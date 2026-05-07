@@ -1,0 +1,12 @@
+{
+  "command": [
+    "docker",
+    "build",
+    "-f",
+    "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/docker/real_proposals/Dockerfile",
+    "-t",
+    "research2/real-smoke",
+    "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/docker/real_proposals"
+  ],
+  "image_tag": "research2/real-smoke"
+}

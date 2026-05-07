@@ -1,0 +1,24 @@
+{
+  "calibration_f1": 0.18181818181818182,
+  "confidence_threshold": 0.3,
+  "false_positive_proposal_rate": 0.6666666666666666,
+  "false_positive_proposal_rows": 8,
+  "filtered_proposal_rows": 21,
+  "fixed_label_overlap_target_recall": 0.125,
+  "fixed_label_overlap_target_rows": 32,
+  "match_distance_threshold_m": 1.0,
+  "matched_centroid_error_m": {
+    "max": 0.278519,
+    "mean": 0.21704875,
+    "median": 0.2568765,
+    "min": 0.075923
+  },
+  "matched_proposal_rows": 4,
+  "matched_target_rows": 4,
+  "min_depth_pixels": 500,
+  "nms_radius_m": 1.0,
+  "proposal_precision": 0.3333333333333333,
+  "retained_proposal_rows": 12,
+  "scan_target_recall": 0.0784313725490196,
+  "score_mode": "confidence"
+}

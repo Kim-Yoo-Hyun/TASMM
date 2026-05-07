@@ -1,0 +1,40 @@
+{
+  "do_not_scale_to_paper_table": true,
+  "next_policy_id": "cap_aware_label_balanced_ranking_v0",
+  "next_recommended_unit": "E003-M28 cap-aware label-balanced detector policy smoke",
+  "policy_requirements": [
+    "filter output labels not mapped to the prompt-set canonical labels",
+    "rank before the per-frame/global cap using confidence and depth support",
+    "use per-label or label-balanced caps so high-volume labels do not dominate written proposals",
+    "apply same-label spatial consolidation before evaluating wider scan scaling",
+    "keep match-preserving recall constraints during calibration"
+  ],
+  "rejected_next_steps": [
+    {
+      "reason": "all sampled frames already saturate the per-frame cap and false-positive rate is above 0.9",
+      "step": "wider scan/frame scaling immediately"
+    },
+    {
+      "reason": "M26 selected calibration reduces only 92 false positives while preserving 39 matches",
+      "step": "threshold/depth/NMS-only calibration as final policy"
+    },
+    {
+      "reason": "raising caps will likely increase false positives unless ranking is fixed first",
+      "step": "increase max_predictions as the first response"
+    }
+  ],
+  "supporting_facts": {
+    "frames_saturated_by_per_frame_cap": 24,
+    "no_target_label_count_with_predictions": 2,
+    "selected_false_positive_rate": 0.9710682492581603,
+    "selected_precision": 0.028931750741839762,
+    "top_high_fp_zero_match_labels": [
+      "table",
+      "sofa",
+      "picture",
+      "stove",
+      "commode"
+    ],
+    "written_prediction_rows": 1440
+  }
+}

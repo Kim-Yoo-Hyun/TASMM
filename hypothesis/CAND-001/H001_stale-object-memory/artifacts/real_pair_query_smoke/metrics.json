@@ -1,0 +1,99 @@
+{
+  "oracle_current_pose": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "current_target_return_rate": 1.0,
+    "current_target_valid_rate": 1.0,
+    "moved_object_recovery_success": 1.0,
+    "oracle_gap": 0.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 1.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 0.0,
+    "stale_old_location_returns": 0,
+    "target_type_counts": {
+      "absent_target": 5,
+      "current_estimate_target": 24,
+      "old_location_target": 3
+    },
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  },
+  "ours_staleness_v0": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "current_target_return_rate": 0.0,
+    "current_target_valid_rate": 0.0,
+    "moved_object_recovery_success": 0.0,
+    "oracle_gap": 1.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 1.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 0.0,
+    "stale_old_location_returns": 0,
+    "target_type_counts": {
+      "absent_target": 5,
+      "old_context_target": 11,
+      "old_location_target": 16
+    },
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  },
+  "relation_only": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "current_target_return_rate": 0.0,
+    "current_target_valid_rate": 0.0,
+    "moved_object_recovery_success": 0.0,
+    "oracle_gap": 1.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 0.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 1.0,
+    "stale_old_location_returns": 16,
+    "target_type_counts": {
+      "old_location_target": 16,
+      "stale_old_location": 16
+    },
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  },
+  "static_map": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "current_target_return_rate": 0.0,
+    "current_target_valid_rate": 0.0,
+    "moved_object_recovery_success": 0.0,
+    "oracle_gap": 1.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 0.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 1.0,
+    "stale_old_location_returns": 16,
+    "target_type_counts": {
+      "old_location_target": 16,
+      "stale_old_location": 16
+    },
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  },
+  "time_decay": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "current_target_return_rate": 0.0,
+    "current_target_valid_rate": 0.0,
+    "moved_object_recovery_success": 0.0,
+    "oracle_gap": 1.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 0.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 1.0,
+    "stale_old_location_returns": 16,
+    "target_type_counts": {
+      "old_location_target": 16,
+      "stale_old_location": 16
+    },
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  }
+}

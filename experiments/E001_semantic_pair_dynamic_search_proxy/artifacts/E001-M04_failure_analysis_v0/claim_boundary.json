@@ -1,0 +1,50 @@
+{
+  "method_failure_rows": 7,
+  "next_required_evidence": [
+    "E001 failure analysis review on hard target_outside_returned_budget rows.",
+    "Additional pair staging to increase significant moved denominator.",
+    "E002 path/search-cost bridge with candidate_path_cost_m and old-location dead-end cost.",
+    "E003 RGB-D or open-vocabulary proposal replacement after sequence/proposal availability is staged.",
+    "E004 task-context ablation after the clean E001 denominator is expanded."
+  ],
+  "safe_claim_evidence": {
+    "high_value_equals_always_top5_proxy_sr": true,
+    "high_value_fetch_method_expected_search_cost": 2.181818,
+    "high_value_fetch_method_proxy_sr": 0.909091,
+    "low_motion_preservation_rate": 1.0,
+    "method_below_oracle_proxy_sr": true,
+    "method_stale_fp_rate": 0.0,
+    "query_rows": 294,
+    "routine_fetch_method_expected_search_cost": 1.636364,
+    "routine_fetch_method_proxy_sr": 0.727273,
+    "significant_moved_rows_per_context": 11,
+    "static_map_stale_fp_rate": 1.0,
+    "validated_pair_count": 13
+  },
+  "safe_claims": [
+    "E001 supports annotation-level semantic-pair dynamic object search proxy evaluation on locally ready 3RScan/3DSSG pairs.",
+    "On significant moved rows, task_conditioned_budget_v0 suppresses stale old-location false positives relative to scene_aligned_static_map.",
+    "Structured task context changes the search budget and creates a routine-vs-high-value tradeoff in proxy SR and ExpectedSearchCost.",
+    "Low-motion rows are preserved under task_conditioned_budget_v0 in the current E001 data."
+  ],
+  "unsupported_claims": [
+    "real navigation SR/SPL",
+    "path-cost-aware search policy",
+    "RGB-D perception robustness",
+    "open-vocabulary perception robustness",
+    "natural-language intention understanding",
+    "learned task policy",
+    "full 3RScan/3DSSG benchmark-scale conclusion"
+  ],
+  "unsupported_reasons": {
+    "benchmark_scale": "Only 12 ready_minimal reference-rescan pairs are evaluated under the current local dataset.",
+    "natural_language": "Task context is structured and controlled, not parsed from language.",
+    "real_navigation": "E001 uses candidate-count ExpectedSearchCost and proxy SR/AttemptSPL; path_cost_ready is false.",
+    "rgbd_or_open_vocab": "E001 uses annotation_semseg current candidates; eval coverage marks RGB-D and open-vocabulary perception as false."
+  },
+  "weakened_or_partial_claims": [
+    "Routine context improves search-cost behavior but does not maximize proxy SR against always_top5.",
+    "High-value context matches always_top5 proxy SR on significant moved rows but does not close the oracle gap.",
+    "Failure analysis still shows target_outside_returned_budget cases for task_conditioned_budget_v0."
+  ]
+}

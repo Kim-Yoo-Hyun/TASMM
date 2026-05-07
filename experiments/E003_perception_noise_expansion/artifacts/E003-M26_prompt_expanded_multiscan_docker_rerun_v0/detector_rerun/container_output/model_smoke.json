@@ -1,0 +1,222 @@
+{
+  "backend_id": "groundingdino_rgbd_backproject_v0",
+  "detector_backend_integrated": true,
+  "detector_predictions_ready": true,
+  "device": "cpu",
+  "inference_rows": [
+    {
+      "frame_id": "frame-000000",
+      "label_count": 28,
+      "raw_prediction_count": 353,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 17,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000009",
+      "label_count": 28,
+      "raw_prediction_count": 383,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 1,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000018",
+      "label_count": 28,
+      "raw_prediction_count": 368,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000027",
+      "label_count": 28,
+      "raw_prediction_count": 419,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 1,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000036",
+      "label_count": 28,
+      "raw_prediction_count": 377,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000045",
+      "label_count": 28,
+      "raw_prediction_count": 425,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 7,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000054",
+      "label_count": 28,
+      "raw_prediction_count": 488,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000063",
+      "label_count": 28,
+      "raw_prediction_count": 353,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 3,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000072",
+      "label_count": 28,
+      "raw_prediction_count": 475,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 2,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000081",
+      "label_count": 28,
+      "raw_prediction_count": 444,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 8,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000090",
+      "label_count": 28,
+      "raw_prediction_count": 300,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000099",
+      "label_count": 28,
+      "raw_prediction_count": 415,
+      "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "skipped_no_depth_prediction_count": 6,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000000",
+      "label_count": 30,
+      "raw_prediction_count": 508,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 7,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000014",
+      "label_count": 30,
+      "raw_prediction_count": 418,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 1,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000028",
+      "label_count": 30,
+      "raw_prediction_count": 345,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000042",
+      "label_count": 30,
+      "raw_prediction_count": 386,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000056",
+      "label_count": 30,
+      "raw_prediction_count": 322,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000070",
+      "label_count": 30,
+      "raw_prediction_count": 494,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000084",
+      "label_count": 30,
+      "raw_prediction_count": 428,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000098",
+      "label_count": 30,
+      "raw_prediction_count": 471,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 2,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000112",
+      "label_count": 30,
+      "raw_prediction_count": 502,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 1,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000126",
+      "label_count": 30,
+      "raw_prediction_count": 240,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000140",
+      "label_count": 30,
+      "raw_prediction_count": 473,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    },
+    {
+      "frame_id": "frame-000154",
+      "label_count": 30,
+      "raw_prediction_count": 381,
+      "scan_id": "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "skipped_no_depth_prediction_count": 0,
+      "written_prediction_count": 60
+    }
+  ],
+  "max_frames_per_scan": 12,
+  "max_labels": 32,
+  "max_predictions": 1440,
+  "max_predictions_per_frame": 60,
+  "max_predictions_reached": true,
+  "max_scans": 2,
+  "min_predictions": 1,
+  "model_id": "IDEA-Research/grounding-dino-tiny",
+  "model_loaded": true,
+  "model_smoke_version": "e003_m20_detector_model_smoke_v0",
+  "output": "/outputs/real_proposals.jsonl",
+  "prediction_rows": 1440,
+  "proposal_run_id": "m22",
+  "scanned_frame_count": 24,
+  "selected_scan_count": 2,
+  "skipped_no_depth_predictions": 56,
+  "status": "model_smoke_predictions_ready",
+  "stop_after_min_predictions": false,
+  "text_threshold": 0.08,
+  "threshold": 0.08,
+  "torch_version": "2.5.1+cpu",
+  "transformers_version": "4.57.1"
+}

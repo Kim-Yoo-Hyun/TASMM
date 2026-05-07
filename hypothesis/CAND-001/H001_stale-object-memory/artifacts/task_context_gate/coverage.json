@@ -1,0 +1,52 @@
+{
+  "contexts": [
+    {
+      "check_cost": 0.15,
+      "description": "ordinary task; keep bounded search cost",
+      "failure_cost": 0.0,
+      "high_ambiguity_budget": 2,
+      "max_budget": 3,
+      "name": "routine_fetch",
+      "success_reward": 1.0
+    },
+    {
+      "check_cost": 0.15,
+      "description": "important task; accept larger candidate set to avoid misses",
+      "failure_cost": 0.25,
+      "high_ambiguity_budget": 5,
+      "max_budget": 5,
+      "name": "high_value_fetch",
+      "success_reward": 3.0
+    },
+    {
+      "check_cost": 0.15,
+      "description": "important task under noisy perception; expand budget when perception risk is high",
+      "failure_cost": 0.25,
+      "high_ambiguity_budget": 5,
+      "max_budget": 5,
+      "name": "noisy_high_value_fetch",
+      "success_reward": 3.0
+    }
+  ],
+  "input_dir": "/home/yoohyun/research2/hypothesis/CAND-001/H001_stale-object-memory/artifacts/multi_pair_non_persistent_validation",
+  "low_motion_control_rows": 48,
+  "not_supported_claims": [
+    "natural-language intention understanding",
+    "learned task policy",
+    "real navigation SR/SPL",
+    "deployable search policy",
+    "real RGB-D/open-vocabulary perception robustness"
+  ],
+  "primary_scenario": "ranking_noise_moderate",
+  "query_rows": 94,
+  "ranking_uses_persistent_cross_scan_ids": false,
+  "significant_moved_rows": 10,
+  "status": "conditioning_pass",
+  "stress_scenario": "heavy_noise_stress",
+  "uses_natural_language_understanding": false,
+  "uses_navigation": false,
+  "uses_open_vocabulary_perception": false,
+  "uses_rgbd_perception": false,
+  "uses_structured_task_context": true,
+  "validated_pair_count": 12
+}

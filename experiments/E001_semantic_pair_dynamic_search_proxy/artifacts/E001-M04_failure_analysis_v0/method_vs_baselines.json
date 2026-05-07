@@ -1,0 +1,66 @@
+{
+  "always_top1": {
+    "both_fail": 7,
+    "both_success": 264,
+    "mean_expected_search_cost_delta": 0.098639,
+    "mean_proxy_sr_delta": 0.078231,
+    "mean_task_utility_delta": 0.20119,
+    "method_success_baseline_fail": 23,
+    "rows": 294
+  },
+  "always_top3": {
+    "baseline_success_method_fail": 1,
+    "both_fail": 6,
+    "both_success": 281,
+    "mean_expected_search_cost_delta": 0.006803,
+    "mean_proxy_sr_delta": 0.017007,
+    "mean_task_utility_delta": 0.061905,
+    "method_success_baseline_fail": 6,
+    "rows": 294
+  },
+  "always_top5": {
+    "baseline_success_method_fail": 4,
+    "both_fail": 3,
+    "both_success": 287,
+    "mean_expected_search_cost_delta": -0.02381,
+    "mean_proxy_sr_delta": -0.013605,
+    "mean_task_utility_delta": -0.010034,
+    "rows": 294
+  },
+  "fixed_uncertainty_topk_v0": {
+    "baseline_success_method_fail": 1,
+    "both_fail": 6,
+    "both_success": 281,
+    "mean_expected_search_cost_delta": 0.006803,
+    "mean_proxy_sr_delta": 0.017007,
+    "mean_task_utility_delta": 0.061905,
+    "method_success_baseline_fail": 6,
+    "rows": 294
+  },
+  "label_nearest_current_observation": {
+    "both_fail": 7,
+    "both_success": 264,
+    "mean_expected_search_cost_delta": 0.098639,
+    "mean_proxy_sr_delta": 0.078231,
+    "mean_task_utility_delta": 0.20119,
+    "method_success_baseline_fail": 23,
+    "rows": 294
+  },
+  "oracle_current_target": {
+    "baseline_success_method_fail": 7,
+    "both_success": 287,
+    "mean_expected_search_cost_delta": 0.20068,
+    "mean_proxy_sr_delta": -0.02381,
+    "mean_task_utility_delta": -0.069218,
+    "rows": 294
+  },
+  "scene_aligned_static_map": {
+    "both_fail": 7,
+    "both_success": 204,
+    "mean_expected_search_cost_delta": -0.105442,
+    "mean_proxy_sr_delta": 0.282313,
+    "mean_task_utility_delta": 0.742007,
+    "method_success_baseline_fail": 83,
+    "rows": 294
+  }
+}

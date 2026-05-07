@@ -1,0 +1,65 @@
+{
+  "ambiguity_band_counts": {
+    "high_ambiguity": 43,
+    "rank_sensitive": 17,
+    "trivial_candidate": 38
+  },
+  "base_candidate_rows": 416,
+  "base_query_rows": 98,
+  "base_row_band_counts": {
+    "low_motion_control": 51,
+    "mid_motion_review": 36,
+    "significant_moved": 11
+  },
+  "candidate_rows": 1248,
+  "context_row_band_counts": {
+    "low_motion_control": 153,
+    "mid_motion_review": 108,
+    "significant_moved": 33
+  },
+  "dataset_root": "/home/yoohyun/research2/local_dataset",
+  "e002_expected_search_cost_proxy_ready_rows": 294,
+  "e002_path_cost_ready_rows": 0,
+  "e003_open_vocab_ready_rows": 0,
+  "e003_rgbd_ready_rows": 0,
+  "manifest_path": "/home/yoohyun/research2/experiments/E001_semantic_pair_dynamic_search_proxy/artifacts/E001-M01_pair_manifest_v0/manifest.jsonl",
+  "outputs": {
+    "base_query_rows": "/home/yoohyun/research2/experiments/E001_semantic_pair_dynamic_search_proxy/artifacts/E001-M02_query_construction_v0/base_query_rows.jsonl",
+    "candidate_rows": "/home/yoohyun/research2/experiments/E001_semantic_pair_dynamic_search_proxy/artifacts/E001-M02_query_construction_v0/candidate_rows.jsonl",
+    "coverage": "/home/yoohyun/research2/experiments/E001_semantic_pair_dynamic_search_proxy/artifacts/E001-M02_query_construction_v0/coverage.json",
+    "pair_rows": "/home/yoohyun/research2/experiments/E001_semantic_pair_dynamic_search_proxy/artifacts/E001-M02_query_construction_v0/pair_rows.jsonl",
+    "query_rows": "/home/yoohyun/research2/experiments/E001_semantic_pair_dynamic_search_proxy/artifacts/E001-M02_query_construction_v0/query_rows.jsonl",
+    "report": "/home/yoohyun/research2/experiments/E001_semantic_pair_dynamic_search_proxy/artifacts/E001-M02_query_construction_v0/report.md"
+  },
+  "pair_rows": 101,
+  "query_rows": 294,
+  "query_version": "e001_query_v0",
+  "ready_manifest_pairs": 13,
+  "rgbd_sequence_available_query_rows": 0,
+  "split_counts": {
+    "train": 57,
+    "validation": 41
+  },
+  "status": "ready",
+  "task_context_counts": {
+    "high_value_fetch": 98,
+    "noisy_high_value_fetch": 98,
+    "routine_fetch": 98
+  },
+  "thresholds": {
+    "geometry_valid_threshold_m": 1.0,
+    "low_motion_threshold_m": 0.25,
+    "mid_motion_range_m": [
+      0.25,
+      1.0
+    ],
+    "significant_moved_threshold_m": 1.0,
+    "success_threshold_m": 0.5
+  },
+  "uses_annotation_level_current_observation": true,
+  "uses_natural_language_intent_understanding": false,
+  "uses_navigation": false,
+  "uses_open_vocabulary_perception": false,
+  "uses_rgbd_perception": false,
+  "validated_pair_count": 13
+}

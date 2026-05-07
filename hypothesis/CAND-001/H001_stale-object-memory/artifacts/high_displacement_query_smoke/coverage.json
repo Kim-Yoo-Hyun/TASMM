@@ -1,0 +1,14 @@
+{
+  "dataset_root": "/home/yoohyun/research2/local_dataset",
+  "evaluates_removed_suppression": false,
+  "input_rigid_rows": 6,
+  "low_motion_row_valid_rows": 2,
+  "reference_scan_id": "569d8f0d-72aa-2f24-8ac6-c6ee8d927c4b",
+  "rescan_id": "569d8f0f-72aa-2f24-89a6-77f8b8779ae9",
+  "row_valid_rigid_rows": 5,
+  "significant_moved_rows": 3,
+  "stale_threshold_m": 1.0,
+  "status": "complete",
+  "success_threshold_m": 0.5,
+  "uses_navigation": false
+}

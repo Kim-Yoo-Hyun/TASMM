@@ -1,0 +1,52 @@
+{"detector_proposal_rows": 2, "label_canonical": "backpack", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 9, "label_canonical": "bag", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.1111111111111111, "target_recall": 0.5, "target_rows": 2}
+{"detector_proposal_rows": 4, "label_canonical": "basket", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 3, "label_canonical": "bench", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 5, "label_canonical": "blanket", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 10, "label_canonical": "board", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.1, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 5, "label_canonical": "bottle", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.2, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 34, "label_canonical": "box", "matched_proposal_rows": 3, "matched_target_rows": 3, "proposal_precision": 0.08823529411764706, "target_recall": 0.75, "target_rows": 4}
+{"detector_proposal_rows": 5, "label_canonical": "bucket", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.2, "target_recall": 0.5, "target_rows": 2}
+{"detector_proposal_rows": 12, "label_canonical": "cabinet", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.08333333333333333, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 45, "label_canonical": "chair", "matched_proposal_rows": 5, "matched_target_rows": 5, "proposal_precision": 0.1111111111111111, "target_recall": 0.7142857142857143, "target_rows": 7}
+{"detector_proposal_rows": 0, "label_canonical": "clothes", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": null, "target_recall": 0.0, "target_rows": 3}
+{"detector_proposal_rows": 11, "label_canonical": "coffee machine", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 9, "label_canonical": "commode", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 3, "label_canonical": "container", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 6, "label_canonical": "couch table", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 0, "label_canonical": "counter", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": null, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 11, "label_canonical": "curtain", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.09090909090909091, "target_recall": 0.14285714285714285, "target_rows": 7}
+{"detector_proposal_rows": 10, "label_canonical": "cutting board", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 8, "label_canonical": "decoration", "matched_proposal_rows": 2, "matched_target_rows": 2, "proposal_precision": 0.25, "target_recall": 0.6666666666666666, "target_rows": 3}
+{"detector_proposal_rows": 12, "label_canonical": "door", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.08333333333333333, "target_recall": 0.2, "target_rows": 5}
+{"detector_proposal_rows": 3, "label_canonical": "drum", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.3333333333333333, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 4, "label_canonical": "fireplace", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.25, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 3, "label_canonical": "firewood box", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.3333333333333333, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 1, "label_canonical": "frame", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 4, "label_canonical": "gymnastic ball", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 7, "label_canonical": "heater", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.14285714285714285, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 2, "label_canonical": "jar", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 2, "label_canonical": "kitchen cabinet", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 4}
+{"detector_proposal_rows": 6, "label_canonical": "kitchen counter", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 1, "label_canonical": "lamp", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 30, "label_canonical": "light", "matched_proposal_rows": 3, "matched_target_rows": 3, "proposal_precision": 0.1, "target_recall": 0.75, "target_rows": 4}
+{"detector_proposal_rows": 3, "label_canonical": "microwave", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 4, "label_canonical": "oven", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 2, "label_canonical": "paper towel", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.5, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 12, "label_canonical": "picture", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 8, "label_canonical": "pillow", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 6}
+{"detector_proposal_rows": 29, "label_canonical": "plant", "matched_proposal_rows": 4, "matched_target_rows": 4, "proposal_precision": 0.13793103448275862, "target_recall": 0.36363636363636365, "target_rows": 11}
+{"detector_proposal_rows": 2, "label_canonical": "rocking chair", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 6, "label_canonical": "shelf", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 6, "label_canonical": "shoe rack", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 3, "label_canonical": "shoes", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.3333333333333333, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 3, "label_canonical": "showcase", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 6, "label_canonical": "sink", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 14, "label_canonical": "sofa", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 6, "label_canonical": "stove", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 1, "label_canonical": "suitcase", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 24, "label_canonical": "table", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 2}
+{"detector_proposal_rows": 1, "label_canonical": "telephone", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": 0.0, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 0, "label_canonical": "tree decoration", "matched_proposal_rows": 0, "matched_target_rows": 0, "proposal_precision": null, "target_recall": 0.0, "target_rows": 1}
+{"detector_proposal_rows": 7, "label_canonical": "tv", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.14285714285714285, "target_recall": 1.0, "target_rows": 1}
+{"detector_proposal_rows": 3, "label_canonical": "tv stand", "matched_proposal_rows": 1, "matched_target_rows": 1, "proposal_precision": 0.3333333333333333, "target_recall": 1.0, "target_rows": 1}

@@ -1,0 +1,23 @@
+{
+  "detector_backend_integrated": false,
+  "detector_config_id": "h001_real_proposals_ovdet_v0",
+  "detector_id": "open_vocab_rgbd_detector_v0",
+  "detector_predictions_ready": false,
+  "input_status": {
+    "detector_target_count": 344,
+    "errors": [],
+    "manifest_rows": 8,
+    "prompt_label_count": 98,
+    "sampled_frame_count": 459,
+    "scan_count": 8,
+    "schema_id": "real_proposal_prediction_jsonl_v0",
+    "valid": true
+  },
+  "mode": "scaffold-smoke",
+  "output": "/outputs/real_proposals.jsonl",
+  "prompt_set": "/inputs/prompt_set.json",
+  "scaffold_note": "Empty JSONL is a Docker contract smoke output, not detector evidence.",
+  "scaffold_version": "e003_m18_container_scaffold_v0",
+  "seed": "101",
+  "status": "scaffold_smoke_passed"
+}

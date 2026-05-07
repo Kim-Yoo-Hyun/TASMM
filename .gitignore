@@ -1,0 +1,27 @@
+# Local datasets and generated payloads
+local_dataset/
+
+# Python/runtime byproducts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments and local secrets
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Logs and temporary files
+*.log
+*.tmp
+.DS_Store
+
+# Editor and OS byproducts
+.idea/
+.vscode/
+Thumbs.db

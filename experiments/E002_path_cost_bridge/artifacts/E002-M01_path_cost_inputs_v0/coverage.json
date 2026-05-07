@@ -1,0 +1,39 @@
+{
+  "candidate_rows": 1248,
+  "denominator_preserved": true,
+  "input_dir": "/home/yoohyun/research2/experiments/E001_semantic_pair_dynamic_search_proxy/artifacts/E001-M02_query_construction_v0",
+  "input_validated_pair_count": 13,
+  "old_location_dead_end_cost_m": 1.0,
+  "old_location_dead_end_rows": 33,
+  "outputs": {
+    "coverage": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M01_path_cost_inputs_v0/coverage.json",
+    "path_candidate_rows": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M01_path_cost_inputs_v0/path_candidate_rows.jsonl",
+    "path_query_rows": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M01_path_cost_inputs_v0/path_query_rows.jsonl",
+    "report": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M01_path_cost_inputs_v0/report.md"
+  },
+  "path_cost_profile_id": "euclidean_polyline_proxy_v0",
+  "path_cost_proxy_ready_rows": 294,
+  "path_cost_source": "euclidean_polyline_proxy",
+  "query_rows": 294,
+  "real_navigation_path_cost_ready_rows": 0,
+  "row_band_counts": {
+    "low_motion_control": 153,
+    "mid_motion_review": 108,
+    "significant_moved": 33
+  },
+  "status": "path_cost_inputs_ready",
+  "target_path_rank_max": 7,
+  "target_path_rank_mean": 1.234694,
+  "target_path_rank_min": 1,
+  "task_context_counts": {
+    "high_value_fetch": 98,
+    "noisy_high_value_fetch": 98,
+    "routine_fetch": 98
+  },
+  "unsupported_claims": [
+    "real navigation SR/SPL",
+    "collision-aware path planning",
+    "deployable search policy",
+    "RGB-D/open-vocabulary perception robustness"
+  ]
+}

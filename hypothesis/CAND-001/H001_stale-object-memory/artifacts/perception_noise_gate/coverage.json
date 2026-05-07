@@ -1,0 +1,66 @@
+{
+  "input_dir": "/home/yoohyun/research2/hypothesis/CAND-001/H001_stale-object-memory/artifacts/multi_pair_non_persistent_validation",
+  "low_motion_control_rows": 48,
+  "not_supported_claims": [
+    "real RGB-D perception robustness",
+    "open-vocabulary perception robustness",
+    "deployable search policy",
+    "real navigation SR/SPL"
+  ],
+  "primary_scenario": "ranking_noise_moderate",
+  "query_rows": 94,
+  "scenarios": [
+    {
+      "false_positive_max": 0,
+      "false_positive_prob": 0.0,
+      "feature_noise_std": 0.0,
+      "localization_jitter_m": 0.0,
+      "name": "clean_replay",
+      "non_target_dropout_prob": 0.0,
+      "seed_offset": 0,
+      "target_dropout_prob": 0.0,
+      "trials": 1
+    },
+    {
+      "false_positive_max": 1,
+      "false_positive_prob": 0.5,
+      "feature_noise_std": 0.08,
+      "localization_jitter_m": 0.2,
+      "name": "ranking_noise_moderate",
+      "non_target_dropout_prob": 0.1,
+      "seed_offset": 1000,
+      "target_dropout_prob": 0.0,
+      "trials": 100
+    },
+    {
+      "false_positive_max": 1,
+      "false_positive_prob": 0.5,
+      "feature_noise_std": 0.08,
+      "localization_jitter_m": 0.2,
+      "name": "target_dropout_stress",
+      "non_target_dropout_prob": 0.1,
+      "seed_offset": 2000,
+      "target_dropout_prob": 0.2,
+      "trials": 100
+    },
+    {
+      "false_positive_max": 2,
+      "false_positive_prob": 1.0,
+      "feature_noise_std": 0.15,
+      "localization_jitter_m": 0.35,
+      "name": "heavy_noise_stress",
+      "non_target_dropout_prob": 0.2,
+      "seed_offset": 3000,
+      "target_dropout_prob": 0.1,
+      "trials": 100
+    }
+  ],
+  "significant_moved_rows": 10,
+  "status": "robustness_pass",
+  "uses_controlled_annotation_level_proposal_noise": true,
+  "uses_navigation": false,
+  "uses_open_vocabulary_perception": false,
+  "uses_persistent_cross_scan_ids_for_ranking": false,
+  "uses_rgbd_perception": false,
+  "validated_pair_count": 12
+}

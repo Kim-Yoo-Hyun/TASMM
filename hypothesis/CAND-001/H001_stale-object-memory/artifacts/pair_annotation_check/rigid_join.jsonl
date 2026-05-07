@@ -1,0 +1,11 @@
+{"instance_reference": "15", "instance_rescan": "15", "label_match": true, "ref_join": true, "ref_label": "couch table", "rescan_join": true, "rescan_label": "couch table"}
+{"instance_reference": "34", "instance_rescan": "34", "label_match": true, "ref_join": true, "ref_label": "stand", "rescan_join": true, "rescan_label": "stand"}
+{"instance_reference": "19", "instance_rescan": "19", "label_match": true, "ref_join": true, "ref_label": "desk", "rescan_join": true, "rescan_label": "desk"}
+{"instance_reference": "20", "instance_rescan": "20", "label_match": true, "ref_join": true, "ref_label": "chair", "rescan_join": true, "rescan_label": "chair"}
+{"instance_reference": "10", "instance_rescan": "10", "label_match": true, "ref_join": true, "ref_label": "bench", "rescan_join": true, "rescan_label": "bench"}
+{"instance_reference": "9", "instance_rescan": "9", "label_match": true, "ref_join": true, "ref_label": "table", "rescan_join": true, "rescan_label": "table"}
+{"instance_reference": "12", "instance_rescan": "12", "label_match": true, "ref_join": true, "ref_label": "chair", "rescan_join": true, "rescan_label": "chair"}
+{"instance_reference": "11", "instance_rescan": "11", "label_match": true, "ref_join": true, "ref_label": "chair", "rescan_join": true, "rescan_label": "chair"}
+{"instance_reference": "26", "instance_rescan": "26", "label_match": true, "ref_join": true, "ref_label": "stool", "rescan_join": true, "rescan_label": "stool"}
+{"instance_reference": "27", "instance_rescan": "27", "label_match": true, "ref_join": true, "ref_label": "stool", "rescan_join": true, "rescan_label": "stool"}
+{"instance_reference": "57", "instance_rescan": "57", "label_match": true, "ref_join": true, "ref_label": "shelf", "rescan_join": true, "rescan_label": "shelf"}

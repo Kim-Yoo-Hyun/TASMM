@@ -1,0 +1,1130 @@
+{
+  "all_candidates_reachable_eval": {
+    "all": {
+      "high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 66
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 66,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.992424,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.670023,
+          "mean_grid_path_utility_proxy": 2.899497,
+          "mean_returned_location_count": 1.636364,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 66,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.492486,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.992424,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.670023,
+          "mean_grid_path_utility_proxy": 2.899497,
+          "mean_returned_location_count": 1.636364,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 66,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.492486,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "noisy_high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 66
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 66,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.992424,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.670023,
+          "mean_grid_path_utility_proxy": 2.899497,
+          "mean_returned_location_count": 1.636364,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 66,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.492486,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.992424,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.670023,
+          "mean_grid_path_utility_proxy": 2.899497,
+          "mean_returned_location_count": 1.636364,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 66,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.492486,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "routine_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 66
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 66,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.992424,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.670023,
+          "mean_grid_path_utility_proxy": 0.899497,
+          "mean_returned_location_count": 1.257576,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 66,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.492486,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.992424,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.670023,
+          "mean_grid_path_utility_proxy": 0.899497,
+          "mean_returned_location_count": 1.257576,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 66,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.492486,
+          "total_returned_unreachable_count": 0
+        }
+      }
+    },
+    "low_motion_control": {
+      "high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 42
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 42,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.273938,
+          "mean_grid_path_utility_proxy": 2.958909,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 42,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.650461,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.273938,
+          "mean_grid_path_utility_proxy": 2.958909,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 42,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.650461,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "noisy_high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 42
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 42,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.273938,
+          "mean_grid_path_utility_proxy": 2.958909,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 42,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.650461,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.273938,
+          "mean_grid_path_utility_proxy": 2.958909,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 42,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.650461,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "routine_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 42
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 42,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.273938,
+          "mean_grid_path_utility_proxy": 0.958909,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 42,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.650461,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.273938,
+          "mean_grid_path_utility_proxy": 0.958909,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 42,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.650461,
+          "total_returned_unreachable_count": 0
+        }
+      }
+    },
+    "mid_motion_review": {
+      "high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 20
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 20,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.975,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.354386,
+          "mean_grid_path_utility_proxy": 2.796842,
+          "mean_returned_location_count": 3.1,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 20,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.738342,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.975,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.354386,
+          "mean_grid_path_utility_proxy": 2.796842,
+          "mean_returned_location_count": 3.1,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 20,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.738342,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "noisy_high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 20
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 20,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.975,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.354386,
+          "mean_grid_path_utility_proxy": 2.796842,
+          "mean_returned_location_count": 3.1,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 20,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.738342,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.975,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.354386,
+          "mean_grid_path_utility_proxy": 2.796842,
+          "mean_returned_location_count": 3.1,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 20,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.738342,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "routine_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 20
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 20,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.975,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.354386,
+          "mean_grid_path_utility_proxy": 0.796842,
+          "mean_returned_location_count": 1.85,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 20,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.738342,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.975,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.354386,
+          "mean_grid_path_utility_proxy": 0.796842,
+          "mean_returned_location_count": 1.85,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 20,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.738342,
+          "total_returned_unreachable_count": 0
+        }
+      }
+    },
+    "significant_moved": {
+      "high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 4
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 4,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.407107,
+          "mean_grid_path_utility_proxy": 2.788934,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 4,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.710678,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.407107,
+          "mean_grid_path_utility_proxy": 2.788934,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 4,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.710678,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "noisy_high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 4
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 4,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.407107,
+          "mean_grid_path_utility_proxy": 2.788934,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 4,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.710678,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.407107,
+          "mean_grid_path_utility_proxy": 2.788934,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 4,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.710678,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "routine_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 4
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 4,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.407107,
+          "mean_grid_path_utility_proxy": 0.788934,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 4,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.710678,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.407107,
+          "mean_grid_path_utility_proxy": 0.788934,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 4,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.710678,
+          "total_returned_unreachable_count": 0
+        }
+      }
+    }
+  },
+  "analysis_version": "e002_reachable_first_semantic_grid_scoring_v0",
+  "claim_boundary": {
+    "supported": [
+      "reachable-first semantic scoring can be tested under the source-filtered grid-path proxy denominator",
+      "returned-unreachable attempts can be reduced without recall loss if target_reachable_eval gate passes"
+    ],
+    "unsupported": [
+      "real navigation SR/SPL",
+      "deployable search policy",
+      "collision-aware robot planning",
+      "RGB-D/open-vocabulary perception robustness"
+    ]
+  },
+  "gate_summary": {
+    "all_candidates_reachable_eval": {
+      "comparison_counts": {
+        "both_success": 198
+      },
+      "gate_pass": false,
+      "mean_cost_delta_m": 0.0,
+      "mean_utility_delta": 0.0,
+      "returned_unreachable_delta_total": 0,
+      "returned_unreachable_increase_rows": 0,
+      "returned_unreachable_reduction_rows": 0,
+      "rows": 198,
+      "success_gain_rows": 0,
+      "success_loss_rows": 0
+    },
+    "target_reachable_eval": {
+      "comparison_counts": {
+        "both_fail": 5,
+        "both_success": 262
+      },
+      "gate_pass": true,
+      "mean_cost_delta_m": -0.018727,
+      "mean_utility_delta": 0.002809,
+      "returned_unreachable_delta_total": -6,
+      "returned_unreachable_increase_rows": 0,
+      "returned_unreachable_reduction_rows": 6,
+      "rows": 267,
+      "success_gain_rows": 0,
+      "success_loss_rows": 0
+    }
+  },
+  "status": "reachable_first_scoring_gate_pass",
+  "target_reachable_eval": {
+    "all": {
+      "high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_fail": 1,
+            "both_success": 88
+          },
+          "gate_pass": true,
+          "mean_cost_delta_m": -0.022472,
+          "mean_utility_delta": 0.003371,
+          "returned_unreachable_delta_total": -2,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 2,
+          "rows": 89,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.969932,
+          "grid_proxy_sr": 0.988764,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.789047,
+          "mean_grid_path_utility_proxy": 2.845126,
+          "mean_returned_location_count": 2.078652,
+          "returned_unreachable_rate": 0.078652,
+          "returned_unreachable_rows": 7,
+          "rows": 89,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.253112,
+          "total_returned_unreachable_count": 15
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.9649,
+          "grid_proxy_sr": 0.988764,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.811519,
+          "mean_grid_path_utility_proxy": 2.841755,
+          "mean_returned_location_count": 2.078652,
+          "returned_unreachable_rate": 0.101124,
+          "returned_unreachable_rows": 9,
+          "rows": 89,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.218411,
+          "total_returned_unreachable_count": 17
+        }
+      },
+      "noisy_high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_fail": 1,
+            "both_success": 88
+          },
+          "gate_pass": true,
+          "mean_cost_delta_m": -0.022472,
+          "mean_utility_delta": 0.003371,
+          "returned_unreachable_delta_total": -2,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 2,
+          "rows": 89,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.969932,
+          "grid_proxy_sr": 0.988764,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.789047,
+          "mean_grid_path_utility_proxy": 2.845126,
+          "mean_returned_location_count": 2.078652,
+          "returned_unreachable_rate": 0.078652,
+          "returned_unreachable_rows": 7,
+          "rows": 89,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.253112,
+          "total_returned_unreachable_count": 15
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.9649,
+          "grid_proxy_sr": 0.988764,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.811519,
+          "mean_grid_path_utility_proxy": 2.841755,
+          "mean_returned_location_count": 2.078652,
+          "returned_unreachable_rate": 0.101124,
+          "returned_unreachable_rows": 9,
+          "rows": 89,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.218411,
+          "total_returned_unreachable_count": 17
+        }
+      },
+      "routine_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_fail": 3,
+            "both_success": 86
+          },
+          "gate_pass": true,
+          "mean_cost_delta_m": -0.011236,
+          "mean_utility_delta": 0.001685,
+          "returned_unreachable_delta_total": -2,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 2,
+          "rows": 89,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.953078,
+          "grid_proxy_sr": 0.966292,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.619483,
+          "mean_grid_path_utility_proxy": 0.87337,
+          "mean_returned_location_count": 1.359551,
+          "returned_unreachable_rate": 0.044944,
+          "returned_unreachable_rows": 4,
+          "rows": 89,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.559836,
+          "total_returned_unreachable_count": 4
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.953078,
+          "grid_proxy_sr": 0.966292,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.630719,
+          "mean_grid_path_utility_proxy": 0.871684,
+          "mean_returned_location_count": 1.359551,
+          "returned_unreachable_rate": 0.067416,
+          "returned_unreachable_rows": 6,
+          "rows": 89,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 1.532048,
+          "total_returned_unreachable_count": 6
+        }
+      }
+    },
+    "low_motion_control": {
+      "high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 50
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 50,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.261907,
+          "mean_grid_path_utility_proxy": 2.960714,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 50,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.818149,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.261907,
+          "mean_grid_path_utility_proxy": 2.960714,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 50,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.818149,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "noisy_high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 50
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 50,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.261907,
+          "mean_grid_path_utility_proxy": 2.960714,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 50,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.818149,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.261907,
+          "mean_grid_path_utility_proxy": 2.960714,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 50,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.818149,
+          "total_returned_unreachable_count": 0
+        }
+      },
+      "routine_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 50
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 50,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.261907,
+          "mean_grid_path_utility_proxy": 0.960714,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 50,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.818149,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 1.0,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": 1.0,
+          "mean_expected_grid_path_cost_m": 0.261907,
+          "mean_grid_path_utility_proxy": 0.960714,
+          "mean_returned_location_count": 1.0,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 50,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 3.818149,
+          "total_returned_unreachable_count": 0
+        }
+      }
+    },
+    "mid_motion_review": {
+      "high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 30
+          },
+          "gate_pass": true,
+          "mean_cost_delta_m": -0.033333,
+          "mean_utility_delta": 0.005,
+          "returned_unreachable_delta_total": -2,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 2,
+          "rows": 30,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.966053,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.073635,
+          "mean_grid_path_utility_proxy": 2.838955,
+          "mean_returned_location_count": 3.533333,
+          "returned_unreachable_rate": 0.2,
+          "returned_unreachable_rows": 6,
+          "rows": 30,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.931415,
+          "total_returned_unreachable_count": 14
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.954586,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.106968,
+          "mean_grid_path_utility_proxy": 2.833955,
+          "mean_returned_location_count": 3.533333,
+          "returned_unreachable_rate": 0.266667,
+          "returned_unreachable_rows": 8,
+          "rows": 30,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.903368,
+          "total_returned_unreachable_count": 16
+        }
+      },
+      "noisy_high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_success": 30
+          },
+          "gate_pass": true,
+          "mean_cost_delta_m": -0.033333,
+          "mean_utility_delta": 0.005,
+          "returned_unreachable_delta_total": -2,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 2,
+          "rows": 30,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.966053,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.073635,
+          "mean_grid_path_utility_proxy": 2.838955,
+          "mean_returned_location_count": 3.533333,
+          "returned_unreachable_rate": 0.2,
+          "returned_unreachable_rows": 6,
+          "rows": 30,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.931415,
+          "total_returned_unreachable_count": 14
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.954586,
+          "grid_proxy_sr": 1.0,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.106968,
+          "mean_grid_path_utility_proxy": 2.833955,
+          "mean_returned_location_count": 3.533333,
+          "returned_unreachable_rate": 0.266667,
+          "returned_unreachable_rows": 8,
+          "rows": 30,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.903368,
+          "total_returned_unreachable_count": 16
+        }
+      },
+      "routine_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_fail": 1,
+            "both_success": 29
+          },
+          "gate_pass": true,
+          "mean_cost_delta_m": 0.0,
+          "mean_utility_delta": 0.0,
+          "returned_unreachable_delta_total": -1,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 1,
+          "rows": 30,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.932719,
+          "grid_proxy_sr": 0.966667,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.010064,
+          "mean_grid_path_utility_proxy": 0.815157,
+          "mean_returned_location_count": 1.9,
+          "returned_unreachable_rate": 0.133333,
+          "returned_unreachable_rows": 4,
+          "rows": 30,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.957035,
+          "total_returned_unreachable_count": 4
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.932719,
+          "grid_proxy_sr": 0.966667,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.010064,
+          "mean_grid_path_utility_proxy": 0.815157,
+          "mean_returned_location_count": 1.9,
+          "returned_unreachable_rate": 0.166667,
+          "returned_unreachable_rows": 5,
+          "rows": 30,
+          "stale_old_location_fp_rate": null,
+          "success_per_meter": 0.957035,
+          "total_returned_unreachable_count": 5
+        }
+      }
+    },
+    "significant_moved": {
+      "high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_fail": 1,
+            "both_success": 8
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": -0.111111,
+          "mean_utility_delta": 0.016667,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 9,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.815817,
+          "grid_proxy_sr": 0.888889,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 2.768979,
+          "mean_grid_path_utility_proxy": 2.223542,
+          "mean_returned_location_count": 3.222222,
+          "returned_unreachable_rate": 0.111111,
+          "returned_unreachable_rows": 1,
+          "rows": 9,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.321017,
+          "total_returned_unreachable_count": 1
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.804277,
+          "grid_proxy_sr": 0.888889,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 2.88009,
+          "mean_grid_path_utility_proxy": 2.206875,
+          "mean_returned_location_count": 3.222222,
+          "returned_unreachable_rate": 0.111111,
+          "returned_unreachable_rows": 1,
+          "rows": 9,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.308632,
+          "total_returned_unreachable_count": 1
+        }
+      },
+      "noisy_high_value_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_fail": 1,
+            "both_success": 8
+          },
+          "gate_pass": false,
+          "mean_cost_delta_m": -0.111111,
+          "mean_utility_delta": 0.016667,
+          "returned_unreachable_delta_total": 0,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 0,
+          "rows": 9,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.815817,
+          "grid_proxy_sr": 0.888889,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 2.768979,
+          "mean_grid_path_utility_proxy": 2.223542,
+          "mean_returned_location_count": 3.222222,
+          "returned_unreachable_rate": 0.111111,
+          "returned_unreachable_rows": 1,
+          "rows": 9,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.321017,
+          "total_returned_unreachable_count": 1
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.804277,
+          "grid_proxy_sr": 0.888889,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 2.88009,
+          "mean_grid_path_utility_proxy": 2.206875,
+          "mean_returned_location_count": 3.222222,
+          "returned_unreachable_rate": 0.111111,
+          "returned_unreachable_rows": 1,
+          "rows": 9,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.308632,
+          "total_returned_unreachable_count": 1
+        }
+      },
+      "routine_fetch": {
+        "comparison": {
+          "comparison_counts": {
+            "both_fail": 2,
+            "both_success": 7
+          },
+          "gate_pass": true,
+          "mean_cost_delta_m": -0.111111,
+          "mean_utility_delta": 0.016667,
+          "returned_unreachable_delta_total": -1,
+          "returned_unreachable_increase_rows": 0,
+          "returned_unreachable_reduction_rows": 1,
+          "rows": 9,
+          "success_gain_rows": 0,
+          "success_loss_rows": 0
+        },
+        "reachable_first_task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.760261,
+          "grid_proxy_sr": 0.777778,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.304084,
+          "mean_grid_path_utility_proxy": 0.582165,
+          "mean_returned_location_count": 1.555556,
+          "returned_unreachable_rate": 0.0,
+          "returned_unreachable_rows": 0,
+          "rows": 9,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.596417,
+          "total_returned_unreachable_count": 0
+        },
+        "task_conditioned_budget_v0": {
+          "grid_attempt_spl_proxy": 0.760261,
+          "grid_proxy_sr": 0.777778,
+          "low_motion_preservation_rate": null,
+          "mean_expected_grid_path_cost_m": 1.415195,
+          "mean_grid_path_utility_proxy": 0.565498,
+          "mean_returned_location_count": 1.555556,
+          "returned_unreachable_rate": 0.111111,
+          "returned_unreachable_rows": 1,
+          "rows": 9,
+          "stale_old_location_fp_rate": 0.0,
+          "success_per_meter": 0.549591,
+          "total_returned_unreachable_count": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "contract_id": "m25_visibility_aware_detector_denominator_v0",
+  "current_m24_reference": {
+    "active_prompt_target_rows": 32,
+    "depth_consistent_visible_proxy_target_rows": 5,
+    "m22_matched_outside_centroid_frustum_proxy_rows": 2,
+    "m22_recall_over_depth_consistent_visible_proxy_denominator": 1.0,
+    "scan_eval_target_rows": 51
+  },
+  "m25_version": "e003_m25_visibility_prompt_rerun_gate_v0",
+  "paper_claim_boundary": "diagnostic_until_multiscan_rerun_and_visibility_proxy_limitations_are_reported",
+  "primary_report_denominators": [
+    "scan_eval_target_rows",
+    "expanded_active_prompt_target_rows",
+    "centroid_frustum_visible_proxy_target_rows",
+    "depth_consistent_visible_proxy_target_rows"
+  ],
+  "rules": [
+    "Report scan-level recall only as a broad diagnostic denominator.",
+    "Use expanded active-prompt target rows to separate prompt-cap failure from detector failure.",
+    "Use depth-consistent centroid-visible proxy as a lower-bound visibility diagnostic, not true visibility.",
+    "Always report matched-outside-visibility-proxy rows because centroid projection is not true object visibility."
+  ]
+}

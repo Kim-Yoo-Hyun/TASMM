@@ -1,0 +1,194 @@
+{
+  "analysis_version": "e002_grid_failure_source_analysis_v0",
+  "claim_boundary": {
+    "supported": [
+      "target/source failure can be separated from policy failure under occupancy-grid path-cost proxy",
+      "grid-aware ordering is currently not a supported improvement claim",
+      "task-conditioned budget should be compared against always_top5 and oracle under grid cost"
+    ],
+    "unsupported": [
+      "real navigation SR/SPL",
+      "deployable search policy",
+      "collision-aware robot planning",
+      "RGB-D/open-vocabulary perception robustness"
+    ]
+  },
+  "grid_aware_comparison": {
+    "all": {
+      "comparison_counts": {
+        "both_fail_different_type": 1,
+        "both_fail_same_type": 31,
+        "grid_aware_cost_improvement": 7,
+        "grid_aware_cost_regression": 13,
+        "grid_aware_regression_success_loss": 2,
+        "grid_aware_tie_success": 240
+      },
+      "grid_aware_cost_improvement_rows": 7,
+      "grid_aware_cost_regression_rows": 13,
+      "grid_aware_success_gain_rows": 0,
+      "grid_aware_success_loss_rows": 2,
+      "mean_cost_delta_on_both_success_m": 0.028823,
+      "mean_utility_delta_grid_minus_task": -0.012863,
+      "rows": 294
+    },
+    "row_band:low_motion_control": {
+      "comparison_counts": {
+        "both_fail_same_type": 3,
+        "grid_aware_tie_success": 150
+      },
+      "grid_aware_cost_improvement_rows": 0,
+      "grid_aware_cost_regression_rows": 0,
+      "grid_aware_success_gain_rows": 0,
+      "grid_aware_success_loss_rows": 0,
+      "mean_cost_delta_on_both_success_m": 0.0,
+      "mean_utility_delta_grid_minus_task": 0.0,
+      "rows": 153
+    },
+    "row_band:mid_motion_review": {
+      "comparison_counts": {
+        "both_fail_same_type": 19,
+        "grid_aware_cost_improvement": 5,
+        "grid_aware_cost_regression": 8,
+        "grid_aware_regression_success_loss": 1,
+        "grid_aware_tie_success": 75
+      },
+      "grid_aware_cost_improvement_rows": 5,
+      "grid_aware_cost_regression_rows": 8,
+      "grid_aware_success_gain_rows": 0,
+      "grid_aware_success_loss_rows": 1,
+      "mean_cost_delta_on_both_success_m": 0.04844,
+      "mean_utility_delta_grid_minus_task": -0.017561,
+      "rows": 108
+    },
+    "row_band:significant_moved": {
+      "comparison_counts": {
+        "both_fail_different_type": 1,
+        "both_fail_same_type": 9,
+        "grid_aware_cost_improvement": 2,
+        "grid_aware_cost_regression": 5,
+        "grid_aware_regression_success_loss": 1,
+        "grid_aware_tie_success": 15
+      },
+      "grid_aware_cost_improvement_rows": 2,
+      "grid_aware_cost_regression_rows": 5,
+      "grid_aware_success_gain_rows": 0,
+      "grid_aware_success_loss_rows": 1,
+      "mean_cost_delta_on_both_success_m": 0.14688,
+      "mean_utility_delta_grid_minus_task": -0.057127,
+      "rows": 33
+    },
+    "task_context:high_value_fetch": {
+      "comparison_counts": {
+        "both_fail_same_type": 10,
+        "grid_aware_cost_improvement": 3,
+        "grid_aware_cost_regression": 5,
+        "grid_aware_tie_success": 80
+      },
+      "grid_aware_cost_improvement_rows": 3,
+      "grid_aware_cost_regression_rows": 5,
+      "grid_aware_success_gain_rows": 0,
+      "grid_aware_success_loss_rows": 0,
+      "mean_cost_delta_on_both_success_m": 0.032921,
+      "mean_utility_delta_grid_minus_task": -0.007058,
+      "rows": 98
+    },
+    "task_context:noisy_high_value_fetch": {
+      "comparison_counts": {
+        "both_fail_same_type": 10,
+        "grid_aware_cost_improvement": 3,
+        "grid_aware_cost_regression": 5,
+        "grid_aware_tie_success": 80
+      },
+      "grid_aware_cost_improvement_rows": 3,
+      "grid_aware_cost_regression_rows": 5,
+      "grid_aware_success_gain_rows": 0,
+      "grid_aware_success_loss_rows": 0,
+      "mean_cost_delta_on_both_success_m": 0.032921,
+      "mean_utility_delta_grid_minus_task": -0.007058,
+      "rows": 98
+    },
+    "task_context:routine_fetch": {
+      "comparison_counts": {
+        "both_fail_different_type": 1,
+        "both_fail_same_type": 11,
+        "grid_aware_cost_improvement": 1,
+        "grid_aware_cost_regression": 3,
+        "grid_aware_regression_success_loss": 2,
+        "grid_aware_tie_success": 80
+      },
+      "grid_aware_cost_improvement_rows": 1,
+      "grid_aware_cost_regression_rows": 3,
+      "grid_aware_success_gain_rows": 0,
+      "grid_aware_success_loss_rows": 2,
+      "mean_cost_delta_on_both_success_m": 0.020238,
+      "mean_utility_delta_grid_minus_task": -0.024473,
+      "rows": 98
+    }
+  },
+  "grid_query_rows": 294,
+  "m05_candidate_grid_reachable_rows": 1029,
+  "m05_candidate_grid_unreachable_rows": 219,
+  "m06_failure_type_counts": {
+    "returned_unreachable_candidate": 13,
+    "stale_old_location_returned": 33,
+    "static_map_localization_error": 48,
+    "target_grid_unreachable": 237,
+    "target_outside_returned_budget": 56
+  },
+  "m06_policy_failure_counts": {
+    "always_top1": 45,
+    "always_top3": 36,
+    "always_top5": 30,
+    "fixed_uncertainty_topk_v0": 36,
+    "grid_path_aware_task_conditioned_budget_v0": 34,
+    "label_nearest_current_observation": 45,
+    "oracle_current_target": 27,
+    "scene_aligned_static_map": 102,
+    "task_conditioned_budget_v0": 32
+  },
+  "returned_unreachable_failure_counts": {
+    "None": 131,
+    "returned_unreachable_candidate": 13,
+    "target_grid_unreachable": 187
+  },
+  "returned_unreachable_policy_counts": {
+    "always_top1": 18,
+    "always_top3": 63,
+    "always_top5": 69,
+    "fixed_uncertainty_topk_v0": 48,
+    "grid_path_aware_task_conditioned_budget_v0": 40,
+    "label_nearest_current_observation": 18,
+    "oracle_current_target": 27,
+    "task_conditioned_budget_v0": 48
+  },
+  "returned_unreachable_prediction_rows": 331,
+  "returned_unreachable_source_limited_rows": 187,
+  "returned_unreachable_with_reachable_target_rows": 144,
+  "status": "grid_failure_source_analysis_ready",
+  "target_source_failure_counts": {
+    "candidate_unprojectable": 6,
+    "disconnected_free_space": 15,
+    "start_unprojectable": 6
+  },
+  "target_source_label_counts": {
+    "chair": 6,
+    "item": 3,
+    "pillow": 15,
+    "stool": 3
+  },
+  "target_source_row_band_counts": {
+    "low_motion_control": 3,
+    "mid_motion_review": 18,
+    "significant_moved": 6
+  },
+  "target_source_scan_counts": {
+    "10b17957-3938-2467-88a5-9e9254930dad": 3,
+    "4731976c-f9f7-2a1a-95cc-31c4d1751d0b": 3,
+    "74ef846e-9dce-2d66-83d5-294aac7b1b0f": 6,
+    "ddc73795-765b-241a-9c5d-b97744afe077": 12,
+    "ea318260-0a4c-2749-9389-4c16c782c4b1": 3
+  },
+  "target_unreachable_base_rows": 9,
+  "target_unreachable_query_rows": 27,
+  "target_unreachable_rate": 0.091837
+}

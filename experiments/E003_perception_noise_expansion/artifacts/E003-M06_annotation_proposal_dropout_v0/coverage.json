@@ -1,0 +1,101 @@
+{
+  "docker_reason": "This profile is a repository-local artifact transform; Docker becomes required when a detector/open-vocabulary model is implemented for paper-body experiments.",
+  "docker_required": false,
+  "dropout_seeds": [
+    11,
+    17,
+    23
+  ],
+  "eval_version": "e003_annotation_proposal_dropout_v0",
+  "failure_rows": 1191,
+  "failure_type_counts": {
+    "stale_old_location_returned": 119,
+    "static_map_localization_error": 211,
+    "target_dropped_by_noise": 553,
+    "target_outside_returned_budget": 308
+  },
+  "input_candidate_rows": 1248,
+  "input_query_rows": 294,
+  "manifest_summary": {
+    "annotation_proposal_dropout_v0": {
+      "dropped_non_target_candidate_rows": 707,
+      "mean_candidate_rows_dropped": 0.888889,
+      "mean_candidate_rows_original": 4.244898,
+      "mean_candidate_rows_retained": 3.356009,
+      "rows": 882,
+      "target_drop_forced_retained_rows": 51,
+      "target_dropped_rate": 0.087302,
+      "target_dropped_rows": 77,
+      "target_retained_rows": 805
+    },
+    "clean_annotation_oracle_v0": {
+      "dropped_non_target_candidate_rows": 0,
+      "mean_candidate_rows_dropped": 0.0,
+      "mean_candidate_rows_original": 4.244898,
+      "mean_candidate_rows_retained": 4.244898,
+      "rows": 294,
+      "target_drop_forced_retained_rows": 0,
+      "target_dropped_rate": 0.0,
+      "target_dropped_rows": 0,
+      "target_retained_rows": 294
+    }
+  },
+  "noise_manifest_rows": 1176,
+  "noisy_candidate_rows": 4208,
+  "noisy_query_rows": 1176,
+  "non_target_candidate_drop_rate": 0.25,
+  "outputs": {
+    "coverage": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M06_annotation_proposal_dropout_v0/coverage.json",
+    "failure_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M06_annotation_proposal_dropout_v0/failure_rows.jsonl",
+    "metrics": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M06_annotation_proposal_dropout_v0/metrics.json",
+    "noise_manifest": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M06_annotation_proposal_dropout_v0/noise_manifest.jsonl",
+    "noisy_candidate_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M06_annotation_proposal_dropout_v0/noisy_candidate_rows.jsonl",
+    "noisy_query_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M06_annotation_proposal_dropout_v0/noisy_query_rows.jsonl",
+    "predictions": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M06_annotation_proposal_dropout_v0/predictions.jsonl",
+    "report": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M06_annotation_proposal_dropout_v0/report.md"
+  },
+  "prediction_rows": 10584,
+  "profiles": [
+    "clean_annotation_oracle_v0",
+    "annotation_proposal_dropout_v0"
+  ],
+  "significant_moved_routine_task_dropped_metrics": {
+    "attempt_spl_proxy": 0.0,
+    "low_motion_preservation_rate": null,
+    "mean_expected_search_cost": 3.0,
+    "mean_returned_location_count": 2.0,
+    "mean_task_utility": -0.45,
+    "proposal_recall": 0.0,
+    "proxy_sr": 0.0,
+    "returned_unreachable_rate": 0.666667,
+    "rows": 3,
+    "stale_old_location_fp_rate": 0.0,
+    "subset": "significant_moved",
+    "target_dropped_eval_sr": 0.0,
+    "target_dropped_rate": 1.0,
+    "target_retained_eval_sr": null
+  },
+  "significant_moved_routine_task_retained_metrics": {
+    "attempt_spl_proxy": 0.733333,
+    "low_motion_preservation_rate": null,
+    "mean_expected_search_cost": 1.533333,
+    "mean_returned_location_count": 1.5,
+    "mean_task_utility": 0.57,
+    "proposal_recall": 1.0,
+    "proxy_sr": 0.8,
+    "returned_unreachable_rate": 0.233333,
+    "rows": 30,
+    "stale_old_location_fp_rate": 0.0,
+    "subset": "significant_moved",
+    "target_dropped_eval_sr": null,
+    "target_dropped_rate": 0.0,
+    "target_retained_eval_sr": 0.8
+  },
+  "status": "proposal_dropout_eval_ready",
+  "target_drop_profiles_included": true,
+  "target_drop_rate": 0.15,
+  "uses_annotation_proxy_noise": true,
+  "uses_open_vocab_perception": false,
+  "uses_real_navigation": false,
+  "uses_real_rgbd_perception": false
+}

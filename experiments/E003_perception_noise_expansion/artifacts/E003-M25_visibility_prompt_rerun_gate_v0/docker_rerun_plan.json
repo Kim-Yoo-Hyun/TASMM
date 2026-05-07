@@ -1,0 +1,68 @@
+{
+  "m25_version": "e003_m25_visibility_prompt_rerun_gate_v0",
+  "paper_table_command_ready": false,
+  "pilot_config": {
+    "max_frames_per_scan": 12,
+    "max_labels": 32,
+    "max_predictions": 1440,
+    "max_predictions_per_frame": 60,
+    "max_scans": 2,
+    "text_threshold": 0.08,
+    "threshold": 0.08
+  },
+  "pilot_detector_command": {
+    "argv": [
+      "python",
+      "experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py",
+      "--out-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/detector_rerun",
+      "--build",
+      "--docker-sudo",
+      "--sudo-password-stdin",
+      "--max-scans",
+      "2",
+      "--max-frames-per-scan",
+      "12",
+      "--max-labels",
+      "32",
+      "--max-predictions",
+      "1440",
+      "--max-predictions-per-frame",
+      "60",
+      "--threshold",
+      "0.08",
+      "--text-threshold",
+      "0.08"
+    ],
+    "shell": "python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/detector_rerun --build --docker-sudo --sudo-password-stdin --max-scans 2 --max-frames-per-scan 12 --max-labels 32 --max-predictions 1440 --max-predictions-per-frame 60 --threshold 0.08 --text-threshold 0.08"
+  },
+  "post_calibration_command": {
+    "argv": [
+      "python",
+      "experiments/E003_perception_noise_expansion/tools/run_m23_proposal_calibration.py",
+      "--m22-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/detector_rerun",
+      "--out-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/match_preserving_calibration",
+      "--selection-policy",
+      "full_match_preserving"
+    ],
+    "shell": "python experiments/E003_perception_noise_expansion/tools/run_m23_proposal_calibration.py --m22-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/detector_rerun --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/match_preserving_calibration --selection-policy full_match_preserving"
+  },
+  "post_visibility_command": {
+    "argv": [
+      "python",
+      "experiments/E003_perception_noise_expansion/tools/run_m24_visibility_prompt_projection_gate.py",
+      "--m22-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/detector_rerun",
+      "--m23-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/match_preserving_calibration",
+      "--out-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/visibility_denominator",
+      "--max-labels",
+      "32"
+    ],
+    "shell": "python experiments/E003_perception_noise_expansion/tools/run_m24_visibility_prompt_projection_gate.py --m22-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/detector_rerun --m23-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/match_preserving_calibration --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M25_visibility_prompt_rerun_gate_v0/visibility_denominator --max-labels 32"
+  },
+  "sudo_password_policy": "stdin_required_not_stored"
+}

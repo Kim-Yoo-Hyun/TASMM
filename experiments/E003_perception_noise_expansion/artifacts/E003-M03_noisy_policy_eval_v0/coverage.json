@@ -1,0 +1,43 @@
+{
+  "candidate_grid_signal_rows": 2496,
+  "eval_version": "e003_noisy_policy_eval_v0",
+  "failure_rows": 466,
+  "failure_type_counts": {
+    "stale_old_location_returned": 66,
+    "static_map_localization_error": 114,
+    "target_outside_returned_budget": 286
+  },
+  "grid_dir": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M05_occupancy_grid_astar_v0",
+  "input_dir": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M02_annotation_proxy_noise_v0",
+  "noisy_candidate_rows": 2496,
+  "noisy_query_rows": 588,
+  "outputs": {
+    "coverage": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M03_noisy_policy_eval_v0/coverage.json",
+    "failure_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M03_noisy_policy_eval_v0/failure_rows.jsonl",
+    "metrics": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M03_noisy_policy_eval_v0/metrics.json",
+    "predictions": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M03_noisy_policy_eval_v0/predictions.jsonl",
+    "report": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M03_noisy_policy_eval_v0/report.md"
+  },
+  "policies": [
+    "scene_aligned_static_map",
+    "label_nearest_current_observation",
+    "always_top1",
+    "always_top3",
+    "always_top5",
+    "fixed_uncertainty_topk_v0",
+    "task_conditioned_budget_v0",
+    "reachable_first_task_conditioned_budget_v0",
+    "oracle_current_target"
+  ],
+  "prediction_rows": 5292,
+  "profiles": [
+    "clean_annotation_oracle_v0",
+    "annotation_score_jitter_v0"
+  ],
+  "status": "noisy_policy_eval_ready",
+  "target_drop_profiles_included": false,
+  "uses_annotation_proxy_noise": true,
+  "uses_open_vocab_perception": false,
+  "uses_real_navigation": false,
+  "uses_real_rgbd_perception": false
+}

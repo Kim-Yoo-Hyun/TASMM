@@ -1,0 +1,28 @@
+{
+  "all_candidates_reachable_eval_rows": 198,
+  "analysis_version": "e002_reachable_first_semantic_grid_scoring_v0",
+  "candidate_rows": 1248,
+  "failure_rows": 5,
+  "gate_condition": {
+    "requires_returned_unreachable_delta_total_below": 0,
+    "requires_success_loss_rows": 0,
+    "scope": "target_reachable_eval"
+  },
+  "input_grid_dir": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M05_occupancy_grid_astar_v0",
+  "input_m08_dir": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M08_source_quality_filtered_grid_eval_v0",
+  "m08_source_limited_rows": 27,
+  "m08_target_reachable_eval_rows": 267,
+  "outputs": {
+    "comparison_rows": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M09_reachable_first_scoring_v0/comparison_rows.jsonl",
+    "coverage": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M09_reachable_first_scoring_v0/coverage.json",
+    "failure_rows": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M09_reachable_first_scoring_v0/failure_rows.jsonl",
+    "metrics": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M09_reachable_first_scoring_v0/metrics.json",
+    "reachable_first_predictions": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M09_reachable_first_scoring_v0/reachable_first_predictions.jsonl",
+    "report": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M09_reachable_first_scoring_v0/report.md",
+    "strict_comparison_rows": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M09_reachable_first_scoring_v0/strict_comparison_rows.jsonl"
+  },
+  "query_rows": 294,
+  "reachable_first_prediction_rows": 267,
+  "status": "reachable_first_scoring_gate_pass",
+  "target_reachable_eval_rows": 267
+}

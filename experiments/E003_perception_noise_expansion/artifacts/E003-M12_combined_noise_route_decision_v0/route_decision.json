@@ -1,0 +1,41 @@
+{
+  "analysis_version": "e003_m12_combined_noise_route_decision_v0",
+  "claim_boundary": {
+    "non_claims_even_if_next_unit_succeeds": [
+      "real RGB-D perception robustness",
+      "open-vocabulary detector robustness",
+      "real navigation SR/SPL",
+      "deployable search policy",
+      "natural-language intention understanding"
+    ],
+    "safe_if_next_unit_succeeds": "Controlled perception-like annotation noise robustness under combined dropout, false-positive, score/rank, and centroid perturbations."
+  },
+  "decision": {
+    "deferred_route": "dockerized_real_proposal_route",
+    "deferred_route_status": "blocked_not_selected_as_immediate_next",
+    "immediate_next": "controlled_annotation_proxy_combined_stress"
+  },
+  "evidence_snapshot": {
+    "individual_controlled_profiles_complete": {
+      "annotation_centroid_jitter_v0": true,
+      "annotation_false_positive_v0": true,
+      "annotation_proposal_dropout_v0": true,
+      "annotation_score_jitter_v0": true
+    },
+    "proposal_output_files_found": 0,
+    "ready_rows": 294,
+    "real_open_vocab_proposal_ready_rows": 0,
+    "real_rgbd_proposal_ready_rows": 0
+  },
+  "next_action": "E003-M13_annotation_combined_moderate_v0",
+  "selected_profile": "annotation_combined_moderate_v0",
+  "selected_route": "controlled_annotation_proxy_combined_stress",
+  "status": "combined_controlled_route_selected",
+  "why_combined_now": [
+    "Score/rank jitter, proposal dropout, false-positive contamination, and centroid jitter have separate executable boundaries.",
+    "The combined profile is the smallest next step that tests interaction between proposal recall, distractors, rank noise, and localization noise.",
+    "It preserves the current E001/E002 denominator and can be run as a repository-local artifact transform.",
+    "Real detector/open-vocabulary claims remain blocked until Dockerized proposal generation and alignment are staged."
+  ],
+  "why_not_real_route_now": "Current E001 query denominator has 0 real RGB-D proposal-ready rows, 0 real open-vocabulary proposal-ready rows, and 0 proposal output files; switching immediately would stop the E003 controlled-noise progression before the combined profile is measured."
+}

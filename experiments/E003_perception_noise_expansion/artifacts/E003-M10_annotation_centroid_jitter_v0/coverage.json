@@ -1,0 +1,145 @@
+{
+  "centroid_jitter_seeds": [
+    43,
+    47,
+    53
+  ],
+  "docker_reason": "This profile is a repository-local artifact transform over annotation candidates; real detector/open-vocabulary paper-body implementation remains Docker-required.",
+  "docker_required": false,
+  "eval_version": "e003_annotation_centroid_jitter_v0",
+  "failure_rows": 1654,
+  "failure_type_counts": {
+    "identity_or_budget_failure": 604,
+    "static_map_localization_error": 360,
+    "target_centroid_jitter_exceeds_threshold": 690
+  },
+  "grid_path_note": "E002 grid reachability is reused by instance id; occupancy-grid path costs are not recomputed after centroid jitter.",
+  "grid_path_recomputed_for_centroid_jitter": false,
+  "input_candidate_rows": 1248,
+  "input_query_rows": 294,
+  "manifest_summary": {
+    "annotation_centroid_jitter_v0": {
+      "grid_path_recomputed_for_centroid_jitter": false,
+      "mean_candidate_centroid_jitter_m": 0.314413,
+      "mean_candidate_planar_jitter_m": 0.309071,
+      "mean_target_centroid_jitter_m": 0.313896,
+      "mean_target_planar_jitter_m": 0.308592,
+      "rank_changed_candidate_rows": 1327,
+      "rows": 882,
+      "target_jitter_exceeds_threshold_rate": 0.139456,
+      "target_jitter_exceeds_threshold_rows": 123,
+      "target_rank_changed_rate": 0.157596,
+      "target_rank_changed_rows": 139,
+      "target_retained_rate": 1.0,
+      "target_retained_rows": 882
+    },
+    "clean_annotation_oracle_v0": {
+      "grid_path_recomputed_for_centroid_jitter": false,
+      "mean_candidate_centroid_jitter_m": 0.0,
+      "mean_candidate_planar_jitter_m": 0.0,
+      "mean_target_centroid_jitter_m": 0.0,
+      "mean_target_planar_jitter_m": 0.0,
+      "rank_changed_candidate_rows": 0,
+      "rows": 294,
+      "target_jitter_exceeds_threshold_rate": 0.0,
+      "target_jitter_exceeds_threshold_rows": 0,
+      "target_rank_changed_rate": 0.0,
+      "target_rank_changed_rows": 0,
+      "target_retained_rate": 1.0,
+      "target_retained_rows": 294
+    }
+  },
+  "max_planar_jitter_m": 0.75,
+  "max_z_jitter_m": 0.15,
+  "next_recommended_unit": "E003-M11_centroid_jitter_failure_boundary_v0",
+  "noise_manifest_rows": 1176,
+  "noisy_candidate_rows": 4992,
+  "noisy_query_rows": 1176,
+  "outputs": {
+    "coverage": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M10_annotation_centroid_jitter_v0/coverage.json",
+    "failure_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M10_annotation_centroid_jitter_v0/failure_rows.jsonl",
+    "metrics": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M10_annotation_centroid_jitter_v0/metrics.json",
+    "noise_manifest": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M10_annotation_centroid_jitter_v0/noise_manifest.jsonl",
+    "noisy_candidate_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M10_annotation_centroid_jitter_v0/noisy_candidate_rows.jsonl",
+    "noisy_query_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M10_annotation_centroid_jitter_v0/noisy_query_rows.jsonl",
+    "predictions": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M10_annotation_centroid_jitter_v0/predictions.jsonl",
+    "report": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M10_annotation_centroid_jitter_v0/report.md"
+  },
+  "planar_sigma_m": 0.25,
+  "prediction_rows": 10584,
+  "profiles": [
+    "clean_annotation_oracle_v0",
+    "annotation_centroid_jitter_v0"
+  ],
+  "significant_moved_routine_reachable_centroid_jitter_metrics": {
+    "attempt_spl_proxy": 0.621212,
+    "identity_proxy_sr": 0.69697,
+    "localization_failure_counts": {
+      "identity_or_budget_failure": 10,
+      "none": 20,
+      "target_centroid_jitter_exceeds_threshold": 3
+    },
+    "localization_proxy_sr": 0.606061,
+    "low_motion_preservation_rate": null,
+    "mean_expected_search_cost": 1.757576,
+    "mean_target_centroid_jitter_m": 0.276294,
+    "mean_target_planar_jitter_m": 0.270449,
+    "mean_task_utility": 0.433333,
+    "returned_unreachable_rate": 0.090909,
+    "rows": 33,
+    "stale_old_location_fp_rate": 0.0,
+    "subset": "significant_moved",
+    "target_jitter_exceeds_threshold_rate": 0.090909,
+    "target_rank_changed_rate": 0.30303,
+    "target_retained_rate": 1.0
+  },
+  "significant_moved_routine_task_centroid_jitter_metrics": {
+    "attempt_spl_proxy": 0.621212,
+    "identity_proxy_sr": 0.69697,
+    "localization_failure_counts": {
+      "identity_or_budget_failure": 10,
+      "none": 20,
+      "target_centroid_jitter_exceeds_threshold": 3
+    },
+    "localization_proxy_sr": 0.606061,
+    "low_motion_preservation_rate": null,
+    "mean_expected_search_cost": 1.757576,
+    "mean_target_centroid_jitter_m": 0.276294,
+    "mean_target_planar_jitter_m": 0.270449,
+    "mean_task_utility": 0.433333,
+    "returned_unreachable_rate": 0.242424,
+    "rows": 33,
+    "stale_old_location_fp_rate": 0.0,
+    "subset": "significant_moved",
+    "target_jitter_exceeds_threshold_rate": 0.090909,
+    "target_rank_changed_rate": 0.30303,
+    "target_retained_rate": 1.0
+  },
+  "significant_moved_routine_task_threshold_exceeded_metrics": {
+    "attempt_spl_proxy": 1.0,
+    "identity_proxy_sr": 1.0,
+    "localization_failure_counts": {
+      "target_centroid_jitter_exceeds_threshold": 3
+    },
+    "localization_proxy_sr": 0.0,
+    "low_motion_preservation_rate": null,
+    "mean_expected_search_cost": 1.0,
+    "mean_target_centroid_jitter_m": 0.697119,
+    "mean_target_planar_jitter_m": 0.696879,
+    "mean_task_utility": 0.85,
+    "returned_unreachable_rate": 0.0,
+    "rows": 3,
+    "stale_old_location_fp_rate": 0.0,
+    "subset": "significant_moved",
+    "target_jitter_exceeds_threshold_rate": 1.0,
+    "target_rank_changed_rate": 0.0,
+    "target_retained_rate": 1.0
+  },
+  "status": "centroid_jitter_eval_ready",
+  "target_drop_profiles_included": false,
+  "uses_annotation_proxy_noise": true,
+  "uses_open_vocab_perception": false,
+  "uses_real_navigation": false,
+  "uses_real_rgbd_perception": false,
+  "z_sigma_m": 0.05
+}

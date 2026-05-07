@@ -1,0 +1,2266 @@
+{
+  "all": {
+    "high_value_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.381599,
+        "mean_path_utility_proxy": 2.611127,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.897958,
+        "path_proxy_sr": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.353148
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.503585,
+        "mean_path_utility_proxy": 2.791809,
+        "mean_returned_location_count": 2.142857,
+        "path_attempt_spl_proxy": 0.941293,
+        "path_proxy_sr": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.904711
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.578931,
+        "mean_path_utility_proxy": 2.879997,
+        "mean_returned_location_count": 2.979592,
+        "path_attempt_spl_proxy": 0.956331,
+        "path_proxy_sr": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.709696
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.197332,
+        "mean_path_utility_proxy": 0.26887,
+        "path_attempt_spl_proxy": 0.058374,
+        "path_proxy_sr": 0.091837
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.075346,
+        "mean_path_utility_proxy": 0.088188,
+        "path_attempt_spl_proxy": 0.015039,
+        "path_proxy_sr": 0.030612
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 1e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.075346,
+        "mean_path_utility_proxy": 0.088188,
+        "path_attempt_spl_proxy": 0.015038,
+        "path_proxy_sr": 0.030612
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.118579,
+        "mean_path_utility_proxy": -0.05095,
+        "path_attempt_spl_proxy": -0.043668,
+        "path_proxy_sr": -0.010204
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.140839,
+        "mean_path_utility_proxy": 0.940609,
+        "path_attempt_spl_proxy": 0.262454,
+        "path_proxy_sr": 0.295918
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.197332,
+        "mean_path_utility_proxy": 0.26887,
+        "path_attempt_spl_proxy": 0.058374,
+        "path_proxy_sr": 0.091837
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.075346,
+        "mean_path_utility_proxy": 0.088188,
+        "path_attempt_spl_proxy": 0.015039,
+        "path_proxy_sr": 0.030612
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 1e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.075346,
+        "mean_path_utility_proxy": 0.088188,
+        "path_attempt_spl_proxy": 0.015038,
+        "path_proxy_sr": 0.030612
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.118579,
+        "mean_path_utility_proxy": -0.05095,
+        "path_attempt_spl_proxy": -0.043668,
+        "path_proxy_sr": -0.010204
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.140839,
+        "mean_path_utility_proxy": 0.940609,
+        "path_attempt_spl_proxy": 0.262454,
+        "path_proxy_sr": 0.295918
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.503585,
+        "mean_path_utility_proxy": 2.791809,
+        "mean_returned_location_count": 1.663265,
+        "path_attempt_spl_proxy": 0.941294,
+        "path_proxy_sr": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.904711
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.381599,
+        "mean_path_utility_proxy": 2.611127,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.897958,
+        "path_proxy_sr": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.353148
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.460352,
+        "mean_path_utility_proxy": 2.930947,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.172251
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.578931,
+        "mean_path_utility_proxy": 2.879997,
+        "mean_returned_location_count": 2.193878,
+        "path_attempt_spl_proxy": 0.956332,
+        "path_proxy_sr": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.709696
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.438092,
+        "mean_path_utility_proxy": 1.939388,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.693878,
+        "path_proxy_sr": 0.693878,
+        "rows": 98,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "all",
+        "success_per_meter": 1.583864
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.578931,
+        "mean_path_utility_proxy": 2.879997,
+        "mean_returned_location_count": 2.193878,
+        "path_attempt_spl_proxy": 0.956332,
+        "path_proxy_sr": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.709696
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.381599,
+        "mean_path_utility_proxy": 2.611127,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.897958,
+        "path_proxy_sr": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.353148
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.503585,
+        "mean_path_utility_proxy": 2.791809,
+        "mean_returned_location_count": 2.142857,
+        "path_attempt_spl_proxy": 0.941293,
+        "path_proxy_sr": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.904711
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.578931,
+        "mean_path_utility_proxy": 2.879997,
+        "mean_returned_location_count": 2.979592,
+        "path_attempt_spl_proxy": 0.956331,
+        "path_proxy_sr": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.709696
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.197332,
+        "mean_path_utility_proxy": 0.26887,
+        "path_attempt_spl_proxy": 0.058374,
+        "path_proxy_sr": 0.091837
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.075346,
+        "mean_path_utility_proxy": 0.088188,
+        "path_attempt_spl_proxy": 0.015039,
+        "path_proxy_sr": 0.030612
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 1e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.075346,
+        "mean_path_utility_proxy": 0.088188,
+        "path_attempt_spl_proxy": 0.015038,
+        "path_proxy_sr": 0.030612
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.118579,
+        "mean_path_utility_proxy": -0.05095,
+        "path_attempt_spl_proxy": -0.043668,
+        "path_proxy_sr": -0.010204
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.140839,
+        "mean_path_utility_proxy": 0.940609,
+        "path_attempt_spl_proxy": 0.262454,
+        "path_proxy_sr": 0.295918
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.197332,
+        "mean_path_utility_proxy": 0.26887,
+        "path_attempt_spl_proxy": 0.058374,
+        "path_proxy_sr": 0.091837
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.075346,
+        "mean_path_utility_proxy": 0.088188,
+        "path_attempt_spl_proxy": 0.015039,
+        "path_proxy_sr": 0.030612
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 1e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.075346,
+        "mean_path_utility_proxy": 0.088188,
+        "path_attempt_spl_proxy": 0.015038,
+        "path_proxy_sr": 0.030612
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.118579,
+        "mean_path_utility_proxy": -0.05095,
+        "path_attempt_spl_proxy": -0.043668,
+        "path_proxy_sr": -0.010204
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.140839,
+        "mean_path_utility_proxy": 0.940609,
+        "path_attempt_spl_proxy": 0.262454,
+        "path_proxy_sr": 0.295918
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.503585,
+        "mean_path_utility_proxy": 2.791809,
+        "mean_returned_location_count": 1.663265,
+        "path_attempt_spl_proxy": 0.941294,
+        "path_proxy_sr": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.904711
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.381599,
+        "mean_path_utility_proxy": 2.611127,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.897958,
+        "path_proxy_sr": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.353148
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.460352,
+        "mean_path_utility_proxy": 2.930947,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.172251
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.578931,
+        "mean_path_utility_proxy": 2.879997,
+        "mean_returned_location_count": 2.193878,
+        "path_attempt_spl_proxy": 0.956332,
+        "path_proxy_sr": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.709696
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.438092,
+        "mean_path_utility_proxy": 1.939388,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.693878,
+        "path_proxy_sr": 0.693878,
+        "rows": 98,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "all",
+        "success_per_meter": 1.583864
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.578931,
+        "mean_path_utility_proxy": 2.879997,
+        "mean_returned_location_count": 2.193878,
+        "path_attempt_spl_proxy": 0.956332,
+        "path_proxy_sr": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.709696
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.381599,
+        "mean_path_utility_proxy": 0.840719,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.897958,
+        "path_proxy_sr": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.353148
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.503585,
+        "mean_path_utility_proxy": 0.883646,
+        "mean_returned_location_count": 2.142857,
+        "path_attempt_spl_proxy": 0.941293,
+        "path_proxy_sr": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.904711
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.578931,
+        "mean_path_utility_proxy": 0.902956,
+        "mean_returned_location_count": 2.979592,
+        "path_attempt_spl_proxy": 0.956331,
+        "path_proxy_sr": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.709696
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.080366,
+        "mean_path_utility_proxy": 0.038966,
+        "path_attempt_spl_proxy": 0.03412,
+        "path_proxy_sr": 0.051021
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": -0.04162,
+        "mean_path_utility_proxy": -0.003961,
+        "path_attempt_spl_proxy": -0.009215,
+        "path_proxy_sr": -0.010204
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": -0.116966,
+        "mean_path_utility_proxy": -0.023271,
+        "path_attempt_spl_proxy": -0.024253,
+        "path_proxy_sr": -0.040816
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": -0.04162,
+        "mean_path_utility_proxy": -0.003961,
+        "path_attempt_spl_proxy": -0.009216,
+        "path_proxy_sr": -0.010204
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.001613,
+        "mean_path_utility_proxy": -0.051262,
+        "path_attempt_spl_proxy": -0.067922,
+        "path_proxy_sr": -0.05102
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.023873,
+        "mean_path_utility_proxy": 0.251521,
+        "path_attempt_spl_proxy": 0.2382,
+        "path_proxy_sr": 0.255102
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.080366,
+        "mean_path_utility_proxy": 0.038966,
+        "path_attempt_spl_proxy": 0.03412,
+        "path_proxy_sr": 0.051021
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": -0.04162,
+        "mean_path_utility_proxy": -0.003961,
+        "path_attempt_spl_proxy": -0.009215,
+        "path_proxy_sr": -0.010204
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": -0.116966,
+        "mean_path_utility_proxy": -0.023271,
+        "path_attempt_spl_proxy": -0.024253,
+        "path_proxy_sr": -0.040816
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": -0.04162,
+        "mean_path_utility_proxy": -0.003961,
+        "path_attempt_spl_proxy": -0.009216,
+        "path_proxy_sr": -0.010204
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.001613,
+        "mean_path_utility_proxy": -0.051262,
+        "path_attempt_spl_proxy": -0.067922,
+        "path_proxy_sr": -0.05102
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.023873,
+        "mean_path_utility_proxy": 0.251521,
+        "path_attempt_spl_proxy": 0.2382,
+        "path_proxy_sr": 0.255102
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.503585,
+        "mean_path_utility_proxy": 0.883646,
+        "mean_returned_location_count": 1.663265,
+        "path_attempt_spl_proxy": 0.941294,
+        "path_proxy_sr": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.904711
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.381599,
+        "mean_path_utility_proxy": 0.840719,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.897958,
+        "path_proxy_sr": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.353148
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.460352,
+        "mean_path_utility_proxy": 0.930947,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.172251
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.461965,
+        "mean_path_utility_proxy": 0.879685,
+        "mean_returned_location_count": 1.387755,
+        "path_attempt_spl_proxy": 0.932078,
+        "path_proxy_sr": 0.94898,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.054225
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.438092,
+        "mean_path_utility_proxy": 0.628164,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.693878,
+        "path_proxy_sr": 0.693878,
+        "rows": 98,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "all",
+        "success_per_meter": 1.583864
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.461965,
+        "mean_path_utility_proxy": 0.879685,
+        "mean_returned_location_count": 1.387755,
+        "path_attempt_spl_proxy": 0.932078,
+        "path_proxy_sr": 0.94898,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 2.054225
+      }
+    }
+  },
+  "low_motion_control": {
+    "high_value_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.921569,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 2.509804,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.921569,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 2.509804,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 2.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 0.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 0.980284,
+        "mean_returned_location_count": 1.921569,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 0.980284,
+        "mean_returned_location_count": 2.509804,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 2e-06,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 0.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 0.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.999998,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 0.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 0.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 0.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_path_cost_m": 0.131442,
+        "mean_path_utility_proxy": 0.980284,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 7.607918
+      }
+    }
+  },
+  "mid_motion_review": {
+    "high_value_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.462471,
+        "mean_path_utility_proxy": 2.388963,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.833333,
+        "path_proxy_sr": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.801914
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.565581,
+        "mean_path_utility_proxy": 2.824885,
+        "mean_returned_location_count": 2.472222,
+        "path_attempt_spl_proxy": 0.935516,
+        "path_proxy_sr": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.718979
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.580316,
+        "mean_path_utility_proxy": 2.912953,
+        "mean_returned_location_count": 3.583333,
+        "path_attempt_spl_proxy": 0.953519,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.723199
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.117845,
+        "mean_path_utility_proxy": 0.52399,
+        "path_attempt_spl_proxy": 0.120186,
+        "path_proxy_sr": 0.166667
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.014735,
+        "mean_path_utility_proxy": 0.088068,
+        "path_attempt_spl_proxy": 0.018003,
+        "path_proxy_sr": 0.027778
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.014735,
+        "mean_path_utility_proxy": 0.088068,
+        "path_attempt_spl_proxy": 0.018003,
+        "path_proxy_sr": 0.027778
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.049003,
+        "mean_path_utility_proxy": -0.00735,
+        "path_attempt_spl_proxy": -0.046481,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": -0.120504,
+        "mean_path_utility_proxy": 1.733354,
+        "path_attempt_spl_proxy": 0.481297,
+        "path_proxy_sr": 0.527778
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.117845,
+        "mean_path_utility_proxy": 0.52399,
+        "path_attempt_spl_proxy": 0.120186,
+        "path_proxy_sr": 0.166667
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.014735,
+        "mean_path_utility_proxy": 0.088068,
+        "path_attempt_spl_proxy": 0.018003,
+        "path_proxy_sr": 0.027778
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.014735,
+        "mean_path_utility_proxy": 0.088068,
+        "path_attempt_spl_proxy": 0.018003,
+        "path_proxy_sr": 0.027778
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.049003,
+        "mean_path_utility_proxy": -0.00735,
+        "path_attempt_spl_proxy": -0.046481,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": -0.120504,
+        "mean_path_utility_proxy": 1.733354,
+        "path_attempt_spl_proxy": 0.481297,
+        "path_proxy_sr": 0.527778
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.565581,
+        "mean_path_utility_proxy": 2.824885,
+        "mean_returned_location_count": 2.472222,
+        "path_attempt_spl_proxy": 0.935516,
+        "path_proxy_sr": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.718979
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.462471,
+        "mean_path_utility_proxy": 2.388963,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.833333,
+        "path_proxy_sr": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.801914
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.531313,
+        "mean_path_utility_proxy": 2.920303,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.88213
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.580316,
+        "mean_path_utility_proxy": 2.912953,
+        "mean_returned_location_count": 3.583333,
+        "path_attempt_spl_proxy": 0.953519,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.723199
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.70082,
+        "mean_path_utility_proxy": 1.179599,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.472222,
+        "path_proxy_sr": 0.472222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.673814
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.580316,
+        "mean_path_utility_proxy": 2.912953,
+        "mean_returned_location_count": 3.583333,
+        "path_attempt_spl_proxy": 0.953519,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.723199
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.462471,
+        "mean_path_utility_proxy": 2.388963,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.833333,
+        "path_proxy_sr": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.801914
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.565581,
+        "mean_path_utility_proxy": 2.824885,
+        "mean_returned_location_count": 2.472222,
+        "path_attempt_spl_proxy": 0.935516,
+        "path_proxy_sr": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.718979
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.580316,
+        "mean_path_utility_proxy": 2.912953,
+        "mean_returned_location_count": 3.583333,
+        "path_attempt_spl_proxy": 0.953519,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.723199
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.117845,
+        "mean_path_utility_proxy": 0.52399,
+        "path_attempt_spl_proxy": 0.120186,
+        "path_proxy_sr": 0.166667
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.014735,
+        "mean_path_utility_proxy": 0.088068,
+        "path_attempt_spl_proxy": 0.018003,
+        "path_proxy_sr": 0.027778
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.014735,
+        "mean_path_utility_proxy": 0.088068,
+        "path_attempt_spl_proxy": 0.018003,
+        "path_proxy_sr": 0.027778
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.049003,
+        "mean_path_utility_proxy": -0.00735,
+        "path_attempt_spl_proxy": -0.046481,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": -0.120504,
+        "mean_path_utility_proxy": 1.733354,
+        "path_attempt_spl_proxy": 0.481297,
+        "path_proxy_sr": 0.527778
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.117845,
+        "mean_path_utility_proxy": 0.52399,
+        "path_attempt_spl_proxy": 0.120186,
+        "path_proxy_sr": 0.166667
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.014735,
+        "mean_path_utility_proxy": 0.088068,
+        "path_attempt_spl_proxy": 0.018003,
+        "path_proxy_sr": 0.027778
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.014735,
+        "mean_path_utility_proxy": 0.088068,
+        "path_attempt_spl_proxy": 0.018003,
+        "path_proxy_sr": 0.027778
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.049003,
+        "mean_path_utility_proxy": -0.00735,
+        "path_attempt_spl_proxy": -0.046481,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": -0.120504,
+        "mean_path_utility_proxy": 1.733354,
+        "path_attempt_spl_proxy": 0.481297,
+        "path_proxy_sr": 0.527778
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.565581,
+        "mean_path_utility_proxy": 2.824885,
+        "mean_returned_location_count": 2.472222,
+        "path_attempt_spl_proxy": 0.935516,
+        "path_proxy_sr": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.718979
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.462471,
+        "mean_path_utility_proxy": 2.388963,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.833333,
+        "path_proxy_sr": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.801914
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.531313,
+        "mean_path_utility_proxy": 2.920303,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.88213
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.580316,
+        "mean_path_utility_proxy": 2.912953,
+        "mean_returned_location_count": 3.583333,
+        "path_attempt_spl_proxy": 0.953519,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.723199
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.70082,
+        "mean_path_utility_proxy": 1.179599,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.472222,
+        "path_proxy_sr": 0.472222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.673814
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.580316,
+        "mean_path_utility_proxy": 2.912953,
+        "mean_returned_location_count": 3.583333,
+        "path_attempt_spl_proxy": 0.953519,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.723199
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.462471,
+        "mean_path_utility_proxy": 0.763963,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.833333,
+        "path_proxy_sr": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.801914
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.565581,
+        "mean_path_utility_proxy": 0.887385,
+        "mean_returned_location_count": 2.472222,
+        "path_attempt_spl_proxy": 0.935516,
+        "path_proxy_sr": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.718979
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.580316,
+        "mean_path_utility_proxy": 0.912953,
+        "mean_returned_location_count": 3.583333,
+        "path_attempt_spl_proxy": 0.953519,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.723199
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.083685,
+        "mean_path_utility_proxy": 0.098558,
+        "path_attempt_spl_proxy": 0.077094,
+        "path_proxy_sr": 0.111111
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": -0.019425,
+        "mean_path_utility_proxy": -0.024864,
+        "path_attempt_spl_proxy": -0.025089,
+        "path_proxy_sr": -0.027778
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": -0.03416,
+        "mean_path_utility_proxy": -0.050432,
+        "path_attempt_spl_proxy": -0.043092,
+        "path_proxy_sr": -0.055556
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": -0.019425,
+        "mean_path_utility_proxy": -0.024864,
+        "path_attempt_spl_proxy": -0.025089,
+        "path_proxy_sr": -0.027778
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.014843,
+        "mean_path_utility_proxy": -0.057782,
+        "path_attempt_spl_proxy": -0.089573,
+        "path_proxy_sr": -0.055556
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": -0.154664,
+        "mean_path_utility_proxy": 0.495422,
+        "path_attempt_spl_proxy": 0.438205,
+        "path_proxy_sr": 0.472222
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.083685,
+        "mean_path_utility_proxy": 0.098558,
+        "path_attempt_spl_proxy": 0.077094,
+        "path_proxy_sr": 0.111111
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": -0.019425,
+        "mean_path_utility_proxy": -0.024864,
+        "path_attempt_spl_proxy": -0.025089,
+        "path_proxy_sr": -0.027778
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": -0.03416,
+        "mean_path_utility_proxy": -0.050432,
+        "path_attempt_spl_proxy": -0.043092,
+        "path_proxy_sr": -0.055556
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": -0.019425,
+        "mean_path_utility_proxy": -0.024864,
+        "path_attempt_spl_proxy": -0.025089,
+        "path_proxy_sr": -0.027778
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.014843,
+        "mean_path_utility_proxy": -0.057782,
+        "path_attempt_spl_proxy": -0.089573,
+        "path_proxy_sr": -0.055556
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": -0.154664,
+        "mean_path_utility_proxy": 0.495422,
+        "path_attempt_spl_proxy": 0.438205,
+        "path_proxy_sr": 0.472222
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.565581,
+        "mean_path_utility_proxy": 0.887385,
+        "mean_returned_location_count": 2.472222,
+        "path_attempt_spl_proxy": 0.935516,
+        "path_proxy_sr": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.718979
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.462471,
+        "mean_path_utility_proxy": 0.763963,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.833333,
+        "path_proxy_sr": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.801914
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.531313,
+        "mean_path_utility_proxy": 0.920303,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.88213
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.546156,
+        "mean_path_utility_proxy": 0.862521,
+        "mean_returned_location_count": 1.888889,
+        "path_attempt_spl_proxy": 0.910427,
+        "path_proxy_sr": 0.944444,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.729257
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.70082,
+        "mean_path_utility_proxy": 0.367099,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.472222,
+        "path_proxy_sr": 0.472222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.673814
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 0.546156,
+        "mean_path_utility_proxy": 0.862521,
+        "mean_returned_location_count": 1.888889,
+        "path_attempt_spl_proxy": 0.910427,
+        "path_proxy_sr": 0.944444,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 1.729257
+      }
+    }
+  },
+  "significant_moved": {
+    "high_value_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.27675,
+        "mean_path_utility_proxy": 1.626669,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.636364,
+        "path_proxy_sr": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.498425
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.026084,
+        "mean_path_utility_proxy": 1.809724,
+        "mean_returned_location_count": 2.090909,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.358955
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.649124,
+        "mean_path_utility_proxy": 2.307177,
+        "mean_returned_location_count": 3.181818,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.343167
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 1.372374,
+        "mean_path_utility_proxy": 0.680508,
+        "path_attempt_spl_proxy": 0.126711,
+        "path_proxy_sr": 0.272727
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.62304,
+        "mean_path_utility_proxy": 0.497453,
+        "path_attempt_spl_proxy": 0.075049,
+        "path_proxy_sr": 0.181818
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.62304,
+        "mean_path_utility_proxy": 0.497453,
+        "path_attempt_spl_proxy": 0.075049,
+        "path_proxy_sr": 0.181818
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.896061,
+        "mean_path_utility_proxy": -0.429864,
+        "path_attempt_spl_proxy": -0.236925,
+        "path_proxy_sr": -0.090909
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 1.649124,
+        "mean_path_utility_proxy": 2.707177,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 1.372374,
+        "mean_path_utility_proxy": 0.680508,
+        "path_attempt_spl_proxy": 0.126711,
+        "path_proxy_sr": 0.272727
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.62304,
+        "mean_path_utility_proxy": 0.497453,
+        "path_attempt_spl_proxy": 0.075049,
+        "path_proxy_sr": 0.181818
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.62304,
+        "mean_path_utility_proxy": 0.497453,
+        "path_attempt_spl_proxy": 0.075049,
+        "path_proxy_sr": 0.181818
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.896061,
+        "mean_path_utility_proxy": -0.429864,
+        "path_attempt_spl_proxy": -0.236925,
+        "path_proxy_sr": -0.090909
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 1.649124,
+        "mean_path_utility_proxy": 2.707177,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.026084,
+        "mean_path_utility_proxy": 1.809724,
+        "mean_returned_location_count": 2.090909,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.358955
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.27675,
+        "mean_path_utility_proxy": 1.626669,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.636364,
+        "path_proxy_sr": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.498425
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.753063,
+        "mean_path_utility_proxy": 2.737041,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.57043
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.649124,
+        "mean_path_utility_proxy": 2.307177,
+        "mean_returned_location_count": 3.181818,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.343167
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.0,
+        "mean_path_utility_proxy": -0.4,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.0
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.649124,
+        "mean_path_utility_proxy": 2.307177,
+        "mean_returned_location_count": 3.181818,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.343167
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.27675,
+        "mean_path_utility_proxy": 1.626669,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.636364,
+        "path_proxy_sr": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.498425
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.026084,
+        "mean_path_utility_proxy": 1.809724,
+        "mean_returned_location_count": 2.090909,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.358955
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.649124,
+        "mean_path_utility_proxy": 2.307177,
+        "mean_returned_location_count": 3.181818,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.343167
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 1.372374,
+        "mean_path_utility_proxy": 0.680508,
+        "path_attempt_spl_proxy": 0.126711,
+        "path_proxy_sr": 0.272727
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.62304,
+        "mean_path_utility_proxy": 0.497453,
+        "path_attempt_spl_proxy": 0.075049,
+        "path_proxy_sr": 0.181818
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.62304,
+        "mean_path_utility_proxy": 0.497453,
+        "path_attempt_spl_proxy": 0.075049,
+        "path_proxy_sr": 0.181818
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.896061,
+        "mean_path_utility_proxy": -0.429864,
+        "path_attempt_spl_proxy": -0.236925,
+        "path_proxy_sr": -0.090909
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 1.649124,
+        "mean_path_utility_proxy": 2.707177,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 1.372374,
+        "mean_path_utility_proxy": 0.680508,
+        "path_attempt_spl_proxy": 0.126711,
+        "path_proxy_sr": 0.272727
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": 0.62304,
+        "mean_path_utility_proxy": 0.497453,
+        "path_attempt_spl_proxy": 0.075049,
+        "path_proxy_sr": 0.181818
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": 0.62304,
+        "mean_path_utility_proxy": 0.497453,
+        "path_attempt_spl_proxy": 0.075049,
+        "path_proxy_sr": 0.181818
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": 0.896061,
+        "mean_path_utility_proxy": -0.429864,
+        "path_attempt_spl_proxy": -0.236925,
+        "path_proxy_sr": -0.090909
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 1.649124,
+        "mean_path_utility_proxy": 2.707177,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.026084,
+        "mean_path_utility_proxy": 1.809724,
+        "mean_returned_location_count": 2.090909,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.358955
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.27675,
+        "mean_path_utility_proxy": 1.626669,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.636364,
+        "path_proxy_sr": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.498425
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.753063,
+        "mean_path_utility_proxy": 2.737041,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.57043
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.649124,
+        "mean_path_utility_proxy": 2.307177,
+        "mean_returned_location_count": 3.181818,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.343167
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.0,
+        "mean_path_utility_proxy": -0.4,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.0
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.649124,
+        "mean_path_utility_proxy": 2.307177,
+        "mean_returned_location_count": 3.181818,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.343167
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.27675,
+        "mean_path_utility_proxy": 0.444851,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.636364,
+        "path_proxy_sr": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.498425
+      },
+      "always_top3": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.026084,
+        "mean_path_utility_proxy": 0.42336,
+        "mean_returned_location_count": 2.090909,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.358955
+      },
+      "always_top5": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.649124,
+        "mean_path_utility_proxy": 0.511722,
+        "mean_returned_location_count": 3.181818,
+        "path_attempt_spl_proxy": 0.763075,
+        "path_proxy_sr": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.343167
+      },
+      "delta_path_aware_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.442109,
+        "mean_path_utility_proxy": 0.024593,
+        "path_attempt_spl_proxy": 0.051662,
+        "path_proxy_sr": 0.090909
+      },
+      "delta_path_aware_vs_always_top3": {
+        "mean_expected_path_cost_m": -0.307225,
+        "mean_path_utility_proxy": 0.046084,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_always_top5": {
+        "mean_expected_path_cost_m": -0.930265,
+        "mean_path_utility_proxy": -0.042278,
+        "path_attempt_spl_proxy": -0.075049,
+        "path_proxy_sr": -0.181818
+      },
+      "delta_path_aware_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": -0.307225,
+        "mean_path_utility_proxy": 0.046084,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_path_aware_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": -0.034204,
+        "mean_path_utility_proxy": -0.267597,
+        "path_attempt_spl_proxy": -0.311974,
+        "path_proxy_sr": -0.272727
+      },
+      "delta_path_aware_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.718859,
+        "mean_path_utility_proxy": 0.619444,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273
+      },
+      "delta_path_aware_vs_task_conditioned_budget_v0": {
+        "mean_expected_path_cost_m": 0.0,
+        "mean_path_utility_proxy": 0.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "mean_expected_path_cost_m": 0.442109,
+        "mean_path_utility_proxy": 0.024593,
+        "path_attempt_spl_proxy": 0.051662,
+        "path_proxy_sr": 0.090909
+      },
+      "delta_task_vs_always_top3": {
+        "mean_expected_path_cost_m": -0.307225,
+        "mean_path_utility_proxy": 0.046084,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_always_top5": {
+        "mean_expected_path_cost_m": -0.930265,
+        "mean_path_utility_proxy": -0.042278,
+        "path_attempt_spl_proxy": -0.075049,
+        "path_proxy_sr": -0.181818
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "mean_expected_path_cost_m": -0.307225,
+        "mean_path_utility_proxy": 0.046084,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0
+      },
+      "delta_task_vs_oracle_current_target": {
+        "mean_expected_path_cost_m": -0.034204,
+        "mean_path_utility_proxy": -0.267597,
+        "path_attempt_spl_proxy": -0.311974,
+        "path_proxy_sr": -0.272727
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "mean_expected_path_cost_m": 0.718859,
+        "mean_path_utility_proxy": 0.619444,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273
+      },
+      "fixed_uncertainty_topk_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 2.026084,
+        "mean_path_utility_proxy": 0.42336,
+        "mean_returned_location_count": 2.090909,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.358955
+      },
+      "label_nearest_current_observation": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.27675,
+        "mean_path_utility_proxy": 0.444851,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.636364,
+        "path_proxy_sr": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.498425
+      },
+      "oracle_current_target": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.753063,
+        "mean_path_utility_proxy": 0.737041,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 1.0,
+        "path_proxy_sr": 1.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.57043
+      },
+      "path_aware_task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.718859,
+        "mean_path_utility_proxy": 0.469444,
+        "mean_returned_location_count": 1.545455,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.423114
+      },
+      "scene_aligned_static_map": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.0,
+        "mean_path_utility_proxy": -0.15,
+        "mean_returned_location_count": 1.0,
+        "path_attempt_spl_proxy": 0.0,
+        "path_proxy_sr": 0.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.0
+      },
+      "task_conditioned_budget_v0": {
+        "low_motion_preservation_rate": null,
+        "mean_expected_path_cost_m": 1.718859,
+        "mean_path_utility_proxy": 0.469444,
+        "mean_returned_location_count": 1.545455,
+        "path_attempt_spl_proxy": 0.688026,
+        "path_proxy_sr": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.423114
+      }
+    }
+  }
+}

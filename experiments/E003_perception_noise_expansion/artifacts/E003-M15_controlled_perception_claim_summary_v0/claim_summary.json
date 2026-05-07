@@ -1,0 +1,58 @@
+{
+  "claim_rows": 8,
+  "completed_statuses": {
+    "M03_score_jitter_eval": "noisy_policy_eval_ready",
+    "M04_score_jitter_boundary": "robustness_boundary_ready",
+    "M06_dropout_eval": "proposal_dropout_eval_ready",
+    "M07_dropout_boundary": "dropout_boundary_ready",
+    "M08_false_positive_eval": "false_positive_eval_ready",
+    "M09_false_positive_boundary": "false_positive_boundary_ready",
+    "M10_centroid_jitter_eval": "centroid_jitter_eval_ready",
+    "M11_centroid_jitter_boundary": "centroid_jitter_boundary_ready",
+    "M12_combined_route": "combined_controlled_route_selected",
+    "M13_combined_eval": "combined_moderate_eval_ready",
+    "M14_combined_boundary": "combined_noise_boundary_ready"
+  },
+  "controlled_profiles_summarized": [
+    "annotation_score_jitter_v0",
+    "annotation_proposal_dropout_v0",
+    "annotation_false_positive_v0",
+    "annotation_centroid_jitter_v0",
+    "annotation_combined_moderate_v0"
+  ],
+  "core_supported_claim": "Under controlled annotation-proxy perception/proposal noise, H001 can separate proposal-recall, distractor rank/budget, and centroid-localization failures, and reachable-first ordering mitigates combined distractor/rank-budget damage in significant moved routine-fetch rows.",
+  "global_flags": {
+    "all_profiles_annotation_proxy": true,
+    "uses_open_vocab_perception_any": false,
+    "uses_real_navigation_any": false,
+    "uses_real_rgbd_perception_any": false
+  },
+  "main_method_signal": {
+    "profile": "annotation_combined_moderate_v0",
+    "reachable_first_identity_sr": 0.606061,
+    "reachable_gain_rows": 13,
+    "reachable_loss_rows": 0,
+    "reachable_minus_task_identity_delta": 0.393939,
+    "subset": "significant_moved|routine_fetch",
+    "task_conditioned_identity_sr": 0.212121
+  },
+  "next_recommended_unit": "E003-M16 Dockerized real-proposal route decision",
+  "promotion_gate_status": "controlled_claim_ready_real_proposal_blocked",
+  "source_units": {
+    "M03_score_jitter_eval": "E003-M03_noisy_policy_eval_v0",
+    "M04_score_jitter_boundary": "E003-M04_robustness_failure_analysis_v0",
+    "M06_dropout_eval": "E003-M06_annotation_proposal_dropout_v0",
+    "M07_dropout_boundary": "E003-M07_dropout_failure_boundary_v0",
+    "M08_false_positive_eval": "E003-M08_annotation_false_positive_v0",
+    "M09_false_positive_boundary": "E003-M09_false_positive_failure_boundary_v0",
+    "M10_centroid_jitter_eval": "E003-M10_annotation_centroid_jitter_v0",
+    "M11_centroid_jitter_boundary": "E003-M11_centroid_jitter_failure_boundary_v0",
+    "M12_combined_route": "E003-M12_combined_noise_route_decision_v0",
+    "M13_combined_eval": "E003-M13_annotation_combined_moderate_v0",
+    "M14_combined_boundary": "E003-M14_combined_noise_failure_boundary_v0"
+  },
+  "status": "controlled_perception_claim_summary_ready",
+  "summary_version": "e003_controlled_perception_claim_summary_v0",
+  "supported_claim_count": 4,
+  "unsupported_claim_count": 3
+}

@@ -1,0 +1,13 @@
+{
+  "m24_version": "e003_m24_visibility_prompt_projection_gate_v0",
+  "next_recommended_unit": "E003-M25 prompt-expanded / visibility-aware detector rerun gate",
+  "paper_table_promotion_ready": false,
+  "primary_decision": "do_not_scale_to_paper_table_before_visibility_and_prompt_calibration",
+  "reason": "scan-level recall mixes inactive prompts and non-visible target centroids; threshold/NMS calibration also drops matched targets under M23",
+  "required_before_real_claim": [
+    "visibility-aware denominator over evaluated frames",
+    "active prompt budget or prompt expansion policy",
+    "projection/depth consistency sanity check",
+    "multi-scan detector rerun after denominator and prompt policy are fixed"
+  ]
+}

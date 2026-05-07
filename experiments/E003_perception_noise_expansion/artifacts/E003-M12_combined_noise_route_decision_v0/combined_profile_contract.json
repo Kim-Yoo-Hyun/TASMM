@@ -1,0 +1,83 @@
+{
+  "analysis_version": "e003_m12_combined_noise_route_decision_v0",
+  "claim_if_successful": "Controlled perception-like annotation noise robustness under combined dropout, false-positive, score/rank, and centroid perturbations.",
+  "docker_reason": "This is a repository-local JSONL artifact transform and policy evaluation; Docker remains required for real detector/open-vocabulary implementations.",
+  "docker_required": false,
+  "moderate_noise_parameters": {
+    "centroid_planar_sigma_m": 0.18,
+    "centroid_z_sigma_m": 0.04,
+    "max_false_positive_candidates": 2,
+    "max_planar_jitter_m": 0.5,
+    "max_z_jitter_m": 0.12,
+    "min_false_positive_candidates": 1,
+    "non_target_candidate_drop_rate": 0.2,
+    "preserve_at_least_one_candidate": true,
+    "score_jitter_sigma": 0.08,
+    "target_drop_rate": 0.1
+  },
+  "must_report_boundaries": [
+    "target-dropped rows are proposal-recall ceiling rows",
+    "false positives that push target outside task budget",
+    "identity-success/localization-failure rows caused by over-threshold centroid jitter",
+    "grid/path costs are not recomputed after centroid jitter unless a later path-cost source is added"
+  ],
+  "next_executable_unit": "E003-M13_annotation_combined_moderate_v0",
+  "non_claims_even_if_successful": [
+    "real RGB-D perception robustness",
+    "open-vocabulary detector robustness",
+    "real navigation SR/SPL",
+    "deployable search policy",
+    "natural-language intention understanding"
+  ],
+  "operation_order": [
+    "candidate dropout with target-dropped rows retained as a separate denominator",
+    "annotation-derived false-positive insertion",
+    "score jitter and rank recomputation",
+    "centroid jitter and localization metric recomputation",
+    "policy evaluation with identity and localization metrics separated"
+  ],
+  "primary_metrics": [
+    "proposal_recall",
+    "target_dropped_rate",
+    "identity_proxy_SR",
+    "localization_proxy_SR",
+    "identity_localization_gap",
+    "ExpectedSearchCost",
+    "AttemptSPL proxy",
+    "task utility",
+    "stale old-location FP",
+    "returned-unreachable event rate",
+    "robustness delta against clean_annotation_oracle_v0"
+  ],
+  "profile_id": "annotation_combined_moderate_v0",
+  "readiness_basis": {
+    "individual_profiles_complete": {
+      "annotation_centroid_jitter_v0": true,
+      "annotation_false_positive_v0": true,
+      "annotation_proposal_dropout_v0": true,
+      "annotation_score_jitter_v0": true
+    },
+    "real_open_vocab_ready_rows": 0,
+    "real_proposal_ready_rows": 0
+  },
+  "reference_profile": "clean_annotation_oracle_v0",
+  "required_denominators": [
+    "all_rows",
+    "target_retained_eval",
+    "target_dropped_eval",
+    "false_positive_added_eval",
+    "target_rank_changed_eval",
+    "target_jitter_within_threshold_eval",
+    "target_jitter_exceeds_threshold_eval",
+    "significant_moved|routine_fetch",
+    "significant_moved|high_value_fetch",
+    "low_motion_control"
+  ],
+  "role": "controlled_annotation_proxy_combined_stress",
+  "seed_set": [
+    61,
+    67,
+    71
+  ],
+  "source": "E001-M02 annotation candidates with E002 grid reachability attached when available"
+}

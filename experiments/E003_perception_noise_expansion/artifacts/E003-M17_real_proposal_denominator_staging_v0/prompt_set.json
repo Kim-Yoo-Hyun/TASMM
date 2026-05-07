@@ -1,0 +1,1756 @@
+{
+  "detector_profile_id": "open_vocab_rgbd_detector_v0",
+  "detector_target_label_count": 85,
+  "generic_context_label_count": 5,
+  "label_count": 98,
+  "labels": [
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "armchair",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a armchair",
+        "armchair",
+        "the armchair"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "backpack",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a backpack",
+        "backpack",
+        "the backpack"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "bag",
+      "object_count": 3,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a bag",
+        "bag",
+        "the bag"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "basket",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a basket",
+        "basket",
+        "the basket"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [
+        "bathroom cabinet"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "bath cabinet",
+      "object_count": 4,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a bath cabinet",
+        "a bathroom cabinet",
+        "bath cabinet",
+        "bathroom cabinet",
+        "the bath cabinet",
+        "the bathroom cabinet"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "bench",
+      "object_count": 4,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a bench",
+        "bench",
+        "the bench"
+      ],
+      "scan_count": 3,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "blanket",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a blanket",
+        "blanket",
+        "the blanket"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "board",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a board",
+        "board",
+        "the board"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "book",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a book",
+        "book",
+        "the book"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "bottle",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a bottle",
+        "bottle",
+        "the bottle"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "box",
+      "object_count": 12,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a box",
+        "box",
+        "the box"
+      ],
+      "scan_count": 5,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "bucket",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a bucket",
+        "bucket",
+        "the bucket"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "cabinet",
+      "object_count": 15,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a cabinet",
+        "cabinet",
+        "the cabinet"
+      ],
+      "scan_count": 5,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "cart",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a cart",
+        "cart",
+        "the cart"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "ceiling",
+      "object_count": 13,
+      "prompt_role": "structural_context",
+      "prompts": [
+        "a ceiling",
+        "ceiling",
+        "the ceiling"
+      ],
+      "scan_count": 7,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "chair",
+      "object_count": 19,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a chair",
+        "chair",
+        "the chair"
+      ],
+      "scan_count": 6,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "chandelier",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a chandelier",
+        "chandelier",
+        "the chandelier"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "8eabc45f-5af7-2f32-8528-640861d2a135"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "clock",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a clock",
+        "clock",
+        "the clock"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "clothes",
+      "object_count": 3,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a clothes",
+        "clothes",
+        "the clothes"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "clutter",
+      "object_count": 2,
+      "prompt_role": "generic_context",
+      "prompts": [
+        "a clutter",
+        "clutter",
+        "the clutter"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "coffee machine",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a coffee machine",
+        "coffee machine",
+        "the coffee machine"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "coffee table",
+      "object_count": 6,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a coffee table",
+        "coffee table",
+        "the coffee table"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "c7895f27-339c-2d13-836b-c12dca280261"
+      ]
+    },
+    {
+      "aliases": [
+        "toilet"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "commode",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a commode",
+        "a toilet",
+        "commode",
+        "the commode",
+        "the toilet",
+        "toilet"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "container",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a container",
+        "container",
+        "the container"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [
+        "sofa"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "couch",
+      "object_count": 3,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a couch",
+        "a sofa",
+        "couch",
+        "sofa",
+        "the couch",
+        "the sofa"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f27-339c-2d13-836b-c12dca280261"
+      ]
+    },
+    {
+      "aliases": [
+        "coffee table"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "couch table",
+      "object_count": 4,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a coffee table",
+        "a couch table",
+        "coffee table",
+        "couch table",
+        "the coffee table",
+        "the couch table"
+      ],
+      "scan_count": 4,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "counter",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a counter",
+        "counter",
+        "the counter"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "curtain",
+      "object_count": 12,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a curtain",
+        "curtain",
+        "the curtain"
+      ],
+      "scan_count": 4,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "cushion",
+      "object_count": 18,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a cushion",
+        "cushion",
+        "the cushion"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "cutting board",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a cutting board",
+        "cutting board",
+        "the cutting board"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "decoration",
+      "object_count": 9,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a decoration",
+        "decoration",
+        "the decoration"
+      ],
+      "scan_count": 4,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "desk",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a desk",
+        "desk",
+        "the desk"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "door",
+      "object_count": 6,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a door",
+        "door",
+        "the door"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "doorframe",
+      "object_count": 5,
+      "prompt_role": "structural_context",
+      "prompts": [
+        "a doorframe",
+        "doorframe",
+        "the doorframe"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "drum",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a drum",
+        "drum",
+        "the drum"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "fireplace",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a fireplace",
+        "fireplace",
+        "the fireplace"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "8eabc45f-5af7-2f32-8528-640861d2a135"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "firewood box",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a firewood box",
+        "firewood box",
+        "the firewood box"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "floor",
+      "object_count": 8,
+      "prompt_role": "structural_context",
+      "prompts": [
+        "a floor",
+        "floor",
+        "the floor"
+      ],
+      "scan_count": 8,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [
+        "floor",
+        "other room"
+      ],
+      "detector_prompt_enabled": false,
+      "label_canonical": "floor /other room",
+      "object_count": 1,
+      "prompt_role": "structural_context",
+      "prompts": [
+        "a floor",
+        "a floor /other room",
+        "a other room",
+        "floor",
+        "floor /other room",
+        "other room",
+        "the floor",
+        "the floor /other room",
+        "the other room"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "frame",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a frame",
+        "frame",
+        "the frame"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "gymnastic ball",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a gymnastic ball",
+        "gymnastic ball",
+        "the gymnastic ball"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "heater",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a heater",
+        "heater",
+        "the heater"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "item",
+      "object_count": 12,
+      "prompt_role": "generic_context",
+      "prompts": [
+        "a item",
+        "item",
+        "the item"
+      ],
+      "scan_count": 4,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "jar",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a jar",
+        "jar",
+        "the jar"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "kitchen cabinet",
+      "object_count": 6,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a kitchen cabinet",
+        "kitchen cabinet",
+        "the kitchen cabinet"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "kitchen counter",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a kitchen counter",
+        "kitchen counter",
+        "the kitchen counter"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "kitchen object",
+      "object_count": 1,
+      "prompt_role": "generic_context",
+      "prompts": [
+        "a kitchen object",
+        "kitchen object",
+        "the kitchen object"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "ladder",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a ladder",
+        "ladder",
+        "the ladder"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "8eabc45f-5af7-2f32-8528-640861d2a135"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "lamp",
+      "object_count": 19,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a lamp",
+        "lamp",
+        "the lamp"
+      ],
+      "scan_count": 6,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [
+        "clothes basket"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "laundry basket",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a clothes basket",
+        "a laundry basket",
+        "clothes basket",
+        "laundry basket",
+        "the clothes basket",
+        "the laundry basket"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "light",
+      "object_count": 6,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a light",
+        "light",
+        "the light"
+      ],
+      "scan_count": 4,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "microwave",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a microwave",
+        "microwave",
+        "the microwave"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "mirror",
+      "object_count": 3,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a mirror",
+        "mirror",
+        "the mirror"
+      ],
+      "scan_count": 3,
+      "scan_ids": [
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "monitor",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a monitor",
+        "monitor",
+        "the monitor"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "object",
+      "object_count": 10,
+      "prompt_role": "generic_context",
+      "prompts": [
+        "a object",
+        "object",
+        "the object"
+      ],
+      "scan_count": 3,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "objects",
+      "object_count": 1,
+      "prompt_role": "generic_context",
+      "prompts": [
+        "a objects",
+        "objects",
+        "the objects"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "ottoman",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a ottoman",
+        "ottoman",
+        "the ottoman"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "oven",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a oven",
+        "oven",
+        "the oven"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "paper towel",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a paper towel",
+        "paper towel",
+        "the paper towel"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "picture",
+      "object_count": 16,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a picture",
+        "picture",
+        "the picture"
+      ],
+      "scan_count": 4,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "pile of books",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a pile of books",
+        "pile of books",
+        "the pile of books"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "pillow",
+      "object_count": 31,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a pillow",
+        "pillow",
+        "the pillow"
+      ],
+      "scan_count": 4,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "plant",
+      "object_count": 27,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a plant",
+        "plant",
+        "the plant"
+      ],
+      "scan_count": 8,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "plate",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a plate",
+        "plate",
+        "the plate"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "pot",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a pot",
+        "pot",
+        "the pot"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f27-339c-2d13-836b-c12dca280261"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "rack",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a rack",
+        "rack",
+        "the rack"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "rocking chair",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a rocking chair",
+        "rocking chair",
+        "the rocking chair"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "round table",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a round table",
+        "round table",
+        "the round table"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f27-339c-2d13-836b-c12dca280261"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "screen",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a screen",
+        "screen",
+        "the screen"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f27-339c-2d13-836b-c12dca280261"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "shelf",
+      "object_count": 22,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a shelf",
+        "shelf",
+        "the shelf"
+      ],
+      "scan_count": 6,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "shoe rack",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a shoe rack",
+        "shoe rack",
+        "the shoe rack"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "shoes",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a shoes",
+        "shoes",
+        "the shoes"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "showcase",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a showcase",
+        "showcase",
+        "the showcase"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "shower curtain",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a shower curtain",
+        "shower curtain",
+        "the shower curtain"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "shower wall",
+      "object_count": 4,
+      "prompt_role": "structural_context",
+      "prompts": [
+        "a shower wall",
+        "shower wall",
+        "the shower wall"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [
+        "end table"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "side table",
+      "object_count": 5,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a end table",
+        "a side table",
+        "end table",
+        "side table",
+        "the end table",
+        "the side table"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "sink",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a sink",
+        "sink",
+        "the sink"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [
+        "couch"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "sofa",
+      "object_count": 5,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a couch",
+        "a sofa",
+        "couch",
+        "sofa",
+        "the couch",
+        "the sofa"
+      ],
+      "scan_count": 5,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [
+        "armchair"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "sofa chair",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a armchair",
+        "a sofa chair",
+        "armchair",
+        "sofa chair",
+        "the armchair",
+        "the sofa chair"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f27-339c-2d13-836b-c12dca280261"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "stair",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a stair",
+        "stair",
+        "the stair"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "8eabc45f-5af7-2f32-8528-640861d2a135"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "stand",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a stand",
+        "stand",
+        "the stand"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "stool",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a stool",
+        "stool",
+        "the stool"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "stove",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a stove",
+        "stove",
+        "the stove"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "stuffed animal",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a stuffed animal",
+        "stuffed animal",
+        "the stuffed animal"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "75c25975-9ca2-2844-9769-84677f46d4cf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "suitcase",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a suitcase",
+        "suitcase",
+        "the suitcase"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "table",
+      "object_count": 5,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a table",
+        "table",
+        "the table"
+      ],
+      "scan_count": 5,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "telephone",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a telephone",
+        "telephone",
+        "the telephone"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "toilet",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a toilet",
+        "the toilet",
+        "toilet"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "toilet paper dispenser",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a toilet paper dispenser",
+        "the toilet paper dispenser",
+        "toilet paper dispenser"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "towel",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a towel",
+        "the towel",
+        "towel"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "tree decoration",
+      "object_count": 1,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a tree decoration",
+        "the tree decoration",
+        "tree decoration"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801"
+      ]
+    },
+    {
+      "aliases": [
+        "television"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "tv",
+      "object_count": 3,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a television",
+        "a tv",
+        "television",
+        "the television",
+        "the tv",
+        "tv"
+      ],
+      "scan_count": 3,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [
+        "television stand"
+      ],
+      "detector_prompt_enabled": true,
+      "label_canonical": "tv stand",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a television stand",
+        "a tv stand",
+        "television stand",
+        "the television stand",
+        "the tv stand",
+        "tv stand"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "vase",
+      "object_count": 3,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a vase",
+        "the vase",
+        "vase"
+      ],
+      "scan_count": 2,
+      "scan_ids": [
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "wall",
+      "object_count": 52,
+      "prompt_role": "structural_context",
+      "prompts": [
+        "a wall",
+        "the wall",
+        "wall"
+      ],
+      "scan_count": 7,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "75c25975-9ca2-2844-9769-84677f46d4cf",
+        "8eabc45f-5af7-2f32-8528-640861d2a135",
+        "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+        "c7895f27-339c-2d13-836b-c12dca280261",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [
+        "other room",
+        "wall"
+      ],
+      "detector_prompt_enabled": false,
+      "label_canonical": "wall /other room",
+      "object_count": 2,
+      "prompt_role": "structural_context",
+      "prompts": [
+        "a other room",
+        "a wall",
+        "a wall /other room",
+        "other room",
+        "the other room",
+        "the wall",
+        "the wall /other room",
+        "wall",
+        "wall /other room"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "c7895f7c-339c-2d13-819f-3bb0b26c91f6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": false,
+      "label_canonical": "window",
+      "object_count": 5,
+      "prompt_role": "structural_context",
+      "prompts": [
+        "a window",
+        "the window",
+        "window"
+      ],
+      "scan_count": 3,
+      "scan_ids": [
+        "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+        "ddc73797-765b-241a-9e2c-097c5989baf6"
+      ]
+    },
+    {
+      "aliases": [],
+      "detector_prompt_enabled": true,
+      "label_canonical": "wood",
+      "object_count": 2,
+      "prompt_role": "detector_target",
+      "prompts": [
+        "a wood",
+        "the wood",
+        "wood"
+      ],
+      "scan_count": 1,
+      "scan_ids": [
+        "8eabc45f-5af7-2f32-8528-640861d2a135"
+      ]
+    }
+  ],
+  "prompt_policy": "prompt all non-structural, non-generic labels as detector targets; retain structural/generic labels as context/evaluation metadata",
+  "prompt_set_id": "e003_m17_3dssg_sequence_ready_prompts_v0",
+  "source": "3DSSG labels from sequence-ready 3RScan scans",
+  "staging_version": "e003_m17_real_proposal_denominator_staging_v0",
+  "structural_context_label_count": 8
+}

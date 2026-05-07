@@ -1,0 +1,9 @@
+{
+  "input_rows": 32,
+  "policy_count": 8,
+  "removed_rows": 5,
+  "rigid_moved_rows": 11,
+  "unchanged_control_rows": 16,
+  "uses_exact_non_oracle_current_pose": false,
+  "uses_navigation": false
+}

@@ -1,0 +1,55 @@
+{
+  "candidate_rows": 1248,
+  "denominator_preserved": true,
+  "failure_rows": 387,
+  "failure_type_counts": {
+    "returned_unreachable_candidate": 13,
+    "stale_old_location_returned": 33,
+    "static_map_localization_error": 48,
+    "target_grid_unreachable": 237,
+    "target_outside_returned_budget": 56
+  },
+  "grid_path_cost_profile_id": "occupancy_grid_astar_v0",
+  "grid_path_cost_source": "ply_floor_obstacle_occupancy_astar",
+  "grid_target_reachable_rows": 267,
+  "grid_target_unreachable_rows": 27,
+  "input_dir": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M05_occupancy_grid_astar_v0",
+  "outputs": {
+    "coverage": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M06_grid_path_policy_evaluation_v0/coverage.json",
+    "failure_rows": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M06_grid_path_policy_evaluation_v0/failure_rows.jsonl",
+    "metrics": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M06_grid_path_policy_evaluation_v0/metrics.json",
+    "predictions": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M06_grid_path_policy_evaluation_v0/predictions.jsonl",
+    "report": "/home/yoohyun/research2/experiments/E002_path_cost_bridge/artifacts/E002-M06_grid_path_policy_evaluation_v0/report.md"
+  },
+  "policy_failure_counts": {
+    "always_top1": 45,
+    "always_top3": 36,
+    "always_top5": 30,
+    "fixed_uncertainty_topk_v0": 36,
+    "grid_path_aware_task_conditioned_budget_v0": 34,
+    "label_nearest_current_observation": 45,
+    "oracle_current_target": 27,
+    "scene_aligned_static_map": 102,
+    "task_conditioned_budget_v0": 32
+  },
+  "prediction_rows": 2646,
+  "query_rows": 294,
+  "real_navigation_path_cost_ready_rows": 0,
+  "row_band_counts": {
+    "low_motion_control": 153,
+    "mid_motion_review": 108,
+    "significant_moved": 33
+  },
+  "status": "grid_path_policy_eval_ready",
+  "unsupported_claims": [
+    "real navigation SR/SPL",
+    "collision-aware robot planning",
+    "simulator execution",
+    "deployable search policy",
+    "RGB-D/open-vocabulary perception robustness"
+  ],
+  "uses_collision_aware_robot_planning": false,
+  "uses_grid_path_cost_proxy": true,
+  "uses_real_navigation": false,
+  "uses_simulator_execution": false
+}

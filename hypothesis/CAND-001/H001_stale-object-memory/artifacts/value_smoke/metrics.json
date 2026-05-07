@@ -1,0 +1,72 @@
+{
+  "oracle_current_pose": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "moved_object_recovery_attempts": 0,
+    "moved_object_recovery_success": 1.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 1.0,
+    "reobservation_redirect_rate": 0.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 0.0,
+    "stale_old_location_returns": 0,
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  },
+  "ours_staleness": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "moved_object_recovery_attempts": 11,
+    "moved_object_recovery_success": 0.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 1.0,
+    "reobservation_redirect_rate": 1.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 0.0,
+    "stale_old_location_returns": 0,
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  },
+  "relation_only": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "moved_object_recovery_attempts": 0,
+    "moved_object_recovery_success": 0.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 0.0,
+    "reobservation_redirect_rate": 0.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 1.0,
+    "stale_old_location_returns": 16,
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  },
+  "static_map": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "moved_object_recovery_attempts": 0,
+    "moved_object_recovery_success": 0.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 0.0,
+    "reobservation_redirect_rate": 0.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 1.0,
+    "stale_old_location_returns": 16,
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  },
+  "time_decay": {
+    "changed_object_queries": 16,
+    "control_stale_marks": 0,
+    "moved_object_recovery_attempts": 0,
+    "moved_object_recovery_success": 0.0,
+    "removed_object_queries": 5,
+    "removed_suppression_success": 0.0,
+    "reobservation_redirect_rate": 0.0,
+    "rigid_moved_object_queries": 11,
+    "stale_false_positive_rate": 1.0,
+    "stale_old_location_returns": 16,
+    "trusted_false_negative_rate": 0.0,
+    "unchanged_control_queries": 16
+  }
+}

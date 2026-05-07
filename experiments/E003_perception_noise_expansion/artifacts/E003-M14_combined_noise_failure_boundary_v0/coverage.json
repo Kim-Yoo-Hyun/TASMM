@@ -1,0 +1,42 @@
+{
+  "analysis_version": "e003_combined_noise_failure_boundary_v0",
+  "boundary_rows": 7938,
+  "docker_reason": "E003-M14 is repository-local analysis over E003-M13 JSONL artifacts; real detector/open-vocabulary implementations remain Docker-required.",
+  "docker_required": false,
+  "expected_boundary_rows": 7938,
+  "grid_path_recomputed_for_centroid_jitter": false,
+  "hard_boundary_rows": 521,
+  "input_dir": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M13_annotation_combined_moderate_v0",
+  "input_status": "combined_moderate_eval_ready",
+  "manifest_rows": 1176,
+  "next_recommended_unit": "E003-M15 controlled perception-robustness claim summary",
+  "outputs": {
+    "boundary_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M14_combined_noise_failure_boundary_v0/boundary_rows.jsonl",
+    "claim_boundary": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M14_combined_noise_failure_boundary_v0/claim_boundary.json",
+    "coverage": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M14_combined_noise_failure_boundary_v0/coverage.json",
+    "hard_boundary_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M14_combined_noise_failure_boundary_v0/hard_boundary_rows.jsonl",
+    "policy_delta_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M14_combined_noise_failure_boundary_v0/policy_delta_rows.jsonl",
+    "report": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M14_combined_noise_failure_boundary_v0/report.md",
+    "summary": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M14_combined_noise_failure_boundary_v0/summary.json"
+  },
+  "policies": [
+    "always_top1",
+    "always_top3",
+    "always_top5",
+    "fixed_uncertainty_topk_v0",
+    "label_nearest_current_observation",
+    "oracle_current_target",
+    "reachable_first_task_conditioned_budget_v0",
+    "scene_aligned_static_map",
+    "task_conditioned_budget_v0"
+  ],
+  "prediction_rows": 10584,
+  "reference_profile": "clean_annotation_oracle_v0",
+  "status": "combined_noise_boundary_ready",
+  "stress_profile": "annotation_combined_moderate_v0",
+  "stress_query_rows": 882,
+  "uses_annotation_proxy_noise": true,
+  "uses_open_vocab_perception": false,
+  "uses_real_navigation": false,
+  "uses_real_rgbd_perception": false
+}

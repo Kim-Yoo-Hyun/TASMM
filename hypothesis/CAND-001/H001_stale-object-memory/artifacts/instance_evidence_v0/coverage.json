@@ -1,0 +1,16 @@
+{
+  "dataset_root": "/home/yoohyun/research2/local_dataset",
+  "hard_row_object_id": "41",
+  "instance_evidence_uses_exact_current_pose": false,
+  "low_motion_rows": 2,
+  "query_rows": 5,
+  "reference_scan_id": "569d8f0d-72aa-2f24-8ac6-c6ee8d927c4b",
+  "rescan_id": "569d8f0f-72aa-2f24-89a6-77f8b8779ae9",
+  "same_label_candidate_count": 13,
+  "significant_moved_rows": 3,
+  "status": "complete",
+  "success_threshold_m": 0.5,
+  "uses_annotation_level_current_observation": true,
+  "uses_navigation": false,
+  "uses_persistent_annotation_ids_for_stable_anchors": true
+}

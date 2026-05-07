@@ -1,0 +1,41 @@
+{
+  "carry_forward_boundaries": [
+    "The current combined profile uses annotation-derived proxy perturbations, not real RGB-D or open-vocabulary detector proposals.",
+    "Target-dropped rows are proposal-recall ceiling cases and should not be counted as recoverable stale-memory policy failures.",
+    "False positives are annotation-derived semantic-group or fallback distractors; same-label detector hallucinations are not covered.",
+    "Occupancy-grid reachability is reused by instance id and is not recomputed after centroid perturbation.",
+    "Current `ExpectedSearchCost`, `AttemptSPL`, and `SR` are proxy metrics, not real navigation `SPL` or execution `SR`.",
+    "real RGB-D perception robustness",
+    "open-vocabulary detector robustness",
+    "real navigation `SR` / `SPL`",
+    "deployable search policy",
+    "natural-language intention understanding"
+  ],
+  "controlled_claim_ready": true,
+  "current_blockers": [
+    "No detector/proposal output files found under local_dataset.",
+    "No current E001 query row has a detector/open-vocabulary proposal source.",
+    "No current E001 query row has rescan RGB-D triplets ready for detector execution.",
+    "Real detector/open-vocabulary implementation must use Docker under docs/experiments.md."
+  ],
+  "minimum_unblock_requirements": [
+    "Dockerfile or Docker image tag for detector/open-vocabulary proposal generation",
+    "exact mounted dataset path and output path",
+    "RGB-D frame, depth, pose, and scan-alignment route for the selected query denominator",
+    "proposal output schema with label, confidence, mask or point support, centroid, and source frame ids",
+    "matching/evaluation schema from proposals to 3DSSG object ids",
+    "proposal recall, false-positive, localization-error, and stale-memory policy metrics",
+    "seed/config record for detector thresholds and text prompts"
+  ],
+  "next_recommended_unit": "E003-M16 Dockerized real-proposal route decision",
+  "next_recommended_unit_reason": "E003 controlled profiles and boundaries are consolidated; top-tier perception claim now needs a real proposal source, scan alignment, Docker command, and proposal matching schema.",
+  "paper_table_readiness": {
+    "controlled_annotation_proxy_table": "ready_as_controlled_stress_table",
+    "real_navigation_table": "blocked",
+    "real_perception_table": "blocked"
+  },
+  "real_navigation_claim_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "status": "controlled_claim_ready_real_proposal_blocked",
+  "summary_version": "e003_controlled_perception_claim_summary_v0"
+}

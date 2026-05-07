@@ -1,0 +1,2482 @@
+{
+  "all": {
+    "high_value_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.846939,
+        "grid_proxy_sr": 0.846939,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.581019,
+        "mean_grid_path_utility_proxy": 2.415398,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.061224,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.457679,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.86555,
+        "grid_proxy_sr": 0.877551,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.811016,
+        "mean_grid_path_utility_proxy": 2.480388,
+        "mean_returned_location_count": 2.142857,
+        "returned_unreachable_rate": 0.214286,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.082039,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.876287,
+        "grid_proxy_sr": 0.897959,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 1.085458,
+        "mean_grid_path_utility_proxy": 2.505549,
+        "mean_returned_location_count": 2.979592,
+        "returned_unreachable_rate": 0.234694,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 0.827263,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.016116,
+        "grid_proxy_sr": 0.05102,
+        "mean_expected_grid_path_cost_m": 0.484206,
+        "mean_grid_path_utility_proxy": 0.093186
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": -0.002495,
+        "grid_proxy_sr": 0.020408,
+        "mean_expected_grid_path_cost_m": 0.254209,
+        "mean_grid_path_utility_proxy": 0.028196
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.013232,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.020233,
+        "mean_grid_path_utility_proxy": 0.003035
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": -0.002495,
+        "grid_proxy_sr": 0.020408,
+        "mean_expected_grid_path_cost_m": 0.287605,
+        "mean_grid_path_utility_proxy": 0.023186
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.045108,
+        "grid_proxy_sr": -0.010204,
+        "mean_expected_grid_path_cost_m": 0.370475,
+        "mean_grid_path_utility_proxy": -0.088734
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.209994,
+        "grid_proxy_sr": 0.244898,
+        "mean_expected_grid_path_cost_m": 0.406444,
+        "mean_grid_path_utility_proxy": 0.734952
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": -0.013232,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.047053,
+        "mean_grid_path_utility_proxy": -0.007058
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.029348,
+        "grid_proxy_sr": 0.05102,
+        "mean_expected_grid_path_cost_m": 0.437153,
+        "mean_grid_path_utility_proxy": 0.100244
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.010737,
+        "grid_proxy_sr": 0.020408,
+        "mean_expected_grid_path_cost_m": 0.207156,
+        "mean_grid_path_utility_proxy": 0.035254
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.067286,
+        "mean_grid_path_utility_proxy": 0.010093
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.010737,
+        "grid_proxy_sr": 0.020408,
+        "mean_expected_grid_path_cost_m": 0.240552,
+        "mean_grid_path_utility_proxy": 0.030244
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.031876,
+        "grid_proxy_sr": -0.010204,
+        "mean_expected_grid_path_cost_m": 0.323422,
+        "mean_grid_path_utility_proxy": -0.081676
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.223226,
+        "grid_proxy_sr": 0.244898,
+        "mean_expected_grid_path_cost_m": 0.359391,
+        "mean_grid_path_utility_proxy": 0.74201
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.86555,
+        "grid_proxy_sr": 0.877551,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.77762,
+        "mean_grid_path_utility_proxy": 2.485398,
+        "mean_returned_location_count": 1.663265,
+        "returned_unreachable_rate": 0.163265,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.128509,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.863055,
+        "grid_proxy_sr": 0.897959,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 1.065225,
+        "mean_grid_path_utility_proxy": 2.508584,
+        "mean_returned_location_count": 2.193878,
+        "returned_unreachable_rate": 0.153061,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 0.842976,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.846939,
+        "grid_proxy_sr": 0.846939,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.581019,
+        "mean_grid_path_utility_proxy": 2.415398,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.061224,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.457679,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.908163,
+        "grid_proxy_sr": 0.908163,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.69475,
+        "mean_grid_path_utility_proxy": 2.597318,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.091837,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.30718,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.653061,
+        "grid_proxy_sr": 0.653061,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.658781,
+        "mean_grid_path_utility_proxy": 1.773632,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 98,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "all",
+        "success_per_meter": 0.991317,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.876287,
+        "grid_proxy_sr": 0.897959,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 1.018172,
+        "mean_grid_path_utility_proxy": 2.515642,
+        "mean_returned_location_count": 2.193878,
+        "returned_unreachable_rate": 0.173469,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 0.881933,
+        "target_grid_unreachable_rate": 0.091837
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.846939,
+        "grid_proxy_sr": 0.846939,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.581019,
+        "mean_grid_path_utility_proxy": 2.415398,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.061224,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.457679,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.86555,
+        "grid_proxy_sr": 0.877551,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.811016,
+        "mean_grid_path_utility_proxy": 2.480388,
+        "mean_returned_location_count": 2.142857,
+        "returned_unreachable_rate": 0.214286,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.082039,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.876287,
+        "grid_proxy_sr": 0.897959,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 1.085458,
+        "mean_grid_path_utility_proxy": 2.505549,
+        "mean_returned_location_count": 2.979592,
+        "returned_unreachable_rate": 0.234694,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 0.827263,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.016116,
+        "grid_proxy_sr": 0.05102,
+        "mean_expected_grid_path_cost_m": 0.484206,
+        "mean_grid_path_utility_proxy": 0.093186
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": -0.002495,
+        "grid_proxy_sr": 0.020408,
+        "mean_expected_grid_path_cost_m": 0.254209,
+        "mean_grid_path_utility_proxy": 0.028196
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.013232,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.020233,
+        "mean_grid_path_utility_proxy": 0.003035
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": -0.002495,
+        "grid_proxy_sr": 0.020408,
+        "mean_expected_grid_path_cost_m": 0.287605,
+        "mean_grid_path_utility_proxy": 0.023186
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.045108,
+        "grid_proxy_sr": -0.010204,
+        "mean_expected_grid_path_cost_m": 0.370475,
+        "mean_grid_path_utility_proxy": -0.088734
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.209994,
+        "grid_proxy_sr": 0.244898,
+        "mean_expected_grid_path_cost_m": 0.406444,
+        "mean_grid_path_utility_proxy": 0.734952
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": -0.013232,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.047053,
+        "mean_grid_path_utility_proxy": -0.007058
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.029348,
+        "grid_proxy_sr": 0.05102,
+        "mean_expected_grid_path_cost_m": 0.437153,
+        "mean_grid_path_utility_proxy": 0.100244
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.010737,
+        "grid_proxy_sr": 0.020408,
+        "mean_expected_grid_path_cost_m": 0.207156,
+        "mean_grid_path_utility_proxy": 0.035254
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.067286,
+        "mean_grid_path_utility_proxy": 0.010093
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.010737,
+        "grid_proxy_sr": 0.020408,
+        "mean_expected_grid_path_cost_m": 0.240552,
+        "mean_grid_path_utility_proxy": 0.030244
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.031876,
+        "grid_proxy_sr": -0.010204,
+        "mean_expected_grid_path_cost_m": 0.323422,
+        "mean_grid_path_utility_proxy": -0.081676
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.223226,
+        "grid_proxy_sr": 0.244898,
+        "mean_expected_grid_path_cost_m": 0.359391,
+        "mean_grid_path_utility_proxy": 0.74201
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.86555,
+        "grid_proxy_sr": 0.877551,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.77762,
+        "mean_grid_path_utility_proxy": 2.485398,
+        "mean_returned_location_count": 1.663265,
+        "returned_unreachable_rate": 0.163265,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.128509,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.863055,
+        "grid_proxy_sr": 0.897959,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 1.065225,
+        "mean_grid_path_utility_proxy": 2.508584,
+        "mean_returned_location_count": 2.193878,
+        "returned_unreachable_rate": 0.153061,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 0.842976,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.846939,
+        "grid_proxy_sr": 0.846939,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.581019,
+        "mean_grid_path_utility_proxy": 2.415398,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.061224,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.457679,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.908163,
+        "grid_proxy_sr": 0.908163,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.69475,
+        "mean_grid_path_utility_proxy": 2.597318,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.091837,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.30718,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.653061,
+        "grid_proxy_sr": 0.653061,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.658781,
+        "mean_grid_path_utility_proxy": 1.773632,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 98,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "all",
+        "success_per_meter": 0.991317,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.876287,
+        "grid_proxy_sr": 0.897959,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 1.018172,
+        "mean_grid_path_utility_proxy": 2.515642,
+        "mean_returned_location_count": 2.193878,
+        "returned_unreachable_rate": 0.173469,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 0.881933,
+        "target_grid_unreachable_rate": 0.091837
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.846939,
+        "grid_proxy_sr": 0.846939,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.581019,
+        "mean_grid_path_utility_proxy": 0.759786,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.061224,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.457679,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.86555,
+        "grid_proxy_sr": 0.877551,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.811016,
+        "mean_grid_path_utility_proxy": 0.755899,
+        "mean_returned_location_count": 2.142857,
+        "returned_unreachable_rate": 0.214286,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.082039,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.876287,
+        "grid_proxy_sr": 0.897959,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 1.085458,
+        "mean_grid_path_utility_proxy": 0.73514,
+        "mean_returned_location_count": 2.979592,
+        "returned_unreachable_rate": 0.234694,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 0.827263,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": -0.008306,
+        "grid_proxy_sr": 0.010204,
+        "mean_expected_grid_path_cost_m": 0.138511,
+        "mean_grid_path_utility_proxy": -0.010573
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": -0.026917,
+        "grid_proxy_sr": -0.020408,
+        "mean_expected_grid_path_cost_m": -0.091486,
+        "mean_grid_path_utility_proxy": -0.006686
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.037654,
+        "grid_proxy_sr": -0.040816,
+        "mean_expected_grid_path_cost_m": -0.365928,
+        "mean_grid_path_utility_proxy": 0.014073
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": -0.026917,
+        "grid_proxy_sr": -0.020408,
+        "mean_expected_grid_path_cost_m": -0.05809,
+        "mean_grid_path_utility_proxy": -0.011695
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.06953,
+        "grid_proxy_sr": -0.05102,
+        "mean_expected_grid_path_cost_m": 0.02478,
+        "mean_grid_path_utility_proxy": -0.054738
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.185572,
+        "grid_proxy_sr": 0.204082,
+        "mean_expected_grid_path_cost_m": 0.060749,
+        "mean_grid_path_utility_proxy": 0.194969
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": -0.026917,
+        "grid_proxy_sr": -0.020408,
+        "mean_expected_grid_path_cost_m": 0.027099,
+        "mean_grid_path_utility_proxy": -0.024473
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.018611,
+        "grid_proxy_sr": 0.030612,
+        "mean_expected_grid_path_cost_m": 0.111412,
+        "mean_grid_path_utility_proxy": 0.0139
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.118585,
+        "mean_grid_path_utility_proxy": 0.017787
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.010737,
+        "grid_proxy_sr": -0.020408,
+        "mean_expected_grid_path_cost_m": -0.393027,
+        "mean_grid_path_utility_proxy": 0.038546
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.085189,
+        "mean_grid_path_utility_proxy": 0.012778
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.042613,
+        "grid_proxy_sr": -0.030612,
+        "mean_expected_grid_path_cost_m": -0.002319,
+        "mean_grid_path_utility_proxy": -0.030265
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.212489,
+        "grid_proxy_sr": 0.22449,
+        "mean_expected_grid_path_cost_m": 0.03365,
+        "mean_grid_path_utility_proxy": 0.219442
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.86555,
+        "grid_proxy_sr": 0.877551,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.77762,
+        "mean_grid_path_utility_proxy": 0.760908,
+        "mean_returned_location_count": 1.663265,
+        "returned_unreachable_rate": 0.163265,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.128509,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.838633,
+        "grid_proxy_sr": 0.857143,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.71953,
+        "mean_grid_path_utility_proxy": 0.749213,
+        "mean_returned_location_count": 1.387755,
+        "returned_unreachable_rate": 0.102041,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.191254,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.846939,
+        "grid_proxy_sr": 0.846939,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.581019,
+        "mean_grid_path_utility_proxy": 0.759786,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.061224,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.457679,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.908163,
+        "grid_proxy_sr": 0.908163,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.69475,
+        "mean_grid_path_utility_proxy": 0.803951,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.091837,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.30718,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.653061,
+        "grid_proxy_sr": 0.653061,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.658781,
+        "mean_grid_path_utility_proxy": 0.554244,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 98,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "all",
+        "success_per_meter": 0.991317,
+        "target_grid_unreachable_rate": 0.091837
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.86555,
+        "grid_proxy_sr": 0.877551,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.692431,
+        "mean_grid_path_utility_proxy": 0.773686,
+        "mean_returned_location_count": 1.387755,
+        "returned_unreachable_rate": 0.142857,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_meter": 1.267348,
+        "target_grid_unreachable_rate": 0.091837
+      }
+    }
+  },
+  "low_motion_control": {
+    "high_value_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.019608,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.340551,
+        "mean_grid_path_utility_proxy": 2.885192,
+        "mean_returned_location_count": 1.921569,
+        "returned_unreachable_rate": 0.098039,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 2.87884,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.405675,
+        "mean_grid_path_utility_proxy": 2.875423,
+        "mean_returned_location_count": 2.509804,
+        "returned_unreachable_rate": 0.117647,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 2.416693,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.064172,
+        "mean_grid_path_utility_proxy": 0.009626
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.129296,
+        "mean_grid_path_utility_proxy": 0.019395
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.064172,
+        "mean_grid_path_utility_proxy": 0.009626
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.129296,
+        "mean_grid_path_utility_proxy": 0.019395
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.019608,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.019608,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.019608,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.340551,
+        "mean_grid_path_utility_proxy": 2.885192,
+        "mean_returned_location_count": 1.921569,
+        "returned_unreachable_rate": 0.098039,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 2.87884,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.405675,
+        "mean_grid_path_utility_proxy": 2.875423,
+        "mean_returned_location_count": 2.509804,
+        "returned_unreachable_rate": 0.117647,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 2.416693,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.064172,
+        "mean_grid_path_utility_proxy": 0.009626
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.129296,
+        "mean_grid_path_utility_proxy": 0.019395
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.064172,
+        "mean_grid_path_utility_proxy": 0.009626
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.129296,
+        "mean_grid_path_utility_proxy": 0.019395
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.019608,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.019608,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 2.894818,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 0.938935,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.019608,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.340551,
+        "mean_grid_path_utility_proxy": 0.929309,
+        "mean_returned_location_count": 1.921569,
+        "returned_unreachable_rate": 0.098039,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 2.87884,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.405675,
+        "mean_grid_path_utility_proxy": 0.919541,
+        "mean_returned_location_count": 2.509804,
+        "returned_unreachable_rate": 0.117647,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 2.416693,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.064172,
+        "mean_grid_path_utility_proxy": 0.009626
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.129296,
+        "mean_grid_path_utility_proxy": 0.019394
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.064172,
+        "mean_grid_path_utility_proxy": 0.009626
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.129296,
+        "mean_grid_path_utility_proxy": 0.019394
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 0.938935,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 0.938935,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 0.938935,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.019608,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 0.938935,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.019608,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 0.938935,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.980392,
+        "grid_proxy_sr": 0.980392,
+        "low_motion_preservation_rate": 0.980392,
+        "mean_expected_grid_path_cost_m": 0.276379,
+        "mean_grid_path_utility_proxy": 0.938935,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_meter": 3.547274,
+        "target_grid_unreachable_rate": 0.019608
+      }
+    }
+  },
+  "mid_motion_review": {
+    "high_value_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.75,
+        "grid_proxy_sr": 0.75,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.927157,
+        "mean_grid_path_utility_proxy": 2.048426,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.111111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.808924,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.777266,
+        "grid_proxy_sr": 0.805556,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.22295,
+        "mean_grid_path_utility_proxy": 2.184613,
+        "mean_returned_location_count": 2.472222,
+        "returned_unreachable_rate": 0.361111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.658699,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.795489,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.521241,
+        "mean_grid_path_utility_proxy": 2.230147,
+        "mean_returned_location_count": 3.583333,
+        "returned_unreachable_rate": 0.388889,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.547798,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.029119,
+        "grid_proxy_sr": 0.083333,
+        "mean_expected_grid_path_cost_m": 0.644955,
+        "mean_grid_path_utility_proxy": 0.17409
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.001853,
+        "grid_proxy_sr": 0.027777,
+        "mean_expected_grid_path_cost_m": 0.349162,
+        "mean_grid_path_utility_proxy": 0.037903
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.01637,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.050871,
+        "mean_grid_path_utility_proxy": -0.007631
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.001853,
+        "grid_proxy_sr": 0.027777,
+        "mean_expected_grid_path_cost_m": 0.349162,
+        "mean_grid_path_utility_proxy": 0.037903
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.054214,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.557693,
+        "mean_grid_path_utility_proxy": -0.083654
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.39023,
+        "grid_proxy_sr": 0.444444,
+        "mean_expected_grid_path_cost_m": 0.475857,
+        "mean_grid_path_utility_proxy": 1.373065
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": -0.01637,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.050871,
+        "mean_grid_path_utility_proxy": -0.007631
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.045489,
+        "grid_proxy_sr": 0.083333,
+        "mean_expected_grid_path_cost_m": 0.594084,
+        "mean_grid_path_utility_proxy": 0.181721
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.018223,
+        "grid_proxy_sr": 0.027777,
+        "mean_expected_grid_path_cost_m": 0.298291,
+        "mean_grid_path_utility_proxy": 0.045534
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.018223,
+        "grid_proxy_sr": 0.027777,
+        "mean_expected_grid_path_cost_m": 0.298291,
+        "mean_grid_path_utility_proxy": 0.045534
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.037844,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.506822,
+        "mean_grid_path_utility_proxy": -0.076023
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.4066,
+        "grid_proxy_sr": 0.444444,
+        "mean_expected_grid_path_cost_m": 0.424986,
+        "mean_grid_path_utility_proxy": 1.380696
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.777266,
+        "grid_proxy_sr": 0.805556,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.22295,
+        "mean_grid_path_utility_proxy": 2.184613,
+        "mean_returned_location_count": 2.472222,
+        "returned_unreachable_rate": 0.361111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.658699,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.779119,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.572112,
+        "mean_grid_path_utility_proxy": 2.222516,
+        "mean_returned_location_count": 3.583333,
+        "returned_unreachable_rate": 0.333333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.530072,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.75,
+        "grid_proxy_sr": 0.75,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.927157,
+        "mean_grid_path_utility_proxy": 2.048426,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.111111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.808924,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.833333,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.014419,
+        "mean_grid_path_utility_proxy": 2.30617,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.166667,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.821488,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.388889,
+        "grid_proxy_sr": 0.388889,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.096255,
+        "mean_grid_path_utility_proxy": 0.849451,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.354743,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.795489,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.521241,
+        "mean_grid_path_utility_proxy": 2.230147,
+        "mean_returned_location_count": 3.583333,
+        "returned_unreachable_rate": 0.388889,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.547798,
+        "target_grid_unreachable_rate": 0.166667
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.75,
+        "grid_proxy_sr": 0.75,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.927157,
+        "mean_grid_path_utility_proxy": 2.048426,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.111111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.808924,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.777266,
+        "grid_proxy_sr": 0.805556,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.22295,
+        "mean_grid_path_utility_proxy": 2.184613,
+        "mean_returned_location_count": 2.472222,
+        "returned_unreachable_rate": 0.361111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.658699,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.795489,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.521241,
+        "mean_grid_path_utility_proxy": 2.230147,
+        "mean_returned_location_count": 3.583333,
+        "returned_unreachable_rate": 0.388889,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.547798,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.029119,
+        "grid_proxy_sr": 0.083333,
+        "mean_expected_grid_path_cost_m": 0.644955,
+        "mean_grid_path_utility_proxy": 0.17409
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.001853,
+        "grid_proxy_sr": 0.027777,
+        "mean_expected_grid_path_cost_m": 0.349162,
+        "mean_grid_path_utility_proxy": 0.037903
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.01637,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.050871,
+        "mean_grid_path_utility_proxy": -0.007631
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.001853,
+        "grid_proxy_sr": 0.027777,
+        "mean_expected_grid_path_cost_m": 0.349162,
+        "mean_grid_path_utility_proxy": 0.037903
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.054214,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.557693,
+        "mean_grid_path_utility_proxy": -0.083654
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.39023,
+        "grid_proxy_sr": 0.444444,
+        "mean_expected_grid_path_cost_m": 0.475857,
+        "mean_grid_path_utility_proxy": 1.373065
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": -0.01637,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.050871,
+        "mean_grid_path_utility_proxy": -0.007631
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.045489,
+        "grid_proxy_sr": 0.083333,
+        "mean_expected_grid_path_cost_m": 0.594084,
+        "mean_grid_path_utility_proxy": 0.181721
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.018223,
+        "grid_proxy_sr": 0.027777,
+        "mean_expected_grid_path_cost_m": 0.298291,
+        "mean_grid_path_utility_proxy": 0.045534
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.018223,
+        "grid_proxy_sr": 0.027777,
+        "mean_expected_grid_path_cost_m": 0.298291,
+        "mean_grid_path_utility_proxy": 0.045534
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.037844,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.506822,
+        "mean_grid_path_utility_proxy": -0.076023
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.4066,
+        "grid_proxy_sr": 0.444444,
+        "mean_expected_grid_path_cost_m": 0.424986,
+        "mean_grid_path_utility_proxy": 1.380696
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.777266,
+        "grid_proxy_sr": 0.805556,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.22295,
+        "mean_grid_path_utility_proxy": 2.184613,
+        "mean_returned_location_count": 2.472222,
+        "returned_unreachable_rate": 0.361111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.658699,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.779119,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.572112,
+        "mean_grid_path_utility_proxy": 2.222516,
+        "mean_returned_location_count": 3.583333,
+        "returned_unreachable_rate": 0.333333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.530072,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.75,
+        "grid_proxy_sr": 0.75,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.927157,
+        "mean_grid_path_utility_proxy": 2.048426,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.111111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.808924,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.833333,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.014419,
+        "mean_grid_path_utility_proxy": 2.30617,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.166667,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.821488,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.388889,
+        "grid_proxy_sr": 0.388889,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.096255,
+        "mean_grid_path_utility_proxy": 0.849451,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.354743,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.795489,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.521241,
+        "mean_grid_path_utility_proxy": 2.230147,
+        "mean_returned_location_count": 3.583333,
+        "returned_unreachable_rate": 0.388889,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.547798,
+        "target_grid_unreachable_rate": 0.166667
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.75,
+        "grid_proxy_sr": 0.75,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.927157,
+        "mean_grid_path_utility_proxy": 0.610926,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.111111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.808924,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.777266,
+        "grid_proxy_sr": 0.805556,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.22295,
+        "mean_grid_path_utility_proxy": 0.622113,
+        "mean_returned_location_count": 2.472222,
+        "returned_unreachable_rate": 0.361111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.658699,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.795489,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.521241,
+        "mean_grid_path_utility_proxy": 0.605147,
+        "mean_returned_location_count": 3.583333,
+        "returned_unreachable_rate": 0.388889,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.547798,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": -0.009123,
+        "grid_proxy_sr": 0.027778,
+        "mean_expected_grid_path_cost_m": 0.221188,
+        "mean_grid_path_utility_proxy": -0.0054
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": -0.036389,
+        "grid_proxy_sr": -0.027778,
+        "mean_expected_grid_path_cost_m": -0.074605,
+        "mean_grid_path_utility_proxy": -0.016587
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.054612,
+        "grid_proxy_sr": -0.055555,
+        "mean_expected_grid_path_cost_m": -0.372896,
+        "mean_grid_path_utility_proxy": 0.000379
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": -0.036389,
+        "grid_proxy_sr": -0.027778,
+        "mean_expected_grid_path_cost_m": -0.074605,
+        "mean_grid_path_utility_proxy": -0.016587
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.092456,
+        "grid_proxy_sr": -0.055555,
+        "mean_expected_grid_path_cost_m": 0.133926,
+        "mean_grid_path_utility_proxy": -0.075644
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.351988,
+        "grid_proxy_sr": 0.388889,
+        "mean_expected_grid_path_cost_m": 0.05209,
+        "mean_grid_path_utility_proxy": 0.381075
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": -0.036389,
+        "grid_proxy_sr": -0.027778,
+        "mean_expected_grid_path_cost_m": 0.064284,
+        "mean_grid_path_utility_proxy": -0.03742
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.027266,
+        "grid_proxy_sr": 0.055556,
+        "mean_expected_grid_path_cost_m": 0.156904,
+        "mean_grid_path_utility_proxy": 0.03202
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.138889,
+        "mean_grid_path_utility_proxy": 0.020833
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.018223,
+        "grid_proxy_sr": -0.027777,
+        "mean_expected_grid_path_cost_m": -0.43718,
+        "mean_grid_path_utility_proxy": 0.037799
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.138889,
+        "mean_grid_path_utility_proxy": 0.020833
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.056067,
+        "grid_proxy_sr": -0.027777,
+        "mean_expected_grid_path_cost_m": 0.069642,
+        "mean_grid_path_utility_proxy": -0.038224
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.388377,
+        "grid_proxy_sr": 0.416667,
+        "mean_expected_grid_path_cost_m": -0.012194,
+        "mean_grid_path_utility_proxy": 0.418495
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.777266,
+        "grid_proxy_sr": 0.805556,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.22295,
+        "mean_grid_path_utility_proxy": 0.622113,
+        "mean_returned_location_count": 2.472222,
+        "returned_unreachable_rate": 0.361111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.658699,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.740877,
+        "grid_proxy_sr": 0.777778,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.148345,
+        "mean_grid_path_utility_proxy": 0.605526,
+        "mean_returned_location_count": 1.888889,
+        "returned_unreachable_rate": 0.25,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.677303,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.75,
+        "grid_proxy_sr": 0.75,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.927157,
+        "mean_grid_path_utility_proxy": 0.610926,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.111111,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.808924,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.833333,
+        "grid_proxy_sr": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.014419,
+        "mean_grid_path_utility_proxy": 0.68117,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.166667,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.821488,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.388889,
+        "grid_proxy_sr": 0.388889,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.096255,
+        "mean_grid_path_utility_proxy": 0.224451,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.354743,
+        "target_grid_unreachable_rate": 0.166667
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.777266,
+        "grid_proxy_sr": 0.805556,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.084061,
+        "mean_grid_path_utility_proxy": 0.642946,
+        "mean_returned_location_count": 1.888889,
+        "returned_unreachable_rate": 0.305556,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_meter": 0.743091,
+        "target_grid_unreachable_rate": 0.166667
+      }
+    }
+  },
+  "significant_moved": {
+    "high_value_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.545455,
+        "grid_proxy_sr": 0.545455,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.860628,
+        "mean_grid_path_utility_proxy": 1.393633,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.090909,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.633787,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.622032,
+        "grid_proxy_sr": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.644116,
+        "mean_grid_path_utility_proxy": 1.571564,
+        "mean_returned_location_count": 2.090909,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.387055,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.658045,
+        "grid_proxy_sr": 0.727273,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 2.810983,
+        "mean_grid_path_utility_proxy": 1.691989,
+        "mean_returned_location_count": 3.181818,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.258726,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.04828,
+        "grid_proxy_sr": 0.181818,
+        "mean_expected_grid_path_cost_m": 2.203073,
+        "mean_grid_path_utility_proxy": 0.260448
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": -0.028297,
+        "grid_proxy_sr": 0.090909,
+        "mean_expected_grid_path_cost_m": 1.419585,
+        "mean_grid_path_utility_proxy": 0.082517
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.06431,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.252718,
+        "mean_grid_path_utility_proxy": -0.037908
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": -0.028297,
+        "grid_proxy_sr": 0.090909,
+        "mean_expected_grid_path_cost_m": 1.419585,
+        "mean_grid_path_utility_proxy": 0.082517
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.224447,
+        "grid_proxy_sr": -0.090909,
+        "mean_expected_grid_path_cost_m": 1.475422,
+        "mean_grid_path_utility_proxy": -0.516768
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.593735,
+        "grid_proxy_sr": 0.727273,
+        "mean_expected_grid_path_cost_m": 2.063701,
+        "mean_grid_path_utility_proxy": 2.054081
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": -0.06431,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.252718,
+        "mean_grid_path_utility_proxy": -0.037908
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.11259,
+        "grid_proxy_sr": 0.181818,
+        "mean_expected_grid_path_cost_m": 1.950355,
+        "mean_grid_path_utility_proxy": 0.298356
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.036013,
+        "grid_proxy_sr": 0.090909,
+        "mean_expected_grid_path_cost_m": 1.166867,
+        "mean_grid_path_utility_proxy": 0.120425
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.036013,
+        "grid_proxy_sr": 0.090909,
+        "mean_expected_grid_path_cost_m": 1.166867,
+        "mean_grid_path_utility_proxy": 0.120425
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.160137,
+        "grid_proxy_sr": -0.090909,
+        "mean_expected_grid_path_cost_m": 1.222704,
+        "mean_grid_path_utility_proxy": -0.47886
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.658045,
+        "grid_proxy_sr": 0.727273,
+        "mean_expected_grid_path_cost_m": 1.810983,
+        "mean_grid_path_utility_proxy": 2.091989
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.622032,
+        "grid_proxy_sr": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.644116,
+        "mean_grid_path_utility_proxy": 1.571564,
+        "mean_returned_location_count": 2.090909,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.387055,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.593735,
+        "grid_proxy_sr": 0.727273,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 3.063701,
+        "mean_grid_path_utility_proxy": 1.654081,
+        "mean_returned_location_count": 3.181818,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.237384,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.545455,
+        "grid_proxy_sr": 0.545455,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.860628,
+        "mean_grid_path_utility_proxy": 1.393633,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.090909,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.633787,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.818182,
+        "grid_proxy_sr": 0.818182,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.588279,
+        "mean_grid_path_utility_proxy": 2.170849,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.181818,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.515137,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.0,
+        "mean_grid_path_utility_proxy": -0.4,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.0,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.658045,
+        "grid_proxy_sr": 0.727273,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 2.810983,
+        "mean_grid_path_utility_proxy": 1.691989,
+        "mean_returned_location_count": 3.181818,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.258726,
+        "target_grid_unreachable_rate": 0.181818
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.545455,
+        "grid_proxy_sr": 0.545455,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.860628,
+        "mean_grid_path_utility_proxy": 1.393633,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.090909,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.633787,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.622032,
+        "grid_proxy_sr": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.644116,
+        "mean_grid_path_utility_proxy": 1.571564,
+        "mean_returned_location_count": 2.090909,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.387055,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.658045,
+        "grid_proxy_sr": 0.727273,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 2.810983,
+        "mean_grid_path_utility_proxy": 1.691989,
+        "mean_returned_location_count": 3.181818,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.258726,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.04828,
+        "grid_proxy_sr": 0.181818,
+        "mean_expected_grid_path_cost_m": 2.203073,
+        "mean_grid_path_utility_proxy": 0.260448
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": -0.028297,
+        "grid_proxy_sr": 0.090909,
+        "mean_expected_grid_path_cost_m": 1.419585,
+        "mean_grid_path_utility_proxy": 0.082517
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.06431,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.252718,
+        "mean_grid_path_utility_proxy": -0.037908
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": -0.028297,
+        "grid_proxy_sr": 0.090909,
+        "mean_expected_grid_path_cost_m": 1.419585,
+        "mean_grid_path_utility_proxy": 0.082517
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.224447,
+        "grid_proxy_sr": -0.090909,
+        "mean_expected_grid_path_cost_m": 1.475422,
+        "mean_grid_path_utility_proxy": -0.516768
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.593735,
+        "grid_proxy_sr": 0.727273,
+        "mean_expected_grid_path_cost_m": 2.063701,
+        "mean_grid_path_utility_proxy": 2.054081
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": -0.06431,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.252718,
+        "mean_grid_path_utility_proxy": -0.037908
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.11259,
+        "grid_proxy_sr": 0.181818,
+        "mean_expected_grid_path_cost_m": 1.950355,
+        "mean_grid_path_utility_proxy": 0.298356
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.036013,
+        "grid_proxy_sr": 0.090909,
+        "mean_expected_grid_path_cost_m": 1.166867,
+        "mean_grid_path_utility_proxy": 0.120425
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.0,
+        "mean_grid_path_utility_proxy": 0.0
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.036013,
+        "grid_proxy_sr": 0.090909,
+        "mean_expected_grid_path_cost_m": 1.166867,
+        "mean_grid_path_utility_proxy": 0.120425
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.160137,
+        "grid_proxy_sr": -0.090909,
+        "mean_expected_grid_path_cost_m": 1.222704,
+        "mean_grid_path_utility_proxy": -0.47886
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.658045,
+        "grid_proxy_sr": 0.727273,
+        "mean_expected_grid_path_cost_m": 1.810983,
+        "mean_grid_path_utility_proxy": 2.091989
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.622032,
+        "grid_proxy_sr": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.644116,
+        "mean_grid_path_utility_proxy": 1.571564,
+        "mean_returned_location_count": 2.090909,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.387055,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.593735,
+        "grid_proxy_sr": 0.727273,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 3.063701,
+        "mean_grid_path_utility_proxy": 1.654081,
+        "mean_returned_location_count": 3.181818,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.237384,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.545455,
+        "grid_proxy_sr": 0.545455,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.860628,
+        "mean_grid_path_utility_proxy": 1.393633,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.090909,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.633787,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.818182,
+        "grid_proxy_sr": 0.818182,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.588279,
+        "mean_grid_path_utility_proxy": 2.170849,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.181818,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.515137,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.0,
+        "mean_grid_path_utility_proxy": -0.4,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.0,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.658045,
+        "grid_proxy_sr": 0.727273,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 2.810983,
+        "mean_grid_path_utility_proxy": 1.691989,
+        "mean_returned_location_count": 3.181818,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.258726,
+        "target_grid_unreachable_rate": 0.181818
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "grid_attempt_spl_proxy": 0.545455,
+        "grid_proxy_sr": 0.545455,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.860628,
+        "mean_grid_path_utility_proxy": 0.41636,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.090909,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.633787,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "always_top3": {
+        "grid_attempt_spl_proxy": 0.622032,
+        "grid_proxy_sr": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.644116,
+        "mean_grid_path_utility_proxy": 0.389746,
+        "mean_returned_location_count": 2.090909,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.387055,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "always_top5": {
+        "grid_attempt_spl_proxy": 0.658045,
+        "grid_proxy_sr": 0.727273,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 2.810983,
+        "mean_grid_path_utility_proxy": 0.305625,
+        "mean_returned_location_count": 3.181818,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.258726,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "delta_grid_aware_vs_always_top1": {
+        "grid_attempt_spl_proxy": -0.044137,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": 0.510115,
+        "mean_grid_path_utility_proxy": -0.076517
+      },
+      "delta_grid_aware_vs_always_top3": {
+        "grid_attempt_spl_proxy": -0.120714,
+        "grid_proxy_sr": -0.090909,
+        "mean_expected_grid_path_cost_m": -0.273373,
+        "mean_grid_path_utility_proxy": -0.049903
+      },
+      "delta_grid_aware_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.156727,
+        "grid_proxy_sr": -0.181818,
+        "mean_expected_grid_path_cost_m": -1.44024,
+        "mean_grid_path_utility_proxy": 0.034218
+      },
+      "delta_grid_aware_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": -0.120714,
+        "grid_proxy_sr": -0.090909,
+        "mean_expected_grid_path_cost_m": -0.273373,
+        "mean_grid_path_utility_proxy": -0.049903
+      },
+      "delta_grid_aware_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.316864,
+        "grid_proxy_sr": -0.272727,
+        "mean_expected_grid_path_cost_m": -0.217536,
+        "mean_grid_path_utility_proxy": -0.240097
+      },
+      "delta_grid_aware_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.501318,
+        "grid_proxy_sr": 0.545455,
+        "mean_expected_grid_path_cost_m": 0.370743,
+        "mean_grid_path_utility_proxy": 0.489843
+      },
+      "delta_grid_aware_vs_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": -0.120714,
+        "grid_proxy_sr": -0.090909,
+        "mean_expected_grid_path_cost_m": 0.031038,
+        "mean_grid_path_utility_proxy": -0.095565
+      },
+      "delta_task_vs_always_top1": {
+        "grid_attempt_spl_proxy": 0.076577,
+        "grid_proxy_sr": 0.090909,
+        "mean_expected_grid_path_cost_m": 0.479077,
+        "mean_grid_path_utility_proxy": 0.019048
+      },
+      "delta_task_vs_always_top3": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.304411,
+        "mean_grid_path_utility_proxy": 0.045662
+      },
+      "delta_task_vs_always_top5": {
+        "grid_attempt_spl_proxy": -0.036013,
+        "grid_proxy_sr": -0.090909,
+        "mean_expected_grid_path_cost_m": -1.471278,
+        "mean_grid_path_utility_proxy": 0.129783
+      },
+      "delta_task_vs_fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "mean_expected_grid_path_cost_m": -0.304411,
+        "mean_grid_path_utility_proxy": 0.045662
+      },
+      "delta_task_vs_oracle_current_target": {
+        "grid_attempt_spl_proxy": -0.19615,
+        "grid_proxy_sr": -0.181818,
+        "mean_expected_grid_path_cost_m": -0.248574,
+        "mean_grid_path_utility_proxy": -0.144532
+      },
+      "delta_task_vs_scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.622032,
+        "grid_proxy_sr": 0.636364,
+        "mean_expected_grid_path_cost_m": 0.339705,
+        "mean_grid_path_utility_proxy": 0.585408
+      },
+      "fixed_uncertainty_topk_v0": {
+        "grid_attempt_spl_proxy": 0.622032,
+        "grid_proxy_sr": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.644116,
+        "mean_grid_path_utility_proxy": 0.389746,
+        "mean_returned_location_count": 2.090909,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.387055,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "grid_path_aware_task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.501318,
+        "grid_proxy_sr": 0.545455,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.370743,
+        "mean_grid_path_utility_proxy": 0.339843,
+        "mean_returned_location_count": 1.545455,
+        "returned_unreachable_rate": 0.090909,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.397927,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "label_nearest_current_observation": {
+        "grid_attempt_spl_proxy": 0.545455,
+        "grid_proxy_sr": 0.545455,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 0.860628,
+        "mean_grid_path_utility_proxy": 0.41636,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.090909,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.633787,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "oracle_current_target": {
+        "grid_attempt_spl_proxy": 0.818182,
+        "grid_proxy_sr": 0.818182,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.588279,
+        "mean_grid_path_utility_proxy": 0.57994,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.181818,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.515137,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "scene_aligned_static_map": {
+        "grid_attempt_spl_proxy": 0.0,
+        "grid_proxy_sr": 0.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.0,
+        "mean_grid_path_utility_proxy": -0.15,
+        "mean_returned_location_count": 1.0,
+        "returned_unreachable_rate": 0.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.0,
+        "target_grid_unreachable_rate": 0.181818
+      },
+      "task_conditioned_budget_v0": {
+        "grid_attempt_spl_proxy": 0.622032,
+        "grid_proxy_sr": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_grid_path_cost_m": 1.339705,
+        "mean_grid_path_utility_proxy": 0.435408,
+        "mean_returned_location_count": 1.545455,
+        "returned_unreachable_rate": 0.272727,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_meter": 0.475003,
+        "target_grid_unreachable_rate": 0.181818
+      }
+    }
+  }
+}

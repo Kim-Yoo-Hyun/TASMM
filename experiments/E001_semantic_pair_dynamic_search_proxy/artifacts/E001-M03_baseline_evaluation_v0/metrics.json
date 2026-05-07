@@ -1,0 +1,1642 @@
+{
+  "all": {
+    "high_value_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 0.897959,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.102041,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.503061,
+        "proxy_sr": 0.897959,
+        "recall_at_returned_k": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.897959
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 0.926871,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.193878,
+        "mean_returned_location_count": 2.142857,
+        "mean_task_utility": 2.688265,
+        "proxy_sr": 0.959184,
+        "recall_at_returned_k": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.447619
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 0.934014,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.22449,
+        "mean_returned_location_count": 2.979592,
+        "mean_task_utility": 2.783163,
+        "proxy_sr": 0.989796,
+        "recall_at_returned_k": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.332192
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.036055,
+        "mean_expected_search_cost": 0.122449,
+        "mean_task_utility": 0.280102,
+        "proxy_sr": 0.091837
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.007143,
+        "mean_expected_search_cost": 0.030612,
+        "mean_task_utility": 0.094898,
+        "proxy_sr": 0.030612
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.007143,
+        "mean_expected_search_cost": 0.030612,
+        "mean_task_utility": 0.094898,
+        "proxy_sr": 0.030612
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.240136,
+        "mean_expected_search_cost": -0.081632,
+        "mean_task_utility": 0.973979,
+        "proxy_sr": 0.295918
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.926871,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.193878,
+        "mean_returned_location_count": 1.663265,
+        "mean_task_utility": 2.688265,
+        "proxy_sr": 0.959184,
+        "recall_at_returned_k": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.576687
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 0.897959,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.102041,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.503061,
+        "proxy_sr": 0.897959,
+        "recall_at_returned_k": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.897959
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.693878,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.306122,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 1.809184,
+        "proxy_sr": 0.693878,
+        "recall_at_returned_k": 0.693878,
+        "rows": 98,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "all",
+        "success_per_returned_location": 0.693878
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 0.934014,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.22449,
+        "mean_returned_location_count": 2.193878,
+        "mean_task_utility": 2.783163,
+        "proxy_sr": 0.989796,
+        "recall_at_returned_k": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.451163
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 0.897959,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.102041,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.503061,
+        "proxy_sr": 0.897959,
+        "recall_at_returned_k": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.897959
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 0.926871,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.193878,
+        "mean_returned_location_count": 2.142857,
+        "mean_task_utility": 2.688265,
+        "proxy_sr": 0.959184,
+        "recall_at_returned_k": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.447619
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 0.934014,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.22449,
+        "mean_returned_location_count": 2.979592,
+        "mean_task_utility": 2.783163,
+        "proxy_sr": 0.989796,
+        "recall_at_returned_k": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.332192
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.036055,
+        "mean_expected_search_cost": 0.122449,
+        "mean_task_utility": 0.280102,
+        "proxy_sr": 0.091837
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.007143,
+        "mean_expected_search_cost": 0.030612,
+        "mean_task_utility": 0.094898,
+        "proxy_sr": 0.030612
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.007143,
+        "mean_expected_search_cost": 0.030612,
+        "mean_task_utility": 0.094898,
+        "proxy_sr": 0.030612
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.240136,
+        "mean_expected_search_cost": -0.081632,
+        "mean_task_utility": 0.973979,
+        "proxy_sr": 0.295918
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.926871,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.193878,
+        "mean_returned_location_count": 1.663265,
+        "mean_task_utility": 2.688265,
+        "proxy_sr": 0.959184,
+        "recall_at_returned_k": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.576687
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 0.897959,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.102041,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.503061,
+        "proxy_sr": 0.897959,
+        "recall_at_returned_k": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.897959
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.693878,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.306122,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 1.809184,
+        "proxy_sr": 0.693878,
+        "recall_at_returned_k": 0.693878,
+        "rows": 98,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "all",
+        "success_per_returned_location": 0.693878
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 0.934014,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.22449,
+        "mean_returned_location_count": 2.193878,
+        "mean_task_utility": 2.783163,
+        "proxy_sr": 0.989796,
+        "recall_at_returned_k": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.451163
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 0.897959,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.102041,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.732653,
+        "proxy_sr": 0.897959,
+        "recall_at_returned_k": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.897959
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 0.926871,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.193878,
+        "mean_returned_location_count": 2.142857,
+        "mean_task_utility": 0.780102,
+        "proxy_sr": 0.959184,
+        "recall_at_returned_k": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.447619
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 0.934014,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.22449,
+        "mean_returned_location_count": 2.979592,
+        "mean_task_utility": 0.806122,
+        "proxy_sr": 0.989796,
+        "recall_at_returned_k": 0.989796,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.332192
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.02551,
+        "mean_expected_search_cost": 0.05102,
+        "mean_task_utility": 0.043367,
+        "proxy_sr": 0.051021
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": -0.003402,
+        "mean_expected_search_cost": -0.040817,
+        "mean_task_utility": -0.004082,
+        "proxy_sr": -0.010204
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": -0.010545,
+        "mean_expected_search_cost": -0.071429,
+        "mean_task_utility": -0.030102,
+        "proxy_sr": -0.040816
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": -0.003402,
+        "mean_expected_search_cost": -0.040817,
+        "mean_task_utility": -0.004082,
+        "proxy_sr": -0.010204
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.229591,
+        "mean_expected_search_cost": -0.153061,
+        "mean_task_utility": 0.278061,
+        "proxy_sr": 0.255102
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.926871,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.193878,
+        "mean_returned_location_count": 1.663265,
+        "mean_task_utility": 0.780102,
+        "proxy_sr": 0.959184,
+        "recall_at_returned_k": 0.959184,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.576687
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 0.897959,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.102041,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.732653,
+        "proxy_sr": 0.897959,
+        "recall_at_returned_k": 0.897959,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.897959
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.693878,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.306122,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.497959,
+        "proxy_sr": 0.693878,
+        "recall_at_returned_k": 0.693878,
+        "rows": 98,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "all",
+        "success_per_returned_location": 0.693878
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 0.923469,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.153061,
+        "mean_returned_location_count": 1.387755,
+        "mean_task_utility": 0.77602,
+        "proxy_sr": 0.94898,
+        "recall_at_returned_k": 0.94898,
+        "rows": 98,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "all",
+        "success_per_returned_location": 0.683824
+      }
+    }
+  },
+  "low_motion_control": {
+    "high_value_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.921569,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 0.520408
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 2.509804,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 0.398437
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.921569,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 0.520408
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 2.509804,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 0.398437
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.921569,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 0.520408
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 2.509804,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 0.398437
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 0.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": 1.0,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 51,
+        "stale_old_location_fp_rate": null,
+        "subset": "low_motion_control",
+        "success_per_returned_location": 1.0
+      }
+    }
+  },
+  "mid_motion_review": {
+    "high_value_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.166667,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.283333,
+        "proxy_sr": 0.833333,
+        "recall_at_returned_k": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.833333
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 0.898148,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 2.472222,
+        "mean_task_utility": 2.722222,
+        "proxy_sr": 0.972222,
+        "recall_at_returned_k": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.393258
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 0.905093,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 3.583333,
+        "mean_task_utility": 2.8125,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.27907
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.07176,
+        "mean_expected_search_cost": 0.083333,
+        "mean_task_utility": 0.529167,
+        "proxy_sr": 0.166667
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.006945,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.090278,
+        "proxy_sr": 0.027778
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.006945,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.090278,
+        "proxy_sr": 0.027778
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.432871,
+        "mean_expected_search_cost": -0.277778,
+        "mean_task_utility": 1.756944,
+        "proxy_sr": 0.527778
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.898148,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 2.472222,
+        "mean_task_utility": 2.722222,
+        "proxy_sr": 0.972222,
+        "recall_at_returned_k": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.393258
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.166667,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.283333,
+        "proxy_sr": 0.833333,
+        "recall_at_returned_k": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.833333
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.472222,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.527778,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 1.055556,
+        "proxy_sr": 0.472222,
+        "recall_at_returned_k": 0.472222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.472222
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 0.905093,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 3.583333,
+        "mean_task_utility": 2.8125,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.27907
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.166667,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.283333,
+        "proxy_sr": 0.833333,
+        "recall_at_returned_k": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.833333
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 0.898148,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 2.472222,
+        "mean_task_utility": 2.722222,
+        "proxy_sr": 0.972222,
+        "recall_at_returned_k": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.393258
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 0.905093,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 3.583333,
+        "mean_task_utility": 2.8125,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.27907
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.07176,
+        "mean_expected_search_cost": 0.083333,
+        "mean_task_utility": 0.529167,
+        "proxy_sr": 0.166667
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.006945,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.090278,
+        "proxy_sr": 0.027778
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.006945,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.090278,
+        "proxy_sr": 0.027778
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.432871,
+        "mean_expected_search_cost": -0.277778,
+        "mean_task_utility": 1.756944,
+        "proxy_sr": 0.527778
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.898148,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 2.472222,
+        "mean_task_utility": 2.722222,
+        "proxy_sr": 0.972222,
+        "recall_at_returned_k": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.393258
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.166667,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.283333,
+        "proxy_sr": 0.833333,
+        "recall_at_returned_k": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.833333
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.472222,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.527778,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 1.055556,
+        "proxy_sr": 0.472222,
+        "recall_at_returned_k": 0.472222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.472222
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 0.905093,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 3.583333,
+        "mean_task_utility": 2.8125,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.27907
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.166667,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.658333,
+        "proxy_sr": 0.833333,
+        "recall_at_returned_k": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.833333
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 0.898148,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 2.472222,
+        "mean_task_utility": 0.784722,
+        "proxy_sr": 0.972222,
+        "recall_at_returned_k": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.393258
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 0.905093,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 3.583333,
+        "mean_task_utility": 0.8125,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.27907
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.055556,
+        "mean_expected_search_cost": 0.055555,
+        "mean_task_utility": 0.102778,
+        "proxy_sr": 0.111111
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": -0.009259,
+        "mean_expected_search_cost": -0.027778,
+        "mean_task_utility": -0.023611,
+        "proxy_sr": -0.027778
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": -0.016204,
+        "mean_expected_search_cost": -0.027778,
+        "mean_task_utility": -0.051389,
+        "proxy_sr": -0.055556
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": -0.009259,
+        "mean_expected_search_cost": -0.027778,
+        "mean_task_utility": -0.023611,
+        "proxy_sr": -0.027778
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.416667,
+        "mean_expected_search_cost": -0.305556,
+        "mean_task_utility": 0.518055,
+        "proxy_sr": 0.472222
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.898148,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.25,
+        "mean_returned_location_count": 2.472222,
+        "mean_task_utility": 0.784722,
+        "proxy_sr": 0.972222,
+        "recall_at_returned_k": 0.972222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.393258
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 0.833333,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.166667,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.658333,
+        "proxy_sr": 0.833333,
+        "recall_at_returned_k": 0.833333,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.833333
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.472222,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.527778,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.243056,
+        "proxy_sr": 0.472222,
+        "recall_at_returned_k": 0.472222,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.472222
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 0.888889,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.222222,
+        "mean_returned_location_count": 1.888889,
+        "mean_task_utility": 0.761111,
+        "proxy_sr": 0.944444,
+        "recall_at_returned_k": 0.944444,
+        "rows": 36,
+        "stale_old_location_fp_rate": null,
+        "subset": "mid_motion_review",
+        "success_per_returned_location": 0.5
+      }
+    }
+  },
+  "significant_moved": {
+    "high_value_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.363636,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 1.613636,
+        "proxy_sr": 0.636364,
+        "recall_at_returned_k": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.636364
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 0.681818,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.909091,
+        "mean_returned_location_count": 2.090909,
+        "mean_task_utility": 1.827273,
+        "proxy_sr": 0.727273,
+        "recall_at_returned_k": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.347826
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 0.722727,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 2.181818,
+        "mean_returned_location_count": 3.181818,
+        "mean_task_utility": 2.377273,
+        "proxy_sr": 0.909091,
+        "recall_at_returned_k": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.285714
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.086363,
+        "mean_expected_search_cost": 0.818182,
+        "mean_task_utility": 0.763637,
+        "proxy_sr": 0.272727
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.040909,
+        "mean_expected_search_cost": 0.272727,
+        "mean_task_utility": 0.55,
+        "proxy_sr": 0.181818
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.040909,
+        "mean_expected_search_cost": 0.272727,
+        "mean_task_utility": 0.55,
+        "proxy_sr": 0.181818
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.722727,
+        "mean_expected_search_cost": 0.181818,
+        "mean_task_utility": 2.927273,
+        "proxy_sr": 0.909091
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.681818,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.909091,
+        "mean_returned_location_count": 2.090909,
+        "mean_task_utility": 1.827273,
+        "proxy_sr": 0.727273,
+        "recall_at_returned_k": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.347826
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.363636,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 1.613636,
+        "proxy_sr": 0.636364,
+        "recall_at_returned_k": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.636364
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 2.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": -0.55,
+        "proxy_sr": 0.0,
+        "recall_at_returned_k": 0.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.0
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 0.722727,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 2.181818,
+        "mean_returned_location_count": 3.181818,
+        "mean_task_utility": 2.377273,
+        "proxy_sr": 0.909091,
+        "recall_at_returned_k": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.285714
+      }
+    },
+    "noisy_high_value_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.363636,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 1.613636,
+        "proxy_sr": 0.636364,
+        "recall_at_returned_k": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.636364
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 0.681818,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.909091,
+        "mean_returned_location_count": 2.090909,
+        "mean_task_utility": 1.827273,
+        "proxy_sr": 0.727273,
+        "recall_at_returned_k": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.347826
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 0.722727,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 2.181818,
+        "mean_returned_location_count": 3.181818,
+        "mean_task_utility": 2.377273,
+        "proxy_sr": 0.909091,
+        "recall_at_returned_k": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.285714
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.086363,
+        "mean_expected_search_cost": 0.818182,
+        "mean_task_utility": 0.763637,
+        "proxy_sr": 0.272727
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.040909,
+        "mean_expected_search_cost": 0.272727,
+        "mean_task_utility": 0.55,
+        "proxy_sr": 0.181818
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": 0.0,
+        "mean_task_utility": 0.0,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.040909,
+        "mean_expected_search_cost": 0.272727,
+        "mean_task_utility": 0.55,
+        "proxy_sr": 0.181818
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.722727,
+        "mean_expected_search_cost": 0.181818,
+        "mean_task_utility": 2.927273,
+        "proxy_sr": 0.909091
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.681818,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.909091,
+        "mean_returned_location_count": 2.090909,
+        "mean_task_utility": 1.827273,
+        "proxy_sr": 0.727273,
+        "recall_at_returned_k": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.347826
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.363636,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 1.613636,
+        "proxy_sr": 0.636364,
+        "recall_at_returned_k": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.636364
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 2.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 2.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": -0.55,
+        "proxy_sr": 0.0,
+        "recall_at_returned_k": 0.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.0
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 0.722727,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 2.181818,
+        "mean_returned_location_count": 3.181818,
+        "mean_task_utility": 2.377273,
+        "proxy_sr": 0.909091,
+        "recall_at_returned_k": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.285714
+      }
+    },
+    "routine_fetch": {
+      "always_top1": {
+        "attempt_spl_proxy": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.363636,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.431818,
+        "proxy_sr": 0.636364,
+        "recall_at_returned_k": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.636364
+      },
+      "always_top3": {
+        "attempt_spl_proxy": 0.681818,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.909091,
+        "mean_returned_location_count": 2.090909,
+        "mean_task_utility": 0.440909,
+        "proxy_sr": 0.727273,
+        "recall_at_returned_k": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.347826
+      },
+      "always_top5": {
+        "attempt_spl_proxy": 0.722727,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 2.181818,
+        "mean_returned_location_count": 3.181818,
+        "mean_task_utility": 0.581818,
+        "proxy_sr": 0.909091,
+        "recall_at_returned_k": 0.909091,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.285714
+      },
+      "delta_vs_always_top1": {
+        "attempt_spl_proxy": 0.045454,
+        "mean_expected_search_cost": 0.272728,
+        "mean_task_utility": 0.05,
+        "proxy_sr": 0.090909
+      },
+      "delta_vs_always_top3": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": -0.272727,
+        "mean_task_utility": 0.040909,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_always_top5": {
+        "attempt_spl_proxy": -0.040909,
+        "mean_expected_search_cost": -0.545454,
+        "mean_task_utility": -0.1,
+        "proxy_sr": -0.181818
+      },
+      "delta_vs_fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.0,
+        "mean_expected_search_cost": -0.272727,
+        "mean_task_utility": 0.040909,
+        "proxy_sr": 0.0
+      },
+      "delta_vs_scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.681818,
+        "mean_expected_search_cost": -0.363636,
+        "mean_task_utility": 0.781818,
+        "proxy_sr": 0.727273
+      },
+      "fixed_uncertainty_topk_v0": {
+        "attempt_spl_proxy": 0.681818,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.909091,
+        "mean_returned_location_count": 2.090909,
+        "mean_task_utility": 0.440909,
+        "proxy_sr": 0.727273,
+        "recall_at_returned_k": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.347826
+      },
+      "label_nearest_current_observation": {
+        "attempt_spl_proxy": 0.636364,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.363636,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.431818,
+        "proxy_sr": 0.636364,
+        "recall_at_returned_k": 0.636364,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.636364
+      },
+      "oracle_current_target": {
+        "attempt_spl_proxy": 1.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": 0.85,
+        "proxy_sr": 1.0,
+        "recall_at_returned_k": 1.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 1.0
+      },
+      "scene_aligned_static_map": {
+        "attempt_spl_proxy": 0.0,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 2.0,
+        "mean_returned_location_count": 1.0,
+        "mean_task_utility": -0.3,
+        "proxy_sr": 0.0,
+        "recall_at_returned_k": 0.0,
+        "rows": 11,
+        "stale_old_location_fp_rate": 1.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.0
+      },
+      "task_conditioned_budget_v0": {
+        "attempt_spl_proxy": 0.681818,
+        "low_motion_preservation_rate": null,
+        "mean_expected_search_cost": 1.636364,
+        "mean_returned_location_count": 1.545455,
+        "mean_task_utility": 0.481818,
+        "proxy_sr": 0.727273,
+        "recall_at_returned_k": 0.727273,
+        "rows": 11,
+        "stale_old_location_fp_rate": 0.0,
+        "subset": "significant_moved",
+        "success_per_returned_location": 0.470588
+      }
+    }
+  }
+}

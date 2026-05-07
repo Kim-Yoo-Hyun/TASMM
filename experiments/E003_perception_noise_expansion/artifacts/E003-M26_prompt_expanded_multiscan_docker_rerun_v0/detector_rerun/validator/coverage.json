@@ -1,0 +1,23 @@
+{
+  "allow_empty_scaffold": false,
+  "detector_predictions_ready": true,
+  "error_rows": 0,
+  "manifest_rows": 8,
+  "paper_table_command_ready": false,
+  "prediction_rows": 1440,
+  "prediction_rows_by_match_status": {
+    "unmatched": 1440
+  },
+  "prediction_rows_by_scan": {
+    "280d8ebb-6cc6-2788-9153-98959a2da801": 720,
+    "38770ca1-86d7-27b8-8619-ab66f67d9adf": 720
+  },
+  "predictions": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M26_prompt_expanded_multiscan_docker_rerun_v0/detector_rerun/container_output/real_proposals.jsonl",
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "schema_id": "real_proposal_prediction_jsonl_v0",
+  "schema_only_smoke": true,
+  "status": "proposal_schema_smoke_valid",
+  "target_rows": 460,
+  "valid": true,
+  "warning_rows": 7
+}

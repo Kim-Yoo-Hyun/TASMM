@@ -1,0 +1,38 @@
+{
+  "evaluated_scan_count": 2,
+  "evaluated_scans": [
+    "280d8ebb-6cc6-2788-9153-98959a2da801",
+    "38770ca1-86d7-27b8-8619-ab66f67d9adf"
+  ],
+  "false_positive_proposal_rate_smoke": 0.9729166666666667,
+  "false_positive_proposal_rows": 1401,
+  "input_prediction_rows": 1440,
+  "label_metric_rows": 54,
+  "label_overlap_target_recall_smoke": 0.4148936170212766,
+  "label_overlap_target_rows": 94,
+  "m17_scan_count": 8,
+  "m21_version": "e003_m21_detector_proposal_matching_v0",
+  "match_distance_threshold_m": 1.0,
+  "matched_centroid_error_m": {
+    "max": 0.996147,
+    "mean": 0.4966466923076923,
+    "median": 0.430379,
+    "min": 0.101215
+  },
+  "matched_proposal_rows": 39,
+  "matched_target_rows": 39,
+  "nearest_same_label_distance_m": {
+    "max": 7.500496,
+    "mean": 2.5667167934403348,
+    "median": 2.491587,
+    "min": 0.017339
+  },
+  "paper_table_command_ready": false,
+  "proposal_precision_smoke": 0.027083333333333334,
+  "proposal_rows": 1440,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "scan_eval_target_rows": 99,
+  "scan_target_recall_smoke": 0.3939393939393939,
+  "status": "detector_matching_smoke_ready",
+  "target_rows": 99
+}

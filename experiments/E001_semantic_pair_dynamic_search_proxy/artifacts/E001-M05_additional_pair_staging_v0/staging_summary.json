@@ -1,0 +1,90 @@
+{
+  "after": {
+    "base_query_rows": 98,
+    "blocked_pairs": 991,
+    "low_motion_control_base_rows": 51,
+    "mid_motion_review_base_rows": 36,
+    "query_rows": 294,
+    "ready_minimal_pairs": 13,
+    "significant_moved_base_rows": 11,
+    "validated_pair_count": 13
+  },
+  "reference_payload": {
+    "required_files": {
+      "labels.instances.annotated.v2.ply": {
+        "bytes": 5067380,
+        "exists": true
+      },
+      "mesh.refined.0.010000.segs.v2.json": {
+        "bytes": 476864,
+        "exists": true
+      },
+      "semseg.v2.json": {
+        "bytes": 47216,
+        "exists": true
+      }
+    },
+    "scan_dir": "/home/yoohyun/research2/local_dataset/3RScan/scans/5630cfcb-12bf-2860-87ee-b4e4a5bf0cb0",
+    "scan_dir_exists": true,
+    "scan_id": "5630cfcb-12bf-2860-87ee-b4e4a5bf0cb0",
+    "semantic_triplet_ready": true,
+    "sequence_available": false
+  },
+  "rescan_payload": {
+    "required_files": {
+      "labels.instances.annotated.v2.ply": {
+        "bytes": 5232447,
+        "exists": true
+      },
+      "mesh.refined.0.010000.segs.v2.json": {
+        "bytes": 484598,
+        "exists": true
+      },
+      "semseg.v2.json": {
+        "bytes": 47248,
+        "exists": true
+      }
+    },
+    "scan_dir": "/home/yoohyun/research2/local_dataset/3RScan/scans/d7d40d75-7a5d-2b36-9746-3e807d3e7558",
+    "scan_dir_exists": true,
+    "scan_id": "d7d40d75-7a5d-2b36-9746-3e807d3e7558",
+    "semantic_triplet_ready": true,
+    "sequence_available": false
+  },
+  "status": "staging_ready",
+  "target_pair": {
+    "base_query_rows": 4,
+    "base_rows": [
+      {
+        "object_label": "box",
+        "row_band": "low_motion_control",
+        "scene_aligned_static_planar_error_m": 0.239917
+      },
+      {
+        "object_label": "sack",
+        "row_band": "low_motion_control",
+        "scene_aligned_static_planar_error_m": 0.024978
+      },
+      {
+        "object_label": "vacuum",
+        "row_band": "significant_moved",
+        "scene_aligned_static_planar_error_m": 3.126915
+      },
+      {
+        "object_label": "water heater",
+        "row_band": "low_motion_control",
+        "scene_aligned_static_planar_error_m": 0.075771
+      }
+    ],
+    "low_motion_control_rows": 3,
+    "manifest_status": "ready_minimal",
+    "mid_motion_review_rows": 0,
+    "reference_scan_id": "5630cfcb-12bf-2860-87ee-b4e4a5bf0cb0",
+    "rescan_id": "d7d40d75-7a5d-2b36-9746-3e807d3e7558",
+    "significant_moved_labels": [
+      "vacuum"
+    ],
+    "significant_moved_rows": 1
+  },
+  "target_pair_uid": "5630cfcb-12bf-2860-87ee-b4e4a5bf0cb0->d7d40d75-7a5d-2b36-9746-3e807d3e7558"
+}

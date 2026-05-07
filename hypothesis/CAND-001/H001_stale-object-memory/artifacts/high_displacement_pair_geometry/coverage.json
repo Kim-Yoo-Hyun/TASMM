@@ -1,0 +1,52 @@
+{
+  "best_max_error_m": 1.754380931244542,
+  "best_median_error_m": 0.13140801633649057,
+  "best_transform_candidate": "object_direct_error_m",
+  "candidate_summaries": [
+    {
+      "candidate": "object_direct_error_m",
+      "count": 6,
+      "max_error_m": 1.754380931244542,
+      "mean_error_m": 0.40924742217862065,
+      "median_error_m": 0.13140801633649057
+    },
+    {
+      "candidate": "object_inverse_error_m",
+      "count": 6,
+      "max_error_m": 6.594367224813478,
+      "mean_error_m": 3.7041969160354555,
+      "median_error_m": 3.3320843684713912
+    },
+    {
+      "candidate": "scene_direct_error_m",
+      "count": 6,
+      "max_error_m": 6.122724333081149,
+      "mean_error_m": 4.342977778106914,
+      "median_error_m": 4.670509468520089
+    },
+    {
+      "candidate": "scene_inverse_error_m",
+      "count": 6,
+      "max_error_m": 1.7668748508823426,
+      "mean_error_m": 0.9908708823156839,
+      "median_error_m": 1.251864349036121
+    }
+  ],
+  "dataset_root": "/home/yoohyun/research2/local_dataset",
+  "metadata_removed": 3,
+  "metadata_rigid": 6,
+  "pair_geometry_status": "partial_rigid_moved_ready_needs_review",
+  "reference_scan_id": "569d8f0d-72aa-2f24-8ac6-c6ee8d927c4b",
+  "reference_semseg_objects": 69,
+  "removed_absence_ready": false,
+  "removed_absent_in_rescan_semseg": 0,
+  "removed_ref_geometry_join": 3,
+  "rescan_id": "569d8f0f-72aa-2f24-89a6-77f8b8779ae9",
+  "rescan_semseg_objects": 35,
+  "rigid_label_match": 6,
+  "rigid_pair_geometry_ready": false,
+  "rigid_ref_geometry_join": 6,
+  "rigid_rescan_geometry_join": 6,
+  "rigid_row_geometry_valid": 5,
+  "transform_direction_validated": false
+}
