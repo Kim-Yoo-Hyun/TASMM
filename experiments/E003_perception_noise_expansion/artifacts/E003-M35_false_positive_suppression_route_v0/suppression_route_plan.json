@@ -1,0 +1,42 @@
+{
+  "allowed_inference_fields": [
+    "scan_id",
+    "label_canonical",
+    "confidence",
+    "depth_valid_pixel_count",
+    "pre_cap_group_rank",
+    "centroid_world_m",
+    "frame_ids"
+  ],
+  "blocked_inference_fields": [
+    "match_status",
+    "matched_target_uid",
+    "matched_3dssg_instance_id",
+    "nearest_same_label_target_uid",
+    "3DSSG object instance ids"
+  ],
+  "diagnostic_fields_allowed_for_evaluation_only": [
+    "match_status",
+    "matched_target_uid",
+    "matched_3dssg_instance_id",
+    "nearest_same_label_distance_m"
+  ],
+  "m35_output_dir": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M35_false_positive_suppression_route_v0",
+  "next_command_plan": {
+    "argv": [
+      "python",
+      "experiments/E003_perception_noise_expansion/tools/run_m36_recall_preserving_suppression_sweep.py",
+      "--out-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M36_recall_preserving_suppression_sweep_v0"
+    ],
+    "shell": "python experiments/E003_perception_noise_expansion/tools/run_m36_recall_preserving_suppression_sweep.py --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M36_recall_preserving_suppression_sweep_v0"
+  },
+  "next_unit": "E003-M36 recall-preserving suppression sweep smoke",
+  "recall_preservation_gate": {
+    "conservative_matched_target_retention_min": 0.95,
+    "exploratory_matched_target_retention_min": 0.9,
+    "must_report_depth_consistent_visible_proxy_recall": true,
+    "must_report_scan_target_recall": true
+  },
+  "selected_route": "recall_preserving_rank_cap_sweep_v0"
+}

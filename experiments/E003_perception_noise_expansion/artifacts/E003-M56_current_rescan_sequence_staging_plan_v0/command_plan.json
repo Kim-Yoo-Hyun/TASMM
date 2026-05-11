@@ -1,0 +1,7 @@
+{
+  "launch_command": "mkdir -p logs && tmux new -d -s e003_m56_sequence_stage 'cd /home/yoohyun/research2 && bash /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/run_sequence_staging.sh > /home/yoohyun/research2/logs/20260510_170443_e003_m56_sequence_staging.log 2>&1'",
+  "log_path": "/home/yoohyun/research2/logs/20260510_170443_e003_m56_sequence_staging.log",
+  "run_script": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/run_sequence_staging.sh",
+  "verification_command": "python experiments/E003_perception_noise_expansion/tools/verify_m56_sequence_payloads.py --manifest '/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/download_manifest.jsonl' --out-dir '/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/verification' --require-ready",
+  "working_directory": "/home/yoohyun/research2"
+}

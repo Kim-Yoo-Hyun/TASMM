@@ -1,0 +1,120 @@
+{
+  "candidate_group_key": [
+    "scan_id",
+    "label_canonical"
+  ],
+  "compatibility_rule": "The existing real_proposal_prediction_jsonl_v0 validator allows additional fields, so M40 can add support fields without changing required proposal fields.",
+  "compute_stage": "after_prompt_label_cleanup_before_spatial_consolidation_and_caps",
+  "contract_id": "temporal_spatial_support_evidence_v0",
+  "coordinate_source": "centroid_world_m from projected RGB-D depth and camera pose",
+  "m39_version": "e003_m39_temporal_spatial_support_instrumentation_gate_v0",
+  "radii_m": [
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "required_prediction_fields_when_enabled": [
+    {
+      "field": "support_evidence_policy",
+      "type": "string",
+      "value": "temporal_spatial_support_evidence_v0"
+    },
+    {
+      "field": "support_group_key",
+      "format": "<scan_id>::<label_canonical>",
+      "type": "string"
+    },
+    {
+      "definition": "Number of cleaned candidates in the same support group before consolidation.",
+      "field": "support_group_candidate_count",
+      "type": "int"
+    },
+    {
+      "definition": "Number of distinct RGB-D frames in the same support group before consolidation.",
+      "field": "support_group_frame_count",
+      "type": "int"
+    },
+    {
+      "definition": "Number of same-scan, same-label cleaned candidates within the radius, excluding the candidate itself.",
+      "field": "support_spatial_neighbor_count_r0p75m",
+      "required_when_enabled": true,
+      "type": "int"
+    },
+    {
+      "definition": "Number of distinct other RGB-D frame ids represented by same-scan, same-label neighbors within the radius.",
+      "field": "support_temporal_neighbor_frame_count_r0p75m",
+      "required_when_enabled": true,
+      "type": "int"
+    },
+    {
+      "definition": "Maximum detector confidence among same-scan, same-label neighbors within the radius; null when no neighbor exists.",
+      "field": "support_max_neighbor_confidence_r0p75m",
+      "required_when_enabled": true,
+      "type": "float|null"
+    },
+    {
+      "definition": "Number of same-scan, same-label cleaned candidates within the radius, excluding the candidate itself.",
+      "field": "support_spatial_neighbor_count_r1p0m",
+      "required_when_enabled": true,
+      "type": "int"
+    },
+    {
+      "definition": "Number of distinct other RGB-D frame ids represented by same-scan, same-label neighbors within the radius.",
+      "field": "support_temporal_neighbor_frame_count_r1p0m",
+      "required_when_enabled": true,
+      "type": "int"
+    },
+    {
+      "definition": "Maximum detector confidence among same-scan, same-label neighbors within the radius; null when no neighbor exists.",
+      "field": "support_max_neighbor_confidence_r1p0m",
+      "required_when_enabled": true,
+      "type": "float|null"
+    },
+    {
+      "definition": "Number of same-scan, same-label cleaned candidates within the radius, excluding the candidate itself.",
+      "field": "support_spatial_neighbor_count_r1p5m",
+      "required_when_enabled": true,
+      "type": "int"
+    },
+    {
+      "definition": "Number of distinct other RGB-D frame ids represented by same-scan, same-label neighbors within the radius.",
+      "field": "support_temporal_neighbor_frame_count_r1p5m",
+      "required_when_enabled": true,
+      "type": "int"
+    },
+    {
+      "definition": "Maximum detector confidence among same-scan, same-label neighbors within the radius; null when no neighbor exists.",
+      "field": "support_max_neighbor_confidence_r1p5m",
+      "required_when_enabled": true,
+      "type": "float|null"
+    },
+    {
+      "definition": "Number of same-scan, same-label cleaned candidates within the radius, excluding the candidate itself.",
+      "field": "support_spatial_neighbor_count_r2p0m",
+      "required_when_enabled": true,
+      "type": "int"
+    },
+    {
+      "definition": "Number of distinct other RGB-D frame ids represented by same-scan, same-label neighbors within the radius.",
+      "field": "support_temporal_neighbor_frame_count_r2p0m",
+      "required_when_enabled": true,
+      "type": "int"
+    },
+    {
+      "definition": "Maximum detector confidence among same-scan, same-label neighbors within the radius; null when no neighbor exists.",
+      "field": "support_max_neighbor_confidence_r2p0m",
+      "required_when_enabled": true,
+      "type": "float|null"
+    }
+  ],
+  "summary_json_fields_when_enabled": [
+    "support_evidence_policy",
+    "support_evidence_stage",
+    "support_evidence_radii_m",
+    "support_evidence_candidate_rows",
+    "support_evidence_groups",
+    "support_evidence_output",
+    "support_evidence_attached_to_selected_rows"
+  ]
+}

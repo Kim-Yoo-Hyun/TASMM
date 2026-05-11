@@ -1,0 +1,142 @@
+{
+  "dev_scan_count": 4,
+  "dev_scans": [
+    "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+    "8eabc45f-5af7-2f32-8528-640861d2a135",
+    "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+    "ddc73797-765b-241a-9e2c-097c5989baf6"
+  ],
+  "heldout_baseline_policy": {
+    "deployability": "baseline",
+    "depth_consistent_visible_proxy_recall": 0.9090909090909091,
+    "false_positive_proposal_rows": 1523,
+    "false_positive_reduction_vs_m33": 0,
+    "matched_target_delta_vs_m33": 0,
+    "matched_target_retention_vs_m33": 1.0,
+    "matched_target_rows": 97,
+    "policy_family": "baseline",
+    "policy_id": "balanced_scan_4_4_v0_heldout_baseline",
+    "proposal_precision": 0.059876543209876544,
+    "proposal_rows": 1620,
+    "scan_target_recall": 0.5388888888888889
+  },
+  "heldout_oracle_policy": {
+    "deployability": "diagnostic_oracle_not_deployable",
+    "depth_consistent_visible_proxy_recall": 0.9090909090909091,
+    "false_positive_proposal_rows": 979,
+    "false_positive_reduction_vs_m33": 544,
+    "matched_target_delta_vs_m33": 0,
+    "matched_target_retention_vs_m33": 1.0,
+    "matched_target_rows": 97,
+    "policy_family": "heldout_oracle_labelwise_rank_cap",
+    "policy_id": "heldout_oracle_visible_miss_guarded_labelwise_rank_cap_v0",
+    "proposal_precision": 0.09014869888475836,
+    "proposal_rows": 1076,
+    "scan_target_recall": 0.5388888888888889
+  },
+  "heldout_scan_count": 4,
+  "heldout_scans": [
+    "280d8ebb-6cc6-2788-9153-98959a2da801",
+    "75c25975-9ca2-2844-9769-84677f46d4cf",
+    "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+    "c7895f27-339c-2d13-836b-c12dca280261"
+  ],
+  "heldout_target_without_dev_match_labels": 24,
+  "label_coverage_risk_counts": {
+    "covered": 61,
+    "heldout_target_without_dev_match": 24
+  },
+  "label_coverage_rows": 85,
+  "label_stratified_validation_feasible": false,
+  "m36_selected_diagnostic_policy": {
+    "deployability": "diagnostic_oracle_not_deployable",
+    "depth_consistent_visible_proxy_recall": 0.9155844155844156,
+    "false_positive_proposal_rows": 1585,
+    "false_positive_reduction_vs_m33": 1625,
+    "matched_target_delta_vs_m33": 0,
+    "matched_target_retention_vs_m33": 1.0,
+    "matched_target_rows": 204,
+    "policy_family": "labelwise_rank_cap_diagnostic",
+    "policy_id": "labelwise_rank_cap_oracle_retain_0p95",
+    "proposal_precision": 0.11403018446059252,
+    "proposal_rows": 1789,
+    "scan_target_recall": 0.5930232558139535
+  },
+  "m37_version": "e003_m37_suppression_split_validation_v0",
+  "next_recommended_unit": "E003-M38 stronger split or temporal-spatial suppression gate",
+  "paper_table_command_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "runner_integration_recommended": false,
+  "selected_candidate_fp_reduction_rate": 0.242284963887065,
+  "selected_candidate_policy": {
+    "deployability": "candidate_policy_selected_on_train",
+    "depth_consistent_visible_proxy_recall": 0.7792207792207793,
+    "false_positive_proposal_rows": 1154,
+    "false_positive_reduction_vs_m33": 369,
+    "matched_target_delta_vs_m33": -16,
+    "matched_target_retention_vs_m33": 0.8350515463917526,
+    "matched_target_rows": 81,
+    "policy_family": "visible_miss_guarded_labelwise_rank_cap",
+    "policy_id": "dev_selected_visible_miss_guarded_labelwise_rank_cap_v0",
+    "proposal_precision": 0.06558704453441296,
+    "proposal_rows": 1235,
+    "scan_target_recall": 0.45
+  },
+  "selected_fixed_policy": {
+    "deployability": "deployable_fixed_hyperparameter_selected_on_train",
+    "depth_consistent_visible_proxy_recall": 0.9090909090909091,
+    "false_positive_proposal_rows": 1433,
+    "false_positive_reduction_vs_m33": 90,
+    "matched_target_delta_vs_m33": 0,
+    "matched_target_retention_vs_m33": 1.0,
+    "matched_target_rows": 97,
+    "policy_family": "global_rank_cap",
+    "policy_id": "global_rank_cap_le_22_selected_on_train",
+    "proposal_precision": 0.06339869281045751,
+    "proposal_rows": 1530,
+    "scan_target_recall": 0.5388888888888889
+  },
+  "selected_split_protocol": "balanced_scan_4_4_v0",
+  "split_balance": {
+    "balance_score": 0.07324892191723625,
+    "dev_totals": {
+      "evaluation_target_rows": 164,
+      "matched_proposal_rows": 107,
+      "proposal_rows": 1794,
+      "visible_proxy_target_rows": 77
+    },
+    "heldout_totals": {
+      "evaluation_target_rows": 180,
+      "matched_proposal_rows": 97,
+      "proposal_rows": 1620,
+      "visible_proxy_target_rows": 77
+    },
+    "totals": {
+      "evaluation_target_rows": 344,
+      "matched_proposal_rows": 204,
+      "proposal_rows": 3414,
+      "visible_proxy_target_rows": 154
+    }
+  },
+  "split_summary": {
+    "dev_scan_count": 4,
+    "dev_scans": [
+      "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "8eabc45f-5af7-2f32-8528-640861d2a135",
+      "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+      "ddc73797-765b-241a-9e2c-097c5989baf6"
+    ],
+    "fallback_cap": 24,
+    "heldout_scan_count": 4,
+    "heldout_scans": [
+      "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "75c25975-9ca2-2844-9769-84677f46d4cf",
+      "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+      "c7895f27-339c-2d13-836b-c12dca280261"
+    ],
+    "heldout_target_without_dev_match_labels": 24,
+    "split": "balanced_scan_4_4_v0"
+  },
+  "status": "suppression_split_validation_gate_ready",
+  "validation_rows": 7
+}

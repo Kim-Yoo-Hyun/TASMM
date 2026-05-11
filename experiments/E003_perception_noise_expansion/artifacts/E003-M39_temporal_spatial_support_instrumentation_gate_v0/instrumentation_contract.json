@@ -1,0 +1,171 @@
+{
+  "contract_id": "e003_m39_temporal_spatial_support_instrumentation",
+  "deterministic_postprocessing_rejection_reason": "M33/M38 artifacts preserve final selected proposals, not the cleaned raw candidate pool before spatial consolidation and caps.",
+  "deterministic_postprocessing_route_ready": false,
+  "implementation_notes_for_m40": [
+    "Add helper functions near score_candidate: parse_support_radii_m, support_radius_suffix, compute_temporal_spatial_support.",
+    "Call compute_temporal_spatial_support on cleaned candidates before grouped is built.",
+    "Attach support fields to selected rows that survive consolidation and caps.",
+    "Add support summary fields to pre_cap_policy_summary and model_smoke metadata.",
+    "Keep default support policy as none so earlier artifacts remain reproducible."
+  ],
+  "m38_input_status": "split_or_temporal_spatial_gate_ready",
+  "m38_selected_route": "temporal_spatial_evidence_instrumentation_required",
+  "m38_stronger_split_feasible_with_current_scans": false,
+  "m38_support_transfer_pass": false,
+  "m39_version": "e003_m39_temporal_spatial_support_instrumentation_gate_v0",
+  "runner_edit_scope_for_m40": [
+    "experiments/E003_perception_noise_expansion/docker/real_proposals/run_rgbd_ov_proposals.py",
+    "experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py"
+  ],
+  "runner_insertion_point": {
+    "after": {
+      "line": 312,
+      "needle": "cleaned.append(row)",
+      "snippet": "        cleaned.append(row)"
+    },
+    "before": {
+      "line": 316,
+      "needle": "grouped.setdefault((str(row[\"scan_id\"]), str(row[\"label_canonical\"])), []).append(row)",
+      "snippet": "        grouped.setdefault((str(row[\"scan_id\"]), str(row[\"label_canonical\"])), []).append(row)"
+    },
+    "id": "select_cap_aware_label_balanced_candidates.after_cleaned_before_grouped",
+    "ready": true,
+    "reason": "Support evidence must be computed after prompt/label cleanup but before spatial consolidation and caps remove candidates."
+  },
+  "runner_new_args_for_m40": [
+    {
+      "arg": "--support-evidence-policy",
+      "choices": [
+        "none",
+        "temporal_spatial_support_evidence_v0"
+      ],
+      "default": "none",
+      "purpose": "Enable pre-consolidation support evidence without changing default runner behavior."
+    },
+    {
+      "arg": "--support-evidence-radii-m",
+      "default": "0.75,1.0,1.5,2.0",
+      "purpose": "Comma-separated radii used for same-label spatial/temporal support diagnostics."
+    },
+    {
+      "arg": "--support-evidence-output",
+      "default": "/outputs/support_evidence_summary.json",
+      "purpose": "Write support instrumentation summary beside pre_cap_policy_summary.json."
+    }
+  ],
+  "selected_instrumentation_route": "docker_runner_pre_consolidation_support_evidence_v0",
+  "source_inspection": {
+    "runner": {
+      "missing_expected_points": [],
+      "points": {
+        "argparse_candidate_selection_policy": {
+          "line": 776,
+          "needle": "\"--candidate-selection-policy\"",
+          "snippet": "        \"--candidate-selection-policy\","
+        },
+        "argparse_raw_candidate_collection_cap": {
+          "line": 788,
+          "needle": "\"--raw-candidate-collection-cap\"",
+          "snippet": "    parser.add_argument(\"--raw-candidate-collection-cap\", default=50000, type=int)"
+        },
+        "cleaned_candidate_append": {
+          "line": 312,
+          "needle": "cleaned.append(row)",
+          "snippet": "        cleaned.append(row)"
+        },
+        "grouping_after_cleaned": {
+          "line": 316,
+          "needle": "grouped.setdefault((str(row[\"scan_id\"]), str(row[\"label_canonical\"])), []).append(row)",
+          "snippet": "        grouped.setdefault((str(row[\"scan_id\"]), str(row[\"label_canonical\"])), []).append(row)"
+        },
+        "label_balancing_start": {
+          "line": 330,
+          "needle": "balanced = []",
+          "snippet": "    balanced = []"
+        },
+        "policy_function": {
+          "line": 290,
+          "needle": "def select_cap_aware_label_balanced_candidates(",
+          "snippet": "def select_cap_aware_label_balanced_candidates("
+        },
+        "policy_summary_write": {
+          "line": 591,
+          "needle": "write_json(pre_cap_policy_output, pre_cap_policy_summary)",
+          "snippet": "        write_json(pre_cap_policy_output, pre_cap_policy_summary)"
+        },
+        "proposal_jsonl_write": {
+          "line": 594,
+          "needle": "write_jsonl(output_path, rows)",
+          "snippet": "    write_jsonl(output_path, rows)"
+        },
+        "spatial_consolidation_start": {
+          "line": 318,
+          "needle": "consolidated = []",
+          "snippet": "    consolidated = []"
+        },
+        "support_helper_anchor_score_candidate": {
+          "line": 278,
+          "needle": "def score_candidate(",
+          "snippet": "def score_candidate(row: dict[str, Any], score_mode: str) -> float:"
+        }
+      },
+      "preferred_insertion_point": {
+        "after": {
+          "line": 312,
+          "needle": "cleaned.append(row)",
+          "snippet": "        cleaned.append(row)"
+        },
+        "before": {
+          "line": 316,
+          "needle": "grouped.setdefault((str(row[\"scan_id\"]), str(row[\"label_canonical\"])), []).append(row)",
+          "snippet": "        grouped.setdefault((str(row[\"scan_id\"]), str(row[\"label_canonical\"])), []).append(row)"
+        },
+        "id": "select_cap_aware_label_balanced_candidates.after_cleaned_before_grouped",
+        "ready": true,
+        "reason": "Support evidence must be computed after prompt/label cleanup but before spatial consolidation and caps remove candidates."
+      },
+      "runner": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/docker/real_proposals/run_rgbd_ov_proposals.py",
+      "source_line_count": 965,
+      "status": "runner_instrumentation_sites_found"
+    },
+    "wrapper": {
+      "missing_expected_points": [],
+      "points": {
+        "argparse_candidate_selection_policy": {
+          "line": 207,
+          "needle": "\"--candidate-selection-policy\"",
+          "snippet": "        \"--candidate-selection-policy\","
+        },
+        "argparse_raw_candidate_collection_cap": {
+          "line": 218,
+          "needle": "\"--raw-candidate-collection-cap\"",
+          "snippet": "    parser.add_argument(\"--raw-candidate-collection-cap\", default=50000, type=int)"
+        },
+        "pre_cap_policy_summary_load": {
+          "line": 380,
+          "needle": "pre_cap_policy_summary = load_json(pre_cap_policy_output)",
+          "snippet": "    pre_cap_policy_summary = load_json(pre_cap_policy_output) if pre_cap_policy_output.exists() else {}"
+        },
+        "run_cmd_candidate_selection_policy": {
+          "line": 318,
+          "needle": "args.candidate_selection_policy",
+          "snippet": "        args.candidate_selection_policy,"
+        },
+        "run_cmd_pre_cap_policy_output": {
+          "line": 328,
+          "needle": "\"/outputs/pre_cap_policy_summary.json\"",
+          "snippet": "        \"/outputs/pre_cap_policy_summary.json\","
+        }
+      },
+      "source_line_count": 459,
+      "status": "wrapper_pass_through_sites_found",
+      "wrapper": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py"
+    }
+  },
+  "wrapper_pass_through_for_m40": [
+    "--support-evidence-policy",
+    "--support-evidence-radii-m",
+    "--support-evidence-output"
+  ]
+}

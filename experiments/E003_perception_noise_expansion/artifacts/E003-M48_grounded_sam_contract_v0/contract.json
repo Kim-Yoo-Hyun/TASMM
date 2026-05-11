@@ -1,0 +1,188 @@
+{
+  "allowed_inputs": [
+    "posed RGB frames from 3RScan sequence payload",
+    "registered depth frames from the same sequence payload",
+    "camera pose and intrinsics from the sequence payload",
+    "M17 prompt labels and prompt set id",
+    "GroundingDINO boxes, labels, and confidence scores",
+    "SAM masks produced from the same RGB frame and detector boxes"
+  ],
+  "baseline_to_compare": {
+    "baseline_artifact": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M45_scaled_candidate_pool_export_replay_v0",
+    "box_depth_confidence": {
+      "false_positive_proposal_rows": 3210,
+      "matched_target_rows": 204,
+      "mean_matched_centroid_error_m": 0.5345816127450981,
+      "proposal_precision": 0.05975395430579965,
+      "scan_target_recall": 0.5930232558139535
+    },
+    "box_depth_confidence_sqrt_depth": {
+      "false_positive_proposal_rows": 3209,
+      "matched_target_rows": 198,
+      "mean_matched_centroid_error_m": 0.5447731414141415,
+      "proposal_precision": 0.05811564426181391,
+      "scan_target_recall": 0.5755813953488372
+    },
+    "box_depth_support_aware_failed": {
+      "false_positive_proposal_rows": 3211,
+      "matched_target_rows": 196,
+      "proposal_precision": 0.05752861755209862
+    },
+    "frozen_m45_verdict": "fail_redesign"
+  },
+  "blocked_inputs": [
+    "3DSSG object instance ids during proposal generation",
+    "M17 evaluation target ids during proposal generation",
+    "candidate_is_target",
+    "matched_3dssg_instance_id before M21 matching",
+    "future frames outside the selected scan/frame budget",
+    "heldout matching labels or target locations as detector prompts beyond the fixed M17 prompt set"
+  ],
+  "comparison_policy": {
+    "primary_comparison": "same scan/frame subset versus current bbox-depth GroundingDINO route",
+    "success_signal": [
+      "validator errors == 0",
+      "M21 matcher completes",
+      "non-empty proposal rows",
+      "matched targets are not lower than the same-subset bbox-depth route or mean matched centroid error decreases",
+      "false-positive rows do not increase on the same subset"
+    ],
+    "unsupported_after_pass": [
+      "final real RGB-D/open-vocabulary robustness",
+      "real navigation SR/SPL",
+      "deployable search policy",
+      "claim that SAM solves detector label false positives"
+    ]
+  },
+  "contract_id": "grounded_sam_mask_backprojection_contract_v0",
+  "detector_backend": {
+    "base_detector_backend_id": "groundingdino_rgbd_backproject_v0",
+    "new_backend_id": "grounded_sam_mask_backproject_v0",
+    "segmentation_backend": "SAM",
+    "selected_by_m47": "Grounded-SAM"
+  },
+  "implementation_route": {
+    "do_not_start_with": [
+      "OpenMask3D scene conversion",
+      "ConceptGraphs full map build",
+      "HOV-SG navigation/hierarchy pipeline"
+    ],
+    "preferred_edit_points": [
+      "experiments/E003_perception_noise_expansion/docker/real_proposals/run_rgbd_ov_proposals.py",
+      "experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py or a thin M49 wrapper"
+    ],
+    "runner_args_to_add": [
+      "--detector grounded_sam_mask_backproject_v0",
+      "--segmentation-backend sam_vit_b",
+      "--mask-depth-filter median_mad_trimmed_mask_depth_v0",
+      "--mask-min-depth-valid-pixels 200",
+      "--mask-point-sample-cap 2048"
+    ]
+  },
+  "long_running_policy": {
+    "background_required_for": [
+      "SAM checkpoint download",
+      "Docker build with segmentation dependencies",
+      "multi-scan mask generation"
+    ],
+    "log_dir": "logs/",
+    "tmux_template": "ts=$(date +%Y%m%d_%H%M%S); tmux new-session -d -s e003_m49_grounded_sam \"cd /home/yoohyun/research2 && mkdir -p logs && python experiments/E003_perception_noise_expansion/tools/run_m49_grounded_sam_smoke.py --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M49_grounded_sam_smoke_v0 --max-scans 1 --max-frames-per-scan 2 --max-labels 12 > logs/${ts}_e003_m49_grounded_sam_smoke.log 2>&1\"",
+    "verification_command": "python -m json.tool experiments/E003_perception_noise_expansion/artifacts/E003-M49_grounded_sam_smoke_v0/coverage.json"
+  },
+  "mask_backprojection_steps": [
+    "run GroundingDINO as the current backend does",
+    "run SAM with each detector box as a box prompt",
+    "resize mask to depth frame coordinates",
+    "keep finite positive depth pixels inside the mask",
+    "apply robust median/MAD or percentile depth trimming",
+    "backproject valid mask pixels with intrinsics and pose",
+    "write mask centroid and optional sampled support points",
+    "preserve the existing real_proposal_prediction_jsonl_v0 required fields",
+    "run the existing validator and M21 matcher"
+  ],
+  "output_contract": {
+    "optional_fields_added": [
+      {
+        "field": "geometry_source",
+        "purpose": "separate mask-depth geometry from previous box-depth geometry",
+        "type": "string",
+        "value": "mask_depth_backprojection_v0"
+      },
+      {
+        "field": "mask_backend_id",
+        "purpose": "record the segmentation backend used after GroundingDINO boxes",
+        "type": "string",
+        "value": "sam_box_prompt_v0"
+      },
+      {
+        "field": "mask_area_px",
+        "purpose": "2D mask area before depth filtering",
+        "type": "integer"
+      },
+      {
+        "field": "mask_depth_valid_pixel_count",
+        "purpose": "valid positive depth pixels inside the mask",
+        "type": "integer"
+      },
+      {
+        "field": "mask_depth_valid_ratio",
+        "purpose": "valid depth pixels divided by mask area",
+        "type": "number"
+      },
+      {
+        "field": "mask_backprojection_policy",
+        "purpose": "freeze robust depth filtering and centroid estimation policy",
+        "type": "string",
+        "value": "median_mad_trimmed_mask_depth_v0"
+      },
+      {
+        "field": "mask_centroid_world_m",
+        "purpose": "mask-depth centroid in scan/world coordinates",
+        "type": "array[number]"
+      },
+      {
+        "field": "bbox_centroid_world_m",
+        "purpose": "paired diagnostic centroid from previous bbox-depth route",
+        "type": "array[number]"
+      },
+      {
+        "field": "mask_support_point_sample_path",
+        "purpose": "optional path to sampled world points for later debugging without bloating JSONL",
+        "type": "string|null"
+      }
+    ],
+    "required_fields_preserved": [
+      "bbox_2d",
+      "camera_intrinsics_source",
+      "camera_pose_source",
+      "centroid_world_m",
+      "confidence",
+      "depth_valid_pixel_count",
+      "detector_config_id",
+      "detector_id",
+      "frame_ids",
+      "label_canonical",
+      "label_text",
+      "mask_rle",
+      "match_distance_m",
+      "match_iou_3d",
+      "match_status",
+      "matched_3dssg_instance_id",
+      "pair_uid",
+      "point_support_world",
+      "prompt_set_id",
+      "proposal_uid",
+      "row_uid",
+      "scan_id",
+      "seed"
+    ],
+    "schema_id": "real_proposal_prediction_jsonl_v0"
+  },
+  "smoke_scope": {
+    "max_frames_per_scan": 2,
+    "max_labels": 12,
+    "max_predictions": 400,
+    "max_scans": 1,
+    "reason": "verify schema, depth/mask geometry, and matcher compatibility before any long multi-scan run"
+  }
+}

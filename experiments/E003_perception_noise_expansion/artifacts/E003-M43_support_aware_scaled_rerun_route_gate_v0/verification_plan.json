@@ -1,0 +1,66 @@
+{
+  "commands_executed_for_m43": [
+    {
+      "argv": [
+        "python",
+        "-m",
+        "py_compile",
+        "experiments/E003_perception_noise_expansion/tools/plan_m43_support_aware_scaled_rerun_route.py"
+      ],
+      "shell": "python -m py_compile experiments/E003_perception_noise_expansion/tools/plan_m43_support_aware_scaled_rerun_route.py"
+    },
+    {
+      "argv": [
+        "python",
+        "experiments/E003_perception_noise_expansion/tools/plan_m43_support_aware_scaled_rerun_route.py",
+        "--out-dir",
+        "experiments/E003_perception_noise_expansion/artifacts/E003-M43_support_aware_scaled_rerun_route_gate_v0"
+      ],
+      "shell": "python experiments/E003_perception_noise_expansion/tools/plan_m43_support_aware_scaled_rerun_route.py --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M43_support_aware_scaled_rerun_route_gate_v0"
+    }
+  ],
+  "commands_reserved_for_m44_after_runner_edit": [
+    {
+      "argv": [
+        "python",
+        "experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py",
+        "--build",
+        "--out-dir",
+        "experiments/E003_perception_noise_expansion/artifacts/E003-M44_pre_cap_candidate_pool_export_smoke_v0",
+        "--max-scans",
+        "1",
+        "--max-frames-per-scan",
+        "2",
+        "--max-labels",
+        "32",
+        "--max-predictions",
+        "400",
+        "--max-predictions-per-frame",
+        "20",
+        "--candidate-selection-policy",
+        "cap_aware_label_balanced_ranking_v0",
+        "--selection-score-mode",
+        "confidence_sqrt_depth_support_temporal_v0",
+        "--pre-cap-per-scan-label-cap",
+        "40",
+        "--pre-cap-spatial-consolidation-radius-m",
+        "0.5",
+        "--raw-candidate-collection-cap",
+        "20000",
+        "--support-evidence-policy",
+        "temporal_spatial_support_evidence_v0",
+        "--support-evidence-radii-m",
+        "0.75,1.0,1.5,2.0",
+        "--export-pre-cap-candidate-pool"
+      ],
+      "shell": "python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --build --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M44_pre_cap_candidate_pool_export_smoke_v0 --max-scans 1 --max-frames-per-scan 2 --max-labels 32 --max-predictions 400 --max-predictions-per-frame 20 --candidate-selection-policy cap_aware_label_balanced_ranking_v0 --selection-score-mode confidence_sqrt_depth_support_temporal_v0 --pre-cap-per-scan-label-cap 40 --pre-cap-spatial-consolidation-radius-m 0.5 --raw-candidate-collection-cap 20000 --support-evidence-policy temporal_spatial_support_evidence_v0 --support-evidence-radii-m 0.75,1.0,1.5,2.0 --export-pre-cap-candidate-pool"
+    }
+  ],
+  "long_running_rule": "Run any 8-scan detector export in tmux/nohup with timestamped logs under logs/.",
+  "m44_smoke_success_checks": [
+    "pre_cap_candidate_pool.jsonl exists and row count equals policy input candidate count",
+    "candidate pool rows include support evidence fields when support policy is enabled",
+    "offline replay reproduces runner selected stable-candidate set for confidence_sqrt_depth_support_temporal_v0",
+    "validator errors/warnings remain 0/0"
+  ]
+}

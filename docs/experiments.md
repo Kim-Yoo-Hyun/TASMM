@@ -32,6 +32,7 @@ Experiment 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 - 사용자에게는 한국어로 답한다.
 - 논문 제목, 방법명, dataset, metric, benchmark 이름은 영어 원문을 유지한다.
 - "사실", "논문 주장", "에이전트 추론", "사용자 판단 필요"를 섞지 않고 구분한다.
+- 목표와 방향성은 AI, ML, CV, Robotics top-tier journal/conference 제출 가능성을 기준으로 판단한다.
 - `TODO.md`는 계획, 상태, 다음 행동만 관리한다.
 - `experiments/`에는 실제 experiment 내용과 산출물 계약을 둔다.
 - `docs/experiments.md`에는 특정 experiment 숫자, 결과, claim ledger를 길게 넣지 않는다.

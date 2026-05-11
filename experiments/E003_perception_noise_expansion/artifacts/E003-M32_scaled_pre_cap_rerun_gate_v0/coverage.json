@@ -1,0 +1,64 @@
+{
+  "available_sampled_frame_count": 459,
+  "docker_command_ready": true,
+  "docker_run_executed": false,
+  "estimated_final_prediction_rows": 6640,
+  "estimated_raw_predictions": 78144,
+  "m31_blocker_rows": 7,
+  "m31_reference": {
+    "m30_gain_targets_vs_m26": 15,
+    "m30_loss_targets_vs_m26": 6,
+    "top_false_positive_labels": [
+      {
+        "false_positive_rows": 47,
+        "label": "table"
+      },
+      {
+        "false_positive_rows": 42,
+        "label": "chair"
+      },
+      {
+        "false_positive_rows": 41,
+        "label": "box"
+      },
+      {
+        "false_positive_rows": 41,
+        "label": "light"
+      },
+      {
+        "false_positive_rows": 38,
+        "label": "plant"
+      }
+    ],
+    "top_loss_labels": [
+      {
+        "label": "plant",
+        "loss": 6
+      }
+    ]
+  },
+  "m32_version": "e003_m32_scaled_pre_cap_rerun_gate_v0",
+  "next_recommended_unit": "E003-M33 scaled pre-cap policy Docker rerun",
+  "paper_table_command_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "run_config": {
+    "candidate_selection_policy": "cap_aware_label_balanced_ranking_v0",
+    "max_frames_per_scan": 24,
+    "max_labels": 32,
+    "max_predictions": 10000,
+    "max_predictions_per_frame": 60,
+    "max_scans": 8,
+    "pre_cap_per_scan_label_cap": 24,
+    "pre_cap_spatial_consolidation_radius_m": 0.5,
+    "raw_candidate_collection_cap": 200000,
+    "selection_score_mode": "confidence",
+    "text_threshold": 0.08,
+    "threshold": 0.08
+  },
+  "selected_evaluation_target_rows": 344,
+  "selected_frame_count": 192,
+  "selected_route": "staged_8scan_24frame_pre_cap_scaled_pilot",
+  "selected_scan_count": 8,
+  "staged_scan_count": 8,
+  "status": "scaled_pre_cap_rerun_gate_ready"
+}

@@ -1,0 +1,42 @@
+{
+  "split_balance": {
+    "balance_score": 0.07324892191723625,
+    "dev_totals": {
+      "evaluation_target_rows": 164,
+      "matched_proposal_rows": 107,
+      "proposal_rows": 1794,
+      "visible_proxy_target_rows": 77
+    },
+    "heldout_totals": {
+      "evaluation_target_rows": 180,
+      "matched_proposal_rows": 97,
+      "proposal_rows": 1620,
+      "visible_proxy_target_rows": 77
+    },
+    "totals": {
+      "evaluation_target_rows": 344,
+      "matched_proposal_rows": 204,
+      "proposal_rows": 3414,
+      "visible_proxy_target_rows": 154
+    }
+  },
+  "split_summary": {
+    "dev_scan_count": 4,
+    "dev_scans": [
+      "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "8eabc45f-5af7-2f32-8528-640861d2a135",
+      "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+      "ddc73797-765b-241a-9e2c-097c5989baf6"
+    ],
+    "fallback_cap": 24,
+    "heldout_scan_count": 4,
+    "heldout_scans": [
+      "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "75c25975-9ca2-2844-9769-84677f46d4cf",
+      "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+      "c7895f27-339c-2d13-836b-c12dca280261"
+    ],
+    "heldout_target_without_dev_match_labels": 24,
+    "split": "balanced_scan_4_4_v0"
+  }
+}

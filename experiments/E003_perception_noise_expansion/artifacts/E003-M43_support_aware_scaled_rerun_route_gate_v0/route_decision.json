@@ -1,0 +1,35 @@
+{
+  "existing_candidate_pool_replay_available": false,
+  "full_scaled_run_after_candidate_pool_export_recommended": true,
+  "immediate_support_aware_long_rerun_recommended": false,
+  "m33_scaled_baseline_ready": true,
+  "m43_version": "e003_m43_support_aware_scaled_rerun_route_gate_v0",
+  "next_recommended_unit": "E003-M44 pre-cap candidate-pool export and offline replay harness smoke",
+  "quality_positive_in_short_smoke": false,
+  "ranking_sensitive": true,
+  "route_options": [
+    {
+      "reason": "M42 has neutral quality delta vs M40, and a support-aware-only scaled rerun would not preserve a replayable candidate pool for ablations.",
+      "route": "immediate_scaled_support_aware_docker_rerun_v0",
+      "status": "not_selected"
+    },
+    {
+      "reason": "Existing M40/M42 artifacts store final selected proposals and summaries, not the cleaned pre-consolidation candidate pool needed to compare score modes without rerunning the detector.",
+      "route": "offline_replay_existing_candidate_pool_v0",
+      "status": "blocked"
+    },
+    {
+      "reason": "One small runner edit can export the support-instrumented candidate pool, then offline replay can compare confidence, sqrt-depth, support-aware, and redesigned scores using the same detector output.",
+      "route": "pre_cap_candidate_pool_export_then_offline_replay_v0",
+      "status": "selected"
+    },
+    {
+      "reason": "Score redesign should be tested by replaying a candidate pool; redesigning from final selected rows would overfit to a tiny smoke artifact.",
+      "route": "score_redesign_before_any_scaled_evidence_v0",
+      "status": "deferred"
+    }
+  ],
+  "runner_edit_required_before_next_scaled_run": true,
+  "selected_route": "pre_cap_candidate_pool_export_then_offline_replay_v0",
+  "short_smoke_valid": true
+}

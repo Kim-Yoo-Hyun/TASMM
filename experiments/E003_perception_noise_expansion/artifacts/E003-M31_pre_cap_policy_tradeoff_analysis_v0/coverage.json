@@ -1,0 +1,113 @@
+{
+  "depth_consistent_visible_proxy_targets": 35,
+  "evaluated_scan_count": 2,
+  "m26_false_positive_rows": 1401,
+  "m26_matched_targets": 39,
+  "m26_precision": 0.027083333333333334,
+  "m28_false_positive_rows": 375,
+  "m28_matched_targets": 32,
+  "m28_precision": 0.07862407862407862,
+  "m30_false_positive_rows": 782,
+  "m30_gain_targets_vs_m26": 15,
+  "m30_loss_targets_vs_m26": 6,
+  "m30_matched_targets": 48,
+  "m30_missed_visible_proxy_targets": 5,
+  "m30_precision": 0.05783132530120482,
+  "m30_proposal_status_counts": {
+    "matched": 48,
+    "unmatched_false_positive": 782
+  },
+  "m30_version": "e003_m30_pre_cap_policy_docker_rerun_v0",
+  "m30_written_predictions": 830,
+  "m31_version": "e003_m31_pre_cap_policy_tradeoff_analysis_v0",
+  "next_recommended_unit": "E003-M32 scaled pre-cap policy rerun gate",
+  "paper_table_command_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "scaling_blocker_rows": 7,
+  "scan_eval_target_rows": 99,
+  "stable_matched_targets": 33,
+  "stable_missed_targets": 45,
+  "status": "pre_cap_policy_tradeoff_analysis_ready",
+  "target_transition_counts": {
+    "m30_gain": 15,
+    "m30_loss": 6,
+    "stable_matched": 33,
+    "stable_missed": 45
+  },
+  "top_false_positive_labels": [
+    {
+      "false_positive_rows": 47,
+      "label": "table"
+    },
+    {
+      "false_positive_rows": 42,
+      "label": "chair"
+    },
+    {
+      "false_positive_rows": 41,
+      "label": "box"
+    },
+    {
+      "false_positive_rows": 41,
+      "label": "light"
+    },
+    {
+      "false_positive_rows": 38,
+      "label": "plant"
+    }
+  ],
+  "top_gain_labels": [
+    {
+      "gain": 2,
+      "label": "clothes"
+    },
+    {
+      "gain": 2,
+      "label": "kitchen cabinet"
+    },
+    {
+      "gain": 1,
+      "label": "backpack"
+    },
+    {
+      "gain": 1,
+      "label": "bag"
+    },
+    {
+      "gain": 1,
+      "label": "blanket"
+    }
+  ],
+  "top_loss_label_rows": [
+    {
+      "depth_consistent_visible_proxy_rows": 4,
+      "label_canonical": "plant",
+      "m26_false_positive_rows": 136,
+      "m26_matched_targets": 10,
+      "m26_precision_by_label": 0.0684931506849315,
+      "m26_proposal_rows": 146,
+      "m28_false_positive_rows": 25,
+      "m28_matched_targets": 4,
+      "m28_precision_by_label": 0.13793103448275862,
+      "m28_proposal_rows": 29,
+      "m30_false_positive_delta_vs_m26": -98,
+      "m30_false_positive_rows": 38,
+      "m30_gain_targets_vs_m26": 0,
+      "m30_loss_targets_vs_m26": 6,
+      "m30_matched_delta_vs_m26": -6,
+      "m30_matched_targets": 4,
+      "m30_missed_visible_targets": 1,
+      "m30_precision_by_label": 0.09523809523809523,
+      "m30_proposal_rows": 42,
+      "target_rows": 11
+    }
+  ],
+  "top_loss_labels": [
+    {
+      "label": "plant",
+      "loss": 6
+    }
+  ],
+  "total_frame_rows": 24,
+  "total_label_rows": 52
+}

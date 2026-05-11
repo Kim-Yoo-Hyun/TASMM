@@ -1,0 +1,68 @@
+{
+  "calibration_command": {
+    "argv": [
+      "python",
+      "experiments/E003_perception_noise_expansion/tools/run_m23_proposal_calibration.py",
+      "--m22-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun",
+      "--out-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/match_preserving_calibration",
+      "--selection-policy",
+      "full_match_preserving"
+    ],
+    "shell": "python experiments/E003_perception_noise_expansion/tools/run_m23_proposal_calibration.py --m22-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/match_preserving_calibration --selection-policy full_match_preserving"
+  },
+  "detector_command": {
+    "argv": [
+      "python",
+      "experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py",
+      "--out-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun",
+      "--build",
+      "--docker-sudo",
+      "--sudo-password-stdin",
+      "--max-scans",
+      "8",
+      "--max-frames-per-scan",
+      "24",
+      "--max-labels",
+      "32",
+      "--max-predictions",
+      "10000",
+      "--max-predictions-per-frame",
+      "60",
+      "--threshold",
+      "0.08",
+      "--text-threshold",
+      "0.08",
+      "--candidate-selection-policy",
+      "cap_aware_label_balanced_ranking_v0",
+      "--selection-score-mode",
+      "confidence",
+      "--pre-cap-per-scan-label-cap",
+      "24",
+      "--pre-cap-spatial-consolidation-radius-m",
+      "0.5",
+      "--raw-candidate-collection-cap",
+      "200000"
+    ],
+    "shell": "python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun --build --docker-sudo --sudo-password-stdin --max-scans 8 --max-frames-per-scan 24 --max-labels 32 --max-predictions 10000 --max-predictions-per-frame 60 --threshold 0.08 --text-threshold 0.08 --candidate-selection-policy cap_aware_label_balanced_ranking_v0 --selection-score-mode confidence --pre-cap-per-scan-label-cap 24 --pre-cap-spatial-consolidation-radius-m 0.5 --raw-candidate-collection-cap 200000"
+  },
+  "docker_password_policy": "stdin_required_not_stored",
+  "expected_output_root": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0",
+  "visibility_command": {
+    "argv": [
+      "python",
+      "experiments/E003_perception_noise_expansion/tools/run_m24_visibility_prompt_projection_gate.py",
+      "--m22-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun",
+      "--m23-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/match_preserving_calibration",
+      "--out-dir",
+      "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/visibility_denominator",
+      "--max-labels",
+      "32"
+    ],
+    "shell": "python experiments/E003_perception_noise_expansion/tools/run_m24_visibility_prompt_projection_gate.py --m22-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun --m23-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/match_preserving_calibration --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/visibility_denominator --max-labels 32"
+  }
+}

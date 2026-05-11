@@ -1,0 +1,32 @@
+{
+  "candidate_selection_policy": "cap_aware_label_balanced_ranking_v0",
+  "dropped_non_prompt_label_rows": 33,
+  "dropped_not_scan_prompt_label_rows": 0,
+  "final_prediction_rows": 95,
+  "max_predictions": 400,
+  "max_predictions_reached_after_policy": false,
+  "per_scan_label_cap": 40,
+  "policy_input_candidate_count": 629,
+  "projected_candidate_count": 662,
+  "raw_candidate_collection_cap": 20000,
+  "raw_candidate_collection_cap_reached": false,
+  "raw_prediction_count": 736,
+  "require_scan_prompt_label": true,
+  "score_mode": "confidence_sqrt_depth_support_temporal_v0",
+  "selected_candidate_count": 95,
+  "skipped_no_depth_prediction_count": 74,
+  "spatial_consolidated_candidate_count": 95,
+  "spatial_consolidation_radius_m": 0.5,
+  "support_evidence_attached_to_selected_rows": 95,
+  "support_evidence_candidate_rows": 629,
+  "support_evidence_groups": 28,
+  "support_evidence_output": "/outputs/support_evidence_summary.json",
+  "support_evidence_policy": "temporal_spatial_support_evidence_v0",
+  "support_evidence_radii_m": [
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "support_evidence_stage": "after_prompt_label_cleanup_before_spatial_consolidation_and_caps"
+}

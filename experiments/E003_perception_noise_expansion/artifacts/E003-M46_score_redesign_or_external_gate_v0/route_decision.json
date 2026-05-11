@@ -1,0 +1,26 @@
+{
+  "best_policy_by_matched_fp_precision": {
+    "false_positive_delta_vs_m33": 0,
+    "false_positive_proposal_rows": 3210,
+    "hard_pass_vs_m45_contract": false,
+    "matched_centroid_error_m": {
+      "max": 0.992563,
+      "mean": 0.5345816127450981,
+      "median": 0.5355765,
+      "min": 0.021623
+    },
+    "matched_target_delta_vs_m33": 0,
+    "matched_target_rows": 204,
+    "policy_id": "confidence",
+    "proposal_precision": 0.05975395430579965,
+    "proposal_precision_delta_vs_m33": 0.0,
+    "proposal_rows": 3414,
+    "scan_target_recall": 0.5930232558139535,
+    "weak_positive_vs_m45_contract": false
+  },
+  "hard_pass_policy_count": 0,
+  "m46_version": "e003_m46_score_redesign_or_external_gate_v0",
+  "next_recommended_unit": "E003-M47 external proposal/mapping baseline feasibility gate",
+  "selected_route": "external_proposal_baseline_gate_first",
+  "weak_positive_policy_count": 0
+}

@@ -1,0 +1,101 @@
+{
+  "candidate_pool_rows": 629,
+  "m44_version": "e003_m44_pre_cap_candidate_pool_replay_v0",
+  "replay_summaries": [
+    {
+      "common_with_runner_selected_rows": 66,
+      "first_10_raw_candidate_uids": [
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00011",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00006",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00002",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00003",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00004",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00001",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00002",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00003",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00030",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00004"
+      ],
+      "mean_selection_score": 0.1726423125,
+      "ordered_reproduction_match": false,
+      "replay_only_rows": 30,
+      "runner_only_rows": 29,
+      "score_mode": "confidence",
+      "selected_rows": 96,
+      "set_reproduction_match": false
+    },
+    {
+      "common_with_runner_selected_rows": 94,
+      "first_10_raw_candidate_uids": [
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00001",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00002",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00002",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00030",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00009",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00011",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00034",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00037",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00019",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00065"
+      ],
+      "mean_selection_score": 0.09251040284210527,
+      "ordered_reproduction_match": false,
+      "replay_only_rows": 1,
+      "runner_only_rows": 1,
+      "score_mode": "confidence_sqrt_depth",
+      "selected_rows": 95,
+      "set_reproduction_match": false
+    },
+    {
+      "common_with_runner_selected_rows": 95,
+      "first_10_raw_candidate_uids": [
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00001",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00002",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00030",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00002",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00009",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00034",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00037",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00019",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00011",
+        "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00065"
+      ],
+      "mean_selection_score": 0.10794532747368421,
+      "ordered_reproduction_match": true,
+      "replay_only_rows": 0,
+      "runner_only_rows": 0,
+      "score_mode": "confidence_sqrt_depth_support_temporal_v0",
+      "selected_rows": 95,
+      "set_reproduction_match": true
+    }
+  ],
+  "runner_score_mode": "confidence_sqrt_depth_support_temporal_v0",
+  "runner_score_mode_replay": {
+    "common_with_runner_selected_rows": 95,
+    "first_10_raw_candidate_uids": [
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00001",
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00002",
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00030",
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00002",
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00009",
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00034",
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00037",
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000000:raw:00019",
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00011",
+      "m22:280d8ebb-6cc6-2788-9153-98959a2da801:frame-000009:raw:00065"
+    ],
+    "mean_selection_score": 0.10794532747368421,
+    "ordered_reproduction_match": true,
+    "replay_only_rows": 0,
+    "runner_only_rows": 0,
+    "score_mode": "confidence_sqrt_depth_support_temporal_v0",
+    "selected_rows": 95,
+    "set_reproduction_match": true
+  },
+  "runner_selected_rows": 95,
+  "score_modes": [
+    "confidence",
+    "confidence_sqrt_depth",
+    "confidence_sqrt_depth_support_temporal_v0"
+  ]
+}

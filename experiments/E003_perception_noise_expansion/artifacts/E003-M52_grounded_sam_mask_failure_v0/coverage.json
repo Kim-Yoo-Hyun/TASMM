@@ -1,0 +1,99 @@
+{
+  "candidate_pairing_summary": {
+    "bbox_matched_mask_common_unmatched": 0,
+    "bbox_matched_mask_missing": 1,
+    "bbox_only_candidate_rows": 7,
+    "candidate_pairing_rows": 31,
+    "common_bbox_to_mask_centroid_shift_m": {
+      "max": 0.5114175603965903,
+      "mean": 0.146978324699292,
+      "median": 0.13048930393025532,
+      "min": 0.009494451642933333
+    },
+    "common_candidate_rows": 24,
+    "common_same_target_match_distance_delta_mask_minus_bbox_m": {
+      "max": -0.018907,
+      "mean": -0.018907,
+      "median": -0.018907,
+      "min": -0.018907
+    },
+    "label_mismatch_count": 0,
+    "mask_bbox_diagnostic_to_mask_centroid_shift_m": {
+      "max": 0.5114175603965903,
+      "mean": 0.146978324699292,
+      "median": 0.13048930393025532,
+      "min": 0.009494451642933333
+    },
+    "mask_only_candidate_rows": 0
+  },
+  "diagnosis": {
+    "centroid_worsening_primary_cause": "match_set_composition_after_easy_target_dropout",
+    "exact_mask_skip_reason_observable_from_current_artifacts": false,
+    "false_positive_interpretation": "fewer_rows_without_precision_gain",
+    "mask_projection_skipped_rows": 16,
+    "next_recommended_unit": "E003-M53 bbox-depth continuation and failure-boundary repair gate",
+    "openmask3d_feasibility_next_now": false,
+    "scaled_grounded_sam_recommended": false,
+    "target_loss_primary_cause": "mask_projection_candidate_dropout_before_matching"
+  },
+  "m49_mask_model_summary": {
+    "inference_rows": [
+      {
+        "frame_id": "frame-000000",
+        "label_count": 12,
+        "legacy_pre_policy_frame_cap_applied": false,
+        "policy_selected_prediction_count": 6,
+        "projected_candidate_count": 6,
+        "raw_prediction_count": 207,
+        "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "skipped_mask_projection_count": 14,
+        "skipped_no_depth_prediction_count": 0,
+        "written_prediction_count": 6
+      },
+      {
+        "frame_id": "frame-000009",
+        "label_count": 12,
+        "legacy_pre_policy_frame_cap_applied": false,
+        "policy_selected_prediction_count": 18,
+        "projected_candidate_count": 18,
+        "raw_prediction_count": 276,
+        "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801",
+        "skipped_mask_projection_count": 2,
+        "skipped_no_depth_prediction_count": 0,
+        "written_prediction_count": 18
+      }
+    ],
+    "mask_depth_filter": "median_mad_trimmed_mask_depth_v0",
+    "mask_min_depth_valid_pixels": 200,
+    "mask_point_sample_cap": 2048,
+    "mask_projected_candidate_count": 24,
+    "prediction_rows": 24,
+    "skipped_mask_projection_count": 16
+  },
+  "m50_summary": {
+    "aggregate_centroid_error_delta_mask_minus_bbox_m": 0.3249025,
+    "bbox_false_positive_rows": 29,
+    "bbox_matched_target_rows": 2,
+    "bbox_precision": 0.06451612903225806,
+    "bbox_prediction_rows": 31,
+    "mask_false_positive_rows": 23,
+    "mask_matched_target_rows": 1,
+    "mask_precision": 0.041666666666666664,
+    "mask_prediction_rows": 24
+  },
+  "m52_version": "e003_m52_grounded_sam_mask_failure_v0",
+  "matching_threshold_m": 1.0,
+  "paper_table_command_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "status": "grounded_sam_mask_failure_analysis_ready",
+  "target_transition_summary": {
+    "gained_by_mask_targets": 0,
+    "lost_by_mask_labels": {
+      "plant": 1
+    },
+    "lost_by_mask_targets": 1,
+    "matched_by_both_targets": 1,
+    "missed_by_both_targets": 49,
+    "target_rows": 51
+  }
+}

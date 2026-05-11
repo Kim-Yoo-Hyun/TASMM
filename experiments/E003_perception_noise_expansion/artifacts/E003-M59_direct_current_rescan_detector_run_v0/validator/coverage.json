@@ -1,0 +1,25 @@
+{
+  "allow_empty_scaffold": false,
+  "detector_predictions_ready": true,
+  "error_rows": 0,
+  "manifest_rows": 4,
+  "paper_table_command_ready": false,
+  "prediction_rows": 96,
+  "prediction_rows_by_match_status": {
+    "unmatched": 96
+  },
+  "prediction_rows_by_scan": {
+    "10b17957-3938-2467-88a5-9e9254930dad": 24,
+    "4731976c-f9f7-2a1a-95cc-31c4d1751d0b": 24,
+    "5555106a-36f1-29c0-8913-df1ba3c3cfd5": 24,
+    "ddc73795-765b-241a-9c5d-b97744afe077": 24
+  },
+  "predictions": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M59_direct_current_rescan_detector_run_v0/container_output/real_proposals.jsonl",
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "schema_id": "real_proposal_prediction_jsonl_v0",
+  "schema_only_smoke": true,
+  "status": "proposal_schema_smoke_valid",
+  "target_rows": 29,
+  "valid": true,
+  "warning_rows": 0
+}

@@ -1,0 +1,10 @@
+{
+  "centroid_worsening_primary_cause": "match_set_composition_after_easy_target_dropout",
+  "exact_mask_skip_reason_observable_from_current_artifacts": false,
+  "false_positive_interpretation": "fewer_rows_without_precision_gain",
+  "mask_projection_skipped_rows": 16,
+  "next_recommended_unit": "E003-M53 bbox-depth continuation and failure-boundary repair gate",
+  "openmask3d_feasibility_next_now": false,
+  "scaled_grounded_sam_recommended": false,
+  "target_loss_primary_cause": "mask_projection_candidate_dropout_before_matching"
+}

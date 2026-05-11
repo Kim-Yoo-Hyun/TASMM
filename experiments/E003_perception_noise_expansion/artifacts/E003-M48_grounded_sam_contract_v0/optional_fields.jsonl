@@ -1,0 +1,9 @@
+{"field": "geometry_source", "purpose": "separate mask-depth geometry from previous box-depth geometry", "type": "string", "value": "mask_depth_backprojection_v0"}
+{"field": "mask_backend_id", "purpose": "record the segmentation backend used after GroundingDINO boxes", "type": "string", "value": "sam_box_prompt_v0"}
+{"field": "mask_area_px", "purpose": "2D mask area before depth filtering", "type": "integer"}
+{"field": "mask_depth_valid_pixel_count", "purpose": "valid positive depth pixels inside the mask", "type": "integer"}
+{"field": "mask_depth_valid_ratio", "purpose": "valid depth pixels divided by mask area", "type": "number"}
+{"field": "mask_backprojection_policy", "purpose": "freeze robust depth filtering and centroid estimation policy", "type": "string", "value": "median_mad_trimmed_mask_depth_v0"}
+{"field": "mask_centroid_world_m", "purpose": "mask-depth centroid in scan/world coordinates", "type": "array[number]"}
+{"field": "bbox_centroid_world_m", "purpose": "paired diagnostic centroid from previous bbox-depth route", "type": "array[number]"}
+{"field": "mask_support_point_sample_path", "purpose": "optional path to sampled world points for later debugging without bloating JSONL", "type": "string|null"}

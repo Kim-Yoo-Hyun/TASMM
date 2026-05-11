@@ -1,0 +1,22 @@
+{
+  "deterministic_postprocessing_route_ready": false,
+  "docker_run_executed": false,
+  "long_rerun_ready": false,
+  "m38_selected_route": "temporal_spatial_evidence_instrumentation_required",
+  "m38_stronger_split_feasible_with_current_scans": false,
+  "m38_support_transfer_pass": false,
+  "m39_version": "e003_m39_temporal_spatial_support_instrumentation_gate_v0",
+  "next_recommended_unit": "E003-M40 temporal-spatial support runner implementation smoke",
+  "paper_table_command_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "runner_args_contract_ready": true,
+  "runner_instrumentation_required": true,
+  "runner_instrumentation_site_ready": true,
+  "selected_insertion_point": "select_cap_aware_label_balanced_candidates.after_cleaned_before_grouped",
+  "selected_instrumentation_route": "docker_runner_pre_consolidation_support_evidence_v0",
+  "status": "temporal_spatial_support_instrumentation_gate_ready",
+  "support_field_contract_ready": true,
+  "verification_plan_ready": true,
+  "wrapper_args_contract_ready": true,
+  "wrapper_pass_through_site_ready": true
+}

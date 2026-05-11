@@ -1,0 +1,77 @@
+{
+  "allowed_detector_inputs": [
+    "RGB frames",
+    "Depth frames",
+    "Camera poses",
+    "Camera intrinsics",
+    "Open-vocabulary prompt text",
+    "SAM masks from the same RGB frame and detector boxes"
+  ],
+  "backend_status": {
+    "backend_id": "groundingdino_rgbd_backproject_v0",
+    "detector_prompt_label_count": 2,
+    "errors": [],
+    "scan_rows": [
+      {
+        "info_ready": true,
+        "missing_examples": [],
+        "missing_triplets": 0,
+        "ready_triplets": 22,
+        "sampled_frame_count": 22,
+        "scan_id": "10b17957-3938-2467-88a5-9e9254930dad",
+        "sequence_dir": "/data/3RScan/scans/10b17957-3938-2467-88a5-9e9254930dad/sequence"
+      },
+      {
+        "info_ready": true,
+        "missing_examples": [],
+        "missing_triplets": 0,
+        "ready_triplets": 24,
+        "sampled_frame_count": 24,
+        "scan_id": "4731976c-f9f7-2a1a-95cc-31c4d1751d0b",
+        "sequence_dir": "/data/3RScan/scans/4731976c-f9f7-2a1a-95cc-31c4d1751d0b/sequence"
+      },
+      {
+        "info_ready": true,
+        "missing_examples": [],
+        "missing_triplets": 0,
+        "ready_triplets": 23,
+        "sampled_frame_count": 23,
+        "scan_id": "5555106a-36f1-29c0-8913-df1ba3c3cfd5",
+        "sequence_dir": "/data/3RScan/scans/5555106a-36f1-29c0-8913-df1ba3c3cfd5/sequence"
+      },
+      {
+        "info_ready": true,
+        "missing_examples": [],
+        "missing_triplets": 0,
+        "ready_triplets": 24,
+        "sampled_frame_count": 24,
+        "scan_id": "ddc73795-765b-241a-9c5d-b97744afe077",
+        "sequence_dir": "/data/3RScan/scans/ddc73795-765b-241a-9c5d-b97744afe077/sequence"
+      }
+    ],
+    "selected_backend": {
+      "backend_id": "groundingdino_rgbd_backproject_v0",
+      "detector_family": "GroundingDINO",
+      "expected_model_dependency": "GroundingDINO-compatible open-vocabulary 2D detector",
+      "geometry_stage": "RGB-D depth backprojection from 2D boxes into scan/world coordinates",
+      "model_dependency_installed": false,
+      "output_schema": "real_proposal_prediction_jsonl_v0",
+      "segmentation_dependency": "optional SAM/SAM2 mask refinement after 2D box detection"
+    },
+    "total_missing_triplets": 0,
+    "total_ready_triplets": 93,
+    "total_sampled_frames": 93,
+    "valid": true,
+    "warnings": []
+  },
+  "blocked_detector_inputs": [
+    "3DSSG object instance ids",
+    "evaluation target ids",
+    "candidate_is_target",
+    "matched_3dssg_instance_id"
+  ],
+  "contract_version": "e003_m19_real_detector_backend_contract_v0",
+  "detector_backend_integrated": false,
+  "detector_predictions_ready": false,
+  "selected_backend_id": "groundingdino_rgbd_backproject_v0"
+}

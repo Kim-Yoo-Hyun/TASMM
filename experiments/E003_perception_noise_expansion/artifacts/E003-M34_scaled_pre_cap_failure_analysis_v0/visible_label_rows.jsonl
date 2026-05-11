@@ -1,0 +1,57 @@
+{"label_canonical": "picture", "visible_proxy_matched_target_rows": 7, "visible_proxy_missed_target_rows": 2, "visible_proxy_recall": 0.7777777777777778, "visible_proxy_target_rows": 9}
+{"label_canonical": "pillow", "visible_proxy_matched_target_rows": 13, "visible_proxy_missed_target_rows": 2, "visible_proxy_recall": 0.8666666666666667, "visible_proxy_target_rows": 15}
+{"label_canonical": "basket", "visible_proxy_matched_target_rows": 0, "visible_proxy_missed_target_rows": 1, "visible_proxy_recall": 0.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "couch", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 1, "visible_proxy_recall": 0.5, "visible_proxy_target_rows": 2}
+{"label_canonical": "curtain", "visible_proxy_matched_target_rows": 6, "visible_proxy_missed_target_rows": 1, "visible_proxy_recall": 0.8571428571428571, "visible_proxy_target_rows": 7}
+{"label_canonical": "cushion", "visible_proxy_matched_target_rows": 5, "visible_proxy_missed_target_rows": 1, "visible_proxy_recall": 0.8333333333333334, "visible_proxy_target_rows": 6}
+{"label_canonical": "pile of books", "visible_proxy_matched_target_rows": 0, "visible_proxy_missed_target_rows": 1, "visible_proxy_recall": 0.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "plant", "visible_proxy_matched_target_rows": 7, "visible_proxy_missed_target_rows": 1, "visible_proxy_recall": 0.875, "visible_proxy_target_rows": 8}
+{"label_canonical": "shelf", "visible_proxy_matched_target_rows": 5, "visible_proxy_missed_target_rows": 1, "visible_proxy_recall": 0.8333333333333334, "visible_proxy_target_rows": 6}
+{"label_canonical": "sofa", "visible_proxy_matched_target_rows": 3, "visible_proxy_missed_target_rows": 1, "visible_proxy_recall": 0.75, "visible_proxy_target_rows": 4}
+{"label_canonical": "telephone", "visible_proxy_matched_target_rows": 0, "visible_proxy_missed_target_rows": 1, "visible_proxy_recall": 0.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "bag", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "bath cabinet", "visible_proxy_matched_target_rows": 4, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 4}
+{"label_canonical": "bench", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "blanket", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "book", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "box", "visible_proxy_matched_target_rows": 7, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 7}
+{"label_canonical": "bucket", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "cabinet", "visible_proxy_matched_target_rows": 6, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 6}
+{"label_canonical": "cart", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "chair", "visible_proxy_matched_target_rows": 10, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 10}
+{"label_canonical": "clothes", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "coffee table", "visible_proxy_matched_target_rows": 3, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 3}
+{"label_canonical": "couch table", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "counter", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "cutting board", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "decoration", "visible_proxy_matched_target_rows": 4, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 4}
+{"label_canonical": "desk", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "door", "visible_proxy_matched_target_rows": 4, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 4}
+{"label_canonical": "drum", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "fireplace", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "firewood box", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "kitchen cabinet", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "lamp", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "laundry basket", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "light", "visible_proxy_matched_target_rows": 3, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 3}
+{"label_canonical": "paper towel", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "pot", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "rack", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "round table", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "screen", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "shoe rack", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "shoes", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "shower curtain", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "side table", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "sink", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "sofa chair", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "stand", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "stuffed animal", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "table", "visible_proxy_matched_target_rows": 3, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 3}
+{"label_canonical": "toilet", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "towel", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "tree decoration", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "tv", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "tv stand", "visible_proxy_matched_target_rows": 1, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 1}
+{"label_canonical": "vase", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}
+{"label_canonical": "wood", "visible_proxy_matched_target_rows": 2, "visible_proxy_missed_target_rows": 0, "visible_proxy_recall": 1.0, "visible_proxy_target_rows": 2}

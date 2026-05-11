@@ -1,0 +1,44 @@
+{
+  "evaluated_scan_count": 8,
+  "evaluated_scans": [
+    "280d8ebb-6cc6-2788-9153-98959a2da801",
+    "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+    "75c25975-9ca2-2844-9769-84677f46d4cf",
+    "8eabc45f-5af7-2f32-8528-640861d2a135",
+    "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+    "c7895f27-339c-2d13-836b-c12dca280261",
+    "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+    "ddc73797-765b-241a-9e2c-097c5989baf6"
+  ],
+  "false_positive_proposal_rate_smoke": 0.9418843557381861,
+  "false_positive_proposal_rows": 3209,
+  "input_prediction_rows": 3407,
+  "label_metric_rows": 85,
+  "label_overlap_target_recall_smoke": 0.577259475218659,
+  "label_overlap_target_rows": 343,
+  "m17_scan_count": 8,
+  "m21_version": "e003_m21_detector_proposal_matching_v0",
+  "match_distance_threshold_m": 1.0,
+  "matched_centroid_error_m": {
+    "max": 0.992563,
+    "mean": 0.5447731414141415,
+    "median": 0.5669005,
+    "min": 0.021623
+  },
+  "matched_proposal_rows": 198,
+  "matched_target_rows": 198,
+  "nearest_same_label_distance_m": {
+    "max": 8.792618,
+    "mean": 2.8442081376577635,
+    "median": 2.571989,
+    "min": 0.021623
+  },
+  "paper_table_command_ready": false,
+  "proposal_precision_smoke": 0.05811564426181391,
+  "proposal_rows": 3407,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "scan_eval_target_rows": 344,
+  "scan_target_recall_smoke": 0.5755813953488372,
+  "status": "detector_matching_smoke_ready",
+  "target_rows": 344
+}

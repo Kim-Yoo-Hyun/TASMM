@@ -1,0 +1,72 @@
+{
+  "additional_prediction_fields": [
+    "candidate_selection_policy",
+    "selection_score",
+    "pre_cap_rank",
+    "pre_cap_group_key",
+    "raw_candidate_uid",
+    "raw_frame_local_index"
+  ],
+  "contract_id": "cap_aware_label_balanced_ranking_v0_output_contract",
+  "frame_inference_row_additions": [
+    "projected_candidate_count",
+    "policy_selected_prediction_count",
+    "legacy_pre_policy_frame_cap_applied"
+  ],
+  "m29_version": "e003_m29_pre_cap_policy_integration_gate_v0",
+  "model_status_additions": [
+    "candidate_selection_policy",
+    "pre_cap_policy_applied",
+    "pre_cap_policy_output",
+    "raw_prediction_count",
+    "projected_candidate_count",
+    "policy_input_candidate_count",
+    "spatial_consolidated_candidate_count",
+    "selected_candidate_count",
+    "max_predictions_reached_after_policy"
+  ],
+  "policy_summary_json": {
+    "path_arg": "--pre-cap-policy-output",
+    "required_fields": [
+      "candidate_selection_policy",
+      "score_mode",
+      "raw_prediction_count",
+      "projected_candidate_count",
+      "policy_input_candidate_count",
+      "spatial_consolidated_candidate_count",
+      "selected_candidate_count",
+      "final_prediction_rows",
+      "dropped_non_prompt_label_rows",
+      "dropped_not_scan_prompt_label_rows",
+      "skipped_no_depth_prediction_count",
+      "per_scan_label_cap",
+      "spatial_consolidation_radius_m",
+      "max_predictions",
+      "max_predictions_reached_after_policy"
+    ]
+  },
+  "prediction_jsonl_rule": "Keep the existing required fields valid; additional policy fields are allowed by the validator.",
+  "prediction_jsonl_schema": "real_proposal_prediction_jsonl_v0",
+  "selected_m28_values": {
+    "false_positive_proposal_rate": 0.9213759213759214,
+    "false_positive_proposal_rows": 375,
+    "global_cap": 1440,
+    "label_overlap_target_recall": 0.3404255319148936,
+    "label_overlap_target_rows": 94,
+    "matched_centroid_error_m": {
+      "max": 0.996147,
+      "mean": 0.477722375,
+      "median": 0.419153,
+      "min": 0.101215
+    },
+    "matched_proposal_rows": 32,
+    "matched_target_rows": 32,
+    "per_scan_label_cap": 24,
+    "proposal_precision": 0.07862407862407862,
+    "proposal_rows": 407,
+    "scan_target_recall": 0.32323232323232326,
+    "scan_target_rows": 99,
+    "score_mode": "confidence",
+    "spatial_consolidation_radius_m": 0.5
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "candidate_selection_policy": "cap_aware_label_balanced_ranking_v0",
+  "dropped_non_prompt_label_rows": 525,
+  "dropped_not_scan_prompt_label_rows": 2,
+  "final_prediction_rows": 830,
+  "max_predictions": 1440,
+  "max_predictions_reached_after_policy": false,
+  "per_scan_label_cap": 24,
+  "policy_input_candidate_count": 8969,
+  "projected_candidate_count": 9496,
+  "raw_candidate_collection_cap": 50000,
+  "raw_candidate_collection_cap_reached": false,
+  "raw_prediction_count": 9768,
+  "require_scan_prompt_label": true,
+  "score_mode": "confidence",
+  "selected_candidate_count": 830,
+  "skipped_no_depth_prediction_count": 272,
+  "spatial_consolidated_candidate_count": 848,
+  "spatial_consolidation_radius_m": 0.5
+}

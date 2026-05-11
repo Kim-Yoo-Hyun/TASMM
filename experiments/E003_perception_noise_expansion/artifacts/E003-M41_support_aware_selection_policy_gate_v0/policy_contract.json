@@ -1,0 +1,41 @@
+{
+  "contract_id": "confidence_sqrt_depth_support_temporal_v0",
+  "formula": {
+    "base_score": "confidence * min(1, sqrt(depth_valid_pixel_count) / sqrt(5000))",
+    "selection_score": "base_score * (1 + 0.25 * temporal_factor + 0.10 * spatial_factor)",
+    "spatial_factor": "min(1, support_spatial_neighbor_count_r1p0m / 8)",
+    "temporal_factor": "min(1, support_temporal_neighbor_frame_count_r2p0m / 2)"
+  },
+  "m41_version": "e003_m41_support_aware_selection_policy_gate_v0",
+  "reasoning": [
+    "M38 showed post-hoc support filters can lose heldout matched targets.",
+    "M40 showed temporal support is available on selected rows, but selection quality is still weak.",
+    "A soft score bonus can test support usefulness without suppressing single-frame true targets."
+  ],
+  "runner_arg": {
+    "arg": "--selection-score-mode",
+    "new_choice": "confidence_sqrt_depth_support_temporal_v0"
+  },
+  "selected_route": "support_aware_scoring_before_consolidation_and_final_rank",
+  "support_args_kept": [
+    {
+      "arg": "--support-evidence-policy",
+      "required_value": "temporal_spatial_support_evidence_v0"
+    },
+    {
+      "arg": "--support-evidence-radii-m",
+      "required_value": "0.75,1.0,1.5,2.0"
+    }
+  ],
+  "support_evidence_policy_required": "temporal_spatial_support_evidence_v0",
+  "where_it_applies": [
+    "same-scan/same-label spatial consolidation representative ranking",
+    "per-scan-label cap ranking",
+    "final global max-predictions ranking"
+  ],
+  "where_it_does_not_apply": [
+    "no hard support filter in M42",
+    "no labelwise support threshold in M42",
+    "no change to max_predictions or per_scan_label_cap in M42"
+  ]
+}

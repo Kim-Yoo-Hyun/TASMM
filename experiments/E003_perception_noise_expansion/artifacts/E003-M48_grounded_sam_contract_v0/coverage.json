@@ -1,0 +1,26 @@
+{
+  "backend_id": "grounded_sam_mask_backproject_v0",
+  "contract_id": "grounded_sam_mask_backprojection_contract_v0",
+  "contract_ready": true,
+  "docker_run_executed": false,
+  "m47_selected_route": "Grounded-SAM",
+  "m48_version": "e003_m48_grounded_sam_contract_v0",
+  "next_recommended_unit": "E003-M49 Grounded-SAM Docker/model smoke implementation",
+  "optional_field_count": 9,
+  "paper_table_command_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "required_schema_fields_ready": {
+    "bbox_2d": true,
+    "centroid_world_m": true,
+    "confidence": true,
+    "depth_valid_pixel_count": true,
+    "detector_id": true,
+    "frame_ids": true,
+    "label_canonical": true,
+    "mask_rle": true,
+    "proposal_uid": true,
+    "scan_id": true
+  },
+  "smoke_run_ready": false,
+  "status": "grounded_sam_contract_ready"
+}

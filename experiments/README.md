@@ -1,12 +1,14 @@
 # Experiments
 
-Updated: 2026-05-08
+Updated: 2026-05-11
 
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
+- Current report: [report.md](report.md)
+
 ## Status
 
-Main experiment implementation stage has started. E001-M01 through E001-M05 artifacts, E002-M01 through E002-M09 artifacts, and E003-M00 through E003-M28 artifacts are complete. E003 has a Dockerized real-detector backend, non-empty model smoke output, detector-to-target matching diagnostics, multi-frame projection diagnostics, proposal calibration diagnostics, visibility/prompt/projection denominator diagnostics, a prompt-expanded two-scan Docker rerun pilot, a false-positive/cap bottleneck gate, and a cap-aware label-balanced replay policy smoke.
+Main experiment implementation stage has started. E001-M01 through E001-M05 artifacts, E002-M01 through E002-M09 artifacts, and E003-M00 through E003-M58 artifacts are complete. E003 has a Dockerized real-detector backend, scaled real-proposal diagnostics, failed support-aware replay/redesign evidence, an external baseline feasibility gate, a negative `Grounded-SAM` mask-depth diagnostic, a search-critical bbox boundary audit, a dynamic-pair bridge gate, verified current-rescan sequence payloads, and a direct current-rescan detector/evaluation bridge design. E003-M59 direct current-rescan detector bridge Docker run has been launched in background tmux session `e003_m59_direct_bridge` for 7 search-failure query rows across 4 scans.
 
 ## Active Experiment
 
@@ -14,7 +16,7 @@ Main experiment implementation stage has started. E001-M01 through E001-M05 arti
 | --- | --- | --- | --- |
 | E001 | M01-M05 artifacts ready | [E001_semantic_pair_dynamic_search_proxy](E001_semantic_pair_dynamic_search_proxy/README.md) | Input to E002 |
 | E002 | M01-M09 path-cost artifacts ready | [E002_path_cost_bridge](E002_path_cost_bridge/README.md) | Input to E003 |
-| E003 | M00-M28 cap-aware replay policy ready | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Docker pre-cap policy integration rerun gate |
+| E003 | M00-M59 detector job running | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Verify E003-M59 completion, then run E003-M60 query-level bridge evaluation |
 
 ## 사실
 
@@ -124,6 +126,77 @@ Main experiment implementation stage has started. E001-M01 through E001-M05 arti
 - E003-M28 selected proposal rows: 407, matched target rows: 32, false-positive rows: 375.
 - E003-M28 improves proposal precision from 0.027083 to 0.078624 while losing 7 matched targets.
 - E003-M28 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false because it is replayed after M26's detector cap.
+- E003-M29 inspects `run_rgbd_ov_proposals.py` and finds the current global cap at line 355 and per-frame cap at line 358 inside the detector result loop.
+- E003-M29 fixes the runner args contract for `cap_aware_label_balanced_ranking_v0`: `--candidate-selection-policy`, `--selection-score-mode`, `--pre-cap-per-scan-label-cap`, `--pre-cap-spatial-consolidation-radius-m`, `--require-scan-prompt-label`, `--raw-candidate-collection-cap`, and `--pre-cap-policy-output`.
+- E003-M29 fixes the output contract: keep `real_proposal_prediction_jsonl_v0`, add optional policy diagnostic fields, and write `pre_cap_policy_summary.json`.
+- E003-M29 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false because it does not execute Docker detector inference.
+- E003-M30 implements `cap_aware_label_balanced_ranking_v0` inside the Docker runner and host wrapper, then reruns the fixed M26 two-scan pilot.
+- E003-M30 raw predictions / projected candidates / final written proposals: 9768 / 9496 / 830.
+- E003-M30 matched target rows improve from M26 39 to 48, while false-positive rows drop from 1401 to 782.
+- E003-M30 proposal precision improves from M26 0.027083 to 0.057831, but paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness remain false.
+- E003-M31 compares M26/M28/M30 at target, label, and frame level.
+- E003-M31 M30 gains/losses vs M26: 15 / 6 targets; stable matched / stable missed: 33 / 45.
+- E003-M31 top gain labels: clothes +2, kitchen cabinet +2; top loss label: plant -6; top false-positive labels: table 47, chair 42, box 41, light 41, plant 38.
+- E003-M31 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false because scale, true visibility, and remaining false positives are unresolved.
+- E003-M32 fixes the scaled pre-cap rerun route as 8 staged scans with 24 frames per scan, 192 selected frames, 344 evaluation target rows, max labels 32, max predictions 10000, and raw candidate collection cap 200000.
+- E003-M32 estimates 78144 raw predictions and 6640 final prediction rows from the M30 per-frame rate.
+- E003-M32 tracks 7 M31 blockers in the scaled rerun contract and keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false until Docker rerun results exist.
+- E003-M33 executes the scaled pre-cap Docker rerun over 8 scans and 192 frames.
+- E003-M33 writes 3414 schema-valid final proposal rows from 67639 raw predictions, with validator errors/warnings 0 / 0.
+- E003-M33 matched target rows: 204 / 344, proposal precision 0.059754, scan target recall 0.593023, depth-consistent visible-proxy recall 0.915584.
+- E003-M33 match-preserving calibration does not change selected proposals, and top false-positive labels remain plant, shelf, chair, sofa, table, box, cabinet, and lamp.
+- E003-M33 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false because false-positive load and true visibility remain unresolved.
+- E003-M34 analyzes M33 false-positive labels, visible-proxy misses, and M31 blocker resolution over the scaled 8-scan result.
+- E003-M34 resolves the previous two-scan scale-count blocker, but keeps false-positive load and true visibility as unresolved claim blockers.
+- E003-M34 visible-proxy missed target rows: 13 / 154, visible-proxy recall 0.915584.
+- E003-M34 top false-positive labels: plant 176, shelf 133, chair 129, sofa 117, table 116, box 111, cabinet 110, lamp 106.
+- E003-M34 next recommended unit: `E003-M35 false-positive suppression route decision`.
+- E003-M35 selects `recall_preserving_rank_cap_sweep_v0` as the first false-positive suppression route.
+- E003-M35 selected probe `visible_miss_guarded_labelwise_rank_cap_v0` keeps matched targets 204 / 204, reduces false-positive rows from 3210 to 1782, and improves precision from 0.059754 to 0.102719 in diagnostic replay.
+- E003-M35 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false because the selected probe is not yet executed as a validated M36 sweep.
+- E003-M36 executes 56 offline suppression policies over M33 proposals and re-runs target matching after each filter.
+- E003-M36 selected deployable 95pct policy `global_rank_cap_le_20` keeps 195 / 204 matched targets and reduces false-positive rows from 3210 to 2819.
+- E003-M36 selected diagnostic policy `labelwise_rank_cap_oracle_retain_0p95` keeps 204 / 204 matched targets and reduces false-positive rows from 3210 to 1585.
+- E003-M36 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false because split validation is still required.
+- E003-M37 runs a balanced 4/4 scan split validation gate over M33 proposal artifacts.
+- E003-M37 heldout baseline: matched targets 97, false-positive rows 1523, precision 0.059877.
+- E003-M37 dev-selected labelwise policy: heldout matched targets 81 / 97, false-positive rows 1154, precision 0.065587, matched-target retention 0.835052.
+- E003-M37 fixed global policy: heldout matched targets 97 / 97, false-positive rows 1433, precision 0.063399.
+- E003-M37 heldout oracle: heldout matched targets 97 / 97, false-positive rows 979, precision 0.090149.
+- E003-M37 label coverage risk: 24 heldout target labels have no dev matched example.
+- E003-M37 keeps runner integration recommended false, paper-table command readiness false, and real RGB-D/open-vocabulary robustness claim readiness false.
+- E003-M38 enumerates 210 possible split feasibility rows over the current 8-scan artifact.
+- E003-M38 best current split still leaves 7 heldout target labels and 7 heldout target rows without dev matched examples.
+- E003-M38 marks stronger split feasible with current 8 scans false.
+- E003-M38 selected dev support policy `spatial_support_or_rank_guard_r1p5m_min3_rank_guard_le_12`: heldout matched targets 89 / 97, false-positive rows 1406, matched-target retention 0.917526, precision 0.059532.
+- E003-M38 heldout oracle support policy `temporal_support_or_rank_guard_r0p75m_min3_rank_guard_le_20`: heldout matched targets 95 / 97, false-positive rows 1336, precision 0.066387.
+- E003-M38 selects route `temporal_spatial_evidence_instrumentation_required`.
+- E003-M38 keeps runner integration recommended false, paper-table command readiness false, and real RGB-D/open-vocabulary robustness claim readiness false.
+- E003-M39 selects `docker_runner_pre_consolidation_support_evidence_v0`.
+- E003-M39 fixes the runner insertion point as `select_cap_aware_label_balanced_candidates.after_cleaned_before_grouped`.
+- E003-M39 fixes support policy id `temporal_spatial_support_evidence_v0` with radii 0.75m, 1.0m, 1.5m, and 2.0m.
+- E003-M39 keeps deterministic post-processing route readiness false and real RGB-D/open-vocabulary robustness claim readiness false.
+- E003-M40 implements runner-side `temporal_spatial_support_evidence_v0` fields and runs a short Docker smoke.
+- E003-M40 status: `temporal_spatial_support_runner_smoke_ready`.
+- E003-M40 final predictions: 95, with support evidence attached to 95 / 95 selected rows and support row field errors 0.
+- E003-M40 selected rows with spatial / temporal support at any configured radius: 93 / 58.
+- E003-M40 validator errors/warnings: 0 / 0.
+- E003-M40 matched proposals / false positives / proposal precision smoke: 5 / 90 / 0.052632.
+- E003-M40 keeps real RGB-D/open-vocabulary robustness claim readiness false because it is a short instrumentation smoke, not heldout policy evidence.
+- E003-M41 selects score mode `confidence_sqrt_depth_support_temporal_v0`.
+- E003-M41 route: `support_aware_scoring_before_consolidation_and_final_rank`.
+- E003-M41 rejects hard support filtering for the next unit and keeps cap changes deferred.
+- E003-M41 keeps long rerun readiness false until the selected score mode passes a short runner smoke.
+- E003-M42 implements `confidence_sqrt_depth_support_temporal_v0` and runs a short Docker smoke.
+- E003-M42 status: `support_aware_selection_runner_smoke_ready`.
+- E003-M42 final predictions / matched proposals / false positives / precision smoke: 95 / 5 / 90 / 0.052632.
+- E003-M42 has no M40 smoke delta on matched proposals, false positives, or precision.
+- E003-M42 keeps real RGB-D/open-vocabulary robustness claim readiness false.
+- E003-M43 selects `pre_cap_candidate_pool_export_then_offline_replay_v0` rather than an immediate long support-aware rerun.
+- E003-M43 finds M42 vs M40 common selected rows 94 / 95, selected symmetric difference 2 rows, pre-cap rank changed 68 common rows, and selection-score changed 89 common rows.
+- E003-M43 marks existing candidate-pool replay available false and runner edit required true.
+- E003-M44 exports a 629-row pre-cap candidate pool and verifies offline replay reproduction for `confidence_sqrt_depth_support_temporal_v0`.
+- E003-M44 runner selected rows / offline replay selected rows: 95 / 95, ordered and set reproduction true / true.
 
 ## 논문 주장
 
@@ -145,4 +218,4 @@ E001 is a main experiment implementation stage, not a final thesis confirmation 
 
 ## 사용자 판단 필요
 
-No current decision. Continue with E003-M29 Docker pre-cap policy integration rerun gate.
+No current decision. Continue with E003-M54 search-critical bbox-depth failure-boundary audit.

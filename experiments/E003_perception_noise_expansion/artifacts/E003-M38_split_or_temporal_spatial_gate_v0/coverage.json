@@ -1,0 +1,127 @@
+{
+  "best_split_feasibility": {
+    "balance_score": 1.0389511073307256,
+    "dev_scan_count": 6,
+    "dev_scans": [
+      "280d8ebb-6cc6-2788-9153-98959a2da801",
+      "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+      "8eabc45f-5af7-2f32-8528-640861d2a135",
+      "c7895f27-339c-2d13-836b-c12dca280261",
+      "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+      "ddc73797-765b-241a-9e2c-097c5989baf6"
+    ],
+    "heldout_scan_count": 2,
+    "heldout_scans": [
+      "75c25975-9ca2-2844-9769-84677f46d4cf",
+      "a0905fd9-66f7-2272-9dfb-0483fdcc54c7"
+    ],
+    "heldout_target_rows": 92,
+    "uncovered_heldout_target_label_count": 7,
+    "uncovered_heldout_target_labels": [
+      "armchair",
+      "frame",
+      "ottoman",
+      "pile of books",
+      "plate",
+      "showcase",
+      "stuffed animal"
+    ],
+    "uncovered_heldout_target_rows": 7
+  },
+  "current_m37_dev_scans": [
+    "38770ca1-86d7-27b8-8619-ab66f67d9adf",
+    "8eabc45f-5af7-2f32-8528-640861d2a135",
+    "c7895f7c-339c-2d13-819f-3bb0b26c91f6",
+    "ddc73797-765b-241a-9e2c-097c5989baf6"
+  ],
+  "current_m37_heldout_scans": [
+    "280d8ebb-6cc6-2788-9153-98959a2da801",
+    "75c25975-9ca2-2844-9769-84677f46d4cf",
+    "a0905fd9-66f7-2272-9dfb-0483fdcc54c7",
+    "c7895f27-339c-2d13-836b-c12dca280261"
+  ],
+  "heldout_baseline_policy": {
+    "deployability": "baseline",
+    "depth_consistent_visible_proxy_recall": 0.9090909090909091,
+    "false_positive_proposal_rows": 1523,
+    "false_positive_reduction_vs_m33": 0,
+    "matched_target_delta_vs_m33": 0,
+    "matched_target_retention_vs_m33": 1.0,
+    "matched_target_rows": 97,
+    "policy_family": "baseline",
+    "policy_id": "m37_heldout_baseline",
+    "proposal_precision": 0.059876543209876544,
+    "proposal_rows": 1620,
+    "scan_target_recall": 0.5388888888888889
+  },
+  "heldout_oracle_support_policy": {
+    "deployability": "diagnostic_heldout_oracle_not_deployable",
+    "depth_consistent_visible_proxy_recall": 0.8961038961038961,
+    "false_positive_proposal_rows": 1336,
+    "false_positive_reduction_vs_m33": 187,
+    "matched_target_delta_vs_m33": -2,
+    "matched_target_retention_vs_m33": 0.979381443298969,
+    "matched_target_rows": 95,
+    "policy_family": "temporal_support_or_rank_guard",
+    "policy_id": "temporal_support_or_rank_guard_r0p75m_min3_rank_guard_le_20",
+    "proposal_precision": 0.06638714185883997,
+    "proposal_rows": 1431,
+    "scan_target_recall": 0.5277777777777778
+  },
+  "m38_version": "e003_m38_split_or_temporal_spatial_gate_v0",
+  "match_distance_threshold_m": 1.0,
+  "next_recommended_unit": "E003-M39 temporal-spatial support instrumentation gate",
+  "paper_table_command_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "runner_integration_recommended": false,
+  "selected_route": "temporal_spatial_evidence_instrumentation_required",
+  "selected_support_fp_reduction_rate": 0.07682206172028891,
+  "selected_support_policy_dev": {
+    "deployability": "candidate_policy_selected_on_dev",
+    "depth_consistent_visible_proxy_recall": 0.8831168831168831,
+    "false_positive_proposal_rows": 1452,
+    "false_positive_reduction_vs_m33": 235,
+    "matched_target_delta_vs_m33": -3,
+    "matched_target_retention_vs_m33": 0.9719626168224299,
+    "matched_target_rows": 104,
+    "policy_family": "spatial_support_or_rank_guard",
+    "policy_id": "spatial_support_or_rank_guard_r1p5m_min3_rank_guard_le_12",
+    "proposal_precision": 0.06683804627249357,
+    "proposal_rows": 1556,
+    "scan_target_recall": 0.6341463414634146
+  },
+  "selected_support_policy_heldout": {
+    "deployability": "candidate_policy_selected_on_dev_applied_to_heldout",
+    "depth_consistent_visible_proxy_recall": 0.8571428571428571,
+    "false_positive_proposal_rows": 1406,
+    "false_positive_reduction_vs_m33": 117,
+    "matched_target_delta_vs_m33": -8,
+    "matched_target_retention_vs_m33": 0.9175257731958762,
+    "matched_target_rows": 89,
+    "policy_family": "spatial_support_or_rank_guard",
+    "policy_id": "spatial_support_or_rank_guard_r1p5m_min3_rank_guard_le_12_selected_on_dev",
+    "proposal_precision": 0.05953177257525084,
+    "proposal_rows": 1495,
+    "scan_target_recall": 0.49444444444444446
+  },
+  "split_feasibility_rows": 210,
+  "status": "split_or_temporal_spatial_gate_ready",
+  "stronger_split_feasible_with_current_scans": false,
+  "support_feature_rows": 24,
+  "support_policy_rows": 244,
+  "support_transfer_pass": false,
+  "train_baseline_policy": {
+    "deployability": "baseline",
+    "depth_consistent_visible_proxy_recall": 0.922077922077922,
+    "false_positive_proposal_rows": 1687,
+    "false_positive_reduction_vs_m33": 0,
+    "matched_target_delta_vs_m33": 0,
+    "matched_target_retention_vs_m33": 1.0,
+    "matched_target_rows": 107,
+    "policy_family": "baseline",
+    "policy_id": "m37_dev_baseline",
+    "proposal_precision": 0.05964325529542921,
+    "proposal_rows": 1794,
+    "scan_target_recall": 0.6524390243902439
+  }
+}

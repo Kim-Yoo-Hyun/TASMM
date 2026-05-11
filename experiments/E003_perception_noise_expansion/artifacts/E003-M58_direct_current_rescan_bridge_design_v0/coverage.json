@@ -1,0 +1,126 @@
+{
+  "bridge_query_target_object_rows": 5,
+  "bridge_query_target_uids": 5,
+  "detector_run_executed": false,
+  "detector_target_label_count": 2,
+  "direct_bridge_base_rows": 5,
+  "direct_bridge_query_rows": 7,
+  "direct_bridge_scan_rows": 4,
+  "direct_bridge_target_labels": [
+    "chair",
+    "pillow"
+  ],
+  "evaluation_contract_id": "e003_m58_direct_bridge_evaluation_contract_v0",
+  "frame_triplet_lower_bound_total": 826,
+  "linked_bridge_query_target_uids": 5,
+  "m58_version": "e003_m58_direct_current_rescan_bridge_design_v0",
+  "missing_bridge_query_target_uids": [],
+  "next_recommended_unit": "E003-M59 direct current-rescan detector bridge Docker run",
+  "object_target_rows": 29,
+  "outputs": {
+    "coverage": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/coverage.json",
+    "detector_run_command_plan": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/detector_run_command_plan.json",
+    "direct_bridge_query_rows": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/direct_bridge_query_rows.jsonl",
+    "evaluation_contract": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/evaluation_contract.json",
+    "prompt_set": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/prompt_set.json",
+    "proposal_output_schema": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/proposal_output_schema.json",
+    "real_proposal_object_targets": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/real_proposal_object_targets.jsonl",
+    "real_proposal_query_manifest": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/real_proposal_query_manifest.jsonl",
+    "report": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/report.md",
+    "scan_bridge_summary": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/scan_bridge_summary.jsonl"
+  },
+  "paper_table_command_ready": false,
+  "prompt_label_count": 2,
+  "real_rgbd_or_open_vocab_search_claim_ready": false,
+  "same_label_distractor_object_rows": 24,
+  "sampled_frame_count": 93,
+  "scan_summary": [
+    {
+      "bridge_base_rows": 1,
+      "bridge_query_rows": 1,
+      "bridge_target_objects": 1,
+      "e001_failure_rows": 1,
+      "e002_failure_rows": 0,
+      "frame_triplet_lower_bound": 196,
+      "m58_version": "e003_m58_direct_current_rescan_bridge_design_v0",
+      "query_label_counts": {
+        "pillow": 1
+      },
+      "query_task_context_counts": {
+        "routine_fetch": 1
+      },
+      "same_label_distractor_objects": 4,
+      "sampled_frame_count": 22,
+      "scan_id": "10b17957-3938-2467-88a5-9e9254930dad",
+      "target_labels": [
+        "pillow"
+      ]
+    },
+    {
+      "bridge_base_rows": 2,
+      "bridge_query_rows": 2,
+      "bridge_target_objects": 2,
+      "e001_failure_rows": 2,
+      "e002_failure_rows": 2,
+      "frame_triplet_lower_bound": 381,
+      "m58_version": "e003_m58_direct_current_rescan_bridge_design_v0",
+      "query_label_counts": {
+        "pillow": 2
+      },
+      "query_task_context_counts": {
+        "routine_fetch": 2
+      },
+      "same_label_distractor_objects": 3,
+      "sampled_frame_count": 24,
+      "scan_id": "4731976c-f9f7-2a1a-95cc-31c4d1751d0b",
+      "target_labels": [
+        "pillow"
+      ]
+    },
+    {
+      "bridge_base_rows": 1,
+      "bridge_query_rows": 3,
+      "bridge_target_objects": 1,
+      "e001_failure_rows": 3,
+      "e002_failure_rows": 3,
+      "frame_triplet_lower_bound": 156,
+      "m58_version": "e003_m58_direct_current_rescan_bridge_design_v0",
+      "query_label_counts": {
+        "chair": 3
+      },
+      "query_task_context_counts": {
+        "high_value_fetch": 1,
+        "noisy_high_value_fetch": 1,
+        "routine_fetch": 1
+      },
+      "same_label_distractor_objects": 11,
+      "sampled_frame_count": 23,
+      "scan_id": "5555106a-36f1-29c0-8913-df1ba3c3cfd5",
+      "target_labels": [
+        "chair"
+      ]
+    },
+    {
+      "bridge_base_rows": 1,
+      "bridge_query_rows": 1,
+      "bridge_target_objects": 1,
+      "e001_failure_rows": 1,
+      "e002_failure_rows": 0,
+      "frame_triplet_lower_bound": 93,
+      "m58_version": "e003_m58_direct_current_rescan_bridge_design_v0",
+      "query_label_counts": {
+        "pillow": 1
+      },
+      "query_task_context_counts": {
+        "routine_fetch": 1
+      },
+      "same_label_distractor_objects": 6,
+      "sampled_frame_count": 24,
+      "scan_id": "ddc73795-765b-241a-9c5d-b97744afe077",
+      "target_labels": [
+        "pillow"
+      ]
+    }
+  ],
+  "status": "direct_current_rescan_bridge_design_ready"
+}

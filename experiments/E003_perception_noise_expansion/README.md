@@ -1,10 +1,10 @@
 # E003 Perception Noise Expansion
 
-Updated: 2026-05-08
+Updated: 2026-05-10
 
 ## Status
 
-`E003-M00_contract_v0`, `E003-M01_source_audit_v0`, `E003-M02_annotation_proxy_noise_v0`, `E003-M03_noisy_policy_eval_v0`, `E003-M04_robustness_failure_analysis_v0`, `E003-M05_route_v0`, `E003-M06_annotation_proposal_dropout_v0`, `E003-M07_dropout_failure_boundary_v0`, `E003-M08_annotation_false_positive_v0`, `E003-M09_false_positive_failure_boundary_v0`, `E003-M10_annotation_centroid_jitter_v0`, `E003-M11_centroid_jitter_failure_boundary_v0`, `E003-M12_combined_noise_route_decision_v0`, `E003-M13_annotation_combined_moderate_v0`, `E003-M14_combined_noise_failure_boundary_v0`, `E003-M15_controlled_perception_claim_summary_v0`, `E003-M16_real_proposal_route_decision_v0`, `E003-M17_real_proposal_denominator_staging_v0`, `E003-M18_dockerized_real_proposal_detector_scaffold_v0`, `E003-M19_real_detector_backend_integration_v0`, `E003-M20_detector_model_smoke_v0`, `E003-M21_detector_proposal_matching_v0`, `E003-M22_frame_scaling_projection_diagnostic_v0`, `E003-M23_proposal_consolidation_calibration_v0`, `E003-M24_visibility_prompt_projection_gate_v0`, `E003-M25_visibility_prompt_rerun_gate_v0`, `E003-M26_prompt_expanded_multiscan_docker_rerun_v0`, `E003-M27_false_positive_cap_bottleneck_v0`, and `E003-M28_cap_aware_label_balanced_policy_v0` are complete. Next unit is E003-M29 Docker pre-cap policy integration rerun gate.
+`E003-M00_contract_v0`, `E003-M01_source_audit_v0`, `E003-M02_annotation_proxy_noise_v0`, `E003-M03_noisy_policy_eval_v0`, `E003-M04_robustness_failure_analysis_v0`, `E003-M05_route_v0`, `E003-M06_annotation_proposal_dropout_v0`, `E003-M07_dropout_failure_boundary_v0`, `E003-M08_annotation_false_positive_v0`, `E003-M09_false_positive_failure_boundary_v0`, `E003-M10_annotation_centroid_jitter_v0`, `E003-M11_centroid_jitter_failure_boundary_v0`, `E003-M12_combined_noise_route_decision_v0`, `E003-M13_annotation_combined_moderate_v0`, `E003-M14_combined_noise_failure_boundary_v0`, `E003-M15_controlled_perception_claim_summary_v0`, `E003-M16_real_proposal_route_decision_v0`, `E003-M17_real_proposal_denominator_staging_v0`, `E003-M18_dockerized_real_proposal_detector_scaffold_v0`, `E003-M19_real_detector_backend_integration_v0`, `E003-M20_detector_model_smoke_v0`, `E003-M21_detector_proposal_matching_v0`, `E003-M22_frame_scaling_projection_diagnostic_v0`, `E003-M23_proposal_consolidation_calibration_v0`, `E003-M24_visibility_prompt_projection_gate_v0`, `E003-M25_visibility_prompt_rerun_gate_v0`, `E003-M26_prompt_expanded_multiscan_docker_rerun_v0`, `E003-M27_false_positive_cap_bottleneck_v0`, `E003-M28_cap_aware_label_balanced_policy_v0`, `E003-M29_pre_cap_policy_integration_gate_v0`, `E003-M30_pre_cap_policy_docker_rerun_v0`, `E003-M31_pre_cap_policy_tradeoff_analysis_v0`, `E003-M32_scaled_pre_cap_rerun_gate_v0`, `E003-M33_scaled_pre_cap_policy_docker_rerun_v0`, `E003-M34_scaled_pre_cap_failure_analysis_v0`, `E003-M35_false_positive_suppression_route_v0`, `E003-M36_recall_preserving_suppression_sweep_v0`, `E003-M37_suppression_split_validation_v0`, `E003-M38_split_or_temporal_spatial_gate_v0`, `E003-M39_temporal_spatial_support_instrumentation_gate_v0`, `E003-M40_temporal_spatial_support_runner_smoke_v0`, `E003-M41_support_aware_selection_policy_gate_v0`, `E003-M42_support_aware_selection_runner_smoke_v0`, `E003-M43_support_aware_scaled_rerun_route_gate_v0`, `E003-M44_pre_cap_candidate_pool_export_smoke_v0`, `E003-M45_scaled_candidate_pool_export_replay_v0`, `E003-M46_score_redesign_or_external_gate_v0`, `E003-M47_external_baseline_feasibility_gate_v0`, `E003-M48_grounded_sam_contract_v0`, `E003-M49_grounded_sam_smoke_v0`, `E003-M50_same_subset_bbox_vs_mask_v0`, `E003-M51_post_m50_route_decision_v0`, `E003-M52_grounded_sam_mask_failure_v0`, `E003-M53_bbox_continuation_repair_gate_v0`, `E003-M54_search_critical_bbox_failure_boundary_v0`, `E003-M55_dynamic_pair_bridge_gate_v0`, `E003-M56_current_rescan_sequence_staging_plan_v0`, `E003-M57_sequence_staging_job_launch_v0`, and `E003-M58_direct_current_rescan_bridge_design_v0` are complete. E003-M59 direct current-rescan detector bridge Docker run has been launched in background tmux session `e003_m59_direct_bridge`; completion verification is pending.
 
 ## Source
 
@@ -213,6 +213,125 @@ Updated: 2026-05-08
 - E003-M28 matched target delta vs baseline: -7.
 - E003-M28 false-positive reduction vs baseline: 1026.
 - E003-M28 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false because it is replayed after M26's detector cap.
+- E003-M29 inspects `run_rgbd_ov_proposals.py` and finds the current global cap check at line 355 and current per-frame cap check at line 358, both inside the detector result loop.
+- E003-M29 fixes `cap_aware_label_balanced_ranking_v0` runner args: `--candidate-selection-policy`, `--selection-score-mode`, `--pre-cap-per-scan-label-cap`, `--pre-cap-spatial-consolidation-radius-m`, `--require-scan-prompt-label`, `--raw-candidate-collection-cap`, and `--pre-cap-policy-output`.
+- E003-M29 fixes the output contract: keep `real_proposal_prediction_jsonl_v0`, add optional policy fields, write `pre_cap_policy_summary.json`, and mirror key counts into `model_smoke.json` / `run_metadata.json`.
+- E003-M29 sets the next recommended unit to `E003-M30 pre-cap policy Docker runner implementation/rerun`.
+- E003-M29 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false because it does not execute Docker detector inference.
+- E003-M30 implements `cap_aware_label_balanced_ranking_v0` inside `run_rgbd_ov_proposals.py` and passes the policy through `run_m22_frame_scaling_diagnostics.py`.
+- E003-M30 executes the fixed M26 two-scan / 24-frame Docker pilot with max labels 32, threshold/text-threshold 0.08/0.08, score mode `confidence`, per-scan-label cap 24, and spatial consolidation radius 0.5m.
+- E003-M30 raw predictions: 9768.
+- E003-M30 projected candidates: 9496.
+- E003-M30 policy input candidates: 8969.
+- E003-M30 spatial consolidated candidates: 848.
+- E003-M30 final written predictions: 830.
+- E003-M30 validator error/warning rows: 0 / 0.
+- E003-M30 matched target rows: 48, M26 delta +9.
+- E003-M30 false-positive proposal rows: 782, M26 delta -619.
+- E003-M30 proposal precision: 0.057831, M26 delta +0.030748.
+- E003-M30 depth-consistent visible-proxy recall after post-check: 0.857143.
+- E003-M30 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false because it is still a two-scan pilot and needs failure/recall tradeoff analysis.
+- E003-M31 compares M26/M28/M30 at target, label, and frame level.
+- E003-M31 M26/M28/M30 matched target rows: 39 / 32 / 48.
+- E003-M31 M30 gains/losses vs M26: 15 / 6 targets.
+- E003-M31 stable matched / stable missed targets: 33 / 45.
+- E003-M31 M26/M28/M30 false-positive rows: 1401 / 375 / 782.
+- E003-M31 top gain labels: clothes +2, kitchen cabinet +2, backpack +1, bag +1, blanket +1.
+- E003-M31 top loss label: plant -6.
+- E003-M31 top false-positive labels: table 47, chair 42, box 41, light 41, plant 38.
+- E003-M31 scaling blockers: two-scan pilot only, remaining scan-level misses, remaining false-positive load, true visibility not implemented, visible-miss labels, recall-loss label, and top false-positive labels.
+- E003-M31 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false.
+- E003-M32 fixes the scaled pre-cap rerun route as `staged_8scan_24frame_pre_cap_scaled_pilot`.
+- E003-M32 selected scans / frames: 8 / 192, from 459 available sampled frames.
+- E003-M32 selected evaluation target rows: 344.
+- E003-M32 run config: max labels 32, max predictions 10000, max predictions per frame 60, threshold/text-threshold 0.08/0.08, per-scan-label cap 24, spatial consolidation radius 0.5m, raw candidate collection cap 200000.
+- E003-M32 estimates 78144 raw predictions and 6640 final prediction rows from the M30 per-frame rate.
+- E003-M32 tracks 7 M31 blockers as required post-rerun diagnostics.
+- E003-M32 keeps Docker run executed false, paper-table command readiness false, and real RGB-D/open-vocabulary robustness claim readiness false.
+- E003-M33 executes the scaled pre-cap Docker rerun over 8 scans and 192 frames.
+- E003-M33 estimated detector wall time is 3333 seconds.
+- E003-M33 raw / projected / policy-input / spatial-consolidated / final proposal rows: 67639 / 65812 / 60435 / 4284 / 3414.
+- E003-M33 validator error/warning rows: 0 / 0.
+- E003-M33 matched target rows: 204 / 344.
+- E003-M33 false-positive proposal rows: 3210.
+- E003-M33 proposal precision: 0.059754.
+- E003-M33 scan target recall: 0.593023.
+- E003-M33 depth-consistent visible-proxy target rows: 154.
+- E003-M33 recall over depth-consistent visible-proxy denominator: 0.915584.
+- E003-M33 detector/threshold missed visible-proxy target rows: 13.
+- E003-M33 match-preserving calibration changed selected proposals: false.
+- E003-M33 top false-positive labels: plant 176, shelf 133, chair 129, sofa 117, table 116, box 111, cabinet 110, lamp 106.
+- E003-M33 keeps paper-table command readiness and real RGB-D/open-vocabulary robustness claim readiness false.
+- E003-M34 scaled failure analysis resolves the two-scan scale-count blocker but keeps false-positive load and true visibility unresolved.
+- E003-M35 selects `recall_preserving_rank_cap_sweep_v0` and the probe `visible_miss_guarded_labelwise_rank_cap_v0`.
+- E003-M36 evaluates 56 offline suppression policies over M33 proposals with re-matching after every filter.
+- E003-M36 selected deployable 95pct policy `global_rank_cap_le_20`: matched targets 195 / 204, false-positive rows 2819, precision 0.064698.
+- E003-M36 selected diagnostic policy `labelwise_rank_cap_oracle_retain_0p95`: matched targets 204 / 204, false-positive rows 1585, precision 0.114030.
+- E003-M37 runs a balanced 4/4 scan split validation gate over M33 proposal artifacts.
+- E003-M37 heldout baseline: matched targets 97, false-positive rows 1523, precision 0.059877, depth-consistent visible-proxy recall 0.909091.
+- E003-M37 dev-selected labelwise policy `dev_selected_visible_miss_guarded_labelwise_rank_cap_v0`: heldout matched targets 81 / 97, false-positive rows 1154, precision 0.065587, matched-target retention 0.835052.
+- E003-M37 fixed policy `global_rank_cap_le_22_selected_on_train`: heldout matched targets 97 / 97, false-positive rows 1433, precision 0.063399.
+- E003-M37 heldout oracle `heldout_oracle_visible_miss_guarded_labelwise_rank_cap_v0`: heldout matched targets 97 / 97, false-positive rows 979, precision 0.090149.
+- E003-M37 label coverage risk: 24 heldout target labels have no dev matched example, so label-stratified validation is not feasible under the current 8-scan split.
+- E003-M37 keeps runner integration recommended false, paper-table command readiness false, and real RGB-D/open-vocabulary claim readiness false.
+- E003-M38 enumerates 210 split feasibility rows across current 8-scan artifacts.
+- E003-M38 best split still leaves 7 heldout target labels and 7 heldout target rows without dev matched examples.
+- E003-M38 marks stronger split feasible with current 8 scans false.
+- E003-M38 selected dev support policy `spatial_support_or_rank_guard_r1p5m_min3_rank_guard_le_12`: heldout matched targets 89 / 97, false-positive rows 1406, retention 0.917526, precision 0.059532.
+- E003-M38 heldout oracle support policy `temporal_support_or_rank_guard_r0p75m_min3_rank_guard_le_20`: heldout matched targets 95 / 97, false-positive rows 1336, precision 0.066387.
+- E003-M38 selected route: `temporal_spatial_evidence_instrumentation_required`.
+- E003-M38 keeps runner integration recommended false, paper-table command readiness false, and real RGB-D/open-vocabulary claim readiness false.
+- E003-M39 status: `temporal_spatial_support_instrumentation_gate_ready`.
+- E003-M39 selected route: `docker_runner_pre_consolidation_support_evidence_v0`.
+- E003-M39 selected insertion point: `select_cap_aware_label_balanced_candidates.after_cleaned_before_grouped`.
+- E003-M39 support policy id: `temporal_spatial_support_evidence_v0`.
+- E003-M39 radii: 0.75m, 1.0m, 1.5m, and 2.0m.
+- E003-M39 keeps deterministic post-processing route readiness false, Docker run executed false, paper-table command readiness false, and real RGB-D/open-vocabulary claim readiness false.
+- E003-M40 status: `temporal_spatial_support_runner_smoke_ready`.
+- E003-M40 Docker build/run executed: true / true.
+- E003-M40 scans/frames: 1 / 2.
+- E003-M40 raw predictions / projected candidates / policy input / final predictions: 736 / 662 / 629 / 95.
+- E003-M40 support evidence attached to selected rows: 95 / 95.
+- E003-M40 selected rows with spatial / temporal support at any configured radius: 93 / 58.
+- E003-M40 support row field errors: 0.
+- E003-M40 validator errors/warnings: 0 / 0.
+- E003-M40 matched proposals / false positives / proposal precision smoke: 5 / 90 / 0.052632.
+- E003-M40 real RGB-D/open-vocabulary claim readiness: false.
+- E003-M41 status: `support_aware_selection_policy_gate_ready`.
+- E003-M41 selected score mode: `confidence_sqrt_depth_support_temporal_v0`.
+- E003-M41 selected route: `support_aware_scoring_before_consolidation_and_final_rank`.
+- E003-M41 support hard filter recommended: false.
+- E003-M41 support cap change recommended: false.
+- E003-M41 long rerun ready: false.
+- E003-M42 status: `support_aware_selection_runner_smoke_ready`.
+- E003-M42 score mode: `confidence_sqrt_depth_support_temporal_v0`.
+- E003-M42 raw predictions / projected candidates / policy input / final predictions: 736 / 662 / 629 / 95.
+- E003-M42 support evidence attached to selected rows: 95 / 95.
+- E003-M42 validator errors/warnings: 0 / 0.
+- E003-M42 matched proposals / false positives / proposal precision smoke: 5 / 90 / 0.052632.
+- E003-M42 matched/false-positive/precision delta vs E003-M40: 0 / 0 / 0.0.
+- E003-M42 real RGB-D/open-vocabulary claim readiness: false.
+- E003-M43 status: `support_aware_scaled_rerun_route_gate_ready`.
+- E003-M43 selected route: `pre_cap_candidate_pool_export_then_offline_replay_v0`.
+- E003-M43 M42 vs M40 common selected rows: 94 / 95.
+- E003-M43 M42 vs M40 selected symmetric difference rows: 2.
+- E003-M43 M42 vs M40 pre-cap rank changed common rows: 68.
+- E003-M43 M42 vs M40 selection-score changed common rows: 89.
+- E003-M43 existing candidate-pool replay available: false.
+- E003-M43 immediate support-aware long rerun recommended: false.
+- E003-M43 runner edit required before next scaled run: true.
+- E003-M44 status: `pre_cap_candidate_pool_replay_smoke_ready`.
+- E003-M44 Docker smoke status: `pre_cap_candidate_pool_export_smoke_ready`.
+- E003-M44 candidate pool rows: 629.
+- E003-M44 candidate pool rows with support policy: 629 / 629.
+- E003-M44 runner selected rows / offline replay selected rows: 95 / 95.
+- E003-M44 ordered / set reproduction for `confidence_sqrt_depth_support_temporal_v0`: true / true.
+- E003-M44 validator errors/warnings: 0 / 0.
+- E003-M45 long-running Docker export/replay job completed from tmux session `e003_m45_scaled_pool`.
+- E003-M45 log: `logs/20260508_155219_e003_m45_scaled_candidate_pool_export_replay_tmux.log`.
+- E003-M45 output path: `experiments/E003_perception_noise_expansion/artifacts/E003-M45_scaled_candidate_pool_export_replay_v0/`.
+- E003-M45 verification status: `scaled_candidate_pool_replay_ready`.
+- E003-M45 frozen contract verdict: `fail_redesign`.
 
 ## 논문 주장
 
@@ -399,6 +518,92 @@ E003-M28 can support:
 - deciding to move the policy into the Docker runner before the detector's per-frame/global cap.
 - blocking real perception robustness claims until the policy is executed pre-cap in Docker and re-evaluated.
 
+E003-M29 can support:
+
+- locating the current pre-policy cap sites in `run_rgbd_ov_proposals.py`.
+- fixing the runner args and output contract for pre-cap `cap_aware_label_balanced_ranking_v0`.
+- defining the next Docker rerun gate while keeping detector-result claims unsupported.
+
+E003-M30 can support:
+
+- saying the pre-cap policy executes inside the Docker detector runner under fixed M26 pilot conditions.
+- saying schema-valid pre-cap policy outputs can be matched against the M17 target denominator.
+- reporting a two-scan pilot improvement over M26 in matched targets, false positives, and proposal precision.
+
+E003-M31 can support:
+
+- target/label/frame-level comparison between M26, M28, and M30.
+- a two-scan diagnostic claim that M30 improves the M26 recall/precision tradeoff.
+- identifying scale and label-specific blockers before wider detector evaluation.
+
+E003-M32 can support:
+
+- fixing the scaled rerun scope and command contract for `cap_aware_label_balanced_ranking_v0`.
+- tracking M31 blockers explicitly before treating the pre-cap policy as a paper-table detector result.
+- selecting `E003-M33 scaled pre-cap policy Docker rerun` as the next executable unit.
+
+E003-M33 can support:
+
+- saying the Dockerized `cap_aware_label_balanced_ranking_v0` route scales from the two-scan pilot to 8 staged `3RScan` scans under a fixed schema.
+- a scaled diagnostic result with detector proposals, match-preserving calibration, and visibility-proxy denominator post-check.
+- selecting scaled failure analysis before any paper-table real RGB-D/open-vocabulary claim.
+
+E003-M34 can support:
+
+- saying the previous two-scan scale-count blocker is resolved.
+- saying false-positive load remains the main unresolved quality blocker.
+- selecting `E003-M35 false-positive suppression route decision` before connecting real proposals to E001/E002 search-policy tables.
+
+E003-M35 can support:
+
+- selecting `recall_preserving_rank_cap_sweep_v0` as the first false-positive suppression route.
+- saying an M33-derived visible-miss-guarded labelwise rank-cap probe preserves 204 / 204 matched targets while reducing false-positive rows from 3210 to 1782.
+- selecting `E003-M36 recall-preserving suppression sweep smoke` before any Docker rerun or paper-table real RGB-D/open-vocabulary claim.
+
+E003-M36 can support:
+
+- saying an offline suppression sweep was executed over M33 proposal artifacts with re-matching after every filter.
+- saying deployable fixed hyperparameters provide only modest recall-preserving gain: `global_rank_cap_le_20` keeps 195 / 204 matched targets and reduces false-positive rows from 3210 to 2819.
+- saying labelwise diagnostic caps show a larger ceiling: `labelwise_rank_cap_oracle_retain_0p95` keeps 204 / 204 matched targets and reduces false-positive rows from 3210 to 1585.
+- selecting `E003-M37 suppression split validation gate` before Docker runner integration or paper-table real RGB-D/open-vocabulary claim.
+
+E003-M37 can support:
+
+- saying suppression policy selection was tested under a balanced scan-level dev/heldout split.
+- saying dev-selected labelwise caps do not yet transfer safely to heldout scans because matched-target retention drops to 0.835052.
+- saying fixed global rank caps transfer recall better but provide too little false-positive reduction for runner integration.
+- selecting `E003-M38 stronger split or temporal-spatial suppression gate` before Docker runner integration or paper-table real RGB-D/open-vocabulary claim.
+
+E003-M38 can support:
+
+- saying stronger split design alone is not enough with the current 8-scan artifact because every feasible split leaves uncovered heldout target labels.
+- saying post-hoc support-feature filtering is not ready for Docker runner integration because dev-selected heldout retention drops to 0.917526.
+- selecting `E003-M39 temporal-spatial support instrumentation gate` before another Docker rerun or real RGB-D/open-vocabulary paper-table claim.
+
+E003-M39 can support:
+
+- saying temporal/spatial support evidence should be instrumented before spatial consolidation and caps in the Docker runner.
+- saying deterministic post-processing over final selected proposal artifacts is insufficient for this support route.
+- selecting `E003-M40 temporal-spatial support runner implementation smoke`.
+
+E003-M40 to E003-M42 can support:
+
+- saying runner-side support evidence and support-aware scoring are executable in the Dockerized proposal path.
+- saying `confidence_sqrt_depth_support_temporal_v0` did not improve matched proposals, false positives, or precision in the 1-scan / 2-frame smoke relative to E003-M40.
+- selecting `E003-M43 support-aware scaled rerun route gate` before any longer support-aware rerun or real RGB-D/open-vocabulary paper-table claim.
+
+E003-M43 can support:
+
+- saying an immediate support-aware long rerun is not the best next step because it would not preserve a replayable candidate pool for ablations.
+- saying existing M40/M42 artifacts cannot support offline score replay because they store final selected proposals, not the cleaned pre-cap candidate pool.
+- selecting `E003-M44 pre-cap candidate-pool export and offline replay harness smoke`.
+
+E003-M44 can support:
+
+- saying the runner can export a cleaned, support-instrumented pre-cap candidate pool.
+- saying offline replay can reproduce runner-selected stable candidates for `confidence_sqrt_depth_support_temporal_v0`.
+- selecting `E003-M45 scaled candidate-pool export and support-aware replay`.
+
 E003-M00 cannot support:
 
 - real RGB-D perception robustness.
@@ -425,7 +630,7 @@ Claim that requires later real perception:
 | method | Generate noisy candidate sets from annotation candidates using declared noise profiles; evaluate existing policies without using target identity except for metric computation and oracle upper bound. |
 | comparison | `scene_aligned_static_map`, `always_top1`, `always_top3`, `always_top5`, `fixed_uncertainty_topk_v0`, `task_conditioned_budget_v0`, `reachable_first_task_conditioned_budget_v0`, and oracle upper bound. |
 | metrics | proposal recall, candidate contamination, stale old-location FP, low-motion preservation, proxy `SR`, `ExpectedSearchCost`, grid cost when available, `AttemptSPL` proxy, task utility, robustness delta from clean. |
-| command | Current executable commands are `python experiments/E003_perception_noise_expansion/tools/build_noise_inputs.py`, `python experiments/E003_perception_noise_expansion/tools/evaluate_noisy_policies.py`, `python experiments/E003_perception_noise_expansion/tools/run_proposal_dropout.py`, `python experiments/E003_perception_noise_expansion/tools/analyze_dropout_boundaries.py`, `python experiments/E003_perception_noise_expansion/tools/run_false_positive_stress.py`, `python experiments/E003_perception_noise_expansion/tools/analyze_false_positive_boundaries.py`, `python experiments/E003_perception_noise_expansion/tools/run_centroid_jitter.py`, `python experiments/E003_perception_noise_expansion/tools/analyze_centroid_jitter_boundaries.py`, `python experiments/E003_perception_noise_expansion/tools/select_m12_combined_route.py`, `python experiments/E003_perception_noise_expansion/tools/run_combined_moderate.py`, `python experiments/E003_perception_noise_expansion/tools/analyze_combined_boundaries.py`, `python experiments/E003_perception_noise_expansion/tools/summarize_controlled_claims.py`, `python experiments/E003_perception_noise_expansion/tools/select_m16_real_proposal_route.py`, `python experiments/E003_perception_noise_expansion/tools/stage_m17_real_proposal_denominator.py`, `python experiments/E003_perception_noise_expansion/tools/run_m18_real_proposal_scaffold.py`, `python experiments/E003_perception_noise_expansion/tools/run_m19_real_detector_backend.py`, `python experiments/E003_perception_noise_expansion/tools/run_m20_detector_model_smoke.py`, `python experiments/E003_perception_noise_expansion/tools/evaluate_m21_detector_matching.py`, `python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py`, `python experiments/E003_perception_noise_expansion/tools/run_m23_proposal_calibration.py`, `python experiments/E003_perception_noise_expansion/tools/run_m24_visibility_prompt_projection_gate.py`, `python experiments/E003_perception_noise_expansion/tools/plan_m25_visibility_prompt_rerun.py`, `python experiments/E003_perception_noise_expansion/tools/summarize_m26_prompt_expanded_rerun.py`, `python experiments/E003_perception_noise_expansion/tools/analyze_m27_false_positive_cap_bottleneck.py`, `python experiments/E003_perception_noise_expansion/tools/run_m28_cap_aware_policy_smoke.py`, and `python experiments/E003_perception_noise_expansion/tools/validate_real_proposal_output.py`. |
+| command | Current executable commands include the E003 toolchain in `experiments/E003_perception_noise_expansion/tools/`, including `run_m22_frame_scaling_diagnostics.py`, `run_m23_proposal_calibration.py`, `run_m24_visibility_prompt_projection_gate.py`, `plan_m32_scaled_pre_cap_rerun.py`, `summarize_m33_scaled_pre_cap_policy_rerun.py`, `run_m36_recall_preserving_suppression_sweep.py`, `run_m37_suppression_split_validation.py`, `plan_m38_split_or_temporal_spatial_gate.py`, and `validate_real_proposal_output.py`. |
 | output | noise manifest, noisy candidate rows, noisy predictions, metrics, failure rows, coverage, and report. |
 | conclusion | Claim supported only if robustness deltas are reported with explicit noise profile, seed, denominator, dropped-target rate, and non-claims. |
 
@@ -567,7 +772,31 @@ Secondary diagnostics:
 | E003-M26 | prompt-expanded multi-scan Docker rerun pilot | complete: Docker rerun, match-preserving calibration, visibility denominator post-check, summary |
 | E003-M27 | false-positive / cap bottleneck analysis gate | complete: max prediction cap, false-positive domination, projection/capping loss, calibration limit, and next detector policy decision |
 | E003-M28 | cap-aware label-balanced detector policy smoke | complete: written-proposal replay policy sweep and next pre-cap Docker integration decision |
-| E003-M29 | Docker pre-cap policy integration rerun gate | next: integrate policy into detector runner command path and define rerun contract |
+| E003-M29 | Docker pre-cap policy integration rerun gate | complete: runner insertion points, args contract, output contract, and rerun gate |
+| E003-M30 | pre-cap policy Docker runner implementation/rerun | complete: runner implementation, wrapper pass-through, Docker rerun, calibration, visibility post-check, summary |
+| E003-M31 | pre-cap policy failure/recall tradeoff analysis | complete: target/label/frame tradeoff rows and scaling blockers |
+| E003-M32 | scaled pre-cap policy rerun gate | complete: 8-scan / 24-frame scaled rerun scope and command plan |
+| E003-M33 | scaled pre-cap policy Docker rerun | complete: detector rerun, match-preserving calibration, visibility post-check, summary |
+| E003-M34 | scaled pre-cap failure and label analysis | complete: label failures, visible-proxy misses, and M31 blocker resolution |
+| E003-M35 | false-positive suppression route decision | complete: selected `recall_preserving_rank_cap_sweep_v0` |
+| E003-M36 | recall-preserving suppression sweep smoke | complete: offline sweep over M33 proposals with re-matching |
+| E003-M37 | suppression split validation gate | complete: balanced 4/4 scan split validation and runner integration decision |
+| E003-M38 | stronger split or temporal-spatial suppression gate | complete: split feasibility and post-hoc support transfer route decision |
+| E003-M39 | temporal-spatial support instrumentation gate | complete: support field contract and runner insertion point fixed |
+| E003-M40 | temporal-spatial support runner smoke | complete: support fields implemented and short Docker smoke passed |
+| E003-M41 | support-aware selection policy gate | complete: selected `confidence_sqrt_depth_support_temporal_v0` |
+| E003-M42 | support-aware selection runner smoke | complete: selected score mode implemented and short Docker smoke passed |
+| E003-M43 | support-aware scaled rerun route gate | complete: selected candidate-pool export and offline replay route |
+| E003-M44 | pre-cap candidate-pool export and offline replay harness smoke | complete: export/replay contract and short reproduction check passed |
+| E003-M45 | scaled candidate-pool export and support-aware replay | complete: replay verified; frozen contract verdict `fail_redesign` |
+| E003-M46 | score redesign or external baseline gate | complete: 12 bounded local score policies swept; hard pass 0; weak positive 0; selected `external_proposal_baseline_gate_first` |
+| E003-M47 | external baseline feasibility gate | complete: selected `Grounded-SAM` as first route |
+| E003-M48 | Grounded-SAM contract | complete: `grounded_sam_mask_backproject_v0` input/output contract fixed |
+| E003-M49 | Grounded-SAM Docker/model smoke | complete: Docker runner emitted mask-depth proposal rows and M21 matcher smoke passed |
+| E003-M50 | same-subset bbox-depth vs mask-depth comparison | complete: `Grounded-SAM` mask-depth did not beat bbox-depth; do not scale yet |
+| E003-M51 | post-M50 route decision | complete: selected `targeted_mask_failure_analysis_first` |
+| E003-M52 | Grounded-SAM mask failure analysis | complete: target loss is mask projection dropout; centroid worsening is match-set composition |
+| E003-M53 | bbox-depth continuation repair gate | complete: selected search-critical bbox-depth failure-boundary audit |
 
 ## Real Perception Gate
 
@@ -2247,7 +2476,1680 @@ Artifacts:
 
 사용자 판단 필요:
 
-- None for E003-M28. Next is E003-M29 Docker pre-cap policy integration rerun gate.
+- None for E003-M28. E003-M29 is recorded below.
+
+## E003-M29 Pre Cap Policy Integration Gate
+
+Implementation unit: `E003-M29_pre_cap_policy_integration_gate_v0`.
+
+Stage: runner contract gate. This records where the current Docker runner applies caps and how `cap_aware_label_balanced_ranking_v0` must be exposed as runner args and output diagnostics. It does not rerun Docker detector inference.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m29_pre_cap_policy_integration.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m29_pre_cap_policy_integration.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M29_pre_cap_policy_integration_gate_v0/runner_insertion_points.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M29_pre_cap_policy_integration_gate_v0/runner_args_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M29_pre_cap_policy_integration_gate_v0/output_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M29_pre_cap_policy_integration_gate_v0/integration_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M29_pre_cap_policy_integration_gate_v0/docker_rerun_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M29_pre_cap_policy_integration_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M29_pre_cap_policy_integration_gate_v0/report.md`
+
+사실:
+
+- Status: `pre_cap_policy_integration_gate_ready`.
+- Current detector result loop line: 351.
+- Current global cap check line: 355.
+- Current per-frame cap check line: 358.
+- Current proposal row append line: 375.
+- Current final JSONL write line: 422.
+- Selected policy id: `cap_aware_label_balanced_ranking_v0`.
+- Selected score mode: `confidence`.
+- Selected per-scan-label cap: 24.
+- Selected spatial consolidation radius: 0.5m.
+- New runner args contract is ready.
+- New output contract is ready.
+- Docker rerun plan is ready.
+- Runner code updated in M29: false.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M29 supports a reproducible implementation contract for moving `cap_aware_label_balanced_ranking_v0` before detector output caps.
+- E003-M29 does not support a detector-result claim because it does not rerun Docker detector inference.
+
+에이전트 추론:
+
+- The current cap site is inside the detector result loop, so M28 post-hoc replay can miss raw candidates that were truncated before replay.
+- M30 should collect raw projected candidates first, then apply label cleanup, scoring, same-label spatial consolidation, per-scan-label cap, and final global cap.
+- `--max-predictions` should remain the final output cap under the pre-cap policy; `--max-predictions-per-frame` must not truncate raw candidates before policy ranking.
+
+사용자 판단 필요:
+
+- None for E003-M29. E003-M30 is recorded below.
+
+## E003-M30 Pre Cap Policy Docker Rerun
+
+Implementation unit: `E003-M30_pre_cap_policy_docker_rerun_v0`.
+
+Stage: Docker runner implementation and two-scan pilot rerun. This implements `cap_aware_label_balanced_ranking_v0` inside the container runner, passes it through the host wrapper, reruns the fixed M26 detector pilot, and applies the existing matching, calibration, and visibility post-checks.
+
+Command:
+
+```bash
+printf 'a\n' | python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/detector_rerun --build --docker-sudo --sudo-password-stdin --max-scans 2 --max-frames-per-scan 12 --max-labels 32 --max-predictions 1440 --max-predictions-per-frame 60 --threshold 0.08 --text-threshold 0.08 --candidate-selection-policy cap_aware_label_balanced_ranking_v0 --selection-score-mode confidence --pre-cap-per-scan-label-cap 24 --pre-cap-spatial-consolidation-radius-m 0.5
+python experiments/E003_perception_noise_expansion/tools/run_m23_proposal_calibration.py --m22-dir experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/detector_rerun --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/match_preserving_calibration --selection-policy full_match_preserving
+python experiments/E003_perception_noise_expansion/tools/run_m24_visibility_prompt_projection_gate.py --m22-dir experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/detector_rerun --m23-dir experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/match_preserving_calibration --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/visibility_denominator --max-labels 32
+python experiments/E003_perception_noise_expansion/tools/summarize_m30_pre_cap_policy_rerun.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/docker/real_proposals/run_rgbd_ov_proposals.py`
+- `experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py`
+- `experiments/E003_perception_noise_expansion/tools/summarize_m30_pre_cap_policy_rerun.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/detector_rerun/`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/match_preserving_calibration/`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/visibility_denominator/`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/claim_boundary.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M30_pre_cap_policy_docker_rerun_v0/report.md`
+
+사실:
+
+- Status: `pre_cap_policy_docker_rerun_pilot_ready`.
+- Docker build executed: true.
+- Docker run executed: true.
+- Candidate selection policy: `cap_aware_label_balanced_ranking_v0`.
+- Pre-cap policy applied: true.
+- Raw predictions: 9768.
+- Projected candidates: 9496.
+- Policy input candidates: 8969.
+- Spatial consolidated candidates: 848.
+- Final written predictions: 830.
+- Max predictions reached after policy: false.
+- Validator error/warning rows: 0 / 0.
+- M26 matched target rows: 39.
+- M30 matched target rows: 48.
+- Matched target delta vs M26: +9.
+- M26 false-positive proposal rows: 1401.
+- M30 false-positive proposal rows: 782.
+- False-positive delta vs M26: -619.
+- M26 proposal precision: 0.027083.
+- M30 proposal precision: 0.057831.
+- Precision delta vs M26: +0.030748.
+- Depth-consistent visible-proxy target rows: 35.
+- Recall over depth-consistent visible-proxy denominator: 0.857143.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M30 supports saying the pre-cap policy can be executed inside the Docker detector runner under the fixed M26 pilot conditions.
+- E003-M30 supports a two-scan pilot comparison showing improved matched target count, false-positive count, and proposal precision over M26.
+- E003-M30 does not support a final real RGB-D/open-vocabulary robustness claim because this is still a two-scan pilot and needs failure/recall tradeoff analysis.
+
+에이전트 추론:
+
+- The key comparison is M30 vs M26, not M30 alone, because M26 fixed prompt coverage but was cap/false-positive dominated.
+- M30 is stronger than the M28 replay because the policy is applied before the final output cap and sees projected candidates that M28 could not replay.
+- The next unit should identify which labels, frames, and target rows explain gains and remaining misses before scaling beyond the two-scan pilot.
+
+사용자 판단 필요:
+
+- None for E003-M30. E003-M31 is recorded below.
+
+## E003-M31 Pre Cap Policy Tradeoff Analysis
+
+Implementation unit: `E003-M31_pre_cap_policy_tradeoff_analysis_v0`.
+
+Stage: analysis-only comparison over M26, M28, and M30 artifacts. This does not rerun Docker. It records target-level transitions, label-level tradeoffs, frame-level proposal changes, and scaling blockers.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/analyze_m31_pre_cap_tradeoffs.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/analyze_m31_pre_cap_tradeoffs.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M31_pre_cap_policy_tradeoff_analysis_v0/target_transition_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M31_pre_cap_policy_tradeoff_analysis_v0/label_tradeoff_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M31_pre_cap_policy_tradeoff_analysis_v0/frame_tradeoff_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M31_pre_cap_policy_tradeoff_analysis_v0/scaling_blocker_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M31_pre_cap_policy_tradeoff_analysis_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M31_pre_cap_policy_tradeoff_analysis_v0/report.md`
+
+사실:
+
+- Status: `pre_cap_policy_tradeoff_analysis_ready`.
+- Evaluated scans: 2.
+- Scan eval target rows: 99.
+- M26 / M28 / M30 matched target rows: 39 / 32 / 48.
+- M30 gains/losses vs M26: 15 / 6.
+- Stable matched / stable missed: 33 / 45.
+- M26 / M28 / M30 false-positive rows: 1401 / 375 / 782.
+- M26 / M28 / M30 proposal precision: 0.027083 / 0.078624 / 0.057831.
+- M30 depth-consistent visible-proxy target rows: 35.
+- M30 missed visible-proxy target rows: 5.
+- Top gain labels: clothes +2, kitchen cabinet +2, backpack +1, bag +1, blanket +1.
+- Top loss label: plant -6.
+- Top false-positive labels: table 47, chair 42, box 41, light 41, plant 38.
+- Scaling blocker rows: 7.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M31 supports a two-scan diagnostic claim that the pre-cap policy improves the M26 detector pilot's recall/precision tradeoff.
+- E003-M31 does not support a final real RGB-D/open-vocabulary robustness claim because scale, true visibility, and remaining false positives are unresolved.
+
+에이전트 추론:
+
+- M30 is better than M26 on matched targets and false positives, while M28 remains a high-precision post-hoc replay with lower matched-target count.
+- The recall loss is concentrated in `plant`; this must be inspected before treating M30 as a final policy.
+- The next scaled rerun should keep M30's pre-cap policy but track label-specific false positives and visible-proxy misses explicitly.
+
+사용자 판단 필요:
+
+- None for E003-M31. E003-M32 is recorded below.
+
+## E003-M32 Scaled Pre Cap Rerun Gate
+
+Implementation unit: `E003-M32_scaled_pre_cap_rerun_gate_v0`.
+
+Stage: planning-only gate over M17, M30, and M31 artifacts. This does not rerun Docker. It fixes the scaled pre-cap rerun scope, command plan, and required post-rerun blocker diagnostics.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m32_scaled_pre_cap_rerun.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m32_scaled_pre_cap_rerun.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M32_scaled_pre_cap_rerun_gate_v0/scaled_scope_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M32_scaled_pre_cap_rerun_gate_v0/blocker_response_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M32_scaled_pre_cap_rerun_gate_v0/scaled_rerun_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M32_scaled_pre_cap_rerun_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M32_scaled_pre_cap_rerun_gate_v0/report.md`
+
+사실:
+
+- Status: `scaled_pre_cap_rerun_gate_ready`.
+- Selected route: `staged_8scan_24frame_pre_cap_scaled_pilot`.
+- Staged / selected scans: 8 / 8.
+- Selected frame budget: 192 / 459 sampled frames.
+- Selected evaluation target rows: 344.
+- Run config: max labels 32, max predictions 10000, max predictions per frame 60, threshold/text-threshold 0.08/0.08.
+- Pre-cap policy config: `cap_aware_label_balanced_ranking_v0`, score mode `confidence`, per-scan-label cap 24, spatial consolidation radius 0.5m, raw candidate collection cap 200000.
+- Estimated raw predictions: 78144.
+- Estimated final prediction rows: 6640.
+- M31 blocker rows tracked: 7.
+- Docker command ready: true.
+- Docker run executed: false.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M32 supports fixing a scaled rerun contract for the pre-cap policy.
+- E003-M32 does not support a detector-result claim because it does not execute Docker inference.
+
+에이전트 추론:
+
+- The next Docker run should scale across all 8 staged scans while keeping a 24-frame-per-scan budget before full-frame evaluation.
+- M31 blockers should be carried into post-rerun diagnostics, especially `plant` recall loss and table/chair/box/light/plant false positives.
+- A paper-table detector claim remains blocked until the E003-M33 scaled result has failure and label analysis.
+
+사용자 판단 필요:
+
+- None for E003-M32. E003-M33 is recorded below.
+
+## E003-M33 Scaled Pre Cap Policy Docker Rerun
+
+Implementation unit: `E003-M33_scaled_pre_cap_policy_docker_rerun_v0`.
+
+Stage: Docker detector rerun plus repository-local calibration, visibility post-check, and summary. This executes the M32 scaled command plan.
+
+Commands:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun --build --docker-sudo --sudo-password-stdin --max-scans 8 --max-frames-per-scan 24 --max-labels 32 --max-predictions 10000 --max-predictions-per-frame 60 --threshold 0.08 --text-threshold 0.08 --candidate-selection-policy cap_aware_label_balanced_ranking_v0 --selection-score-mode confidence --pre-cap-per-scan-label-cap 24 --pre-cap-spatial-consolidation-radius-m 0.5 --raw-candidate-collection-cap 200000
+python experiments/E003_perception_noise_expansion/tools/run_m23_proposal_calibration.py --m22-dir experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/match_preserving_calibration --selection-policy full_match_preserving
+python experiments/E003_perception_noise_expansion/tools/run_m24_visibility_prompt_projection_gate.py --m22-dir experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun --m23-dir experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/match_preserving_calibration --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/visibility_denominator --max-labels 32
+python experiments/E003_perception_noise_expansion/tools/summarize_m33_scaled_pre_cap_policy_rerun.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/summarize_m33_scaled_pre_cap_policy_rerun.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/detector_rerun/`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/match_preserving_calibration/`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/visibility_denominator/`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M33_scaled_pre_cap_policy_docker_rerun_v0/report.md`
+
+사실:
+
+- Status: `scaled_pre_cap_policy_docker_rerun_ready`.
+- Selected route: `staged_8scan_24frame_pre_cap_scaled_pilot`.
+- Docker build/run executed: true / true.
+- Estimated detector wall time seconds: 3333.
+- Evaluated scans / frames: 8 / 192.
+- Evaluation target rows: 344.
+- Raw / projected / policy-input / spatial-consolidated / final proposal rows: 67639 / 65812 / 60435 / 4284 / 3414.
+- Raw candidate cap reached: false.
+- Max predictions reached after policy: false.
+- Validator errors/warnings: 0 / 0.
+- Matched target rows: 204.
+- False-positive proposal rows: 3210.
+- Proposal precision: 0.059754.
+- Scan target recall: 0.593023.
+- Depth-consistent visible-proxy target rows: 154.
+- Recall over depth-consistent visible-proxy denominator: 0.915584.
+- Detector/threshold missed visible-proxy target rows: 13.
+- Match-preserving calibration changed selected proposals: false.
+- Top false-positive labels: plant 176, shelf 133, chair 129, sofa 117, table 116, box 111, cabinet 110, lamp 106.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M33 supports that the Dockerized `cap_aware_label_balanced_ranking_v0` route can scale from the two-scan pilot to 8 staged `3RScan` scans under a fixed output schema.
+- E003-M33 supports a scaled diagnostic result, not a final real RGB-D/open-vocabulary robustness claim.
+- E003-M33 does not support a deployable perception/search claim because false-positive load remains high and visibility is still a centroid/depth proxy.
+
+에이전트 추론:
+
+- The scaled run improves the denominator size enough for label-level failure analysis, but proposal precision remains low.
+- Match-preserving calibration selected the baseline-like config, so simple confidence/depth/NMS filtering did not reduce false positives without risking matched target loss.
+- The next unit should analyze M33 false-positive labels, visible-proxy misses, and M31 blocker resolution before any paper-table claim.
+
+사용자 판단 필요:
+
+- None for E003-M33. Next is E003-M34 scaled pre-cap failure and label analysis.
+
+## E003-M34 Scaled Failure Analysis
+
+Implementation unit: `E003-M34_scaled_pre_cap_failure_analysis_v0`.
+
+Stage: repository-local failure analysis over M31 and M33 artifacts. This does not execute Docker. It fixes the label-level false-positive summary, visible-proxy miss rows, and M31 blocker resolution status after the 8-scan scaled rerun.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/analyze_m34_scaled_failures.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/analyze_m34_scaled_failures.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M34_scaled_pre_cap_failure_analysis_v0/label_failure_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M34_scaled_pre_cap_failure_analysis_v0/visible_miss_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M34_scaled_pre_cap_failure_analysis_v0/visible_label_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M34_scaled_pre_cap_failure_analysis_v0/blocker_resolution_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M34_scaled_pre_cap_failure_analysis_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M34_scaled_pre_cap_failure_analysis_v0/report.md`
+
+사실:
+
+- Status: `scaled_pre_cap_failure_analysis_ready`.
+- M33 evaluated scans / frames: 8 / 192.
+- M33 matched targets / scan targets: 204 / 344.
+- M33 false-positive proposal rows: 3210.
+- M33 proposal precision: 0.059754.
+- M33 scan target recall: 0.593023.
+- Depth-consistent visible-proxy target rows: 154.
+- Visible-proxy missed target rows: 13.
+- Visible-proxy recall: 0.915584.
+- Top false-positive labels: plant 176, shelf 133, chair 129, sofa 117, table 116, box 111, cabinet 110, lamp 106.
+- Top visible-miss labels: picture 2, pillow 2, basket 1, couch 1, curtain 1, cushion 1, pile of books 1, plant 1.
+- M31 blocker status counts after M34: resolved 1, partially resolved 1, reframed 1, analyzed-not-resolved 1, unresolved 2, unresolved claim-boundary 1.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M34 supports a scaled diagnostic failure analysis for the 8-scan real RGB-D/open-vocabulary proposal route.
+- E003-M34 does not support a final real RGB-D/open-vocabulary robustness claim because false-positive load remains unresolved and visibility remains a proxy.
+- E003-M34 does not support a deployable search-policy claim from real detector proposals yet.
+
+에이전트 추론:
+
+- The previous scale-count blocker is resolved, but the main technical blocker moved to false-positive suppression.
+- Scan-level missed targets are mostly not visible under the current sampled-frame proxy; visible-proxy misses are much smaller and should be reported separately.
+- The next useful unit is a false-positive suppression route decision before connecting M33 proposals into E001/E002 search-policy tables.
+
+사용자 판단 필요:
+
+- None for E003-M34. Next is E003-M35 false-positive suppression route decision.
+
+## E003-M35 False Positive Suppression Route
+
+Implementation unit: `E003-M35_false_positive_suppression_route_v0`.
+
+Stage: repository-local route decision over M33/M34 artifacts. This does not execute Docker. It selects the first false-positive suppression family and fixes the M36 recall-preserving sweep contract.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m35_false_positive_suppression.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m35_false_positive_suppression.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M35_false_positive_suppression_route_v0/global_rank_probe_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M35_false_positive_suppression_route_v0/label_cap_probe_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M35_false_positive_suppression_route_v0/label_priority_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M35_false_positive_suppression_route_v0/route_candidate_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M35_false_positive_suppression_route_v0/suppression_route_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M35_false_positive_suppression_route_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M35_false_positive_suppression_route_v0/report.md`
+
+사실:
+
+- Status: `false_positive_suppression_route_ready`.
+- Baseline proposal rows: 3414.
+- Baseline matched targets: 204.
+- Baseline false-positive rows: 3210.
+- Baseline precision: 0.059754.
+- Top false-positive labels: plant 176, shelf 133, chair 129, sofa 117, table 116, box 111, cabinet 110, lamp 106.
+- Selected route: `recall_preserving_rank_cap_sweep_v0`.
+- Selected probe policy: `visible_miss_guarded_labelwise_rank_cap_v0`.
+- Selected probe proposal rows: 1986.
+- Selected probe matched targets: 204.
+- Selected probe false-positive rows: 1782.
+- Selected probe precision: 0.102719.
+- Selected probe false-positive reduction vs M33: 1428.
+- Selected probe matched target retention: 1.0.
+- Best global fixed-rank cap with at least 95% matched target retention: rank <= 20, matched targets 195 / 204, false-positive rows 2819.
+- Docker run executed: false.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M35 supports selecting a recall-preserving suppression sweep route for the M33 real-proposal artifacts.
+- E003-M35 does not support a final suppression method claim because it does not execute the selected M36 sweep or a held-out validation.
+- E003-M35 does not support a paper-table real RGB-D/open-vocabulary robustness claim.
+
+에이전트 추론:
+
+- Rank-cap suppression is the first route because it uses fields already present in M33 outputs and can be tested without another long Docker run.
+- The selected probe is promising as a ceiling, but any cap selected using M33 match labels is diagnostic until validated on a split that did not choose the caps.
+- Confidence/depth-only filtering should stay as a baseline arm, not the primary route.
+
+사용자 판단 필요:
+
+- None for E003-M35. Next is E003-M36 recall-preserving suppression sweep smoke.
+
+## E003-M36 Recall Preserving Suppression Sweep
+
+Implementation unit: `E003-M36_recall_preserving_suppression_sweep_v0`.
+
+Stage: repository-local offline sweep over M33 proposal artifacts. This does not execute Docker. It filters M33 proposals under fixed/global rank caps, confidence/depth baselines, labelwise diagnostic caps, and the M35 visible-miss-guarded probe, then re-runs target matching after every filter.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/run_m36_recall_preserving_suppression_sweep.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/run_m36_recall_preserving_suppression_sweep.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M36_recall_preserving_suppression_sweep_v0/sweep_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M36_recall_preserving_suppression_sweep_v0/family_summary_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M36_recall_preserving_suppression_sweep_v0/selected_policy_label_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M36_recall_preserving_suppression_sweep_v0/selected_policy_proposals.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M36_recall_preserving_suppression_sweep_v0/selected_policy_target_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M36_recall_preserving_suppression_sweep_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M36_recall_preserving_suppression_sweep_v0/report.md`
+
+사실:
+
+- Status: `recall_preserving_suppression_sweep_ready`.
+- Input proposal rows: 3414.
+- Evaluation target rows: 344.
+- Sweep policy rows: 56.
+- Baseline matched targets: 204.
+- Baseline false-positive rows: 3210.
+- Baseline precision: 0.059754.
+- Baseline depth-consistent visible-proxy recall: 0.915584.
+- Selected deployable 95pct policy: `global_rank_cap_le_20`.
+- `global_rank_cap_le_20` matched targets: 195 / 204.
+- `global_rank_cap_le_20` false-positive rows: 2819.
+- `global_rank_cap_le_20` precision: 0.064698.
+- Selected diagnostic policy: `labelwise_rank_cap_oracle_retain_0p95`.
+- `labelwise_rank_cap_oracle_retain_0p95` matched targets: 204 / 204.
+- `labelwise_rank_cap_oracle_retain_0p95` false-positive rows: 1585.
+- `labelwise_rank_cap_oracle_retain_0p95` precision: 0.114030.
+- M35 selected probe after re-matching: `visible_miss_guarded_labelwise_rank_cap_v0`.
+- `visible_miss_guarded_labelwise_rank_cap_v0` matched targets / false-positive rows: 204 / 1782.
+- Split validation required: true.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M36 supports an offline suppression sweep over the M33 real-proposal artifacts.
+- E003-M36 supports a diagnostic ceiling for labelwise rank-cap suppression, not a final method claim.
+- E003-M36 does not support a paper-table real RGB-D/open-vocabulary robustness claim because policy selection still needs split validation.
+
+에이전트 추론:
+
+- Deployable fixed hyperparameters give a modest recall-preserving gain, while labelwise diagnostic caps show a much larger ceiling.
+- The next step should validate cap selection on a dev/held-out split before adding the policy to the Docker runner.
+
+사용자 판단 필요:
+
+- None for E003-M36. E003-M37 is recorded below.
+
+## E003-M37 Suppression Split Validation Gate
+
+Implementation unit: `E003-M37_suppression_split_validation_v0`.
+
+Stage: repository-local split validation over M33 proposal artifacts. This does not execute Docker. It creates a balanced scan-level dev/heldout split, selects suppression caps on dev scans, applies the selected policy to heldout scans, and compares against heldout baseline and heldout oracle policies.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/run_m37_suppression_split_validation.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/run_m37_suppression_split_validation.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M37_suppression_split_validation_v0/scan_split_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M37_suppression_split_validation_v0/validation_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M37_suppression_split_validation_v0/label_coverage_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M37_suppression_split_validation_v0/split_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M37_suppression_split_validation_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M37_suppression_split_validation_v0/report.md`
+
+사실:
+
+- Status: `suppression_split_validation_gate_ready`.
+- Split protocol: `balanced_scan_4_4_v0`.
+- Dev / heldout scans: 4 / 4.
+- Dev totals: 164 evaluation targets, 107 matched proposals, 1794 proposal rows, 77 visible-proxy target rows.
+- Heldout totals: 180 evaluation targets, 97 matched proposals, 1620 proposal rows, 77 visible-proxy target rows.
+- Heldout baseline matched targets / false-positive rows / precision: 97 / 1523 / 0.059877.
+- Heldout baseline depth-consistent visible-proxy recall: 0.909091.
+- Selected candidate policy: `dev_selected_visible_miss_guarded_labelwise_rank_cap_v0`.
+- Selected candidate heldout matched targets / false-positive rows / precision: 81 / 1154 / 0.065587.
+- Selected candidate matched-target retention: 0.835052.
+- Selected fixed policy: `global_rank_cap_le_22_selected_on_train`.
+- Selected fixed policy heldout matched targets / false-positive rows / precision: 97 / 1433 / 0.063399.
+- Heldout oracle policy: `heldout_oracle_visible_miss_guarded_labelwise_rank_cap_v0`.
+- Heldout oracle matched targets / false-positive rows / precision: 97 / 979 / 0.090149.
+- Label coverage rows: 85.
+- Heldout target labels without dev matched example: 24.
+- Label-stratified validation feasible: false.
+- Runner integration recommended: false.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M37 supports a split-validation gate for suppression policy selection over M33 real-proposal artifacts.
+- E003-M37 does not support Docker runner integration for the dev-selected labelwise policy because heldout matched-target retention drops below the recall-preserving threshold.
+- E003-M37 does not support a final real RGB-D/open-vocabulary robustness claim.
+
+에이전트 추론:
+
+- The M36 labelwise oracle ceiling is real as a diagnostic, but it is not yet a deployable method because dev-selected labelwise caps do not transfer under the current split.
+- The fixed global cap is safer for recall but too weak for false-positive suppression.
+- The next step should test stronger split design or temporal/spatial evidence before touching the Docker runner.
+
+사용자 판단 필요:
+
+- None for E003-M37. E003-M38 is recorded below.
+
+## E003-M38 Split Or Temporal-Spatial Gate
+
+Implementation unit: `E003-M38_split_or_temporal_spatial_gate_v0`.
+
+Stage: repository-local route decision over M33/M37 artifacts. This does not execute Docker. It enumerates feasible scan splits, checks whether stronger split design can cover heldout labels, and tests post-hoc spatial/temporal support filters selected on dev and applied to heldout.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m38_split_or_temporal_spatial_gate.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m38_split_or_temporal_spatial_gate.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M38_split_or_temporal_spatial_gate_v0/split_feasibility_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M38_split_or_temporal_spatial_gate_v0/support_policy_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M38_split_or_temporal_spatial_gate_v0/support_feature_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M38_split_or_temporal_spatial_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M38_split_or_temporal_spatial_gate_v0/report.md`
+
+사실:
+
+- Status: `split_or_temporal_spatial_gate_ready`.
+- Split feasibility rows: 210.
+- Best split dev / heldout scans: 6 / 2.
+- Best split uncovered heldout target labels: 7.
+- Best split uncovered heldout target rows: 7.
+- Stronger split feasible with current 8 scans: false.
+- Support policy rows: 244.
+- Selected dev support policy: `spatial_support_or_rank_guard_r1p5m_min3_rank_guard_le_12`.
+- Selected support policy heldout matched targets / false-positive rows / precision: 89 / 1406 / 0.059532.
+- Selected support policy heldout matched-target retention: 0.917526.
+- Heldout oracle support policy: `temporal_support_or_rank_guard_r0p75m_min3_rank_guard_le_20`.
+- Heldout oracle support policy matched targets / false-positive rows / precision: 95 / 1336 / 0.066387.
+- Selected route: `temporal_spatial_evidence_instrumentation_required`.
+- Runner integration recommended: false.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M38 supports a route decision after M37 heldout transfer failure.
+- E003-M38 does not support stronger split design as the next solution under the current 8-scan artifact.
+- E003-M38 does not support Docker runner integration for the current post-hoc spatial/temporal support filters.
+- E003-M38 does not support a final real RGB-D/open-vocabulary robustness claim.
+
+에이전트 추론:
+
+- The current 8-scan artifact is too small and label-sparse for reliable labelwise dev/heldout cap learning.
+- Post-hoc support computed after final proposal selection is too weak; temporal/spatial evidence should be instrumented earlier, before or during candidate consolidation.
+- The next route should decide which temporal/spatial evidence fields to preserve in the Docker runner or in an immediate post-processing schema before another long detector rerun.
+
+사용자 판단 필요:
+
+- None for E003-M38. Next is E003-M39 temporal-spatial support instrumentation gate.
+
+## E003-M39 Temporal-Spatial Support Instrumentation Gate
+
+Implementation unit: `E003-M39_temporal_spatial_support_instrumentation_gate_v0`.
+
+Stage: repository-local instrumentation contract over M38 route evidence. This does not execute Docker. It fixes where temporal/spatial support evidence should be computed in the real-proposal runner before another long detector rerun.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m39_temporal_spatial_support_instrumentation.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m39_temporal_spatial_support_instrumentation.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M39_temporal_spatial_support_instrumentation_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M39_temporal_spatial_support_instrumentation_gate_v0/instrumentation_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M39_temporal_spatial_support_instrumentation_gate_v0/support_field_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M39_temporal_spatial_support_instrumentation_gate_v0/verification_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M39_temporal_spatial_support_instrumentation_gate_v0/report.md`
+
+사실:
+
+- Status: `temporal_spatial_support_instrumentation_gate_ready`.
+- Selected route: `docker_runner_pre_consolidation_support_evidence_v0`.
+- Selected insertion point: `select_cap_aware_label_balanced_candidates.after_cleaned_before_grouped`.
+- Support policy id: `temporal_spatial_support_evidence_v0`.
+- Support radii: 0.75m, 1.0m, 1.5m, and 2.0m.
+- Runner instrumentation site ready: true.
+- Wrapper pass-through site ready: true.
+- Deterministic post-processing route ready: false.
+- Docker run executed: false.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M39 supports an implementation decision for where to preserve temporal/spatial proposal support evidence.
+- E003-M39 does not support a final real RGB-D/open-vocabulary robustness claim.
+
+에이전트 추론:
+
+- Support evidence should be computed after prompt/label cleanup but before spatial consolidation and caps, because final selected proposal artifacts cannot recover removed raw candidates.
+- M40 should implement the runner fields with default behavior preserved, then run a short Docker smoke before any longer rerun.
+
+사용자 판단 필요:
+
+- None for E003-M39. Next is E003-M40 temporal-spatial support runner implementation smoke.
+
+## E003-M40 Temporal-Spatial Support Runner Smoke
+
+Implementation unit: `E003-M40_temporal_spatial_support_runner_smoke_v0`.
+
+Stage: Docker runner implementation smoke. This implements `temporal_spatial_support_evidence_v0` in the real-proposal runner, passes support args through the host wrapper, builds `research2/real-smoke`, and runs a short 1-scan / 2-frame detector smoke.
+
+Command:
+
+```bash
+sg docker -c 'python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --build --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M40_temporal_spatial_support_runner_smoke_v0 --max-scans 1 --max-frames-per-scan 2 --max-labels 32 --max-predictions 400 --max-predictions-per-frame 20 --candidate-selection-policy cap_aware_label_balanced_ranking_v0 --selection-score-mode confidence_sqrt_depth --pre-cap-per-scan-label-cap 40 --pre-cap-spatial-consolidation-radius-m 0.5 --raw-candidate-collection-cap 20000 --support-evidence-policy temporal_spatial_support_evidence_v0 --support-evidence-radii-m 0.75,1.0,1.5,2.0'
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/docker/real_proposals/run_rgbd_ov_proposals.py`
+- `experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M40_temporal_spatial_support_runner_smoke_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M40_temporal_spatial_support_runner_smoke_v0/report.md`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M40_temporal_spatial_support_runner_smoke_v0/container_output/pre_cap_policy_summary.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M40_temporal_spatial_support_runner_smoke_v0/container_output/support_evidence_summary.json`
+- `logs/20260508_141745_e003_m40_support_smoke_tmux.log`
+
+사실:
+
+- Status: `temporal_spatial_support_runner_smoke_ready`.
+- Docker build/run executed: true / true.
+- Scans / frames: 1 / 2.
+- Raw predictions / projected candidates / policy input / final predictions: 736 / 662 / 629 / 95.
+- Support evidence attached to selected rows: 95 / 95.
+- Selected rows with spatial / temporal support at any configured radius: 93 / 58.
+- Support row field errors: 0.
+- Validator errors/warnings: 0 / 0.
+- Matched proposals / false-positive proposals / proposal precision smoke: 5 / 90 / 0.052632.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M40 supports runner-side instrumentation of temporal/spatial proposal support evidence.
+- E003-M40 does not support final real RGB-D/open-vocabulary robustness because it is a short smoke, not a heldout policy evaluation.
+
+에이전트 추론:
+
+- Support evidence is now available before downstream support-aware selection or scaled reruns.
+- The next unit should decide how support fields affect scoring, consolidation, or caps before another long Docker rerun.
+
+사용자 판단 필요:
+
+- None for E003-M40. Next is E003-M41 support-aware selection policy gate.
+
+## E003-M41 Support-Aware Selection Policy Gate
+
+Implementation unit: `E003-M41_support_aware_selection_policy_gate_v0`.
+
+Stage: repository-local policy gate. This does not execute Docker. It decides how the M40 temporal/spatial support evidence should affect candidate selection before any long rerun.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m41_support_aware_selection_policy.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m41_support_aware_selection_policy.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M41_support_aware_selection_policy_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M41_support_aware_selection_policy_gate_v0/policy_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M41_support_aware_selection_policy_gate_v0/rejected_routes.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M41_support_aware_selection_policy_gate_v0/source_inspection.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M41_support_aware_selection_policy_gate_v0/verification_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M41_support_aware_selection_policy_gate_v0/report.md`
+
+사실:
+
+- Status: `support_aware_selection_policy_gate_ready`.
+- Selected score mode: `confidence_sqrt_depth_support_temporal_v0`.
+- Selected route: `support_aware_scoring_before_consolidation_and_final_rank`.
+- Base score: `confidence * min(1, sqrt(depth_valid_pixel_count) / sqrt(5000))`.
+- Temporal factor: `min(1, support_temporal_neighbor_frame_count_r2p0m / 2)`.
+- Spatial factor: `min(1, support_spatial_neighbor_count_r1p0m / 8)`.
+- Selection score: `base_score * (1 + 0.25 * temporal_factor + 0.10 * spatial_factor)`.
+- Hard support filter recommended: false.
+- Support cap change recommended: false.
+- Long rerun ready: false.
+
+논문 주장:
+
+- E003-M41 supports a policy decision for how to use runner-side temporal/spatial support evidence.
+- E003-M41 does not prove proposal-quality improvement because it does not execute Docker or matching.
+
+에이전트 추론:
+
+- M38 makes hard support filtering risky because heldout matched-target retention dropped.
+- M40 shows temporal support exists, but selection quality remains weak.
+- A soft support-aware score is the lowest-risk next test because it can affect consolidation and ranking without suppressing single-frame candidates.
+
+사용자 판단 필요:
+
+- None for E003-M41. Next is E003-M42 support-aware selection runner smoke.
+
+## E003-M42 Support-Aware Selection Runner Smoke
+
+Implementation unit: `E003-M42_support_aware_selection_runner_smoke_v0`.
+
+Stage: Docker runner smoke. This implements `confidence_sqrt_depth_support_temporal_v0`, rebuilds `research2/real-smoke`, and runs the same 1-scan / 2-frame smoke scope as E003-M40 for a controlled comparison.
+
+Command:
+
+```bash
+sg docker -c 'python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --build --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M42_support_aware_selection_runner_smoke_v0 --max-scans 1 --max-frames-per-scan 2 --max-labels 32 --max-predictions 400 --max-predictions-per-frame 20 --candidate-selection-policy cap_aware_label_balanced_ranking_v0 --selection-score-mode confidence_sqrt_depth_support_temporal_v0 --pre-cap-per-scan-label-cap 40 --pre-cap-spatial-consolidation-radius-m 0.5 --raw-candidate-collection-cap 20000 --support-evidence-policy temporal_spatial_support_evidence_v0 --support-evidence-radii-m 0.75,1.0,1.5,2.0'
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/docker/real_proposals/run_rgbd_ov_proposals.py`
+- `experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M42_support_aware_selection_runner_smoke_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M42_support_aware_selection_runner_smoke_v0/report.md`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M42_support_aware_selection_runner_smoke_v0/container_output/pre_cap_policy_summary.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M42_support_aware_selection_runner_smoke_v0/container_output/support_evidence_summary.json`
+- `logs/20260508_145516_e003_m42_support_aware_smoke_tmux.log`
+
+사실:
+
+- Status: `support_aware_selection_runner_smoke_ready`.
+- Docker build/run executed: true / true.
+- Score mode: `confidence_sqrt_depth_support_temporal_v0`.
+- Scans / frames: 1 / 2.
+- Raw predictions / projected candidates / policy input / final predictions: 736 / 662 / 629 / 95.
+- Support evidence attached to selected rows: 95 / 95.
+- Validator errors/warnings: 0 / 0.
+- Matched proposals / false-positive proposals / proposal precision smoke: 5 / 90 / 0.052632.
+- Delta vs E003-M40 matched / false-positive / precision: 0 / 0 / 0.0.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M42 supports that the selected support-aware score mode is executable in the Docker runner.
+- E003-M42 does not support proposal-quality improvement because the short smoke did not change matched proposals, false positives, or precision relative to E003-M40.
+
+에이전트 추론:
+
+- The score mode passed implementation and validation but did not improve proposal-quality metrics under the 1-scan / 2-frame smoke.
+- The next unit should decide whether a larger support-instrumented replay is enough to test the score, or whether the support-aware score needs redesign before a long Docker rerun.
+
+사용자 판단 필요:
+
+- None for E003-M42. Next is E003-M43 support-aware scaled rerun route gate.
+
+## E003-M43 Support-Aware Scaled Rerun Route Gate
+
+Implementation unit: `E003-M43_support_aware_scaled_rerun_route_gate_v0`.
+
+Stage: route gate. This compares E003-M40 and E003-M42, checks whether existing artifacts can support offline replay, and decides whether to run an immediate long Docker rerun, replay, or redesign the score first.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m43_support_aware_scaled_rerun_route.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m43_support_aware_scaled_rerun_route.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M43_support_aware_scaled_rerun_route_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M43_support_aware_scaled_rerun_route_gate_v0/report.md`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M43_support_aware_scaled_rerun_route_gate_v0/m40_m42_comparison.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M43_support_aware_scaled_rerun_route_gate_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M43_support_aware_scaled_rerun_route_gate_v0/candidate_pool_contract.json`
+
+사실:
+
+- Status: `support_aware_scaled_rerun_route_gate_ready`.
+- Selected route: `pre_cap_candidate_pool_export_then_offline_replay_v0`.
+- M42 vs M40 matched / false-positive / precision delta: 0 / 0 / 0.0.
+- M42 vs M40 common selected rows: 94 / 95.
+- M42 vs M40 selected symmetric difference rows: 2.
+- M42 vs M40 pre-cap rank changed common rows: 68.
+- M42 vs M40 selection-score changed common rows: 89.
+- Existing candidate-pool replay available: false.
+- Immediate support-aware long rerun recommended: false.
+- Runner edit required before next scaled run: true.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M43 supports only a route decision for support-aware proposal evaluation.
+- E003-M43 does not support final real RGB-D/open-vocabulary robustness or a paper-table result.
+
+에이전트 추론:
+
+- M42 is a valid runner smoke, but a long support-aware-only rerun would not isolate score-mode ablations.
+- The support-aware score is not inert because row ranks and a small part of the selected set changed.
+- The next step should export the cleaned, support-instrumented pre-cap candidate pool and replay score modes offline.
+
+사용자 판단 필요:
+
+- None for E003-M43. Next is E003-M44 pre-cap candidate-pool export and offline replay harness smoke.
+
+## E003-M44 Pre-Cap Candidate-Pool Export And Replay Smoke
+
+Implementation unit: `E003-M44_pre_cap_candidate_pool_export_smoke_v0`.
+
+Stage: Docker export smoke plus offline replay. This adds runner-side export of the cleaned pre-cap candidate pool, then checks whether offline replay can reproduce the runner-selected stable candidates for the active support-aware score mode.
+
+Command:
+
+```bash
+sg docker -c 'python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --build --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M44_pre_cap_candidate_pool_export_smoke_v0 --max-scans 1 --max-frames-per-scan 2 --max-labels 32 --max-predictions 400 --max-predictions-per-frame 20 --candidate-selection-policy cap_aware_label_balanced_ranking_v0 --selection-score-mode confidence_sqrt_depth_support_temporal_v0 --pre-cap-per-scan-label-cap 40 --pre-cap-spatial-consolidation-radius-m 0.5 --raw-candidate-collection-cap 20000 --support-evidence-policy temporal_spatial_support_evidence_v0 --support-evidence-radii-m 0.75,1.0,1.5,2.0 --export-pre-cap-candidate-pool'
+python experiments/E003_perception_noise_expansion/tools/run_m44_pre_cap_replay.py --m44-dir experiments/E003_perception_noise_expansion/artifacts/E003-M44_pre_cap_candidate_pool_export_smoke_v0
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/docker/real_proposals/run_rgbd_ov_proposals.py`
+- `experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py`
+- `experiments/E003_perception_noise_expansion/tools/run_m44_pre_cap_replay.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M44_pre_cap_candidate_pool_export_smoke_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M44_pre_cap_candidate_pool_export_smoke_v0/report.md`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M44_pre_cap_candidate_pool_export_smoke_v0/container_output/pre_cap_candidate_pool.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M44_pre_cap_candidate_pool_export_smoke_v0/offline_replay/coverage.json`
+- `logs/20260508_152859_e003_m44_candidate_pool_replay_smoke_tmux.log`
+
+사실:
+
+- Status: `pre_cap_candidate_pool_replay_smoke_ready`.
+- Docker smoke status: `pre_cap_candidate_pool_export_smoke_ready`.
+- Candidate pool rows: 629.
+- Candidate pool rows with support policy: 629 / 629.
+- Candidate pool field errors: 0.
+- Runner selected rows: 95.
+- Offline replay selected rows for `confidence_sqrt_depth_support_temporal_v0`: 95.
+- Ordered reproduction match: true.
+- Set reproduction match: true.
+- Validator errors/warnings: 0 / 0.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M44 supports a short reproducibility smoke for replayable pre-cap proposal candidates.
+- E003-M44 does not support final real RGB-D/open-vocabulary robustness because it is not scaled heldout evidence.
+
+에이전트 추론:
+
+- The candidate-pool export gives a stable substrate for score-mode ablations without repeating detector inference.
+- The next scaled unit can export one 8-scan candidate pool, then compare support-aware scoring offline.
+
+사용자 판단 필요:
+
+- None for E003-M44. Next is E003-M45 scaled candidate-pool export and support-aware replay.
+
+## E003-M45 Scaled Candidate-Pool Export And Support-Aware Replay
+
+Implementation unit: `E003-M45_scaled_candidate_pool_export_replay_v0`.
+
+Stage: long-running Docker export plus offline score-mode comparison. This reruns the 8-scan / 24-frame scaled detector route with pre-cap candidate-pool export enabled, then replays `confidence`, `confidence_sqrt_depth`, and `confidence_sqrt_depth_support_temporal_v0` over the same candidate pool and matches each replay output against the M17 target denominator.
+
+Command launched:
+
+```bash
+sg docker -c 'python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --build --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M45_scaled_candidate_pool_export_replay_v0 --max-scans 8 --max-frames-per-scan 24 --max-labels 32 --max-predictions 10000 --max-predictions-per-frame 60 --candidate-selection-policy cap_aware_label_balanced_ranking_v0 --selection-score-mode confidence_sqrt_depth_support_temporal_v0 --pre-cap-per-scan-label-cap 24 --pre-cap-spatial-consolidation-radius-m 0.5 --raw-candidate-collection-cap 200000 --support-evidence-policy temporal_spatial_support_evidence_v0 --support-evidence-radii-m 0.75,1.0,1.5,2.0 --export-pre-cap-candidate-pool'
+python experiments/E003_perception_noise_expansion/tools/run_m45_scaled_replay.py --m45-dir experiments/E003_perception_noise_expansion/artifacts/E003-M45_scaled_candidate_pool_export_replay_v0
+```
+
+Job status:
+
+- Launched: true.
+- tmux session: `e003_m45_scaled_pool`.
+- Log: `logs/20260508_155219_e003_m45_scaled_candidate_pool_export_replay_tmux.log`.
+- Output path: `experiments/E003_perception_noise_expansion/artifacts/E003-M45_scaled_candidate_pool_export_replay_v0/`.
+- Expected files: `container_output/pre_cap_candidate_pool.jsonl`, `coverage.json`, `offline_replay/coverage.json`.
+- Verification command: `python experiments/E003_perception_noise_expansion/tools/run_m45_scaled_replay.py --m45-dir experiments/E003_perception_noise_expansion/artifacts/E003-M45_scaled_candidate_pool_export_replay_v0`.
+- Status: complete / verified.
+- tmux log exit code: 0.
+
+Result interpretation contract:
+
+- Artifact: `experiments/E003_perception_noise_expansion/artifacts/E003-M45_scaled_candidate_pool_export_replay_v0/interpretation_contract.json`.
+- Frozen before final M45 metric inspection: true.
+- Baseline: E003-M33 `confidence` route, matched targets 204, false positives 3210, proposal precision 0.059754.
+- Primary score mode: `confidence_sqrt_depth_support_temporal_v0`.
+- Reference score modes: `confidence`, `confidence_sqrt_depth`.
+
+사실:
+
+- Hard pass requires `scaled_candidate_pool_replay_ready`, validator errors/warnings 0 / 0, support-aware matched targets at least 204, false positives below 3210, proposal precision above 0.059754, and no lexicographic regression against `confidence_sqrt_depth`.
+- Weak positive requires clean replay, support-aware matched targets at least 194, false positives at most 3049, and proposal precision above 0.059754.
+- Fail/redesign triggers include matched targets below 194, false positives not reduced from 3210, precision not improved over 0.059754, or a strict regression against `confidence_sqrt_depth`.
+- Verification status: `scaled_candidate_pool_replay_ready`.
+- Candidate pool rows: 60,435.
+- Validator errors/warnings: 0 / 0.
+- Frozen contract verdict: `fail_redesign`.
+- `confidence`: 204 matched targets, 3210 false positives, proposal precision 0.059754.
+- `confidence_sqrt_depth`: 198 matched targets, 3209 false positives, proposal precision 0.058116.
+- `confidence_sqrt_depth_support_temporal_v0`: 196 matched targets, 3211 false positives, proposal precision 0.057529.
+- The support-aware score failed hard pass and weak positive because it lost matched targets, did not reduce false positives, did not improve precision, and regressed against `confidence_sqrt_depth`.
+
+논문 주장:
+
+- E003-M45 supports a scaled offline comparison over one shared detector candidate pool.
+- E003-M45 does not support a positive support-aware proposal-quality claim for the current score.
+- It does not establish final real RGB-D/open-vocabulary robustness, real navigation `SR`, or real navigation `SPL`.
+
+Reviewer defense boundary:
+
+- Current evidence is an 8-scan staged artifact, not a broad heldout benchmark.
+- The visibility denominator is a depth-consistent centroid projection proxy, not ground-truth visibility or embodied observability.
+- The detector path currently uses one `GroundingDINO`-based RGB-D backprojection backend; it does not yet compare against external proposal or mapping baselines such as `Grounded-SAM`, `OpenMask3D`, `OVIR-3D`, `ConceptGraphs`, `HOV-SG`, or `Open3DSG`.
+- Heldout transfer is not established because current split evidence showed weak label coverage under the 8-scan split.
+- Therefore, even if M45 improves matched targets, false positives, and proposal precision, the defensible claim is limited to support-aware proposal-quality evidence under this staged route.
+
+에이전트 추론:
+
+- Freezing these thresholds before final M45 metrics reduces post-hoc interpretation risk.
+- The next claim-relevant step should be E003-M46 support-aware score redesign or external proposal baseline gate, not real proposal to stale-memory bridge yet.
+- A reviewer could reasonably reject a final robustness claim unless the next stages add larger heldout evaluation and at least one external detector/proposal baseline.
+
+사용자 판단 필요:
+
+- Resolved by E003-M46: prioritize external detector/proposal or mapping baseline feasibility first.
+
+## E003-M46 Score Redesign Or External Baseline Gate
+
+Implementation unit: `E003-M46_score_redesign_or_external_gate_v0`.
+
+Stage: repository-local route gate over the M45 candidate pool. This tests whether bounded local score redesign can repair the failed support-aware result before moving to external proposal or mapping baselines.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m46_score_redesign_or_external_gate.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m46_score_redesign_or_external_gate.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M46_score_redesign_or_external_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M46_score_redesign_or_external_gate_v0/policy_sweep.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M46_score_redesign_or_external_gate_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M46_score_redesign_or_external_gate_v0/report.md`
+
+사실:
+
+- Status: `score_redesign_or_external_gate_ready`.
+- Candidate pool rows: 60,435.
+- Policies swept: 12.
+- Hard pass policy count: 0.
+- Weak positive policy count: 0.
+- Best policy by matched / false-positive / precision: `confidence`, 204 / 3210 / 0.059754.
+- `confidence_sqrt_depth` and several weak/guarded support variants produced 198 matched targets, 3209 false positives, precision 0.058116.
+- Current support boost produced 196 matched targets, 3211 false positives, precision 0.057529.
+- Current support boost lost 2 matched targets relative to `confidence_sqrt_depth` and gained 0.
+- Selected route: `external_proposal_baseline_gate_first`.
+- Next recommended unit: `E003-M47 external proposal/mapping baseline feasibility gate`.
+
+논문 주장:
+
+- E003-M46 does not create a new paper claim.
+- It shows that bounded local support-score redesign is not enough to recover M45 into claim-ready evidence.
+
+에이전트 추론:
+
+- The current temporal/spatial support evidence is too saturated to serve as a discriminative main ranking signal.
+- The next top-tier-relevant improvement should prioritize stronger proposal/mapping baselines or richer support evidence, not minor support score-weight tuning.
+
+사용자 판단 필요:
+
+- Resolved by E003-M47: first external route is `Grounded-SAM`.
+
+## E003-M47 External Baseline Feasibility Gate
+
+Implementation unit: `E003-M47_external_baseline_feasibility_gate_v0`.
+
+Stage: external route selection after M45/M46 failure. This ranks candidate external proposal or mapping routes by current harness fit, direct diagnostic value for the M45 failure, schema compatibility, top-tier reviewer value, dependency risk, and data conversion burden.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m47_external_baseline_feasibility.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m47_external_baseline_feasibility.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M47_external_baseline_feasibility_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M47_external_baseline_feasibility_gate_v0/candidate_routes.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M47_external_baseline_feasibility_gate_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M47_external_baseline_feasibility_gate_v0/report.md`
+
+사실:
+
+- Status: `external_baseline_feasibility_gate_ready`.
+- Selected route: `Grounded-SAM`.
+- Route scores: `Grounded-SAM` 39, `OpenMask3D` 24, `ConceptGraphs` 16, `OVIR-3D` 14, `HOV-SG` 6.
+- Next recommended unit: `E003-M48 Grounded-SAM mask-backprojection proposal smoke`.
+
+논문 주장:
+
+- E003-M47 does not create a new paper claim.
+- It fixes the first external feasibility route needed to separate proposal/backend failure from stale-memory logic.
+
+에이전트 추론:
+
+- `Grounded-SAM` is the best first route because the current runner already uses `GroundingDINO`, posed RGB-D frames, prompt labels, and depth backprojection.
+- `Grounded-SAM` directly tests whether M45 false positives and target losses come from box-based depth projection; masks can be backprojected into the existing `real_proposal_prediction_jsonl_v0` schema.
+- `OpenMask3D` has stronger 3D baseline value, but the first gate should not be dominated by MinkowskiEngine/checkpoint/scene-format staging.
+- `ConceptGraphs` and `HOV-SG` are valuable map/navigation baselines after proposal quality stabilizes, not the first diagnosis tool for M45's proposal failure.
+- `OVIR-3D` is retrieval-oriented and needs a less direct proposal-row adapter.
+
+사용자 판단 필요:
+
+- None for E003-M47. Next is `E003-M48 Grounded-SAM mask-backprojection proposal smoke`.
+
+## E003-M48 Grounded-SAM Contract
+
+Implementation unit: `E003-M48_grounded_sam_contract_v0`.
+
+Stage: contract gate for replacing box-depth proposal geometry with `Grounded-SAM` mask-depth proposal geometry. This does not download checkpoints or execute Docker inference; it fixes the implementation boundary for the next smoke.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m48_grounded_sam_contract.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m48_grounded_sam_contract.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M48_grounded_sam_contract_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M48_grounded_sam_contract_v0/contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M48_grounded_sam_contract_v0/optional_fields.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M48_grounded_sam_contract_v0/report.md`
+
+사실:
+
+- Status: `grounded_sam_contract_ready`.
+- Backend id: `grounded_sam_mask_backproject_v0`.
+- Existing schema: `real_proposal_prediction_jsonl_v0`.
+- Existing required proposal fields are preserved.
+- Optional mask diagnostic fields added: 9.
+- Allowed inputs: posed RGB-D frames, camera pose/intrinsics, M17 prompt labels, `GroundingDINO` boxes/scores, and `SAM` masks from the same frame.
+- Blocked inputs: `3DSSG` object instance ids, evaluation target ids, `candidate_is_target`, and `matched_3dssg_instance_id` before matching.
+- M45 bbox-depth confidence baseline remains 204 matched targets, 3210 false positives, proposal precision 0.059754.
+- Docker/model smoke executed: false.
+- Real RGB-D/open-vocabulary claim ready: false.
+- Next recommended unit: `E003-M49 Grounded-SAM Docker/model smoke implementation`.
+
+논문 주장:
+
+- E003-M48 does not create a new result claim.
+- It fixes the contract needed to test whether mask-depth backprojection is better than box-depth backprojection for proposal geometry.
+
+에이전트 추론:
+
+- `Grounded-SAM` remains the correct first external implementation route because it minimally changes the current `GroundingDINO` runner while directly isolating the box-depth projection bottleneck.
+- `OpenMask3D` should be the later 3D instance baseline route after this mask-depth route is understood.
+- `ConceptGraphs` and `HOV-SG` should remain later mapping/navigation baselines, not immediate proposal-geometry diagnosis routes.
+
+사용자 판단 필요:
+
+- None before E003-M49. The next unit should implement a short Docker/model smoke from this contract.
+
+## E003-M49 Grounded-SAM Docker/Model Smoke
+
+Implementation unit: `E003-M49_grounded_sam_smoke_v0`.
+
+Stage: background Docker/model smoke for the `E003-M48` contract. This builds the current `research2/real-smoke` image, runs `GroundingDINO` plus `SAM` over a small RGB-D subset, writes `grounded_sam_mask_backproject_v0` proposal rows, validates the existing schema, and runs the M21 matcher.
+
+Working directory:
+
+```bash
+/home/yoohyun/research2
+```
+
+Command launched:
+
+```bash
+sg docker -c 'python experiments/E003_perception_noise_expansion/tools/run_m49_grounded_sam_smoke.py --build --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M49_grounded_sam_smoke_v0 --max-scans 1 --max-frames-per-scan 2 --max-labels 12 --max-predictions 400 --max-predictions-per-frame 20 --threshold 0.08 --text-threshold 0.08'
+```
+
+Job status:
+
+- Launched: true.
+- Status: complete / verified.
+- tmux session: `e003_m49_grounded_sam`.
+- Log: `logs/20260510_001637_e003_m49_grounded_sam_smoke_tmux.log`.
+- Output path: `experiments/E003_perception_noise_expansion/artifacts/E003-M49_grounded_sam_smoke_v0/`.
+- Expected files: `container_output/real_proposals.jsonl`, `container_output/backend_contract.json`, `container_output/model_smoke.json`, `validator/coverage.json`, `matching/coverage.json`, `coverage.json`.
+- Verification command: `python -m json.tool experiments/E003_perception_noise_expansion/artifacts/E003-M49_grounded_sam_smoke_v0/coverage.json`.
+
+사실:
+
+- `run_rgbd_ov_proposals.py` now accepts `--detector grounded_sam_mask_backproject_v0`.
+- The runner now accepts `--segmentation-backend sam_vit_b`, `--sam-model-id`, `--mask-depth-filter`, `--mask-min-depth-valid-pixels`, and `--mask-point-sample-cap`.
+- The `Grounded-SAM` path uses `GroundingDINO` boxes and `facebook/sam-vit-base` masks through `transformers`.
+- The output preserves `real_proposal_prediction_jsonl_v0` required fields.
+- The output adds mask diagnostic fields including `geometry_source`, `mask_backend_id`, `mask_area_px`, `mask_depth_valid_pixel_count`, `mask_depth_valid_ratio`, `mask_centroid_world_m`, and `bbox_centroid_world_m`.
+- Status: `grounded_sam_model_smoke_ready`.
+- Docker build/run executed: true / true.
+- Prediction rows: 24.
+- Mask geometry rows: 24.
+- Rows with mask RLE: 24.
+- Validator errors/warnings: 0 / 0.
+- M21 matcher status: `detector_matching_smoke_ready`.
+- Matched proposal/target rows: 1 / 1.
+- False-positive proposal rows: 23.
+- Proposal precision smoke: 0.041667.
+- Scan target recall smoke: 0.019608.
+- Label-overlap target recall smoke: 0.043478.
+- Mean matched centroid error: 0.916258m.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M49 can support only an implementation smoke if it completes.
+- E003-M49 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- If E003-M49 completes with non-empty mask-depth rows, the next step should be E003-M50 same-subset bbox-depth vs mask-depth comparison.
+- The comparison should test whether mask-depth geometry improves matched targets, false positives, or centroid error relative to the current bbox-depth route.
+
+사용자 판단 필요:
+
+- None until E003-M49 finishes or fails.
+
+## E003-M50 Same-Subset Bbox-Depth Vs Mask-Depth
+
+Implementation unit: `E003-M50_same_subset_bbox_vs_mask_v0`.
+
+Stage: same-subset diagnostic comparison. This reruns the current `GroundingDINO` bbox-depth backend with the same scan/frame/label/prediction budget as E003-M49 and compares the M21 matching results against the E003-M49 `Grounded-SAM` mask-depth rows.
+
+Command:
+
+```bash
+sg docker -c 'python experiments/E003_perception_noise_expansion/tools/run_m50_same_subset_comparison.py --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M50_same_subset_bbox_vs_mask_v0'
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/run_m50_same_subset_comparison.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M50_same_subset_bbox_vs_mask_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M50_same_subset_bbox_vs_mask_v0/comparison_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M50_same_subset_bbox_vs_mask_v0/report.md`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M50_same_subset_bbox_vs_mask_v0/bbox_depth_baseline/`
+
+사실:
+
+- Status: `same_subset_comparison_ready`.
+- Same-subset config: max scans 1, max frames per scan 2, max labels 12, max predictions 400, max predictions per frame 20.
+- Bbox-depth backend: `groundingdino_rgbd_backproject_v0`.
+- Mask-depth backend: `grounded_sam_mask_backproject_v0`.
+- Bbox-depth: 31 proposals, 2 matched targets, 29 false positives, proposal precision 0.064516, scan target recall 0.039216, mean matched centroid error 0.591356m.
+- Mask-depth: 24 proposals, 1 matched target, 23 false positives, proposal precision 0.041667, scan target recall 0.019608, mean matched centroid error 0.916258m.
+- Mask minus bbox: matched targets -1, false positives -6, proposal precision -0.022849, scan target recall -0.019608, mean centroid error +0.324903m.
+- Weak positive: false.
+- Hard positive: false.
+- Selected next route: `do_not_scale_grounded_sam_yet`.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M50 is a same-subset diagnostic gate, not a final robustness result.
+- E003-M50 does not support scaling `Grounded-SAM` as the next paper-table route.
+- It does not support real RGB-D/open-vocabulary robustness, heldout transfer, or navigation/search claims.
+
+에이전트 추론:
+
+- `Grounded-SAM` mask-depth reduced false positives only because it produced fewer proposals, but it also lost a matched target, lowered precision/recall, and worsened centroid error.
+- Immediate scaled `Grounded-SAM` rerun would be a weak use of compute.
+- The next unit should decide between continuing with the stronger current bbox-depth route, doing targeted mask failure analysis, or moving to a stronger 3D instance baseline such as `OpenMask3D`.
+
+사용자 판단 필요:
+
+- None if `do_not_scale_grounded_sam_yet` is accepted.
+
+## E003-M51 Post-M50 Route Decision
+
+Implementation unit: `E003-M51_post_m50_route_decision_v0`.
+
+Stage: route gate after negative same-subset `Grounded-SAM` evidence. It ranks artifact-local mask failure analysis, current `bbox-depth` continuation, and `OpenMask3D` feasibility.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m51_post_m50_route_decision.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m51_post_m50_route_decision.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M51_post_m50_route_decision_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M51_post_m50_route_decision_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M51_post_m50_route_decision_v0/candidate_routes.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M51_post_m50_route_decision_v0/report.md`
+
+사실:
+
+- Status: `post_m50_route_decision_ready`.
+- Selected route: `targeted_mask_failure_analysis_first`.
+- Route ranking: `targeted_mask_failure_analysis_first` score 43, `bbox_depth_continuation_after_mask_check` score 34, `openmask3d_feasibility_after_mask_failure` score 24.
+- Next recommended unit: `E003-M52 Grounded-SAM mask failure analysis`.
+- Real RGB-D/open-vocabulary claim ready: false.
+
+논문 주장:
+
+- E003-M51 does not create a paper result claim.
+- It fixes the next route after a negative same-subset `Grounded-SAM` comparison.
+
+에이전트 추론:
+
+- Do not scale `Grounded-SAM` immediately because M50 is negative.
+- Do not jump straight to `OpenMask3D` before checking whether M50 exposed a simple mask projection or filtering issue.
+- Artifact-local mask failure analysis is the cheapest reviewer-defensible next step.
+
+사용자 판단 필요:
+
+- None if the selected diagnostic route is accepted.
+
+## E003-M52 Grounded-SAM Mask Failure Analysis
+
+Implementation unit: `E003-M52_grounded_sam_mask_failure_v0`.
+
+Stage: artifact-local failure analysis over M49/M50. This separates candidate dropout, common-target centroid shift, and match-set composition without another Docker run.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/analyze_m52_grounded_sam_mask_failure.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/analyze_m52_grounded_sam_mask_failure.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M52_grounded_sam_mask_failure_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M52_grounded_sam_mask_failure_v0/diagnosis.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M52_grounded_sam_mask_failure_v0/candidate_pairing_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M52_grounded_sam_mask_failure_v0/target_transition_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M52_grounded_sam_mask_failure_v0/report.md`
+
+사실:
+
+- Status: `grounded_sam_mask_failure_analysis_ready`.
+- Bbox-depth proposal rows: 31.
+- Mask-depth proposal rows: 24.
+- Common candidate rows by scan/frame/raw index: 24.
+- Bbox-only candidate rows: 7.
+- Mask-only candidate rows: 0.
+- `Grounded-SAM` skipped mask projection rows: 16.
+- Lost-by-mask targets: 1, label `plant`.
+- Matched-by-both targets: 1.
+- Common same-target match-distance delta mask minus bbox: -0.018907m.
+- Aggregate M50 mean centroid error delta mask minus bbox: +0.3249025m.
+- Exact per-skipped mask reason is not observable from current artifacts.
+
+논문 주장:
+
+- E003-M52 does not create a final paper claim.
+- E003-M52 supports a route decision: the current `Grounded-SAM` mask-depth path should not be scaled as-is.
+- Real RGB-D/open-vocabulary robustness remains unsupported.
+
+에이전트 추론:
+
+- Target loss primary cause is `mask_projection_candidate_dropout_before_matching`.
+- Centroid worsening primary cause is `match_set_composition_after_easy_target_dropout`.
+- The common matched `box` target is slightly better under mask-depth; the aggregate centroid error worsens because the easy bbox-depth `plant` match is dropped before matching.
+- The false-positive reduction is mostly fewer rows without precision gain.
+- Next recommended unit: `E003-M53 bbox-depth continuation and failure-boundary repair gate`.
+
+사용자 판단 필요:
+
+- None if bbox-depth continuation is accepted as the next immediate route. `OpenMask3D` remains the next external 3D instance baseline candidate after the current bbox-depth route is stabilized.
+
+## E003-M53 Bbox-Depth Continuation Repair Gate
+
+Implementation unit: `E003-M53_bbox_continuation_repair_gate_v0`.
+
+Stage: route gate after negative `Grounded-SAM` diagnosis. This decides whether to keep repairing the current `bbox-depth` route, jump to `OpenMask3D`, or move to map-level external baselines such as `Open3DSG`, `ConceptGraphs`, and `HOV-SG`.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m53_bbox_continuation_repair_gate.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m53_bbox_continuation_repair_gate.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M53_bbox_continuation_repair_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M53_bbox_continuation_repair_gate_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M53_bbox_continuation_repair_gate_v0/candidate_routes.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M53_bbox_continuation_repair_gate_v0/external_baseline_boundary.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M53_bbox_continuation_repair_gate_v0/report.md`
+
+사실:
+
+- Status: `bbox_continuation_repair_gate_ready`.
+- Selected route: `search_critical_bbox_failure_boundary_first`.
+- Next recommended unit: `E003-M54 search-critical bbox-depth failure-boundary audit`.
+- Route ranking: `search_critical_bbox_failure_boundary_first` score 46, `deployable_bbox_suppression_repair_now` score 30, `openmask3d_feasibility_now` score 27, `conceptgraphs_mapping_baseline_now` score 19, `open3dsg_mapping_baseline_now` score 16, `hovsg_navigation_mapping_baseline_now` score 10.
+- M33 scaled bbox-depth artifact covers 8 scans and 192 frames.
+- M33 matched / FP / precision: 204 / 3210 / 0.059754.
+- M52 scaled `Grounded-SAM` recommended: false.
+- M36/M37/M38 show generic suppression, split selection, and simple support-aware fixes are not claim-ready.
+
+논문 주장:
+
+- E003-M53 does not create a paper result claim.
+- E003-M53 fixes the immediate route after negative `Grounded-SAM` evidence.
+- Real RGB-D/open-vocabulary robustness remains unsupported.
+
+에이전트 추론:
+
+- 지금 `OpenMask3D`로 바로 넘어가는 것은 이르다. 현재 best `bbox-depth` route가 search decision에서 어떤 실패를 실제로 만드는지 먼저 좁혀야 한다.
+- `OpenMask3D`는 later external 3D instance proposal baseline으로 적합하다. 이유는 2D bbox/mask-depth projection이 아니라 3D instance mask proposal 품질을 비교할 수 있기 때문이다.
+- `Open3DSG`, `ConceptGraphs`, `HOV-SG`는 더 넓은 map/scene-graph/navigation baseline이다. 현재 E003의 직접 blocker인 proposal-row false positive / target dropout을 가장 작게 진단하는 baseline은 아니다.
+- 따라서 이들은 E005 map/scene-graph/navigation baseline expansion에서 다루는 것이 더 맞다.
+
+사용자 판단 필요:
+
+- None if E003-M54 search-critical bbox-depth failure-boundary audit is accepted as the next immediate unit.
+
+## E003-M54 Search-Critical Bbox Failure Boundary
+
+Implementation unit: `E003-M54_search_critical_bbox_failure_boundary_v0`.
+
+Stage: artifact-local audit linking E001/E002 search rows, M33 scaled `bbox-depth` detector failures, and M45 replay variants. This separates exact current query-instance causality from label-level detector risk.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/audit_m54_search_critical_bbox_boundary.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/audit_m54_search_critical_bbox_boundary.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M54_search_critical_bbox_failure_boundary_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M54_search_critical_bbox_failure_boundary_v0/query_search_boundary_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M54_search_critical_bbox_failure_boundary_v0/label_search_risk_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M54_search_critical_bbox_failure_boundary_v0/m45_label_policy_delta_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M54_search_critical_bbox_failure_boundary_v0/report.md`
+
+사실:
+
+- Status: `search_critical_bbox_failure_boundary_ready`.
+- E001 query rows: 294.
+- E002 reachable-first rows: 267.
+- M33 detector scans / frames: 8 / 192.
+- E001 current `rescan_id` overlap with M33 detector scans: 0.
+- Exact current query-instance joins: 0.
+- Reference-memory-only joins: 120.
+- Label overlap count: 21.
+- Existing E001/E002 search failures with label-level detector risk: 7.
+- Search-critical label candidates: `pillow` priority 8, `chair` priority 7, `plant` / `shelf` / `sofa` priority 6.
+- M45 frozen verdict remains `fail_redesign`; support-aware score does not repair the bridge.
+- Next recommended unit: `E003-M55 dynamic-pair-aligned real-proposal bridge gate`.
+
+논문 주장:
+
+- E003-M54 does not establish a final real RGB-D/open-vocabulary search robustness claim.
+- Current M33/M45 detector failures cannot be causally attached to E001/E002 current search instances because detector-ready scans do not overlap with E001 current rescans.
+- Until a dynamic-pair-aligned real-proposal denominator exists, M33/M45 can only support label-level detector stress evidence.
+
+에이전트 추론:
+
+- `chair` and `pillow` are the strongest immediate bridge labels because they already cause E001/E002 search failures and also show M33 detector risk.
+- `plant`, `shelf`, `sofa`, `table`, and `box` are detector-pressure risks, but the current artifact alignment does not prove they cause search decision failure.
+- Running `OpenMask3D` next would improve proposal-quality coverage but would not by itself fix the missing current-rescan join to E001/E002.
+
+사용자 판단 필요:
+
+- None if `E003-M55 dynamic-pair-aligned real-proposal bridge gate` is accepted as the next route.
+- Choose immediate `OpenMask3D` only if the goal is proposal-quality evidence with a weaker search-bridge claim.
+
+## E003-M55 Dynamic-Pair Bridge Gate
+
+Implementation unit: `E003-M55_dynamic_pair_bridge_gate_v0`.
+
+Stage: route gate after M54. This chooses how to connect real RGB-D/open-vocabulary proposal evidence to E001/E002 dynamic-pair search decisions.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m55_dynamic_pair_bridge_gate.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m55_dynamic_pair_bridge_gate.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M55_dynamic_pair_bridge_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M55_dynamic_pair_bridge_gate_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M55_dynamic_pair_bridge_gate_v0/candidate_routes.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M55_dynamic_pair_bridge_gate_v0/bridge_target_scan_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M55_dynamic_pair_bridge_gate_v0/report.md`
+
+사실:
+
+- Status: `dynamic_pair_bridge_gate_ready`.
+- Selected route: `stage_search_failure_current_rescans_first`.
+- Route ranking: direct current-rescan staging score 46, detector-aligned search proxy score 31, reference-memory-side bridge score 18, `OpenMask3D` before bridge score 15, label-level stress only score 14.
+- M54 exact current query-instance joins: 0.
+- M16 current real RGB-D proposal-ready query rows: 0.
+- Search-failure current rescans: 4.
+- Search-failure current rescans with semantic triplet ready: 4.
+- Search-failure current rescans already sequence-ready: 0.
+- Priority scans: `5555106a-36f1-29c0-8913-df1ba3c3cfd5`(`chair`), `4731976c-f9f7-2a1a-95cc-31c4d1751d0b`(`pillow`), `ddc73795-765b-241a-9c5d-b97744afe077`(`pillow`), `10b17957-3938-2467-88a5-9e9254930dad`(`pillow`).
+- Next recommended unit: `E003-M56 current-rescan sequence payload staging plan`.
+
+논문 주장:
+
+- E003-M55 does not create a paper result claim.
+- E003-M55 fixes the bridge route needed before real RGB-D/open-vocabulary proposal evidence can support downstream search claims.
+- Real RGB-D/open-vocabulary search robustness remains blocked until current-rescan detector outputs are available and evaluated against E001/E002 rows.
+
+에이전트 추론:
+
+- The direct route is stronger than an M17 detector-aligned proxy because it preserves dynamic-pair current-rescan identity.
+- `OpenMask3D` should wait until the bridge denominator is fixed; otherwise it improves proposal-quality evidence without solving the search-causality gap.
+- E003-M56 should plan the 4-scan sequence payload staging under the long-running/background task rule.
+
+사용자 판단 필요:
+
+- None if E003-M56 current-rescan sequence payload staging plan is accepted as the next unit.
+
+## E003-M56 Current-Rescan Sequence Staging Plan
+
+Implementation unit: `E003-M56_current_rescan_sequence_staging_plan_v0`.
+
+Stage: staging plan for the 4 current rescans selected by E003-M55. This records exact download/decompression commands, output paths, log path, and verification command. It does not launch the long-running job.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m56_current_rescan_sequence_staging.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m56_current_rescan_sequence_staging.py`
+- `experiments/E003_perception_noise_expansion/tools/verify_m56_sequence_payloads.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/command_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/download_manifest.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/run_sequence_staging.sh`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/prelaunch_verification/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/report.md`
+
+사실:
+
+- Status: `current_rescan_sequence_staging_plan_ready`.
+- Target scan count: 4.
+- Prelaunch sequence-ready target scan count: 0.
+- Download-required scan count: 4.
+- Decompression-required scan count after zip appears: 4.
+- Background job status: `not_launched`.
+- Default downloader: `wget -c`.
+- Fallback downloader: official `local_dataset/3RScan/download_3rscan.py --type sequence.zip`.
+- Launch command is recorded in `command_plan.json`.
+- Verification command is recorded in `command_plan.json` and uses `verify_m56_sequence_payloads.py --require-ready`.
+- Next recommended unit: `E003-M57 launch current-rescan sequence staging background job`.
+
+논문 주장:
+
+- E003-M56 does not create a paper result claim.
+- E003-M56 fixes the reproducible staging plan needed before current-rescan detector outputs can be evaluated against E001/E002 rows.
+- Real RGB-D/open-vocabulary search robustness remains blocked until the staging job completes and detector inference/evaluation runs.
+
+에이전트 추론:
+
+- `wget -c` is preferred because it is resumable and matches the long-running/background task rule.
+- The job should be launched with `tmux` and logged under `logs/`, not monitored continuously by Codex.
+- The next unit should launch the recorded command and then return to other work until verification is needed.
+
+사용자 판단 필요:
+
+- None; E003-M57 has launched the recorded background job.
+
+## E003-M57 Sequence Staging Job Launch
+
+Implementation unit: `E003-M57_sequence_staging_job_launch_v0`.
+
+Stage: background launch for the long-running M56 sequence staging job.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/launch_m57_sequence_staging_job.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/launch_m57_sequence_staging_job.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M57_sequence_staging_job_launch_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M57_sequence_staging_job_launch_v0/report.md`
+
+사실:
+
+- Status: `sequence_staging_job_launched`.
+- Background job status at launch: `running`.
+- Completion status: M56 verifier reports `sequence_payloads_ready`, ready rows 4 / 4.
+- tmux session: `e003_m56_sequence_stage`.
+- Log path: `logs/20260510_170443_e003_m56_sequence_staging.log`.
+- Target scans: `5555106a-36f1-29c0-8913-df1ba3c3cfd5`, `4731976c-f9f7-2a1a-95cc-31c4d1751d0b`, `ddc73795-765b-241a-9c5d-b97744afe077`, `10b17957-3938-2467-88a5-9e9254930dad`.
+- Verification command: `python experiments/E003_perception_noise_expansion/tools/verify_m56_sequence_payloads.py --manifest experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/download_manifest.jsonl --out-dir experiments/E003_perception_noise_expansion/artifacts/E003-M56_current_rescan_sequence_staging_plan_v0/verification --require-ready`.
+
+논문 주장:
+
+- E003-M57 does not create a paper result claim.
+- It only prepares the payloads needed before direct current-rescan detector evaluation.
+
+에이전트 추론:
+
+- Do not monitor the job continuously.
+- Direct current-rescan detector/evaluation bridge design can start from the verified 4-scan payloads.
+
+사용자 판단 필요:
+
+- None; the background job has ended and the payload verifier passed.
+
+## E003-M58 Direct Current-Rescan Detector Bridge Design
+
+Implementation unit: `E003-M58_direct_current_rescan_bridge_design_v0`.
+
+Stage: design contract after E003-M57. This builds the direct detector/evaluation bridge denominator that connects E001/E002 search-failure rows to the verified current-rescan RGB-D sequences.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m58_direct_current_rescan_bridge.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m58_direct_current_rescan_bridge.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/direct_bridge_query_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/real_proposal_query_manifest.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/real_proposal_object_targets.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/prompt_set.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/evaluation_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/detector_run_command_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0/report.md`
+
+사실:
+
+- Status: `direct_current_rescan_bridge_design_ready`.
+- Direct bridge query rows: 7.
+- Direct bridge base rows: 5.
+- Direct bridge scans: 4.
+- Target labels: `chair`, `pillow`.
+- Linked bridge query target uids: 5 / 5.
+- Object target rows: 29.
+- Same-label distractor object rows: 24.
+- Prompt label count: 2.
+- Sampled frame count for next detector run: 93.
+- Detector run executed: false.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary search claim ready: false.
+- Next recommended unit: `E003-M59 direct current-rescan detector bridge Docker run`.
+
+논문 주장:
+
+- E003-M58 supports saying that the direct current-rescan bridge denominator is ready.
+- E003-M58 preserves E001/E002 dynamic-pair current-rescan identity, which was the missing causality link in E003-M54.
+- E003-M58 does not support a real RGB-D/open-vocabulary search result because no detector run or query-level bridge evaluation has been executed.
+
+에이전트 추론:
+
+- The next detector run should use the M58 artifact as `--m17-dir` so the existing Docker runner and M21 matcher can be reused.
+- Query-level bridge evaluation should be a separate E003-M60 step after detector output exists.
+- `OpenMask3D` remains a later external baseline; it should not precede the direct bridge detector run unless this route fails.
+
+사용자 판단 필요:
+
+- None. The next unit should launch or execute the recorded E003-M59 detector command if compute is available.
+
+## E003-M59 Direct Current-Rescan Detector Launch
+
+Implementation unit: `E003-M59_direct_current_rescan_detector_launch_v0`.
+
+Stage: long-running Docker detector launch after E003-M58. This starts the direct current-rescan detector bridge run in a background `tmux` session and records the command, log, output path, expected files, and verification command.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/launch_m59_direct_current_rescan_detector.py --sudo-password-stdin
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/launch_m59_direct_current_rescan_detector.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M59_direct_current_rescan_detector_launch_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M59_direct_current_rescan_detector_launch_v0/report.md`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M59_direct_current_rescan_detector_launch_v0/run_m59_detector.sh`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M59_direct_current_rescan_detector_launch_v0/launch_command.txt`
+
+사실:
+
+- Status: `direct_current_rescan_detector_job_launched`.
+- Background job status: `running`.
+- tmux session: `e003_m59_direct_bridge`.
+- Log path: `logs/20260511_114356_e003_m59_direct_current_rescan_detector_run.log`.
+- Output path: `experiments/E003_perception_noise_expansion/artifacts/E003-M59_direct_current_rescan_detector_run_v0/`.
+- Target scans: 4.
+- Bridge query rows: 7.
+- Expected files are recorded in `coverage.json`.
+- Verification command is recorded in `coverage.json`.
+- Sudo password value is not recorded.
+
+논문 주장:
+
+- E003-M59 launch does not create a paper result claim.
+- E003-M59 only starts the Docker detector run required before direct current-rescan query-level bridge evaluation.
+
+에이전트 추론:
+
+- Do not continuously monitor the detector job.
+- Before E003-M60, verify expected files, validator coverage, and matching coverage.
+- If the job fails, inspect only the log tail or targeted error lines.
+
+사용자 판단 필요:
+
+- None while the background job is running.
 
 ## Real Navigation Note
 

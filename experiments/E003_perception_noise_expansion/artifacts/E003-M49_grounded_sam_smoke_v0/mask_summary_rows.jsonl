@@ -1,0 +1,1 @@
+{"all_prediction_rows_have_mask_geometry": true, "mask_backprojection_policy_rows": 24, "mask_depth_valid_pixel_count_mean": 2420.25, "mask_depth_valid_ratio_mean": 0.7050974166666667, "mask_geometry_rows": 24, "prediction_rows": 24, "rows_with_bbox_centroid_diagnostic": 24, "rows_with_mask_rle": 24}

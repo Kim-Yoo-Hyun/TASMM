@@ -1,0 +1,35 @@
+{
+  "contract_id": "pre_cap_candidate_pool_export_for_offline_replay_v0",
+  "export_stage": "after_prompt_label_cleanup_and_support_evidence_before_spatial_consolidation_and_caps",
+  "offline_replay_score_modes": [
+    "confidence",
+    "confidence_sqrt_depth",
+    "confidence_sqrt_depth_support_temporal_v0"
+  ],
+  "purpose": "Make support-aware scoring ablations replayable without repeated detector inference.",
+  "reproduction_check": "Offline replay with the runner score mode must reproduce the runner selected stable-candidate set on the M44 short smoke before any scaled export run.",
+  "required_fields": [
+    "scan_id",
+    "frame_ids",
+    "label_canonical",
+    "centroid_world_m",
+    "confidence",
+    "depth_valid_pixel_count",
+    "raw_candidate_uid",
+    "support_evidence_policy",
+    "support_spatial_neighbor_count_r1p0m",
+    "support_temporal_neighbor_frame_count_r2p0m"
+  ],
+  "runner_new_args": [
+    {
+      "arg": "--export-pre-cap-candidate-pool",
+      "default": false,
+      "type": "flag"
+    },
+    {
+      "arg": "--pre-cap-candidate-pool-output",
+      "default": "/outputs/pre_cap_candidate_pool.jsonl"
+    }
+  ],
+  "scaled_use": "After M44 smoke passes, run one 8-scan detector job that exports the candidate pool; compare score modes offline and use the same rows for support score redesign if needed."
+}

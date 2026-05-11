@@ -1,0 +1,83 @@
+{
+  "docker_rerun_plan_ready": true,
+  "m28_replay_after_detector_cap": true,
+  "m29_version": "e003_m29_pre_cap_policy_integration_gate_v0",
+  "next_recommended_unit": "E003-M30 pre-cap policy Docker runner implementation/rerun",
+  "output_contract_ready": true,
+  "paper_table_command_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "runner_args_contract_ready": true,
+  "runner_code_updated_in_m29": false,
+  "runner_inspection": {
+    "missing_expected_points": [],
+    "points": {
+      "argparse_max_predictions": {
+        "line": 578,
+        "needle": "parser.add_argument(\"--max-predictions\", default=20, type=int)",
+        "snippet": "    parser.add_argument(\"--max-predictions\", default=20, type=int)"
+      },
+      "argparse_max_predictions_per_frame": {
+        "line": 579,
+        "needle": "parser.add_argument(\"--max-predictions-per-frame\", type=int)",
+        "snippet": "    parser.add_argument(\"--max-predictions-per-frame\", type=int)"
+      },
+      "current_frame_cap_check": {
+        "line": 358,
+        "needle": "if max_predictions_per_frame is not None and frame_predictions >= max_predictions_per_frame:",
+        "snippet": "                if max_predictions_per_frame is not None and frame_predictions >= max_predictions_per_frame:"
+      },
+      "current_global_cap_check": {
+        "line": 355,
+        "needle": "if len(rows) >= max_predictions:",
+        "snippet": "                if len(rows) >= max_predictions:"
+      },
+      "detector_result_loop": {
+        "line": 351,
+        "needle": "for local_index, (box, score, raw_label) in enumerate(",
+        "snippet": "            for local_index, (box, score, raw_label) in enumerate("
+      },
+      "final_jsonl_write": {
+        "line": 422,
+        "needle": "write_jsonl(output_path, rows)",
+        "snippet": "    write_jsonl(output_path, rows)"
+      },
+      "final_row_append": {
+        "line": 375,
+        "needle": "rows.append(",
+        "snippet": "                rows.append("
+      },
+      "model_status_metadata": {
+        "line": 695,
+        "needle": "write_json(args.output.parent / \"model_smoke.json\", model_status)",
+        "snippet": "            write_json(args.output.parent / \"model_smoke.json\", model_status)"
+      }
+    },
+    "runner": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/docker/real_proposals/run_rgbd_ov_proposals.py",
+    "source_line_count": 757,
+    "status": "runner_cap_sites_found"
+  },
+  "selected_m28_policy": {
+    "false_positive_proposal_rate": 0.9213759213759214,
+    "false_positive_proposal_rows": 375,
+    "global_cap": 1440,
+    "label_overlap_target_recall": 0.3404255319148936,
+    "label_overlap_target_rows": 94,
+    "matched_centroid_error_m": {
+      "max": 0.996147,
+      "mean": 0.477722375,
+      "median": 0.419153,
+      "min": 0.101215
+    },
+    "matched_proposal_rows": 32,
+    "matched_target_rows": 32,
+    "per_scan_label_cap": 24,
+    "proposal_precision": 0.07862407862407862,
+    "proposal_rows": 407,
+    "scan_target_recall": 0.32323232323232326,
+    "scan_target_rows": 99,
+    "score_mode": "confidence",
+    "spatial_consolidation_radius_m": 0.5
+  },
+  "selected_policy_id": "cap_aware_label_balanced_ranking_v0",
+  "status": "pre_cap_policy_integration_gate_ready"
+}

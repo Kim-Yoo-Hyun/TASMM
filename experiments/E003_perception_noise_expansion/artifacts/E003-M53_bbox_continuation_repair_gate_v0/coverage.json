@@ -1,0 +1,240 @@
+{
+  "candidate_routes": [
+    {
+      "claim_relevance": 5,
+      "current_artifact_fit": 5,
+      "dependency_risk": 0,
+      "evidence_basis": [
+        "M33 scaled bbox-depth artifact covers 8 scans and 192 frames.",
+        "M33 has 204 matched targets and 3210 false-positive rows.",
+        "M52 shows Grounded-SAM should not scale as-is, so the current best route is still bbox-depth.",
+        "M36/M37/M38 show generic suppression, split selection, and simple support-aware fixes are not claim-ready."
+      ],
+      "feasibility_score": 46,
+      "implementation_burden": 1,
+      "m38_support_transfer_pass": false,
+      "m46_best_policy": "confidence",
+      "m52_scaled_grounded_sam_recommended": false,
+      "main_risk": "may only produce a tighter claim boundary unless it identifies a search-critical subset where detector failures matter",
+      "next_unit": "E003-M54 search-critical bbox-depth failure-boundary audit",
+      "reviewer_defense_value": 5,
+      "route_id": "search_critical_bbox_failure_boundary_first",
+      "route_type": "current_best_route_defense_and_repair",
+      "scope_drift_risk": 0,
+      "top_tier_path_value": 4
+    },
+    {
+      "claim_relevance": 4,
+      "current_artifact_fit": 4,
+      "dependency_risk": 1,
+      "evidence_basis": [
+        "M36 diagnostic policy keeps 204 matched targets and reduces false positives to 1585.",
+        "M37 dev-selected policy transfers poorly: heldout matched targets 81 / 97.",
+        "A deployable repair must avoid labelwise overfitting and preserve visible-proxy recall."
+      ],
+      "feasibility_score": 30,
+      "implementation_burden": 3,
+      "m38_support_transfer_pass": false,
+      "m46_best_policy": "confidence",
+      "m52_scaled_grounded_sam_recommended": false,
+      "main_risk": "more proposal filtering may repeat M36/M37 overfit and M45/M46 support-score failure",
+      "next_unit": "E003-M54 deployable bbox-depth suppression repair smoke",
+      "reviewer_defense_value": 4,
+      "route_id": "deployable_bbox_suppression_repair_now",
+      "route_type": "proposal_filter_repair",
+      "scope_drift_risk": 1,
+      "top_tier_path_value": 3
+    },
+    {
+      "claim_relevance": 4,
+      "current_artifact_fit": 3,
+      "dependency_risk": 4,
+      "evidence_basis": [
+        "OpenMask3D is the strongest later 3D instance proposal baseline candidate in M47.",
+        "It is more directly comparable to proposal precision/recall than map-level baselines.",
+        "M52 says Grounded-SAM should not scale, but it does not prove all external 3D instance baselines should be skipped."
+      ],
+      "feasibility_score": 27,
+      "implementation_burden": 4,
+      "m38_support_transfer_pass": false,
+      "m46_best_policy": "confidence",
+      "m52_scaled_grounded_sam_recommended": false,
+      "main_risk": "MinkowskiEngine/checkpoint/data-format burden can dominate before a small feasibility result",
+      "next_unit": "E003-M54 OpenMask3D scene-format feasibility gate",
+      "reviewer_defense_value": 5,
+      "route_id": "openmask3d_feasibility_now",
+      "route_type": "external_3d_instance_baseline",
+      "scope_drift_risk": 2,
+      "top_tier_path_value": 5
+    },
+    {
+      "claim_relevance": 3,
+      "current_artifact_fit": 3,
+      "dependency_risk": 5,
+      "evidence_basis": [
+        "ConceptGraphs is relevant for object-centric open-vocabulary mapping comparison.",
+        "Its strongest role is a map baseline after the stale-memory/search evaluation bridge is stable.",
+        "It is not the smallest repair for the current proposal-row false-positive boundary."
+      ],
+      "feasibility_score": 19,
+      "implementation_burden": 5,
+      "m38_support_transfer_pass": false,
+      "m46_best_policy": "confidence",
+      "m52_scaled_grounded_sam_recommended": false,
+      "main_risk": "heavy dependency chain, including Grounded-SAM/LLaVA style components, makes it a poor first debugging gate",
+      "next_unit": "E005 ConceptGraphs mapping baseline adapter planning",
+      "reviewer_defense_value": 5,
+      "route_id": "conceptgraphs_mapping_baseline_now",
+      "route_type": "open_vocabulary_mapping_baseline",
+      "scope_drift_risk": 4,
+      "top_tier_path_value": 5
+    },
+    {
+      "claim_relevance": 3,
+      "current_artifact_fit": 2,
+      "dependency_risk": 3,
+      "evidence_basis": [
+        "Open3DSG is relevant to scene-graph/map representation comparison.",
+        "The current E003 blocker is detector proposal false positives and target dropout, not scene graph construction.",
+        "It needs a separate adapter from scene graph outputs to dynamic object search rows."
+      ],
+      "feasibility_score": 16,
+      "implementation_burden": 4,
+      "m38_support_transfer_pass": false,
+      "m46_best_policy": "confidence",
+      "m52_scaled_grounded_sam_recommended": false,
+      "main_risk": "high chance of shifting from current E003 proposal failure into a separate representation benchmark",
+      "next_unit": "E005 scene-graph mapping baseline planning",
+      "reviewer_defense_value": 4,
+      "route_id": "open3dsg_mapping_baseline_now",
+      "route_type": "scene_graph_mapping_baseline",
+      "scope_drift_risk": 4,
+      "top_tier_path_value": 4
+    },
+    {
+      "claim_relevance": 2,
+      "current_artifact_fit": 2,
+      "dependency_risk": 5,
+      "evidence_basis": [
+        "HOV-SG is relevant for hierarchical open-vocabulary scene graph and navigation/search claims.",
+        "Real navigation SR/SPL remains unsupported in the current workspace.",
+        "It is better suited after E004/E005 task and navigation benchmark integration."
+      ],
+      "feasibility_score": 10,
+      "implementation_burden": 5,
+      "m38_support_transfer_pass": false,
+      "m46_best_policy": "confidence",
+      "m52_scaled_grounded_sam_recommended": false,
+      "main_risk": "too broad for immediate M45 proposal failure; better suited once navigation/hierarchy claims are active",
+      "next_unit": "E005 HOV-SG navigation/mapping baseline planning",
+      "reviewer_defense_value": 4,
+      "route_id": "hovsg_navigation_mapping_baseline_now",
+      "route_type": "hierarchical_mapping_navigation_baseline",
+      "scope_drift_risk": 5,
+      "top_tier_path_value": 5
+    }
+  ],
+  "evidence_summary": {
+    "m33": {
+      "evaluated_frame_count": 192,
+      "evaluated_scan_count": 8,
+      "false_positive_proposal_rows": 3210,
+      "matched_target_rows": 204,
+      "proposal_precision": 0.05975395430579965,
+      "real_rgbd_or_open_vocab_claim_ready": false,
+      "visibility_proxy_is_true_visibility": false
+    },
+    "m36": {
+      "diagnostic_policy": "labelwise_rank_cap_oracle_retain_0p95",
+      "selected_deployable_policy": "global_rank_cap_le_20",
+      "split_validation_required": true
+    },
+    "m37": {
+      "label_stratified_validation_feasible": false,
+      "runner_integration_recommended": false,
+      "selected_candidate_retention": 0.8350515463917526
+    },
+    "m38": {
+      "stronger_split_feasible_with_current_scans": false,
+      "support_transfer_pass": false
+    },
+    "m46": {
+      "hard_pass_policy_count": 0,
+      "weak_positive_policy_count": 0
+    },
+    "m52": {
+      "scaled_grounded_sam_recommended": false,
+      "target_loss_primary_cause": "mask_projection_candidate_dropout_before_matching"
+    }
+  },
+  "external_baseline_boundary": [
+    {
+      "baseline": "OpenMask3D",
+      "immediate_role": "later_external_3d_instance_proposal_baseline",
+      "m47_score": 24,
+      "output_fit": "3D instance masks can map to proposal centroids and open-vocabulary labels, but adapter work is nontrivial",
+      "reason_not_immediate": "M52 only showed the current Grounded-SAM route should not scale; the current best bbox-depth route still needs a defensible failure-boundary bridge before another heavy external dependency.",
+      "reason_to_keep": "It directly tests whether 3D open-vocabulary instance masks reduce proposal false positives better than 2D bbox/mask-depth projection."
+    },
+    {
+      "baseline": "Open3DSG",
+      "immediate_role": "later_scene_graph_mapping_baseline",
+      "m47_score": null,
+      "output_fit": "Scene graph/map representation baseline; needs a separate adapter to the current proposal-row and dynamic search schema.",
+      "reason_not_immediate": "The current blocker is proposal-row false positives and target dropout under real RGB-D/open-vocabulary output, not 3D scene graph construction quality.",
+      "reason_to_keep": "It is relevant when the paper compares semantic map or scene-graph representation quality."
+    },
+    {
+      "baseline": "ConceptGraphs",
+      "immediate_role": "later_open_vocabulary_mapping_baseline",
+      "m47_score": 16,
+      "output_fit": "object-centric map/graph is highly relevant to semantic mapping, but less direct for M45 proposal-quality diagnosis",
+      "reason_not_immediate": "It is a mapping stack, not the smallest test for the current bbox-depth proposal failure boundary.",
+      "reason_to_keep": "It is a strong object-centric open-vocabulary mapping baseline for semantic map comparison."
+    },
+    {
+      "baseline": "HOV-SG",
+      "immediate_role": "later_hierarchical_mapping_navigation_baseline",
+      "m47_score": 6,
+      "output_fit": "hierarchical graph is valuable for language navigation, but not a direct proposal-quality replacement",
+      "reason_not_immediate": "Navigation/hierarchy claims are still blocked by real navigation source and downstream benchmark integration.",
+      "reason_to_keep": "It is relevant for hierarchical open-vocabulary scene graph and navigation/search claims."
+    },
+    {
+      "baseline": "OVIR-3D",
+      "immediate_role": "fallback_3d_retrieval_baseline",
+      "m47_score": 14,
+      "output_fit": "ranked 3D instance retrieval can be compared for query success, but proposal-row matching needs a custom adapter",
+      "reason_not_immediate": "Its retrieval-oriented output is less direct for proposal precision/recall and stale-memory search rows.",
+      "reason_to_keep": "It may provide a 3D instance retrieval route if OpenMask3D is blocked."
+    }
+  ],
+  "m53_version": "e003_m53_bbox_continuation_repair_gate_v0",
+  "next_recommended_unit": "E003-M54 search-critical bbox-depth failure-boundary audit",
+  "paper_table_command_ready": false,
+  "real_rgbd_or_open_vocab_claim_ready": false,
+  "selected_route": {
+    "claim_relevance": 5,
+    "current_artifact_fit": 5,
+    "dependency_risk": 0,
+    "evidence_basis": [
+      "M33 scaled bbox-depth artifact covers 8 scans and 192 frames.",
+      "M33 has 204 matched targets and 3210 false-positive rows.",
+      "M52 shows Grounded-SAM should not scale as-is, so the current best route is still bbox-depth.",
+      "M36/M37/M38 show generic suppression, split selection, and simple support-aware fixes are not claim-ready."
+    ],
+    "feasibility_score": 46,
+    "implementation_burden": 1,
+    "m38_support_transfer_pass": false,
+    "m46_best_policy": "confidence",
+    "m52_scaled_grounded_sam_recommended": false,
+    "main_risk": "may only produce a tighter claim boundary unless it identifies a search-critical subset where detector failures matter",
+    "next_unit": "E003-M54 search-critical bbox-depth failure-boundary audit",
+    "reviewer_defense_value": 5,
+    "route_id": "search_critical_bbox_failure_boundary_first",
+    "route_type": "current_best_route_defense_and_repair",
+    "scope_drift_risk": 0,
+    "top_tier_path_value": 4
+  },
+  "status": "bbox_continuation_repair_gate_ready"
+}
