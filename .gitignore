@@ -11,6 +11,7 @@ __pycache__/
 
 # Virtual environments and local secrets
 .venv/
+.venv_tools/
 venv/
 env/
 .env
@@ -28,4 +29,5 @@ Thumbs.db
 
 **/artifacts/
 **/container_output/
+**/external/
 *.jsonl

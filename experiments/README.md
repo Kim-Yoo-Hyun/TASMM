@@ -1,6 +1,6 @@
 # Experiments
 
-Updated: 2026-05-11
+Updated: 2026-05-15
 
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
@@ -8,7 +8,7 @@ Updated: 2026-05-11
 
 ## Status
 
-Main experiment implementation stage has started. E001-M01 through E001-M05 artifacts, E002-M01 through E002-M09 artifacts, and E003-M00 through E003-M58 artifacts are complete. E003 has a Dockerized real-detector backend, scaled real-proposal diagnostics, failed support-aware replay/redesign evidence, an external baseline feasibility gate, a negative `Grounded-SAM` mask-depth diagnostic, a search-critical bbox boundary audit, a dynamic-pair bridge gate, verified current-rescan sequence payloads, and a direct current-rescan detector/evaluation bridge design. E003-M59 direct current-rescan detector bridge Docker run has been launched in background tmux session `e003_m59_direct_bridge` for 7 search-failure query rows across 4 scans.
+Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, and E005-M01 through E005-M45 are complete/verified with constraints through heldout runtime launch and non-runtime heldout metric conversion contract. E003 has Dockerized real-detector diagnostics and expanded direct current-rescan metrics for 96 query rows over 4 RGB-D-ready current rescans. E004 evaluates `task_context_memory_trust_reobserve_v0` and supports the memory-trust decision claim with limited task-context-specific strength. E005 selected `DualMap` first, then moved to `ConceptGraphs` after faithful `DualMap` object-map outputs were missing. `ConceptGraphs` now has 4-scan query-level metrics, failure boundary, a 13-scan heldout scale contract, 9/9 heldout scans sequence-ready, 9/9 heldout scans `ConceptGraphs` staged-layout ready, `heldout_b01` running as a 3-scan tmux background runtime job, and an M45 heldout metric contract ready for post-M44 conversion. Final baseline claim remains false. The next step is E005-M44 completion verification after the background job finishes.
 
 ## Active Experiment
 
@@ -16,12 +16,14 @@ Main experiment implementation stage has started. E001-M01 through E001-M05 arti
 | --- | --- | --- | --- |
 | E001 | M01-M05 artifacts ready | [E001_semantic_pair_dynamic_search_proxy](E001_semantic_pair_dynamic_search_proxy/README.md) | Input to E002 |
 | E002 | M01-M09 path-cost artifacts ready | [E002_path_cost_bridge](E002_path_cost_bridge/README.md) | Input to E003 |
-| E003 | M00-M59 detector job running | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Verify E003-M59 completion, then run E003-M60 query-level bridge evaluation |
+| E003 | M00-M75 query bridge ready | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Input to E004 |
+| E004 | M01-M05 ready with constraints | [E004_task_context_memory_trust](E004_task_context_memory_trust/README.md) | Input to E005 |
+| E005 | M01-M43 heldout runtime running | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Verify `ConceptGraphs` heldout runtime batch completion |
 
 ## 사실
 
 - Active hypothesis: `hypothesis/CAND-001/H001_stale-object-memory/`.
-- Active experiment: `E003_perception_noise_expansion`.
+- Active experiment: `E005_external_baseline_transition`.
 - E001 is the first main experiment for H001.
 - E001 starts as a proxy semantic-pair dynamic object search benchmark.
 - E002 starts from E001 rows and attaches path/search-cost bridge fields.
@@ -197,6 +199,121 @@ Main experiment implementation stage has started. E001-M01 through E001-M05 arti
 - E003-M43 marks existing candidate-pool replay available false and runner edit required true.
 - E003-M44 exports a 629-row pre-cap candidate pool and verifies offline replay reproduction for `confidence_sqrt_depth_support_temporal_v0`.
 - E003-M44 runner selected rows / offline replay selected rows: 95 / 95, ordered and set reproduction true / true.
+- E003-M45 confirms support-aware replay fails the frozen hard/weak-positive criteria.
+- E003-M46 confirms bounded support-aware score redesign is not enough, so external route and direct bridge work are required.
+- E003-M50 confirms `Grounded-SAM mask-depth` is not a positive replacement for `bbox-depth` on the same subset.
+- E003-M54 confirms previous detector-ready scans cannot be directly attached to E001/E002 current search failures.
+- E003-M59 verifies the first direct current-rescan detector bridge: 96 proposals, 21 matched proposals, precision 0.218750, scan target recall 0.724138.
+- E003-M60 query-level bridge shows target detection on 3 / 7 query rows, but `detector_task_budget_v0` success remains 0 / 7.
+- E003-M62 shows bounded repair recovers only 2 / 7 rows, while unbounded repair has high expected search cost.
+- E003-M71 confirms `OpenMask3D` Docker execution is blocked by `MinkowskiEngine` dependency setup in the current environment.
+- E003-M73 expands the direct detector-ready denominator to 96 query rows over 4 RGB-D-ready current rescans.
+- E003-M74 completion verification is ready: 478 proposals, 12,192 pre-cap candidate rows, 47 / 62 matched targets, proposal precision 0.098326, scan target recall 0.758065, false-positive proposal rate 0.901674.
+- E003-M75 joins E003-M74 proposals to 96 M73 query rows: query target detected 87 / 96, unique target detected 29 / 32, mean detected target rank 9.034483, mean false positives before target 8.034483.
+- E003-M75 `detector_task_budget_v0` succeeds on 13 / 96 rows; bounded repair succeeds on 33 / 96 rows with higher mean `ExpectedSearchCost` 4.937500.
+- E003-M75 keeps real RGB-D/open-vocabulary search claim readiness false and selects the E004 transition gate as the next step.
+- E004-M01 transition gate is complete with status `e004_transition_ready_with_constraints`.
+- E004-M01 confirms bounded repair improves query-level success by 20 rows over task budget, but task-context-specific effect readiness is false.
+- E004-M01 selects E004-M02 as the next unit: design the task-context memory trust / re-observation decision metric contract.
+- E004-M02 metric contract is complete with status `e004_m02_metric_contract_ready`.
+- E004-M02 fixes allowed policy inputs, blocked leakage inputs, primary metrics, task-context-specific metrics, and E004-M03 success gates.
+- E004-M03 memory trust policy is complete with status `e004_m03_task_context_tradeoff_ready_with_constraints`.
+- E004-M03 `static_memory_only_v0` succeeds on 63 / 96 rows.
+- E004-M03 `context_agnostic_memory_trust_reobserve_v0` succeeds on 66 / 96 rows.
+- E004-M03 `task_context_memory_trust_reobserve_v0` succeeds on 68 / 96 rows, with mean `ExpectedSearchCost` 2.354167 and `AttemptSPL` proxy 0.675347.
+- E004-M03 task-context-specific gain over context-agnostic memory trust is concentrated in `high_value_fetch`: +2 success rows with +0.500000 mean `ExpectedSearchCost`.
+- E004-M03 keeps final real RGB-D/open-vocabulary robustness, deployable search policy, and real navigation `SR` / `SPL` claim readiness false.
+- E004-M04 claim-boundary ablation is complete with status `e004_m04_claim_boundary_ready`.
+- E004-M04 `context_agnostic_memory_trust_reobserve_v0`: 66 / 96, mean `ExpectedSearchCost` 2.187500.
+- E004-M04 `task_context_memory_trust_reobserve_v0`: 68 / 96, mean `ExpectedSearchCost` 2.354167.
+- E004-M04 `all_high_value_memory_trust_counterfactual_v0`: 72 / 96, mean `ExpectedSearchCost` 2.687500.
+- E004-M04 task-context-specific claim strength is `limited_positive`; memory-trust decision claim readiness is true.
+- E004-M05 scale/split stress is complete with status `e004_m05_split_stress_ready_limited_task_context`.
+- E004-M05 task-context vs static success delta is +5 rows; task-context vs context-agnostic success delta is +2 rows.
+- E004-M05 leave-one-scan memory-trust positive and task-context positive gates are true.
+- E004-M05 bootstrap positive rates: task-context vs static 0.952, task-context vs context-agnostic 0.872, all-high-value vs task-context 0.872.
+- E004-M05 task-context positive label groups are only `chair` and `pillow`; label breadth sufficient is false.
+- E005-M01 external baseline transition is complete with status `e005_m01_external_baseline_transition_ready`.
+- E005-M01 scored 10 candidate baselines and selected `DualMap` as the first external route.
+- E005-M01 selected `ConceptGraphs` as backup, because it is the strongest open-vocabulary graph mapping fallback over posed RGB-D observations.
+- E005-M01 keeps `OpenMask3D` as a later 3D instance proposal baseline because the local Docker/MinkowskiEngine blocker is still present.
+- E005-M02 `DualMap` source/interface audit is complete with status `e005_m02_dualmap_interface_audit_ready_with_staging_required`.
+- E005-M02 checked official `DualMap` repo commit `157235ec49e6a1f439babbc571c4c02ad1f06aa9` and license `Apache-2.0`.
+- E005-M02 direct drop-in to current E004 JSONL rows: false.
+- E005-M02 Dataset Mode staging route feasible: true.
+- E005-M02 adapter contract ready: true.
+- E005-M02 external baseline comparison ready: false.
+- E005-M03 `DualMap` 3RScan dataset-format staging feasibility is complete with status `e005_m03_dualmap_3rscan_staging_feasibility_ready_with_conversion_required`.
+- E005-M03 selected scans from E003-M73: 4.
+- E005-M03 preflight-ready scans: 4 / 4.
+- E005-M03 RGB-D-pose triplets across selected scans: 826.
+- E005-M03 selected adapter: `scannet_exported_3rscan_adapter_v0`.
+- E005-M03 materialization required: true.
+- E005-M03 depth conversion `.pgm` -> `.png` required: true.
+- E005-M03 object `*.pkl` schema inspection ready: false.
+- E005-M04 `DualMap` staging root materialization is complete with status `e005_m04_dualmap_staging_root_materialized_smoke_ready`.
+- E005-M04 staged dataset root: `local_dataset/DualMap_staged/3rscan_scannet_exported/scannet`.
+- E005-M04 materialized scans: 4 / 4.
+- E005-M04 color symlinks / depth PNG / pose symlinks: 826 / 826 / 826.
+- E005-M04 intrinsic files: 4.
+- E005-M04 runtime command plan ready: true.
+- E005-M04 `DualMap` runtime launched: false.
+- E005-M04 object `*.pkl` schema inspected: false.
+- E005-M05 `DualMap` runtime preflight is complete with status `e005_m05_dualmap_runtime_blocked_env_bootstrap_required`.
+- E005-M05 official repo head matches audited commit `157235ec49e6a1f439babbc571c4c02ad1f06aa9`.
+- E005-M05 smoke scan color/depth/pose frame counts: 93 / 93 / 93.
+- E005-M05 Docker daemon ready: true.
+- E005-M05 NVIDIA runtime detected: true.
+- E005-M05 GPU probe: `NVIDIA GeForce RTX 5090, 32607 MiB, 580.126.09`.
+- E005-M05 static object `*.pkl` schema inspected: true.
+- E005-M05 static schema fields: `uid`, `pcd_points`, `pcd_colors`, `clip_ft`, `class_id`, `nav_goal`.
+- E005-M05 `mobileclip` submodule ready: false.
+- E005-M05 current Python runtime dependency ready: false.
+- E005-M05 `DualMap` runtime launched: false.
+- E005-M05 runtime object `*.pkl` inspected: false.
+- E005-M06 `DualMap` bootstrap launch is complete with status `e005_m06_dualmap_bootstrap_job_launched`.
+- E005-M06 tmux session: `e005_m06_dualmap_bootstrap`.
+- E005-M06 log path: `logs/20260513_142937_e005_m06_dualmap_bootstrap.log`.
+- E005-M06 Docker image target: `research2/dualmap-smoke:latest`.
+- E005-M06 initial verifier status: `e005_m06_dualmap_bootstrap_running`.
+- E005-M06 local `mobileclip` ready: true.
+- E005-M06 Docker image ready at initial verification: false.
+- E005-M06 bounded Dockerfile repair applied: absolute env Python for `mobileclip` install and import smoke.
+- E005-M06 one-scan runtime launched: false.
+- E005-M07 `DualMap` bootstrap completion verification is complete with status `e005_m06_dualmap_bootstrap_ready`.
+- E005-M07 tmux session stopped: true.
+- E005-M07 Docker image ready: true.
+- E005-M07 image id: `sha256:7c053613ab51d968f4e70896364af2493595e827fb7605f0fd16c514c5cc0bf4`.
+- E005-M07 image size: 7,927,047,638 bytes.
+- E005-M07 local `mobileclip` ready: true.
+- E005-M07 dependency import smoke: `dualmap_import_smoke_ok`.
+- E005-M07 one-scan runtime launched: false.
+- E005-M08 `DualMap` one-scan runtime smoke launch is complete with status `e005_m08_dualmap_runtime_job_launched`.
+- E005-M08 verifier status is `e005_m08_dualmap_runtime_running`.
+- E005-M08 tmux session: `e005_m08_dualmap_runtime`.
+- E005-M08 log path: `logs/20260513_153046_e005_m08_dualmap_one_scan_runtime.log`.
+- E005-M08 output path: `local_dataset/DualMap_outputs/ddc73795-765b-241a-9c5d-b97744afe077`.
+- E005-M08 scan id: `ddc73795-765b-241a-9c5d-b97744afe077`.
+- E005-M08 runtime object `*.pkl` count while running: 0.
+- E005-M09 `DualMap` runtime completion verification is complete with status `e005_m08_dualmap_runtime_failed`.
+- E005-M09 confirms tmux stopped and background returncode is 137.
+- E005-M09 output inventory: runtime object `*.pkl` 0, `layout.pcd` 0, `system_time.csv` 0, DualMap log 1.
+- E005-M09 failure signals: `cuda_out_of_memory`, `clip_model_init_failed`, `yolo_not_initialized_after_detector_init_failure`, `fastsam_not_initialized_after_detector_init_failure`, `hydra_job_error`.
+- E005-M09 GPU snapshot after cleanup: free 1510 MiB, with an unrelated `python3` process using 27714 MiB.
+- E005-M10 selects detector-enabled free-GPU retry.
+- E005-M12 verifies the retry failed at `/home/mambauser/.cache/clip` permission.
+- E005-M13 fixes the cache route with a writable `/home/mambauser/.cache` mount.
+- E005-M15 verifies cache-fixed runtime completion with `layout.pcd` 1, `system_time.csv` 1, `detector_time.csv` 1, but object `*.pkl` 0.
+- E005-M16 diagnoses M14 as an object-output failure under `stride=20`, `stable_num=8`, and local objects 8 -> 0.
+- E005-M18 verifies denser stride `stride=5` also completes without object `*.pkl`: processed keyframes 19, local objects 26 -> 0, `layout.pcd` 1, `system_time.csv` 1, `detector_time.csv` 1.
+- E005-M19 selects `ConceptGraphs` fallback source/interface audit and leaves lower-`stable_num` `DualMap` as schema-only diagnostic fallback.
+- E005-M20 audits official `ConceptGraphs` source/interface at commit `93277a02bd89171f8121e84203121cf7af9ebb5d`, license `MIT`, and selects `conceptgraphs_depth_aligned_scannet_smoke`.
+- E005-M20 finds local direct ConceptGraphs-ready scans 0 / 4 because the current staged scans have `intrinsic_depth.txt` and color/depth resolution mismatch, but no `intrinsic_color.txt`.
+- E005-M21 materializes `local_dataset/ConceptGraphs_staged/3rscan_depth_aligned_scannet/` with 4 / 4 scans ready, 826 / 826 / 826 color/depth/pose files, and 4 / 4 resolution-aligned scans.
+- E005-M22 verifies Docker ready true, NVIDIA runtime true, GPU free memory 24008 MiB, staged scans 4 / 4, and SAM checkpoint ready true.
+- E005-M22 finds `ConceptGraphs` repo, `Grounded-Segment-Anything` repo, `research2/conceptgraphs-smoke:latest`, and `groundingdino_swint_ogc.pth` are not ready yet.
+- E005-M23 launches tmux `e005_m23_conceptgraphs_acquisition`, log `logs/20260514_165555_e005_m23_conceptgraphs_acquisition.log`.
+- E005-M24 verifies acquisition complete: `ConceptGraphs` head matched, `GSA` head matched, SAM symlinks ready, `groundingdino_swint_ogc.pth` ready 693,997,677 bytes.
 
 ## 논문 주장
 
@@ -214,8 +331,8 @@ Non-claims:
 
 ## 에이전트 추론
 
-E001 is a main experiment implementation stage, not a final thesis confirmation stage. Thesis direction should be confirmed only after scaled E001 results and failure analysis.
+E005 now shows that `DualMap` can execute on the staged `3RScan` adapter, but the current route does not produce object-map `*.pkl` outputs. This is no longer a GPU/cache/bootstrap blocker; it is an object-retention/output-compatibility blocker. `ConceptGraphs` is now the active external mapping baseline route, with Docker/runtime, 4-scan query-level conversion, failure boundary, 13-scan heldout scale contract, 9 heldout scans sequence-ready, heldout runtime preflight completed, heldout staged layout ready, and `heldout_b01` running as a 3-scan background runtime batch. It is still not a final paper-table baseline until heldout runtime completion verification and metric conversion are done.
 
 ## 사용자 판단 필요
 
-No current decision. Continue with E003-M54 search-critical bbox-depth failure-boundary audit.
+Continue with E005-M44 `ConceptGraphs` heldout runtime batch completion verification after the background job finishes.

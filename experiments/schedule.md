@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-05-11
+Last updated: 2026-05-12
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -13,7 +13,7 @@ Last updated: 2026-05-11
 - Current stage: main experiment implementation.
 - Final paper target: Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`.
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
-- Current E003 status: `E003-M59_direct_current_rescan_detector_launch_v0` launched; the direct detector/evaluation bridge run is active in tmux session `e003_m59_direct_bridge`.
+- Current E003 status: `E003-M64_openmask3d_feasibility_decision_v0` complete; `OpenMask3D` feasibility passes with constraints and the next unit is a scene-format/model smoke plan, not an immediate Docker/model run.
 - E003-M48 selected backend contract: `grounded_sam_mask_backproject_v0`.
 - E003-M50 selected route: `do_not_scale_grounded_sam_yet`.
 - E003-M57 launched tmux session `e003_m56_sequence_stage` for the 4 current-rescan sequence payloads; the session has ended and verifier status is ready.
@@ -60,8 +60,13 @@ Last updated: 2026-05-11
 | E003-M56 | Current-rescan sequence payload staging plan | Complete: fixed target scan list, command, output paths, logs, and verification for 4 current rescans | Use long-running/background task rule for download/decompression |
 | E003-M57 | Current-rescan sequence staging background job | Complete: launched M56 command in `tmux`, recorded job status/log path, and verified 4 / 4 payloads ready | Direct detector bridge design can start |
 | E003-M58 | Direct current-rescan detector/evaluation bridge design | Complete: 7 query rows, 5 unique bridge targets, 4 scans, `chair`/`pillow` prompt set, M59 command plan | No real RGB-D search claim until detector bridge output is evaluated |
-| E003-M59 | Direct current-rescan detector bridge Docker run | Running: launched in `tmux` with timestamped log and expected files/verification command recorded | Completion verification required before E003-M60 |
-| E003-M60 | Direct current-rescan query-level bridge evaluation | Join M59 detector output with M58 query rows and report query-level bridge metrics | No real RGB-D search claim until query-level evaluation passes |
+| E003-M59 | Direct current-rescan detector bridge Docker run | Complete: 93 frames, 96 proposals, validator errors/warnings 0 / 0, matched 21, false positives 75 | Query-level bridge evaluation required before search claim |
+| E003-M60 | Direct current-rescan query-level bridge evaluation | Complete: 3 / 7 query targets detected, `detector_task_budget_v0` success 0 / 7 | Budget/rank gap blocks real RGB-D search claim |
+| E003-M61 | Direct bridge rank/failure analysis gate | Complete: detector recall miss 4, task-budget mismatch 2, false-positive rank failure 1 | Selected `proposal_rerank_then_openmask3d_feasibility` |
+| E003-M62 | Offline proposal rerank/budget repair sweep | Complete: best deployable unbounded repair 3 / 7, bounded top-5/adaptive repair 2 / 7 | Selected bounded repair integration before `OpenMask3D` |
+| E003-M63 | Bounded rerank/budget repair integration gate | Complete: bounded repair ablation ready, unique rerank gain false, unbounded upper-bound only | Selected `openmask3d_feasibility_gate_next` |
+| E003-M64 | `OpenMask3D` feasibility decision gate | Complete: target-undetected rows 4, minimal-input-ready scans 4 / 4 | Selected `openmask3d_scene_format_model_smoke_plan_next` |
+| E003-M65 | `OpenMask3D` scene-format/model smoke plan | Fix scene-format manifest, command plan, adapter contract, and verification command | No Docker/model run until background/log/output/verification contract is fixed |
 | E004-M01 | Task-context memory trust contract | Fix task context fields for memory trust / re-observation decision | Natural language parser remains adapter, not main claim |
 | E004-M02 | Task-conditioned re-observation/search policy | Evaluate task-conditioned policy under stale memory + proposal noise | Must beat static memory, fixed top-k, and detector-confidence-first |
 | E005-M01 | External benchmark/baseline integration | Add at least one mapping baseline and one navigation/search baseline | Paper-table claim blocked until external comparison exists |
@@ -151,8 +156,7 @@ Purpose:
 
 ## Immediate Next Actions
 
-- E003-M59: verify completion after tmux exits using expected files, validator coverage, and matching coverage.
-- E003-M60: if M59 output is valid, run direct current-rescan query-level bridge evaluation.
+- E003-M65: fix `OpenMask3D` scene-format/model smoke plan, including command/log/output/verification contract.
 - Keep `OpenMask3D` as the later 3D instance proposal baseline candidate after the direct bridge denominator is staged/verified or explicitly blocked.
 - Keep `Open3DSG`, `ConceptGraphs`, and `HOV-SG` for later map/scene-graph/navigation baseline expansion, not the immediate proposal-geometry diagnosis.
 
@@ -224,12 +228,44 @@ Purpose:
 - E003-M58 status is `direct_current_rescan_bridge_design_ready`.
 - E003-M58 links 7 search-failure query rows, 5 unique bridge targets, 4 current rescans, 29 same-label object targets, and 93 sampled frames for the next detector run.
 - E003-M58 detector run executed is false and real RGB-D/open-vocabulary search claim readiness remains false.
-- E003-M59 status is `direct_current_rescan_detector_job_launched`.
-- E003-M59 background job status is `running`.
+- E003-M59 status is `pre_cap_candidate_pool_export_smoke_ready`.
+- E003-M59 background job has completed.
 - E003-M59 tmux session is `e003_m59_direct_bridge`.
 - E003-M59 log path is `logs/20260511_114356_e003_m59_direct_current_rescan_detector_run.log`.
 - E003-M59 target scans are 4 and bridge query rows are 7.
-- E003-M59 does not create a paper result claim; detector output and query-level bridge metrics are still pending.
+- E003-M59 scanned 93 frames, produced 2015 raw predictions, wrote 96 selected proposals, and exported 1970 pre-cap candidate rows.
+- E003-M59 validator status is `proposal_schema_smoke_valid`, with errors/warnings 0 / 0.
+- E003-M59 matching status is `detector_matching_smoke_ready`, with 21 matched proposals, 75 false-positive proposals, precision 0.218750, and scan target recall 0.724138.
+- E003-M59 does not create a query-level paper result claim by itself; E003-M60 provides the first query-level bridge metric.
+- E003-M60 status is `direct_query_bridge_budget_rank_gap`.
+- E003-M60 query target detected rows are 3 / 7 and unique target detected rows are 3 / 5.
+- E003-M60 mean detected target rank is 5.0 and mean false positives before detected target is 4.0.
+- E003-M60 `detector_task_budget_v0` success is 0 / 7.
+- E003-M60 `detector_top5_v0` success is 2 / 7.
+- E003-M60 unbounded detector success is 3 / 7.
+- E003-M60 keeps real RGB-D/open-vocabulary search claim readiness false.
+- E003-M61 status is `direct_bridge_rank_failure_gate_ready`.
+- E003-M61 failure class counts are detector recall miss 4, task-budget mismatch 2, and false-positive rank failure 1.
+- E003-M61 unique target failure class counts are detector recall miss 2, task-budget mismatch 2, and false-positive rank failure 1.
+- E003-M61 selected next route is `proposal_rerank_then_openmask3d_feasibility`.
+- E003-M61 keeps real RGB-D/open-vocabulary search claim readiness false.
+- E003-M62 status is `offline_rerank_budget_repair_ready`.
+- E003-M62 best deployable unbounded repair succeeds on 3 / 7 rows with mean expected search cost 16.428571.
+- E003-M62 bounded top-5/adaptive repair succeeds on 2 / 7 rows.
+- E003-M62 selected next route is `integrate_deployable_rerank_budget_then_openmask3d`.
+- E003-M62 keeps real RGB-D/open-vocabulary search claim readiness false.
+- E003-M63 status is `bounded_repair_integration_gate_ready`.
+- E003-M63 selected bounded policy is `old_memory_distance_guard+adaptive_uncertainty_top5`.
+- E003-M63 selected bounded repair succeeds on 2 / 7 rows with mean expected search cost 5.428571.
+- E003-M63 best task-budget rerank succeeds on 1 / 7 rows.
+- E003-M63 unbounded upper-bound succeeds on 3 / 7 rows.
+- E003-M63 bounded budget repair ablation ready is true, but bounded rerank unique gain ready is false.
+- E003-M63 selected next route is `openmask3d_feasibility_gate_next`.
+- E003-M64 status is `openmask3d_feasibility_decision_ready`.
+- E003-M64 bounded failure rows are 5 / 7: target-undetected 4 and rank/budget gap 1.
+- E003-M64 bridge scans with `OpenMask3D` minimal input readiness are 4 / 4.
+- E003-M64 selected next route is `openmask3d_scene_format_model_smoke_plan_next`.
+- E003-M64 launched no Docker/model run and keeps real RGB-D/open-vocabulary search claim readiness false.
 
 논문 주장:
 

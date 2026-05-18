@@ -1,6 +1,6 @@
 # Semantic Mapping Research Workspace
 
-업데이트: 2026-05-11
+업데이트: 2026-05-15
 
 이 워크스페이스는 semantic mapping을 중심으로, human-friendly robot intelligence 연구를 작게 시작하기 위한 문서 기반 작업 공간이다. 목표는 로봇이 사람의 의도와 지식을 이해하고, 그 이해를 공간적 기억과 행동으로 연결하여 사람이 요구하는 복잡한 작업을 수행하게 하는 것이다.
 
@@ -37,10 +37,11 @@
 - Active hypothesis: `H001_stale-object-memory`
 - Final paper target: Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`
 - Current implementation path: Direction A `Task-Conditioned Stale Semantic Memory`를 core method로 만들고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 붙여 Direction B로 확장
-- Current experiment: [E003_perception_noise_expansion](experiments/E003_perception_noise_expansion/README.md)
-- Current E003 status: M00-M58 complete; E003-M59 direct current-rescan detector bridge Docker run has been launched in background tmux session `e003_m59_direct_bridge`. Next is completion verification, then E003-M60 query-level bridge evaluation.
+- Current experiment: [E005_external_baseline_transition](experiments/E005_external_baseline_transition/README.md)
+- Current E004 status: E004-M01 transition gate is `ready_with_constraints`; E004-M02 metric contract is `ready`; E004-M03 memory trust policy is `ready_with_constraints`; E004-M04 claim-boundary ablation is `ready`; E004-M05 scale/split stress is `ready_limited_task_context`. E004-M05 supports a split-supported memory-trust decision claim, but task-context-specific claim strength remains limited and not label-broad. The next unit is E005 external baseline transition.
+- Current E005 status: E005-M01 through E005-M43 are complete/verified with constraints through heldout runtime launch. `DualMap` staging, Docker bootstrap, cache-fixed detector runtime, and denser-stride retry run on the staged `3RScan` adapter, but M14/M17 both produce `layout.pcd` and timing files without object `*.pkl` outputs. `ConceptGraphs` is now the active external mapping baseline route; 4 staged scans have query-level metrics and failure boundary, M38 fixes a 13-scan / 291-query heldout scale contract, M40 verifies 9/9 heldout scans as sequence-ready, and M42 materializes 9/9 heldout scans into the `ConceptGraphs` staged layout. E005-M43 launched `heldout_b01` as a 3-scan tmux background runtime job. The next step is E005-M44 completion verification after the background job finishes.
 - Current boundary: main experiment implementation 단계이며, paper 폴더는 아직 만들지 않는다.
-- Current top-tier path: E001 benchmark/proxy -> E002 search/navigation bridge -> E003 controlled perception/proposal noise -> Dockerized RGB-D/open-vocabulary proposal route -> E003-M59 direct current-rescan detector run -> E003-M60 query-level bridge evaluation -> external baselines -> E004 task-context memory trust / re-observation decision -> Direction B mapping-navigation system evidence.
+- Current top-tier path: E001 benchmark/proxy -> E002 search/navigation bridge -> E003 controlled perception/proposal noise -> Dockerized RGB-D/open-vocabulary proposal route -> E003-M75 expanded query-level evaluation -> E004 task-context memory trust / re-observation decision with split stress -> E005 external baselines and dataset-format staging -> Direction B mapping-navigation system evidence.
 
 ## 작업 루프
 

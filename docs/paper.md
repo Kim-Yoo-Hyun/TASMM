@@ -1,129 +1,171 @@
-# Paper
+# Paper Workflow
 
-Status: Deferred until paper writing starts.
+Status: active protocol, no paper folder yet.
 
-이 문서는 이전 `literature/paper_protocol.md`를 옮긴 초안이다. 실제 논문 작성 단계가 시작되면 target venue, claim-evidence ledger, figure/table plan에 맞춰 다시 작성한다.
+이 문서는 paper 작성 규칙과 claim 검증 기준만 관리한다. 논문 본문 산출물은 아직 만들지 않는다. 실제 paper folder는 thesis, main result table, method figure, target venue, claim-evidence ledger가 구체화된 뒤에 만든다.
 
-## Goal
+Source note: this workflow reflects the "Motivation is Not Novelty" guide: https://gisbi-kim.github.io/motivation-is-not-novelty/
 
-top-tier paper를 빨리 쓰는 것이 아니라, 실험이 논문 문장을 강제로 정직하게 만들도록 한다. 이 문서는 semantic mapping 연구를 NeurIPS, CVPR, ICCV, ECCV, CoRL, ICRA, RA-L 같은 venue에 맞게 발전시키기 위한 작성 프로토콜이다.
+## Core Rule
+
+Motivation is not novelty.
+
+For this project, the following is only motivation:
+
+- dynamic objects make semantic memory stale
+- RGB-D / open-vocabulary perception creates missed targets, false positives, and localization errors
+- human task context should affect robot behavior
+- existing mapping systems do not directly solve our dynamic search setting
+
+Novelty starts only when the paper can explain why the naive solution fails, what principle follows from that diagnosis, and why the method must have its specific form.
+
+## Paper Claim Ladder
+
+Use this ladder before writing any abstract, introduction, method, or contribution list.
+
+| Stage | Required Output | Current H001 Direction |
+| --- | --- | --- |
+| Motivation | What existing methods fail to handle | Stale semantic memory under dynamic object search and noisy RGB-D/open-vocabulary proposals |
+| Naive baseline | Simplest implementation implied by the motivation | static old memory, fixed top-k, detector-confidence ranking, context-agnostic memory trust |
+| Failure diagnosis | Why the naive baseline fails | stale old-location FP, detector recall miss, false-positive pushdown, centroid/localization error, path/reachability mismatch, task-budget mismatch |
+| Principle | One sentence that explains the required method form | Candidate: memory trust should be conditioned on staleness, task value, current-evidence reliability, and search/re-observation cost |
+| Method form | Components derived from the principle | task context conditioner, memory trust gate, re-observation budget, path/search-cost ranking, proposal reliability bridge |
+| Evidence | Experiments that test the principle, not just performance | E001/E002 proxy search, E003 noise and real proposal bridge, E004 memory trust policy, E005 external baselines |
+| Boundary | What the paper cannot claim yet | real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, natural-language intent understanding |
+
+## Current One-Liner
+
+Working one-liner:
+
+> In dynamic indoor search, stale semantic memory fails not because old memory is always wrong, but because its reliability is task- and observation-cost dependent; therefore a semantic map should expose memory trust and re-observation as first-class decisions conditioned on task value, current proposal reliability, and search cost.
+
+This is still a working hypothesis. It becomes a paper-ready novelty sentence only if ablations show that each condition is necessary and simpler alternatives fail for predictable reasons.
+
+## Novelty Gate
+
+Before calling anything a contribution, answer these questions.
+
+- What is the closest naive baseline, in one sentence?
+- Why does it fail, in a mechanism-level sentence?
+- Which method component is forced by that failure diagnosis?
+- What breaks when that component is removed?
+- Why not static memory, detector-confidence ranking, fixed top-k, or context-agnostic memory trust?
+- Which result tests the insight rather than merely showing a better score?
+- Does the claim hold beyond one scan, one label group, or one artifact route?
+- Can the novelty be explained in 30 seconds without saying "we propose"?
+
+If four or more answers are weak, the work is still motivation-stage and the method section should not be drafted.
 
 ## Claim-Evidence Ledger
 
-논문 초안보다 먼저 이 표를 채운다.
+| Claim Candidate | Evidence Needed | Current Status | Risk |
+| --- | --- | --- | --- |
+| Task/staleness-aware memory decision improves dynamic object search proxy behavior | E001/E002/E004 tables vs static memory, fixed top-k, context-agnostic trust, path-aware variants | partially supported | task-context effect is narrow |
+| The decision layer remains useful under real RGB-D/open-vocabulary proposal noise | E003 direct current-rescan bridge, heldout split, detector/proposal baseline comparison | not final | false-positive load and detector recall miss remain large |
+| The framework is stronger than external dynamic/open-vocabulary mapping baselines | E005 `DualMap` or `ConceptGraphs` adapter and fair query-level comparison | in progress | `DualMap` runs but lacks object `*.pkl`; `ConceptGraphs` acquisition is ready and Docker/runtime smoke is still needed |
+| The system supports deployable search policy | bounded budget improvement, allowed-input contract, failure separation | not ready | current policy is diagnostic, not deployable |
+| The system improves real navigation `SR` / `SPL` | simulator/navmesh/trajectory execution and navigation baselines | unsupported | no real navigation evaluation yet |
 
-| Claim | Evidence | Figure/Table | Missing risk | Status |
-| --- | --- | --- | --- | --- |
-| Our map improves language grounding in partially observed scenes. | TBD | TBD | no real-world result yet | open |
-| Object-level temporal memory reduces stale semantic errors. | TBD | TBD | dynamic benchmark not fixed | open |
-| The method is efficient enough for online robot use. | TBD | TBD | compute/hardware not logged | open |
+## Experiment-To-Paper Mapping
 
-Rule:
+- E001: defines the semantic-pair dynamic object search problem and naive baselines.
+- E002: adds path/search-cost bridge and separates source-limited failures from policy failures.
+- E003: tests controlled perception noise and real RGB-D/open-vocabulary proposal failure modes.
+- E004: tests memory trust and task-context conditioning, with claim boundaries.
+- E005: adds external baseline pressure; `DualMap` first, `ConceptGraphs` staging/preflight/acquisition ready, Docker build preflight next.
 
-- claim이 evidence 없이 있으면 abstract에 넣지 않는다.
-- evidence가 있지만 baseline이 약하면 contribution으로 쓰지 않는다.
-- qualitative demo는 quantitative table을 보조할 때만 main claim으로 쓴다.
+Main tables should not merely report that our method is better. They should show which failure mode is addressed by which component.
+
+## Required Ablations
+
+Minimum ablation set for a serious paper draft:
+
+- no task context
+- no staleness / memory-trust term
+- no current-proposal reliability term
+- no re-observation budget
+- no path/search-cost term
+- fixed top-k replacement
+- detector-confidence-only replacement
+- context-agnostic trust replacement
+- external mapping baseline replacement when available
+
+Each ablation must have an expected failure mode before running it.
+
+## Reviewer Defense
+
+Expected reviewer questions:
+
+- Why is this semantic mapping, not just ranking?
+- Why is structured task context enough, and what is not claimed about natural language?
+- Why not use a stronger detector or open-vocabulary mapper directly?
+- Why does stale memory require task-conditioned trust instead of a fixed decay score?
+- Why does the method generalize beyond `chair` / `pillow` and the current 4 rescans?
+- What does `DualMap` / `ConceptGraphs` fail or solve compared with our method?
+- Where are real navigation `SR` / `SPL` and what is the bridge until then?
+
+Answers must refer to artifacts, tables, ablations, or explicit limitations.
 
 ## Paper Shape
 
 ### Abstract
 
-Four sentences:
+Four sentences only:
 
-1. problem and why current semantic maps are insufficient
-2. method idea in one concrete sentence
-3. key experimental setting
-4. strongest quantitative and real-world result
+1. problem and mechanism-level failure of existing semantic memory
+2. principle and method form in one concrete sentence
+3. dataset / benchmark / baseline setting
+4. strongest quantitative result and boundary
 
 ### Introduction
 
 Use this order:
 
-1. Human-facing robot tasks require maps that understand language, intent, and spatial state.
-2. Existing semantic maps are strong but usually fail under ambiguity, dynamic changes, embodiment/viewpoint gap, or task-specific intent.
-3. State the technical gap, not just an application gap.
-4. State the method in one paragraph.
-5. State contributions as testable claims.
+1. Human-facing robot tasks need semantic maps that support action under stale and noisy observations.
+2. Existing semantic maps or open-vocabulary mappers do not directly decide when old memory should be trusted for a task.
+3. Diagnose the naive baseline failure, not just the application pain point.
+4. State the principle that forces the method design.
+5. State contributions as tested claims with evidence pointers.
 
 ### Method
 
-Must expose the contract between modules:
-
-- observation to map update
-- language/intention to query representation
-- semantic feature fusion
-- object/relation/temporal memory
-- grounding or planner interface
-- uncertainty and failure handling
+Do not write a system-diagram-only method section. Each component must be introduced by the failure mode that requires it.
 
 ### Experiments
 
-Every experiment should answer one reviewer question.
+Every experiment answers a reviewer question:
 
-| Reviewer question | Experiment |
+| Reviewer Question | Experiment |
 | --- | --- |
-| Does the map improve over simpler VLM retrieval? | 2D retrieval vs 3D map vs ours |
-| Does object memory matter? | no-instance and no-temporal ablation |
-| Does it work online? | latency, memory, FPS, query time |
-| Does it handle natural language variation? | synonym/paraphrase/ambiguous query split |
-| Does it transfer outside simulation? | replay log or real robot episodes |
-| What breaks? | failure taxonomy and limitations |
-
-### Limitations
-
-Write limitations before submission week. Good limitations are specific.
-
-- Fails when object is never observed and common-sense prior is wrong.
-- Requires camera pose quality above a stated threshold.
-- Open-vocabulary labels inherit VLM bias and may be unreliable for rare or culturally specific objects.
-- Dynamic object update assumes at least one re-observation after movement.
-- Human data or preference memory requires privacy and consent handling.
-
-## Venue-Aware Notes
-
-Always verify the exact current call for papers before submission; requirements change by year.
-
-- NeurIPS: include the official paper checklist. The checklist is designed around reproducibility, transparency, ethics, and societal impact.
-- CVPR/ICCV/ECCV style venues: expect strict anonymization, page limits, supplementary rules, asset attribution, and strong pressure toward code/data release. CVPR 2026 made compute reporting procedural for all submissions.
-- CoRL: robotics + learning fit is strong if the method is evaluated on embodied tasks. CoRL 2026 requires a limitations section in the main paper and strongly encourages reproducibility details.
-- ICRA/RA-L/IEEE: robotics systems value matters. Provide method detail, data/code availability, video evidence when appropriate, and real-robot or realistic deployment discussion.
-- Dual submission: do not submit substantially similar work to multiple archival venues at the same time unless the venue policy explicitly allows it.
-- AI writing tools: check the target venue policy. Some IEEE/RAS instructions restrict AI-generated manuscript text and references, so use AI assistance only in a way that remains compliant.
+| Does stale memory require a decision layer? | static memory vs trust/re-observation policies |
+| Does task context matter beyond a global threshold? | task-conditioned vs context-agnostic trust |
+| Does path/search cost change the decision? | E002/E004 cost-aware metrics |
+| Does the result survive proposal noise? | E003 controlled and real proposal diagnostics |
+| Is this competitive with external mappers? | E005 `DualMap` / `ConceptGraphs` comparison |
+| What breaks? | failure taxonomy and claim boundary table |
 
 ## Reproducibility Checklist
 
-Before a draft is considered serious:
-
 - exact dataset version and split are recorded
 - preprocessing is described
-- train/eval seeds are fixed and logged
-- all hyperparameters are in config
-- all baselines are implemented or clearly sourced
+- all policy inputs and forbidden inputs are fixed
+- all baselines are sourced or implemented
 - exact commands reproduce main tables
-- pretrained weights or checkpoints are documented
-- hardware, runtime, memory, and approximate compute are logged
-- all external code, models, datasets, and assets are cited with version/license
+- Docker image and hardware are recorded for paper-body experiments
+- external code, models, checkpoints, datasets, and assets are cited with version/license
 - failure cases are not filtered out silently
 - limitations are linked to actual experiments
-
-## Ethics And Human Data
-
-Because the research direction is human-friendly robot intelligence, do not treat human interaction data as ordinary logs.
-
-- If collecting human instructions, preferences, corrections, images, voice, or personally identifiable data, check IRB or local ethics approval requirements.
-- Store private user identifiers separately from research logs.
-- Avoid claims about "understanding human intention" unless the evaluation actually tests intent inference or interaction outcomes.
-- Include failure modes where the robot should ask for clarification instead of acting.
 
 ## When To Create A Paper Folder
 
 Create a paper folder only when all are true:
 
 - one-sentence thesis is stable
+- method components are derived from diagnosed failures
 - at least one main result table exists
 - one system diagram or method figure is sketched
 - target venue and deadline are selected
-- related work map has at least 15 closely read papers
+- related work map has at least 20 closely read papers
 - claim-evidence ledger has no empty evidence for main claims
 
 Until then, keep paper work in this protocol and result logs.

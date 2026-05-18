@@ -18,6 +18,20 @@
 - 후보, hypothesis, experiment, claim boundary를 정할 때 `NeurIPS`, `ICLR`, `ICML`, `CVPR`, `ICCV`, `ECCV`, `CoRL`, `ICRA`, `IROS`, `RA-L`, `T-RO`급 venue의 reviewer가 볼 novelty, contribution, benchmark rigor, reproducibility를 우선한다.
 - 단기 smoke test는 허용하지만, 최종 claim은 top-tier paper로 확장 가능한 dataset scale, baseline, metric, ablation, robustness, failure analysis 경로를 가져야 한다.
 
+## Novelty Discipline
+
+- Motivation을 novelty로 쓰지 않는다. "기존 방법이 dynamic object, RGB-D noise, open-vocabulary query, stale memory에서 실패한다"는 문제 제기일 뿐이다.
+- 새 module, LLM/VLM adapter, detector, reranker, map layer를 붙였다는 사실만으로 contribution이라고 쓰지 않는다.
+- 각 paper claim은 `motivation -> naive baseline -> failure diagnosis -> principle -> method form -> ablation/evidence` 순서로 방어되어야 한다.
+- 가장 단순한 naive baseline을 먼저 정의하고, 왜 실패하는지 case-level failure taxonomy로 기록한다.
+- Method component는 failure diagnosis에서 도출되어야 한다. component를 다른 module로 쉽게 바꿔도 설명이 유지되면 novelty가 약한 것이다.
+- "왜 더 단순한 X로는 안 되는가?"에 대해 최소 3개의 X를 준비한다. 예: static memory, detector-confidence ranking, fixed top-k, context-agnostic memory trust.
+- Contribution sentence에서 "we propose"를 지워도 남는 insight가 있어야 한다.
+- Ablation은 전체 system vs baseline만으로 끝내지 않는다. task context, staleness/memory trust, re-observation budget, path/search cost, proposal reliability, external map baseline 연결이 각각 무엇을 깨뜨리는지 보여야 한다.
+- Generality claim은 2개 이상의 split, scene group, label group, task/domain, 또는 external baseline route에서 지지될 때만 쓴다.
+- Failure mode는 future work로 숨기지 않는다. 실패 조건, 원인, 다음 validation requirement를 claim boundary에 명시한다.
+- 우리 연구에서 금지되는 약한 claim: "semantic map에 human intent/VLM/open-vocabulary perception을 붙였다." 더 강한 claim은 stale semantic memory의 실패 원인과 memory trust/re-observation/search-cost decision의 필연성을 한 문장으로 설명해야 한다.
+
 ## Workspace Shape
 
 - Root operational files stay limited to `README.md`, `TODO.md`, and `AGENTS.md`.

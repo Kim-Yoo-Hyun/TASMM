@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+"""Verify E005-M33 ConceptGraphs pending-scan runtime outputs."""
+
+from __future__ import annotations
+
+import glob
+import json
+import subprocess
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(__file__).resolve().parents[3]
+EXPERIMENT_ROOT = ROOT / "experiments" / "E005_external_baseline_transition"
+M33_DIR = EXPERIMENT_ROOT / "artifacts" / "E005-M33_conceptgraphs_pending_scan_runtime_v0"
+OUT_DIR = M33_DIR / "verification"
+SESSION = "e005_m33_conceptgraphs_pending_scans"
+
+
+def read_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+def read_jsonl(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def write_json(path: Path, payload: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+
+
+def run(cmd: list[str], timeout: int = 15) -> dict[str, Any]:
+    try:
+        proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False, timeout=timeout)
+        return {
+            "cmd": cmd,
+            "returncode": proc.returncode,
+            "stdout": proc.stdout.strip(),
+            "stderr": proc.stderr.strip(),
+            "ok": proc.returncode == 0,
+        }
+    except Exception as exc:  # noqa: BLE001
+        return {"cmd": cmd, "returncode": None, "stdout": "", "stderr": repr(exc), "ok": False}
+
+
+def tmux_running() -> bool:
+    return run(["tmux", "has-session", "-t", SESSION], timeout=10)["ok"]
+
+
+def tail_log(path: str, lines: int = 80) -> dict[str, Any]:
+    if not path:
+        return {"exists": False, "tail": ""}
+    log_path = Path(path)
+    if not log_path.exists():
+        return {"exists": False, "tail": ""}
+    result = run(["tail", "-n", str(lines), str(log_path)], timeout=10)
+    return {"exists": True, "tail": result["stdout"] if result["ok"] else result["stderr"]}
+
+
+def inventory_row(expected: dict[str, Any]) -> dict[str, Any]:
+    gsa_files = sorted(glob.glob(str(expected.get("gsa_detection_pattern", ""))))
+    full_pcd = Path(str(expected.get("full_pcd", "")))
+    full_pcd_post = Path(str(expected.get("full_pcd_post", "")))
+    return {
+        "scan_id": expected.get("scan_id"),
+        "gsa_detection_count": len(gsa_files),
+        "sample_gsa_detection": gsa_files[0] if gsa_files else "",
+        "full_pcd_exists": full_pcd.exists(),
+        "full_pcd_size_bytes": full_pcd.stat().st_size if full_pcd.exists() else 0,
+        "full_pcd_post_exists": full_pcd_post.exists(),
+        "full_pcd_post_size_bytes": full_pcd_post.stat().st_size if full_pcd_post.exists() else 0,
+    }
+
+
+def build_report(coverage: dict[str, Any]) -> str:
+    return "\n".join(
+        [
+            "# E005-M33 ConceptGraphs Pending Scan Runtime Verification",
+            "",
+            "## Status",
+            "",
+            coverage["status"],
+            "",
+            "## Facts",
+            "",
+            f"- tmux running: {str(coverage['tmux_running']).lower()}.",
+            f"- background status: `{coverage['background_status'].get('status', 'missing')}`.",
+            f"- ready scans: {coverage['ready_scan_count']} / {coverage['expected_scan_count']}.",
+            f"- log path: `{coverage['log_path']}`.",
+            "",
+            "## Claim Boundary",
+            "",
+            "- M33 only verifies runtime outputs for scaled `ConceptGraphs` scans.",
+            "- Query-level metric conversion remains a separate gate.",
+            "",
+        ]
+    )
+
+
+def main() -> int:
+    launch = read_json(M33_DIR / "coverage.json")
+    expected = read_jsonl(M33_DIR / "expected_outputs.jsonl")
+    background = read_json(Path(launch.get("background_status_path", "")))
+    inventory = [inventory_row(row) for row in expected]
+    running = tmux_running()
+    ready_count = sum(1 for row in inventory if row["gsa_detection_count"] > 0 and row["full_pcd_exists"] and row["full_pcd_post_exists"])
+    if running:
+        status = "e005_m33_conceptgraphs_pending_scan_runtime_running"
+    elif background.get("status") == "completed" and ready_count == len(expected):
+        status = "e005_m33_conceptgraphs_pending_scan_runtime_outputs_ready"
+    elif background.get("status") == "failed":
+        status = "e005_m33_conceptgraphs_pending_scan_runtime_failed"
+    elif launch.get("status", "").endswith("blocked_preflight"):
+        status = "e005_m33_conceptgraphs_pending_scan_runtime_blocked_preflight"
+    else:
+        status = "e005_m33_conceptgraphs_pending_scan_runtime_needs_verification"
+    coverage = {
+        "status": status,
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "tmux_running": running,
+        "background_status": background,
+        "launch_status": launch.get("status"),
+        "expected_scan_count": len(expected),
+        "ready_scan_count": ready_count,
+        "inventory": inventory,
+        "log_path": launch.get("log_path"),
+        "log_tail": tail_log(launch.get("log_path", ""), 80),
+        "next_recommended_unit": "E005-M33 completion verification"
+        if status == "e005_m33_conceptgraphs_pending_scan_runtime_running"
+        else "E005-M34 4-scan ConceptGraphs output schema/conversion",
+    }
+    write_json(OUT_DIR / "coverage.json", coverage)
+    write_text(OUT_DIR / "report.md", build_report(coverage))
+    print(json.dumps(coverage, indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

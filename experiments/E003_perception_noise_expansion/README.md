@@ -1,10 +1,10 @@
 # E003 Perception Noise Expansion
 
-Updated: 2026-05-10
+Updated: 2026-05-13
 
 ## Status
 
-`E003-M00_contract_v0`, `E003-M01_source_audit_v0`, `E003-M02_annotation_proxy_noise_v0`, `E003-M03_noisy_policy_eval_v0`, `E003-M04_robustness_failure_analysis_v0`, `E003-M05_route_v0`, `E003-M06_annotation_proposal_dropout_v0`, `E003-M07_dropout_failure_boundary_v0`, `E003-M08_annotation_false_positive_v0`, `E003-M09_false_positive_failure_boundary_v0`, `E003-M10_annotation_centroid_jitter_v0`, `E003-M11_centroid_jitter_failure_boundary_v0`, `E003-M12_combined_noise_route_decision_v0`, `E003-M13_annotation_combined_moderate_v0`, `E003-M14_combined_noise_failure_boundary_v0`, `E003-M15_controlled_perception_claim_summary_v0`, `E003-M16_real_proposal_route_decision_v0`, `E003-M17_real_proposal_denominator_staging_v0`, `E003-M18_dockerized_real_proposal_detector_scaffold_v0`, `E003-M19_real_detector_backend_integration_v0`, `E003-M20_detector_model_smoke_v0`, `E003-M21_detector_proposal_matching_v0`, `E003-M22_frame_scaling_projection_diagnostic_v0`, `E003-M23_proposal_consolidation_calibration_v0`, `E003-M24_visibility_prompt_projection_gate_v0`, `E003-M25_visibility_prompt_rerun_gate_v0`, `E003-M26_prompt_expanded_multiscan_docker_rerun_v0`, `E003-M27_false_positive_cap_bottleneck_v0`, `E003-M28_cap_aware_label_balanced_policy_v0`, `E003-M29_pre_cap_policy_integration_gate_v0`, `E003-M30_pre_cap_policy_docker_rerun_v0`, `E003-M31_pre_cap_policy_tradeoff_analysis_v0`, `E003-M32_scaled_pre_cap_rerun_gate_v0`, `E003-M33_scaled_pre_cap_policy_docker_rerun_v0`, `E003-M34_scaled_pre_cap_failure_analysis_v0`, `E003-M35_false_positive_suppression_route_v0`, `E003-M36_recall_preserving_suppression_sweep_v0`, `E003-M37_suppression_split_validation_v0`, `E003-M38_split_or_temporal_spatial_gate_v0`, `E003-M39_temporal_spatial_support_instrumentation_gate_v0`, `E003-M40_temporal_spatial_support_runner_smoke_v0`, `E003-M41_support_aware_selection_policy_gate_v0`, `E003-M42_support_aware_selection_runner_smoke_v0`, `E003-M43_support_aware_scaled_rerun_route_gate_v0`, `E003-M44_pre_cap_candidate_pool_export_smoke_v0`, `E003-M45_scaled_candidate_pool_export_replay_v0`, `E003-M46_score_redesign_or_external_gate_v0`, `E003-M47_external_baseline_feasibility_gate_v0`, `E003-M48_grounded_sam_contract_v0`, `E003-M49_grounded_sam_smoke_v0`, `E003-M50_same_subset_bbox_vs_mask_v0`, `E003-M51_post_m50_route_decision_v0`, `E003-M52_grounded_sam_mask_failure_v0`, `E003-M53_bbox_continuation_repair_gate_v0`, `E003-M54_search_critical_bbox_failure_boundary_v0`, `E003-M55_dynamic_pair_bridge_gate_v0`, `E003-M56_current_rescan_sequence_staging_plan_v0`, `E003-M57_sequence_staging_job_launch_v0`, and `E003-M58_direct_current_rescan_bridge_design_v0` are complete. E003-M59 direct current-rescan detector bridge Docker run has been launched in background tmux session `e003_m59_direct_bridge`; completion verification is pending.
+`E003-M00_contract_v0`, `E003-M01_source_audit_v0`, `E003-M02_annotation_proxy_noise_v0`, `E003-M03_noisy_policy_eval_v0`, `E003-M04_robustness_failure_analysis_v0`, `E003-M05_route_v0`, `E003-M06_annotation_proposal_dropout_v0`, `E003-M07_dropout_failure_boundary_v0`, `E003-M08_annotation_false_positive_v0`, `E003-M09_false_positive_failure_boundary_v0`, `E003-M10_annotation_centroid_jitter_v0`, `E003-M11_centroid_jitter_failure_boundary_v0`, `E003-M12_combined_noise_route_decision_v0`, `E003-M13_annotation_combined_moderate_v0`, `E003-M14_combined_noise_failure_boundary_v0`, `E003-M15_controlled_perception_claim_summary_v0`, `E003-M16_real_proposal_route_decision_v0`, `E003-M17_real_proposal_denominator_staging_v0`, `E003-M18_dockerized_real_proposal_detector_scaffold_v0`, `E003-M19_real_detector_backend_integration_v0`, `E003-M20_detector_model_smoke_v0`, `E003-M21_detector_proposal_matching_v0`, `E003-M22_frame_scaling_projection_diagnostic_v0`, `E003-M23_proposal_consolidation_calibration_v0`, `E003-M24_visibility_prompt_projection_gate_v0`, `E003-M25_visibility_prompt_rerun_gate_v0`, `E003-M26_prompt_expanded_multiscan_docker_rerun_v0`, `E003-M27_false_positive_cap_bottleneck_v0`, `E003-M28_cap_aware_label_balanced_policy_v0`, `E003-M29_pre_cap_policy_integration_gate_v0`, `E003-M30_pre_cap_policy_docker_rerun_v0`, `E003-M31_pre_cap_policy_tradeoff_analysis_v0`, `E003-M32_scaled_pre_cap_rerun_gate_v0`, `E003-M33_scaled_pre_cap_policy_docker_rerun_v0`, `E003-M34_scaled_pre_cap_failure_analysis_v0`, `E003-M35_false_positive_suppression_route_v0`, `E003-M36_recall_preserving_suppression_sweep_v0`, `E003-M37_suppression_split_validation_v0`, `E003-M38_split_or_temporal_spatial_gate_v0`, `E003-M39_temporal_spatial_support_instrumentation_gate_v0`, `E003-M40_temporal_spatial_support_runner_smoke_v0`, `E003-M41_support_aware_selection_policy_gate_v0`, `E003-M42_support_aware_selection_runner_smoke_v0`, `E003-M43_support_aware_scaled_rerun_route_gate_v0`, `E003-M44_pre_cap_candidate_pool_export_smoke_v0`, `E003-M45_scaled_candidate_pool_export_replay_v0`, `E003-M46_score_redesign_or_external_gate_v0`, `E003-M47_external_baseline_feasibility_gate_v0`, `E003-M48_grounded_sam_contract_v0`, `E003-M49_grounded_sam_smoke_v0`, `E003-M50_same_subset_bbox_vs_mask_v0`, `E003-M51_post_m50_route_decision_v0`, `E003-M52_grounded_sam_mask_failure_v0`, `E003-M53_bbox_continuation_repair_gate_v0`, `E003-M54_search_critical_bbox_failure_boundary_v0`, `E003-M55_dynamic_pair_bridge_gate_v0`, `E003-M56_current_rescan_sequence_staging_plan_v0`, `E003-M57_sequence_staging_job_launch_v0`, `E003-M58_direct_current_rescan_bridge_design_v0`, `E003-M59_direct_current_rescan_detector_run_v0`, `E003-M60_direct_current_rescan_query_bridge_v0`, `E003-M61_direct_bridge_rank_failure_gate_v0`, `E003-M62_offline_rerank_budget_repair_v0`, `E003-M63_bounded_repair_integration_gate_v0`, `E003-M64_openmask3d_feasibility_decision_v0`, `E003-M65_openmask3d_scene_format_model_smoke_plan_v0`, `E003-M66_openmask3d_model_smoke_v0` staging/preflight, `E003-M67_openmask3d_checkpoint_env_route_v0`, `E003-M68_openmask3d_checkpoint_download_launch_v0`, checkpoint verification, `E003-M70_openmask3d_docker_env_build_preflight_v0`, final E003-M71 Docker build failure verification, E003-M72 fallback gate, E003-M73 denominator expansion plan, E003-M74 detector completion verification, and E003-M75 expanded direct query-level evaluation are complete with constraints. The immediate next unit is the E004 transition gate.
 
 ## Source
 
@@ -4126,7 +4126,7 @@ Artifacts:
 사실:
 
 - Status: `direct_current_rescan_detector_job_launched`.
-- Background job status: `running`.
+- Background job status: `completed`.
 - tmux session: `e003_m59_direct_bridge`.
 - Log path: `logs/20260511_114356_e003_m59_direct_current_rescan_detector_run.log`.
 - Output path: `experiments/E003_perception_noise_expansion/artifacts/E003-M59_direct_current_rescan_detector_run_v0/`.
@@ -4135,21 +4135,859 @@ Artifacts:
 - Expected files are recorded in `coverage.json`.
 - Verification command is recorded in `coverage.json`.
 - Sudo password value is not recorded.
+- Completion verification: passed.
+- Validator status: `proposal_schema_smoke_valid`.
+- Validator errors/warnings: 0 / 0.
+- Matching status: `detector_matching_smoke_ready`.
+- Scanned frames: 93.
+- Raw predictions: 2015.
+- Written proposals: 96.
+- Candidate pool rows: 1970.
+- Matched proposal rows: 21.
+- False-positive proposal rows: 75.
+- Proposal precision smoke: 0.218750.
+- Scan target recall smoke: 0.724138.
+- Label-overlap target recall smoke: 0.724138.
 
 논문 주장:
 
-- E003-M59 launch does not create a paper result claim.
-- E003-M59 only starts the Docker detector run required before direct current-rescan query-level bridge evaluation.
+- E003-M59 supports saying that direct current-rescan detector output is now available and schema/matching checks pass.
+- E003-M59 alone does not support a query-level real RGB-D/open-vocabulary search claim; E003-M60 below performs the first detector-to-query join.
 
 에이전트 추론:
 
-- Do not continuously monitor the detector job.
-- Before E003-M60, verify expected files, validator coverage, and matching coverage.
-- If the job fails, inspect only the log tail or targeted error lines.
+- E003-M60 below joins the 96 detector proposals with the 7 M58 bridge query rows.
+- The M59 aggregate target recall is promising for the direct bridge denominator, but E003-M60 confirms that false positives and target rank still affect search cost and old-location decision metrics.
+- Keep final real RGB-D/open-vocabulary robustness claim blocked until query-level bridge repair and external baseline comparisons exist.
 
 사용자 판단 필요:
 
-- None while the background job is running.
+- None. E003-M60 has been run below.
+
+## E003-M60 Direct Current-Rescan Query Bridge
+
+Implementation unit: `E003-M60_direct_current_rescan_query_bridge_v0`.
+
+Stage: query-level bridge evaluation after E003-M59. This joins M59 detector proposals with M58 search-failure query rows and keeps target detection separate from search-budget success.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/evaluate_m60_direct_query_bridge.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/evaluate_m60_direct_query_bridge.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M60_direct_current_rescan_query_bridge_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M60_direct_current_rescan_query_bridge_v0/metrics.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M60_direct_current_rescan_query_bridge_v0/query_bridge_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M60_direct_current_rescan_query_bridge_v0/policy_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M60_direct_current_rescan_query_bridge_v0/report.md`
+
+사실:
+
+- Status: `direct_query_bridge_budget_rank_gap`.
+- Direct bridge query rows: 7.
+- Unique bridge targets: 5.
+- Query target detected rows/rate: 3 / 0.428571.
+- Unique target detected rows/rate: 3 / 0.600000.
+- Mean target rank when detected: 5.0.
+- Mean false positives before target when detected: 4.0.
+- `detector_task_budget_v0` success rows/rate: 0 / 0.000000.
+- `detector_top5_v0` success rows/rate: 2 / 0.285714.
+- `detector_unbounded_until_target_or_exhausted_v0` success rows/rate: 3 / 0.428571.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary search claim ready: false.
+
+논문 주장:
+
+- E003-M60 supports a direct current-rescan query-level bridge diagnostic.
+- E003-M60 shows that target detection and search-budget success are different failure surfaces.
+- E003-M60 does not support a final real RGB-D/open-vocabulary search robustness claim because the denominator has 7 query rows, the task-budget policy succeeds on 0 rows, and external baselines are absent.
+
+에이전트 추론:
+
+- The immediate blocker is not only detector recall. For detected targets, ranking and false positives push the target outside the current task-conditioned budget.
+- The next unit should split failures into detector miss, false-positive/rank failure, and task-budget mismatch before deciding whether to repair ranking/budget or move to `OpenMask3D`.
+
+사용자 판단 필요:
+
+- None. The next unit is E003-M61 direct bridge rank/failure analysis gate.
+
+## E003-M61 Direct Bridge Rank/Failure Gate
+
+Implementation unit: `E003-M61_direct_bridge_rank_failure_gate_v0`.
+
+Stage: failure taxonomy and route decision after E003-M60. This separates detector recall miss, false-positive/rank failure, and task-budget mismatch before choosing between local repair and external proposal baselines.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/analyze_m61_direct_bridge_failures.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/analyze_m61_direct_bridge_failures.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M61_direct_bridge_rank_failure_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M61_direct_bridge_rank_failure_gate_v0/failure_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M61_direct_bridge_rank_failure_gate_v0/target_summary.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M61_direct_bridge_rank_failure_gate_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M61_direct_bridge_rank_failure_gate_v0/report.md`
+
+사실:
+
+- Status: `direct_bridge_rank_failure_gate_ready`.
+- Query rows: 7.
+- Unique targets: 5.
+- Failure class counts: detector recall miss 4, task-budget mismatch 2, false-positive rank failure 1.
+- Unique target failure class counts: detector recall miss 2, task-budget mismatch 2, false-positive rank failure 1.
+- Detected target rerank upper-bound rows: 3.
+- Top-5 budget gain rows: 2.
+- Recall miss rows: 4.
+- Recall miss unique targets: 2.
+- Mean rank gap vs task budget for detected failures: 3.0.
+- Selected next route: `proposal_rerank_then_openmask3d_feasibility`.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary search claim ready: false.
+
+논문 주장:
+
+- E003-M61 supports a failure taxonomy for the direct bridge.
+- E003-M61 supports saying the current direct bridge failure is mixed: detector recall miss plus rank/budget failure.
+- E003-M61 does not support a final real RGB-D/open-vocabulary search claim.
+
+에이전트 추론:
+
+- Current detector misses the largest number of query rows, but detected targets are also outside the task budget.
+- Offline rerank/budget repair should come first because it is cheap and defines the upper bound of current proposals.
+- `OpenMask3D` remains important after this because current proposals cannot recover detector-recall-miss targets.
+
+사용자 판단 필요:
+
+- None. The next unit is E003-M62 offline proposal rerank/budget repair sweep.
+
+## E003-M62 Offline Rerank/Budget Repair Sweep
+
+Implementation unit: `E003-M62_offline_rerank_budget_repair_v0`.
+
+Stage: offline repair and upper-bound diagnostic after E003-M61. This tests whether current M59 proposals can recover M60 query failures by changing proposal order and search budget before adding an external 3D proposal baseline.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/run_m62_offline_rerank_budget_sweep.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/run_m62_offline_rerank_budget_sweep.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M62_offline_rerank_budget_repair_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M62_offline_rerank_budget_repair_v0/summary_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M62_offline_rerank_budget_repair_v0/prediction_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M62_offline_rerank_budget_repair_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M62_offline_rerank_budget_repair_v0/report.md`
+
+사실:
+
+- Status: `offline_rerank_budget_repair_ready`.
+- Query rows: 7.
+- Sweep policies: 36.
+- Best deployable policy: `old_memory_distance_guard` + `unbounded_until_target_or_exhausted`.
+- Best deployable success rows/rate: 3 / 0.428571.
+- Best deployable mean expected search cost: 16.428571.
+- Bounded top-5/adaptive repair success rows/rate: 2 / 0.285714.
+- Best oracle policy: `oracle_target_first_upper_bound` + `task_budget`.
+- Best oracle success rows/rate: 3 / 0.428571.
+- Selected next route: `integrate_deployable_rerank_budget_then_openmask3d`.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary search claim ready: false.
+
+논문 주장:
+
+- E003-M62 supports an offline repair and upper-bound diagnostic for current M59 proposals.
+- E003-M62 supports saying rank/budget repair can recover some detected-target failures, but cannot recover detector recall misses.
+- E003-M62 does not support a final real RGB-D/open-vocabulary search claim.
+
+에이전트 추론:
+
+- The current proposals have an upper bound of 3/7 query rows on this direct bridge.
+- Bounded repair is more paper-safe than unbounded repair because the unbounded policy reaches 3/7 only with high expected search cost.
+- The next unit should convert M62 into a bounded method ablation, then run `OpenMask3D` feasibility for remaining recall-miss targets.
+
+사용자 판단 필요:
+
+- None. The next unit is E003-M63 bounded rerank/budget repair integration gate.
+
+## E003-M63 Bounded Repair Integration Gate
+
+Implementation unit: `E003-M63_bounded_repair_integration_gate_v0`.
+
+Stage: paper-safe ablation contract after E003-M62. This separates bounded budget repair, rerank diagnostics, high-cost unbounded upper bound, and non-deployable oracle ordering before deciding whether `OpenMask3D` is justified.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m63_bounded_repair_integration_gate.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m63_bounded_repair_integration_gate.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M63_bounded_repair_integration_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M63_bounded_repair_integration_gate_v0/policy_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M63_bounded_repair_integration_gate_v0/paper_table_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M63_bounded_repair_integration_gate_v0/row_outcomes.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M63_bounded_repair_integration_gate_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M63_bounded_repair_integration_gate_v0/report.md`
+
+사실:
+
+- Status: `bounded_repair_integration_gate_ready`.
+- Query rows: 7.
+- Selected bounded policy: `old_memory_distance_guard+adaptive_uncertainty_top5`.
+- Selected bounded success rows/rate: 2 / 0.285714.
+- Selected bounded mean expected search cost: 5.428571.
+- Original task-budget success rows: 0.
+- Best task-budget rerank success rows: 1.
+- Unbounded upper-bound success rows: 3.
+- Oracle task-budget success rows: 3.
+- Bounded budget repair ablation ready: true.
+- Bounded rerank unique gain ready: false.
+- Selected next route: `openmask3d_feasibility_gate_next`.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary search claim ready: false.
+
+논문 주장:
+
+- E003-M63 supports using bounded budget repair as a small direct-bridge ablation.
+- E003-M63 does not support claiming unique bounded rerank gain on the current 7-row denominator.
+- E003-M63 keeps unbounded visit-until-target as an upper-bound diagnostic, not a cost-efficient method.
+- E003-M63 does not support final real RGB-D/open-vocabulary search or real navigation claims.
+
+에이전트 추론:
+
+- The safest paper use is to report bounded budget repair separately from unbounded upper bound.
+- The remaining upper-bound gap and recall-miss rows justify an `OpenMask3D` feasibility decision next.
+- If M64 is blocked, the fallback is to expand the direct bridge denominator before another heavy baseline.
+
+사용자 판단 필요:
+
+- None. The next unit is E003-M64 `OpenMask3D` feasibility decision gate.
+
+## E003-M64 OpenMask3D Feasibility Decision
+
+Implementation unit: `E003-M64_openmask3d_feasibility_decision_v0`.
+
+Stage: external 3D instance proposal feasibility decision after M63. This decides whether remaining target-undetected direct-bridge failures justify `OpenMask3D`, while keeping Docker/model work blocked until a scene-format/model smoke plan is fixed.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m64_openmask3d_feasibility_decision.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m64_openmask3d_feasibility_decision.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M64_openmask3d_feasibility_decision_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M64_openmask3d_feasibility_decision_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M64_openmask3d_feasibility_decision_v0/smoke_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M64_openmask3d_feasibility_decision_v0/gap_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M64_openmask3d_feasibility_decision_v0/scan_input_status.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M64_openmask3d_feasibility_decision_v0/feasibility_matrix.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M64_openmask3d_feasibility_decision_v0/report.md`
+
+사실:
+
+- Status: `openmask3d_feasibility_decision_ready`.
+- Query rows: 7.
+- Selected bounded success rows: 2.
+- Bounded failure rows: 5.
+- Gap class counts after bounded repair: `bounded_repair_success` 2, `detector_recall_miss_after_bounded_repair` 4, `rank_or_budget_gap_after_bounded_repair` 1.
+- Gap label counts after bounded repair: `chair` 3, `pillow` 2.
+- Bridge scans: 4.
+- `OpenMask3D` minimal-input-ready scans: 4 / 4.
+- Feasibility matrix status counts: pass 3, conditional 1, warn 1.
+- Selected next route: `openmask3d_scene_format_model_smoke_plan_next`.
+- Next recommended unit: `E003-M65 OpenMask3D scene-format/model smoke plan`.
+- Docker/model run launched: false.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary search claim ready: false.
+
+논문 주장:
+
+- E003-M64 supports moving to an `OpenMask3D` scene-format/model smoke plan as a feasibility step.
+- E003-M64 does not support claiming `OpenMask3D` improves search, proposal recall, or false positives yet.
+- E003-M64 keeps `Open3DSG`, `ConceptGraphs`, and `HOV-SG` as later map/scene-graph/navigation baselines.
+
+에이전트 추론:
+
+- The direct bridge denominator is now strong enough to justify a constrained external 3D instance proposal baseline check.
+- The next step should prepare scene-format, model/checkpoint, adapter, and verification contracts before any long Docker/model job.
+- If scene-format conversion is blocked, expand the direct bridge denominator instead of spending compute on an unverified baseline path.
+
+사용자 판단 필요:
+
+- None. The next unit is E003-M65 `OpenMask3D` scene-format/model smoke plan.
+
+## E003-M65 OpenMask3D Smoke Plan
+
+Implementation unit: `E003-M65_openmask3d_scene_format_model_smoke_plan_v0`.
+
+Stage: execution contract before a long-running `OpenMask3D` Docker/model smoke. This fixes the scene layout, adapter output contract, background-job command shape, and verification route without launching model inference.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m65_openmask3d_scene_format_model_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m65_openmask3d_scene_format_model_smoke.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M65_openmask3d_scene_format_model_smoke_plan_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M65_openmask3d_scene_format_model_smoke_plan_v0/scene_format_manifest.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M65_openmask3d_scene_format_model_smoke_plan_v0/scene_frame_manifest.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M65_openmask3d_scene_format_model_smoke_plan_v0/openmask3d_command_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M65_openmask3d_scene_format_model_smoke_plan_v0/proposal_adapter_contract.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M65_openmask3d_scene_format_model_smoke_plan_v0/verification_command.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M65_openmask3d_scene_format_model_smoke_plan_v0/report.md`
+
+사실:
+
+- Status: `openmask3d_scene_format_model_smoke_plan_ready`.
+- Selected scans: 2.
+- Selected prompt labels: `chair`, `pillow`.
+- Planned frame rows: 48.
+- Direct detector-recall-miss rows represented: 4.
+- Planned frames per selected scan: 24 / 24.
+- Scene-format manifest ready: true.
+- Command plan ready: true.
+- Adapter contract ready: true.
+- Verification command ready: true.
+- Docker/model run launched: false.
+- Real RGB-D/open-vocabulary search claim ready: false.
+
+논문 주장:
+
+- E003-M65 supports an execution-ready plan for testing `OpenMask3D` on direct recall-miss bridge rows.
+- E003-M65 does not support claiming `OpenMask3D` improves proposal recall, search success, or open-vocabulary robustness.
+
+에이전트 추론:
+
+- `OpenMask3D` is useful here because it tests a 3D instance-mask proposal route for current `bbox-depth` target-undetected failures.
+- The first M66 implementation unit must stage `3RScan` scene folders into the official `OpenMask3D` single-scene layout and convert local `.pgm` depth files to `.png` while preserving depth-scale semantics.
+- The M66 job should run in `tmux` with timestamped logs and verify completion through file counts, schema validation, and M21 matching before any M60-style query bridge claim.
+
+사용자 판단 필요:
+
+- None. The next unit is E003-M66 `OpenMask3D` scene-format staging plus Docker/model smoke background launch.
+
+## E003-M66 OpenMask3D Stage and Preflight
+
+Implementation unit: `E003-M66_openmask3d_model_smoke_v0`.
+
+Stage: scene-format staging, background preflight, and lightweight verification for `OpenMask3D`. This stage converts local `3RScan` inputs to the official single-scene layout, launches a `tmux` preflight job, and records the model-smoke blocker.
+
+Commands:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/stage_m66_openmask3d_scene_format.py --force
+python experiments/E003_perception_noise_expansion/tools/launch_m66_openmask3d_smoke.py
+python experiments/E003_perception_noise_expansion/tools/verify_m66_openmask3d_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/stage_m66_openmask3d_scene_format.py`
+- `experiments/E003_perception_noise_expansion/tools/launch_m66_openmask3d_smoke.py`
+- `experiments/E003_perception_noise_expansion/tools/verify_m66_openmask3d_smoke.py`
+- `experiments/E003_perception_noise_expansion/docker/openmask3d_smoke/Dockerfile`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M66_openmask3d_model_smoke_v0/stage/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M66_openmask3d_model_smoke_v0/launch/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M66_openmask3d_model_smoke_v0/verification/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M66_openmask3d_model_smoke_v0/background_status.json`
+- `logs/20260512_081828_e003_m66_openmask3d_smoke.log`
+
+사실:
+
+- Stage status: `openmask3d_scene_stage_ready`.
+- Verification status: `openmask3d_checkpoints_missing`.
+- Selected scans: 2.
+- Planned/staged frame rows: 48 / 48.
+- Staged color/depth/pose files: 48 / 48 / 48.
+- Staged PLY files: 2.
+- Staged intrinsic files: 2.
+- Missing source files: 0.
+- Depth conversion: `.pgm` -> 16-bit grayscale `.png`.
+- Official `OpenMask3D` repo cloned at commit `3bc3fc52693b25668d0e91d55a2ea714544a4749`.
+- `OpenMask3D` mask checkpoint ready: false.
+- `SAM` checkpoint ready: false.
+- Model inference launched: false.
+- Real RGB-D/open-vocabulary search claim ready: false.
+
+논문 주장:
+
+- E003-M66 supports that the selected direct recall-miss scans can be staged into `OpenMask3D` input format.
+- E003-M66 does not support any `OpenMask3D` proposal-quality or search-improvement claim because model outputs do not exist yet.
+
+에이전트 추론:
+
+- The immediate blocker is no longer scene format or local RGB-D payload. It is checkpoint acquisition and environment execution.
+- The next unit should decide whether to download/provide the `OpenMask3D` mask checkpoint and `SAM` checkpoint, then run Docker build/model smoke, or fall back to direct bridge denominator expansion.
+
+사용자 판단 필요:
+
+- None yet. The next unit is E003-M67 checkpoint acquisition / Docker env route decision.
+
+## E003-M67 OpenMask3D Checkpoint / Env Route
+
+Implementation unit: `E003-M67_openmask3d_checkpoint_env_route_v0`.
+
+Stage: route decision after E003-M66 stage readiness and checkpoint blocker. This fixes the checkpoint cache path, download script, verification command, Docker env risk, and fallback route before launching any large download.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m67_openmask3d_checkpoint_env_route.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m67_openmask3d_checkpoint_env_route.py`
+- `experiments/E003_perception_noise_expansion/tools/verify_m67_openmask3d_checkpoints.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0/checkpoint_manifest.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0/download_command_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0/env_route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0/verification_command.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0/run_m68_checkpoint_download.sh`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0/report.md`
+
+사실:
+
+- Status: `openmask3d_checkpoint_env_route_ready`.
+- Selected route: `checkpoint_download_background_launch_next`.
+- Fallback route: `direct_bridge_denominator_expansion_if_checkpoint_or_docker_env_blocks`.
+- Cache path: `local_dataset/checkpoints/openmask3d/`.
+- Checkpoint readiness: false.
+- Required checkpoint 1: `OpenMask3D` arbitrary-scene mask checkpoint from the official `OpenMask3D` README.
+- Required checkpoint 2: `SAM ViT-H` checkpoint from the official `Segment Anything` model checkpoint list.
+- Download script: `run_m68_checkpoint_download.sh`.
+- Verification command: `verify_m67_openmask3d_checkpoints.py`.
+- Docker probe: ready through sudo.
+- GPU probe: `NVIDIA GeForce RTX 5090`, driver `580.126.09`, memory `32607 MiB`.
+- Environment risk: high because official `OpenMask3D` uses old `torch` / CUDA / `MinkowskiEngine`, while the current host GPU is RTX 5090.
+
+논문 주장:
+
+- E003-M67 supports only an operational route for checkpoint acquisition and env preflight.
+- It does not support `OpenMask3D` proposal-quality or search-improvement claims.
+
+에이전트 추론:
+
+- Because E003-M66 scene staging and repo preflight are ready, checkpoint acquisition is the next smallest blocker.
+- Docker build should wait until checkpoint verification passes.
+- If Google Drive quota/auth or Docker build blocks, direct bridge denominator expansion is the safer next route than spending unbounded time on environment repair.
+
+사용자 판단 필요:
+
+- None before M68. The next unit is E003-M68 checkpoint download background launch.
+
+## E003-M68 OpenMask3D Checkpoint Download Launch
+
+Implementation unit: `E003-M68_openmask3d_checkpoint_download_launch_v0`.
+
+Stage: long-running checkpoint acquisition launch. This starts the M67 download script in a `tmux` background session and records the exact command, working directory, log path, output cache, expected files, and verification command.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/launch_m68_openmask3d_checkpoint_download.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/launch_m68_openmask3d_checkpoint_download.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M68_openmask3d_checkpoint_download_launch_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M68_openmask3d_checkpoint_download_launch_v0/launch_command.txt`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M68_openmask3d_checkpoint_download_launch_v0/report.md`
+
+사실:
+
+- Status: `openmask3d_checkpoint_download_job_launched`.
+- Background job final status: exited; checkpoint verifier passed.
+- tmux session: `e003_m68_openmask3d_checkpoints`.
+- Final log: `logs/20260512_084954_e003_m68_openmask3d_checkpoints.log`.
+- Cache path: `local_dataset/checkpoints/openmask3d/`.
+- Expected file 1: `openmask3d_arbitrary_scene_model.ckpt`, minimum size 50 MB.
+- Expected file 2: `sam_vit_h_4b8939.pth`, minimum size 2 GB.
+- Verification command: `python experiments/E003_perception_noise_expansion/tools/verify_m67_openmask3d_checkpoints.py --cache-dir /home/yoohyun/research2/local_dataset/checkpoints/openmask3d --openmask3d-repo /home/yoohyun/research2/experiments/E003_perception_noise_expansion/external/openmask3d --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0`.
+- First two launch attempts failed quickly due to PEP 668 `pip --user` blocking and `gdown` v6 CLI syntax. The download script now uses `.venv_tools/gdown` and positional `gdown` id syntax.
+
+논문 주장:
+
+- E003-M68 does not support `OpenMask3D` proposal-quality or search-improvement claims.
+- It only supports that checkpoint acquisition has been launched reproducibly under the long-running job policy.
+
+에이전트 추론:
+
+- The background launch and verification path are reproducible.
+- The job exited with checkpoints ready, so E003-M70 can focus on Docker/env build feasibility.
+- If a future rerun hits Google Drive quota/auth or network issues, use the fixed fallback route instead of spending unbounded time on checkpoint acquisition.
+
+사용자 판단 필요:
+
+- None.
+
+## E003-M69 OpenMask3D Checkpoint Completion Verification
+
+Implementation unit: checkpoint completion verification using `verify_m67_openmask3d_checkpoints.py`.
+
+Stage: post-download verification. This verifies cache files and symlink/resource paths after E003-M68 exits.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/verify_m67_openmask3d_checkpoints.py --cache-dir /home/yoohyun/research2/local_dataset/checkpoints/openmask3d --openmask3d-repo /home/yoohyun/research2/experiments/E003_perception_noise_expansion/external/openmask3d --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0/checkpoint_verification.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0/checkpoint_verification.md`
+
+사실:
+
+- Status: `openmask3d_checkpoints_ready`.
+- Cache ready count: 2 / 2.
+- Resource ready count: 2 / 2.
+- `openmask3d_arbitrary_scene_model.ckpt`: 952,327,000 bytes.
+- `sam_vit_h_4b8939.pth`: 2,564,550,879 bytes.
+- `OpenMask3D/resources` paths are ready through symlink/resource checks.
+
+논문 주장:
+
+- E003-M69 supports only checkpoint availability.
+- It does not support model execution, proposal quality, or search-improvement claims.
+
+에이전트 추론:
+
+- The next blocker is Docker/env build feasibility, not checkpoint availability.
+- Because official `OpenMask3D` uses old `torch` / CUDA / `MinkowskiEngine`, E003-M70 should remain a preflight with logs and fallback, not an unbounded environment-repair effort.
+
+사용자 판단 필요:
+
+- None before E003-M70 Docker env build preflight.
+
+## E003-M70 OpenMask3D Docker Build Preflight
+
+Implementation unit: `E003-M70_openmask3d_docker_env_build_preflight_v0`.
+
+Stage: Docker environment build preflight after checkpoint verification. This starts the `OpenMask3D` Docker image build in a `tmux` background session and records the exact build command, log path, status file, image name, and verification command.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/launch_m70_openmask3d_docker_build_preflight.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/launch_m70_openmask3d_docker_build_preflight.py`
+- `experiments/E003_perception_noise_expansion/tools/verify_m70_openmask3d_docker_build.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M70_openmask3d_docker_env_build_preflight_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M70_openmask3d_docker_env_build_preflight_v0/launch_command.txt`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M70_openmask3d_docker_env_build_preflight_v0/run_m70_openmask3d_docker_build.sh`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M70_openmask3d_docker_env_build_preflight_v0/background_status.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M70_openmask3d_docker_env_build_preflight_v0/verification/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M70_openmask3d_docker_env_build_preflight_v0/report.md`
+
+사실:
+
+- Status: `openmask3d_docker_build_failed`.
+- Final verification status: `openmask3d_docker_build_failed`.
+- tmux session running: false.
+- Current build log: `logs/20260512_105700_e003_m70_openmask3d_docker_build.log`.
+- Image name: `research2/openmask3d-smoke:latest`.
+- Image ready: false.
+- Dockerfile: `experiments/E003_perception_noise_expansion/docker/openmask3d_smoke/Dockerfile`.
+- Checkpoints ready before launch: true.
+- Scene stage ready before launch: true.
+- Earlier build attempts failed because the pinned `Miniconda3-py38_24.1.2-0` installer URL returned 404, latest conda required ToS acceptance, and `pytorch-lightning==1.7.2` needs `pip<24.1`; the Dockerfile now uses `Miniconda3-latest`, accepts required channels, still creates the `python=3.8.5` conda env, and pins `pip<24.1`.
+- Final relaunch failed while collecting `NVIDIA/MinkowskiEngine`: `Getting requirements to build wheel: finished with status 'error'`.
+- Fallback route: `direct_bridge_denominator_expansion`.
+
+논문 주장:
+
+- E003-M70/E003-M71 support only a reproducible Docker env build launch and failure diagnosis.
+- It does not support `OpenMask3D` model execution, proposal quality, real RGB-D robustness, or search-improvement claims.
+
+에이전트 추론:
+
+- The build failure is an environment/dependency blocker, not negative evidence about `OpenMask3D` proposal quality.
+- The immediate research bottleneck is still the small direct bridge denominator, so more `OpenMask3D` environment repair is deferred.
+
+사용자 판단 필요:
+
+- None for choosing direct denominator expansion next.
+
+## E003-M72 OpenMask3D Blocker Fallback Gate
+
+Implementation unit: `E003-M72_openmask3d_blocker_fallback_gate_v0`.
+
+Stage: route decision after final `OpenMask3D` Docker build failure. This records the blocker and chooses whether to keep repairing the environment or return to direct bridge denominator expansion.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m72_openmask3d_blocker_fallback_gate.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m72_openmask3d_blocker_fallback_gate.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M72_openmask3d_blocker_fallback_gate_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M72_openmask3d_blocker_fallback_gate_v0/route_options.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M72_openmask3d_blocker_fallback_gate_v0/report.md`
+
+사실:
+
+- Status: `openmask3d_blocked_direct_denominator_fallback_selected`.
+- E003-M70 verification status: `openmask3d_docker_build_failed`.
+- Hard blockers: `docker_build_failed`, `minkowskiengine_build_requirement_error`, `image_not_ready`.
+- Current direct bridge query rows: 7.
+- Current direct bridge target-detected rows: 3.
+- M64 bounded failure rows: 5, including 4 detector-recall-miss rows and 1 rank/budget row.
+- Selected next route: `direct_bridge_denominator_expansion`.
+- Next recommended unit: `E003-M73 direct bridge denominator expansion plan`.
+
+논문 주장:
+
+- E003-M72 does not support an `OpenMask3D` proposal-quality claim.
+- E003-M72 only supports an engineering route decision after Docker environment failure.
+
+에이전트 추론:
+
+- `OpenMask3D` remains useful later as an external 3D instance proposal baseline.
+- It should not block E003 because the current search-bridge evidence is still dominated by a 7-row direct denominator.
+
+사용자 판단 필요:
+
+- None for proceeding to E003-M73.
+
+## E003-M73 Direct Bridge Denominator Expansion Plan
+
+Implementation unit: `E003-M73_direct_bridge_denominator_expansion_plan_v0`.
+
+Stage: planning gate after `OpenMask3D` Docker blocker. This expands the direct current-rescan detector bridge from search-failure-only rows to all detector-ready query rows on already RGB-D-ready exact current rescans.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/plan_m73_direct_bridge_denominator_expansion.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/plan_m73_direct_bridge_denominator_expansion.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M73_direct_bridge_denominator_expansion_plan_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M73_direct_bridge_denominator_expansion_plan_v0/direct_bridge_query_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M73_direct_bridge_denominator_expansion_plan_v0/real_proposal_query_manifest.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M73_direct_bridge_denominator_expansion_plan_v0/real_proposal_object_targets.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M73_direct_bridge_denominator_expansion_plan_v0/prompt_set.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M73_direct_bridge_denominator_expansion_plan_v0/detector_run_command_plan.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M73_direct_bridge_denominator_expansion_plan_v0/report.md`
+
+사실:
+
+- Status: `direct_bridge_denominator_expansion_plan_ready`.
+- Selected exact current-rescan scans: 4.
+- Detector-ready query rows: 96.
+- Detector-ready base rows: 32.
+- Previous M58 query rows: 7.
+- Added query rows over M58: 89.
+- Target uids: 32.
+- Object target rows: 62.
+- Prompt labels: 10 (`bench`, `box`, `chair`, `couch table`, `drum`, `gymnastic ball`, `pillow`, `plant`, `rocking chair`, `trash can`).
+- Sampled frame count: 93.
+- Excluded query rows: 3 generic `item` rows.
+- Detector rerun launched: false.
+
+논문 주장:
+
+- E003-M73 only supports a planned denominator expansion contract.
+- It does not support real RGB-D/open-vocabulary search improvement until E003-M74/E003-M75 run and join detector outputs back to query-level metrics.
+
+에이전트 추론:
+
+- This is the right fallback after `OpenMask3D` Docker failure because it increases exact current-rescan bridge coverage without changing the core method claim.
+- The expansion gives success/failure and task-context variation over the same 4 RGB-D-ready scans, improving reviewer defense before external baseline integration.
+
+사용자 판단 필요:
+
+- None before launching E003-M74 as a background detector run.
+
+## E003-M74 Direct Bridge Denominator Detector Launch
+
+Implementation unit: `E003-M74_direct_bridge_denominator_detector_launch_v0`.
+
+Stage: background launch for the expanded direct current-rescan detector run. This uses the M73 input directory, starts the Docker detector job in `tmux`, and records the log path, run script, output path, expected files, and verification command.
+
+Command:
+
+```bash
+printf 'a\n' | python experiments/E003_perception_noise_expansion/tools/launch_m74_direct_bridge_denominator_detector.py --sudo-password-stdin
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/launch_m74_direct_bridge_denominator_detector.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M74_direct_bridge_denominator_detector_launch_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M74_direct_bridge_denominator_detector_launch_v0/launch_command.txt`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M74_direct_bridge_denominator_detector_launch_v0/run_m74_detector.sh`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M74_direct_bridge_denominator_detector_launch_v0/report.md`
+
+사실:
+
+- Status: `expanded_direct_bridge_detector_job_launched`.
+- tmux session: `e003_m74_direct_denominator`.
+- Log path: `logs/20260512_121507_e003_m74_direct_bridge_denominator_detector_run.log`.
+- Input dir: `experiments/E003_perception_noise_expansion/artifacts/E003-M73_direct_bridge_denominator_expansion_plan_v0/`.
+- Output dir: `experiments/E003_perception_noise_expansion/artifacts/E003-M74_direct_bridge_denominator_detector_run_v0/`.
+- Detector-ready query rows: 96.
+- Prompt labels: 10.
+- Target scans: 4.
+- Verification command is recorded in the launch coverage artifact.
+
+논문 주장:
+
+- E003-M74 launch does not create a paper result claim.
+- It only starts the Docker detector run required before expanded direct bridge evaluation.
+
+에이전트 추론:
+
+- Do not monitor this job continuously.
+- Completion should be verified with expected files, schema validation, matching coverage, and targeted log tail.
+- Real RGB-D/open-vocabulary search claims remain blocked until E003-M75 joins outputs back to query-level bridge metrics.
+
+사용자 판단 필요:
+
+- None. Completion is recorded in the next section.
+
+## E003-M74 Detector Completion Verification
+
+Implementation unit: `E003-M74_direct_bridge_detector_completion_verification_v0`.
+
+Stage: completion verification after the expanded direct bridge detector background job. This verifies that the `tmux` session exited, expected files exist, schema validator output is clean, matching coverage exists, and the log sample has no relevant error hit.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/verify_m74_direct_bridge_detector_completion.py --require-ready
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/verify_m74_direct_bridge_detector_completion.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M74_direct_bridge_detector_completion_verification_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M74_direct_bridge_detector_completion_verification_v0/report.md`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M74_direct_bridge_denominator_detector_run_v0/`
+
+사실:
+
+- Status: `expanded_direct_bridge_detector_run_ready`.
+- tmux session running: false.
+- Expected files ready: 4 / 4.
+- Validator status: `proposal_schema_smoke_valid`.
+- Validator errors/warnings: 0 / 0.
+- Prediction rows: 478.
+- Pre-cap candidate rows: 12,192.
+- Evaluated scans: 4.
+- Matched target rows: 47 / 62.
+- Proposal precision smoke: 0.098326.
+- Scan target recall smoke: 0.758065.
+- False-positive proposal rate smoke: 0.901674.
+- Mean matched centroid error: 0.528799m.
+
+논문 주장:
+
+- E003-M74 supports that the expanded direct bridge detector run completed and produced schema-valid, matchable real RGB-D/open-vocabulary proposal artifacts.
+- E003-M74 does not support a search-improvement, deployable policy, final real RGB-D/open-vocabulary robustness, or real navigation claim.
+
+에이전트 추론:
+
+- E003-M75 must join proposals back to query-level rows because proposal precision/recall alone cannot establish stale-memory search value.
+- The high false-positive rate means rank, budget, and `ExpectedSearchCost` are the decisive next checks.
+
+사용자 판단 필요:
+
+- None. E003-M75 is recorded below.
+
+## E003-M75 Expanded Direct Query Bridge
+
+Implementation unit: `E003-M75_expanded_direct_query_bridge_v0`.
+
+Stage: expanded query-level evaluation after E003-M74. This joins detector proposals back to the 96 M73 query rows and recomputes target detection, false positives before target, rank, budgeted success, bounded repair, and candidate-count search-cost proxies.
+
+Command:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/evaluate_m75_expanded_direct_query_bridge.py
+```
+
+Artifacts:
+
+- `experiments/E003_perception_noise_expansion/tools/evaluate_m75_expanded_direct_query_bridge.py`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/coverage.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/metrics.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/query_bridge_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/policy_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/policy_summary_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/failure_rows.jsonl`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/route_decision.json`
+- `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/report.md`
+
+사실:
+
+- Status: `expanded_direct_query_bridge_ready`.
+- Query rows: 96.
+- Unique targets: 32.
+- Query target detected rows/rate: 87 / 0.906250.
+- Unique target detected rows/rate: 29 / 0.906250.
+- Mean target rank when detected: 9.034483.
+- Mean false positives before target when detected: 8.034483.
+- Mean same-label detector proposals per query: 23.187500.
+- `detector_task_budget_v0` success rows/rate: 13 / 0.135417.
+- `detector_task_budget_v0` mean `ExpectedSearchCost` / `AttemptSPL` proxy: 2.645833 / 0.070833.
+- `bounded_old_memory_distance_guard_adaptive_top5_v0` success rows/rate: 33 / 0.343750.
+- `bounded_old_memory_distance_guard_adaptive_top5_v0` mean `ExpectedSearchCost` / `AttemptSPL` proxy: 4.937500 / 0.133333.
+- `unbounded_old_memory_distance_guard_until_target_v0` success rows/rate: 87 / 0.906250.
+- `unbounded_old_memory_distance_guard_until_target_v0` mean `ExpectedSearchCost` / `AttemptSPL` proxy: 9.750000 / 0.190163.
+- Stale old-dead-end avoided rows under task budget vs bounded repair: 3 / 12 vs 6 / 12.
+- Failure class counts: `unbounded_high_cost_repair_only` 54, `bounded_repair_success` 20, `task_budget_success` 13, `detector_recall_miss` 9.
+- Selected next route: `expanded_bridge_bounded_repair_positive_e004_gate_next`.
+- Paper-table command ready: false.
+- Real RGB-D/open-vocabulary search claim ready: false.
+
+논문 주장:
+
+- E003-M75 supports an expanded direct query-level bridge diagnostic over E003-M74 detector outputs.
+- E003-M75 supports that bounded search repair improves query-level success over the original detector task-budget policy on this 96-row denominator.
+- E003-M75 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The positive part is that the expanded bridge no longer collapses at detector recall: 87 / 96 query rows have detected targets.
+- The blocker is ranking/cost: detected targets are late on average, with about 8 false positives before the target.
+- Bounded repair is useful evidence for E004, but not yet a final method claim because it raises average search cost and relaxes the original memory-trust behavior.
+- E004 should explicitly decide whether task context changes memory trust and re-observation budget without turning the method into a generic top-k search expansion.
+
+사용자 판단 필요:
+
+- None before E004 transition gate.
 
 ## Real Navigation Note
 
