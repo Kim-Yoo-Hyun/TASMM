@@ -15,7 +15,7 @@ Last updated: 2026-05-18
 
 Main experiment implementation.
 
-CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 첫 route였던 `DualMap`은 Docker/submodule/bootstrap, staged `3RScan` Dataset Mode adapter, cache-fixed detector runtime까지 통과했지만, M14/M17 모두 object `*.pkl`을 만들지 못했다. `ConceptGraphs` route는 M20 source/interface audit, M21 depth-aligned Scannet-style `3RScan` staging, M22 Docker/runtime preflight, M23/M24 repo/checkpoint acquisition, M25/M26 Docker build/import smoke, M27 one-scan runtime output verification, M28 output schema inspection, M29 output-to-query conversion plan, M30 one-scan object candidate export / CLIP-text scoring smoke, M31 one-scan query-level metric conversion / rank failure check, M32 4-scan scale decision, M33/M34 pending scan runtime repair/verification, M35 4-scan candidate export / query metric conversion, M36 failure analysis / claim boundary, M37 external baseline comparison / next-route decision, M38 heldout/scale contract, M39 heldout sequence acquisition/staging launch, M40 heldout sequence staging verification, M41 heldout runtime preflight/launch plan, M42 heldout staged-layout materialization, M43 heldout runtime batch, M44 completion verification, M45 heldout output-to-query metric conversion, M46 heldout interpretation / remaining batch decision, M47 `heldout_b02` runtime batch launch까지 완료했다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. 다음 gate는 M48 `heldout_b02` runtime completion verification이다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
+CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 첫 route였던 `DualMap`은 Docker/submodule/bootstrap, staged `3RScan` Dataset Mode adapter, cache-fixed detector runtime까지 통과했지만, M14/M17 모두 object `*.pkl`을 만들지 못했다. `ConceptGraphs` route는 M20 source/interface audit, M21 depth-aligned Scannet-style `3RScan` staging, M22 Docker/runtime preflight, M23/M24 repo/checkpoint acquisition, M25/M26 Docker build/import smoke, M27 one-scan runtime output verification, M28 output schema inspection, M29 output-to-query conversion plan, M30 one-scan object candidate export / CLIP-text scoring smoke, M31 one-scan query-level metric conversion / rank failure check, M32 4-scan scale decision, M33/M34 pending scan runtime repair/verification, M35 4-scan candidate export / query metric conversion, M36 failure analysis / claim boundary, M37 external baseline comparison / next-route decision, M38 heldout/scale contract, M39 heldout sequence acquisition/staging launch, M40 heldout sequence staging verification, M41 heldout runtime preflight/launch plan, M42 heldout staged-layout materialization, M43 heldout runtime batch, M44 completion verification, M45 heldout output-to-query metric conversion, M46 heldout interpretation / remaining batch decision, M47 `heldout_b02` runtime batch launch, M48 `heldout_b02` runtime completion verification, M49 heldout batch-aware metric conversion prep / `heldout_b02` metric conversion까지 완료했다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. 다음 gate는 `heldout_b03` runtime launch와 full heldout metric aggregation이다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
 
 CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active task는 없고, CAND-001 feasibility가 약해질 때 다시 승격 여부를 판단한다.
 
@@ -29,7 +29,7 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E005-M48 `ConceptGraphs` `heldout_b02` runtime completion verification
+- [ ] E005-M47 launch `ConceptGraphs` `heldout_b03` when GPU free memory is >= 24GB
 
 ### CAND-002
 
@@ -43,16 +43,16 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E005-M47 launch `ConceptGraphs` `heldout_b03` after `heldout_b02` completes
-- [ ] E005-M48 remaining `ConceptGraphs` heldout runtime completion verification
+- [ ] E005-M47 launch `ConceptGraphs` `heldout_b03` when GPU free memory is >= 24GB
+- [ ] E005-M48 `heldout_b03` runtime completion verification
 - [ ] E005-M49 full heldout `ConceptGraphs` metric aggregation / H001 comparison gate
 - [ ] `OpenMask3D` feasibility는 bridge denominator staging/verification 이후 external 3D instance proposal baseline 후보로 재검토
 - [ ] `Open3DSG` / `ConceptGraphs` / `HOV-SG`는 E005 map/scene-graph/navigation baseline expansion에서 재검토
 
 ## Running / Needs Verification
 
-- Active non-E005 runtime state: tmux session `research`; Docker container `ast_mujoco-lerobot`.
-- E005-M47 running: `heldout_b02`, tmux `e005_m43_conceptgraphs_heldout_runtime_b02`, cwd `/home/yoohyun/research2`, command `python experiments/E005_external_baseline_transition/tools/launch_m43_conceptgraphs_heldout_runtime_batch.py --batch-id heldout_b02`, log `logs/20260518_084811_e005_m43_conceptgraphs_heldout_runtime_heldout_b02.log`, output path `local_dataset/ConceptGraphs_staged/3rscan_depth_aligned_scannet/{scan_id}/`, expected `gsa_detections_none/`, `pcd_saves/full_pcd_none_overlap_maskconf0.95_simsum1.2_dbscan.1_merge20_masksub.pkl.gz`, `pcd_saves/full_pcd_none_overlap_maskconf0.95_simsum1.2_dbscan.1_merge20_masksub_post.pkl.gz`, verify `python experiments/E005_external_baseline_transition/tools/verify_m43_conceptgraphs_heldout_runtime_batch.py --batch-id heldout_b02`, status `running`.
+- Active non-E005 runtime state: tmux sessions `research`, `h001_open3dsg_dump_features_h001_eval_shard_loop`; Docker container `ast_mujoco-lerobot`.
+- E005-M47 blocked: `heldout_b03` launch waiting for GPU free memory >= 24GB; 2026-05-18 latest check showed 22,439 MiB free.
 
 ### CAND-002
 
@@ -64,6 +64,10 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] Documentation refresh 완료: `README.md`, `summary.md`, `docs/index.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/report.md`, `experiments/schedule.md`, `experiments/E005_external_baseline_transition/README.md` 최신 E005 상태와 재현 정보 반영
+- [x] E005-M49 heldout batch-aware metric conversion prep 완료: `heldout_b01/b02/b03_query_rows.jsonl` generated under `E005-M45_conceptgraphs_heldout_metric_contract_v0/`, total heldout query rows 195
+- [x] E005-M49 `ConceptGraphs` `heldout_b02` metric conversion 완료: status `e005_m45_conceptgraphs_heldout_query_metric_ready_with_strict_hits`, query rows 69, target uids 23, object rows 199, candidate rows 4,614, strict bbox top5 45/69 = 0.652174, relaxed bbox 1m top3 51/69 = 0.73913, final baseline claim false
+- [x] E005-M48 `ConceptGraphs` `heldout_b02` runtime completion verification 완료: status `e005_m43_conceptgraphs_heldout_runtime_batch_outputs_ready`, ready scans 3/3, GSA detections 210/63/33, full PCD/post PCD ready 3/3, tmux stopped, log `logs/20260518_084811_e005_m43_conceptgraphs_heldout_runtime_heldout_b02.log`
 - [x] E005-M47 remaining `ConceptGraphs` heldout runtime batch launch 완료: `heldout_b02`, scans 3, staged payload ready 3/3, GPU free 31,719 MiB, tmux `e005_m43_conceptgraphs_heldout_runtime_b02`, log `logs/20260518_084811_e005_m43_conceptgraphs_heldout_runtime_heldout_b02.log`, initial verifier status `e005_m43_conceptgraphs_heldout_runtime_batch_running`
 - [x] E005-M46 `ConceptGraphs` heldout metric interpretation / remaining batch decision 완료: `plan_m46_conceptgraphs_heldout_interpretation.py`, status `e005_m46_conceptgraphs_heldout_interpretation_ready`, completed batches 1, remaining batches `heldout_b02`/`heldout_b03`, selected route `run_remaining_heldout_batches_before_external_baseline_claim`, top-tier novelty contract ready true, remaining heldout required for baseline rigor true / sufficient for novelty false
 - [x] E005-M45 `ConceptGraphs` heldout output-to-query metric conversion 완료: `run_m45_conceptgraphs_heldout_query_metrics.py`, status `e005_m45_conceptgraphs_heldout_query_metric_ready_with_strict_hits`, batch `heldout_b01`, scans 3, query rows 66/195 heldout, object rows 70, candidate rows 1,608, strict bbox top5 45/66 = 0.6818, relaxed bbox 1m top3 57/66 = 0.8636, final baseline claim false

@@ -1,6 +1,6 @@
 # Docs Index
 
-Updated: 2026-05-06
+Updated: 2026-05-18
 
 이 파일은 `docs/` 아래 workflow 문서들의 짧은 입구다. 보통 `docs/index.md`는 문서 내용을 길게 반복하지 않고, 새 작업자가 어떤 문서를 어떤 순서로 읽어야 하는지 알려주는 navigation hub로 쓴다.
 
@@ -10,6 +10,7 @@ Updated: 2026-05-06
 - [hypothesis.md](hypothesis.md): contribution candidate를 검증 가능한 hypothesis로 바꾸는 workflow
 - [experiments.md](experiments.md): experiment workflow와 작성 규칙
 - [paper.md](paper.md): 논문 작성 프로토콜 초안. 논문 작성 단계에서 다시 정리한다.
+- [reproducibility.md](reproducibility.md): 데이터 위치, 다운로드, checkpoint, Docker, 재현 명령, artifact/evaluation 요약
 
 ## Read Order
 

@@ -1,6 +1,6 @@
 # Experiments
 
-Updated: 2026-05-15
+Updated: 2026-05-18
 
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
@@ -8,7 +8,7 @@ Updated: 2026-05-15
 
 ## Status
 
-Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, and E005-M01 through E005-M45 are complete/verified with constraints through heldout runtime launch and non-runtime heldout metric conversion contract. E003 has Dockerized real-detector diagnostics and expanded direct current-rescan metrics for 96 query rows over 4 RGB-D-ready current rescans. E004 evaluates `task_context_memory_trust_reobserve_v0` and supports the memory-trust decision claim with limited task-context-specific strength. E005 selected `DualMap` first, then moved to `ConceptGraphs` after faithful `DualMap` object-map outputs were missing. `ConceptGraphs` now has 4-scan query-level metrics, failure boundary, a 13-scan heldout scale contract, 9/9 heldout scans sequence-ready, 9/9 heldout scans `ConceptGraphs` staged-layout ready, `heldout_b01` running as a 3-scan tmux background runtime job, and an M45 heldout metric contract ready for post-M44 conversion. Final baseline claim remains false. The next step is E005-M44 completion verification after the background job finishes.
+Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, and E005-M01 through E005-M49 are complete/verified with constraints through `heldout_b02` runtime completion and query-level metric conversion. E003 has Dockerized real-detector diagnostics and expanded direct current-rescan metrics for 96 query rows over 4 RGB-D-ready current rescans. E004 evaluates `task_context_memory_trust_reobserve_v0` and supports the memory-trust decision claim with limited task-context-specific strength. E005 selected `DualMap` first, then moved to `ConceptGraphs` after faithful `DualMap` object-map outputs were missing. `ConceptGraphs` now has 4-scan query-level metrics, failure boundary, a 13-scan / 291-query scale contract, 9/9 heldout scans sequence-ready and staged-layout ready, and `heldout_b01/b02` runtime + metric conversion complete. Final baseline claim remains false until `heldout_b03` runs and the 9-scan heldout table is aggregated. The next step is E005-M47 `heldout_b03` launch when GPU free memory is >= 24GB.
 
 ## Active Experiment
 
@@ -18,7 +18,7 @@ Main experiment implementation stage has started. E001-M01 through E001-M05, E00
 | E002 | M01-M09 path-cost artifacts ready | [E002_path_cost_bridge](E002_path_cost_bridge/README.md) | Input to E003 |
 | E003 | M00-M75 query bridge ready | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Input to E004 |
 | E004 | M01-M05 ready with constraints | [E004_task_context_memory_trust](E004_task_context_memory_trust/README.md) | Input to E005 |
-| E005 | M01-M43 heldout runtime running | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Verify `ConceptGraphs` heldout runtime batch completion |
+| E005 | M01-M49 ready through `heldout_b02`; `heldout_b03` pending GPU gate | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Launch `ConceptGraphs` `heldout_b03` when GPU free memory is >= 24GB |
 
 ## 사실
 
@@ -331,8 +331,8 @@ Non-claims:
 
 ## 에이전트 추론
 
-E005 now shows that `DualMap` can execute on the staged `3RScan` adapter, but the current route does not produce object-map `*.pkl` outputs. This is no longer a GPU/cache/bootstrap blocker; it is an object-retention/output-compatibility blocker. `ConceptGraphs` is now the active external mapping baseline route, with Docker/runtime, 4-scan query-level conversion, failure boundary, 13-scan heldout scale contract, 9 heldout scans sequence-ready, heldout runtime preflight completed, heldout staged layout ready, and `heldout_b01` running as a 3-scan background runtime batch. It is still not a final paper-table baseline until heldout runtime completion verification and metric conversion are done.
+E005 now shows that `DualMap` can execute on the staged `3RScan` adapter, but the current route does not produce object-map `*.pkl` outputs. This is no longer a GPU/cache/bootstrap blocker; it is an object-retention/output-compatibility blocker. `ConceptGraphs` is now the active external mapping baseline route, with Docker/runtime, 4-scan query-level conversion, failure boundary, 13-scan heldout scale contract, 9 heldout scans sequence-ready, heldout staged layout ready, and `heldout_b01/b02` runtime + metric conversion complete. It is still not a final paper-table baseline until `heldout_b03` runtime/metric conversion and full 9-scan aggregation are done.
 
 ## 사용자 판단 필요
 
-Continue with E005-M44 `ConceptGraphs` heldout runtime batch completion verification after the background job finishes.
+Continue with E005-M47 `ConceptGraphs` `heldout_b03` runtime launch when GPU free memory is >= 24GB.

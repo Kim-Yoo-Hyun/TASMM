@@ -1,6 +1,6 @@
 # Research Summary
 
-Updated: 2026-05-15
+Updated: 2026-05-18
 
 이 문서는 `research2/`의 연구 방향, 배경, 가설, 현재 진행 상태, 남은 쟁점, 실험 계획을 간단히 정리한 working research report다. 세부 진행 로그는 `TODO.md`, `hypothesis/`, `experiments/`에 둔다.
 
@@ -109,22 +109,12 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - E003은 controlled perception/proposal noise와 Dockerized RGB-D/open-vocabulary proposal route를 구축했다.
 - E004는 `task_context_memory_trust_reobserve_v0`를 평가했고, memory-trust decision claim은 split stress에서 지지되지만 task-context-specific claim은 `limited_positive_not_label_broad`다.
 - E005는 external baseline transition 단계다. `DualMap`은 실행/staging은 됐지만 object `*.pkl` output을 만들지 못해 performance baseline으로는 아직 부적합하다.
-- `ConceptGraphs`는 source/interface audit, `3RScan` depth-aligned staging, repo/checkpoint acquisition, Docker image build, import smoke, one-scan runtime output verification을 통과했다.
-- `ConceptGraphs` E005-M28/M29는 output schema와 output-to-query conversion contract를 고정했다. E005-M30은 one-scan object candidate export와 CPU CLIP-text scoring smoke를 통과했고, E005-M31은 one-scan query-level rank/failure diagnostic을 완료했다.
-- E005-M32는 strict/relaxed geometry boundary를 유지한 4-scan scaling을 승인했다.
-- E005-M33 initial pending runtime은 Docker-invisible host-absolute `depth/pose` symlink 때문에 실패했고, first repair relaunch는 container write permission 때문에 실패했다.
-- E005-M34는 pending 3개 scan의 staging symlink를 regular file로 materialize하고 container write permission을 repair했으며, container read/write smoke를 통과했다.
-- E005-M33 pending 3-scan `ConceptGraphs` runtime은 E005-M34 repair 이후 완료됐고, pending scan 3/3의 GSA detection, full PCD, post PCD output이 준비됐다.
+- `ConceptGraphs`는 source/interface audit, `3RScan` depth-aligned staging, repo/checkpoint acquisition, Docker image build, import smoke, one-scan runtime output verification, 4-scan metric conversion, heldout staging, and heldout batch runtime/metric conversion을 통과했다.
 - E005-M35는 4개 staged scan의 `ConceptGraphs` object map을 query-level candidate/metric으로 변환했다. Primary `M60` 기준 strict bbox top5는 3/7, relaxed bbox 1m top3는 6/7이고, expanded `M73` 기준 strict bbox top5는 57/96이다.
-- E005-M36은 failure boundary를 정리했다. Primary `M60` strict center top5는 1/7로 낮고, primary `chair`는 strict bbox hit가 없으며, primary `pillow`가 strict hit의 대부분을 차지한다.
-- E005-M37은 external baseline comparison을 정리했고, 다음 route를 `ConceptGraphs` heldout/scale expansion으로 고정했다.
-- E005-M38은 `ConceptGraphs` heldout/scale contract를 고정했다. Target scale은 13 scans / 291 eligible query rows이고, 9 heldout scans / 195 query rows는 `sequence.zip` acquisition/staging이 필요하다.
-- E005-M39는 9 heldout scans의 `sequence.zip` acquisition/staging을 tmux background job으로 launch했고, E005-M40에서 completion verification을 완료했다.
-- E005-M40은 9/9 heldout scans의 sequence staging을 검증했다. Valid `sequence.zip` rows는 9/9, total frame triplet lower bound는 2,982, minimum triplet count는 111이다.
-- E005-M41은 heldout runtime preflight를 완료했다. Docker image와 checkpoints는 준비됐지만, heldout `ConceptGraphs` staged payload는 0/9라 runtime launch는 아직 불가하다.
-- E005-M42는 9/9 heldout scans를 `ConceptGraphs` depth-aligned Scannet-style layout으로 materialize했다. Color/depth/pose files는 각각 2,982개이고, error는 0개다.
-- E005-M43은 GPU free memory 25,817 MiB에서 `heldout_b01` 3개 scan의 `ConceptGraphs` heldout runtime을 tmux background job으로 launch했다.
-- 현재 smoke scan에는 6개 post object, 1개 linked `pillow` query row, 6개 query-candidate rows가 있다.
+- E005-M38은 `ConceptGraphs` heldout/scale contract를 고정했다. Target scale은 13 scans / 291 eligible query rows이고, heldout split은 9 scans / 195 query rows다.
+- E005-M40은 9/9 heldout scans의 sequence staging을 검증했고, E005-M42는 9/9 heldout scans를 `ConceptGraphs` depth-aligned Scannet-style layout으로 materialize했다.
+- E005-M45/M49는 `heldout_b01/b02`를 query-level metrics로 변환했다. `heldout_b01` strict bbox top5는 45/66 = 0.681818이고, `heldout_b02` strict bbox top5는 45/69 = 0.652174이다.
+- `heldout_b03`는 아직 runtime/metric conversion이 남아 있으며, launch gate는 GPU free memory >= 24GB다.
 
 논문 주장:
 
@@ -135,7 +125,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 
 사실:
 
-- `ConceptGraphs`는 4-scan query-level conversion과 failure analysis, 13-scan heldout/scale contract, heldout sequence staging verification, runtime preflight, staged-layout materialization, M43 heldout batch launch까지 통과했지만 아직 final baseline result는 아니다. Heldout runtime completion verification, metric conversion, strict/relaxed metric separation, label-transfer analysis가 남아 있다.
+- `ConceptGraphs`는 4-scan query-level conversion과 failure analysis, 13-scan heldout/scale contract, heldout sequence staging verification, staged-layout materialization, `heldout_b01/b02` runtime/metric conversion까지 통과했지만 아직 final baseline result는 아니다. `heldout_b03` runtime/metric conversion, full 9-scan aggregation, strict/relaxed metric separation, label-transfer analysis가 남아 있다.
 - `DualMap`은 object-map output 부재 때문에 아직 external baseline result로 사용 불가하다.
 - `OpenMask3D`는 checkpoint는 준비됐지만 local Docker/MinkowskiEngine build blocker가 있다.
 - real RGB-D/open-vocabulary proposal route는 false-positive load와 heldout label/scan transfer 문제가 남아 있다.
@@ -151,7 +141,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 
 사실:
 
-- Immediate next unit: `E005-M44 ConceptGraphs heldout runtime batch completion verification`.
+- Immediate next unit: `E005-M47 ConceptGraphs heldout_b03 runtime launch` when GPU free memory is >= 24GB.
 - Keep strict 0.5m, relaxed 1.0m, and center-localization metrics separate when scaling the external baseline table.
 - After `ConceptGraphs` scale, audit `Open3DSG` as the next external map/scene-graph route if a second external baseline is needed.
 

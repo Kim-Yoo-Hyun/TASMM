@@ -1,6 +1,6 @@
 # Semantic Mapping Research Workspace
 
-업데이트: 2026-05-15
+업데이트: 2026-05-18
 
 이 워크스페이스는 semantic mapping을 중심으로, human-friendly robot intelligence 연구를 작게 시작하기 위한 문서 기반 작업 공간이다. 목표는 로봇이 사람의 의도와 지식을 이해하고, 그 이해를 공간적 기억과 행동으로 연결하여 사람이 요구하는 복잡한 작업을 수행하게 하는 것이다.
 
@@ -25,6 +25,7 @@
 - [docs/experiments.md](docs/experiments.md): experiment workflow와 작성 규칙
 - [experiments/README.md](experiments/README.md): main experiment index
 - [docs/paper.md](docs/paper.md): 논문 작성 프로토콜 초안. 논문 작성 단계에서 다시 정리한다.
+- [docs/reproducibility.md](docs/reproducibility.md): 데이터, checkpoint, Docker, 재현 명령, artifact/evaluation 요약
 - [literature/README.md](literature/README.md): field map, trend synthesis, cross-paper insights, open questions
 - [literature/PAPER.md](literature/PAPER.md): paper registry와 reading queue
 - [literature/Contribution Candidates.md](<literature/Contribution Candidates.md>): contribution candidate 목록
@@ -39,7 +40,7 @@
 - Current implementation path: Direction A `Task-Conditioned Stale Semantic Memory`를 core method로 만들고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 붙여 Direction B로 확장
 - Current experiment: [E005_external_baseline_transition](experiments/E005_external_baseline_transition/README.md)
 - Current E004 status: E004-M01 transition gate is `ready_with_constraints`; E004-M02 metric contract is `ready`; E004-M03 memory trust policy is `ready_with_constraints`; E004-M04 claim-boundary ablation is `ready`; E004-M05 scale/split stress is `ready_limited_task_context`. E004-M05 supports a split-supported memory-trust decision claim, but task-context-specific claim strength remains limited and not label-broad. The next unit is E005 external baseline transition.
-- Current E005 status: E005-M01 through E005-M43 are complete/verified with constraints through heldout runtime launch. `DualMap` staging, Docker bootstrap, cache-fixed detector runtime, and denser-stride retry run on the staged `3RScan` adapter, but M14/M17 both produce `layout.pcd` and timing files without object `*.pkl` outputs. `ConceptGraphs` is now the active external mapping baseline route; 4 staged scans have query-level metrics and failure boundary, M38 fixes a 13-scan / 291-query heldout scale contract, M40 verifies 9/9 heldout scans as sequence-ready, and M42 materializes 9/9 heldout scans into the `ConceptGraphs` staged layout. E005-M43 launched `heldout_b01` as a 3-scan tmux background runtime job. The next step is E005-M44 completion verification after the background job finishes.
+- Current E005 status: E005-M01 through E005-M49 are complete/verified with constraints through `heldout_b02` runtime completion and query-level metric conversion. `DualMap` staging, Docker bootstrap, cache-fixed detector runtime, and denser-stride retry run on the staged `3RScan` adapter, but M14/M17 both produce `layout.pcd` and timing files without object `*.pkl` outputs. `ConceptGraphs` is the active external mapping baseline route; 4 staged scans have query-level metrics and failure boundary, M38 fixes a 13-scan / 291-query scale contract, M40 verifies 9/9 heldout scans as sequence-ready, M42 materializes 9/9 heldout scans into the `ConceptGraphs` layout, and `heldout_b01/b02` have runtime + metric conversion. Current heldout diagnostics: `heldout_b01` strict bbox top5 45/66 = 0.681818, `heldout_b02` strict bbox top5 45/69 = 0.652174. The next step is launching `heldout_b03` when GPU free memory is >= 24GB, then aggregating all 9 heldout scans.
 - Current boundary: main experiment implementation 단계이며, paper 폴더는 아직 만들지 않는다.
 - Current top-tier path: E001 benchmark/proxy -> E002 search/navigation bridge -> E003 controlled perception/proposal noise -> Dockerized RGB-D/open-vocabulary proposal route -> E003-M75 expanded query-level evaluation -> E004 task-context memory trust / re-observation decision with split stress -> E005 external baselines and dataset-format staging -> Direction B mapping-navigation system evidence.
 

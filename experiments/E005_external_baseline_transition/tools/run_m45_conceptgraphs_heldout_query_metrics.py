@@ -171,13 +171,14 @@ def failure_class(metrics: dict[str, Any]) -> str:
 
 
 def build_report(coverage: dict[str, Any], metrics: dict[str, Any]) -> str:
-    suite = metrics["suites"]["heldout_m38_b01"]
+    suite_name = coverage["query_suite"]
+    suite = metrics["suites"][suite_name]
     strict_bbox = suite["policy_metrics"]["conceptgraphs_clip_rank_bbox_strict_top5_v0"]
     relaxed_bbox = suite["policy_metrics"]["conceptgraphs_clip_rank_bbox_relaxed_1m_top3_v0"]
     centroid = suite["policy_metrics"]["conceptgraphs_clip_rank_centroid_strict_top5_v0"]
     return "\n".join(
         [
-            "# E005-M45 ConceptGraphs Heldout Query Metric",
+            f"# E005-M45 ConceptGraphs Heldout Query Metric: {coverage['batch_id']}",
             "",
             "## Status",
             "",
@@ -186,6 +187,7 @@ def build_report(coverage: dict[str, Any], metrics: dict[str, Any]) -> str:
             "## Facts",
             "",
             f"- Batch id: `{coverage['batch_id']}`.",
+            f"- Query suite: `{suite_name}`.",
             f"- Scans: {coverage['scan_count']}.",
             f"- Query rows: {suite['query_rows']}.",
             f"- Target uids: {suite['target_uid_count']}.",
@@ -245,12 +247,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "version": VERSION,
             "generated_at": datetime.now().isoformat(timespec="seconds"),
             "batch_id": args.batch_id,
+            "query_suite": suite_name,
             "errors": errors,
             "next_recommended_unit": "Repair M43/M45 query target inputs",
         }
+        write_json(out_dir / f"coverage_{args.batch_id}.json", coverage)
         write_json(out_dir / "coverage.json", coverage)
-        write_jsonl(out_dir / "target_rows.jsonl", target_rows)
-        write_text(out_dir / "report.md", "# E005-M45 ConceptGraphs Heldout Query Metric\n\nBlocked.\n")
+        write_jsonl(out_dir / f"target_rows_{args.batch_id}.jsonl", target_rows)
+        write_text(out_dir / f"report_{args.batch_id}.md", f"# E005-M45 ConceptGraphs Heldout Query Metric: {args.batch_id}\n\nBlocked.\n")
+        write_text(out_dir / "report.md", f"# E005-M45 ConceptGraphs Heldout Query Metric: {args.batch_id}\n\nBlocked.\n")
         return coverage
 
     docker_meta, result = m35.docker_export(scan_ids, [], query_rows)
@@ -261,11 +266,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "version": VERSION,
             "generated_at": datetime.now().isoformat(timespec="seconds"),
             "batch_id": args.batch_id,
+            "query_suite": suite_name,
             "docker_returncode": docker_meta.get("returncode"),
             "next_recommended_unit": "Inspect E005-M45 docker_meta stderr/stdout tail",
         }
+        write_json(out_dir / f"coverage_{args.batch_id}.json", coverage)
         write_json(out_dir / "coverage.json", coverage)
-        write_text(out_dir / "report.md", "# E005-M45 ConceptGraphs Heldout Query Metric\n\nFailed.\n")
+        write_text(out_dir / f"report_{args.batch_id}.md", f"# E005-M45 ConceptGraphs Heldout Query Metric: {args.batch_id}\n\nFailed.\n")
+        write_text(out_dir / "report.md", f"# E005-M45 ConceptGraphs Heldout Query Metric: {args.batch_id}\n\nFailed.\n")
         return coverage
 
     object_rows = result["object_rows"]
@@ -290,6 +298,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "version": VERSION,
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "batch_id": args.batch_id,
+        "query_suite": suite_name,
         "m43_status": m43_verify.get("status"),
         "scan_count": len(scan_ids),
         "scan_ids": scan_ids,
@@ -311,12 +320,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "next_recommended_unit": "E005-M46 ConceptGraphs heldout metric interpretation / remaining batch decision",
     }
 
-    write_jsonl(out_dir / "target_rows.jsonl", target_rows)
-    write_jsonl(out_dir / "object_rows_heldout_b01.jsonl", object_rows)
-    write_jsonl(out_dir / "candidate_rows_heldout_b01.jsonl", candidate_rows)
-    write_jsonl(out_dir / "candidate_eval_rows_heldout_b01.jsonl", eval_rows)
-    write_jsonl(out_dir / "policy_rows_heldout_b01.jsonl", policy_rows)
-    write_json(out_dir / "metrics_heldout_b01.json", metrics)
+    write_jsonl(out_dir / f"target_rows_{args.batch_id}.jsonl", target_rows)
+    write_jsonl(out_dir / f"object_rows_{args.batch_id}.jsonl", object_rows)
+    write_jsonl(out_dir / f"candidate_rows_{args.batch_id}.jsonl", candidate_rows)
+    write_jsonl(out_dir / f"candidate_eval_rows_{args.batch_id}.jsonl", eval_rows)
+    write_jsonl(out_dir / f"policy_rows_{args.batch_id}.jsonl", policy_rows)
+    write_json(out_dir / f"metrics_{args.batch_id}.json", metrics)
+    write_json(out_dir / f"coverage_{args.batch_id}.json", coverage)
+    write_text(out_dir / f"report_{args.batch_id}.md", build_report(coverage, metrics))
     write_json(out_dir / "coverage.json", coverage)
     write_text(out_dir / "report.md", build_report(coverage, metrics))
     return coverage

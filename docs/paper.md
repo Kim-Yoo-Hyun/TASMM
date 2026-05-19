@@ -62,7 +62,7 @@ If four or more answers are weak, the work is still motivation-stage and the met
 | --- | --- | --- | --- |
 | Task/staleness-aware memory decision improves dynamic object search proxy behavior | E001/E002/E004 tables vs static memory, fixed top-k, context-agnostic trust, path-aware variants | partially supported | task-context effect is narrow |
 | The decision layer remains useful under real RGB-D/open-vocabulary proposal noise | E003 direct current-rescan bridge, heldout split, detector/proposal baseline comparison | not final | false-positive load and detector recall miss remain large |
-| The framework is stronger than external dynamic/open-vocabulary mapping baselines | E005 `DualMap` or `ConceptGraphs` adapter and fair query-level comparison | in progress | `DualMap` runs but lacks object `*.pkl`; `ConceptGraphs` acquisition is ready and Docker/runtime smoke is still needed |
+| The framework is stronger than external dynamic/open-vocabulary mapping baselines | E005 `DualMap` or `ConceptGraphs` adapter and fair query-level comparison | in progress | `DualMap` runs but lacks object `*.pkl`; `ConceptGraphs` 4-scan and `heldout_b01/b02` query metrics are ready; `heldout_b03` and full aggregation remain |
 | The system supports deployable search policy | bounded budget improvement, allowed-input contract, failure separation | not ready | current policy is diagnostic, not deployable |
 | The system improves real navigation `SR` / `SPL` | simulator/navmesh/trajectory execution and navigation baselines | unsupported | no real navigation evaluation yet |
 
@@ -72,7 +72,7 @@ If four or more answers are weak, the work is still motivation-stage and the met
 - E002: adds path/search-cost bridge and separates source-limited failures from policy failures.
 - E003: tests controlled perception noise and real RGB-D/open-vocabulary proposal failure modes.
 - E004: tests memory trust and task-context conditioning, with claim boundaries.
-- E005: adds external baseline pressure; `DualMap` first, `ConceptGraphs` staging/preflight/acquisition ready, Docker build preflight next.
+- E005: adds external baseline pressure; `DualMap` runs without object-map outputs, while `ConceptGraphs` now has 4-scan metrics plus `heldout_b01/b02` batch diagnostics and needs `heldout_b03` before final aggregation.
 
 Main tables should not merely report that our method is better. They should show which failure mode is addressed by which component.
 
@@ -155,6 +155,8 @@ Every experiment answers a reviewer question:
 - external code, models, checkpoints, datasets, and assets are cited with version/license
 - failure cases are not filtered out silently
 - limitations are linked to actual experiments
+
+Current reproducibility entry point: `docs/reproducibility.md`.
 
 ## When To Create A Paper Folder
 

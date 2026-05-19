@@ -139,6 +139,11 @@ Updated: 2026-05-18
 - E005-M45 keeps `conceptgraphs_clip_rank_bbox_strict_top5_v0` as the primary strict paper-facing policy and keeps relaxed bbox / centroid metrics as diagnostics.
 - E005-M46 interprets `heldout_b01` as a positive batch diagnostic, not a final baseline result, and selects `heldout_b02` / `heldout_b03` as required remaining runtime batches before external-baseline claim.
 - E005-M46 fixes the novelty comparison contract: `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, and H001 `task-conditioned memory trust / re-observation / search-cost policy`.
+- E005-M48 verifies `heldout_b02` runtime outputs: ready scans 3 / 3, GSA detections 210 / 63 / 33, full PCD/post PCD ready for all selected scans.
+- E005-M49 generates batch-aware heldout query rows: `heldout_b01` 66, `heldout_b02` 69, `heldout_b03` 60, total 195.
+- E005-M49 converts `heldout_b02` into query-level metrics: 3 scans, 69 / 195 heldout query rows, 23 target uids, 10 labels, 199 object rows, and 4,614 candidate rows.
+- E005-M49 `heldout_b02` strict bbox top5 success is 45 / 69 = 0.652174 and relaxed bbox 1m top3 success is 51 / 69 = 0.739130.
+- E005-M49 keeps final external baseline claim false until `heldout_b03` and full 9-scan aggregation are complete.
 - Real navigation `SR` / `SPL` remains unsupported.
 - Final real RGB-D/open-vocabulary robustness claim remains unsupported.
 
@@ -184,7 +189,7 @@ Updated: 2026-05-18
 
 사실:
 
-- `ConceptGraphs` has been run and converted to query-level metrics on 4 staged scans, M38 defines the 13-scan heldout scale contract, M40 verifies heldout sequence staging, M41 fixes the heldout runtime preflight, M42 materializes the heldout staged layout, M43 launches `heldout_b01` as a 3-scan background runtime batch, and E005-M45 fixes the post-runtime metric contract. The result is still not a final external baseline table until heldout runtime completion verification and metric conversion are complete.
+- `ConceptGraphs` has been run and converted to query-level metrics on 4 staged scans plus `heldout_b01/b02`; M38 defines the 13-scan heldout scale contract, M40 verifies heldout sequence staging, and M42 materializes the heldout staged layout. The result is still not a final external baseline table until `heldout_b03` runtime/metric conversion and full aggregation are complete.
 - External routes such as `Open3DSG`, `HOV-SG`, `VLFM`, `HM3D-OVON`, `GOAT-Bench`, and `3D-Mem` have not yet been run in this workspace.
 - `DualMap` has been staged and executed, but current M14/M17 runs lack object `*.pkl` outputs, so it is not yet a valid object-map baseline result.
 - E001/E002 still use proxy search metrics, not real executed navigation.
@@ -332,7 +337,7 @@ Cold assessment:
 - E005-M04 removes the local file-layout blocker, but it also exposes the next reviewer-relevant risk: runtime dependency/model readiness and color/depth resolution alignment must be validated before using `DualMap` as evidence.
 - E005-M05 confirms that the remaining `DualMap` blocker is environment/bootstrap, not selected scan file layout. Static object schema is adapter-promising, but runtime map outputs are still required.
 - E005-M06 launches the environment/bootstrap route and confirms local `mobileclip` readiness; E005-M07 verifies Docker image and dependency readiness; E005-M08 launches one-scan runtime smoke; E005-M09 verifies failure at `CLIP` model initialization due to GPU memory contention; E005-M10 selects detector-enabled free-GPU retry; E005-M11 launches that retry; E005-M12/M13/M14/M15 repair the cache path and verify cache-fixed runtime completion; E005-M16/M17/M18 show that denser stride still yields no object `*.pkl`.
-- E005-M35 converts the 4-scan `ConceptGraphs` subset into query-level metrics; E005-M38 defines the 13-scan / 291-query scale contract; E005-M43 launches the first 3-scan heldout runtime batch; E005-M45 fixes the post-runtime metric contract before M44 completion verification.
+- E005-M35 converts the 4-scan `ConceptGraphs` subset into query-level metrics; E005-M38 defines the 13-scan / 291-query scale contract; E005-M45 converts `heldout_b01`; E005-M49 converts `heldout_b02`; `heldout_b03` remains before full aggregation.
 - Current real navigation `SR` / `SPL` remains unsupported because no simulator, navmesh, or trajectory execution source is integrated.
 
 논문 주장:
@@ -346,7 +351,7 @@ Cold assessment:
 - Real RGB-D/open-vocabulary robustness is not just higher detector recall. It must show transfer across heldout scenes/labels and robustness to prompt, depth, pose, and proposal noise.
 - Deployable search policy is currently the nearest claim to mature, but E004-M05 still supports only a diagnostic memory-trust decision claim, not a final deployable policy claim.
 - Real navigation `SR` / `SPL` is the farthest claim because query-level success must be connected to actual path execution and candidate visit order.
-- The correct immediate route is E005-M44: verify heldout `ConceptGraphs` runtime completion, then run metric conversion.
+- The correct immediate route is E005-M47: launch `heldout_b03` when GPU free memory is >= 24GB, verify runtime completion, run metric conversion, then aggregate all heldout batches.
 
 사용자 판단 필요:
 
@@ -358,7 +363,7 @@ Cold assessment:
 
 - Use Direction A as the backbone now.
 - Treat Direction B as the final target, not a separate replacement.
-- The next technical step should be E005-M44 `ConceptGraphs` heldout runtime batch completion verification.
+- The next technical step should be E005-M47 `ConceptGraphs` `heldout_b03` runtime launch when GPU free memory is >= 24GB.
 - E005 should preserve the E004 claim boundary: split-supported memory trust, limited task-context specificity, no final real RGB-D/open-vocabulary robustness, no deployable search policy, and no real navigation `SR` / `SPL`.
 - External proposal/mapping baselines such as `OpenMask3D`, `ConceptGraphs`, and `HOV-SG` should be evaluated as claim-expansion routes, not retrofitted as detector improvements.
 - Do not claim real navigation `SR` / `SPL` until simulator, navmesh, or trajectory execution is integrated.

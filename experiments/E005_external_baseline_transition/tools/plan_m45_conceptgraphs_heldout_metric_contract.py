@@ -23,6 +23,7 @@ VERSION = "e005_m45_conceptgraphs_heldout_metric_contract_v0"
 M35_DIR = EXP_ROOT / "artifacts" / "E005-M35_conceptgraphs_4scan_query_metric_v0"
 M38_DIR = EXP_ROOT / "artifacts" / "E005-M38_conceptgraphs_heldout_scale_v0"
 M43_DIR = EXP_ROOT / "artifacts" / "E005-M43_conceptgraphs_heldout_runtime_batch_launch_v0"
+M41_DIR = EXP_ROOT / "artifacts" / "E005-M41_conceptgraphs_heldout_runtime_preflight_v0"
 
 SAVE_SUFFIX = "overlap_maskconf0.95_simsum1.2_dbscan.1_merge20_masksub"
 
@@ -158,24 +159,43 @@ def build_expected_output_rows(scan_ids: list[str]) -> list[dict[str, Any]]:
     ]
 
 
-def build_contract() -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any]], str]:
+def build_contract() -> tuple[dict[str, Any], dict[str, Any], dict[str, list[dict[str, Any]]], str]:
     m35_coverage = read_json(M35_DIR / "coverage.json")
     m35_metrics = read_json(M35_DIR / "metrics.json")
     m38_coverage = read_json(M38_DIR / "coverage.json")
     m43_coverage = read_json(M43_DIR / "coverage.json")
     m43_verify = read_json(M43_DIR / "verification" / "heldout_b01" / "coverage.json")
+    runtime_batch_rows = read_jsonl(M41_DIR / "runtime_batch_rows.jsonl")
     scale_rows = read_jsonl(M38_DIR / "scale_query_rows.jsonl")
     object_sample = read_jsonl(M35_DIR / "object_rows.jsonl")[:1]
     candidate_sample = read_jsonl(M35_DIR / "candidate_rows.jsonl")[:1]
     candidate_eval_sample = read_jsonl(M35_DIR / "candidate_eval_rows.jsonl")[:1]
     policy_sample = read_jsonl(M35_DIR / "policy_rows.jsonl")[:1]
 
-    scan_ids = [str(scan_id) for scan_id in m43_coverage.get("scan_ids", [])]
-    selected_rows = [row for row in scale_rows if str(row.get("current_rescan_id")) in set(scan_ids)]
+    batch_query_rows: dict[str, list[dict[str, Any]]] = {}
+    batch_summaries: list[dict[str, Any]] = []
+    for batch in runtime_batch_rows:
+        batch_id = str(batch["batch_id"])
+        batch_scan_ids = [str(scan_id) for scan_id in batch.get("scan_ids", [])]
+        rows = [row for row in scale_rows if str(row.get("current_rescan_id")) in set(batch_scan_ids)]
+        batch_query_rows[batch_id] = rows
+        batch_summaries.append(
+            {
+                "batch_id": batch_id,
+                "scan_ids": batch_scan_ids,
+                "query_rows_path": str(OUT_DIR / f"{batch_id}_query_rows.jsonl"),
+                "summary": summarize_rows(rows),
+                "expected_outputs": build_expected_output_rows(batch_scan_ids),
+            }
+        )
+
+    selected_batch_id = "heldout_b01"
+    selected_batch = next((row for row in batch_summaries if row["batch_id"] == selected_batch_id), None)
+    scan_ids = [str(scan_id) for scan_id in (selected_batch or {}).get("scan_ids", [])]
+    selected_rows = batch_query_rows.get(selected_batch_id, [])
     heldout_all_rows = [row for row in scale_rows if row.get("split") == "heldout_sequence_required"]
     dev_rows = [row for row in scale_rows if row.get("split") == "dev_existing_4scan_metric_ready"]
 
-    selected_row_path = OUT_DIR / "heldout_b01_query_rows.jsonl"
     expected_rows = build_expected_output_rows(scan_ids)
 
     table_schema = {
@@ -221,15 +241,17 @@ def build_contract() -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any
         "input_artifacts": {
             "m35_4scan_schema": str(M35_DIR),
             "m38_scale_queries": str(M38_DIR / "scale_query_rows.jsonl"),
-            "m43_expected_runtime_outputs": str(M43_DIR / "expected_outputs_heldout_b01.jsonl"),
+            "m41_runtime_batches": str(M41_DIR / "runtime_batch_rows.jsonl"),
+            "m43_expected_runtime_outputs_pattern": str(M43_DIR / "expected_outputs_<batch_id>.jsonl"),
         },
         "selected_batch": {
             "batch_id": "heldout_b01",
             "scan_ids": scan_ids,
-            "query_rows_path": str(selected_row_path),
+            "query_rows_path": str(OUT_DIR / "heldout_b01_query_rows.jsonl"),
             "summary": summarize_rows(selected_rows),
             "expected_outputs": expected_rows,
         },
+        "all_batches": batch_summaries,
         "scale_context": {
             "m38_status": m38_coverage.get("status"),
             "target_scale": m38_coverage.get("target_scale"),
@@ -282,7 +304,7 @@ def build_contract() -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any
             ],
         },
         "future_command_contract": {
-            "planned_converter": "experiments/E005_external_baseline_transition/tools/run_m45_conceptgraphs_heldout_query_metrics.py --batch-id heldout_b01",
+            "planned_converter": "experiments/E005_external_baseline_transition/tools/run_m45_conceptgraphs_heldout_query_metrics.py --batch-id <heldout_bXX>",
             "docker_required": True,
             "reason": "CLIP text scoring uses the ConceptGraphs Docker image and the same M35 object-map schema.",
         },
@@ -357,16 +379,17 @@ def build_contract() -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any
             "",
         ]
     )
-    return contract, coverage, selected_rows, report
+    return contract, coverage, batch_query_rows, report
 
 
 def main() -> None:
-    contract, coverage, selected_rows, report = build_contract()
+    contract, coverage, batch_query_rows, report = build_contract()
     write_json(OUT_DIR / "contract.json", contract)
     write_json(OUT_DIR / "coverage.json", coverage)
     write_json(OUT_DIR / "table_schema.json", contract["schema"])
     write_jsonl(OUT_DIR / "policy_contract_rows.jsonl", contract["policies"])
-    write_jsonl(OUT_DIR / "heldout_b01_query_rows.jsonl", selected_rows)
+    for batch_id, rows in sorted(batch_query_rows.items()):
+        write_jsonl(OUT_DIR / f"{batch_id}_query_rows.jsonl", rows)
     write_text(OUT_DIR / "report.md", report)
     print(json.dumps(coverage, indent=2, sort_keys=True))
 

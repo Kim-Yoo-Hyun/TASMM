@@ -4,7 +4,7 @@ Updated: 2026-05-18
 
 ## Status
 
-`E005-M01` through `E005-M47` are complete through 4-scan scale decision, pending-scan runtime verification, staging/permission repair, 4-scan candidate/query metric conversion, failure/claim-boundary analysis, external baseline next-route decision, heldout/scale contract planning, heldout sequence acquisition/staging launch, heldout sequence staging verification, heldout runtime preflight, heldout staged-layout materialization, heldout runtime completion verification, heldout batch query-metric conversion, heldout interpretation / remaining-batch decision, and `heldout_b02` runtime launch. The selected first external baseline route was `DualMap`; the backup route is `ConceptGraphs`. `DualMap` Dataset Mode staging, Docker bootstrap, cache-fixed detector initialization, and one-scan runtime completion are verified, but M14/M17 produce `layout.pcd` / timing files without object `*.pkl` outputs. `ConceptGraphs` is now the active external mapping baseline route: E005-M20 audits the official source/interface, E005-M21 materializes a depth-aligned Scannet-style `3RScan` staging root, E005-M22 fixes the Docker/runtime preflight contract, E005-M23/M24 complete repo/checkpoint acquisition, E005-M25/M26 build a Docker image with import smoke passing, E005-M27 verifies one-scan runtime outputs, E005-M28 inspects output schema, E005-M29 fixes the output-to-query conversion contract, E005-M30 exports one-scan object candidates with CLIP-text scores, E005-M31 converts those candidates into query-level diagnostics, E005-M32 approves strict/relaxed-boundary 4-scan scaling, E005-M33 initially fails on Docker-invisible host-absolute `depth/pose` symlinks, E005-M34 materializes those files and fixes container write permissions for pending scans, E005-M35 converts all 4 staged scans into candidate/query metrics, E005-M36 records failure boundary, E005-M37 fixes the baseline comparison / route order, E005-M38 defines the 13-scan heldout/scale contract, E005-M39 launches 9 heldout scan `sequence.zip` acquisition/staging in background, E005-M40 verifies 9/9 heldout scans as sequence-ready, E005-M41 confirms heldout runtime launch is blocked by missing staged-layout payloads, E005-M42 materializes 9/9 heldout scans into the `ConceptGraphs` staged layout, E005-M43 runs `heldout_b01` as a 3-scan tmux background runtime batch, E005-M44 verifies 3/3 runtime outputs, E005-M45 converts `heldout_b01` into query-level metrics, E005-M46 fixes the top-tier novelty comparison contract plus the remaining heldout decision, and E005-M47 launches `heldout_b02` in tmux. The next unit is E005-M48 `heldout_b02` completion verification.
+`E005-M01` through `E005-M49` are complete through 4-scan scale decision, pending-scan runtime verification, staging/permission repair, 4-scan candidate/query metric conversion, failure/claim-boundary analysis, external baseline next-route decision, heldout/scale contract planning, heldout sequence acquisition/staging launch, heldout sequence staging verification, heldout runtime preflight, heldout staged-layout materialization, `heldout_b01/b02` runtime completion verification, `heldout_b01/b02` query-metric conversion, and batch-aware heldout metric-contract preparation. The selected first external baseline route was `DualMap`; the backup route is `ConceptGraphs`. `DualMap` Dataset Mode staging, Docker bootstrap, cache-fixed detector initialization, and one-scan runtime completion are verified, but M14/M17 produce `layout.pcd` / timing files without object `*.pkl` outputs. `ConceptGraphs` is now the active external mapping baseline route. `heldout_b01` strict bbox top5 is 45 / 66 = 0.681818 and `heldout_b02` strict bbox top5 is 45 / 69 = 0.652174. Final external-baseline claim remains false until `heldout_b03` is launched, verified, converted to metrics, and all 9 heldout scans are aggregated. The next unit is E005-M47 `heldout_b03` launch when GPU free memory is >= 24GB.
 
 ## E005-M26 Docker Image Result
 
@@ -52,7 +52,7 @@ Updated: 2026-05-18
 - The third M27 failure was a resource issue: SAM failed while moving to CUDA because global GPU free memory was too low.
 - Current runtime smoke still does not support a baseline performance claim until output-to-query export, semantic scoring, and query-level metric evaluation are complete.
 
-## E005-M28/M29/M30/M31/M32/M33/M34/M35/M36/M37/M38/M39/M40/M41/M42/M43/M45/M46/M47 Current Conversion State
+## E005-M28/M29/M30/M31/M32/M33/M34/M35/M36/M37/M38/M39/M40/M41/M42/M43/M45/M46/M47/M48/M49 Current Conversion State
 
 사실:
 
@@ -194,6 +194,17 @@ Updated: 2026-05-18
 - E005-M47 log: `logs/20260518_084811_e005_m43_conceptgraphs_heldout_runtime_heldout_b02.log`.
 - E005-M47 initial verifier status: `e005_m43_conceptgraphs_heldout_runtime_batch_running`.
 - E005-M47 next recommended unit: `E005-M48 heldout_b02 runtime completion verification`.
+- E005-M48 verification status: `e005_m43_conceptgraphs_heldout_runtime_batch_outputs_ready`.
+- E005-M48 ready scans: 3 / 3.
+- E005-M48 `heldout_b02` GSA detections: 210 / 63 / 33.
+- E005-M48 full PCD and post PCD outputs: ready for all 3 selected scans.
+- E005-M49 batch-aware contract generated `heldout_b01/b02/b03_query_rows.jsonl`.
+- E005-M49 heldout query row split: `heldout_b01` 66, `heldout_b02` 69, `heldout_b03` 60, total 195.
+- E005-M49 `heldout_b02` query-metric status: `e005_m45_conceptgraphs_heldout_query_metric_ready_with_strict_hits`.
+- E005-M49 `heldout_b02` object rows / candidate rows: 199 / 4,614.
+- E005-M49 `heldout_b02` strict bbox top5 success rows/rate: 45 / 0.652174.
+- E005-M49 `heldout_b02` relaxed bbox 1m top3 success rows/rate: 51 / 0.739130.
+- E005-M49 next gate: launch `heldout_b03` when GPU free memory is >= 24GB.
 
 논문 주장:
 
@@ -219,7 +230,9 @@ Updated: 2026-05-18
 - E005-M46 supports the decision to run remaining heldout batches before external-baseline claim.
 - E005-M46 does not support novelty by itself; novelty must come from H001 improving `ExpectedSearchCost`, proxy `SR`, proxy `SPL`, stale-memory recovery, and failure reduction over the fixed comparison rows.
 - E005-M47 supports only a runtime launch decision for `heldout_b02`.
-- E005-M47 does not support heldout performance until completion verification and metric conversion finish.
+- E005-M48 supports runtime-output readiness for `heldout_b02`.
+- E005-M49 supports `heldout_b02` batch diagnostic metric conversion.
+- E005-M49 does not support final external baseline performance, all-9-scan heldout transfer, final real RGB-D/open-vocabulary robustness, or real navigation `SR` / `SPL`.
 
 에이전트 추론:
 
@@ -242,7 +255,7 @@ Updated: 2026-05-18
 - M45 confirms that bbox-based object extent alignment is much stronger than centroid-only localization on `heldout_b01`.
 - `heldout_b01` can only be a batch diagnostic because it covers 66 / 195 heldout query rows.
 - M46 makes the next direction explicit: finish `ConceptGraphs` heldout for baseline rigor, then compare H001 against the fixed naive/external/ablation baselines.
-- M47 should not be monitored continuously; completion should be checked through the verifier when M48 is requested or a dependent task needs it.
+- `heldout_b03` should not be launched below the 24GB GPU-free gate unless the user explicitly accepts higher OOM risk.
 
 ## Source
 
@@ -839,40 +852,42 @@ Artifacts:
 
 - Resolved by E005-M42.
 
-## E005-M43 Heldout Runtime Batch Launch
+## E005-M43/M48/M49 Heldout Runtime And Metric Batches
 
 Implementation unit: `E005-M43_conceptgraphs_heldout_runtime_batch_launch_v0`.
 
 사실:
 
-- Status: `e005_m43_conceptgraphs_heldout_runtime_batch_launched`.
-- Batch id: `heldout_b01`.
-- Selected scans: 3.
-- Staged payload ready scans: 3 / 3.
-- GPU free memory before launch: 25,817 MiB.
+- Latest status: `heldout_b01` and `heldout_b02` runtime outputs and query metrics are ready.
+- `heldout_b01` selected scans: 3, query rows 66 / 195 heldout.
+- `heldout_b01` strict bbox top5: 45 / 66 = 0.681818.
+- `heldout_b01` relaxed bbox 1m top3: 57 / 66 = 0.863636.
+- `heldout_b02` selected scans: 3, query rows 69 / 195 heldout.
+- `heldout_b02` GSA detections: 210 / 63 / 33.
+- `heldout_b02` object rows / candidate rows: 199 / 4,614.
+- `heldout_b02` strict bbox top5: 45 / 69 = 0.652174.
+- `heldout_b02` relaxed bbox 1m top3: 51 / 69 = 0.739130.
+- `heldout_b03` query rows: 60 / 195 heldout.
 - Launch gate: 24,000 MiB.
-- Launch executed: true.
-- tmux session: `e005_m43_conceptgraphs_heldout_runtime_b01`.
-- tmux running after launch: true.
-- Initial verifier status: `e005_m43_conceptgraphs_heldout_runtime_batch_running`.
-- Log path: `logs/20260518_011510_e005_m43_conceptgraphs_heldout_runtime_heldout_b01.log`.
+- Latest blocker: `heldout_b03` launch waits for GPU free memory >= 24GB.
 - Artifact path: `experiments/E005_external_baseline_transition/artifacts/E005-M43_conceptgraphs_heldout_runtime_batch_launch_v0/`.
-- Verification command: `python experiments/E005_external_baseline_transition/tools/verify_m43_conceptgraphs_heldout_runtime_batch.py --batch-id heldout_b01`.
-- Next recommended unit: `E005-M44 ConceptGraphs heldout runtime batch completion verification`.
+- Metric artifact path: `experiments/E005_external_baseline_transition/artifacts/E005-M45_conceptgraphs_heldout_query_metric_v0/`.
+- Verification command template: `python experiments/E005_external_baseline_transition/tools/verify_m43_conceptgraphs_heldout_runtime_batch.py --batch-id <heldout_bXX>`.
+- Metric command template: `python experiments/E005_external_baseline_transition/tools/run_m45_conceptgraphs_heldout_query_metrics.py --batch-id <heldout_bXX>`.
 
 논문 주장:
 
-- E005-M43 supports only a runtime launch decision.
-- E005-M43 does not support heldout runtime performance, final external baseline performance, final real RGB-D/open-vocabulary robustness, or real navigation `SR` / `SPL`.
+- E005-M49 supports heldout batch diagnostics for `heldout_b01/b02`.
+- E005-M49 does not support final external baseline performance, final real RGB-D/open-vocabulary robustness, or real navigation `SR` / `SPL`.
 
 에이전트 추론:
 
-- This is now a background runtime state, not a performance result.
-- The next step should be completion verification after the tmux job stops or when a dependent task needs the result.
+- `heldout_b01/b02` are positive diagnostics but still only 135 / 195 heldout query rows.
+- The next step should finish `heldout_b03` and aggregate all 9 heldout scans before any external-baseline claim.
 
 사용자 판단 필요:
 
-- None before M44 completion verification.
+- None before `heldout_b03` launch once GPU memory is available.
 
 ## E005-M42 Heldout Staging Materialization
 

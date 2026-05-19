@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-05-12
+Last updated: 2026-05-18
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -13,10 +13,9 @@ Last updated: 2026-05-12
 - Current stage: main experiment implementation.
 - Final paper target: Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`.
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
-- Current E003 status: `E003-M64_openmask3d_feasibility_decision_v0` complete; `OpenMask3D` feasibility passes with constraints and the next unit is a scene-format/model smoke plan, not an immediate Docker/model run.
-- E003-M48 selected backend contract: `grounded_sam_mask_backproject_v0`.
-- E003-M50 selected route: `do_not_scale_grounded_sam_yet`.
-- E003-M57 launched tmux session `e003_m56_sequence_stage` for the 4 current-rescan sequence payloads; the session has ended and verifier status is ready.
+- Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
+- Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
+- Current E005 status: `ConceptGraphs` is the active external mapping baseline route. `heldout_b01/b02` runtime and query-level metric conversion are complete; `heldout_b03` is pending GPU free memory >= 24GB.
 
 에이전트 추론:
 
@@ -69,7 +68,9 @@ Last updated: 2026-05-12
 | E003-M65 | `OpenMask3D` scene-format/model smoke plan | Fix scene-format manifest, command plan, adapter contract, and verification command | No Docker/model run until background/log/output/verification contract is fixed |
 | E004-M01 | Task-context memory trust contract | Fix task context fields for memory trust / re-observation decision | Natural language parser remains adapter, not main claim |
 | E004-M02 | Task-conditioned re-observation/search policy | Evaluate task-conditioned policy under stale memory + proposal noise | Must beat static memory, fixed top-k, and detector-confidence-first |
-| E005-M01 | External benchmark/baseline integration | Add at least one mapping baseline and one navigation/search baseline | Paper-table claim blocked until external comparison exists |
+| E005-M47 | `ConceptGraphs` `heldout_b03` runtime launch | Launch final heldout runtime batch when GPU free memory >= 24GB | No final baseline claim until M48/M49 and full aggregation |
+| E005-M48 | `heldout_b03` runtime verification | Verify GSA detections, full PCD, and post PCD outputs | Metric conversion requires 3/3 ready scans |
+| E005-M49 | Full heldout metric aggregation | Convert `heldout_b03`, aggregate `heldout_b01/b02/b03` | External baseline claim still needs H001 comparison table |
 
 ## External Baseline Expansion
 
@@ -156,9 +157,11 @@ Purpose:
 
 ## Immediate Next Actions
 
-- E003-M65: fix `OpenMask3D` scene-format/model smoke plan, including command/log/output/verification contract.
-- Keep `OpenMask3D` as the later 3D instance proposal baseline candidate after the direct bridge denominator is staged/verified or explicitly blocked.
-- Keep `Open3DSG`, `ConceptGraphs`, and `HOV-SG` for later map/scene-graph/navigation baseline expansion, not the immediate proposal-geometry diagnosis.
+- Launch `ConceptGraphs` `heldout_b03` when GPU free memory is >= 24GB.
+- Verify `heldout_b03` runtime outputs with `verify_m43_conceptgraphs_heldout_runtime_batch.py --batch-id heldout_b03`.
+- Convert `heldout_b03` to query-level metrics and aggregate all heldout batches.
+- Keep `OpenMask3D` as the later 3D instance proposal baseline candidate.
+- Keep `Open3DSG`, `ConceptGraphs`, and `HOV-SG` for map/scene-graph/navigation baseline expansion.
 
 ## Claim Boundary
 
