@@ -1,6 +1,6 @@
 # Experiments
 
-Updated: 2026-05-18
+Updated: 2026-05-21
 
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
@@ -8,7 +8,7 @@ Updated: 2026-05-18
 
 ## Status
 
-Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, and E005-M01 through E005-M49 are complete/verified with constraints through `heldout_b02` runtime completion and query-level metric conversion. E003 has Dockerized real-detector diagnostics and expanded direct current-rescan metrics for 96 query rows over 4 RGB-D-ready current rescans. E004 evaluates `task_context_memory_trust_reobserve_v0` and supports the memory-trust decision claim with limited task-context-specific strength. E005 selected `DualMap` first, then moved to `ConceptGraphs` after faithful `DualMap` object-map outputs were missing. `ConceptGraphs` now has 4-scan query-level metrics, failure boundary, a 13-scan / 291-query scale contract, 9/9 heldout scans sequence-ready and staged-layout ready, and `heldout_b01/b02` runtime + metric conversion complete. Final baseline claim remains false until `heldout_b03` runs and the 9-scan heldout table is aggregated. The next step is E005-M47 `heldout_b03` launch when GPU free memory is >= 24GB.
+Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, and E005-M01 through E005-M58 are complete/verified with constraints. E005-M59 `Open3DSG` object-candidate export smoke was launched and failed on CUDA OOM while loading `InstructBLIP`. E003 has Dockerized real-detector diagnostics and expanded direct current-rescan metrics for 96 query rows over 4 RGB-D-ready current rescans. E004 evaluates `task_context_memory_trust_reobserve_v0` and supports the memory-trust decision claim with limited task-context-specific strength. E005 selected `DualMap` first, then moved to `ConceptGraphs` after faithful `DualMap` object-map outputs were missing. `ConceptGraphs` now has full 9-scan heldout query-level conversion: strict bbox top5 114 / 195 = 0.584615, relaxed bbox 1m top3 144 / 195 = 0.738462. H001 replay on the same `M38` contract gives 172 / 195 = 0.882051. E005-M56 fixes the robustness denominator split and audits `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only as the next external map/scene-graph baseline route. E005-M57 stores derived schema/contract outputs under `local_dataset/Open3DSG_bridge/`; E005-M58 fixes the object-candidate export schema, read-only Docker command contract, and verifier. E005-M59 used tmux session `e005_m59_open3dsg_object_export`, log `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, and output path `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`. As of 2026-05-21 04:54 KST, tmux is stopped, candidate rows are not written, and `Open3DSG` still cannot be used as a query-level object-search baseline. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
 
 ## Active Experiment
 
@@ -18,7 +18,7 @@ Main experiment implementation stage has started. E001-M01 through E001-M05, E00
 | E002 | M01-M09 path-cost artifacts ready | [E002_path_cost_bridge](E002_path_cost_bridge/README.md) | Input to E003 |
 | E003 | M00-M75 query bridge ready | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Input to E004 |
 | E004 | M01-M05 ready with constraints | [E004_task_context_memory_trust](E004_task_context_memory_trust/README.md) | Input to E005 |
-| E005 | M01-M49 ready through `heldout_b02`; `heldout_b03` pending GPU gate | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Launch `ConceptGraphs` `heldout_b03` when GPU free memory is >= 24GB |
+| E005 | M01-M58 ready with constraints; M59 failed on CUDA OOM | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Decide E005-M59 repair: GPU-exclusive relaunch or lower-memory object-candidate export patch |
 
 ## 사실
 

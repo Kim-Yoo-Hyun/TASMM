@@ -58,6 +58,14 @@ mkdir -p logs
 tmux new -d -s <job_name> 'cd /home/yoohyun/research2 && <command> > logs/<YYYYMMDD_HHMMSS>_<job_name>.log 2>&1'
 ```
 
+## External Read-Only Dataset Reuse
+
+- `/home/yoohyun/research/local_dataset/Open3DSG_staged` may be used as a read-only source for `Open3DSG` audit, schema inspection, conversion planning, and baseline feasibility work.
+- Never modify, delete, normalize ownership, decompress into, or write generated files under `/home/yoohyun/research/local_dataset/Open3DSG_staged`.
+- When Docker uses that path, mount it read-only, e.g. `-v /home/yoohyun/research/local_dataset/Open3DSG_staged:/data/Open3DSG_staged:ro`.
+- Store all derived `Open3DSG` bridge data, converted rows, caches, prediction exports, and local run outputs under `/home/yoohyun/research2/local_dataset/`, preferably `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`.
+- Experiment reports may live under `experiments/`, but data-bearing outputs from this source should point to the `research2/local_dataset` location.
+
 ## Contribution Candidate Standard
 
 Each candidate must state:

@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-05-18
+Last updated: 2026-05-21
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -15,12 +15,13 @@ Last updated: 2026-05-18
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005 status: `ConceptGraphs` is the active external mapping baseline route. `heldout_b01/b02` runtime and query-level metric conversion are complete; `heldout_b03` is pending GPU free memory >= 24GB.
+- Current E005 status: `ConceptGraphs` is the active external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion. E005-M56 completed the two-table robustness denominator contract and read-only `Open3DSG` source/interface audit. E005-M57 completed `Open3DSG` output schema / query-conversion contract. E005-M58 completed the `Open3DSG` object-candidate export smoke plan and stores derived outputs under `research2/local_dataset/Open3DSG_bridge/`. E005-M59 `Open3DSG` one-batch export smoke launched in tmux `e005_m59_open3dsg_object_export` but failed on CUDA OOM during `InstructBLIP` checkpoint loading; candidate rows are not written. Real RGB-D/open-vocabulary robustness remains blocked until another external route has query-level conversion and an aligned failure table.
 
 에이전트 추론:
 
 - Current core direction is aligned with recent work on open-vocabulary semantic mapping, 3D scene memory, task-driven mapping, and embodied navigation.
 - Direction B is the correct final top-tier target, but the immediate implementation should remain focused on Direction A's memory-decision core to avoid an unfocused system paper.
+- Human intent should remain a controlled task-context condition unless a dedicated context-sensitive utility benchmark shows broad gains over context-agnostic memory trust.
 - Top-tier competitiveness requires moving beyond `3RScan` / `3DSSG` proxy evidence into stronger external baselines and downstream search/navigation evaluation.
 
 ## Top-Tier Target Claim
@@ -34,6 +35,7 @@ Last updated: 2026-05-18
 
 - Final claim should include real RGB-D / open-vocabulary proposal robustness and a search/navigation bridge, not only annotation-proxy stale memory behavior.
 - Direction B is the final target claim family; Direction A is the core method claim that must survive ablation and bridge tests.
+- Human task context is not yet a main contribution claim. The current defensible phrasing is that structured task context is a conditioning signal for memory trust and re-observation, not that the system understands human intent.
 
 ## Schedule
 
@@ -68,9 +70,79 @@ Last updated: 2026-05-18
 | E003-M65 | `OpenMask3D` scene-format/model smoke plan | Fix scene-format manifest, command plan, adapter contract, and verification command | No Docker/model run until background/log/output/verification contract is fixed |
 | E004-M01 | Task-context memory trust contract | Fix task context fields for memory trust / re-observation decision | Natural language parser remains adapter, not main claim |
 | E004-M02 | Task-conditioned re-observation/search policy | Evaluate task-conditioned policy under stale memory + proposal noise | Must beat static memory, fixed top-k, and detector-confidence-first |
-| E005-M47 | `ConceptGraphs` `heldout_b03` runtime launch | Launch final heldout runtime batch when GPU free memory >= 24GB | No final baseline claim until M48/M49 and full aggregation |
-| E005-M48 | `heldout_b03` runtime verification | Verify GSA detections, full PCD, and post PCD outputs | Metric conversion requires 3/3 ready scans |
-| E005-M49 | Full heldout metric aggregation | Convert `heldout_b03`, aggregate `heldout_b01/b02/b03` | External baseline claim still needs H001 comparison table |
+| E005-M49 | Full heldout metric aggregation | Complete: all 9 heldout `ConceptGraphs` scans aggregated, strict bbox top5 114 / 195 | External baseline still needs H001 comparison on the same query contract |
+| E005-M50 | H001-vs-`ConceptGraphs` comparison gate | Complete: direct common query rows 0, paired superiority not ready from original universes | Replay H001 on the `M38` heldout query contract |
+| E005-M51 | H001 heldout replay contract | Complete: 195 / 195 heldout query rows adapter-ready, issues 0 | No result claim until H001 replay is run |
+| E005-M52 | H001 heldout policy replay | Complete: H001 172 / 195, `ConceptGraphs` 114 / 195, static memory 141 / 195, context-agnostic 171 / 195 | Paired failure/table decision required before paper claim |
+| E005-M53 | Paired failure analysis / paper-table decision | Complete: H001-vs-`ConceptGraphs` and H001-vs-static proxy-search claims ready; task-context main claim not ready | Do not claim human intent as the main contribution |
+| E005-M54 | Paper-table claim ledger / method claim rewrite | Complete: paper-facing table, allowed claims, blocked claims, and method framing fixed | Main claim centers memory trust, staleness handling, and bounded re-observation |
+| E005-M55 | Real RGB-D/open-vocabulary robustness expansion gate | Complete: selected `robustness_denominator_contract_then_open3dsg_audit` | Real RGB-D robustness remains blocked |
+| E005-M56 | Robustness denominator + `Open3DSG` audit | Complete: Table A proxy-search denominator 195 rows, Table B real RGB-D proposal bridge denominator 96 rows, `Open3DSG_staged` read-only audit passed | No `Open3DSG` performance claim before query-level conversion |
+| E005-M57 | `Open3DSG` output schema inspection / query-conversion contract | Complete: relation raw dump ready, feature/checkpoint route feasible, object candidate export needed | No `Open3DSG` object-search claim before candidate rows exist |
+| E005-M58 | `Open3DSG` object-candidate dump/export smoke plan | Complete: read-only Docker command, object-candidate schema, local output path, export contract, and verifier fixed | No `Open3DSG` object-search claim before one-batch candidate rows exist |
+| E005-M59 | `Open3DSG` object-candidate export hook / one-batch Docker smoke | Failed: tmux stopped, log `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, candidate rows 0 as of 2026-05-21 04:54 KST, CUDA OOM during `InstructBLIP` loading | Repair with GPU-exclusive relaunch or lower-memory runtime patch before query conversion |
+| E006-M01 optional | Context-sensitive utility benchmark design | Define task-context-sensitive query rows and utility metrics | Start only if human task context is promoted beyond secondary ablation |
+| E006-M02 optional | Strong context-agnostic baseline suite | Compare against fixed trust, all-high-value, all-reobserve, risk-only, path-cost-only, detector-confidence-only | Human task context must beat these baselines beyond a 1-row gain |
+| E006-M03 optional | Context generalization stress | Test heldout scan / label / task-group transfer | Human task context main claim requires broad transfer, not one label group |
+| E007 optional | Navigation `SR` / `SPL` bridge | Add simulator/navmesh/trajectory execution and navigation baselines | Do not start before proxy table and real RGB-D robustness are stable |
+
+## Human Task Context Claim Upgrade
+
+사실:
+
+- E005-M53 shows H001 improves over `ConceptGraphs` and static memory on the heldout proxy-search table.
+- E005-M53 also shows that H001 improves over context-agnostic memory trust by only 1 row.
+- Current evidence supports task context as a secondary ablation, not as the main contribution.
+
+논문 주장:
+
+- Do not write the current paper as a human-intent understanding paper.
+- The current paper can say structured task context conditions memory trust and re-observation decisions, but it should not claim that human task context is the main source of improvement.
+- Natural language or LLM parsing should remain an adapter until structured context has a strong independent effect.
+
+에이전트 추론:
+
+- Human intent is worth keeping in the research direction, but not worth expanding before the real RGB-D/open-vocabulary robustness gate is planned.
+- Promote human task context only if a dedicated context-sensitive utility benchmark shows clear gains over strong context-agnostic policies.
+- The right upgrade target is not generic natural-language understanding; it is context-dependent utility: different task contexts should rationally change memory trust, re-observation budget, candidate visit order, and old-location dead-end cost.
+
+Upgrade requirements:
+
+- Build `task-context-sensitive` query rows where the same object/location evidence should lead to different decisions under different task contexts.
+- Add strong context-agnostic baselines: fixed trust, all-high-value trust, all-reobserve, risk-threshold only, path-cost only, and detector-confidence only.
+- Add context-dependent utility metrics: `ExpectedSearchCost`, old-location dead-end cost, unnecessary re-observation cost, missed-high-value penalty, false trust penalty, and candidate visit order.
+- Require heldout scan / label / task-group transfer before writing a general human-context claim.
+- Treat LLM-based natural-language intent parsing as a later input adapter, not as a source of method novelty.
+
+Decision:
+
+- Immediate paper path: keep human task context as secondary evidence.
+- Optional expansion path: launch E006 only after E005-M54 if the paper needs a stronger human-intent claim.
+
+## Claim Expansion Order
+
+사실:
+
+- Real RGB-D/open-vocabulary robustness is not ready.
+- Real navigation `SR` / `SPL` is not ready.
+- E005-M53 makes the proxy-search claim boundary explicit.
+
+에이전트 추론:
+
+- The next claim to mature is proxy-search with external map baseline comparison.
+- The next expansion after that should be real RGB-D/open-vocabulary robustness.
+- Real navigation `SR` / `SPL` should come last because it requires simulator/navmesh/trajectory execution and navigation baselines.
+
+Order:
+
+1. E005-M54: paper-table claim ledger / method claim rewrite. Complete.
+2. E005-M55: real RGB-D/open-vocabulary robustness expansion gate. Complete.
+3. E005-M56: two-table robustness denominator and `Open3DSG` source/interface audit. Complete.
+4. E005-M57: `Open3DSG` output schema inspection / query-conversion contract. Complete.
+5. E005-M58: `Open3DSG` object-candidate dump/export smoke plan. Complete.
+6. E005-M59: `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke. Failed on CUDA OOM; repair before E005-M60.
+6. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
+7. E007 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
 
 ## External Baseline Expansion
 
@@ -157,9 +229,10 @@ Purpose:
 
 ## Immediate Next Actions
 
-- Launch `ConceptGraphs` `heldout_b03` when GPU free memory is >= 24GB.
-- Verify `heldout_b03` runtime outputs with `verify_m43_conceptgraphs_heldout_runtime_batch.py --batch-id heldout_b03`.
-- Convert `heldout_b03` to query-level metrics and aggregate all heldout batches.
+- Repair E005-M59 `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke.
+- Keep the main paper claim centered on memory trust, staleness handling, bounded re-observation, and proxy-search improvement over `ConceptGraphs` / static memory.
+- Keep human task context as a secondary ablation unless E006 is explicitly launched and passes context-sensitive utility gates.
+- Expand real RGB-D/open-vocabulary robustness before real navigation `SR` / `SPL`.
 - Keep `OpenMask3D` as the later 3D instance proposal baseline candidate.
 - Keep `Open3DSG`, `ConceptGraphs`, and `HOV-SG` for map/scene-graph/navigation baseline expansion.
 
@@ -169,6 +242,8 @@ Purpose:
 
 - Current real RGB-D/open-vocabulary claim readiness is false.
 - Current real navigation `SR` / `SPL` claim readiness is false.
+- Current human task context main-claim readiness is false.
+- Current H001-vs-`ConceptGraphs` proxy-search claim readiness is true with proxy boundary.
 - Current internal evidence supports controlled/proxy behavior, not final top-tier paper evidence.
 - E003-M39 selects `docker_runner_pre_consolidation_support_evidence_v0` and rejects final-artifact post-processing as insufficient.
 - E003-M39 fixes insertion point `select_cap_aware_label_balanced_candidates.after_cleaned_before_grouped`.

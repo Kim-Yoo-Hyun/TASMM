@@ -1,10 +1,182 @@
 # E005 External Baseline Transition
 
-Updated: 2026-05-18
+Updated: 2026-05-21
 
 ## Status
 
-`E005-M01` through `E005-M49` are complete through 4-scan scale decision, pending-scan runtime verification, staging/permission repair, 4-scan candidate/query metric conversion, failure/claim-boundary analysis, external baseline next-route decision, heldout/scale contract planning, heldout sequence acquisition/staging launch, heldout sequence staging verification, heldout runtime preflight, heldout staged-layout materialization, `heldout_b01/b02` runtime completion verification, `heldout_b01/b02` query-metric conversion, and batch-aware heldout metric-contract preparation. The selected first external baseline route was `DualMap`; the backup route is `ConceptGraphs`. `DualMap` Dataset Mode staging, Docker bootstrap, cache-fixed detector initialization, and one-scan runtime completion are verified, but M14/M17 produce `layout.pcd` / timing files without object `*.pkl` outputs. `ConceptGraphs` is now the active external mapping baseline route. `heldout_b01` strict bbox top5 is 45 / 66 = 0.681818 and `heldout_b02` strict bbox top5 is 45 / 69 = 0.652174. Final external-baseline claim remains false until `heldout_b03` is launched, verified, converted to metrics, and all 9 heldout scans are aggregated. The next unit is E005-M47 `heldout_b03` launch when GPU free memory is >= 24GB.
+`E005-M01` through `E005-M58` are complete through 4-scan scale decision, pending-scan runtime verification, staging/permission repair, 4-scan candidate/query metric conversion, failure/claim-boundary analysis, external baseline next-route decision, heldout/scale contract planning, heldout sequence acquisition/staging launch, heldout sequence staging verification, heldout runtime preflight, heldout staged-layout materialization, all `heldout_b01/b02/b03` runtime completion verification, all heldout query-metric conversion, full 9-scan heldout aggregation, H001-vs-`ConceptGraphs` comparison readiness gate, H001 heldout replay contract, H001 heldout policy replay, paired failure analysis / paper-table decision, paper-table claim ledger / method claim rewrite, real RGB-D/open-vocabulary robustness expansion gate, robustness denominator + `Open3DSG` source/interface audit, `Open3DSG` output schema / query-conversion contract, and `Open3DSG` object-candidate export smoke plan. E005-M59 `Open3DSG` object-candidate export smoke launched but failed on CUDA OOM during `InstructBLIP` checkpoint loading. The selected first external baseline route was `DualMap`; the backup route is `ConceptGraphs`. `DualMap` Dataset Mode staging, Docker bootstrap, cache-fixed detector initialization, and one-scan runtime completion are verified, but M14/M17 produce `layout.pcd` / timing files without object `*.pkl` outputs. `ConceptGraphs` is now the active external mapping baseline route. Full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M52 replays H001 on the same `M38` query contract: H001 `task_context_memory_trust_reobserve_v0` is 172 / 195 = 0.882051, `static_memory_only_v0` is 141 / 195 = 0.723077, and `context_agnostic_memory_trust_reobserve_v0` is 171 / 195 = 0.876923. E005-M56 fixes the two-table robustness denominator and audits `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only. E005-M57 stores derived schema/contract results under `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`; relation raw dump and feature/checkpoint route are feasible. E005-M58 stores the object-candidate export schema, read-only Docker command contract, and verifier under the same bridge root. E005-M59 used local runtime patching under `research2`, kept `Open3DSG_staged` mounted read-only, and targeted `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`; as of 2026-05-21 04:54 KST, tmux is stopped, source modified is false, and no candidate rows have been written. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+
+## E005-M59 Open3DSG Object Candidate Export Smoke
+
+사실:
+
+- Status: `e005_m59_open3dsg_object_export_smoke_failed`.
+- tmux session: `e005_m59_open3dsg_object_export`.
+- Log: `logs/20260521_044206_e005_m59_open3dsg_object_export.log`.
+- Output: `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M59_object_candidate_export_smoke_v0/`.
+- Verification command: `python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_object_export_smoke.py --require-ready`.
+- Last check: 2026-05-21 04:54 KST; tmux running false, source modified false, candidate row file missing.
+- Failure reason: CUDA OOM while loading `InstructBLIP`; log reports GPU 0 had 93 MiB free at failure and the Open3DSG process used about 16.35 GiB.
+
+논문 주장:
+
+- This step does not yet establish `Open3DSG` query-level object-search performance.
+- `Open3DSG` remains a second external map/scene-graph baseline candidate until object-candidate rows exist and query-level conversion passes.
+
+에이전트 추론:
+
+- The next dependent action is M59 repair, not a new claim. Use either a GPU-exclusive relaunch with a stricter free-memory preflight or a lower-memory object-candidate export patch that avoids unnecessary `InstructBLIP` GPU loading.
+
+## E005-M58 Open3DSG Object Candidate Export Plan
+
+사실:
+
+- Status: `e005_m58_open3dsg_object_candidate_export_plan_ready_hook_smoke_needed`.
+- Verification: `e005_m58_open3dsg_object_candidate_plan_ready_no_rows_yet`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M58_object_candidate_export_plan_v0/`.
+- Data output: `local_dataset/Open3DSG_bridge/E005-M58_object_candidate_export_plan_v0/`.
+- Existing staged source modified: false.
+- Selected checkpoint exists: true.
+- Feature dir exists: true.
+- Object candidate schema, query candidate schema, export hook contract, Docker command contract, and verifier are ready.
+- One-batch smoke executed: false.
+- Candidate rows exist: false.
+
+논문 주장:
+
+- This step does not establish `Open3DSG` query-level object-search performance.
+- `Open3DSG` remains a second external map/scene-graph baseline candidate until one-batch object candidate export and query conversion pass.
+
+에이전트 추론:
+
+- The next unit should implement a local runtime patch under `research2`, run one-batch Docker smoke, and keep `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only.
+- GT labels and `id2name` must remain eval-only diagnostics, not ranking inputs.
+
+## E005-M57 Open3DSG Schema Contract
+
+사실:
+
+- Status: `e005_m57_open3dsg_output_schema_contract_ready_object_candidate_export_needed`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M57_open3dsg_output_schema_contract_v0/`.
+- Data output: `local_dataset/Open3DSG_bridge/E005-M57_output_schema_contract_v0/`.
+- Existing staged source modified: false.
+- Preprocessed `data_dict_*.pkl`: 377.
+- `object2image` `.pkl`: 127.
+- Feature `.pt` files: 1131.
+- MLflow checkpoints: 8.
+- Relation raw dump ready: true.
+- Object candidate dump ready: false.
+- Query-level conversion ready without new export: false.
+
+논문 주장:
+
+- This step does not establish `Open3DSG` query-level object-search performance.
+- `Open3DSG` can be pursued as a second external map/scene-graph baseline only after object candidate export and H001 query conversion are implemented.
+
+에이전트 추론:
+
+- Aggregate `Open3DSG` eval metrics are useful for source sanity, but not directly comparable to H001 search metrics.
+- E005-M58 completed the object-candidate dump/export smoke plan; E005-M59 attempted one-batch export and now needs CUDA OOM repair.
+
+## E005-M56 Robustness Denominator + Open3DSG Audit
+
+사실:
+
+- Status: `e005_m56_robustness_denominator_open3dsg_audit_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M56_robustness_denominator_open3dsg_audit_v0/`.
+- Table A proxy-search external map denominator: 195 rows.
+- Table B real RGB-D proposal bridge denominator: 96 rows.
+- `Open3DSG_staged` path: `/home/yoohyun/research/local_dataset/Open3DSG_staged`.
+- Existing staged data modified: false.
+- Runtime `3RScan` entries/symlinks/broken symlinks: 133 / 127 / 0.
+- Checkpoint files: 7; feature `.pt` files: 1131; `OpenSG_3RScan` view `.pkl` files: 127.
+- Existing `Open3DSG` eval metrics are present.
+
+논문 주장:
+
+- This step supports source/interface feasibility for `Open3DSG` as a second external map/scene-graph route.
+- This step does not support an `Open3DSG` query-level performance claim.
+- Final real RGB-D/open-vocabulary robustness remains blocked until at least one more external route is converted and failure taxonomy is aligned.
+
+에이전트 추론:
+
+- `Open3DSG` can be used read-only for audit and later conversion without modifying the other research workspace data.
+- The next unit should inspect output/eval schemas and define how `Open3DSG` object/relation predictions map to H001 query candidates.
+
+## E005-M55 Robustness Gate
+
+사실:
+
+- Status: `e005_m55_real_rgbd_ov_robustness_gate_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M55_real_rgbd_ov_robustness_gate_v0/`.
+- M54 proxy-search rows: 195.
+- E003-M75 real proposal bridge rows: 96.
+- E003-M75 target detected rows: 87.
+- E003-M75 bounded repair success rows: 33.
+- `OpenMask3D` blocked: true.
+- Selected route: `robustness_denominator_contract_then_open3dsg_audit`.
+
+논문 주장:
+
+- This gate does not make final real RGB-D/open-vocabulary robustness ready.
+- The next step should define a two-table robustness denominator and audit `Open3DSG` as a second external semantic mapping / 3D scene graph route.
+- Real navigation `SR` / `SPL` remains later than robustness expansion.
+
+에이전트 추론:
+
+- `OpenMask3D` remains valuable for proposal-quality evidence, but it is not the immediate route because the current blocker is environment compatibility rather than research logic.
+- `Open3DSG` is a better next audit target because it is closer to semantic mapping and scene graph evidence, and it can strengthen the claim beyond a single `ConceptGraphs` external map route.
+
+## E005-M54 Claim Ledger
+
+사실:
+
+- Status: `e005_m54_paper_table_claim_ledger_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M54_paper_table_claim_ledger_v0/`.
+- Main table rows: 8 policies.
+- H001 success: 172 / 195 = 0.882051.
+- `ConceptGraphs` success: 114 / 195 = 0.584615.
+- Static memory success: 141 / 195 = 0.723077.
+- Context-agnostic memory trust success: 171 / 195 = 0.876923.
+
+논문 주장:
+
+- Allowed main claim: H001 improves heldout proxy search over `ConceptGraphs`-only map retrieval and static stale memory.
+- Allowed framing: H001 is a semantic memory decision layer for memory trust, staleness handling, and bounded re-observation.
+- Blocked claim: human intent / task context is the main contribution.
+- Blocked claim: final real RGB-D/open-vocabulary robustness.
+- Blocked claim: real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The paper should not be framed as a human-intent understanding paper at this point.
+- E005-M55 should decide the next real RGB-D/open-vocabulary robustness expansion route before adding navigation `SR` / `SPL`.
+
+## E005-M53 Paper-Table Decision
+
+사실:
+
+- Status: `e005_m53_paired_failure_table_decision_ready_memory_trust_supported_task_context_limited`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M53_paired_failure_table_decision_v0/`.
+- Query rows: 195.
+- H001 success: 172 / 195 = 0.882051.
+- `ConceptGraphs` strict bbox top5 success: 114 / 195 = 0.584615.
+- Static memory success: 141 / 195 = 0.723077.
+- Context-agnostic memory trust success: 171 / 195 = 0.876923.
+- H001 vs `ConceptGraphs`: both success 112, H001-only 60, `ConceptGraphs`-only 2, both fail 21.
+- H001 over `ConceptGraphs` gain source: 60 rows are static memory preservation.
+
+논문 주장:
+
+- The main proxy-search table is ready with a bounded claim: H001 improves heldout proxy search over `ConceptGraphs`-only open-vocabulary mapping and static memory.
+- This result does not support human task context as the main contribution because the gain over context-agnostic memory trust is only 1 row.
+- This result does not support final real navigation `SR` / `SPL` or final real RGB-D/open-vocabulary robustness.
+
+에이전트 추론:
+
+- The paper should frame the current contribution around memory trust, staleness handling, and bounded re-observation, not around natural-language or human-intent understanding.
+- E005-M54 turned this result into a claim ledger and method-claim rewrite before adding another heavy baseline.
 
 ## E005-M26 Docker Image Result
 
@@ -858,7 +1030,7 @@ Implementation unit: `E005-M43_conceptgraphs_heldout_runtime_batch_launch_v0`.
 
 사실:
 
-- Latest status: `heldout_b01` and `heldout_b02` runtime outputs and query metrics are ready.
+- Latest status: `heldout_b01`, `heldout_b02`, and `heldout_b03` runtime outputs and query metrics are ready.
 - `heldout_b01` selected scans: 3, query rows 66 / 195 heldout.
 - `heldout_b01` strict bbox top5: 45 / 66 = 0.681818.
 - `heldout_b01` relaxed bbox 1m top3: 57 / 66 = 0.863636.
@@ -868,8 +1040,10 @@ Implementation unit: `E005-M43_conceptgraphs_heldout_runtime_batch_launch_v0`.
 - `heldout_b02` strict bbox top5: 45 / 69 = 0.652174.
 - `heldout_b02` relaxed bbox 1m top3: 51 / 69 = 0.739130.
 - `heldout_b03` query rows: 60 / 195 heldout.
-- Launch gate: 24,000 MiB.
-- Latest blocker: `heldout_b03` launch waits for GPU free memory >= 24GB.
+- `heldout_b03` strict bbox top5: 24 / 60 = 0.400000.
+- `heldout_b03` relaxed bbox 1m top3: 36 / 60 = 0.600000.
+- Full heldout strict bbox top5: 114 / 195 = 0.584615.
+- Full heldout relaxed bbox 1m top3: 144 / 195 = 0.738462.
 - Artifact path: `experiments/E005_external_baseline_transition/artifacts/E005-M43_conceptgraphs_heldout_runtime_batch_launch_v0/`.
 - Metric artifact path: `experiments/E005_external_baseline_transition/artifacts/E005-M45_conceptgraphs_heldout_query_metric_v0/`.
 - Verification command template: `python experiments/E005_external_baseline_transition/tools/verify_m43_conceptgraphs_heldout_runtime_batch.py --batch-id <heldout_bXX>`.
@@ -877,17 +1051,16 @@ Implementation unit: `E005-M43_conceptgraphs_heldout_runtime_batch_launch_v0`.
 
 논문 주장:
 
-- E005-M49 supports heldout batch diagnostics for `heldout_b01/b02`.
-- E005-M49 does not support final external baseline performance, final real RGB-D/open-vocabulary robustness, or real navigation `SR` / `SPL`.
+- E005-M49 supports a full heldout `ConceptGraphs` query-level external map baseline.
+- E005-M49 alone does not support final real RGB-D/open-vocabulary robustness or real navigation `SR` / `SPL`.
 
 에이전트 추론:
 
-- `heldout_b01/b02` are positive diagnostics but still only 135 / 195 heldout query rows.
-- The next step should finish `heldout_b03` and aggregate all 9 heldout scans before any external-baseline claim.
+- The full heldout `ConceptGraphs` table is sufficient for proxy-search comparison after H001 replay, but real RGB-D/open-vocabulary robustness still needs another external route or robustness denominator.
 
 사용자 판단 필요:
 
-- None before `heldout_b03` launch once GPU memory is available.
+- Resolved by E005-M49/M52/M53/M54.
 
 ## E005-M42 Heldout Staging Materialization
 

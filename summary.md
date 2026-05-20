@@ -1,6 +1,6 @@
 # Research Summary
 
-Updated: 2026-05-18
+Updated: 2026-05-21
 
 이 문서는 `research2/`의 연구 방향, 배경, 가설, 현재 진행 상태, 남은 쟁점, 실험 계획을 간단히 정리한 working research report다. 세부 진행 로그는 `TODO.md`, `hypothesis/`, `experiments/`에 둔다.
 
@@ -109,12 +109,21 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - E003은 controlled perception/proposal noise와 Dockerized RGB-D/open-vocabulary proposal route를 구축했다.
 - E004는 `task_context_memory_trust_reobserve_v0`를 평가했고, memory-trust decision claim은 split stress에서 지지되지만 task-context-specific claim은 `limited_positive_not_label_broad`다.
 - E005는 external baseline transition 단계다. `DualMap`은 실행/staging은 됐지만 object `*.pkl` output을 만들지 못해 performance baseline으로는 아직 부적합하다.
-- `ConceptGraphs`는 source/interface audit, `3RScan` depth-aligned staging, repo/checkpoint acquisition, Docker image build, import smoke, one-scan runtime output verification, 4-scan metric conversion, heldout staging, and heldout batch runtime/metric conversion을 통과했다.
+- `ConceptGraphs`는 source/interface audit, `3RScan` depth-aligned staging, repo/checkpoint acquisition, Docker image build, import smoke, one-scan runtime output verification, 4-scan metric conversion, heldout staging, and 9-scan heldout runtime/metric conversion을 통과했다.
 - E005-M35는 4개 staged scan의 `ConceptGraphs` object map을 query-level candidate/metric으로 변환했다. Primary `M60` 기준 strict bbox top5는 3/7, relaxed bbox 1m top3는 6/7이고, expanded `M73` 기준 strict bbox top5는 57/96이다.
 - E005-M38은 `ConceptGraphs` heldout/scale contract를 고정했다. Target scale은 13 scans / 291 eligible query rows이고, heldout split은 9 scans / 195 query rows다.
 - E005-M40은 9/9 heldout scans의 sequence staging을 검증했고, E005-M42는 9/9 heldout scans를 `ConceptGraphs` depth-aligned Scannet-style layout으로 materialize했다.
-- E005-M45/M49는 `heldout_b01/b02`를 query-level metrics로 변환했다. `heldout_b01` strict bbox top5는 45/66 = 0.681818이고, `heldout_b02` strict bbox top5는 45/69 = 0.652174이다.
-- `heldout_b03`는 아직 runtime/metric conversion이 남아 있으며, launch gate는 GPU free memory >= 24GB다.
+- E005-M49는 all heldout `ConceptGraphs` metric을 집계했다. Full heldout strict bbox top5는 114/195 = 0.584615, relaxed bbox 1m top3는 144/195 = 0.738462이다.
+- E005-M50은 H001과 `ConceptGraphs`의 현재 query universe가 겹치지 않음을 확인했다. Aggregate side-by-side reporting은 가능하지만 paired superiority claim은 아직 불가하다.
+- E005-M51은 같은 `M38` heldout query contract에서 H001을 replay하기 위한 adapter contract를 생성했다. 195/195 query rows가 adapter-ready이고 issue는 0개다.
+- E005-M52는 같은 `M38` heldout query contract에서 H001 policy replay를 실행했다. H001은 172/195 = 0.882051, `ConceptGraphs` strict bbox top5는 114/195 = 0.584615, static memory는 141/195 = 0.723077, context-agnostic memory trust는 171/195 = 0.876923이다.
+- E005-M53은 paired failure analysis / paper-table decision을 완료했다. H001-vs-`ConceptGraphs` proxy-search claim과 H001-vs-static memory claim은 ready지만, task context as main claim은 not ready다.
+- E005-M54는 paper-table claim ledger / method claim rewrite를 완료했다. 현재 main claim은 memory trust, staleness handling, bounded re-observation이며, human task context는 secondary ablation으로만 둔다.
+- E005-M55는 real RGB-D/open-vocabulary robustness expansion gate를 완료했다.
+- E005-M56은 two-table robustness denominator contract와 `Open3DSG` source/interface audit을 완료했다. Table A는 proxy-search external map denominator 195 rows, Table B는 real RGB-D proposal bridge denominator 96 rows로 분리한다. `/home/yoohyun/research/local_dataset/Open3DSG_staged`는 read-only audit 가능하며 source, checkpoint, feature, existing eval artifact가 존재한다.
+- E005-M57은 `Open3DSG` output schema inspection / query-conversion contract를 완료했다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M57_output_schema_contract_v0/`에 저장했다. `Open3DSG` relation raw dump hook은 준비되어 있지만 object-search baseline에는 object candidate score export가 추가로 필요하다.
+- E005-M58은 `Open3DSG` object-candidate export schema, read-only Docker command contract, export hook contract, verifier를 완료했다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M58_object_candidate_export_plan_v0/`에 저장했다.
+- E005-M59는 `Open3DSG` one-batch object-candidate export smoke를 tmux background job으로 실행했지만, `InstructBLIP` checkpoint loading 중 CUDA OOM으로 실패했다. Session은 `e005_m59_open3dsg_object_export`, log는 `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, output은 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`이다. 2026-05-21 04:54 KST 기준 tmux는 종료됐고 candidate row는 생성되지 않았다.
 
 논문 주장:
 
@@ -125,9 +134,10 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 
 사실:
 
-- `ConceptGraphs`는 4-scan query-level conversion과 failure analysis, 13-scan heldout/scale contract, heldout sequence staging verification, staged-layout materialization, `heldout_b01/b02` runtime/metric conversion까지 통과했지만 아직 final baseline result는 아니다. `heldout_b03` runtime/metric conversion, full 9-scan aggregation, strict/relaxed metric separation, label-transfer analysis가 남아 있다.
+- H001은 `ConceptGraphs` 대비 paired query-level gain을 보였지만, context-agnostic memory trust 대비 gain은 1 row로 좁다. 따라서 human task context는 현재 main contribution이 아니라 secondary ablation으로만 다룬다.
 - `DualMap`은 object-map output 부재 때문에 아직 external baseline result로 사용 불가하다.
 - `OpenMask3D`는 checkpoint는 준비됐지만 local Docker/MinkowskiEngine build blocker가 있다.
+- `Open3DSG`는 staged source/interface audit, output schema contract, object-candidate export plan은 통과했지만 one-batch export가 CUDA OOM으로 실패했다. Object candidate row가 아직 없어 H001 query-level output conversion이 완료되지 않았다.
 - real RGB-D/open-vocabulary proposal route는 false-positive load와 heldout label/scan transfer 문제가 남아 있다.
 - real navigation `SR` / `SPL`은 아직 simulator, navmesh, trajectory execution source가 없다.
 - task-context-specific effect는 좁고 label-broad하지 않다.
@@ -141,9 +151,9 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 
 사실:
 
-- Immediate next unit: `E005-M47 ConceptGraphs heldout_b03 runtime launch` when GPU free memory is >= 24GB.
+- Immediate next unit: repair `E005-M59 Open3DSG object-candidate export hook implementation / one-batch Docker smoke` through GPU-exclusive relaunch or lower-memory runtime patch.
 - Keep strict 0.5m, relaxed 1.0m, and center-localization metrics separate when scaling the external baseline table.
-- After `ConceptGraphs` scale, audit `Open3DSG` as the next external map/scene-graph route if a second external baseline is needed.
+- After `ConceptGraphs` scale, use `Open3DSG` as the next external map/scene-graph route only after object candidate export and query-level conversion pass.
 
 논문 주장 후보:
 

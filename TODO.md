@@ -1,6 +1,6 @@
 # TODO
 
-Last updated: 2026-05-18
+Last updated: 2026-05-21
 
 이 파일은 에이전트가 다음 작업 계획과 진행 상태를 관리하는 루트 작업판이다. 자세한 문헌 조사 내용은 `literature/`에 기록하고, 이 파일에는 다음 행동과 상태만 남긴다.
 
@@ -10,18 +10,19 @@ Last updated: 2026-05-18
 - 작업 중 새 task가 생기면 이 파일에 추가한다.
 - 완료한 task는 체크하고, 필요한 상세 내용은 `literature/` 또는 해당 workflow 문서에 기록한다.
 - 이 파일은 긴 설명을 담지 않는다. 계획, 상태, 다음 행동만 관리한다.
+- `/home/yoohyun/research/local_dataset/Open3DSG_staged`는 read-only source로만 사용하고, 파생 데이터/변환 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 아래에 저장한다.
 
 ## Current Phase
 
 Main experiment implementation.
 
-CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 첫 route였던 `DualMap`은 Docker/submodule/bootstrap, staged `3RScan` Dataset Mode adapter, cache-fixed detector runtime까지 통과했지만, M14/M17 모두 object `*.pkl`을 만들지 못했다. `ConceptGraphs` route는 M20 source/interface audit, M21 depth-aligned Scannet-style `3RScan` staging, M22 Docker/runtime preflight, M23/M24 repo/checkpoint acquisition, M25/M26 Docker build/import smoke, M27 one-scan runtime output verification, M28 output schema inspection, M29 output-to-query conversion plan, M30 one-scan object candidate export / CLIP-text scoring smoke, M31 one-scan query-level metric conversion / rank failure check, M32 4-scan scale decision, M33/M34 pending scan runtime repair/verification, M35 4-scan candidate export / query metric conversion, M36 failure analysis / claim boundary, M37 external baseline comparison / next-route decision, M38 heldout/scale contract, M39 heldout sequence acquisition/staging launch, M40 heldout sequence staging verification, M41 heldout runtime preflight/launch plan, M42 heldout staged-layout materialization, M43 heldout runtime batch, M44 completion verification, M45 heldout output-to-query metric conversion, M46 heldout interpretation / remaining batch decision, M47 `heldout_b02` runtime batch launch, M48 `heldout_b02` runtime completion verification, M49 heldout batch-aware metric conversion prep / `heldout_b02` metric conversion까지 완료했다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. 다음 gate는 `heldout_b03` runtime launch와 full heldout metric aggregation이다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
+CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 첫 route였던 `DualMap`은 Docker/submodule/bootstrap, staged `3RScan` Dataset Mode adapter, cache-fixed detector runtime까지 통과했지만, M14/M17 모두 object `*.pkl`을 만들지 못했다. `ConceptGraphs` route는 M20-M55까지 진행되어 source/interface audit, `3RScan` staging, Docker/runtime, 4-scan metric conversion, 9-scan heldout runtime/metric aggregation, H001-vs-`ConceptGraphs` common-split gate, H001 heldout replay contract, H001 heldout policy replay, paired failure analysis / paper-table decision, paper-table claim ledger / method claim rewrite, real RGB-D/open-vocabulary robustness expansion gate까지 완료했다. M56은 two-table robustness denominator를 고정하고 `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only source/interface audit을 완료했다. M57은 `Open3DSG` output schema inspection / query-conversion contract를 완료했고, M58은 object-candidate export schema, read-only Docker command contract, verifier를 완료했다. M59는 one-batch object candidate export smoke를 tmux background job으로 실행했지만 CUDA OOM으로 실패했고, 2026-05-21 04:54 KST 기준 candidate row는 없다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `Open3DSG`는 query-level conversion 전까지 performance claim이 아니라 second external map/scene-graph baseline route 후보로만 둔다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. real RGB-D/open-vocabulary robustness와 real navigation `SR`/`SPL`은 아직 not ready다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
 
 CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active task는 없고, CAND-001 feasibility가 약해질 때 다시 승격 여부를 판단한다.
 
 ## Active Objective
 
-- CAND-001: Direction B 최종 목표를 유지하되, `ConceptGraphs` object map을 E004 query-level metric으로 변환하는 external mapping baseline route를 이어간다.
+- CAND-001: Direction B 최종 목표를 유지하되, `Open3DSG` object-candidate export hook / one-batch Docker smoke로 second external baseline route를 query-level conversion에 연결한다.
 - CAND-002: `Common-Ground Semantic Mapping`은 benchmark 설계 부담을 보류 상태로 둔다.
 - CAND-003: `Functional Semantic Memory`는 annotation/manipulation evaluation 부담을 보류 상태로 둔다.
 
@@ -29,7 +30,7 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E005-M47 launch `ConceptGraphs` `heldout_b03` when GPU free memory is >= 24GB
+- [ ] E005-M59 repair route 결정: GPU-exclusive relaunch vs lower-memory object-candidate export patch
 
 ### CAND-002
 
@@ -43,16 +44,15 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E005-M47 launch `ConceptGraphs` `heldout_b03` when GPU free memory is >= 24GB
-- [ ] E005-M48 `heldout_b03` runtime completion verification
-- [ ] E005-M49 full heldout `ConceptGraphs` metric aggregation / H001 comparison gate
+- [ ] E005-M59 repair: GPU memory preflight 강화 또는 `InstructBLIP` GPU loading 회피 patch
+- [ ] E005-M60 `Open3DSG` query-level conversion smoke 여부 판단
 - [ ] `OpenMask3D` feasibility는 bridge denominator staging/verification 이후 external 3D instance proposal baseline 후보로 재검토
-- [ ] `Open3DSG` / `ConceptGraphs` / `HOV-SG`는 E005 map/scene-graph/navigation baseline expansion에서 재검토
+- [ ] `HOV-SG` / additional map-navigation baselines는 `Open3DSG` query-conversion feasibility 이후 재검토
 
 ## Running / Needs Verification
 
-- Active non-E005 runtime state: tmux sessions `research`, `h001_open3dsg_dump_features_h001_eval_shard_loop`; Docker container `ast_mujoco-lerobot`.
-- E005-M47 blocked: `heldout_b03` launch waiting for GPU free memory >= 24GB; 2026-05-18 latest check showed 22,439 MiB free.
+- Active non-E005 runtime state: tmux session `research`; Docker containers `AST_mujoco`, `fervent_meninsky`, `jae`, `musing_leakey`, `vlsat-5090`.
+- E005-M59 failed/needs repair: tmux `e005_m59_open3dsg_object_export` stopped, log `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, output `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`, last check 2026-05-21 04:54 KST, candidate rows 0, source modified false, failure CUDA OOM during `InstructBLIP` loading, verification `python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_object_export_smoke.py --require-ready`.
 
 ### CAND-002
 
@@ -64,6 +64,22 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] Latest status/reproducibility docs refresh 완료: E005-M59 CUDA OOM failure, verification command, output/log path, `.gitignore` tracking boundary를 `README.md`, `summary.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/E005_external_baseline_transition/README.md`에 반영
+- [x] E005-M58 `Open3DSG` object-candidate dump/export smoke plan 완료: `plan_m58_open3dsg_object_candidate_export.py`, `verify_m58_open3dsg_object_candidate_export.py`, status `e005_m58_open3dsg_object_candidate_export_plan_ready_hook_smoke_needed`, verification `e005_m58_open3dsg_object_candidate_plan_ready_no_rows_yet`, local output `local_dataset/Open3DSG_bridge/E005-M58_object_candidate_export_plan_v0/`, source modified false, selected checkpoint/features ready true, next `E005-M59`
+- [x] E005-M57 `Open3DSG` output schema inspection / query-conversion contract 완료: `plan_m57_open3dsg_output_schema_contract.py`, status `e005_m57_open3dsg_output_schema_contract_ready_object_candidate_export_needed`, local output `local_dataset/Open3DSG_bridge/E005-M57_output_schema_contract_v0/`, source modified false, preprocessed pkl 377, object2image pkl 127, feature pt 1131, MLflow checkpoints 8, relation raw dump ready true, object candidate dump ready false, query-level conversion ready false, next `E005-M58`
+- [x] E005-M56 robustness denominator contract + `Open3DSG` source/interface audit 완료: `plan_m56_robustness_denominator_open3dsg_audit.py`, status `e005_m56_robustness_denominator_open3dsg_audit_ready`, proxy-search denominator 195 rows, real RGB-D proposal bridge denominator 96 rows, `/home/yoohyun/research/local_dataset/Open3DSG_staged` readable, existing data modified false, source/checkpoint/features/eval artifacts present, `Open3DSG` query-level performance ready false, next `E005-M57`
+- [x] E005-M55 real RGB-D/open-vocabulary robustness expansion gate 완료: `plan_m55_real_rgbd_ov_robustness_gate.py`, status `e005_m55_real_rgbd_ov_robustness_gate_ready`, selected route `robustness_denominator_contract_then_open3dsg_audit`, M54 proxy rows 195, E003-M75 real proposal bridge rows 96, target detected 87, bounded repair 33, `OpenMask3D` blocked true, next `E005-M56`
+- [x] E005-M54 paper-table claim ledger / method claim rewrite 완료: `plan_m54_paper_table_claim_ledger.py`, status `e005_m54_paper_table_claim_ledger_ready`, artifact `E005-M54_paper_table_claim_ledger_v0/`, main table rows 8, H001 172/195, `ConceptGraphs` 114/195, static 141/195, context-agnostic 171/195, main claim `memory_trust_staleness_bounded_reobservation`, human task context main claim false, real RGB-D/open-vocabulary robustness false, real navigation `SR`/`SPL` false, next `E005-M55`
+- [x] `schedule.md` human intent / robustness / navigation claim timing 업데이트 완료: E005-M53 기준 human task context main claim false, E006 optional context-sensitive utility benchmark, real RGB-D robustness before real navigation `SR`/`SPL` 순서 반영
+- [x] E005-M53 paired heldout failure analysis / paper-table decision 완료: `analyze_m53_paired_failure_table_decision.py`, status `e005_m53_paired_failure_table_decision_ready_memory_trust_supported_task_context_limited`, query rows 195, H001 172/195, `ConceptGraphs` 114/195, static 141/195, context-agnostic 171/195, H001-vs-`ConceptGraphs` outcomes both_success 112 / H001-only 60 / `ConceptGraphs`-only 2 / both_fail 21, task-context main claim false, next `E005-M54`
+- [x] E005-M52 H001 heldout policy replay run 완료: `run_m52_h001_heldout_policy_replay.py`, status `e005_m52_h001_heldout_replay_ready_with_paired_gain`, query rows 195, H001 172/195 = 0.882051, `ConceptGraphs` strict bbox top5 114/195 = 0.584615, static memory 141/195 = 0.723077, context-agnostic 171/195 = 0.876923, paired gain candidate true, real navigation `SR`/`SPL` false
+- [x] E005-M51 H001 heldout policy replay contract 완료: `plan_m51_h001_heldout_policy_replay_contract.py`, status `e005_m51_h001_heldout_replay_contract_ready`, heldout query rows 195, adapter rows 195, adapter issues 0, static memory success 141, `ConceptGraphs` target detected 138, next `E005-M52`
+- [x] E005-M50 H001 vs `ConceptGraphs` heldout comparison gate 완료: `plan_m50_h001_vs_conceptgraphs_gate.py`, status `e005_m50_h001_vs_conceptgraphs_gate_ready_common_split_required`, H001 rows 96, `ConceptGraphs` heldout rows 195, common query rows 0, aggregate side-by-side ready true, paired superiority claim ready false
+- [x] E005-M49 full heldout `ConceptGraphs` metric aggregation 완료: `run_m49_conceptgraphs_full_heldout_aggregation.py`, status `e005_m49_conceptgraphs_full_heldout_aggregation_ready`, scans 9, query rows 195, object rows 342, candidate rows 7,470, strict bbox top5 114/195 = 0.584615, relaxed bbox 1m top3 144/195 = 0.738462
+- [x] E005-M49 `heldout_b03` metric conversion 완료: status `e005_m45_conceptgraphs_heldout_query_metric_ready_with_strict_hits`, query rows 60, target uids 20, object rows 73, candidate rows 1,248, strict bbox top5 24/60 = 0.400000, relaxed bbox 1m top3 36/60 = 0.600000
+- [x] E005-M48 `ConceptGraphs` `heldout_b03` runtime completion verification 완료: status `e005_m43_conceptgraphs_heldout_runtime_batch_outputs_ready`, ready scans 3/3, GSA detections 57/43/43, full PCD/post PCD ready 3/3, tmux stopped, log `logs/20260521_010423_e005_m43_conceptgraphs_heldout_runtime_heldout_b03.log`
+- [x] E005-M47 `heldout_b03` runtime batch launch 완료: scans 3, staged payload ready 3/3, GPU free 24,980 MiB, tmux `e005_m43_conceptgraphs_heldout_runtime_b03`, log `logs/20260521_010423_e005_m43_conceptgraphs_heldout_runtime_heldout_b03.log`, initial verifier status `e005_m43_conceptgraphs_heldout_runtime_batch_running`
+- [x] E005-M47 `heldout_b03` launch preflight 실행: staged payload ready 3/3, scans `c7895f07-339c-2d13-8176-7418b6e8d7ce` / `d7d40d75-7a5d-2b36-9746-3e807d3e7558` / `ea318260-0a4c-2749-9389-4c16c782c4b1`, launch executed false, blocker `gpu_free_below_threshold:23457<24000`, verifier status `e005_m43_conceptgraphs_heldout_runtime_batch_blocked_preflight`
 - [x] Documentation refresh 완료: `README.md`, `summary.md`, `docs/index.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/report.md`, `experiments/schedule.md`, `experiments/E005_external_baseline_transition/README.md` 최신 E005 상태와 재현 정보 반영
 - [x] E005-M49 heldout batch-aware metric conversion prep 완료: `heldout_b01/b02/b03_query_rows.jsonl` generated under `E005-M45_conceptgraphs_heldout_metric_contract_v0/`, total heldout query rows 195
 - [x] E005-M49 `ConceptGraphs` `heldout_b02` metric conversion 완료: status `e005_m45_conceptgraphs_heldout_query_metric_ready_with_strict_hits`, query rows 69, target uids 23, object rows 199, candidate rows 4,614, strict bbox top5 45/69 = 0.652174, relaxed bbox 1m top3 51/69 = 0.73913, final baseline claim false
