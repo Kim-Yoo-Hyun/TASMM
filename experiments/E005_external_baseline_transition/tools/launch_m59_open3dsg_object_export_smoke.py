@@ -157,6 +157,10 @@ def build_docker_command() -> list[str]:
         "-e",
         "OPEN3DSG_OBJECT_DUMP_MAX_BATCHES=1",
         "-e",
+        "OPEN3DSG_OBJECT_DUMP_SKIP_BLIP_LOAD=1",
+        "-e",
+        "OPEN3DSG_OBJECT_DUMP_OBJECT_ONLY=1",
+        "-e",
         "OPEN3DSG_BASELINE_RUN_ID=open3dsg_h001_last_ckpt_object_candidate_smoke",
         "-e",
         f"OPEN3DSG_CHECKPOINT={checkpoint}",
@@ -247,7 +251,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--launch", action="store_true")
     parser.add_argument("--ignore-gpu-memory", action="store_true")
-    parser.add_argument("--min-gpu-free-mib", type=int, default=12000)
+    parser.add_argument("--min-gpu-free-mib", type=int, default=24000)
     args = parser.parse_args()
     coverage = run(
         launch=args.launch,

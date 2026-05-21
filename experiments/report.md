@@ -151,6 +151,7 @@ Updated: 2026-05-18
 - E005-M57 finds that relation raw dump is ready, but object-search comparison needs an object-candidate score export; aggregate `Open3DSG` eval metrics are not query-convertible.
 - E005-M58 fixes the `Open3DSG` object-candidate export plan, read-only Docker command contract, local output path, and verifier.
 - E005-M59 launches one-batch object-candidate export but fails on CUDA OOM during `InstructBLIP` checkpoint loading. No object candidate rows are produced, and `Open3DSG` remains not query-convertible.
+- E005-M59 repair route is lower-memory object-only export. This is preferred over blind GPU-exclusive relaunch because object candidate export does not require relation captioning, while `InstructBLIP` loading was the observed failure point.
 - Real navigation `SR` / `SPL` remains unsupported.
 - Final real RGB-D/open-vocabulary robustness claim remains unsupported.
 
@@ -359,7 +360,7 @@ Cold assessment:
 - Real RGB-D/open-vocabulary robustness is not just higher detector recall. It must show transfer across heldout scenes/labels and robustness to prompt, depth, pose, and proposal noise.
 - Deployable search policy is currently the nearest claim to mature, but E004-M05 still supports only a diagnostic memory-trust decision claim, not a final deployable policy claim.
 - Real navigation `SR` / `SPL` is the farthest claim because query-level success must be connected to actual path execution and candidate visit order.
-- The correct immediate route is E005-M59 repair: either relaunch with exclusive GPU memory or patch the object-candidate export path to avoid unnecessary `InstructBLIP` GPU loading before any `Open3DSG` baseline claim or real navigation `SR` / `SPL` claim.
+- The correct immediate route is E005-M59 lower-memory relaunch after GPU free memory reaches 24GB. GPU-exclusive relaunch is the backup path if the object-only patch still fails.
 
 사용자 판단 필요:
 
@@ -371,7 +372,7 @@ Cold assessment:
 
 - Use Direction A as the backbone now.
 - Treat Direction B as the final target, not a separate replacement.
-- The next technical step should be E005-M59 `Open3DSG` object-candidate export repair.
+- The next technical step should be E005-M59 lower-memory relaunch and verification.
 - E005 should preserve the E004 claim boundary: split-supported memory trust, limited task-context specificity, no final real RGB-D/open-vocabulary robustness, no deployable search policy, and no real navigation `SR` / `SPL`.
 - External proposal/mapping baselines such as `OpenMask3D`, `ConceptGraphs`, and `HOV-SG` should be evaluated as claim-expansion routes, not retrofitted as detector improvements.
 - Do not claim real navigation `SR` / `SPL` until simulator, navmesh, or trajectory execution is integrated.

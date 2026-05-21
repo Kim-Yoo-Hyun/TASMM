@@ -15,7 +15,7 @@ Last updated: 2026-05-21
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005 status: `ConceptGraphs` is the active external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion. E005-M56 completed the two-table robustness denominator contract and read-only `Open3DSG` source/interface audit. E005-M57 completed `Open3DSG` output schema / query-conversion contract. E005-M58 completed the `Open3DSG` object-candidate export smoke plan and stores derived outputs under `research2/local_dataset/Open3DSG_bridge/`. E005-M59 `Open3DSG` one-batch export smoke launched in tmux `e005_m59_open3dsg_object_export` but failed on CUDA OOM during `InstructBLIP` checkpoint loading; candidate rows are not written. Real RGB-D/open-vocabulary robustness remains blocked until another external route has query-level conversion and an aligned failure table.
+- Current E005 status: `ConceptGraphs` is the active external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion. E005-M56 completed the two-table robustness denominator contract and read-only `Open3DSG` source/interface audit. E005-M57 completed `Open3DSG` output schema / query-conversion contract. E005-M58 completed the `Open3DSG` object-candidate export smoke plan and stores derived outputs under `research2/local_dataset/Open3DSG_bridge/`. E005-M59 `Open3DSG` one-batch export smoke launched in tmux `e005_m59_open3dsg_object_export` but failed on CUDA OOM during `InstructBLIP` checkpoint loading; the selected repair is a lower-memory object-only patch plus 24GB GPU preflight. Candidate rows are not written. Real RGB-D/open-vocabulary robustness remains blocked until another external route has query-level conversion and an aligned failure table.
 
 에이전트 추론:
 
@@ -80,7 +80,7 @@ Last updated: 2026-05-21
 | E005-M56 | Robustness denominator + `Open3DSG` audit | Complete: Table A proxy-search denominator 195 rows, Table B real RGB-D proposal bridge denominator 96 rows, `Open3DSG_staged` read-only audit passed | No `Open3DSG` performance claim before query-level conversion |
 | E005-M57 | `Open3DSG` output schema inspection / query-conversion contract | Complete: relation raw dump ready, feature/checkpoint route feasible, object candidate export needed | No `Open3DSG` object-search claim before candidate rows exist |
 | E005-M58 | `Open3DSG` object-candidate dump/export smoke plan | Complete: read-only Docker command, object-candidate schema, local output path, export contract, and verifier fixed | No `Open3DSG` object-search claim before one-batch candidate rows exist |
-| E005-M59 | `Open3DSG` object-candidate export hook / one-batch Docker smoke | Failed: tmux stopped, log `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, candidate rows 0 as of 2026-05-21 04:54 KST, CUDA OOM during `InstructBLIP` loading | Repair with GPU-exclusive relaunch or lower-memory runtime patch before query conversion |
+| E005-M59 | `Open3DSG` object-candidate export hook / one-batch Docker smoke | Repair ready: lower-memory object-only patch implemented, default GPU preflight 24GB, latest GPU free 16,839 MiB | Relaunch when GPU free memory >= 24GB, then verify rows before query conversion |
 | E006-M01 optional | Context-sensitive utility benchmark design | Define task-context-sensitive query rows and utility metrics | Start only if human task context is promoted beyond secondary ablation |
 | E006-M02 optional | Strong context-agnostic baseline suite | Compare against fixed trust, all-high-value, all-reobserve, risk-only, path-cost-only, detector-confidence-only | Human task context must beat these baselines beyond a 1-row gain |
 | E006-M03 optional | Context generalization stress | Test heldout scan / label / task-group transfer | Human task context main claim requires broad transfer, not one label group |
@@ -140,7 +140,7 @@ Order:
 3. E005-M56: two-table robustness denominator and `Open3DSG` source/interface audit. Complete.
 4. E005-M57: `Open3DSG` output schema inspection / query-conversion contract. Complete.
 5. E005-M58: `Open3DSG` object-candidate dump/export smoke plan. Complete.
-6. E005-M59: `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke. Failed on CUDA OOM; repair before E005-M60.
+6. E005-M59: `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke. Lower-memory repair implemented; relaunch before E005-M60.
 6. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
 7. E007 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
 
@@ -229,7 +229,7 @@ Purpose:
 
 ## Immediate Next Actions
 
-- Repair E005-M59 `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke.
+- Relaunch E005-M59 `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke when GPU free memory is >= 24GB.
 - Keep the main paper claim centered on memory trust, staleness handling, bounded re-observation, and proxy-search improvement over `ConceptGraphs` / static memory.
 - Keep human task context as a secondary ablation unless E006 is explicitly launched and passes context-sensitive utility gates.
 - Expand real RGB-D/open-vocabulary robustness before real navigation `SR` / `SPL`.

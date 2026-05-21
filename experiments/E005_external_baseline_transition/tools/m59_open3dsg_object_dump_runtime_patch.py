@@ -302,8 +302,49 @@ def finalize(module: Any, status: str = "object_candidate_stream_complete") -> N
 def patch_trainer() -> None:
     from open3dsg.scripts import trainer as trainer_module
 
+    original_setup = trainer_module.D3SSGModule.setup
     original_test_step = trainer_module.D3SSGModule.test_step
     original_on_test_epoch_end = trainer_module.D3SSGModule.on_test_epoch_end
+
+    def patched_setup(self: Any, stage: str | None = None) -> Any:
+        if os.environ.get("OPEN3DSG_OBJECT_DUMP_SKIP_BLIP_LOAD", "0") == "1":
+            def skip_blip_load(*_args: Any, **_kwargs: Any) -> None:
+                print("M59 object dump skipping pretrained BLIP load", flush=True)
+
+            self.model.load_pretrained_blip_model = skip_blip_load
+            self.model.load_pretrained_blipvision_model = skip_blip_load
+            self.model.load_blip_pos_encoding = skip_blip_load
+        return original_setup(self, stage)
+
+    def patched_predict_rel_from_blip(
+        self: Any,
+        data_dict: dict[str, Any],
+        obj_predict: Any,
+        obj_valids: Any,
+        batch_size: int,
+        from_distill: bool = True,
+    ) -> tuple[list[Any], list[Any], list[Any], list[Any], list[Any]]:
+        if os.environ.get("OPEN3DSG_OBJECT_DUMP_OBJECT_ONLY", "0") != "1":
+            return self._m59_original_predict_rel_from_blip(data_dict, obj_predict, obj_valids, batch_size, from_distill)
+
+        import numpy as np
+        import torch
+
+        pred_names = np.array(getattr(self, "pred_class_dict_orig", ["none"] * 27))
+        pred_vocab_size = max(1, min(27, len(pred_names)))
+        objects = []
+        predicates = []
+        relationships = []
+        predicates_mapped = []
+        predicates_mapped_probs = []
+        for bidx in range(batch_size):
+            rel_count = to_int(data_dict["predicate_count"][bidx])
+            objects.append(np.array([["object", "object"]] * rel_count, dtype=object))
+            predicates.append(["none"] * rel_count)
+            relationships.append(["none"] * rel_count)
+            predicates_mapped.append(np.tile(pred_names[:pred_vocab_size], (rel_count, 1)))
+            predicates_mapped_probs.append(torch.zeros((rel_count, pred_vocab_size), dtype=torch.float32))
+        return objects, predicates, relationships, predicates_mapped, predicates_mapped_probs
 
     def patched_test_step(self: Any, data_dict: dict[str, Any], batch_ixd: int) -> Any:
         before_len = len(getattr(self, "test_step_outputs", []))
@@ -332,6 +373,9 @@ def patch_trainer() -> None:
                 raise SystemExit(0)
         return original_on_test_epoch_end(self)
 
+    trainer_module.D3SSGModule.setup = patched_setup
+    trainer_module.D3SSGModule._m59_original_predict_rel_from_blip = trainer_module.D3SSGModule._predict_rel_from_blip
+    trainer_module.D3SSGModule._predict_rel_from_blip = patched_predict_rel_from_blip
     trainer_module.D3SSGModule.test_step = patched_test_step
     trainer_module.D3SSGModule.on_test_epoch_end = patched_on_test_epoch_end
 

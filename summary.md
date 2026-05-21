@@ -123,7 +123,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - E005-M56은 two-table robustness denominator contract와 `Open3DSG` source/interface audit을 완료했다. Table A는 proxy-search external map denominator 195 rows, Table B는 real RGB-D proposal bridge denominator 96 rows로 분리한다. `/home/yoohyun/research/local_dataset/Open3DSG_staged`는 read-only audit 가능하며 source, checkpoint, feature, existing eval artifact가 존재한다.
 - E005-M57은 `Open3DSG` output schema inspection / query-conversion contract를 완료했다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M57_output_schema_contract_v0/`에 저장했다. `Open3DSG` relation raw dump hook은 준비되어 있지만 object-search baseline에는 object candidate score export가 추가로 필요하다.
 - E005-M58은 `Open3DSG` object-candidate export schema, read-only Docker command contract, export hook contract, verifier를 완료했다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M58_object_candidate_export_plan_v0/`에 저장했다.
-- E005-M59는 `Open3DSG` one-batch object-candidate export smoke를 tmux background job으로 실행했지만, `InstructBLIP` checkpoint loading 중 CUDA OOM으로 실패했다. Session은 `e005_m59_open3dsg_object_export`, log는 `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, output은 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`이다. 2026-05-21 04:54 KST 기준 tmux는 종료됐고 candidate row는 생성되지 않았다.
+- E005-M59는 `Open3DSG` one-batch object-candidate export smoke를 tmux background job으로 실행했지만, `InstructBLIP` checkpoint loading 중 CUDA OOM으로 실패했다. 이후 lower-memory object-only patch를 적용했다. 이 patch는 object candidate export에 불필요한 `InstructBLIP` loading과 relation captioning을 우회한다. Session은 `e005_m59_open3dsg_object_export`, log는 `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, output은 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`이다. 2026-05-21 04:59 KST 기준 candidate row는 생성되지 않았고, relaunch는 GPU free memory >= 24GB를 기다린다.
 
 논문 주장:
 
@@ -151,7 +151,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 
 사실:
 
-- Immediate next unit: repair `E005-M59 Open3DSG object-candidate export hook implementation / one-batch Docker smoke` through GPU-exclusive relaunch or lower-memory runtime patch.
+- Immediate next unit: relaunch `E005-M59 Open3DSG object-candidate export hook implementation / one-batch Docker smoke` with the lower-memory object-only patch when GPU free memory is >= 24GB.
 - Keep strict 0.5m, relaxed 1.0m, and center-localization metrics separate when scaling the external baseline table.
 - After `ConceptGraphs` scale, use `Open3DSG` as the next external map/scene-graph route only after object candidate export and query-level conversion pass.
 
