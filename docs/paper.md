@@ -62,7 +62,7 @@ If four or more answers are weak, the work is still motivation-stage and the met
 | --- | --- | --- | --- |
 | Task/staleness-aware memory decision improves dynamic object search proxy behavior | E001/E002/E004 tables vs static memory, fixed top-k, context-agnostic trust, path-aware variants | partially supported | task-context effect is narrow |
 | The decision layer remains useful under real RGB-D/open-vocabulary proposal noise | E003 direct current-rescan bridge, heldout split, detector/proposal baseline comparison | not final | false-positive load and detector recall miss remain large |
-| The framework is stronger than external dynamic/open-vocabulary mapping baselines | E005 `DualMap` or `ConceptGraphs` adapter and fair query-level comparison | in progress | `DualMap` runs but lacks object `*.pkl`; `ConceptGraphs` 4-scan and `heldout_b01/b02` query metrics are ready; `heldout_b03` and full aggregation remain |
+| The framework is stronger than external dynamic/open-vocabulary mapping baselines | E005 `ConceptGraphs` and at least one additional fair query-level route such as `Open3DSG` | partially supported for proxy-search only | `ConceptGraphs` full 195-row heldout comparison is ready, but `Open3DSG` is contract-ready only and has no M59 candidate rows yet |
 | The system supports deployable search policy | bounded budget improvement, allowed-input contract, failure separation | not ready | current policy is diagnostic, not deployable |
 | The system improves real navigation `SR` / `SPL` | simulator/navmesh/trajectory execution and navigation baselines | unsupported | no real navigation evaluation yet |
 
@@ -72,7 +72,7 @@ If four or more answers are weak, the work is still motivation-stage and the met
 - E002: adds path/search-cost bridge and separates source-limited failures from policy failures.
 - E003: tests controlled perception noise and real RGB-D/open-vocabulary proposal failure modes.
 - E004: tests memory trust and task-context conditioning, with claim boundaries.
-- E005: adds external baseline pressure; `DualMap` runs without object-map outputs, while `ConceptGraphs` now has 4-scan metrics plus `heldout_b01/b02` batch diagnostics and needs `heldout_b03` before final aggregation.
+- E005: adds external baseline pressure; `DualMap` runs without object-map outputs, `ConceptGraphs` now has full 195-row heldout query-level aggregation, and `Open3DSG` is source/schema/export/query-conversion contract-ready but still waits for M59 object-candidate rows.
 
 Main tables should not merely report that our method is better. They should show which failure mode is addressed by which component.
 
@@ -101,7 +101,8 @@ Expected reviewer questions:
 - Why not use a stronger detector or open-vocabulary mapper directly?
 - Why does stale memory require task-conditioned trust instead of a fixed decay score?
 - Why does the method generalize beyond `chair` / `pillow` and the current 4 rescans?
-- What does `DualMap` / `ConceptGraphs` fail or solve compared with our method?
+- What does `DualMap` / `ConceptGraphs` / `Open3DSG` fail or solve compared with our method?
+- Why is `Open3DSG` currently a contract/readiness result rather than a performance baseline?
 - Where are real navigation `SR` / `SPL` and what is the bridge until then?
 
 Answers must refer to artifacts, tables, ablations, or explicit limitations.
@@ -141,7 +142,7 @@ Every experiment answers a reviewer question:
 | Does task context matter beyond a global threshold? | task-conditioned vs context-agnostic trust |
 | Does path/search cost change the decision? | E002/E004 cost-aware metrics |
 | Does the result survive proposal noise? | E003 controlled and real proposal diagnostics |
-| Is this competitive with external mappers? | E005 `DualMap` / `ConceptGraphs` comparison |
+| Is this competitive with external mappers? | E005 `ConceptGraphs` comparison and `Open3DSG` query-conversion route after M59 rows exist |
 | What breaks? | failure taxonomy and claim boundary table |
 
 ## Reproducibility Checklist

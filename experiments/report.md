@@ -1,6 +1,6 @@
 # Experiment Report
 
-Updated: 2026-05-18
+Updated: 2026-05-22
 
 이 문서는 현재 `experiments/` 단계에서 확인된 기여점, reviewer가 공격할 핵심 지점, 방어 전략, 최종 논문 방향성을 정리한다. 세부 산출물은 각 experiment folder와 artifact에 둔다.
 
@@ -152,6 +152,10 @@ Updated: 2026-05-18
 - E005-M58 fixes the `Open3DSG` object-candidate export plan, read-only Docker command contract, local output path, and verifier.
 - E005-M59 launches one-batch object-candidate export but fails on CUDA OOM during `InstructBLIP` checkpoint loading. No object candidate rows are produced, and `Open3DSG` remains not query-convertible.
 - E005-M59 repair route is lower-memory object-only export. This is preferred over blind GPU-exclusive relaunch because object candidate export does not require relation captioning, while `InstructBLIP` loading was the observed failure point.
+- E005-M60 fixes the `Open3DSG` query-level conversion contract before rerunning M59. It maps future `Open3DSG` object-candidate rows to the same 195-row M38/M45 denominator used by `ConceptGraphs` and H001 replay.
+- E005-M60 planned policies are `open3dsg_objects_probs_bbox_strict_top5_v0`, `open3dsg_objects_probs_bbox_relaxed_1m_top3_v0`, and `open3dsg_objects_probs_center_strict_top5_v0`.
+- E005-M60 planned metrics are target detected rate, query bridge success rate, target rank, `ExpectedSearchCost`, `AttemptSPL` proxy, old-location dead-end avoidance, and failure classes.
+- E005-M60 is contract-ready but still has 0 M59 object-candidate rows, so it does not create an `Open3DSG` performance result.
 - Real navigation `SR` / `SPL` remains unsupported.
 - Final real RGB-D/open-vocabulary robustness claim remains unsupported.
 
@@ -198,7 +202,7 @@ Updated: 2026-05-18
 사실:
 
 - `ConceptGraphs` has been run and converted to query-level metrics on all 9 heldout scans. E005-M54 makes this usable as a proxy-search external map baseline, but not as a final real RGB-D/open-vocabulary robustness claim.
-- `Open3DSG` has passed source/interface audit, output schema contract, and object-candidate export planning from an existing staged read-only path, but M59 fails on CUDA OOM before producing H001 object-candidate rows or query-level metrics.
+- `Open3DSG` has passed source/interface audit, output schema contract, object-candidate export planning, and query-conversion contract from an existing staged read-only path, but M59 fails on CUDA OOM before producing H001 object-candidate rows or query-level metrics.
 - External routes such as `HOV-SG`, `VLFM`, `HM3D-OVON`, `GOAT-Bench`, and `3D-Mem` have not yet been run in this workspace.
 - `DualMap` has been staged and executed, but current M14/M17 runs lack object `*.pkl` outputs, so it is not yet a valid object-map baseline result.
 - E001/E002 still use proxy search metrics, not real executed navigation.
@@ -216,6 +220,8 @@ Updated: 2026-05-18
 - Attack 6: human intent may look shallow because current task context is structured, not natural language.
 - Attack 7: current evidence may look like a collection of gates rather than one clean method/evaluation story.
 - Attack 8: if broadened too early, the work may become an engineering integration paper without a sharp algorithmic contribution.
+- Attack 9: `Open3DSG` may look overclaimed if schema/contract work is presented as baseline performance.
+- Attack 10: `ConceptGraphs` may look like the only external baseline if `Open3DSG` remains blocked at M59.
 
 ## Reviewer Defense Priorities
 
@@ -223,6 +229,7 @@ Updated: 2026-05-18
 
 - The main claim should be: task/staleness-aware semantic memory update improves dynamic object search decisions under stale memory and noisy proposals.
 - The method should be defended as a semantic mapping decision layer, not as a detector, language parser, or navigation planner.
+- The current `Open3DSG` statement should be limited to source/interface feasibility and query-conversion readiness, not performance.
 
 에이전트 추론:
 
@@ -230,11 +237,39 @@ Updated: 2026-05-18
 - Defense 2: include ablations for task context, staleness score, memory trust, re-observation budget, reachable-first ordering, proposal filtering, and path/search-cost term.
 - Defense 3: separate controlled annotation-proxy evidence, real proposal diagnostic evidence, and real navigation evidence in all tables.
 - Defense 4: use E003-M75 as the current bridge evidence, while clearly stating that the bounded repair is not yet a final deployable policy.
-- Defense 5: add at least one external 3D proposal/mapping baseline before final real RGB-D/open-vocabulary claim.
+- Defense 5: use `ConceptGraphs` as the current converted external map baseline and use `Open3DSG` only after M59 object rows and M60 conversion pass.
 - Defense 6: keep structured task context as the controlled condition; add LLM parsing only as an adapter after the decision contract is stable.
 - Defense 7: report negative results such as E003-M45 and E003-M50 as boundary evidence, not failed side experiments.
 - Defense 8: scale from diagnostic scans to heldout splits only after the detector/evaluation bridge is stable.
-- Defense 9: treat remaining `ConceptGraphs` heldout batches as baseline rigor, not novelty; the novelty claim must come from H001 improving `ExpectedSearchCost`, proxy `SR`, proxy `SPL`, stale-memory recovery, and failure reduction over static stale memory, detector-confidence ranking, `ConceptGraphs`-only map retrieval, and task-agnostic re-observation.
+- Defense 9: treat `ConceptGraphs` heldout scale as baseline rigor, not novelty; the novelty claim must come from H001 improving `ExpectedSearchCost`, proxy `SR`, proxy `SPL`, stale-memory recovery, and failure reduction over static stale memory, detector-confidence ranking, `ConceptGraphs`-only map retrieval, and task-agnostic re-observation.
+- Defense 10: keep `Open3DSG` as a second-route readiness claim until the exact M60 rows and metrics exist.
+
+## Reviewer Defense Ledger
+
+사실:
+
+| Reviewer concern | Current evidence | Current boundary |
+| --- | --- | --- |
+| Is this only heuristic top-k reranking? | H001 is compared against static memory, detector top-k, `ConceptGraphs` rank, context-agnostic memory trust, and unbounded detector upper-bound policies on the same 195-row M38 denominator. | Needs a cleaner method description that derives memory trust / re-observation / search-cost decisions from stale-memory failure taxonomy. |
+| Is the benchmark self-defined? | Query rows come from dynamic `3RScan` / `3DSSG` scan pairs and are evaluated against external `ConceptGraphs` output on all 9 heldout sequence-required scans. | Still not a standard public navigation benchmark; real `SR` / `SPL` requires simulator or navmesh episodes. |
+| Is `ConceptGraphs` enough as an external baseline? | `ConceptGraphs` is fully converted on 195 heldout rows and is a valid proxy-search external map baseline. | Not enough for final real RGB-D/open-vocabulary robustness by itself; `Open3DSG` is the next route but has no performance rows yet. |
+| Can `Open3DSG` be claimed as a baseline? | M56/M57/M58/M60 prove source/interface/schema/export/query-conversion readiness without modifying the read-only source. | No. M59 has 0 object-candidate rows after CUDA OOM, so `Open3DSG` performance claim is forbidden. |
+| Does this prove real RGB-D/open-vocabulary robustness? | E003-M75 gives a real proposal bridge with 87 / 96 target detected rows and 33 / 96 bounded repair success rows. | No. This is diagnostic Table B, not final robustness. It lacks heldout robustness across external map routes. |
+| Does this prove real navigation `SR` / `SPL`? | E002/E005 provide `ExpectedSearchCost` and `AttemptSPL` proxy. | No. `SR` / `SPL` requires simulator, navmesh, or trajectory execution. |
+| Is human intent a main contribution? | Structured `task_context_id` changes memory trust and re-observation budgets, but E005-M54 marks human task context as secondary. | Do not claim natural-language intent understanding or main human-intent contribution yet. |
+| Are failed baselines being hidden? | `DualMap` executed but produced no object `*.pkl`; E003-M45 and E003-M50 negative support/mask routes are documented. | Use them as failure-boundary evidence, not as performance baselines. |
+
+논문 주장:
+
+- The paper-facing claim should be narrow: H001 improves stale semantic memory decisions for dynamic object search on a fixed proxy-search denominator, with `ConceptGraphs` as the current converted external map baseline.
+- `Open3DSG` should be described as a second external scene-graph baseline route only after M59 object rows and M60 conversion produce query-level metrics.
+- The paper should state that real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` are planned expansion claims, not current evidence.
+
+에이전트 추론:
+
+- The strongest reviewer defense is not to overclaim. Current results are credible if framed as a semantic memory decision layer with strict leakage control and explicit denominator boundaries.
+- The largest remaining risk is not lack of implementation effort; it is claim mismatch. If the paper claims navigation, robust open-vocabulary perception, or human-intent understanding before the required evidence exists, reviewers will correctly reject the claim.
+- M60 is useful because it pre-commits the `Open3DSG` join/metric/leakage rules before seeing `Open3DSG` performance rows, reducing cherry-picking risk after M59 succeeds.
 
 ## Final Paper Direction A
 

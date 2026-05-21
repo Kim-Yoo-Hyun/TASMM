@@ -1,6 +1,6 @@
 # Reproducibility Notes
 
-Updated: 2026-05-21
+Updated: 2026-05-22
 
 이 문서는 현재 repo에서 실험을 다시 실행하기 위해 필요한 데이터 위치, 다운로드 명령, checkpoint 위치, Docker 실행법, 재현 명령, artifact/evaluation 요약을 한 곳에 모은다. 세부 workflow 규칙은 `docs/experiments.md`를 따른다.
 
@@ -12,7 +12,7 @@ Updated: 2026-05-21
 - Active external baseline: `ConceptGraphs`.
 - Docker image: `research2/conceptgraphs-smoke:latest`.
 - Current heldout state: `heldout_b01/b02/b03` runtime/metric conversion and full 9-scan aggregation are complete.
-- Current claim state: E005-M59 failed on CUDA OOM and still keeps final real RGB-D/open-vocabulary robustness false. E005-M56 fixes separate proxy-search / real RGB-D proposal denominators, E005-M57/M58 define the `Open3DSG` conversion/export contracts, and E005-M59 attempts one-batch object candidate export while using `/home/yoohyun/research/local_dataset/Open3DSG_staged` as a read-only source. Derived `Open3DSG` bridge outputs are stored under `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`.
+- Current claim state: E005-M59 failed on CUDA OOM and still keeps final real RGB-D/open-vocabulary robustness false. E005-M56 fixes separate proxy-search / real RGB-D proposal denominators, E005-M57/M58 define the `Open3DSG` conversion/export contracts, E005-M59 attempts one-batch object candidate export while using `/home/yoohyun/research/local_dataset/Open3DSG_staged` as a read-only source, and E005-M60 predefines the query-level conversion contract for the 195-row M38/M45 denominator. Derived `Open3DSG` bridge outputs are stored under `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`.
 
 ## Data Location
 
@@ -173,6 +173,13 @@ python -m py_compile \
   experiments/E005_external_baseline_transition/tools/run_m45_conceptgraphs_heldout_query_metrics.py
 ```
 
+`Open3DSG` query-conversion contract reproduction:
+
+```bash
+python experiments/E005_external_baseline_transition/tools/plan_m60_open3dsg_query_conversion_contract.py
+python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_query_conversion_contract.py
+```
+
 ## Artifact And Evaluation Summary
 
 사실:
@@ -191,6 +198,7 @@ python -m py_compile \
 | `E005-M57_open3dsg_output_schema_contract_v0` | `Open3DSG` schema / conversion contract | relation raw dump ready; feature `.pt` route ready; object candidate dump false; local data output under `local_dataset/Open3DSG_bridge/E005-M57_output_schema_contract_v0/` | object-search baseline still false |
 | `E005-M58_object_candidate_export_plan_v0` | `Open3DSG` object-candidate export plan | object-candidate schema, query-candidate schema, export hook contract, read-only Docker command contract, and verifier ready; local data output under `local_dataset/Open3DSG_bridge/E005-M58_object_candidate_export_plan_v0/` | one-batch export still false |
 | `E005-M59_object_candidate_export_smoke_v0` | `Open3DSG` one-batch object-candidate export | launched once in tmux `e005_m59_open3dsg_object_export`; log `logs/20260521_044206_e005_m59_open3dsg_object_export.log`; output path `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`; candidate rows 0 as of 2026-05-21 04:59 KST; lower-memory object-only patch implemented after CUDA OOM | needs relaunch; no `Open3DSG` performance claim |
+| `E005-M60_open3dsg_query_conversion_contract_v0` | `Open3DSG` query-level conversion contract | M38/M45 denominator 195 rows, M58 schemas ready, M59 candidate rows 0, join/leakage/metric contract fixed under `local_dataset/Open3DSG_bridge/E005-M60_query_conversion_contract_v0/` | contract ready; no `Open3DSG` performance claim |
 
 논문 주장:
 
@@ -369,3 +377,204 @@ Docker images with tracked build recipes:
 에이전트 추론:
 
 - The safest minimal Drive package for moving machines is: selected `Open3DSG` checkpoint, `h001-open3dsg-repro:cu128` image tar, E005-M45/M49/M52/M53/M54 row-level artifacts, E003-M75 bridge artifact, `local_dataset/Open3DSG_bridge/`, and dataset manifests/raw data only if license permits.
+
+## Open3DSG Backup And Restore Checklist
+
+사실:
+
+This checklist is for moving the current `Open3DSG` route to another machine without depending on the current workstation state. Replace `<drive_root>` with the actual Google Drive mount or sync directory.
+
+### Backup Package Layout
+
+Recommended Drive layout:
+
+```text
+<drive_root>/TASMM_backup_20260522/
+  README_restore.md
+  manifest/
+  docker/
+  open3dsg/
+    checkpoints/
+    bridge/
+    artifacts/
+    optional_features/
+  datasets_optional/
+```
+
+### Priority A Backup Commands
+
+Create directories and checksum manifest:
+
+```bash
+BACKUP_ROOT=<drive_root>/TASMM_backup_20260522
+mkdir -p "$BACKUP_ROOT"/{manifest,docker,open3dsg/checkpoints,open3dsg/bridge,open3dsg/artifacts,datasets_optional}
+```
+
+Save the selected `Open3DSG` checkpoint:
+
+```bash
+rsync -av --partial \
+  /home/yoohyun/research/local_dataset/Open3DSG_staged/training_repro/mlops/opensg/mlflow/363094050435167554/2a23a9af581b4666a207423aa6217853/checkpoints/epoch=13-step=13104.ckpt \
+  "$BACKUP_ROOT/open3dsg/checkpoints/"
+
+sha256sum \
+  /home/yoohyun/research/local_dataset/Open3DSG_staged/training_repro/mlops/opensg/mlflow/363094050435167554/2a23a9af581b4666a207423aa6217853/checkpoints/epoch=13-step=13104.ckpt \
+  > "$BACKUP_ROOT/manifest/open3dsg_epoch13_ckpt.sha256"
+```
+
+Save the `Open3DSG` Docker image because this repo does not yet have a confirmed local build recipe for it:
+
+```bash
+docker save h001-open3dsg-repro:cu128 | gzip > "$BACKUP_ROOT/docker/h001-open3dsg-repro_cu128_20260522.tar.gz"
+sha256sum "$BACKUP_ROOT/docker/h001-open3dsg-repro_cu128_20260522.tar.gz" \
+  > "$BACKUP_ROOT/manifest/h001-open3dsg-repro_cu128_20260522.tar.gz.sha256"
+```
+
+Save `Open3DSG` bridge contracts and current paper-table row-level artifacts:
+
+```bash
+rsync -av --partial /home/yoohyun/research2/local_dataset/Open3DSG_bridge/ \
+  "$BACKUP_ROOT/open3dsg/bridge/Open3DSG_bridge/"
+
+rsync -av --partial \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M45_conceptgraphs_heldout_metric_contract_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M45_conceptgraphs_heldout_query_metric_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M49_conceptgraphs_full_heldout_aggregation_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M51_h001_heldout_policy_replay_contract_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M52_h001_heldout_policy_replay_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M53_paired_failure_table_decision_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M54_paper_table_claim_ledger_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M56_robustness_denominator_open3dsg_audit_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M57_open3dsg_output_schema_contract_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M58_object_candidate_export_plan_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M60_open3dsg_query_conversion_contract_v0 \
+  "$BACKUP_ROOT/open3dsg/artifacts/"
+
+rsync -av --partial \
+  /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0 \
+  "$BACKUP_ROOT/open3dsg/artifacts/"
+```
+
+Save optional raw data only if the dataset license permits private Drive storage:
+
+```bash
+rsync -av --partial /home/yoohyun/research2/local_dataset/3RScan "$BACKUP_ROOT/datasets_optional/"
+rsync -av --partial /home/yoohyun/research2/local_dataset/3DSSG "$BACKUP_ROOT/datasets_optional/"
+rsync -av --partial /home/yoohyun/research2/local_dataset/3DSSG_subset "$BACKUP_ROOT/datasets_optional/"
+```
+
+### Priority B Optional Backup Commands
+
+Use these only when Drive space is acceptable. They are large or lower priority.
+
+```bash
+mkdir -p "$BACKUP_ROOT/open3dsg/optional_features"
+
+rsync -av --partial \
+  /home/yoohyun/research/local_dataset/Open3DSG_staged/h001_runtime/output/features/clip_features_h001_eval_blip_top5_scales3 \
+  "$BACKUP_ROOT/open3dsg/optional_features/"
+
+rsync -av --partial \
+  /home/yoohyun/research/local_dataset/Open3DSG_staged/training_repro/output/features/clip_features_h001_official_blip_top5_scales3 \
+  "$BACKUP_ROOT/open3dsg/optional_features/"
+
+rsync -av --partial \
+  /home/yoohyun/research/local_dataset/Open3DSG_staged/h001_runtime/output/checkpoints \
+  "$BACKUP_ROOT/open3dsg/"
+```
+
+Optional Docker image caches:
+
+```bash
+docker save research2/conceptgraphs-smoke:latest | gzip > "$BACKUP_ROOT/docker/research2_conceptgraphs-smoke_latest_20260522.tar.gz"
+docker save research2/real-smoke:latest | gzip > "$BACKUP_ROOT/docker/research2_real-smoke_latest_20260522.tar.gz"
+```
+
+### Restore Order On A New Machine
+
+1. Clone the repo and enter it.
+
+```bash
+git clone https://github.com/Kim-Yoo-Hyun/TASMM.git /home/yoohyun/research2
+cd /home/yoohyun/research2
+```
+
+2. Restore local datasets if they were backed up and license permits.
+
+```bash
+mkdir -p /home/yoohyun/research2/local_dataset
+rsync -av --partial "$BACKUP_ROOT/datasets_optional/3RScan" /home/yoohyun/research2/local_dataset/
+rsync -av --partial "$BACKUP_ROOT/datasets_optional/3DSSG" /home/yoohyun/research2/local_dataset/
+rsync -av --partial "$BACKUP_ROOT/datasets_optional/3DSSG_subset" /home/yoohyun/research2/local_dataset/
+```
+
+3. Restore the external read-only `Open3DSG_staged` source location. Keep derived outputs under `research2/local_dataset/Open3DSG_bridge/`, not inside this source path.
+
+```bash
+mkdir -p /home/yoohyun/research/local_dataset/Open3DSG_staged/training_repro/mlops/opensg/mlflow/363094050435167554/2a23a9af581b4666a207423aa6217853/checkpoints
+rsync -av --partial "$BACKUP_ROOT/open3dsg/checkpoints/" \
+  /home/yoohyun/research/local_dataset/Open3DSG_staged/training_repro/mlops/opensg/mlflow/363094050435167554/2a23a9af581b4666a207423aa6217853/checkpoints/
+```
+
+If the full `Open3DSG_staged` tree was preserved elsewhere, restore it to:
+
+```text
+/home/yoohyun/research/local_dataset/Open3DSG_staged
+```
+
+4. Restore bridge contracts and artifacts.
+
+```bash
+mkdir -p /home/yoohyun/research2/local_dataset/Open3DSG_bridge
+rsync -av --partial "$BACKUP_ROOT/open3dsg/bridge/Open3DSG_bridge/" \
+  /home/yoohyun/research2/local_dataset/Open3DSG_bridge/
+
+mkdir -p /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts
+rsync -av --partial "$BACKUP_ROOT/open3dsg/artifacts/" \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/
+```
+
+5. Load Docker images.
+
+```bash
+gunzip -c "$BACKUP_ROOT/docker/h001-open3dsg-repro_cu128_20260522.tar.gz" | docker load
+docker image inspect h001-open3dsg-repro:cu128
+```
+
+6. Verify the restored state.
+
+```bash
+test -f /home/yoohyun/research/local_dataset/Open3DSG_staged/training_repro/mlops/opensg/mlflow/363094050435167554/2a23a9af581b4666a207423aa6217853/checkpoints/epoch=13-step=13104.ckpt
+docker image inspect h001-open3dsg-repro:cu128 >/dev/null
+python experiments/E005_external_baseline_transition/tools/verify_m58_open3dsg_object_candidate_export.py
+python experiments/E005_external_baseline_transition/tools/plan_m60_open3dsg_query_conversion_contract.py
+python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_query_conversion_contract.py
+```
+
+Expected current verification status before M59 succeeds:
+
+```text
+e005_m60_open3dsg_query_conversion_contract_ready_waiting_m59_rows
+```
+
+7. Resume the active experiment only after the above checks pass.
+
+```bash
+python experiments/E005_external_baseline_transition/tools/launch_m59_open3dsg_object_export_smoke.py --launch
+python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_object_export_smoke.py --require-ready
+```
+
+### Restore Failure Triage
+
+| Failure | Likely cause | Action |
+| --- | --- | --- |
+| `docker image inspect h001-open3dsg-repro:cu128` fails | Image tar was not restored or tag differs | Run `docker images`, reload tar, retag only if the image id matches the saved image |
+| `verify_m58...` reports missing checkpoint | `Open3DSG_staged` checkpoint path incomplete | Restore checkpoint to the exact path above or update M58/M59 contracts intentionally |
+| M60 verifier waits for M59 rows | Expected state before M59 relaunch | Not a failure; relaunch M59 when GPU memory is available |
+| M60 verifier fails denominator row count | E005-M45 contract artifacts missing | Restore `E005-M45_conceptgraphs_heldout_query_metric_v0` and related M45 contract artifacts or regenerate them |
+| M59 writes rows but M60 still waits | Candidate file path mismatch | Check `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/open3dsg_object_candidates.jsonl` |
+
+사용자 판단 필요:
+
+- Decide whether to include the 13 GB eval feature directory in the default Drive package. It is optional but useful if E005-M59/M60 continues on another machine.
+- Decide whether to include the 131 GB official feature directory. It is not recommended unless Drive capacity is not a concern.

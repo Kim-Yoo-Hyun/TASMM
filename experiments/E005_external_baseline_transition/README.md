@@ -1,10 +1,37 @@
 # E005 External Baseline Transition
 
-Updated: 2026-05-21
+Updated: 2026-05-22
 
 ## Status
 
-`E005-M01` through `E005-M58` are complete through 4-scan scale decision, pending-scan runtime verification, staging/permission repair, 4-scan candidate/query metric conversion, failure/claim-boundary analysis, external baseline next-route decision, heldout/scale contract planning, heldout sequence acquisition/staging launch, heldout sequence staging verification, heldout runtime preflight, heldout staged-layout materialization, all `heldout_b01/b02/b03` runtime completion verification, all heldout query-metric conversion, full 9-scan heldout aggregation, H001-vs-`ConceptGraphs` comparison readiness gate, H001 heldout replay contract, H001 heldout policy replay, paired failure analysis / paper-table decision, paper-table claim ledger / method claim rewrite, real RGB-D/open-vocabulary robustness expansion gate, robustness denominator + `Open3DSG` source/interface audit, `Open3DSG` output schema / query-conversion contract, and `Open3DSG` object-candidate export smoke plan. E005-M59 `Open3DSG` object-candidate export smoke launched but failed on CUDA OOM during `InstructBLIP` checkpoint loading. The selected repair route is a lower-memory object-only export patch, not a blind GPU-exclusive relaunch. The selected first external baseline route was `DualMap`; the backup route is `ConceptGraphs`. `DualMap` Dataset Mode staging, Docker bootstrap, cache-fixed detector initialization, and one-scan runtime completion are verified, but M14/M17 produce `layout.pcd` / timing files without object `*.pkl` outputs. `ConceptGraphs` is now the active external mapping baseline route. Full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M52 replays H001 on the same `M38` query contract: H001 `task_context_memory_trust_reobserve_v0` is 172 / 195 = 0.882051, `static_memory_only_v0` is 141 / 195 = 0.723077, and `context_agnostic_memory_trust_reobserve_v0` is 171 / 195 = 0.876923. E005-M56 fixes the two-table robustness denominator and audits `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only. E005-M57 stores derived schema/contract results under `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`; relation raw dump and feature/checkpoint route are feasible. E005-M58 stores the object-candidate export schema, read-only Docker command contract, and verifier under the same bridge root. E005-M59 used local runtime patching under `research2`, kept `Open3DSG_staged` mounted read-only, and targeted `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`. As of 2026-05-21 04:59 KST, lower-memory patch is implemented, source modified is false, no candidate rows have been written, and relaunch is waiting for GPU free memory >= 24GB. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+`E005-M01` through `E005-M60` are complete through 4-scan scale decision, heldout `ConceptGraphs` runtime/query conversion, full 9-scan aggregation, H001 heldout replay, paper-table claim ledger, real RGB-D/open-vocabulary robustness gate, `Open3DSG` source/schema/object-candidate contracts, and `Open3DSG` query-level conversion contract. E005-M59 `Open3DSG` object-candidate export smoke launched but failed on CUDA OOM during `InstructBLIP` checkpoint loading. The selected repair route is a lower-memory object-only export patch, not a blind GPU-exclusive relaunch. `ConceptGraphs` is the active external mapping baseline route: full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M52 replays H001 on the same `M38` query contract: H001 `task_context_memory_trust_reobserve_v0` is 172 / 195 = 0.882051, `static_memory_only_v0` is 141 / 195 = 0.723077, and `context_agnostic_memory_trust_reobserve_v0` is 171 / 195 = 0.876923. E005-M60 fixes how future `Open3DSG` candidate rows will join the 195-row M38/M45 denominator and which strict bbox, relaxed bbox, strict center, `ExpectedSearchCost`, and `AttemptSPL` proxy metrics will be reported. As of 2026-05-22 00:21 KST, M60 is contract-ready but waits for M59 candidate rows; `Open3DSG` query-level performance claim remains false. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+
+## E005-M60 Open3DSG Query Conversion Contract
+
+사실:
+
+- Status: `e005_m60_open3dsg_query_conversion_contract_ready_waiting_m59_rows`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M60_open3dsg_query_conversion_contract_v0/`.
+- Data output: `local_dataset/Open3DSG_bridge/E005-M60_query_conversion_contract_v0/`.
+- Verification: `python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_query_conversion_contract.py`.
+- M58 object schema: `open3dsg_object_candidate_jsonl_v0`.
+- M58 query schema: `open3dsg_query_candidate_jsonl_v0`.
+- M38/M45 denominator rows: 195 / 195.
+- M59 object candidate rows: 0.
+- Join rule: `scan_id == current_rescan_id`, normalized `candidate_label == label_canonical`, rank by `Open3DSG` `candidate_score`.
+- Leakage rule: do not use `target_uid`, `object_instance_id_rescan`, GT labels, `id2name`, or candidate-is-target fields before ranking.
+- Planned policies: `open3dsg_objects_probs_bbox_strict_top5_v0`, `open3dsg_objects_probs_bbox_relaxed_1m_top3_v0`, `open3dsg_objects_probs_center_strict_top5_v0`.
+- Planned metrics: target detected rate, query bridge success rate, target rank, `ExpectedSearchCost`, `AttemptSPL` proxy, old-location dead-end avoidance, failure classes.
+
+논문 주장:
+
+- M60 only supports a contract claim: the `Open3DSG` query-level conversion path is specified.
+- It does not establish `Open3DSG` performance until M59 writes object-candidate rows and M60 conversion is executed.
+
+에이전트 추론:
+
+- This removes a downstream ambiguity: once M59 succeeds, `Open3DSG` can be converted under the same 195-row M38 proxy-search denominator as `ConceptGraphs` and H001 replay.
+- The next dependent action remains M59 relaunch.
 
 ## E005-M59 Open3DSG Object Candidate Export Smoke
 

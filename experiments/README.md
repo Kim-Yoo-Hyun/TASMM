@@ -1,6 +1,6 @@
 # Experiments
 
-Updated: 2026-05-21
+Updated: 2026-05-22
 
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
@@ -8,7 +8,7 @@ Updated: 2026-05-21
 
 ## Status
 
-Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, and E005-M01 through E005-M58 are complete/verified with constraints. E005-M59 `Open3DSG` object-candidate export smoke was launched and failed on CUDA OOM while loading `InstructBLIP`; the selected repair is a lower-memory object-only patch plus a 24GB GPU preflight. E003 has Dockerized real-detector diagnostics and expanded direct current-rescan metrics for 96 query rows over 4 RGB-D-ready current rescans. E004 evaluates `task_context_memory_trust_reobserve_v0` and supports the memory-trust decision claim with limited task-context-specific strength. E005 selected `DualMap` first, then moved to `ConceptGraphs` after faithful `DualMap` object-map outputs were missing. `ConceptGraphs` now has full 9-scan heldout query-level conversion: strict bbox top5 114 / 195 = 0.584615, relaxed bbox 1m top3 144 / 195 = 0.738462. H001 replay on the same `M38` contract gives 172 / 195 = 0.882051. E005-M56 fixes the robustness denominator split and audits `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only as the next external map/scene-graph baseline route. E005-M57 stores derived schema/contract outputs under `local_dataset/Open3DSG_bridge/`; E005-M58 fixes the object-candidate export schema, read-only Docker command contract, and verifier. E005-M59 used tmux session `e005_m59_open3dsg_object_export`, log `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, and output path `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`. As of 2026-05-21 04:59 KST, candidate rows are not written, latest GPU free memory is 16,839 MiB, and `Open3DSG` still cannot be used as a query-level object-search baseline. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, and E005-M01 through E005-M60 are complete/verified with constraints, except that E005-M59 still needs a successful lower-memory relaunch. E003 has Dockerized real-detector diagnostics and expanded direct current-rescan metrics for 96 query rows over 4 RGB-D-ready current rescans. E004 evaluates `task_context_memory_trust_reobserve_v0` and supports the memory-trust decision claim with limited task-context-specific strength. E005 selected `DualMap` first, then moved to `ConceptGraphs` after faithful `DualMap` object-map outputs were missing. `ConceptGraphs` now has full 9-scan heldout query-level conversion: strict bbox top5 114 / 195 = 0.584615, relaxed bbox 1m top3 144 / 195 = 0.738462. H001 replay on the same `M38` contract gives 172 / 195 = 0.882051. E005-M56 fixes the robustness denominator split and audits `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only as the next external map/scene-graph baseline route. E005-M57/M58 store derived schema/export contract outputs under `local_dataset/Open3DSG_bridge/`. E005-M59 launched once and failed on CUDA OOM while loading `InstructBLIP`; the selected repair is a lower-memory object-only patch plus a 24GB GPU preflight. E005-M60 pre-commits `Open3DSG` query conversion rules over the same 195-row M38/M45 denominator before M59 rows exist. `Open3DSG` still cannot be used as a query-level object-search baseline until M59 writes candidate rows and M60 conversion runs. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
 
 ## Active Experiment
 
@@ -18,7 +18,7 @@ Main experiment implementation stage has started. E001-M01 through E001-M05, E00
 | E002 | M01-M09 path-cost artifacts ready | [E002_path_cost_bridge](E002_path_cost_bridge/README.md) | Input to E003 |
 | E003 | M00-M75 query bridge ready | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Input to E004 |
 | E004 | M01-M05 ready with constraints | [E004_task_context_memory_trust](E004_task_context_memory_trust/README.md) | Input to E005 |
-| E005 | M01-M58 ready with constraints; M59 lower-memory repair ready | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Relaunch E005-M59 when GPU free memory is >= 24GB |
+| E005 | M01-M60 ready with constraints; M59 lower-memory relaunch pending | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Relaunch E005-M59 when GPU free memory is >= 24GB, then run M60 conversion |
 
 ## 사실
 
@@ -314,6 +314,12 @@ Main experiment implementation stage has started. E001-M01 through E001-M05, E00
 - E005-M22 finds `ConceptGraphs` repo, `Grounded-Segment-Anything` repo, `research2/conceptgraphs-smoke:latest`, and `groundingdino_swint_ogc.pth` are not ready yet.
 - E005-M23 launches tmux `e005_m23_conceptgraphs_acquisition`, log `logs/20260514_165555_e005_m23_conceptgraphs_acquisition.log`.
 - E005-M24 verifies acquisition complete: `ConceptGraphs` head matched, `GSA` head matched, SAM symlinks ready, `groundingdino_swint_ogc.pth` ready 693,997,677 bytes.
+- E005-M49 aggregates full 9-scan heldout `ConceptGraphs` metrics: strict bbox top5 114 / 195 and relaxed bbox 1m top3 144 / 195.
+- E005-M52 replays H001 on the same M38 heldout query contract: H001 172 / 195, static memory 141 / 195, context-agnostic memory trust 171 / 195.
+- E005-M56 fixes the two-table denominator: proxy-search external map 195 rows and real RGB-D proposal bridge 96 rows.
+- E005-M57/M58 fix the `Open3DSG` schema/export contract while keeping `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only and writing derived outputs to `local_dataset/Open3DSG_bridge/`.
+- E005-M59 fails once on CUDA OOM during `InstructBLIP` loading; lower-memory object-only relaunch is pending GPU free memory >= 24GB.
+- E005-M60 fixes the future `Open3DSG` query-level conversion contract over the 195-row M38/M45 denominator, but no `Open3DSG` performance result exists until M59 writes candidate rows.
 
 ## 논문 주장
 
@@ -331,8 +337,8 @@ Non-claims:
 
 ## 에이전트 추론
 
-E005 now shows that `DualMap` can execute on the staged `3RScan` adapter, but the current route does not produce object-map `*.pkl` outputs. `ConceptGraphs` is the active external mapping baseline route and now has full 9-scan heldout query-level aggregation. `Open3DSG` is the next second external map/scene-graph route, but M59 still needs object-candidate rows before any query-level comparison.
+E005 now shows that `DualMap` can execute on the staged `3RScan` adapter, but the current route does not produce object-map `*.pkl` outputs. `ConceptGraphs` is the active converted external mapping baseline route and now has full 9-scan heldout query-level aggregation plus H001 replay on the same query contract. `Open3DSG` is the next second external map/scene-graph route; M60 has fixed the query conversion contract, but M59 still needs object-candidate rows before any query-level comparison.
 
 ## 사용자 판단 필요
 
-Relaunch E005-M59 with the lower-memory object-only patch when GPU free memory is >= 24GB.
+Relaunch E005-M59 with the lower-memory object-only patch when GPU free memory is >= 24GB, then run E005-M60 query conversion if candidate rows are produced.

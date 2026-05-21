@@ -1,6 +1,6 @@
 # Research Summary
 
-Updated: 2026-05-21
+Updated: 2026-05-22
 
 이 문서는 `research2/`의 연구 방향, 배경, 가설, 현재 진행 상태, 남은 쟁점, 실험 계획을 간단히 정리한 working research report다. 세부 진행 로그는 `TODO.md`, `hypothesis/`, `experiments/`에 둔다.
 
@@ -16,21 +16,20 @@ Updated: 2026-05-21
 
 에이전트 추론:
 
-- 논문 중심은 "더 많은 semantic map 정보를 저장했다"가 아니라 "stale semantic memory를 task/search decision에서 언제 믿고, 언제 재관측하고, 어떤 후보를 먼저 방문할지 결정한다"에 두는 편이 강하다.
-- human intent는 당장 natural-language understanding claim이 아니라 memory trust, re-observation, search budget, candidate visit order를 바꾸는 structured task context로 다루는 것이 방어 가능하다.
+- 논문 중심은 "semantic map에 더 많은 정보를 저장했다"가 아니라 "stale semantic memory를 언제 믿고, 언제 재관측하고, 어떤 후보를 먼저 방문할지 결정한다"에 두는 편이 강하다.
+- human intent는 현재 natural-language understanding claim이 아니라 memory trust, re-observation, search budget, candidate visit order를 바꾸는 structured task context로 다루는 것이 방어 가능하다.
 
 ## Research Background
 
 사실:
 
 - 최근 semantic mapping, 3D scene graph, open-vocabulary mapping 연구는 RGB-D sequence, `3RScan`, `3DSSG`, VLM/LLM reasoning, open-vocabulary perception과 결합되고 있다.
-- 기존 연구는 map construction, object grounding, retrieval, 3D scene representation을 강화해 왔다.
 - Robotics 관점에서는 semantic map이 search, navigation, manipulation, instruction following 같은 downstream task의 행동 품질을 개선하는지가 중요하다.
 
 에이전트 추론:
 
 - dynamic object search/navigation에서는 stale memory, perception noise, path/search cost, task context가 동시에 작동한다.
-- top-tier를 목표로 하려면 map quality만이 아니라 decision quality, external baseline, failure boundary를 함께 보여야 한다.
+- top-tier를 목표로 하려면 map quality만이 아니라 decision quality, external baseline, heldout split, failure boundary를 함께 보여야 한다.
 
 ## Motivation
 
@@ -44,13 +43,13 @@ Updated: 2026-05-21
 논문 주장 후보:
 
 - task context는 stale semantic memory를 얼마나 신뢰할지, 언제 재관측할지, 어떤 후보 위치를 먼저 방문할지를 조절하는 condition이 될 수 있다.
-- stale memory와 noisy current observation을 함께 다루는 semantic mapping decision layer는 dynamic object search에서 `SR`, `ExpectedSearchCost`, `AttemptSPL`, stale old-location FP를 개선할 수 있다.
+- stale memory와 noisy current observation을 함께 다루는 semantic mapping decision layer는 dynamic object search에서 `ExpectedSearchCost`, `AttemptSPL`, stale old-location FP를 개선할 수 있다.
 
-## Limitation of Existing Work
+## Limitation Of Existing Work
 
 사실:
 
-- 많은 semantic mapping 연구는 map construction 또는 open-vocabulary retrieval 성능에 집중한다.
+- 많은 semantic mapping 연구는 map construction, open-vocabulary retrieval, object grounding 성능에 집중한다.
 - open-vocabulary mapping은 query flexibility를 제공하지만, 물체 이동 이후 old memory를 얼마나 신뢰해야 하는지까지 명확히 평가하지 않는 경우가 많다.
 - 3D scene graph 기반 reasoning은 object/relation 구조를 제공하지만, task-conditioned memory update와 search-cost decision을 직접 평가하는 benchmark는 약하다.
 
@@ -69,7 +68,7 @@ Updated: 2026-05-21
 
 논문 주장 후보:
 
-- `Task-Conditioned Stale Semantic Memory Update` should improve dynamic object search behavior over static memory, fixed top-k, detector-only, and naive path-aware policies.
+- `Task-Conditioned Stale Semantic Memory Update` should improve dynamic object search behavior over static memory, fixed top-k, detector-only, external open-vocabulary map baselines, and context-agnostic memory trust.
 - real navigation `SR` / `SPL`은 simulator/navmesh/trajectory execution이 붙기 전까지 claim하지 않는다.
 
 ## Core Hypothesis
@@ -83,7 +82,7 @@ Updated: 2026-05-21
 에이전트 추론:
 
 - 현재 가장 방어 가능한 핵심 claim은 "task/staleness-aware semantic memory decision"이다.
-- broader Direction B claim은 `ConceptGraphs` / `Open3DSG` / `HOV-SG` 같은 external mapping baselines, heldout transfer, and navigation/search-cost evidence가 더 붙어야 한다.
+- broader Direction B claim은 `ConceptGraphs`, `Open3DSG`, `HOV-SG` 같은 external mapping baselines, heldout transfer, navigation/search-cost evidence가 더 붙어야 한다.
 
 ## Proposed Framework
 
@@ -96,7 +95,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - Semantic Memory Store: object/category memory, old/current location, staleness/motion signal, source quality.
 - Task Context Conditioner: structured task context를 memory trust, re-observation priority, search budget에 반영.
 - Candidate Proposal Layer: annotation-proxy candidates와 real RGB-D/open-vocabulary proposals를 공통 schema로 정리.
-- Search Decision Layer: static memory, fixed top-k, task-conditioned budget, reachable-first policy, oracle upper bound를 비교.
+- Search Decision Layer: static memory, detector-confidence ranking, fixed top-k, task-conditioned budget, reachable-first policy, oracle upper bound를 비교.
 - Evaluation Layer: dynamic object search proxy, path/search-cost bridge, perception-noise robustness, external mapping baseline, failure analysis.
 
 ## Current Progress
@@ -106,54 +105,47 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - Hypothesis 단계는 `ready_with_constraints`로 main experiment 단계에 진입했다.
 - E001은 `3RScan` / `3DSSG` 기반 semantic-pair dynamic object search proxy를 구성했다.
 - E002는 path/search-cost bridge와 `occupancy_grid_astar_v0` proxy를 추가했다.
-- E003은 controlled perception/proposal noise와 Dockerized RGB-D/open-vocabulary proposal route를 구축했다.
-- E004는 `task_context_memory_trust_reobserve_v0`를 평가했고, memory-trust decision claim은 split stress에서 지지되지만 task-context-specific claim은 `limited_positive_not_label_broad`다.
-- E005는 external baseline transition 단계다. `DualMap`은 실행/staging은 됐지만 object `*.pkl` output을 만들지 못해 performance baseline으로는 아직 부적합하다.
-- `ConceptGraphs`는 source/interface audit, `3RScan` depth-aligned staging, repo/checkpoint acquisition, Docker image build, import smoke, one-scan runtime output verification, 4-scan metric conversion, heldout staging, and 9-scan heldout runtime/metric conversion을 통과했다.
-- E005-M35는 4개 staged scan의 `ConceptGraphs` object map을 query-level candidate/metric으로 변환했다. Primary `M60` 기준 strict bbox top5는 3/7, relaxed bbox 1m top3는 6/7이고, expanded `M73` 기준 strict bbox top5는 57/96이다.
-- E005-M38은 `ConceptGraphs` heldout/scale contract를 고정했다. Target scale은 13 scans / 291 eligible query rows이고, heldout split은 9 scans / 195 query rows다.
-- E005-M40은 9/9 heldout scans의 sequence staging을 검증했고, E005-M42는 9/9 heldout scans를 `ConceptGraphs` depth-aligned Scannet-style layout으로 materialize했다.
-- E005-M49는 all heldout `ConceptGraphs` metric을 집계했다. Full heldout strict bbox top5는 114/195 = 0.584615, relaxed bbox 1m top3는 144/195 = 0.738462이다.
-- E005-M50은 H001과 `ConceptGraphs`의 현재 query universe가 겹치지 않음을 확인했다. Aggregate side-by-side reporting은 가능하지만 paired superiority claim은 아직 불가하다.
-- E005-M51은 같은 `M38` heldout query contract에서 H001을 replay하기 위한 adapter contract를 생성했다. 195/195 query rows가 adapter-ready이고 issue는 0개다.
-- E005-M52는 같은 `M38` heldout query contract에서 H001 policy replay를 실행했다. H001은 172/195 = 0.882051, `ConceptGraphs` strict bbox top5는 114/195 = 0.584615, static memory는 141/195 = 0.723077, context-agnostic memory trust는 171/195 = 0.876923이다.
-- E005-M53은 paired failure analysis / paper-table decision을 완료했다. H001-vs-`ConceptGraphs` proxy-search claim과 H001-vs-static memory claim은 ready지만, task context as main claim은 not ready다.
-- E005-M54는 paper-table claim ledger / method claim rewrite를 완료했다. 현재 main claim은 memory trust, staleness handling, bounded re-observation이며, human task context는 secondary ablation으로만 둔다.
-- E005-M55는 real RGB-D/open-vocabulary robustness expansion gate를 완료했다.
-- E005-M56은 two-table robustness denominator contract와 `Open3DSG` source/interface audit을 완료했다. Table A는 proxy-search external map denominator 195 rows, Table B는 real RGB-D proposal bridge denominator 96 rows로 분리한다. `/home/yoohyun/research/local_dataset/Open3DSG_staged`는 read-only audit 가능하며 source, checkpoint, feature, existing eval artifact가 존재한다.
-- E005-M57은 `Open3DSG` output schema inspection / query-conversion contract를 완료했다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M57_output_schema_contract_v0/`에 저장했다. `Open3DSG` relation raw dump hook은 준비되어 있지만 object-search baseline에는 object candidate score export가 추가로 필요하다.
-- E005-M58은 `Open3DSG` object-candidate export schema, read-only Docker command contract, export hook contract, verifier를 완료했다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M58_object_candidate_export_plan_v0/`에 저장했다.
-- E005-M59는 `Open3DSG` one-batch object-candidate export smoke를 tmux background job으로 실행했지만, `InstructBLIP` checkpoint loading 중 CUDA OOM으로 실패했다. 이후 lower-memory object-only patch를 적용했다. 이 patch는 object candidate export에 불필요한 `InstructBLIP` loading과 relation captioning을 우회한다. Session은 `e005_m59_open3dsg_object_export`, log는 `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, output은 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`이다. 2026-05-21 04:59 KST 기준 candidate row는 생성되지 않았고, relaunch는 GPU free memory >= 24GB를 기다린다.
+- E003은 controlled perception/proposal noise와 Dockerized RGB-D/open-vocabulary proposal route를 구축했다. E003-M75는 96 query rows에서 target detected 87/96, bounded repair success 33/96을 보였지만 final real RGB-D/open-vocabulary robustness claim은 false다.
+- E004는 `task_context_memory_trust_reobserve_v0`를 평가했다. Memory-trust decision claim은 split stress에서 지지되지만 task-context-specific claim은 `limited_positive_not_label_broad`다.
+- E005는 external baseline transition 단계다. `DualMap`은 실행/staging은 됐지만 object `*.pkl` output을 만들지 못해 performance baseline으로는 부적합하다.
+- `ConceptGraphs`는 full 9-scan heldout query-level conversion을 통과했다. Strict bbox top5는 114/195 = 0.584615, relaxed bbox 1m top3는 144/195 = 0.738462이다.
+- H001 replay on the same `M38` query contract gives H001 172/195 = 0.882051, static memory 141/195 = 0.723077, and context-agnostic memory trust 171/195 = 0.876923.
+- E005-M56은 two-table robustness denominator를 고정했다. Table A는 proxy-search external map denominator 195 rows, Table B는 real RGB-D proposal bridge denominator 96 rows다.
+- `/home/yoohyun/research/local_dataset/Open3DSG_staged`는 read-only source로만 사용하고, 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`에 저장한다.
+- E005-M57/M58은 `Open3DSG` schema/export contract를 완료했다.
+- E005-M59는 one-batch object-candidate export smoke를 실행했지만 CUDA OOM으로 실패했다. Lower-memory object-only patch는 적용되었고, relaunch는 GPU free memory >= 24GB를 기다린다.
+- E005-M60은 `Open3DSG` query-level conversion contract를 M38/M45 195-row denominator 기준으로 선작성했다. M59 candidate rows가 0개이므로 아직 `Open3DSG` performance claim은 없다.
+- `docs/reproducibility.md`에는 데이터 위치, checkpoint/Docker 보존 후보, Drive backup/restore checklist, 재현 명령, artifact/evaluation 요약을 정리했다.
+- `experiments/report.md`와 `docs/paper.md`에는 M60 기준 reviewer defense와 claim-evidence ledger를 반영했다.
 
 논문 주장:
 
-- 현재까지는 `DualMap` performance claim, final real RGB-D/open-vocabulary robustness claim, deployable search policy claim, real navigation `SR` / `SPL` claim을 하지 않는다.
-- 현재 방어 가능한 claim은 controlled/proxy setting에서의 task/staleness-aware memory decision과 그 failure boundary다.
+- 현재 방어 가능한 claim은 controlled/proxy setting에서의 task/staleness-aware memory decision과 `ConceptGraphs` 대비 proxy-search comparison이다.
+- `DualMap` performance claim, `Open3DSG` performance claim, final real RGB-D/open-vocabulary robustness claim, deployable search policy claim, real navigation `SR` / `SPL` claim은 아직 하지 않는다.
 
 ## Remaining Issues
 
 사실:
 
-- H001은 `ConceptGraphs` 대비 paired query-level gain을 보였지만, context-agnostic memory trust 대비 gain은 1 row로 좁다. 따라서 human task context는 현재 main contribution이 아니라 secondary ablation으로만 다룬다.
-- `DualMap`은 object-map output 부재 때문에 아직 external baseline result로 사용 불가하다.
-- `OpenMask3D`는 checkpoint는 준비됐지만 local Docker/MinkowskiEngine build blocker가 있다.
-- `Open3DSG`는 staged source/interface audit, output schema contract, object-candidate export plan은 통과했지만 one-batch export가 CUDA OOM으로 실패했다. Object candidate row가 아직 없어 H001 query-level output conversion이 완료되지 않았다.
+- H001은 `ConceptGraphs`와 static memory 대비 개선을 보였지만, context-agnostic memory trust 대비 gain은 1 row로 좁다. 따라서 human task context는 현재 main contribution이 아니라 secondary ablation이다.
+- `Open3DSG`는 source/interface/schema/query-conversion contract는 준비됐지만 M59 object candidate row가 아직 없어 query-level metric을 만들 수 없다.
+- `OpenMask3D`는 checkpoint는 준비됐지만 local Docker/`MinkowskiEngine` build blocker가 있다.
 - real RGB-D/open-vocabulary proposal route는 false-positive load와 heldout label/scan transfer 문제가 남아 있다.
-- real navigation `SR` / `SPL`은 아직 simulator, navmesh, trajectory execution source가 없다.
-- task-context-specific effect는 좁고 label-broad하지 않다.
+- real navigation `SR` / `SPL`은 simulator, navmesh, trajectory execution source가 아직 없다.
 
 에이전트 추론:
 
-- 다음 방어 포인트는 "왜 detector 성능이 아니라 semantic memory decision contribution인가"를 명확히 분리하는 것이다.
-- top-tier 가능성을 높이려면 external baseline, heldout split, real proposal robustness, search/navigation bridge를 체계적으로 보강해야 한다.
+- 다음 방어 포인트는 "detector 성능 개선"과 "semantic memory decision contribution"을 분리하는 것이다.
+- Top-tier 가능성을 높이려면 `ConceptGraphs` 외에 `Open3DSG`/`HOV-SG` 같은 second external route, real RGB-D proposal robustness, downstream search/navigation bridge를 더 보강해야 한다.
 
 ## Experiment Plan
 
 사실:
 
-- Immediate next unit: relaunch `E005-M59 Open3DSG object-candidate export hook implementation / one-batch Docker smoke` with the lower-memory object-only patch when GPU free memory is >= 24GB.
-- Keep strict 0.5m, relaxed 1.0m, and center-localization metrics separate when scaling the external baseline table.
-- After `ConceptGraphs` scale, use `Open3DSG` as the next external map/scene-graph route only after object candidate export and query-level conversion pass.
+- Immediate next unit: GPU free memory >= 24GB일 때 `E005-M59 Open3DSG object-candidate export hook implementation / one-batch Docker smoke`를 lower-memory object-only patch로 relaunch한다.
+- M59가 candidate rows를 생성하면 E005-M60 query conversion implementation/run을 진행한다.
+- Strict 0.5m, relaxed 1.0m, center-localization metrics는 external baseline table에서 분리해 유지한다.
+- Docker는 논문 본문용 실제 구현 실험의 기본 실행 환경이다.
 
 논문 주장 후보:
 
@@ -164,4 +156,4 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 
 사용자 판단 필요:
 
-- 중간 투고는 focused semantic memory decision paper로 먼저 고정할지, broader mapping-navigation system paper까지 확장할지 evidence가 쌓인 뒤 결정한다.
+- 중간 투고는 focused semantic memory decision paper로 먼저 고정할지, broader mapping-navigation system paper까지 확장할지 evidence가 더 쌓인 뒤 결정한다.
