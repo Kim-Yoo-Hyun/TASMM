@@ -1,23 +1,332 @@
 # E005 External Baseline Transition
 
-Updated: 2026-05-22
+Updated: 2026-05-25
 
 ## Status
 
-`E005-M01` through `E005-M60` are complete through 4-scan scale decision, heldout `ConceptGraphs` runtime/query conversion, full 9-scan aggregation, H001 heldout replay, paper-table claim ledger, real RGB-D/open-vocabulary robustness gate, `Open3DSG` source/schema/object-candidate contracts, and `Open3DSG` query-level conversion contract. E005-M59 `Open3DSG` object-candidate export smoke launched but failed on CUDA OOM during `InstructBLIP` checkpoint loading. The selected repair route is a lower-memory object-only export patch, not a blind GPU-exclusive relaunch. `ConceptGraphs` is the active external mapping baseline route: full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M52 replays H001 on the same `M38` query contract: H001 `task_context_memory_trust_reobserve_v0` is 172 / 195 = 0.882051, `static_memory_only_v0` is 141 / 195 = 0.723077, and `context_agnostic_memory_trust_reobserve_v0` is 171 / 195 = 0.876923. E005-M60 fixes how future `Open3DSG` candidate rows will join the 195-row M38/M45 denominator and which strict bbox, relaxed bbox, strict center, `ExpectedSearchCost`, and `AttemptSPL` proxy metrics will be reported. As of 2026-05-22 00:21 KST, M60 is contract-ready but waits for M59 candidate rows; `Open3DSG` query-level performance claim remains false. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+`E005-M01` through `E005-M71` are complete through 4-scan scale decision, heldout `ConceptGraphs` runtime/query conversion, full 9-scan aggregation, H001 heldout replay, paper-table claim ledger, real RGB-D/open-vocabulary robustness gate, `Open3DSG` source/schema/object-candidate contracts, denominator-aligned `Open3DSG` export, corrected query conversion, route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge planning, and `heldout_b01` detector query-level conversion. `ConceptGraphs` is the active positive external mapping baseline route: full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M52 replays H001 on the same `M38` query contract: H001 `task_context_memory_trust_reobserve_v0` is 172 / 195 = 0.882051, `static_memory_only_v0` is 141 / 195 = 0.723077, and `context_agnostic_memory_trust_reobserve_v0` is 171 / 195 = 0.876923. E005-M64 verifies the bounded predicted-vocabulary adapter policy leakage-safely: strict bbox top5 144 / 195 = 0.738462 and relaxed bbox 1m top3 147 / 195 = 0.753846. E005-M71 converts `heldout_b01` real proposals into query-level metrics: target detected 54 / 66, real detector task-budget 8 / 66, real detector top5 21 / 66, static memory 45 / 66, context-agnostic memory trust 48 / 66, H001 real memory-trust 48 / 66, and `ConceptGraphs` b01 45 / 66. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+
+## E005-M71 Real Proposal Query Metrics
+
+사실:
+
+- Status: `e005_m71_real_proposal_query_metric_ready_with_false_positive_boundary`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M71_real_proposal_query_metric_v0/heldout_b01/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal_query_metrics.py --batch-id heldout_b01`.
+- Query rows: 66.
+- Unique targets: 22.
+- Query target detected: 54 / 66 = 0.818182.
+- Mean target rank when detected: 8.777778.
+- Mean false positives before target when detected: 7.777778.
+- `real_detector_task_budget_v0`: 8 / 66 = 0.121212.
+- `real_detector_confidence_top5_v0`: 21 / 66 = 0.318182.
+- `real_static_memory_only_v0`: 45 / 66 = 0.681818.
+- `real_context_agnostic_memory_trust_reobserve_v0`: 48 / 66 = 0.727273.
+- `real_task_context_memory_trust_reobserve_v0`: 48 / 66 = 0.727273.
+- `ConceptGraphs` same-batch strict bbox top5: 45 / 66 = 0.681818.
+- Selected next route: `launch_remaining_batches_after_recording_false_positive_boundary`.
+
+논문 주장:
+
+- M71 supports a `heldout_b01` query-level diagnostic for real RGB-D/open-vocabulary proposals.
+- M71 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, real navigation `SR` / `SPL`, or human task-context main contribution.
+
+에이전트 추론:
+
+- Remaining batches are worth launching because target detection is usable and H001 memory trust beats real detector-only baselines on this batch.
+- The context-specific part of H001 is still weak: H001 and context-agnostic memory trust both reach 48 / 66, while H001 has higher mean `ExpectedSearchCost`.
+
+## E005-M70 Full-Denominator Detector Verification
+
+사실:
+
+- Status: `e005_m70_real_proposal_detector_batch_ready_with_false_positive_load`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M70_full_denominator_real_proposal_detector_verification_v0/heldout_b01/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b01 --require-ready`.
+- Batch: `heldout_b01`.
+- Expected files ready: 12 / 12.
+- Prediction rows: 261.
+- Pre-cap candidate rows: 5,310.
+- Matched targets: 18 / 22.
+- Scan target recall smoke: 0.8181818181818182.
+- Proposal precision smoke: 0.06896551724137931.
+- False-positive proposal rate smoke: 0.9310344827586207.
+- Mean matched centroid error: 0.5892226111111111m.
+- Next recommended unit: `E005-M71 heldout_b01 real proposal query-level metric conversion`.
+
+논문 주장:
+
+- M70 supports detector completion and schema/matching readiness for `heldout_b01`.
+- M70 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The detector output is ready for query-level conversion, but the high false-positive rate makes rank/budget/search-cost evaluation mandatory before launching further batches as paper evidence.
+
+## E005-M69 Full-Denominator Detector Launch
+
+사실:
+
+- Status: `e005_m69_real_proposal_detector_job_launched`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M69_full_denominator_real_proposal_detector_launch_v0/heldout_b01/`.
+- Batch: `heldout_b01`.
+- tmux session: `e005_m69_real_proposal_heldout_b01`.
+- Log: `logs/20260524_004619_e005_m69_real_proposal_heldout_b01.log`.
+- Working directory: `/home/yoohyun/research2`.
+- Input dir: `experiments/E005_external_baseline_transition/artifacts/E005-M68_full_denominator_real_proposal_bridge_plan_v0/batches/heldout_b01/`.
+- Output dir: `experiments/E005_external_baseline_transition/artifacts/E005-M69_full_denominator_real_proposal_detector_run_v0/heldout_b01/`.
+- Expected files: `coverage.json`, `container_output/real_proposals.jsonl`, `matching/coverage.json`, `validator/coverage.json`.
+- Next recommended unit: `E005-M70 full-denominator real proposal detector completion verification`.
+
+논문 주장:
+
+- M69 is a launch event, not a performance result.
+- Final real RGB-D/open-vocabulary robustness remains blocked until detector completion and query-level metric conversion.
+
+## E005-M68 Full-Denominator Real Proposal Bridge
+
+사실:
+
+- Status: `e005_m68_full_denominator_real_proposal_bridge_plan_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M68_full_denominator_real_proposal_bridge_plan_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m68_full_denominator_real_proposal_bridge.py`.
+- Query rows: 195.
+- Ready scans: 9 / 9.
+- Object targets: 65.
+- Prompt labels: 22.
+- Sampled frames: 214.
+- Batches: `heldout_b01` 66 rows, `heldout_b02` 69 rows, `heldout_b03` 60 rows.
+- Row-level overlap with E003-M75: 0.
+- Next recommended unit: `E005-M69 full-denominator real proposal detector batch launch`.
+
+논문 주장:
+
+- M68 is input materialization and command planning, not a robustness result.
+- Final real RGB-D/open-vocabulary robustness remains blocked until detector execution and query-level metric conversion are complete.
+- Real navigation `SR` / `SPL` remains blocked.
+
+에이전트 추론:
+
+- Because E003-M75 has 0 row-level overlap with the M38/M45 heldout denominator, the full 195-row real-proposal denominator must be executed rather than partially reused.
+- Running by heldout batch is more operationally reliable than a single 9-scan detector run.
+
+## E005-M67 Real RGB-D / Open-Vocabulary Robustness Route
+
+사실:
+
+- Status: `e005_m67_real_rgbd_ov_robustness_route_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M67_real_rgbd_ov_robustness_route_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m67_real_rgbd_ov_robustness_route.py`.
+- Selected route: `scale_real_proposal_bridge_to_m38_heldout_denominator`.
+- M38/M45 heldout denominator: 195 query rows, 9 scans, 65 target rows.
+- Current E003-M75 real-proposal bridge: 96 query rows, target detected 87 rows, bounded repair success 33 rows.
+- Denominator mismatch: 99 query rows.
+- Next recommended unit: `E005-M68 full-denominator real RGB-D proposal bridge plan`.
+
+논문 주장:
+
+- M67 does not add a performance claim. It selects the route needed before claiming final real RGB-D/open-vocabulary robustness.
+- Final real RGB-D/open-vocabulary robustness remains blocked until the scaled denominator is executed and evaluated.
+- Real navigation `SR` / `SPL` remains blocked until a simulator/navmesh/trajectory protocol exists.
+
+에이전트 추론:
+
+- Scaling the real-proposal bridge to the M38/M45 denominator is more valuable now than starting `OpenMask3D`, `HOV-SG`, or real navigation, because it attacks the biggest reviewer weakness in the current evidence table.
+- Human intent should remain secondary because M66 found only 1 task-context-specific gain row.
+
+## E005-M66 External Baseline Failure Boundary
+
+사실:
+
+- Status: `e005_m66_external_baseline_failure_boundary_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M66_external_baseline_failure_boundary_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/analyze_m66_external_baseline_failure_boundary.py`.
+- Query rows: 195.
+- H001 vs `ConceptGraphs`: both_success 112, H001-only 60, `ConceptGraphs`-only 2, both_fail 21.
+- H001 vs `Open3DSG` predicted-vocabulary adapter: both_success 133, H001-only 39, `Open3DSG`-only 11, both_fail 12.
+- `Open3DSG` predicted-vocabulary vs primary-label adapter: both_success 78, vocab-only 66, primary-only 3, both_fail 48.
+- Human intent boundary: no task-context-specific difference 194, task-context-specific gain 1.
+
+논문 주장:
+
+- M66 supports a proxy-search failure-boundary claim, not final real RGB-D/open-vocabulary robustness.
+- `Open3DSG` predicted-vocabulary adapter is a bounded vocabulary-mismatch repair, not a method contribution.
+- Human intent remains a structured task-context ablation, not the main claim.
+
+에이전트 추론:
+
+- The table boundary is now strong enough to move to real RGB-D/open-vocabulary robustness route planning.
+- Real navigation `SR` / `SPL` should still wait until the robustness bridge has a stable denominator and baseline set.
+
+## E005-M65 Open3DSG Table Integration
+
+사실:
+
+- Status: `e005_m65_open3dsg_table_integration_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M65_open3dsg_table_integration_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m65_open3dsg_table_integration.py`.
+- H001: 172 / 195.
+- `Open3DSG` predicted-vocabulary adapter: 144 / 195.
+- `Open3DSG` primary-label adapter: 81 / 195.
+- `ConceptGraphs`: 114 / 195.
+- `Open3DSG` predicted-vocabulary adapter main table include: true.
+- `Open3DSG` primary-label adapter main table include: false.
+- Human intent reflected as structured `task_context_id`: true.
+- Human intent main claim ready: false.
+
+논문 주장:
+
+- `Open3DSG` predicted-vocabulary adapter can be included as a bounded external scene-graph baseline row.
+- H001 remains stronger than both `ConceptGraphs` and the bounded `Open3DSG` adapter under the 195-row proxy-search denominator.
+- Human intent is a secondary ablation in E005, not the main contribution.
+
+에이전트 추론:
+
+- E005 did reflect human intent, but only as structured task context that conditions memory trust / re-observation.
+- Since H001 beats context-agnostic memory trust by only 1 success row, the paper should not be framed as human-intent understanding.
+
+## E005-M64 Open3DSG Vocabulary Expansion Policy
+
+사실:
+
+- Status: `e005_m64_open3dsg_vocab_expansion_policy_verified`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M64_open3dsg_vocab_expansion_policy_v0/`.
+- Data output: `local_dataset/Open3DSG_bridge/E005-M64_vocab_expansion_policy_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/run_m64_open3dsg_vocab_expansion_policy.py --require-object-candidates-ready`.
+- Verification: `python experiments/E005_external_baseline_transition/tools/verify_m64_open3dsg_vocab_expansion_policy.py --require-ready`.
+- Query rows: 195.
+- Query candidate/eval rows: 1,533.
+- Policy rows: 585.
+- Strict bbox top5: 144 / 195 = 0.738462.
+- Relaxed bbox 1m top3: 147 / 195 = 0.753846.
+- Center strict top5: 42 / 195 = 0.215385.
+- Policy allowed inputs: `scan_id`, `query_label`, `candidate_label`, `candidate_score`, `candidate_rank`.
+- Blocked before ranking: `gt_object_label`, `id2name_label`, `target_uid`, `object_instance_id_rescan`, target geometry, target success labels.
+- Leakage audit: pass.
+
+논문 주장:
+
+- M64 promotes the M63 diagnostic into a bounded, leakage-safe `Open3DSG` vocabulary-adapter policy.
+- It can support a paper-table candidate row for `Open3DSG` predicted-vocabulary adapter, but it is not standalone method novelty.
+- Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain unsupported.
+
+에이전트 추론:
+
+- The previous `Open3DSG` gap was largely a vocabulary/query adapter mismatch under the H001 query contract.
+- E005-M65 decided to include this row in the claim-evidence ledger as a bounded external baseline, without overstating it as a full external mapper win.
+
+## E005-M63 Open3DSG Route Decision
+
+사실:
+
+- Status: `e005_m63_open3dsg_route_decision_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M63_open3dsg_route_decision_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/analyze_m63_open3dsg_route_decision.py`.
+- Current corrected `Open3DSG` strict bbox top5: 81 / 195 = 0.415385.
+- Current corrected `Open3DSG` relaxed bbox 1m top3: 90 / 195 = 0.461538.
+- Diagnostic predicted-term strict bbox top5: 144 / 195 = 0.738462.
+- Diagnostic predicted-term relaxed bbox 1m top3: 147 / 195 = 0.753846.
+- Target object present in exported top20 rows: 171 / 195.
+- Target has primary-label candidate: 57 / 195.
+- Target has predicted-term candidate: 93 / 195.
+- No-primary but expanded-term candidate rows: 51 / 195.
+
+논문 주장:
+
+- M63 is diagnostic only. It does not make the expanded-term result a paper claim yet.
+- It supports the next bounded repair route because the immediate blocker appears to be vocabulary/query adapter mismatch.
+
+에이전트 추론:
+
+- Selected route: `bounded_open3dsg_predicted_vocab_expansion_repair_next`.
+- E005-M64 implemented the predicted-vocabulary expansion as a leakage-safe policy and verified that the diagnostic gain survives.
+
+## E005-M62 Open3DSG Result Interpretation
+
+사실:
+
+- Status: `e005_m62_open3dsg_result_interpretation_ready_primary_label_below_conceptgraphs`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M62_open3dsg_result_interpretation_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/analyze_m62_open3dsg_result_interpretation.py`.
+- `Open3DSG` bridge feasibility ready: true.
+- `Open3DSG` main-table performance baseline ready: false.
+- `Open3DSG` primary-label main-table performance baseline ready: false.
+- H001 minus corrected `Open3DSG` strict bbox top5: +91 success rows.
+- `ConceptGraphs` minus corrected `Open3DSG` strict bbox top5: +33 success rows.
+
+논문 주장:
+
+- M61/M60 supports an `Open3DSG` bridge feasibility claim.
+- Current `Open3DSG` does not support a strong external baseline performance claim.
+
+에이전트 추론:
+
+- The dominant failure signal is coverage/vocabulary mismatch, not only ranking: corrected strict policy has 72 `no_same_label_candidates`, 36 `target_object_not_in_open3dsg_candidates`, and 6 `target_present_but_rank_gt_budget`.
+- M63 selected bounded predicted-vocabulary expansion before moving to `HOV-SG` / `OpenMask3D`.
+
+## E005-M61 Open3DSG Denominator-Aligned Export Plan
+
+사실:
+
+- Status: `e005_m61_open3dsg_denominator_aligned_export_plan_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M61_denominator_aligned_export_plan_v0/`.
+- Data output: `local_dataset/Open3DSG_bridge/E005-M61_denominator_aligned_export_plan_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m61_open3dsg_denominator_aligned_export.py`.
+- Launch script: `python experiments/E005_external_baseline_transition/tools/launch_m61_open3dsg_denominator_export.py --launch --min-gpu-free-mib 20000`.
+- Verification script: `python experiments/E005_external_baseline_transition/tools/verify_m61_open3dsg_denominator_export.py --require-ready`.
+- Runtime status: `completed`.
+- tmux: `e005_m61_open3dsg_denominator_export`.
+- Runtime output: `local_dataset/Open3DSG_bridge/E005-M61_denominator_aligned_export_v0/`.
+- Runtime artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M61_denominator_aligned_export_v0/`.
+- Runtime log: `logs/20260523_150156_e005_m61_open3dsg_denominator_export.log`.
+- Runtime object candidate rows: 7,600.
+- Completed batches: 51 / 51.
+- Query scan overlap: 9 / 9.
+- M38/M45 query denominator rows: 195.
+- Query scan count: 9.
+- Query rows by `Open3DSG` source split: train 123, validation 72.
+- Target subgraphs by source split: train 29, validation 22, total 51.
+- Preprocessed-ready target subgraphs: 51 / 51.
+- Feature-ready target subgraphs: 51 / 51.
+- Validation-only smoke target: 3 scans, 22 subgraphs, 72 / 195 query rows.
+- Full denominator target: 9 scans, 51 subgraphs, 195 / 195 query rows.
+- Existing staged source modified: false.
+
+논문 주장:
+
+- M61 supports a denominator-alignment readiness claim for `Open3DSG`.
+- It establishes denominator-aligned `Open3DSG` export readiness but not strong `Open3DSG` performance.
+
+에이전트 추론:
+
+- The runtime patch lets the test dataloader use the selected train+validation target relationships without modifying `/home/yoohyun/research/local_dataset/Open3DSG_staged`.
+- The dependent M60 rerun is complete, so the next issue is claim boundary rather than export coverage.
 
 ## E005-M60 Open3DSG Query Conversion Contract
 
 사실:
 
-- Status: `e005_m60_open3dsg_query_conversion_contract_ready_waiting_m59_rows`.
-- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M60_open3dsg_query_conversion_contract_v0/`.
-- Data output: `local_dataset/Open3DSG_bridge/E005-M60_query_conversion_contract_v0/`.
+- Contract status: `e005_m60_open3dsg_query_conversion_contract_ready_for_conversion_smoke`.
+- Conversion status: `e005_m60_open3dsg_query_conversion_verified`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M60_open3dsg_query_conversion_m61_v0/`.
+- Data output: `local_dataset/Open3DSG_bridge/E005-M60_query_conversion_m61_v0/`.
 - Verification: `python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_query_conversion_contract.py`.
+- Conversion command: `python experiments/E005_external_baseline_transition/tools/run_m60_open3dsg_query_conversion.py --require-object-candidates-ready`.
+- Conversion verification: `python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_query_conversion.py --require-policy-rows`.
 - M58 object schema: `open3dsg_object_candidate_jsonl_v0`.
 - M58 query schema: `open3dsg_query_candidate_jsonl_v0`.
 - M38/M45 denominator rows: 195 / 195.
-- M59 object candidate rows: 0.
+- M61 object candidate rows: 7,600.
+- M61 completed batches: 51.
+- M61 candidate scan count: 9.
+- M38/M45 query scan count: 9.
+- Scan overlap count: 9.
+- Query candidate rows: 759.
+- Candidate eval rows: 759.
+- Policy rows: 585.
+- Strict bbox top5 success: 81 / 195 = 0.415385.
+- Relaxed bbox 1m top3 success: 90 / 195 = 0.461538.
+- Center strict top5 success: 21 / 195 = 0.107692.
 - Join rule: `scan_id == current_rescan_id`, normalized `candidate_label == label_canonical`, rank by `Open3DSG` `candidate_score`.
 - Leakage rule: do not use `target_uid`, `object_instance_id_rescan`, GT labels, `id2name`, or candidate-is-target fields before ranking.
 - Planned policies: `open3dsg_objects_probs_bbox_strict_top5_v0`, `open3dsg_objects_probs_bbox_relaxed_1m_top3_v0`, `open3dsg_objects_probs_center_strict_top5_v0`.
@@ -25,39 +334,44 @@ Updated: 2026-05-22
 
 논문 주장:
 
-- M60 only supports a contract claim: the `Open3DSG` query-level conversion path is specified.
-- It does not establish `Open3DSG` performance until M59 writes object-candidate rows and M60 conversion is executed.
+- M60 supports a conversion-harness claim: the `Open3DSG` query-level conversion path is implemented and verified on the 195-row denominator.
+- It does not establish a strong `Open3DSG` performance baseline because the primary-label adapter remains below `ConceptGraphs`.
 
 에이전트 추론:
 
-- This removes a downstream ambiguity: once M59 succeeds, `Open3DSG` can be converted under the same 195-row M38 proxy-search denominator as `ConceptGraphs` and H001 replay.
-- The next dependent action remains M59 relaunch.
+- This removes the previous coverage blocker and the target-geometry loading bug; the remaining issue is vocabulary/query adapter mismatch.
+- The dependent M64 leakage-safe predicted-vocabulary expansion is complete; the next action is M65 claim-boundary integration.
 
 ## E005-M59 Open3DSG Object Candidate Export Smoke
 
 사실:
 
-- Status: `e005_m59_open3dsg_object_export_smoke_failed`.
+- Status: `e005_m59_open3dsg_object_export_smoke_ready`.
 - tmux session: `e005_m59_open3dsg_object_export`.
-- Log: `logs/20260521_044206_e005_m59_open3dsg_object_export.log`.
+- Relaunch time: 2026-05-23 14:06 KST.
+- Relaunch command: `python experiments/E005_external_baseline_transition/tools/launch_m59_open3dsg_object_export_smoke.py --launch --min-gpu-free-mib 24000`.
+- Workdir: `/home/yoohyun/research2`.
+- Log: `logs/20260523_140609_e005_m59_open3dsg_object_export.log`.
 - Output: `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`.
 - Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M59_object_candidate_export_smoke_v0/`.
 - Verification command: `python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_object_export_smoke.py --require-ready`.
-- Last check: 2026-05-21 04:54 KST; tmux running false, source modified false, candidate row file missing.
-- Failure reason: CUDA OOM while loading `InstructBLIP`; log reports GPU 0 had 93 MiB free at failure and the Open3DSG process used about 16.35 GiB.
+- Initial verification command: `python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_object_export_smoke.py`.
+- Completion verification time: 2026-05-23 14:10 KST; tmux running false, source modified false, candidate rows 180, completed batches 1.
+- Expected files ready: `open3dsg_object_candidates.jsonl`, `open3dsg_object_candidates.completed.jsonl`, `open3dsg_object_candidates.manifest.json`.
+- Previous failure reason: CUDA OOM while loading `InstructBLIP`; log reported GPU 0 had 93 MiB free at failure and the Open3DSG process used about 16.35 GiB.
 - Repair decision: prefer lower-memory object-only export patch over blind GPU-exclusive relaunch.
 - Repair patch: `OPEN3DSG_OBJECT_DUMP_SKIP_BLIP_LOAD=1` skips pretrained `InstructBLIP` loading; `OPEN3DSG_OBJECT_DUMP_OBJECT_ONLY=1` stubs relation prediction because object candidates do not require relation captioning.
 - Relaunch preflight: default `--min-gpu-free-mib 24000`.
-- Latest GPU check: 2026-05-21 04:59 KST, 16,839 MiB free, relaunch deferred.
+- Relaunch GPU check: 2026-05-23 14:06 KST, 28,887 MiB free, launch executed true.
 
 논문 주장:
 
-- This step does not yet establish `Open3DSG` query-level object-search performance.
-- `Open3DSG` remains a second external map/scene-graph baseline candidate until object-candidate rows exist and query-level conversion passes.
+- This step establishes that the lower-memory object-candidate export path can write rows.
+- It does not establish `Open3DSG` query-level object-search performance because the first completed batch is not denominator-aligned.
 
 에이전트 추론:
 
-- The next dependent action is M59 relaunch when the GPU satisfies the 24GB preflight. If the lower-memory patch still fails, then use a GPU-exclusive relaunch as the second repair path.
+- The next dependent action is targeted denominator-aligned export, not another generic first-batch smoke.
 
 ## E005-M58 Open3DSG Object Candidate Export Plan
 

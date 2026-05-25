@@ -1,6 +1,6 @@
 # Reproducibility Notes
 
-Updated: 2026-05-22
+Updated: 2026-05-25
 
 이 문서는 현재 repo에서 실험을 다시 실행하기 위해 필요한 데이터 위치, 다운로드 명령, checkpoint 위치, Docker 실행법, 재현 명령, artifact/evaluation 요약을 한 곳에 모은다. 세부 workflow 규칙은 `docs/experiments.md`를 따른다.
 
@@ -9,10 +9,10 @@ Updated: 2026-05-22
 사실:
 
 - Active experiment route: `experiments/E005_external_baseline_transition/`.
-- Active external baseline: `ConceptGraphs`.
+- Active external baselines: `ConceptGraphs`; bounded `Open3DSG` predicted-vocabulary adapter row candidate.
 - Docker image: `research2/conceptgraphs-smoke:latest`.
 - Current heldout state: `heldout_b01/b02/b03` runtime/metric conversion and full 9-scan aggregation are complete.
-- Current claim state: E005-M59 failed on CUDA OOM and still keeps final real RGB-D/open-vocabulary robustness false. E005-M56 fixes separate proxy-search / real RGB-D proposal denominators, E005-M57/M58 define the `Open3DSG` conversion/export contracts, E005-M59 attempts one-batch object candidate export while using `/home/yoohyun/research/local_dataset/Open3DSG_staged` as a read-only source, and E005-M60 predefines the query-level conversion contract for the 195-row M38/M45 denominator. Derived `Open3DSG` bridge outputs are stored under `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`.
+- Current claim state: E005-M56-M71 use `/home/yoohyun/research/local_dataset/Open3DSG_staged` as a read-only source and store derived outputs under `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`. E005-M61 generated denominator-aligned `Open3DSG` object candidates for all 9 query scans: 7,600 rows and 51 / 51 completed batches. Corrected E005-M60 verifies query-level conversion for the 195-row M38/M45 denominator: 759 query candidate/eval rows and 585 policy rows. Corrected primary-label `Open3DSG` strict bbox top5 is 81 / 195 and relaxed bbox 1m top3 is 90 / 195. E005-M64 verifies the leakage-safe predicted-vocabulary adapter policy: strict bbox top5 144 / 195 and relaxed bbox 1m top3 147 / 195. E005-M68 materializes the M38/M45 full-denominator real proposal bridge plan from local `3RScan` / `3DSSG`: 195 rows, 9 ready scans, 65 object targets, 22 prompt labels, and 3 heldout batches. E005-M71 converts `heldout_b01` real proposals into 66 query metrics: target detected 54 / 66, real detector task-budget 8 / 66, real detector top5 21 / 66, static memory 45 / 66, context-agnostic memory trust 48 / 66, H001 real memory-trust 48 / 66, and `ConceptGraphs` b01 45 / 66. Final real RGB-D/open-vocabulary robustness is still false until remaining heldout batches are complete.
 
 ## Data Location
 
@@ -147,8 +147,8 @@ Runtime contract:
 - Docker image: `h001-open3dsg-repro:cu128`.
 - Source mount: `/home/yoohyun/research/local_dataset/Open3DSG_staged:/workspace/local_dataset/Open3DSG_staged:ro`.
 - Output path: `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`.
-- Log path: `logs/20260521_044206_e005_m59_open3dsg_object_export.log`.
-- Current status as of 2026-05-21 04:59 KST: failed once; lower-memory object-only patch implemented; candidate rows not written; relaunch waits for GPU free memory >= 24GB.
+- Log path: `logs/20260523_140609_e005_m59_open3dsg_object_export.log`.
+- Current status as of 2026-05-23 14:10 KST: lower-memory object-only relaunch completed; candidate rows 180; completed batches 1; source modified false.
 - Object-only repair env: `OPEN3DSG_OBJECT_DUMP_SKIP_BLIP_LOAD=1`, `OPEN3DSG_OBJECT_DUMP_OBJECT_ONLY=1`.
 - Default relaunch preflight: `--min-gpu-free-mib 24000`.
 
@@ -173,11 +173,31 @@ python -m py_compile \
   experiments/E005_external_baseline_transition/tools/run_m45_conceptgraphs_heldout_query_metrics.py
 ```
 
-`Open3DSG` query-conversion contract reproduction:
+`Open3DSG` query-conversion reproduction:
 
 ```bash
 python experiments/E005_external_baseline_transition/tools/plan_m60_open3dsg_query_conversion_contract.py
 python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_query_conversion_contract.py
+python experiments/E005_external_baseline_transition/tools/run_m60_open3dsg_query_conversion.py --require-object-candidates-ready
+python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_query_conversion.py --require-policy-rows
+```
+
+`Open3DSG` denominator-aligned export plan:
+
+```bash
+python experiments/E005_external_baseline_transition/tools/plan_m61_open3dsg_denominator_aligned_export.py
+python experiments/E005_external_baseline_transition/tools/verify_m61_open3dsg_denominator_export.py --require-ready
+python experiments/E005_external_baseline_transition/tools/analyze_m62_open3dsg_result_interpretation.py
+python experiments/E005_external_baseline_transition/tools/analyze_m63_open3dsg_route_decision.py
+python experiments/E005_external_baseline_transition/tools/run_m64_open3dsg_vocab_expansion_policy.py --require-object-candidates-ready
+python experiments/E005_external_baseline_transition/tools/verify_m64_open3dsg_vocab_expansion_policy.py --require-ready
+python experiments/E005_external_baseline_transition/tools/plan_m65_open3dsg_table_integration.py
+python experiments/E005_external_baseline_transition/tools/analyze_m66_external_baseline_failure_boundary.py
+python experiments/E005_external_baseline_transition/tools/plan_m67_real_rgbd_ov_robustness_route.py
+python experiments/E005_external_baseline_transition/tools/plan_m68_full_denominator_real_proposal_bridge.py
+E005_M69_SUDO_PASSWORD=<password> python experiments/E005_external_baseline_transition/tools/launch_m69_full_denominator_real_proposal_batch.py --batch-id heldout_b01
+python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b01 --require-ready
+python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal_query_metrics.py --batch-id heldout_b01
 ```
 
 ## Artifact And Evaluation Summary
@@ -197,8 +217,21 @@ python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_q
 | `E005-M56_robustness_denominator_open3dsg_audit_v0` | denominator + `Open3DSG` audit | proxy-search denominator 195 rows; real RGB-D proposal bridge denominator 96 rows; `Open3DSG_staged` source/checkpoints/features/eval present | `Open3DSG` query-level performance still false |
 | `E005-M57_open3dsg_output_schema_contract_v0` | `Open3DSG` schema / conversion contract | relation raw dump ready; feature `.pt` route ready; object candidate dump false; local data output under `local_dataset/Open3DSG_bridge/E005-M57_output_schema_contract_v0/` | object-search baseline still false |
 | `E005-M58_object_candidate_export_plan_v0` | `Open3DSG` object-candidate export plan | object-candidate schema, query-candidate schema, export hook contract, read-only Docker command contract, and verifier ready; local data output under `local_dataset/Open3DSG_bridge/E005-M58_object_candidate_export_plan_v0/` | one-batch export still false |
-| `E005-M59_object_candidate_export_smoke_v0` | `Open3DSG` one-batch object-candidate export | launched once in tmux `e005_m59_open3dsg_object_export`; log `logs/20260521_044206_e005_m59_open3dsg_object_export.log`; output path `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`; candidate rows 0 as of 2026-05-21 04:59 KST; lower-memory object-only patch implemented after CUDA OOM | needs relaunch; no `Open3DSG` performance claim |
-| `E005-M60_open3dsg_query_conversion_contract_v0` | `Open3DSG` query-level conversion contract | M38/M45 denominator 195 rows, M58 schemas ready, M59 candidate rows 0, join/leakage/metric contract fixed under `local_dataset/Open3DSG_bridge/E005-M60_query_conversion_contract_v0/` | contract ready; no `Open3DSG` performance claim |
+| `E005-M59_object_candidate_export_smoke_v0` | `Open3DSG` one-batch object-candidate export | relaunched in tmux `e005_m59_open3dsg_object_export`; log `logs/20260523_140609_e005_m59_open3dsg_object_export.log`; output path `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`; candidate rows 180; completed batches 1; lower-memory object-only patch active | export smoke ready; no `Open3DSG` performance claim |
+| `E005-M60_open3dsg_query_conversion_contract_v0` | `Open3DSG` query-level conversion | M38/M45 denominator 195 rows, M59 candidate rows 180, policy rows 585, scan overlap 0, query/eval candidate rows 0, outputs under `local_dataset/Open3DSG_bridge/E005-M60_query_conversion_contract_v0/` | verified harness; no `Open3DSG` performance claim |
+| `E005-M61_denominator_aligned_export_plan_v0` | `Open3DSG` denominator-aligned target export plan | query rows 195; query scans 9; target subgraphs 51; preprocessed/features ready 51 / 51; train rows 123 and validation rows 72 | export plan ready; no `Open3DSG` performance claim |
+| `E005-M61_denominator_aligned_export_v0` | `Open3DSG` denominator-aligned target export | object candidate rows 7,600; completed batches 51 / 51; query scan overlap 9 / 9; source modified false | export ready |
+| `E005-M60_open3dsg_query_conversion_m61_v0` | `Open3DSG` denominator-aligned query conversion | query rows 195; query/eval candidate rows 759; policy rows 585; corrected strict bbox top5 81 / 195; corrected relaxed bbox 1m top3 90 / 195 | primary-label adapter below `ConceptGraphs` |
+| `E005-M62_open3dsg_result_interpretation_v0` | `Open3DSG` result interpretation | bridge feasibility true; main-table performance baseline false; H001 - corrected `Open3DSG` strict +91 rows; `ConceptGraphs` - corrected `Open3DSG` strict +33 rows | input to M63 route decision |
+| `E005-M63_open3dsg_route_decision_v0` | `Open3DSG` route decision | diagnostic predicted-term strict 144 / 195; diagnostic predicted-term relaxed 147 / 195; selected bounded repair next | diagnostic route decision, superseded by M64 policy verification |
+| `E005-M64_open3dsg_vocab_expansion_policy_v0` | `Open3DSG` leakage-safe predicted-vocabulary adapter policy | query rows 195; query/eval candidate rows 1,533; policy rows 585; strict bbox top5 144 / 195; relaxed bbox 1m top3 147 / 195; center strict top5 42 / 195; leakage audit pass | bounded external baseline row candidate; not standalone method novelty |
+| `E005-M65_open3dsg_table_integration_v0` | `Open3DSG` paper-table integration boundary | include predicted-vocabulary adapter main table true; primary-label adapter main table false; H001 172 / 195; `Open3DSG` vocab 144 / 195; human intent reflected as structured task context true; human intent main claim false | table boundary ready |
+| `E005-M66_external_baseline_failure_boundary_v0` | row-level external-baseline failure boundary | H001 vs `ConceptGraphs`: both_success 112, H001-only 60, `ConceptGraphs`-only 2, both_fail 21; H001 vs `Open3DSG` vocab: both_success 133, H001-only 39, `Open3DSG`-only 11, both_fail 12; task-context-specific gain 1 | proxy-search failure-boundary ready; real robustness still false |
+| `E005-M67_real_rgbd_ov_robustness_route_v0` | real RGB-D/open-vocabulary robustness route decision | selected `scale_real_proposal_bridge_to_m38_heldout_denominator`; M38/M45 denominator 195 rows / 9 scans / 65 target rows; E003-M75 real-proposal bridge 96 rows; denominator mismatch 99 rows | route ready; final real robustness still false |
+| `E005-M68_full_denominator_real_proposal_bridge_plan_v0` | full-denominator real proposal bridge plan | 195 query rows; 9 / 9 ready scans; 65 object targets; 22 prompt labels; 214 sampled frames; 3 heldout batches; row-level overlap with E003-M75 is 0 | input/command plan ready |
+| `E005-M69_full_denominator_real_proposal_detector_launch_v0` / `heldout_b01` | detector batch launch | tmux `e005_m69_real_proposal_heldout_b01`; log `logs/20260524_004619_e005_m69_real_proposal_heldout_b01.log`; output `E005-M69_full_denominator_real_proposal_detector_run_v0/heldout_b01/` | launch record |
+| `E005-M70_full_denominator_real_proposal_detector_verification_v0` / `heldout_b01` | detector completion verification | expected files 12 / 12; prediction rows 261; pre-cap candidate rows 5,310; matched targets 18 / 22; recall 0.8182; precision 0.0690; false-positive rate 0.9310 | ready for query-level conversion; final robustness still false |
+| `E005-M71_real_proposal_query_metric_v0` / `heldout_b01` | real proposal query metrics | query rows 66; target detected 54 / 66; real detector task-budget 8 / 66; real detector top5 21 / 66; H001 48 / 66; `ConceptGraphs` b01 45 / 66 | one-batch query metric ready; final robustness still false |
 
 논문 주장:
 
@@ -209,9 +242,8 @@ python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_q
 
 사실:
 
-- Relaunch E005-M59 `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke when GPU free memory is >= 24GB.
-- Preferred repair route: lower-memory runtime patch that avoids unnecessary `InstructBLIP` GPU loading for object-candidate export.
-- Backup repair route: GPU-exclusive relaunch if the lower-memory patch still fails.
+- Run E005-M72: launch `heldout_b02` / `heldout_b03` real proposal detector batches.
+- Keep lower-memory runtime patch active to avoid unnecessary `InstructBLIP` GPU loading for object-candidate export.
 - Keep `OpenMask3D` as a later proposal baseline until its Docker/`MinkowskiEngine` blocker is worth revisiting.
 
 ## Git Tracking Boundary
@@ -220,7 +252,7 @@ python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_q
 
 - `.gitignore` intentionally excludes `local_dataset/`, `**/artifacts/`, `*.log`, and `*.jsonl`.
 - Therefore raw datasets, generated bridge outputs, heavy artifacts, logs, and row-level JSONL files do not go to GitHub.
-- Reproduction-critical scripts and docs are not ignored: `experiments/E005_external_baseline_transition/tools/launch_m59_open3dsg_object_export_smoke.py`, `m59_open3dsg_object_dump_runtime_patch.py`, `verify_m59_open3dsg_object_export_smoke.py`, `README.md`, `TODO.md`, and this document are visible to git.
+- Reproduction-critical scripts and docs are not ignored: `experiments/E005_external_baseline_transition/tools/launch_m59_open3dsg_object_export_smoke.py`, `m59_open3dsg_object_dump_runtime_patch.py`, `run_m60_open3dsg_query_conversion.py`, `run_m64_open3dsg_vocab_expansion_policy.py`, `verify_m64_open3dsg_vocab_expansion_policy.py`, `plan_m65_open3dsg_table_integration.py`, `analyze_m66_external_baseline_failure_boundary.py`, `plan_m67_real_rgbd_ov_robustness_route.py`, `plan_m68_full_denominator_real_proposal_bridge.py`, `README.md`, `TODO.md`, and this document are visible to git.
 
 에이전트 추론:
 
@@ -255,6 +287,12 @@ The payloads below are intentionally ignored but can be regenerated when raw dat
 | `ConceptGraphs` heldout runtime outputs | `python experiments/E005_external_baseline_transition/tools/launch_m43_conceptgraphs_heldout_runtime_batch.py --batch-id heldout_b01` and repeat for `heldout_b02`, `heldout_b03` | `python experiments/E005_external_baseline_transition/tools/verify_m43_conceptgraphs_heldout_runtime_batch.py --batch-id heldout_b01` and repeat for each batch |
 | `ConceptGraphs` query metrics and full aggregation | `python experiments/E005_external_baseline_transition/tools/run_m45_conceptgraphs_heldout_query_metrics.py --batch-id heldout_b01` and repeat for each batch; then `python experiments/E005_external_baseline_transition/tools/run_m49_conceptgraphs_full_heldout_aggregation.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M49_conceptgraphs_full_heldout_aggregation_v0/coverage.json` and compare summary values in this document |
 | H001 heldout policy replay artifacts | `python experiments/E005_external_baseline_transition/tools/plan_m51_h001_heldout_policy_replay_contract.py`; `python experiments/E005_external_baseline_transition/tools/run_m52_h001_heldout_policy_replay.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M52_h001_heldout_policy_replay_v0/coverage.json` |
+| E005-M66 external-baseline failure boundary | `python experiments/E005_external_baseline_transition/tools/analyze_m66_external_baseline_failure_boundary.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M66_external_baseline_failure_boundary_v0/coverage.json` |
+| E005-M67 robustness route decision | `python experiments/E005_external_baseline_transition/tools/plan_m67_real_rgbd_ov_robustness_route.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M67_real_rgbd_ov_robustness_route_v0/coverage.json` |
+| E005-M68 full-denominator real proposal bridge plan | `python experiments/E005_external_baseline_transition/tools/plan_m68_full_denominator_real_proposal_bridge.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M68_full_denominator_real_proposal_bridge_plan_v0/coverage.json` |
+| E005-M69 detector batch launch | `E005_M69_SUDO_PASSWORD=<password> python experiments/E005_external_baseline_transition/tools/launch_m69_full_denominator_real_proposal_batch.py --batch-id heldout_b01` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M69_full_denominator_real_proposal_detector_launch_v0/heldout_b01/coverage.json` |
+| E005-M70 detector completion verification | `python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b01 --require-ready` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M70_full_denominator_real_proposal_detector_verification_v0/heldout_b01/coverage.json` |
+| E005-M71 real proposal query metrics | `python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal_query_metrics.py --batch-id heldout_b01` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M71_real_proposal_query_metric_v0/heldout_b01/coverage.json` |
 | `local_dataset/Open3DSG_bridge/E005-M57_output_schema_contract_v0/` | `python experiments/E005_external_baseline_transition/tools/plan_m57_open3dsg_output_schema_contract.py` | Inspect generated `README.md` / `coverage.json` under the output directory |
 | `local_dataset/Open3DSG_bridge/E005-M58_object_candidate_export_plan_v0/` | `python experiments/E005_external_baseline_transition/tools/plan_m58_open3dsg_object_candidate_export.py` | `python experiments/E005_external_baseline_transition/tools/verify_m58_open3dsg_object_candidate_export.py` |
 | `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/` | `python experiments/E005_external_baseline_transition/tools/launch_m59_open3dsg_object_export_smoke.py --launch` | `python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_object_export_smoke.py --require-ready` |
@@ -316,16 +354,25 @@ Core row-level artifacts for current paper-table evidence:
   Size: 236 KB. Contains paired H001-vs-`ConceptGraphs` failure rows.
 - `experiments/E005_external_baseline_transition/artifacts/E005-M54_paper_table_claim_ledger_v0/`  
   Size: 32 KB. Contains `claim_ledger.jsonl`, `paper_table_rows.jsonl`, and paper-table markdown.
+- `experiments/E005_external_baseline_transition/artifacts/E005-M66_external_baseline_failure_boundary_v0/`
+  Contains row-level H001 vs `ConceptGraphs` / `Open3DSG` failure-boundary rows and claim-boundary rows.
+- `experiments/E005_external_baseline_transition/artifacts/E005-M67_real_rgbd_ov_robustness_route_v0/`
+  Contains the real RGB-D/open-vocabulary robustness route decision and M68 minimum contract.
+- `experiments/E005_external_baseline_transition/artifacts/E005-M68_full_denominator_real_proposal_bridge_plan_v0/`
+  Contains full-denominator real proposal bridge inputs and batch command plans.
 - `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/`  
   Size: 1.2 MB. Contains real RGB-D/open-vocabulary bridge rows, policy rows, failure rows, and metrics.
 
-Small but useful `Open3DSG` bridge contracts:
+Small but useful `Open3DSG` bridge contracts and smoke outputs:
 
 - `local_dataset/Open3DSG_bridge/`  
-  Size: 144 KB as of 2026-05-21. Contains M57/M58/M59 schema and launch contracts. It does not yet contain successful M59 candidate rows.
+  Contains M57/M58/M59/M60/M61/M62 schema, launch, conversion, denominator-alignment, and interpretation outputs. It includes denominator-aligned `Open3DSG` performance rows, but current performance is weak.
 - `experiments/E005_external_baseline_transition/artifacts/E005-M56_robustness_denominator_open3dsg_audit_v0/`
 - `experiments/E005_external_baseline_transition/artifacts/E005-M57_open3dsg_output_schema_contract_v0/`
 - `experiments/E005_external_baseline_transition/artifacts/E005-M58_object_candidate_export_plan_v0/`
+- `experiments/E005_external_baseline_transition/artifacts/E005-M59_object_candidate_export_smoke_v0/`
+- `experiments/E005_external_baseline_transition/artifacts/E005-M60_open3dsg_query_conversion_contract_v0/`
+- `experiments/E005_external_baseline_transition/artifacts/E005-M61_denominator_aligned_export_plan_v0/`
 
 Raw data, if license permits private backup:
 
@@ -376,7 +423,7 @@ Docker images with tracked build recipes:
 
 에이전트 추론:
 
-- The safest minimal Drive package for moving machines is: selected `Open3DSG` checkpoint, `h001-open3dsg-repro:cu128` image tar, E005-M45/M49/M52/M53/M54 row-level artifacts, E003-M75 bridge artifact, `local_dataset/Open3DSG_bridge/`, and dataset manifests/raw data only if license permits.
+- The safest minimal Drive package for moving machines is: selected `Open3DSG` checkpoint, `h001-open3dsg-repro:cu128` image tar, E005-M45/M49/M52/M53/M54/M66/M67/M68 row-level artifacts, E003-M75 bridge artifact, `local_dataset/Open3DSG_bridge/`, and dataset manifests/raw data only if license permits.
 
 ## Open3DSG Backup And Restore Checklist
 
@@ -447,7 +494,18 @@ rsync -av --partial \
   /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M56_robustness_denominator_open3dsg_audit_v0 \
   /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M57_open3dsg_output_schema_contract_v0 \
   /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M58_object_candidate_export_plan_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M59_object_candidate_export_smoke_v0 \
   /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M60_open3dsg_query_conversion_contract_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M61_denominator_aligned_export_plan_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M61_denominator_aligned_export_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M60_open3dsg_query_conversion_m61_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M62_open3dsg_result_interpretation_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M63_open3dsg_route_decision_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M64_open3dsg_vocab_expansion_policy_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M65_open3dsg_table_integration_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M66_external_baseline_failure_boundary_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M67_real_rgbd_ov_robustness_route_v0 \
+  /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M68_full_denominator_real_proposal_bridge_plan_v0 \
   "$BACKUP_ROOT/open3dsg/artifacts/"
 
 rsync -av --partial \
@@ -549,19 +607,33 @@ docker image inspect h001-open3dsg-repro:cu128 >/dev/null
 python experiments/E005_external_baseline_transition/tools/verify_m58_open3dsg_object_candidate_export.py
 python experiments/E005_external_baseline_transition/tools/plan_m60_open3dsg_query_conversion_contract.py
 python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_query_conversion_contract.py
+python experiments/E005_external_baseline_transition/tools/plan_m61_open3dsg_denominator_aligned_export.py
+python experiments/E005_external_baseline_transition/tools/verify_m61_open3dsg_denominator_export.py --require-ready
+python experiments/E005_external_baseline_transition/tools/run_m60_open3dsg_query_conversion.py --require-object-candidates-ready
+python experiments/E005_external_baseline_transition/tools/verify_m60_open3dsg_query_conversion.py --require-policy-rows
+python experiments/E005_external_baseline_transition/tools/analyze_m62_open3dsg_result_interpretation.py
+python experiments/E005_external_baseline_transition/tools/analyze_m66_external_baseline_failure_boundary.py
+python experiments/E005_external_baseline_transition/tools/plan_m67_real_rgbd_ov_robustness_route.py
 ```
 
-Expected current verification status before M59 succeeds:
+Expected current verification status:
 
 ```text
-e005_m60_open3dsg_query_conversion_contract_ready_waiting_m59_rows
+M59 verifier: ready with 180 first-batch rows
+M61 verifier: ready with 7,600 denominator-aligned rows and scan overlap 9/9
+M60 verifier: ready with 759 query/eval candidate rows and 585 policy rows
+M62 interpretation: ready; corrected Open3DSG bridge feasible but below ConceptGraphs under primary labels
+M63 route decision: ready; diagnostic predicted-vocabulary repair selected and completed by M64
+M64 verifier: ready with leakage-safe predicted-vocabulary strict 144/195 and relaxed 147/195
+M65 table integration: ready; Open3DSG vocab adapter included as bounded external row; human intent main claim false
+M66 failure boundary: ready; H001-only 60 vs ConceptGraphs, 39 vs Open3DSG vocab; task-context gain 1
+M67 route decision: ready; selected scale_real_proposal_bridge_to_m38_heldout_denominator
 ```
 
 7. Resume the active experiment only after the above checks pass.
 
 ```bash
-python experiments/E005_external_baseline_transition/tools/launch_m59_open3dsg_object_export_smoke.py --launch
-python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_object_export_smoke.py --require-ready
+python experiments/E005_external_baseline_transition/tools/plan_m67_real_rgbd_ov_robustness_route.py
 ```
 
 ### Restore Failure Triage
@@ -570,9 +642,9 @@ python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_o
 | --- | --- | --- |
 | `docker image inspect h001-open3dsg-repro:cu128` fails | Image tar was not restored or tag differs | Run `docker images`, reload tar, retag only if the image id matches the saved image |
 | `verify_m58...` reports missing checkpoint | `Open3DSG_staged` checkpoint path incomplete | Restore checkpoint to the exact path above or update M58/M59 contracts intentionally |
-| M60 verifier waits for M59 rows | Expected state before M59 relaunch | Not a failure; relaunch M59 when GPU memory is available |
+| M60 verifier reports scan overlap 0 | M61 denominator-aligned rows missing or wrong input directory | Verify M61 output, then rerun M60 with `--require-object-candidates-ready` |
 | M60 verifier fails denominator row count | E005-M45 contract artifacts missing | Restore `E005-M45_conceptgraphs_heldout_query_metric_v0` and related M45 contract artifacts or regenerate them |
-| M59 writes rows but M60 still waits | Candidate file path mismatch | Check `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/open3dsg_object_candidates.jsonl` |
+| M59 writes rows but M60 still has no query candidates | Generic first-batch rows do not overlap the M38/M45 denominator | Use M61 target scan/subgraph export instead of generic first-batch export |
 
 사용자 판단 필요:
 

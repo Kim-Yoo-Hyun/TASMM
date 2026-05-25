@@ -1,6 +1,6 @@
 # Research Summary
 
-Updated: 2026-05-22
+Updated: 2026-05-25
 
 이 문서는 `research2/`의 연구 방향, 배경, 가설, 현재 진행 상태, 남은 쟁점, 실험 계획을 간단히 정리한 working research report다. 세부 진행 로그는 `TODO.md`, `hypothesis/`, `experiments/`에 둔다.
 
@@ -112,38 +112,45 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - H001 replay on the same `M38` query contract gives H001 172/195 = 0.882051, static memory 141/195 = 0.723077, and context-agnostic memory trust 171/195 = 0.876923.
 - E005-M56은 two-table robustness denominator를 고정했다. Table A는 proxy-search external map denominator 195 rows, Table B는 real RGB-D proposal bridge denominator 96 rows다.
 - `/home/yoohyun/research/local_dataset/Open3DSG_staged`는 read-only source로만 사용하고, 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`에 저장한다.
-- E005-M57/M58은 `Open3DSG` schema/export contract를 완료했다.
-- E005-M59는 one-batch object-candidate export smoke를 실행했지만 CUDA OOM으로 실패했다. Lower-memory object-only patch는 적용되었고, relaunch는 GPU free memory >= 24GB를 기다린다.
-- E005-M60은 `Open3DSG` query-level conversion contract를 M38/M45 195-row denominator 기준으로 선작성했다. M59 candidate rows가 0개이므로 아직 `Open3DSG` performance claim은 없다.
+- E005-M57-M71은 `Open3DSG` read-only source를 이용한 schema/export/query-conversion/interpretation/route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge plan, `heldout_b01` detector batch launch/completion/query-level conversion을 완료했다.
+- E005-M61은 9개 query scan, 195 query rows, 51 target subgraphs에 대해 denominator-aligned `Open3DSG` object-candidate rows 7,600개를 생성했다.
+- Corrected E005-M60은 query candidate/eval rows 759개와 policy rows 585개를 생성했다. 현재 `Open3DSG` strict bbox top5는 81/195 = 0.415385, relaxed bbox 1m top3는 90/195 = 0.461538이다.
+- E005-M64는 predicted-vocabulary adapter를 leakage-safe policy로 구현/검증했다. Strict bbox top5는 144/195 = 0.738462, relaxed bbox 1m top3는 147/195 = 0.753846이다.
+- E005-M65는 `Open3DSG` predicted-vocabulary adapter를 main table의 bounded external scene-graph baseline row로 포함하고, primary-label adapter는 diagnostic/supplement row로 분리했다.
+- E005-M66은 external-baseline failure boundary를 row-level로 정리했다. H001 vs `ConceptGraphs`는 both_success 112, H001-only 60, `ConceptGraphs`-only 2, both_fail 21이고, H001 vs `Open3DSG` vocab은 both_success 133, H001-only 39, `Open3DSG` vocab-only 11, both_fail 12다.
+- E005-M67은 real RGB-D/open-vocabulary robustness route로 `scale_real_proposal_bridge_to_m38_heldout_denominator`를 선택했다. M38/M45 heldout denominator는 195 query rows / 9 scans / 65 target rows이고, 현재 E003-M75 real-proposal bridge는 96 rows라 denominator mismatch가 99 rows다.
+- E005-M68은 M38/M45 195-row denominator 전체를 real-proposal bridge input으로 materialize했다. 9/9 scans ready, 65 object targets, 22 prompt labels, 214 sampled frames, 3 heldout batches이며 E003-M75와 row-level overlap은 0이다.
+- E005-M70은 `heldout_b01` detector completion을 검증했다. Expected files 12/12, prediction rows 261, pre-cap candidate rows 5,310, matched targets 18/22, scan target recall 0.8182, proposal precision 0.0690, false-positive rate 0.9310이다.
+- E005-M71은 `heldout_b01` 66 query rows를 real proposal query-level metric으로 변환했다. Target detected 54/66, real detector task-budget 8/66, real detector top5 21/66, static memory 45/66, context-agnostic memory trust 48/66, H001 real memory-trust 48/66, `ConceptGraphs` b01 45/66이다.
+- E005에서 human intent는 structured `task_context_id`로 H001 memory trust / re-observation policy에 반영됐다. 그러나 H001과 context-agnostic memory trust의 차이는 1 success row라 human intent main claim은 false다.
 - `docs/reproducibility.md`에는 데이터 위치, checkpoint/Docker 보존 후보, Drive backup/restore checklist, 재현 명령, artifact/evaluation 요약을 정리했다.
-- `experiments/report.md`와 `docs/paper.md`에는 M60 기준 reviewer defense와 claim-evidence ledger를 반영했다.
+- `experiments/report.md`와 `docs/paper.md`에는 `ConceptGraphs` / `Open3DSG` 기준 reviewer defense와 claim-evidence ledger를 반영했다.
 
 논문 주장:
 
 - 현재 방어 가능한 claim은 controlled/proxy setting에서의 task/staleness-aware memory decision과 `ConceptGraphs` 대비 proxy-search comparison이다.
-- `DualMap` performance claim, `Open3DSG` performance claim, final real RGB-D/open-vocabulary robustness claim, deployable search policy claim, real navigation `SR` / `SPL` claim은 아직 하지 않는다.
+- `DualMap` performance claim, human intent main claim, final real RGB-D/open-vocabulary robustness claim, deployable search policy claim, real navigation `SR` / `SPL` claim은 아직 하지 않는다. `Open3DSG`는 bounded predicted-vocabulary adapter baseline으로만 제한해 claim한다.
 
 ## Remaining Issues
 
 사실:
 
 - H001은 `ConceptGraphs`와 static memory 대비 개선을 보였지만, context-agnostic memory trust 대비 gain은 1 row로 좁다. 따라서 human task context는 현재 main contribution이 아니라 secondary ablation이다.
-- `Open3DSG`는 source/interface/schema/query-conversion contract는 준비됐지만 M59 object candidate row가 아직 없어 query-level metric을 만들 수 없다.
+- `Open3DSG`는 primary-label adapter 성능은 `ConceptGraphs`보다 낮지만, predicted-vocabulary adapter에서는 strict bbox top5 144/195로 `ConceptGraphs` strict 114/195를 넘는다.
 - `OpenMask3D`는 checkpoint는 준비됐지만 local Docker/`MinkowskiEngine` build blocker가 있다.
-- real RGB-D/open-vocabulary proposal route는 false-positive load와 heldout label/scan transfer 문제가 남아 있다.
+- real RGB-D/open-vocabulary proposal route는 `heldout_b01`에서 query-level conversion까지 통과했지만, mean false positives before target 7.78과 one-batch evidence 한계 때문에 remaining heldout batch 확장이 남아 있다.
 - real navigation `SR` / `SPL`은 simulator, navmesh, trajectory execution source가 아직 없다.
 
 에이전트 추론:
 
 - 다음 방어 포인트는 "detector 성능 개선"과 "semantic memory decision contribution"을 분리하는 것이다.
-- Top-tier 가능성을 높이려면 `ConceptGraphs` 외에 `Open3DSG`/`HOV-SG` 같은 second external route, real RGB-D proposal robustness, downstream search/navigation bridge를 더 보강해야 한다.
+- Top-tier 가능성을 높이려면 M68에서 M38/M45 195-row denominator로 real RGB-D/open-vocabulary proposal bridge를 확장해 proxy-search table과 real-proposal table의 gap을 줄여야 한다.
 
 ## Experiment Plan
 
 사실:
 
-- Immediate next unit: GPU free memory >= 24GB일 때 `E005-M59 Open3DSG object-candidate export hook implementation / one-batch Docker smoke`를 lower-memory object-only patch로 relaunch한다.
-- M59가 candidate rows를 생성하면 E005-M60 query conversion implementation/run을 진행한다.
+- Immediate next unit: E005-M72에서 `heldout_b02` / `heldout_b03` real proposal detector batch launch를 준비한다.
 - Strict 0.5m, relaxed 1.0m, center-localization metrics는 external baseline table에서 분리해 유지한다.
 - Docker는 논문 본문용 실제 구현 실험의 기본 실행 환경이다.
 

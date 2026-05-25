@@ -299,6 +299,29 @@ def finalize(module: Any, status: str = "object_candidate_stream_complete") -> N
     print(f"M59 object dump finalized rows={manifest['rows_written']} batches={manifest['completed_batches']}", flush=True)
 
 
+def load_target_relationships() -> list[dict[str, Any]] | None:
+    path = os.environ.get("OPEN3DSG_OBJECT_DUMP_TARGET_RELATIONSHIPS_JSONL")
+    if not path:
+        return None
+    target_path = Path(path)
+    if not target_path.exists():
+        raise FileNotFoundError(f"OPEN3DSG_OBJECT_DUMP_TARGET_RELATIONSHIPS_JSONL does not exist: {path}")
+    rows: list[dict[str, Any]] = []
+    with target_path.open("r", encoding="utf-8") as handle:
+        for line_no, line in enumerate(handle, start=1):
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            scan = record.get("scan") or record.get("scan_id")
+            split = record.get("split") or record.get("subset_split_id")
+            if scan is None or split is None:
+                raise ValueError(f"target relationship line {line_no} is missing scan/split fields")
+            rows.append({"scan": str(scan), "split": int(split)})
+    if not rows:
+        raise ValueError(f"target relationship file is empty: {path}")
+    return rows
+
+
 def patch_trainer() -> None:
     from open3dsg.scripts import trainer as trainer_module
 
@@ -314,7 +337,34 @@ def patch_trainer() -> None:
             self.model.load_pretrained_blip_model = skip_blip_load
             self.model.load_pretrained_blipvision_model = skip_blip_load
             self.model.load_blip_pos_encoding = skip_blip_load
-        return original_setup(self, stage)
+        result = original_setup(self, stage)
+        target_relationships = load_target_relationships()
+        if stage == "test" and target_relationships:
+            img_dim = 336 if self.hparams["clip_model"] == "ViT-L/14@336px" else 224
+            rel_img_dim = img_dim
+            if self.hparams.get("edge_model"):
+                rel_img_dim = 336 if self.hparams["edge_model"] == "ViT-L/14@336px" else 224
+            self.val_dataset = trainer_module.Open2D3DSGDataset(
+                relationships_R3SCAN=target_relationships,
+                relationships_scannet=None,
+                openseg=self.hparams["clip_model"] == "OpenSeg",
+                img_dim=img_dim,
+                rel_img_dim=rel_img_dim,
+                top_k_frames=self.hparams["top_k_frames"],
+                scales=self.hparams["scales"],
+                mini=False,
+                load_features=self.hparams.get("load_features", None),
+                blip=self.hparams.get("blip", False),
+                llava=self.hparams.get("llava", False),
+                half=False,
+            )
+            print(
+                "M59/M61 object dump replaced test dataset "
+                f"with target_relationships={len(target_relationships)} "
+                f"source={os.environ.get('OPEN3DSG_OBJECT_DUMP_TARGET_RELATIONSHIPS_JSONL')}",
+                flush=True,
+            )
+        return result
 
     def patched_predict_rel_from_blip(
         self: Any,

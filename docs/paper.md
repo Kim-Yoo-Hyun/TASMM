@@ -61,8 +61,8 @@ If four or more answers are weak, the work is still motivation-stage and the met
 | Claim Candidate | Evidence Needed | Current Status | Risk |
 | --- | --- | --- | --- |
 | Task/staleness-aware memory decision improves dynamic object search proxy behavior | E001/E002/E004 tables vs static memory, fixed top-k, context-agnostic trust, path-aware variants | partially supported | task-context effect is narrow |
-| The decision layer remains useful under real RGB-D/open-vocabulary proposal noise | E003 direct current-rescan bridge, heldout split, detector/proposal baseline comparison | not final | false-positive load and detector recall miss remain large |
-| The framework is stronger than external dynamic/open-vocabulary mapping baselines | E005 `ConceptGraphs` and at least one additional fair query-level route such as `Open3DSG` | partially supported for proxy-search only | `ConceptGraphs` full 195-row heldout comparison is ready, but `Open3DSG` is contract-ready only and has no M59 candidate rows yet |
+| The decision layer remains useful under real RGB-D/open-vocabulary proposal noise | E003 direct current-rescan bridge, heldout split, detector/proposal baseline comparison | not final | M71 converts `heldout_b01` to query metrics with H001 48 / 66 vs `ConceptGraphs` b01 45 / 66, but remaining batches and aggregate failure analysis are still pending |
+| The framework is stronger than external dynamic/open-vocabulary mapping baselines | E005 `ConceptGraphs` and at least one additional fair query-level route such as `Open3DSG` / `HOV-SG` | partially supported for proxy-search only | `ConceptGraphs` full 195-row heldout comparison is ready; corrected `Open3DSG` bridge is denominator-aligned; M65 includes the M64 predicted-vocabulary adapter as a bounded external scene-graph baseline row; M66 fixes row-level failure boundaries |
 | The system supports deployable search policy | bounded budget improvement, allowed-input contract, failure separation | not ready | current policy is diagnostic, not deployable |
 | The system improves real navigation `SR` / `SPL` | simulator/navmesh/trajectory execution and navigation baselines | unsupported | no real navigation evaluation yet |
 
@@ -72,7 +72,7 @@ If four or more answers are weak, the work is still motivation-stage and the met
 - E002: adds path/search-cost bridge and separates source-limited failures from policy failures.
 - E003: tests controlled perception noise and real RGB-D/open-vocabulary proposal failure modes.
 - E004: tests memory trust and task-context conditioning, with claim boundaries.
-- E005: adds external baseline pressure; `DualMap` runs without object-map outputs, `ConceptGraphs` now has full 195-row heldout query-level aggregation, and `Open3DSG` is source/schema/export/query-conversion contract-ready but still waits for M59 object-candidate rows.
+- E005: adds external baseline pressure; `DualMap` runs without object-map outputs, `ConceptGraphs` now has full 195-row heldout query-level aggregation, and `Open3DSG` is source/schema/export/query-conversion ready on the same denominator. Corrected `Open3DSG` primary-label strict bbox top5 is 81/195 and relaxed bbox 1m top3 is 90/195. M64 leakage-safe predicted-vocabulary adapter reaches strict 144/195 and relaxed 147/195. M65 includes it as a bounded external baseline row, keeps the primary-label adapter diagnostic, and keeps human intent as secondary structured task-context evidence. M66 records H001-only 60 rows vs `ConceptGraphs`, H001-only 39 rows vs `Open3DSG` vocab, and only 1 task-context-specific gain row. M68 materializes the next robustness route: 195-row full-denominator real proposal bridge inputs split into 3 heldout batches. M71 converts the first detector batch to query metrics, but no robustness claim is made before remaining batches and aggregate analysis.
 
 Main tables should not merely report that our method is better. They should show which failure mode is addressed by which component.
 
@@ -102,7 +102,7 @@ Expected reviewer questions:
 - Why does stale memory require task-conditioned trust instead of a fixed decay score?
 - Why does the method generalize beyond `chair` / `pillow` and the current 4 rescans?
 - What does `DualMap` / `ConceptGraphs` / `Open3DSG` fail or solve compared with our method?
-- Why is `Open3DSG` currently a contract/readiness result rather than a performance baseline?
+- Does `Open3DSG` remain weak after a leakage-safe predicted-vocabulary adapter, or was the gap mostly an adapter mismatch?
 - Where are real navigation `SR` / `SPL` and what is the bridge until then?
 
 Answers must refer to artifacts, tables, ablations, or explicit limitations.
@@ -142,7 +142,7 @@ Every experiment answers a reviewer question:
 | Does task context matter beyond a global threshold? | task-conditioned vs context-agnostic trust |
 | Does path/search cost change the decision? | E002/E004 cost-aware metrics |
 | Does the result survive proposal noise? | E003 controlled and real proposal diagnostics |
-| Is this competitive with external mappers? | E005 `ConceptGraphs` comparison and `Open3DSG` query-conversion route after M59 rows exist |
+| Is this competitive with external mappers? | E005 `ConceptGraphs` comparison is positive; corrected `Open3DSG` is weaker under primary labels, while M65 accepts the M64 bounded predicted-vocabulary adapter as a main-table external baseline row; M66 reports the row-level boundary |
 | What breaks? | failure taxonomy and claim boundary table |
 
 ## Reproducibility Checklist

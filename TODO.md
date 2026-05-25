@@ -1,6 +1,6 @@
 # TODO
 
-Last updated: 2026-05-22
+Last updated: 2026-05-25
 
 이 파일은 에이전트가 다음 작업 계획과 진행 상태를 관리하는 루트 작업판이다. 자세한 문헌 조사 내용은 `literature/`에 기록하고, 이 파일에는 다음 행동과 상태만 남긴다.
 
@@ -16,13 +16,13 @@ Last updated: 2026-05-22
 
 Main experiment implementation.
 
-CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 첫 route였던 `DualMap`은 Docker/submodule/bootstrap, staged `3RScan` Dataset Mode adapter, cache-fixed detector runtime까지 통과했지만, M14/M17 모두 object `*.pkl`을 만들지 못했다. `ConceptGraphs` route는 M20-M55까지 진행되어 source/interface audit, `3RScan` staging, Docker/runtime, 4-scan metric conversion, 9-scan heldout runtime/metric aggregation, H001-vs-`ConceptGraphs` common-split gate, H001 heldout replay contract, H001 heldout policy replay, paired failure analysis / paper-table decision, paper-table claim ledger / method claim rewrite, real RGB-D/open-vocabulary robustness expansion gate까지 완료했다. M56은 two-table robustness denominator를 고정하고 `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only source/interface audit을 완료했다. M57은 `Open3DSG` output schema inspection / query-conversion contract를 완료했고, M58은 object-candidate export schema, read-only Docker command contract, verifier를 완료했다. M59는 one-batch object candidate export smoke를 실행했지만 CUDA OOM으로 실패했다. M60은 `Open3DSG` query-level conversion contract를 195-row M38/M45 denominator 기준으로 선작성했고, M59 candidate row를 기다린다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `Open3DSG`는 query-level conversion 전까지 performance claim이 아니라 second external map/scene-graph baseline route 후보로만 둔다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. real RGB-D/open-vocabulary robustness와 real navigation `SR`/`SPL`은 아직 not ready다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
+CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 첫 route였던 `DualMap`은 Docker/submodule/bootstrap, staged `3RScan` Dataset Mode adapter, cache-fixed detector runtime까지 통과했지만, M14/M17 모두 object `*.pkl`을 만들지 못했다. `ConceptGraphs` route는 M20-M55까지 진행되어 source/interface audit, `3RScan` staging, Docker/runtime, 4-scan metric conversion, 9-scan heldout runtime/metric aggregation, H001-vs-`ConceptGraphs` common-split gate, H001 heldout replay contract, H001 heldout policy replay, paired failure analysis / paper-table decision, paper-table claim ledger / method claim rewrite, real RGB-D/open-vocabulary robustness expansion gate까지 완료했다. M56-M71은 `/home/yoohyun/research/local_dataset/Open3DSG_staged` read-only source를 사용해 `Open3DSG` schema/export/query-conversion/route decision, leakage-safe predicted-vocabulary expansion policy, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge plan, `heldout_b01` detector batch launch/completion verification/query-level conversion을 진행했다. M61은 9 query scans / 195 query rows / 51 target subgraphs에 대해 7,600 object-candidate rows와 query scan overlap 9/9를 확보했다. M64 leakage-safe predicted-vocabulary policy는 strict bbox top5 144/195, relaxed bbox 1m top3 147/195를 검증했다. M65는 `Open3DSG` predicted-vocabulary adapter를 bounded external scene-graph baseline row로 main table에 포함하고 primary-label adapter는 diagnostic/supplement row로 분리했다. M66은 H001 vs `ConceptGraphs`에서 H001-only 60, `ConceptGraphs`-only 2, H001 vs `Open3DSG` vocab에서 H001-only 39, `Open3DSG` vocab-only 11을 기록하고, human intent task-context-specific gain은 1 row뿐임을 재확인했다. M67은 real RGB-D/open-vocabulary robustness 확장 route로 `scale_real_proposal_bridge_to_m38_heldout_denominator`를 선택했다. M68은 M38/M45 195-row denominator를 3개 heldout batch로 materialize했고, E003-M75와 row-level overlap이 0임을 확인했다. M71은 `heldout_b01` 66 query rows에서 real detector target detected 54/66, H001 real memory-trust 48/66, `ConceptGraphs` b01 45/66, static 45/66, real detector task-budget 8/66, real detector top5 21/66을 확인했다. H001과 context-agnostic memory trust는 둘 다 48/66이라 human intent main claim은 여전히 false다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. real RGB-D/open-vocabulary robustness와 real navigation `SR`/`SPL`은 아직 not ready다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
 
 CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active task는 없고, CAND-001 feasibility가 약해질 때 다시 승격 여부를 판단한다.
 
 ## Active Objective
 
-- CAND-001: Direction B 최종 목표를 유지하되, `Open3DSG` object-candidate export hook / one-batch Docker smoke로 second external baseline route를 query-level conversion에 연결한다.
+- CAND-001: Direction B 최종 목표를 유지하되, E005-M72에서 `heldout_b02` / `heldout_b03` detector batch launch를 순차 진행한다.
 - CAND-002: `Common-Ground Semantic Mapping`은 benchmark 설계 부담을 보류 상태로 둔다.
 - CAND-003: `Functional Semantic Memory`는 annotation/manipulation evaluation 부담을 보류 상태로 둔다.
 
@@ -30,7 +30,7 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E005-M59 lower-memory object-only patch 재실행: GPU free memory >= 24GB일 때 launch
+- [ ] E005-M72 `heldout_b02` real proposal detector batch launch 및 `heldout_b03` 순차 launch gate 기록
 
 ### CAND-002
 
@@ -44,15 +44,16 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E005-M59 lower-memory patch relaunch completion verification
-- [ ] E005-M60 `Open3DSG` query conversion implementation/run: M59 rows 생성 후 진행
-- [ ] `OpenMask3D` feasibility는 bridge denominator staging/verification 이후 external 3D instance proposal baseline 후보로 재검토
+- [ ] E005-M72 `heldout_b03` real proposal detector batch launch
+- [ ] `heldout_b02` / `heldout_b03` launch 후 E005-M73 completion verification
+- [ ] E005-M74 remaining batch query-level metric conversion
+- [ ] E006 human-context upgrade decision은 사용자가 human intent main claim을 원할 때만 진행
+- [ ] `OpenMask3D` feasibility는 external 3D instance proposal baseline 후보로 재검토
 - [ ] `HOV-SG` / additional map-navigation baselines는 `Open3DSG` query-conversion feasibility 이후 재검토
 
 ## Running / Needs Verification
 
-- Active non-E005 runtime state: tmux session `research`; Docker containers `AST_mujoco`, `fervent_meninsky`, `jae`, `musing_leakey`, `vlsat-5090`.
-- E005-M59 failed/needs relaunch: previous tmux `e005_m59_open3dsg_object_export` stopped, log `logs/20260521_044206_e005_m59_open3dsg_object_export.log`, output `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`, lower-memory object-only patch applied, default GPU preflight 24GB, latest GPU free 16,839 MiB < 24,000 MiB, verification `python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_object_export_smoke.py --require-ready`.
+- Active non-E005 runtime state: tmux sessions `gdrive_upload`, `research`; Docker containers may be unrelated.
 
 ### CAND-002
 
@@ -64,7 +65,26 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
-- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/index.md`, `experiments/README.md`, `experiments/schedule.md`에 E005-M60 / M59 pending / `Open3DSG` no-performance boundary 반영
+- [x] E005-M71 `heldout_b01` real proposal query-level metric conversion 완료: `run_m71_real_proposal_query_metrics.py`, status `e005_m71_real_proposal_query_metric_ready_with_false_positive_boundary`, query rows 66, target detected 54/66, real detector task-budget 8/66, real detector top5 21/66, static 45/66, context-agnostic 48/66, H001 48/66, `ConceptGraphs` b01 45/66, selected next `launch_remaining_batches_after_recording_false_positive_boundary`
+- [x] E005-M70 `heldout_b01` full-denominator real proposal detector completion verification 완료: `verify_m70_full_denominator_real_proposal_detector_batch.py`, status `e005_m70_real_proposal_detector_batch_ready_with_false_positive_load`, expected files 12/12, prediction rows 261, pre-cap candidate rows 5,310, matched targets 18/22, recall 0.8182, precision 0.0690, false-positive rate 0.9310, next `E005-M71`
+- [x] E005-M69 `heldout_b01` full-denominator real proposal detector batch launch 완료: `launch_m69_full_denominator_real_proposal_batch.py`, status `e005_m69_real_proposal_detector_job_launched`, tmux `e005_m69_real_proposal_heldout_b01`, GPU free at launch 30,735 MiB, log `logs/20260524_004619_e005_m69_real_proposal_heldout_b01.log`, output `artifacts/E005-M69_full_denominator_real_proposal_detector_run_v0/heldout_b01/`, next `E005-M70`
+- [x] E005-M68 full-denominator real RGB-D proposal bridge plan 완료: `plan_m68_full_denominator_real_proposal_bridge.py`, status `e005_m68_full_denominator_real_proposal_bridge_plan_ready`, query rows 195, scans 9/9 ready, object targets 65, prompt labels 22, sampled frames 214, batches 3(`heldout_b01` 66 rows / `heldout_b02` 69 rows / `heldout_b03` 60 rows), row-level overlap with E003-M75 0, next `E005-M69`
+- [x] E005-M67 real RGB-D/open-vocabulary robustness route decision 완료: `plan_m67_real_rgbd_ov_robustness_route.py`, status `e005_m67_real_rgbd_ov_robustness_route_ready`, selected route `scale_real_proposal_bridge_to_m38_heldout_denominator`, M38/M45 denominator 195 rows / 9 scans / 65 target rows, E003-M75 current real-proposal denominator 96 rows, denominator mismatch 99 rows, next `E005-M68 full-denominator real RGB-D proposal bridge plan`
+- [x] E005-M66 external-baseline failure-boundary rows 완료: `analyze_m66_external_baseline_failure_boundary.py`, status `e005_m66_external_baseline_failure_boundary_ready`, query rows 195, H001 vs `ConceptGraphs` both_success 112 / H001-only 60 / `ConceptGraphs`-only 2 / both_fail 21, H001 vs `Open3DSG` vocab both_success 133 / H001-only 39 / `Open3DSG`-only 11 / both_fail 12, `Open3DSG` vocab vs primary vocab-only 66, human intent task-context-specific gain 1 row, next `E005-M67`
+- [x] E005-M65 `Open3DSG` table integration / claim boundary 완료: `plan_m65_open3dsg_table_integration.py`, status `e005_m65_open3dsg_table_integration_ready`, `Open3DSG` predicted-vocabulary adapter main table include true, primary-label adapter include false, H001 172/195, `Open3DSG` vocab 144/195, `ConceptGraphs` 114/195, human intent reflected as structured task context true, human intent main claim false
+- [x] E005-M64 leakage-safe `Open3DSG` predicted-vocabulary expansion policy 완료: `run_m64_open3dsg_vocab_expansion_policy.py`, `verify_m64_open3dsg_vocab_expansion_policy.py`, status `e005_m64_open3dsg_vocab_expansion_policy_verified`, query rows 195, query/eval candidate rows 1,533, policy rows 585, strict bbox top5 144/195 = 0.738462, relaxed bbox 1m top3 147/195 = 0.753846, leakage audit pass, final external baseline claim false
+- [x] E005-M63 route decision 완료: selected `bounded_open3dsg_predicted_vocab_expansion_repair_next`, current `Open3DSG` strict 81/195, diagnostic predicted-term strict 144/195, diagnostic predicted-term relaxed 147/195, next `E005-M64`
+- [x] E005-M60 target geometry loader fix/rerun 완료: `target_rows*.jsonl` 전체 로드, target geometry rows 65, verified, corrected strict bbox top5 81/195, relaxed bbox 1m top3 90/195, center strict top5 21/195
+- [x] E005-M63 precheck에서 M60 target geometry loader bug 발견: 기존 M60은 195 query rows를 쓰면서 `target_rows.jsonl`만 읽어 b02/b03 target geometry를 누락
+- [x] E005-M62 `Open3DSG` result interpretation rerun 완료: status `e005_m62_open3dsg_result_interpretation_ready_primary_label_below_conceptgraphs`, `Open3DSG` bridge feasibility true, main-table performance baseline false, H001 - corrected `Open3DSG` strict success +91 rows, `ConceptGraphs` - corrected `Open3DSG` strict success +33 rows
+- [x] E005-M60 `Open3DSG` query conversion rerun 완료: M61 rows 사용, status `e005_m60_open3dsg_query_conversion_verified`, query rows 195, object candidate rows 7,600, scan overlap 9/9, query candidate rows 759, candidate eval rows 759, policy rows 585; initial target-geometry bug로 old metric은 superseded
+- [x] E005-M61 targeted `Open3DSG` denominator export completion verification 완료: status `e005_m61_open3dsg_denominator_export_ready`, object candidate rows 7,600, completed batches 51/51, query scan overlap 9/9, source modified false, output `local_dataset/Open3DSG_bridge/E005-M61_denominator_aligned_export_v0/`
+- [x] E005-M61 targeted `Open3DSG` denominator export launch 완료: `launch_m61_open3dsg_denominator_export.py`, tmux `e005_m61_open3dsg_denominator_export`, log `logs/20260523_150156_e005_m61_open3dsg_denominator_export.log`, output `local_dataset/Open3DSG_bridge/E005-M61_denominator_aligned_export_v0/`, launch gate GPU free 22,068 MiB with `--min-gpu-free-mib 20000`, expected completed batches 51, initial verifier status `running`
+- [x] E005-M61 targeted `Open3DSG` denominator-aligned batch export plan 완료: `plan_m61_open3dsg_denominator_aligned_export.py`, status `e005_m61_open3dsg_denominator_aligned_export_plan_ready`, query rows 195, query scans 9, target subgraphs 51, preprocessed/features ready 51/51, train rows 123, validation rows 72, `Open3DSG` performance claim false
+- [x] E005-M60 `Open3DSG` query conversion implementation/run 완료: `run_m60_open3dsg_query_conversion.py`, `verify_m60_open3dsg_query_conversion.py`, status `e005_m60_open3dsg_query_conversion_ready_no_query_overlap`, M59 rows 180, query rows 195, scan overlap 0, policy rows 585, query/eval candidate rows 0, `Open3DSG` performance claim false
+- [x] E005-M59 lower-memory patch relaunch completion verification 완료: status `e005_m59_open3dsg_object_export_smoke_ready`, object candidate rows 180, completed batches 1, manifest rows 180, source modified false
+- [x] E005-M59 lower-memory object-only patch 재실행 launch 완료: GPU free 28,887 MiB, tmux `e005_m59_open3dsg_object_export`, log `logs/20260523_140609_e005_m59_open3dsg_object_export.log`, output `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/`
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M61 plan / `Open3DSG` no-performance boundary 반영
 - [x] 비데이터 TODO 3 reviewer defense 업데이트 완료: `experiments/report.md`에 M60 이후 reviewer defense ledger 추가, `docs/paper.md` claim-evidence ledger와 reviewer question 업데이트
 - [x] 비데이터 TODO 2 `Open3DSG` backup/restore checklist 구체화 완료: `docs/reproducibility.md`에 Drive package layout, Priority A/B backup commands, restore order, verification commands, failure triage 기록
 - [x] E005-M60 `Open3DSG` query-level conversion contract 선작성 완료: `plan_m60_open3dsg_query_conversion_contract.py`, `verify_m60_open3dsg_query_conversion_contract.py`, status `e005_m60_open3dsg_query_conversion_contract_ready_waiting_m59_rows`, M38/M45 denominator 195 rows, M59 candidate rows 0, source modified false

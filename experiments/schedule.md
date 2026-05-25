@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-05-22
+Last updated: 2026-05-25
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -15,7 +15,7 @@ Last updated: 2026-05-22
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005 status: `ConceptGraphs` is the active converted external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56 completed the two-table robustness denominator contract and read-only `Open3DSG` source/interface audit. E005-M57 completed `Open3DSG` output schema / query-conversion contract. E005-M58 completed the `Open3DSG` object-candidate export smoke plan and stores derived outputs under `research2/local_dataset/Open3DSG_bridge/`. E005-M59 `Open3DSG` one-batch export smoke launched in tmux `e005_m59_open3dsg_object_export` but failed on CUDA OOM during `InstructBLIP` checkpoint loading; the selected repair is a lower-memory object-only patch plus 24GB GPU preflight. Candidate rows are not written. E005-M60 pre-committed the `Open3DSG` query-level conversion contract over the 195-row M38/M45 denominator before candidate rows exist. Real RGB-D/open-vocabulary robustness remains blocked until another external route has query-level conversion and an aligned failure table.
+- Current E005 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M71 completed the two-table robustness denominator contract, read-only `Open3DSG` source/interface audit, output schema contract, object-candidate export, denominator-aligned query conversion, target-geometry loader repair, route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge planning, and `heldout_b01` detector query-level conversion. M64 predicted-vocabulary policy reaches strict 144 / 195 and relaxed 147 / 195 with leakage audit pass. M65 includes this row as a bounded external scene-graph baseline, excludes primary-label adapter from the main table, and keeps human intent as structured task-context secondary evidence. M71 converts `heldout_b01`: target detected 54 / 66, real detector task-budget 8 / 66, real detector top5 21 / 66, static memory 45 / 66, context-agnostic memory trust 48 / 66, H001 real memory-trust 48 / 66, and `ConceptGraphs` b01 45 / 66. Real RGB-D/open-vocabulary robustness remains blocked until remaining heldout batches are run and converted.
 
 에이전트 추론:
 
@@ -80,8 +80,19 @@ Last updated: 2026-05-22
 | E005-M56 | Robustness denominator + `Open3DSG` audit | Complete: Table A proxy-search denominator 195 rows, Table B real RGB-D proposal bridge denominator 96 rows, `Open3DSG_staged` read-only audit passed | No `Open3DSG` performance claim before query-level conversion |
 | E005-M57 | `Open3DSG` output schema inspection / query-conversion contract | Complete: relation raw dump ready, feature/checkpoint route feasible, object candidate export needed | No `Open3DSG` object-search claim before candidate rows exist |
 | E005-M58 | `Open3DSG` object-candidate dump/export smoke plan | Complete: read-only Docker command, object-candidate schema, local output path, export contract, and verifier fixed | No `Open3DSG` object-search claim before one-batch candidate rows exist |
-| E005-M59 | `Open3DSG` object-candidate export hook / one-batch Docker smoke | Repair ready: lower-memory object-only patch implemented, default GPU preflight 24GB, latest GPU free 16,839 MiB | Relaunch when GPU free memory >= 24GB, then verify rows before query conversion |
-| E005-M60 | `Open3DSG` query-level conversion contract | Complete: 195-row M38/M45 denominator, join/leakage rules, policies, metrics, and verifier fixed before M59 rows exist | Run conversion only after M59 writes candidate rows |
+| E005-M59 | `Open3DSG` object-candidate export hook / one-batch Docker smoke | Complete: lower-memory relaunch ready, 180 object-candidate rows, completed batches 1 | Input to M60/M61 coverage diagnosis |
+| E005-M60 | `Open3DSG` query-level conversion | Complete after M61 rerun and target-geometry loader fix: 195-row denominator, 7,600 object candidates, 759 query/eval candidate rows, 585 policy rows, strict 81 / 195 | Primary-label adapter below `ConceptGraphs` |
+| E005-M61 | Targeted `Open3DSG` denominator-aligned batch export | Complete: all 9 query scans, 51 target subgraphs, 7,600 object-candidate rows, source modified false | Input to M60 rerun |
+| E005-M62 | `Open3DSG` result interpretation | Complete after corrected M60: bridge feasibility true, main-table performance baseline false, H001 strict margin +91 | Input to M63 |
+| E005-M63 | `Open3DSG` route decision | Complete: diagnostic predicted-term strict 144 / 195, selected bounded repair next | M64 completed the policy verification |
+| E005-M64 | `Open3DSG` leakage-safe vocabulary policy | Complete: strict 144 / 195, relaxed 147 / 195, leakage audit pass | Input to M65 paper-table boundary decision |
+| E005-M65 | `Open3DSG` paper-table integration boundary | Complete: include predicted-vocabulary adapter row, exclude primary-label adapter from main table, human intent secondary | Input to E005-M66 failure-boundary rows |
+| E005-M66 | External-baseline failure-boundary rows | Complete: H001-only 60 vs `ConceptGraphs`, H001-only 39 vs `Open3DSG` vocab, task-context gain 1 | Input to E005-M67 robustness route decision |
+| E005-M67 | Real RGB-D/open-vocabulary robustness route decision | Complete: selected `scale_real_proposal_bridge_to_m38_heldout_denominator`, denominator gap 195 vs 96 rows | Input to E005-M68 full-denominator bridge plan |
+| E005-M68 | Full-denominator real proposal bridge plan | Complete: 195 rows, 9 ready scans, 65 object targets, 22 prompt labels, 214 sampled frames, 3 heldout batches | Input to E005-M69 detector batch launch |
+| E005-M69 | Full-denominator real proposal detector batch launch | Complete: `heldout_b01` launched in tmux `e005_m69_real_proposal_heldout_b01` | Input to E005-M70 completion verification |
+| E005-M70 | `heldout_b01` detector completion verification | Complete: expected files 12/12, prediction rows 261, matched targets 18/22, recall 0.8182, precision 0.0690, false-positive rate 0.9310 | Input to E005-M71 query-level metric conversion |
+| E005-M71 | `heldout_b01` real proposal query-level conversion | Complete: target detected 54/66, H001 48/66, context-agnostic 48/66, `ConceptGraphs` b01 45/66 | Input to E005-M72 remaining batch launch |
 | E006-M01 optional | Context-sensitive utility benchmark design | Define task-context-sensitive query rows and utility metrics | Start only if human task context is promoted beyond secondary ablation |
 | E006-M02 optional | Strong context-agnostic baseline suite | Compare against fixed trust, all-high-value, all-reobserve, risk-only, path-cost-only, detector-confidence-only | Human task context must beat these baselines beyond a 1-row gain |
 | E006-M03 optional | Context generalization stress | Test heldout scan / label / task-group transfer | Human task context main claim requires broad transfer, not one label group |
@@ -141,10 +152,22 @@ Order:
 3. E005-M56: two-table robustness denominator and `Open3DSG` source/interface audit. Complete.
 4. E005-M57: `Open3DSG` output schema inspection / query-conversion contract. Complete.
 5. E005-M58: `Open3DSG` object-candidate dump/export smoke plan. Complete.
-6. E005-M59: `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke. Lower-memory repair implemented; relaunch when GPU free memory >= 24GB.
-7. E005-M60: `Open3DSG` query-level conversion. Contract complete; implementation/run waits for M59 candidate rows.
-8. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
-9. E007 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
+6. E005-M59: `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke. Complete.
+7. E005-M60: `Open3DSG` query-level conversion. Complete after M61 rerun and target-geometry loader fix.
+8. E005-M61: targeted denominator-aligned `Open3DSG` export. Complete.
+9. E005-M62: `Open3DSG` result interpretation. Complete with corrected metrics.
+10. E005-M63: `Open3DSG` route decision. Complete; bounded predicted-vocabulary repair selected.
+11. E005-M64: leakage-safe `Open3DSG` predicted-vocabulary policy. Complete.
+12. E005-M65: `Open3DSG` vocabulary-policy claim-boundary / paper-table integration decision. Complete.
+13. E005-M66: external-baseline table failure-boundary rows. Complete.
+14. E005-M67: real RGB-D/open-vocabulary robustness expansion route decision. Complete.
+15. E005-M68: full-denominator real RGB-D proposal bridge plan. Complete.
+16. E005-M69: full-denominator real proposal detector batch launch. Complete for `heldout_b01`.
+17. E005-M70: `heldout_b01` detector completion verification. Complete.
+18. E005-M71: `heldout_b01` real proposal query-level metric conversion. Complete.
+19. E005-M72: `heldout_b02` / `heldout_b03` real proposal detector batch launch.
+20. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
+21. E007 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
 
 ## External Baseline Expansion
 
@@ -231,8 +254,8 @@ Purpose:
 
 ## Immediate Next Actions
 
-- Relaunch E005-M59 `Open3DSG` object-candidate export hook implementation / one-batch Docker smoke when GPU free memory is >= 24GB.
-- If M59 writes candidate rows, run E005-M60 query-level conversion and add `Open3DSG` to the aligned external baseline table.
+- Run E005-M72 `heldout_b02` / `heldout_b03` real proposal detector batches using the same M68/M71 metric contract.
+- Do not continuously monitor the log; inspect only targeted tail/head/error snippets when verification is needed.
 - Keep the main paper claim centered on memory trust, staleness handling, bounded re-observation, and proxy-search improvement over `ConceptGraphs` / static memory.
 - Keep human task context as a secondary ablation unless E006 is explicitly launched and passes context-sensitive utility gates.
 - Expand real RGB-D/open-vocabulary robustness before real navigation `SR` / `SPL`.
