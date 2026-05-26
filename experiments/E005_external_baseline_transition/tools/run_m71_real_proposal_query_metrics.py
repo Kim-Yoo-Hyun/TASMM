@@ -680,14 +680,16 @@ def build_decision(metrics: dict[str, Any], failure_rows: list[dict[str, Any]]) 
             int(h001["query_bridge_success_rows"]) == int(pm[CONTEXT_AGNOSTIC_POLICY]["query_bridge_success_rows"])
             and float(h001["mean_expected_search_cost"]) < float(pm[CONTEXT_AGNOSTIC_POLICY]["mean_expected_search_cost"])
         ),
-        "real_h001_beats_conceptgraphs_b01": bool(cg and int(h001["query_bridge_success_rows"]) > int(cg["query_bridge_success_rows"])),
+        "real_h001_beats_conceptgraphs_same_batch": bool(
+            cg and int(h001["query_bridge_success_rows"]) > int(cg["query_bridge_success_rows"])
+        ),
         "final_real_rgbd_open_vocab_robustness_claim_ready": False,
         "real_navigation_sr_spl_claim_ready": False,
     }
     failure_counts = Counter(row["failure_class"] for row in failure_rows)
     if gates["real_detector_target_detection_sufficient_for_batch_diagnostic"] and gates["real_h001_beats_real_detector_task_budget"]:
         selected = "launch_remaining_batches_after_recording_false_positive_boundary"
-        rationale = "heldout_b01 has enough real detector target recall to justify scaling, and H001 memory trust improves over detector task-budget on this batch."
+        rationale = "This batch has enough real detector target recall to justify scaling, and H001 memory trust improves over detector task-budget on this batch."
     elif target_rate >= 0.70:
         selected = "query_metric_ready_but_policy_gain_weak_review_before_remaining_batches"
         rationale = "Real detector recall is usable, but policy gain is weak; inspect failures before launching remaining batches."
@@ -703,15 +705,15 @@ def build_decision(metrics: dict[str, Any], failure_rows: list[dict[str, Any]]) 
         "delta_vs_real_detector_top5": metric_delta(pm, H001_POLICY, "real_detector_confidence_top5_v0"),
         "delta_vs_static_memory": metric_delta(pm, H001_POLICY, STATIC_POLICY),
         "delta_vs_context_agnostic_memory_trust": metric_delta(pm, H001_POLICY, CONTEXT_AGNOSTIC_POLICY),
-        "delta_vs_conceptgraphs_b01": metric_delta(pm, H001_POLICY, CONCEPTGRAPHS_POLICY) if cg else None,
+        "delta_vs_conceptgraphs_same_batch": metric_delta(pm, H001_POLICY, CONCEPTGRAPHS_POLICY) if cg else None,
         "claim_boundary": {
-            "heldout_b01_query_metric_ready": True,
+            "batch_query_metric_ready": True,
             "remaining_batches_launch_candidate": selected == "launch_remaining_batches_after_recording_false_positive_boundary",
             "final_real_rgbd_open_vocab_robustness_claim_ready": False,
             "deployable_search_policy_claim_ready": False,
             "real_navigation_sr_spl_claim_ready": False,
         },
-        "next_recommended_unit": "E005-M72 heldout_b02/b03 launch if accepting M71 false-positive boundary",
+        "next_recommended_unit": "E005-M72/E005-M73 remaining-batch launch or verification if accepting M71 false-positive boundary",
     }
 
 
@@ -751,7 +753,7 @@ def build_report(coverage: dict[str, Any], metrics: dict[str, Any], decision: di
             "",
             "## Claim Boundary",
             "",
-            "- M71 converts `heldout_b01` detector output into query-level search metrics.",
+            f"- M71 converts `{coverage['batch_id']}` detector output into query-level search metrics.",
             "- M71 is one batch only, so it is not final real RGB-D/open-vocabulary robustness.",
             "- Real navigation `SR` / `SPL` and deployable search policy claims remain false.",
             "",
@@ -847,6 +849,7 @@ def main() -> int:
         "real_detector_task_budget_success_rows": policy_metrics["real_detector_task_budget_v0"]["query_bridge_success_rows"],
         "real_detector_top5_success_rows": policy_metrics["real_detector_confidence_top5_v0"]["query_bridge_success_rows"],
         "real_context_agnostic_success_rows": policy_metrics[CONTEXT_AGNOSTIC_POLICY]["query_bridge_success_rows"],
+        "conceptgraphs_same_batch_success_rows": policy_metrics[CONCEPTGRAPHS_POLICY]["query_bridge_success_rows"],
         "conceptgraphs_b01_success_rows": policy_metrics[CONCEPTGRAPHS_POLICY]["query_bridge_success_rows"],
         "real_rgbd_open_vocab_robustness_claim_ready": False,
         "deployable_search_policy_claim_ready": False,

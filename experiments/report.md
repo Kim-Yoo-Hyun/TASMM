@@ -1,6 +1,6 @@
 # Experiment Report
 
-Updated: 2026-05-25
+Updated: 2026-05-26
 
 이 문서는 현재 `experiments/` 단계에서 확인된 기여점, reviewer가 공격할 핵심 지점, 방어 전략, 최종 논문 방향성을 정리한다. 세부 산출물은 각 experiment folder와 artifact에 둔다.
 
@@ -166,7 +166,31 @@ Updated: 2026-05-25
 - E005-M68 materializes the full-denominator real proposal bridge plan: 195 query rows, 9/9 ready scans, 65 object targets, 22 prompt labels, 214 sampled frames, 3 heldout batches, and 0 row-level overlap with E003-M75.
 - E005-M69 launches `heldout_b01` detector batch in tmux `e005_m69_real_proposal_heldout_b01`, with log `logs/20260524_004619_e005_m69_real_proposal_heldout_b01.log` and output path `E005-M69_full_denominator_real_proposal_detector_run_v0/heldout_b01/`.
 - E005-M70 verifies `heldout_b01` detector completion: expected files 12/12, prediction rows 261, pre-cap candidate rows 5,310, matched targets 18/22, scan target recall 0.8182, proposal precision 0.0690, false-positive rate 0.9310, and mean matched centroid error 0.5892m.
-- E005-M71 converts `heldout_b01` real proposals into query-level metrics: target detected 54/66, mean target rank 8.777778, mean false positives before target 7.777778, real detector task-budget 8/66, real detector top5 21/66, static memory 45/66, context-agnostic memory trust 48/66, H001 real memory-trust 48/66, and `ConceptGraphs` b01 45/66.
+- E005-M71 converts `heldout_b01` real proposals into query-level metrics: target detected 54/66, mean target rank 8.777778, mean false positives before target 7.777778, real detector task-budget 8/66, real detector top5 21/66, static memory 45/66, context-agnostic memory trust 48/66, H001 real memory-trust 48/66, and `ConceptGraphs` same-batch 45/66.
+- E005-M72/M73/M74 complete `heldout_b02` launch, detector verification, and query conversion: detector expected files 12/12, prediction rows 264, pre-cap candidates 6,799, matched targets 14/17, scan target recall 0.8235, proposal precision 0.0530, false-positive rate 0.9470, query target detected 42/69, real detector task-budget 5/69, real detector top5 9/69, H001 54/69, context-agnostic memory trust 54/69, and `ConceptGraphs` same-batch 45/69.
+- E005-M73 verifies `heldout_b03` detector completion: expected files 12/12, prediction rows 400, matched targets 16/20, scan target recall 0.8000, proposal precision 0.0400.
+- E005-M74 converts `heldout_b03` into query-level metrics: target detected 48/60, H001 55/60, context-agnostic 54/60, `ConceptGraphs` same-batch 24/60, detector task-budget 11/60, detector top5 21/60.
+- E005-M75 aggregates b01/b02/b03: query rows 195, target detected 144/195, H001 157/195, context-agnostic memory trust 156/195, `ConceptGraphs` same-batch 114/195, detector task-budget 24/195, detector top5 51/195, selected route `aggregate_diagnostic_ready_review_claim_boundary`.
+- E005-M76 fixes the real-proposal claim boundary: M75 is diagnostic-table ready, final real RGB-D/open-vocabulary robustness remains blocked, and the next route is `include_diagnostic_table_then_offline_detector_prompt_repair`.
+- E005-M76 detector aggregate precision is 0.051892, detector scan-target recall is 0.813559, mean false positives before target is 8.104167, and human intent main claim readiness is false.
+- E005-M77 analyzes existing M69 pre-cap candidate pools without a new detector run: 23,742 pre-cap candidate rows, 65 target rows, 195 query rows.
+- E005-M77 finds pre-cap detected targets 54 / 65 versus current selected detected targets 48 / 65.
+- E005-M77 repair classes are `rank_or_false_positive_budget_gap` 29, `selection_or_cap_lost_target` 6, `prompt_or_detector_recall_miss` 11, and `already_top5_or_memory_recovered` 19.
+- E005-M77 best offline policy is `offline_confidence_log_depth_radius0p5_cap24`, with top5 success 60 / 195 versus current replay/M75 detector top5 51 / 195.
+- E005-M77 selects `offline_replay_repair_candidate_then_targeted_detector_rerun` and next `E005-M78 offline repair replay implementation`.
+- E005-M78 implements fixed `offline_confidence_log_depth_radius0p5_cap24_fixed_replay_v0` over the same M69 pre-cap candidate pools.
+- E005-M78 reproduces M77 best policy with top5 mismatch 0 and target-rank mismatch 0.
+- E005-M78 fixed replay selected 926 proposals, matched 98 proposal rows, reached proposal precision 0.105832, scan target recall 49 / 65, query target detected 147 / 195, and top5 success 60 / 195.
+- E005-M78 improves over M75 detector top5 by +9 rows but remains -97 rows behind H001 real memory-trust policy.
+- E005-M78 selects `fixed_offline_repair_ready_for_runner_insertion_or_targeted_rerun` and next `E005-M79 runner insertion point and targeted repair rerun plan`.
+- E005-M79 confirms runner source edit required false and fixes insertion point `select_cap_aware_label_balanced_candidates.score_candidate_before_spatial_consolidation_and_caps`.
+- E005-M79 fixes `confidence_log_depth` as the runner score mode and writes 3 targeted rerun command plans.
+- E005-M79 selects `heldout_b02` as the first rerun batch because M78 expected top5 gain is largest there: M75 detector top5 9/69 -> M78 fixed top5 15/69.
+- E005-M79 selects `gain_batch_first_targeted_rerun_then_remaining_batches_if_reproduction_holds` and next `E005-M80 confidence-log-depth targeted detector rerun launch for heldout_b02`.
+- E005-M80 launches `heldout_b02` confidence-log-depth targeted detector rerun in tmux `e005_m80_confidence_log_depth_heldout_b02`, with log `logs/20260526_020840_e005_m80_confidence_log_depth_heldout_b02.log`, output `E005-M80_confidence_log_depth_detector_run_v0/heldout_b02/`, and GPU free at launch 24,421 MiB.
+- E005-M81 verifies M80 completion: expected files 14/14, prediction rows 264, pre-cap candidates 6,799, matched targets 14/17, proposal precision 0.053030, scan target recall 0.823529.
+- E005-M82 converts M80/M81 into query-level metrics: `heldout_b02` target detected 42/69, detector task-budget 7/69, detector top5 15/69, H001 54/69, context-agnostic memory trust 54/69, `ConceptGraphs` same-batch 45/69.
+- E005-M82 reproduces the expected b02 top5 gain over M71/M74 baseline: detector top5 9/69 -> 15/69 and task-budget 5/69 -> 7/69, while target detected stays 42/69.
 - Real navigation `SR` / `SPL` remains unsupported.
 - Final real RGB-D/open-vocabulary robustness claim remains unsupported.
 
@@ -174,6 +198,7 @@ Updated: 2026-05-25
 
 - The currently defensible paper core is `Task-Conditioned Stale Semantic Memory Update`.
 - The current paper should not claim a better detector, deployable navigation policy, or natural-language intention understanding.
+- M78 can be used as detector-repair evidence only after the runner/rerun path is fixed; it should not be merged into the main H001 memory-decision claim.
 - The final paper target is Direction B: `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`.
 
 에이전트 추론:
@@ -217,8 +242,8 @@ Updated: 2026-05-25
 - External routes such as `HOV-SG`, `VLFM`, `HM3D-OVON`, `GOAT-Bench`, and `3D-Mem` have not yet been run in this workspace.
 - `DualMap` has been staged and executed, but current M14/M17 runs lack object `*.pkl` outputs, so it is not yet a valid object-map baseline result.
 - E001/E002 still use proxy search metrics, not real executed navigation.
-- E003 real perception evidence is now connected to direct current-rescan query rows, but the denominator is still 4 rescans / 96 query rows.
-- The current 8-scan real-proposal artifact is too small for reliable heldout transfer.
+- E003 real perception evidence is connected to direct current-rescan query rows, and E005-M75/M76 now scales the real-proposal diagnostic to the 195-row heldout denominator.
+- The current real-proposal artifact is still diagnostic rather than final robustness evidence because detector precision and false-positive load are weak.
 - The current visibility denominator is a centroid/depth-consistent proxy, not true object visibility.
 
 에이전트 추론:
@@ -265,7 +290,7 @@ Updated: 2026-05-25
 | Is the benchmark self-defined? | Query rows come from dynamic `3RScan` / `3DSSG` scan pairs and are evaluated against external `ConceptGraphs` output on all 9 heldout sequence-required scans. | Still not a standard public navigation benchmark; real `SR` / `SPL` requires simulator or navmesh episodes. |
 | Is `ConceptGraphs` enough as an external baseline? | `ConceptGraphs` is fully converted on 195 heldout rows and is a valid proxy-search external map baseline. | Not enough for final real RGB-D/open-vocabulary robustness by itself; `Open3DSG` M64 adds a second bounded external scene-graph row, but it is adapter-based. |
 | Can `Open3DSG` be claimed as a baseline? | M56-M66 prove source/interface/schema/export/query-conversion, denominator alignment, corrected query-level metrics, leakage-safe predicted-vocabulary policy evaluation, and row-level failure boundary without modifying the read-only source. | Primary-label baseline is valid but below `ConceptGraphs` at 81 / 195 strict. Predicted-vocabulary adapter is stronger at 144 / 195 strict but should be labeled as a bounded adapter row. |
-| Does this prove real RGB-D/open-vocabulary robustness? | E003-M75 gives a real proposal bridge with 87 / 96 target detected rows and 33 / 96 bounded repair success rows. M67 selects scaling this bridge to the M38/M45 195-row denominator, M68 materializes 3 detector batches, and M71 converts `heldout_b01` to query metrics with H001 48 / 66 vs `ConceptGraphs` b01 45 / 66. | No. M71 is one-batch evidence. Remaining heldout batches and aggregate failure analysis are required before a robustness claim. |
+| Does this prove real RGB-D/open-vocabulary robustness? | E003-M75 gives a real proposal bridge with 87 / 96 target detected rows and 33 / 96 bounded repair success rows. M67 scales this bridge to the M38/M45 195-row denominator. M75 full aggregate has target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. M76 marks the table diagnostic-ready. M77/M78 show offline repair potential from pre-cap pools, with fixed replay top5 60 / 195. M80-M82 reproduce the b02 ranking gain in the runner path: detector top5 9 / 69 -> 15 / 69. | No. M82 improves ranking but not target detection, and detector-only remains far below H001. Final robustness remains blocked until remaining-batch decision, external proposal baseline pressure, and false-positive/recall boundary analysis are resolved. |
 | Does this prove real navigation `SR` / `SPL`? | E002/E005 provide `ExpectedSearchCost` and `AttemptSPL` proxy. | No. `SR` / `SPL` requires simulator, navmesh, or trajectory execution. |
 | Is human intent a main contribution? | Structured `task_context_id` is included in H001 memory trust / re-observation policies, and E005-M65 records human intent reflected as structured task context. | H001 beats context-agnostic memory trust by only 1 success row, so do not claim natural-language intent understanding or main human-intent contribution yet. |
 | Are failed baselines being hidden? | `DualMap` executed but produced no object `*.pkl`; E003-M45 and E003-M50 negative support/mask routes are documented. | Use them as failure-boundary evidence, not as performance baselines. |
@@ -406,7 +431,7 @@ Cold assessment:
 - Real RGB-D/open-vocabulary robustness is not just higher detector recall. It must show transfer across heldout scenes/labels and robustness to prompt, depth, pose, and proposal noise.
 - Deployable search policy is currently the nearest claim to mature, but E004-M05 still supports only a diagnostic memory-trust decision claim, not a final deployable policy claim.
 - Real navigation `SR` / `SPL` is the farthest claim because query-level success must be connected to actual path execution and candidate visit order.
-- The correct immediate route is E005-M59 lower-memory relaunch after GPU free memory reaches 24GB. GPU-exclusive relaunch is the backup path if the object-only patch still fails.
+- The correct immediate route is E005-M78 fixed offline repair replay over existing pre-cap candidate pools before any new long detector run.
 
 사용자 판단 필요:
 
@@ -418,7 +443,7 @@ Cold assessment:
 
 - Use Direction A as the backbone now.
 - Treat Direction B as the final target, not a separate replacement.
-- The next technical step should be E005-M59 lower-memory relaunch and verification.
+- The next technical step should be E005-M78 fixed offline repair replay and then a targeted rerun only if the replay validates the M77 repair signal.
 - E005 should preserve the E004 claim boundary: split-supported memory trust, limited task-context specificity, no final real RGB-D/open-vocabulary robustness, no deployable search policy, and no real navigation `SR` / `SPL`.
 - External proposal/mapping baselines such as `OpenMask3D`, `ConceptGraphs`, and `HOV-SG` should be evaluated as claim-expansion routes, not retrofitted as detector improvements.
 - Do not claim real navigation `SR` / `SPL` until simulator, navmesh, or trajectory execution is integrated.

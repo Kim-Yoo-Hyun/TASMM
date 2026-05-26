@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-05-25
+Last updated: 2026-05-26
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -15,7 +15,7 @@ Last updated: 2026-05-25
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M71 completed the two-table robustness denominator contract, read-only `Open3DSG` source/interface audit, output schema contract, object-candidate export, denominator-aligned query conversion, target-geometry loader repair, route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge planning, and `heldout_b01` detector query-level conversion. M64 predicted-vocabulary policy reaches strict 144 / 195 and relaxed 147 / 195 with leakage audit pass. M65 includes this row as a bounded external scene-graph baseline, excludes primary-label adapter from the main table, and keeps human intent as structured task-context secondary evidence. M71 converts `heldout_b01`: target detected 54 / 66, real detector task-budget 8 / 66, real detector top5 21 / 66, static memory 45 / 66, context-agnostic memory trust 48 / 66, H001 real memory-trust 48 / 66, and `ConceptGraphs` b01 45 / 66. Real RGB-D/open-vocabulary robustness remains blocked until remaining heldout batches are run and converted.
+- Current E005 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M82 completed the two-table robustness denominator contract, read-only `Open3DSG` source/interface audit, output schema contract, object-candidate export, denominator-aligned query conversion, target-geometry loader repair, route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge planning, all b01/b02/b03 detector verification/query conversion, full aggregate route decision, real-proposal claim-boundary decision, offline detector/prompt repair design, fixed offline repair replay, runner insertion/targeted rerun planning, and `heldout_b02` confidence-log-depth targeted detector rerun launch/completion/query conversion. M64 predicted-vocabulary policy reaches strict 144 / 195 and relaxed 147 / 195 with leakage audit pass. M65 includes this row as a bounded external scene-graph baseline, excludes primary-label adapter from the main table, and keeps human intent as structured task-context secondary evidence. Full real-proposal aggregate has target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. M76 marks the table diagnostic-ready but keeps final real RGB-D/open-vocabulary robustness blocked because detector precision is 0.051892, target detection is 0.738462, and mean false positives before target is 8.104167. M78 fixed replay policy `offline_confidence_log_depth_radius0p5_cap24_fixed_replay_v0` reproduces M77 with 0 top5/rank mismatches and reaches 60 / 195 top5 success, target detected 147 / 195, and proposal precision 0.105832. M80-M82 reproduces the expected b02 runner gain: detector top5 9 / 69 -> 15 / 69 and task-budget 5 / 69 -> 7 / 69, while target detected remains 42 / 69. Next unit: E005-M83 confidence-log-depth rerun result interpretation and remaining-batch decision.
 
 에이전트 추론:
 
@@ -92,7 +92,19 @@ Last updated: 2026-05-25
 | E005-M68 | Full-denominator real proposal bridge plan | Complete: 195 rows, 9 ready scans, 65 object targets, 22 prompt labels, 214 sampled frames, 3 heldout batches | Input to E005-M69 detector batch launch |
 | E005-M69 | Full-denominator real proposal detector batch launch | Complete: `heldout_b01` launched in tmux `e005_m69_real_proposal_heldout_b01` | Input to E005-M70 completion verification |
 | E005-M70 | `heldout_b01` detector completion verification | Complete: expected files 12/12, prediction rows 261, matched targets 18/22, recall 0.8182, precision 0.0690, false-positive rate 0.9310 | Input to E005-M71 query-level metric conversion |
-| E005-M71 | `heldout_b01` real proposal query-level conversion | Complete: target detected 54/66, H001 48/66, context-agnostic 48/66, `ConceptGraphs` b01 45/66 | Input to E005-M72 remaining batch launch |
+| E005-M71 | `heldout_b01` real proposal query-level conversion | Complete: target detected 54/66, H001 48/66, context-agnostic 48/66, `ConceptGraphs` same-batch 45/66 | Input to E005-M72 remaining batch launch |
+| E005-M72 | Remaining real proposal detector batch launch | Complete: `heldout_b02` and `heldout_b03` launched sequentially | Input to E005-M73 verification |
+| E005-M73 | Remaining detector completion verification | Complete: b02 expected files 12/12, prediction rows 264, matched targets 14/17; b03 expected files 12/12, prediction rows 400, matched targets 16/20 | Input to E005-M74 conversion |
+| E005-M74 | Remaining query-level conversion | Complete: b02 target detected 42/69, H001 54/69; b03 target detected 48/60, H001 55/60 | Input to E005-M75 aggregate |
+| E005-M75 | Real-proposal aggregate route | Complete: 195 rows, target detected 144/195, H001 157/195, context-agnostic 156/195, `ConceptGraphs` same-batch 114/195 | Input to E005-M76 claim-boundary decision |
+| E005-M76 | Real-proposal claim-boundary decision | Complete: diagnostic table ready, final robustness blocked, selected `include_diagnostic_table_then_offline_detector_prompt_repair` | Input to E005-M77 offline repair design |
+| E005-M77 | Offline detector/prompt repair design | Complete: pre-cap targets 54/65 vs current 48/65, best offline top5 60/195 vs current 51/195 | Input to E005-M78 fixed replay implementation |
+| E005-M78 | Fixed offline repair replay | Complete: M77 best policy reproduced with 0 mismatches, top5 60/195, target detected 147/195, precision 0.105832 | Input to E005-M79 runner insertion / targeted rerun plan |
+| E005-M79 | Runner insertion point and targeted repair rerun plan | Complete: runner source edit required false, `confidence_log_depth` score mode, first rerun batch `heldout_b02` | Input to E005-M80 targeted detector rerun launch |
+| E005-M80 | Confidence-log-depth targeted detector rerun launch | Complete: `heldout_b02` launched in tmux `e005_m80_confidence_log_depth_heldout_b02` | Input to E005-M81 verification |
+| E005-M81 | Confidence-log-depth detector completion verification | Complete: expected files 14 / 14, prediction rows 264, matched targets 14 / 17, precision 0.053030 | Input to M82 query metrics |
+| E005-M82 | Confidence-log-depth query-level metric conversion | Complete: b02 detector top5 15 / 69, task-budget 7 / 69, target detected 42 / 69 | Input to M83 remaining-batch decision |
+| E005-M83 | Confidence-log-depth rerun interpretation | Decide whether b02 reproduction justifies b01/b03 reruns or should stop at diagnostic detector-repair evidence | Required before more detector reruns |
 | E006-M01 optional | Context-sensitive utility benchmark design | Define task-context-sensitive query rows and utility metrics | Start only if human task context is promoted beyond secondary ablation |
 | E006-M02 optional | Strong context-agnostic baseline suite | Compare against fixed trust, all-high-value, all-reobserve, risk-only, path-cost-only, detector-confidence-only | Human task context must beat these baselines beyond a 1-row gain |
 | E006-M03 optional | Context generalization stress | Test heldout scan / label / task-group transfer | Human task context main claim requires broad transfer, not one label group |
@@ -165,9 +177,18 @@ Order:
 16. E005-M69: full-denominator real proposal detector batch launch. Complete for `heldout_b01`.
 17. E005-M70: `heldout_b01` detector completion verification. Complete.
 18. E005-M71: `heldout_b01` real proposal query-level metric conversion. Complete.
-19. E005-M72: `heldout_b02` / `heldout_b03` real proposal detector batch launch.
-20. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
-21. E007 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
+19. E005-M72: `heldout_b02` / `heldout_b03` real proposal detector batch launch. Complete.
+20. E005-M73/M74: verify/convert `heldout_b02` / `heldout_b03`. Complete.
+21. E005-M75: aggregate b01/b02/b03. Complete.
+22. E005-M76: diagnostic-table inclusion and detector/prompt repair decision. Complete.
+23. E005-M77: offline detector/prompt repair design over existing pre-cap candidate pools. Complete.
+24. E005-M78: fixed offline repair replay implementation and M75/M76 comparison. Complete.
+25. E005-M79: runner insertion point and targeted repair rerun plan. Complete.
+26. E005-M80: confidence-log-depth targeted detector rerun launch for `heldout_b02`. Complete.
+27. E005-M81/M82: completion verification and query metric conversion for targeted rerun. Complete.
+28. E005-M83: result interpretation and remaining-batch decision. Current next action.
+29. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
+30. E007 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
 
 ## External Baseline Expansion
 
@@ -254,8 +275,8 @@ Purpose:
 
 ## Immediate Next Actions
 
-- Run E005-M72 `heldout_b02` / `heldout_b03` real proposal detector batches using the same M68/M71 metric contract.
-- Do not continuously monitor the log; inspect only targeted tail/head/error snippets when verification is needed.
+- Run E005-M78 fixed offline repair replay for `offline_confidence_log_depth_radius0p5_cap24`.
+- Do not launch another long detector run until M78 verifies the offline repair policy against M75/M76 and records remaining prompt/recall misses.
 - Keep the main paper claim centered on memory trust, staleness handling, bounded re-observation, and proxy-search improvement over `ConceptGraphs` / static memory.
 - Keep human task context as a secondary ablation unless E006 is explicitly launched and passes context-sensitive utility gates.
 - Expand real RGB-D/open-vocabulary robustness before real navigation `SR` / `SPL`.

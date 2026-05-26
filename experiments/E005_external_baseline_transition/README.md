@@ -1,10 +1,336 @@
 # E005 External Baseline Transition
 
-Updated: 2026-05-25
+Updated: 2026-05-26
 
 ## Status
 
-`E005-M01` through `E005-M71` are complete through 4-scan scale decision, heldout `ConceptGraphs` runtime/query conversion, full 9-scan aggregation, H001 heldout replay, paper-table claim ledger, real RGB-D/open-vocabulary robustness gate, `Open3DSG` source/schema/object-candidate contracts, denominator-aligned `Open3DSG` export, corrected query conversion, route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge planning, and `heldout_b01` detector query-level conversion. `ConceptGraphs` is the active positive external mapping baseline route: full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M52 replays H001 on the same `M38` query contract: H001 `task_context_memory_trust_reobserve_v0` is 172 / 195 = 0.882051, `static_memory_only_v0` is 141 / 195 = 0.723077, and `context_agnostic_memory_trust_reobserve_v0` is 171 / 195 = 0.876923. E005-M64 verifies the bounded predicted-vocabulary adapter policy leakage-safely: strict bbox top5 144 / 195 = 0.738462 and relaxed bbox 1m top3 147 / 195 = 0.753846. E005-M71 converts `heldout_b01` real proposals into query-level metrics: target detected 54 / 66, real detector task-budget 8 / 66, real detector top5 21 / 66, static memory 45 / 66, context-agnostic memory trust 48 / 66, H001 real memory-trust 48 / 66, and `ConceptGraphs` b01 45 / 66. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+`E005-M01` through `E005-M82` are complete through 4-scan scale decision, heldout `ConceptGraphs` runtime/query conversion, full 9-scan aggregation, H001 heldout replay, paper-table claim ledger, real RGB-D/open-vocabulary robustness gate, `Open3DSG` source/schema/object-candidate contracts, denominator-aligned `Open3DSG` export, corrected query conversion, route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge planning, all b01/b02/b03 detector verification/query conversion, full aggregate route decision, real-proposal claim-boundary decision, offline detector/prompt repair design, fixed offline repair replay, runner insertion/targeted rerun planning, and `heldout_b02` confidence-log-depth targeted detector rerun launch/completion/query conversion. `ConceptGraphs` is the active positive external mapping baseline route: full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M52 replays H001 on the same `M38` query contract: H001 `task_context_memory_trust_reobserve_v0` is 172 / 195 = 0.882051, `static_memory_only_v0` is 141 / 195 = 0.723077, and `context_agnostic_memory_trust_reobserve_v0` is 171 / 195 = 0.876923. E005-M64 verifies the bounded predicted-vocabulary adapter policy leakage-safely: strict bbox top5 144 / 195 = 0.738462 and relaxed bbox 1m top3 147 / 195 = 0.753846. Full real-proposal aggregate over b01/b02/b03 has 195 query rows, target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. E005-M76 marks this as diagnostic-table ready, but final robustness is blocked by detector precision 0.051892, target detection 0.738462, and mean false positives before target 8.104167. E005-M78 fixes and verifies the M77 repair policy: `offline_confidence_log_depth_radius0p5_cap24_fixed_replay_v0` reproduces M77 with 0 top5/rank mismatches and reaches top5 60 / 195, target detected 147 / 195, proposal precision 0.105832. E005-M79 confirms no runner source edit is needed and selects `heldout_b02` as the first rerun batch because expected top5 gain is largest there. E005-M80-M82 confirms the runner-integrated rerun reproduces the expected b02 gain: detector top5 improves from 9 / 69 to 15 / 69 and task-budget success from 5 / 69 to 7 / 69, while target detected stays 42 / 69. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Next unit: E005-M83 result interpretation and remaining-batch decision. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+
+## E005-M82 Confidence-Log-Depth Query Metrics
+
+사실:
+
+- Status: `e005_m71_real_proposal_query_metric_ready_target_detection_weak`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M82_confidence_log_depth_query_metric_v0/heldout_b02/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal_query_metrics.py --batch-id heldout_b02 --m69-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_run_v0 --m70-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M81_confidence_log_depth_detector_verification_v0 --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M82_confidence_log_depth_query_metric_v0`.
+- Query rows: 69.
+- Query target detected: 42 / 69 = 0.608696.
+- Detector task-budget success: 7 / 69.
+- Detector top5 success: 15 / 69.
+- H001 success: 54 / 69.
+- Context-agnostic memory trust success: 54 / 69.
+- `ConceptGraphs` same-batch success: 45 / 69.
+- Baseline M71 `heldout_b02` detector top5 was 9 / 69 and task-budget was 5 / 69.
+
+논문 주장:
+
+- M82 supports that `confidence_log_depth` improves selected-proposal ranking on `heldout_b02`.
+- M82 does not support final real RGB-D/open-vocabulary robustness because target detection remains 42 / 69 and the detector-only row is still far below H001.
+
+에이전트 추론:
+
+- E005-M83 should decide whether the reproduced b02 gain is enough to rerun b01/b03 or whether the route should stop at a diagnostic detector-repair table.
+
+## E005-M81 Confidence-Log-Depth Detector Verification
+
+사실:
+
+- Status: `e005_m70_real_proposal_detector_batch_ready_with_false_positive_load`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M81_confidence_log_depth_detector_verification_v0/heldout_b02/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b02 --launch-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_launch_v0 --run-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_run_v0 --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M81_confidence_log_depth_detector_verification_v0 --require-ready`.
+- Expected files ready: 14 / 14.
+- Prediction rows: 264.
+- Pre-cap candidate rows: 6,799.
+- Matched targets: 14 / 17.
+- Scan target recall: 0.823529.
+- Proposal precision: 0.053030.
+- Query metric conversion ready: true.
+
+논문 주장:
+
+- M81 supports detector completion and schema/matching readiness for the M80 rerun.
+- M81 does not support final robustness or navigation claims.
+
+## E005-M80 Confidence-Log-Depth Detector Launch
+
+사실:
+
+- Status: `e005_m80_confidence_log_depth_detector_job_launched`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_launch_v0/heldout_b02/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/launch_m80_confidence_log_depth_detector_batch.py --batch-id heldout_b02`.
+- Batch: `heldout_b02`.
+- tmux session: `e005_m80_confidence_log_depth_heldout_b02`.
+- Log: `logs/20260526_020840_e005_m80_confidence_log_depth_heldout_b02.log`.
+- Output: `experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_run_v0/heldout_b02/`.
+- GPU free at launch: 24,421 MiB.
+- Fixed score mode: `confidence_log_depth`.
+- Verification: completed by E005-M81.
+- Query-level conversion: completed by E005-M82.
+
+논문 주장:
+
+- M80 only supports that the runner-integrated detector rerun was launched.
+- It does not yet support real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- M80 should be interpreted together with E005-M81/M82; the useful result is the b02 ranking gain, not a final robustness claim.
+
+## E005-M79 Runner Insertion / Targeted Rerun Plan
+
+사실:
+
+- Status: `e005_m79_runner_insertion_targeted_rerun_plan_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M79_runner_insertion_targeted_rerun_plan_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m79_runner_insertion_targeted_rerun.py`.
+- Runner source edit required: false.
+- Fixed score mode: `confidence_log_depth`.
+- Insertion point: `select_cap_aware_label_balanced_candidates.score_candidate_before_spatial_consolidation_and_caps`.
+- M78 expected top5 by batch: `heldout_b01` 21/66, `heldout_b02` 15/69, `heldout_b03` 24/60.
+- M75 detector top5 by batch: `heldout_b01` 21/66, `heldout_b02` 9/69, `heldout_b03` 21/60.
+- First rerun batch: `heldout_b02`.
+- Selected next route: `gain_batch_first_targeted_rerun_then_remaining_batches_if_reproduction_holds`.
+- Completed next unit: E005-M80 confidence-log-depth targeted detector rerun launch for `heldout_b02`.
+
+논문 주장:
+
+- M79 supports that the M78 repair policy is expressible by existing runner arguments.
+- M79 is not a detector result and does not support final robustness.
+
+에이전트 추론:
+
+- `heldout_b02` is the right first rerun because it tests the largest expected repair gain rather than only runner smoke compatibility.
+
+## E005-M78 Offline Repair Replay
+
+사실:
+
+- Status: `e005_m78_offline_repair_replay_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M78_offline_repair_replay_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/run_m78_offline_repair_replay.py`.
+- Fixed policy: `offline_confidence_log_depth_radius0p5_cap24_fixed_replay_v0`.
+- M77 source policy: `offline_confidence_log_depth_radius0p5_cap24`.
+- M77 reproduction: top5 mismatch 0, target-rank mismatch 0.
+- Selected proposals: 926.
+- Matched proposal rows: 98.
+- Proposal precision: 0.105832.
+- Scan target recall: 49 / 65 = 0.753846.
+- Query target detected: 147 / 195 = 0.753846.
+- Top5 success: 60 / 195 = 0.307692.
+- Delta vs M75 detector top5: +9 rows.
+- Delta vs H001 real memory-trust policy: -97 rows.
+- Selected next route: `fixed_offline_repair_ready_for_runner_insertion_or_targeted_rerun`.
+- Next unit: E005-M79 runner insertion point and targeted repair rerun plan.
+
+논문 주장:
+
+- M78 supports a detector-ranking repair argument over existing pre-cap candidates.
+- M78 does not support final real RGB-D/open-vocabulary robustness because it is fixed offline replay, not a new detector run or downstream search execution.
+
+에이전트 추론:
+
+- The right next step is to connect this fixed policy to the runner path before any targeted long rerun.
+- M78 should stay separate from the H001 memory-decision claim because H001 still outperforms the repaired detector-only row by 97 query rows.
+
+## E005-M77 Offline Detector / Prompt Repair
+
+사실:
+
+- Status: `e005_m77_offline_detector_prompt_repair_design_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M77_offline_detector_prompt_repair_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m77_offline_detector_prompt_repair.py`.
+- Pre-cap candidate rows: 23,742.
+- Target rows: 65.
+- Query rows: 195.
+- Current replay top5: 51 / 195, matching M75 detector top5.
+- Pre-cap detected targets: 54 / 65 = 0.830769.
+- Current selected detected targets: 48 / 65 = 0.738462.
+- Repair class counts: `rank_or_false_positive_budget_gap` 29, `selection_or_cap_lost_target` 6, `prompt_or_detector_recall_miss` 11, `already_top5_or_memory_recovered` 19.
+- Best offline top5 policy: `offline_confidence_log_depth_radius0p5_cap24`, top5 60 / 195.
+- Selected next route: `offline_replay_repair_candidate_then_targeted_detector_rerun`.
+- Next unit: E005-M78 offline repair replay implementation.
+
+논문 주장:
+
+- M77 supports that part of the detector failure is repairable offline from existing pre-cap candidates.
+- M77 does not support final real RGB-D/open-vocabulary robustness or deployable search policy because the repair is not yet fixed/replayed as the paper-facing detector route.
+
+에이전트 추론:
+
+- The next step should implement the selected offline policy as a fixed replay artifact and compare it against M75/M76, before launching another long detector run.
+- The 11 pre-cap recall-miss targets still require prompt/label repair or an external proposal baseline later.
+
+## E005-M76 Real Proposal Claim Boundary
+
+사실:
+
+- Status: `e005_m76_real_proposal_claim_boundary_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M76_real_proposal_claim_boundary_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m76_real_proposal_claim_boundary.py`.
+- Diagnostic table ready: true.
+- Selected next route: `include_diagnostic_table_then_offline_detector_prompt_repair`.
+- Next unit: E005-M77 offline detector/prompt repair design.
+- Detector aggregate precision: 0.051892.
+- Detector aggregate scan-target recall: 0.813559.
+- Target detected: 144 / 195 = 0.738462.
+- Mean false positives before target: 8.104167.
+- H001 vs `ConceptGraphs` same-batch: +43 success rows.
+- H001 vs detector top5: +106 success rows.
+- H001 vs context-agnostic memory trust: +1 success row and +0.097436 mean `ExpectedSearchCost`.
+
+논문 주장:
+
+- M75/M76 supports including the full real-proposal aggregate as a diagnostic real-proposal search table.
+- M75/M76 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, real navigation `SR` / `SPL`, or human intent as the main contribution.
+
+에이전트 추론:
+
+- The next low-risk route is offline repair design over existing pre-cap candidate pools before launching another detector run.
+- Prompt/label repair should follow only if M77 shows recall misses are recoverable; external 3D proposal baselines remain later, heavier pressure tests.
+
+## E005-M75 Real Proposal Aggregate Route
+
+사실:
+
+- Status: `e005_m75_real_proposal_aggregate_ready_with_claim_boundary`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M75_real_proposal_aggregate_route_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/analyze_m75_real_proposal_aggregate_route.py --require-all`.
+- Ready batches: `heldout_b01`, `heldout_b02`, `heldout_b03`.
+- Missing batch: none.
+- Query rows: 195.
+- Query target detected: 144 / 195 = 0.738462.
+- Mean target rank when detected: 9.104167.
+- Mean false positives before target when detected: 8.104167.
+- `real_detector_task_budget_v0`: 24 / 195 = 0.123077.
+- `real_detector_confidence_top5_v0`: 51 / 195 = 0.261538.
+- `real_static_memory_only_v0`: 141 / 195 = 0.723077.
+- `real_task_context_memory_trust_reobserve_v0`: 157 / 195 = 0.805128.
+- `real_context_agnostic_memory_trust_reobserve_v0`: 156 / 195 = 0.800000.
+- `ConceptGraphs` same-batch strict bbox top5: 114 / 195 = 0.584615.
+- Selected next route: `aggregate_diagnostic_ready_review_claim_boundary`.
+
+논문 주장:
+
+- M75 supports a full-denominator real-proposal diagnostic table.
+- M75 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+- Human task context remains unsupported as a main claim because H001 beats context-agnostic memory trust by only 1 / 195 row and has higher mean `ExpectedSearchCost`.
+
+에이전트 추론:
+
+- The aggregate should separate detector target-recall limits from memory-policy effects.
+- E005-M76 decided to include this aggregate only as a diagnostic table and to design offline detector/prompt repair before any final robustness claim.
+
+## E005-M74 Heldout B03 Query Metrics
+
+사실:
+
+- Status: `e005_m71_real_proposal_query_metric_ready_with_false_positive_boundary`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M71_real_proposal_query_metric_v0/heldout_b03/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal_query_metrics.py --batch-id heldout_b03`.
+- Query rows: 60.
+- Unique targets: 20.
+- Query target detected: 48 / 60 = 0.800000.
+- `real_detector_task_budget_v0`: 11 / 60 = 0.183333.
+- `real_detector_confidence_top5_v0`: 21 / 60 = 0.350000.
+- `real_context_agnostic_memory_trust_reobserve_v0`: 54 / 60 = 0.900000.
+- `real_task_context_memory_trust_reobserve_v0`: 55 / 60 = 0.916667.
+- `ConceptGraphs` same-batch strict bbox top5: 24 / 60 = 0.400000.
+- Selected next route: `launch_remaining_batches_after_recording_false_positive_boundary`.
+
+논문 주장:
+
+- b03 supports a positive batch diagnostic for H001 over detector-only and `ConceptGraphs` same-batch retrieval.
+- b03 alone does not support final robustness or navigation claims.
+
+## E005-M73 Heldout B03 Detector Verification
+
+사실:
+
+- Status: `e005_m70_real_proposal_detector_batch_ready_with_false_positive_load`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M70_full_denominator_real_proposal_detector_verification_v0/heldout_b03/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b03 --require-ready`.
+- Expected files ready: 12 / 12.
+- Prediction rows: 400.
+- Matched targets: 16.
+- Scan target recall smoke: 0.800000.
+- Proposal precision smoke: 0.040000.
+
+## E005-M74 Heldout B02 Query Metrics
+
+사실:
+
+- Status: `e005_m71_real_proposal_query_metric_ready_target_detection_weak`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M71_real_proposal_query_metric_v0/heldout_b02/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal_query_metrics.py --batch-id heldout_b02`.
+- Query rows: 69.
+- Unique targets: 23.
+- Query target detected: 42 / 69 = 0.608696.
+- `real_detector_task_budget_v0`: 5 / 69 = 0.072464.
+- `real_detector_confidence_top5_v0`: 9 / 69 = 0.130435.
+- `real_context_agnostic_memory_trust_reobserve_v0`: 54 / 69 = 0.782609.
+- `real_task_context_memory_trust_reobserve_v0`: 54 / 69 = 0.782609.
+- `ConceptGraphs` same-batch strict bbox top5: 45 / 69 = 0.652174.
+- Selected next route: `repair_real_detector_or_prompt_route_before_remaining_batches`.
+
+논문 주장:
+
+- b02 supports a failure-boundary diagnostic, not a robustness claim.
+- The weak target detection rate means final real RGB-D/open-vocabulary robustness remains unsupported.
+- Human task-context main contribution remains unsupported because H001 and context-agnostic memory trust are tied on b02.
+
+에이전트 추론:
+
+- b03 later confirmed that the detector/prompt weakness is systematic enough to require claim-boundary handling.
+- The aggregate should separate memory-policy gains from detector target-recall limitations.
+
+## E005-M73 Heldout B02 Detector Verification
+
+사실:
+
+- Status: `e005_m70_real_proposal_detector_batch_ready_with_false_positive_load`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M70_full_denominator_real_proposal_detector_verification_v0/heldout_b02/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b02 --require-ready`.
+- Expected files ready: 12 / 12.
+- Prediction rows: 264.
+- Pre-cap candidate rows: 6,799.
+- Matched targets: 14 / 17.
+- Scan target recall smoke: 0.8235294117647058.
+- Proposal precision smoke: 0.05303030303030303.
+- False-positive proposal rate smoke: 0.946969696969697.
+
+논문 주장:
+
+- M73 supports detector completion and schema/matching readiness for `heldout_b02`.
+- M73 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+## E005-M72 Sequential Remaining Detector Launch
+
+사실:
+
+- Status: `e005_m69_real_proposal_detector_job_launched` for `heldout_b02`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M69_full_denominator_real_proposal_detector_launch_v0/heldout_b02/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/launch_m69_full_denominator_real_proposal_batch.py --batch-id heldout_b02`.
+- tmux session: `e005_m69_real_proposal_heldout_b02`.
+- Log: `logs/20260525_111101_e005_m69_real_proposal_heldout_b02.log`.
+- Working directory: `/home/yoohyun/research2`.
+- Input dir: `experiments/E005_external_baseline_transition/artifacts/E005-M68_full_denominator_real_proposal_bridge_plan_v0/batches/heldout_b02/`.
+- Output dir: `experiments/E005_external_baseline_transition/artifacts/E005-M69_full_denominator_real_proposal_detector_run_v0/heldout_b02/`.
+- Expected files: `coverage.json`, `container_output/real_proposals.jsonl`, `matching/coverage.json`, `validator/coverage.json`.
+- Verification command: `python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b02 --require-ready`.
+- `heldout_b03` launch status: launched.
+- `heldout_b03` tmux session: `e005_m69_real_proposal_heldout_b03`.
+- `heldout_b03` log: `logs/20260525_234108_e005_m69_real_proposal_heldout_b03.log`.
+- `heldout_b03` output dir: `experiments/E005_external_baseline_transition/artifacts/E005-M69_full_denominator_real_proposal_detector_run_v0/heldout_b03/`.
+- `heldout_b03` verification command: `python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b03 --require-ready`.
+
+논문 주장:
+
+- M72 is a launch event, not a performance result.
+- Final real RGB-D/open-vocabulary robustness remains blocked even after `heldout_b02` / `heldout_b03` completion because aggregate detector precision and false-positive load remain weak.
+
+에이전트 추론:
+
+- Sequential launch is preferable here because the same Docker image/build/run path and GPU are shared by both remaining detector batches.
 
 ## E005-M71 Real Proposal Query Metrics
 

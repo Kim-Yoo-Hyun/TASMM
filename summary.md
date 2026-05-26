@@ -1,6 +1,6 @@
 # Research Summary
 
-Updated: 2026-05-25
+Updated: 2026-05-26
 
 이 문서는 `research2/`의 연구 방향, 배경, 가설, 현재 진행 상태, 남은 쟁점, 실험 계획을 간단히 정리한 working research report다. 세부 진행 로그는 `TODO.md`, `hypothesis/`, `experiments/`에 둔다.
 
@@ -113,6 +113,15 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - E005-M56은 two-table robustness denominator를 고정했다. Table A는 proxy-search external map denominator 195 rows, Table B는 real RGB-D proposal bridge denominator 96 rows다.
 - `/home/yoohyun/research/local_dataset/Open3DSG_staged`는 read-only source로만 사용하고, 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`에 저장한다.
 - E005-M57-M71은 `Open3DSG` read-only source를 이용한 schema/export/query-conversion/interpretation/route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge plan, `heldout_b01` detector batch launch/completion/query-level conversion을 완료했다.
+- E005-M72/M73/M74는 b01/b02/b03 detector launch, completion verification, query-level conversion을 완료했다.
+- E005-M75는 full real-proposal aggregate route decision을 완료했다. Full aggregate는 query rows 195, target detected 144/195, H001 157/195, context-agnostic 156/195, `ConceptGraphs` same-batch 114/195, detector task-budget 24/195, detector top5 51/195이다.
+- E005-M76은 M75를 diagnostic real-proposal search table로는 포함 가능하다고 판단했지만, detector precision 0.051892, target detection 0.738462, mean false positives before target 8.104167 때문에 final real RGB-D/open-vocabulary robustness는 blocked로 고정했다.
+- E005-M77은 기존 M69 pre-cap candidate pool 23,742 rows를 분석했다. Pre-cap detected targets는 54/65, current selected detected targets는 48/65이며, best offline policy `offline_confidence_log_depth_radius0p5_cap24`는 top5 success를 current 51/195에서 60/195로 올릴 가능성을 보였다.
+- E005-M78은 fixed policy `offline_confidence_log_depth_radius0p5_cap24_fixed_replay_v0`를 구현/검증했다. M77 best policy를 top5/rank mismatch 0으로 재현했고, selected proposals 926, matched proposal rows 98, proposal precision 0.105832, target detected 147/195, top5 success 60/195를 얻었다.
+- E005-M79는 M78 fixed policy가 runner source edit 없이 `confidence_log_depth` score mode로 표현 가능함을 확인했다. First rerun batch는 expected top5 gain이 가장 큰 `heldout_b02`로 정했다.
+- E005-M80은 `heldout_b02` confidence-log-depth targeted detector rerun을 background로 launch했다. tmux session은 `e005_m80_confidence_log_depth_heldout_b02`, log는 `logs/20260526_020840_e005_m80_confidence_log_depth_heldout_b02.log`, output은 `experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_run_v0/heldout_b02/`다.
+- E005-M81은 M80 completion을 검증했다. Expected files 14/14, prediction rows 264, matched targets 14/17, proposal precision 0.053030, scan target recall 0.823529다.
+- E005-M82는 M80/M81 output을 query-level metric으로 변환했다. `heldout_b02` detector top5는 기존 9/69에서 15/69로, task-budget은 5/69에서 7/69로 개선됐지만, target detected는 42/69로 유지됐다.
 - E005-M61은 9개 query scan, 195 query rows, 51 target subgraphs에 대해 denominator-aligned `Open3DSG` object-candidate rows 7,600개를 생성했다.
 - Corrected E005-M60은 query candidate/eval rows 759개와 policy rows 585개를 생성했다. 현재 `Open3DSG` strict bbox top5는 81/195 = 0.415385, relaxed bbox 1m top3는 90/195 = 0.461538이다.
 - E005-M64는 predicted-vocabulary adapter를 leakage-safe policy로 구현/검증했다. Strict bbox top5는 144/195 = 0.738462, relaxed bbox 1m top3는 147/195 = 0.753846이다.
@@ -121,7 +130,8 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - E005-M67은 real RGB-D/open-vocabulary robustness route로 `scale_real_proposal_bridge_to_m38_heldout_denominator`를 선택했다. M38/M45 heldout denominator는 195 query rows / 9 scans / 65 target rows이고, 현재 E003-M75 real-proposal bridge는 96 rows라 denominator mismatch가 99 rows다.
 - E005-M68은 M38/M45 195-row denominator 전체를 real-proposal bridge input으로 materialize했다. 9/9 scans ready, 65 object targets, 22 prompt labels, 214 sampled frames, 3 heldout batches이며 E003-M75와 row-level overlap은 0이다.
 - E005-M70은 `heldout_b01` detector completion을 검증했다. Expected files 12/12, prediction rows 261, pre-cap candidate rows 5,310, matched targets 18/22, scan target recall 0.8182, proposal precision 0.0690, false-positive rate 0.9310이다.
-- E005-M71은 `heldout_b01` 66 query rows를 real proposal query-level metric으로 변환했다. Target detected 54/66, real detector task-budget 8/66, real detector top5 21/66, static memory 45/66, context-agnostic memory trust 48/66, H001 real memory-trust 48/66, `ConceptGraphs` b01 45/66이다.
+- E005-M71은 `heldout_b01` 66 query rows를 real proposal query-level metric으로 변환했다. Target detected 54/66, real detector task-budget 8/66, real detector top5 21/66, static memory 45/66, context-agnostic memory trust 48/66, H001 real memory-trust 48/66, `ConceptGraphs` same-batch 45/66이다.
+- E005-M73/M74는 `heldout_b02`를 검증/변환했다. Detector expected files 12/12, prediction rows 264, pre-cap candidate rows 6,799, matched targets 14/17, scan target recall 0.8235, proposal precision 0.0530, false-positive rate 0.9470이고, query-level target detected 42/69, H001 54/69, context-agnostic 54/69, `ConceptGraphs` same-batch 45/69이다.
 - E005에서 human intent는 structured `task_context_id`로 H001 memory trust / re-observation policy에 반영됐다. 그러나 H001과 context-agnostic memory trust의 차이는 1 success row라 human intent main claim은 false다.
 - `docs/reproducibility.md`에는 데이터 위치, checkpoint/Docker 보존 후보, Drive backup/restore checklist, 재현 명령, artifact/evaluation 요약을 정리했다.
 - `experiments/report.md`와 `docs/paper.md`에는 `ConceptGraphs` / `Open3DSG` 기준 reviewer defense와 claim-evidence ledger를 반영했다.
@@ -138,19 +148,19 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - H001은 `ConceptGraphs`와 static memory 대비 개선을 보였지만, context-agnostic memory trust 대비 gain은 1 row로 좁다. 따라서 human task context는 현재 main contribution이 아니라 secondary ablation이다.
 - `Open3DSG`는 primary-label adapter 성능은 `ConceptGraphs`보다 낮지만, predicted-vocabulary adapter에서는 strict bbox top5 144/195로 `ConceptGraphs` strict 114/195를 넘는다.
 - `OpenMask3D`는 checkpoint는 준비됐지만 local Docker/`MinkowskiEngine` build blocker가 있다.
-- real RGB-D/open-vocabulary proposal route는 `heldout_b01`에서 query-level conversion까지 통과했지만, mean false positives before target 7.78과 one-batch evidence 한계 때문에 remaining heldout batch 확장이 남아 있다.
+- real RGB-D/open-vocabulary proposal route는 full M38/M45 denominator까지 확장됐다. 그러나 final robustness claim은 아직 불가하다. 이유는 detector target detection이 144/195로 완전하지 않고, false positives before target 평균이 8.104167이며, real navigation / deployable policy evidence가 아직 없기 때문이다.
 - real navigation `SR` / `SPL`은 simulator, navmesh, trajectory execution source가 아직 없다.
 
 에이전트 추론:
 
-- 다음 방어 포인트는 "detector 성능 개선"과 "semantic memory decision contribution"을 분리하는 것이다.
-- Top-tier 가능성을 높이려면 M68에서 M38/M45 195-row denominator로 real RGB-D/open-vocabulary proposal bridge를 확장해 proxy-search table과 real-proposal table의 gap을 줄여야 한다.
+- 다음 방어 포인트는 "detector repair"와 "semantic memory decision contribution"을 분리하는 것이다.
+- Top-tier 가능성을 높이려면 M83에서 `heldout_b02` ranking gain이 b01/b03 rerun을 정당화하는지 판단하고, 이후에도 남는 target detection 한계는 prompt/label repair 또는 external 3D proposal baseline으로 넘겨야 한다.
 
 ## Experiment Plan
 
 사실:
 
-- Immediate next unit: E005-M72에서 `heldout_b02` / `heldout_b03` real proposal detector batch launch를 준비한다.
+- Immediate next unit: E005-M83에서 `heldout_b02` rerun 결과를 해석하고 b01/b03 rerun 여부를 결정한다.
 - Strict 0.5m, relaxed 1.0m, center-localization metrics는 external baseline table에서 분리해 유지한다.
 - Docker는 논문 본문용 실제 구현 실험의 기본 실행 환경이다.
 
