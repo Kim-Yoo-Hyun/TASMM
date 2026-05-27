@@ -1,6 +1,6 @@
 # Experiments
 
-Updated: 2026-05-27
+Updated: 2026-05-28
 
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
@@ -8,7 +8,7 @@ Updated: 2026-05-27
 
 ## Status
 
-Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, E005-M01 through E005-M101, and E007-M01 are complete/verified with constraints through denominator-aligned `Open3DSG`, full-denominator real proposal diagnostics, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary decision, and navigation/path-cost bridge contract. E005-M101 marks `h001_then_conceptgraphs_top5_on_observed_miss_v0` as paper-facing query-level table ready with boundary: H001 success 157 / 195 -> 181 / 195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897. E007-M01 confirms M100/E002 row overlap 195 / 195, E002 target-grid reachable overlap 186 / 195, `ConceptGraphs` candidate query overlap 195 / 195, and selects `e002_occupancy_grid_astar_v0` as the first path-cost source. E003 has Dockerized real-detector diagnostics and expanded direct current-rescan metrics for 96 query rows over 4 RGB-D-ready current rescans. E004 evaluates `task_context_memory_trust_reobserve_v0` and supports the memory-trust decision claim with limited task-context-specific strength. E005 selected `DualMap` first, then moved to `ConceptGraphs` after faithful `DualMap` object-map outputs were missing. E005-M64 verifies the bounded `Open3DSG` predicted-vocabulary adapter policy with strict bbox top5 144 / 195 = 0.738462 and relaxed bbox 1m top3 147 / 195 = 0.753846. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, E005-M01 through E005-M101, E007-M01 through E007-M07, and E008-M01 through E008-M13 are complete/verified with constraints through denominator-aligned `Open3DSG`, full-denominator real proposal diagnostics, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary decision, navigation/path-cost bridge packaging, real navigation source preflight, episode/source adapter smoke, H001 candidate-to-navigation adapter contract, ObjectNav oracle path/metric smoke, `HM3D` candidate-source staging plan, semantic annotation coordinate-extraction smoke, rendered RGB-D detector-source planning, rendered RGB-D frame staging, detector candidate smoke, coordinate-frame/navmesh validation, detector candidate visit-order path smoke, leakage-safe goal-evaluation smoke, and detector-goal failure audit. E007-M07 keeps the bridge table defensible as a paper-facing occupancy-grid path-cost proxy if full denominator, source-ready lower bound, direct/failure-only sensitivity, and source-limited rows are reported together. E008-M13 audits 6 episodes and 12 policy failure rows; 3 episodes fail all policies, with 2 pre-cap target-region misses, 1 near-miss localization threshold case, and 0 post-cap/snap suppression cases. Main navigation table, real navigation `SR` / `SPL`, `OldLocationDeadEndCostM` as a primary metric, and final real RGB-D/open-vocabulary robustness remain blocked. E003 has Dockerized real-detector diagnostics and expanded direct current-rescan metrics for 96 query rows over 4 RGB-D-ready current rescans. E004 evaluates `task_context_memory_trust_reobserve_v0` and supports the memory-trust decision claim with limited task-context-specific strength. E005 selected `DualMap` first, then moved to `ConceptGraphs` after faithful `DualMap` object-map outputs were missing. E005-M64 verifies the bounded `Open3DSG` predicted-vocabulary adapter policy with strict bbox top5 144 / 195 = 0.738462 and relaxed bbox 1m top3 147 / 195 = 0.753846. Next unit is E008-M14 non-oracle observation-coverage expansion plan.
 
 ## Active Experiment
 
@@ -19,12 +19,13 @@ Main experiment implementation stage has started. E001-M01 through E001-M05, E00
 | E003 | M00-M75 query bridge ready | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Input to E004 |
 | E004 | M01-M05 ready with constraints | [E004_task_context_memory_trust](E004_task_context_memory_trust/README.md) | Input to E005 |
 | E005 | M01-M101 ready | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Input to E007 |
-| E007 | M01 contract ready | [E007_navigation_path_cost_bridge](E007_navigation_path_cost_bridge/README.md) | E007-M02 path-source compatibility and candidate-route materialization audit |
+| E007 | M01-M07 paper-facing path-cost proxy bridge package ready | [E007_navigation_path_cost_bridge](E007_navigation_path_cost_bridge/README.md) | Input to E008-M01 |
+| E008 | M01-M13 navigation source/adapter/oracle metric/staging, semantic-coordinate smoke, rendered detector-source plan, frame staging, detector candidate smoke, navmesh validation, visit-order path smoke, goal-evaluation smoke, and detector-goal failure audit ready with warnings | [E008_real_navigation_benchmark](E008_real_navigation_benchmark/README.md) | E008-M14 non-oracle observation-coverage expansion plan |
 
 ## 사실
 
 - Active hypothesis: `hypothesis/CAND-001/H001_stale-object-memory/`.
-- Active experiment: `E005_external_baseline_transition`.
+- Active experiment: `E008_real_navigation_benchmark`.
 - E001 is the first main experiment for H001.
 - E001 starts as a proxy semantic-pair dynamic object search benchmark.
 - E002 starts from E001 rows and attaches path/search-cost bridge fields.
@@ -347,8 +348,8 @@ Non-claims:
 
 ## 에이전트 추론
 
-E005 now shows that `DualMap` can execute on the staged `3RScan` adapter, but the current route does not produce object-map `*.pkl` outputs. `ConceptGraphs` is the active converted positive external mapping baseline route and now has full 9-scan heldout query-level aggregation plus H001 replay on the same query contract. `Open3DSG` has a denominator-aligned bridge and corrected query metrics; M64 verifies that a bounded predicted-vocabulary adapter repairs much of the primary-label gap. The b01/b02/b03 real-proposal aggregate is complete, but M88 keeps final robustness blocked because target detection and the `569d8f0f` cleanup-drop reason are still unresolved.
+E005 shows that `DualMap` can execute on the staged `3RScan` adapter, but the current route does not produce object-map `*.pkl` outputs. `ConceptGraphs` is the active converted positive external mapping baseline route and has full 9-scan heldout query-level aggregation plus H001 replay on the same query contract. `Open3DSG` has a denominator-aligned bridge and corrected query metrics; M64 verifies that a bounded predicted-vocabulary adapter repairs much of the primary-label gap. E007-M07 packages the path-cost bridge as paper-facing occupancy-grid proxy evidence with reviewer sensitivity checks. E008-M10 confirms that a tiny `HM3D ObjectNav` source adapter, H001 candidate schema, oracle metric plumbing, rendered detector-source plan, detector-compatible RGB-D/pose staging, non-oracle detector candidate coordinates, and navmesh snapping are ready with path warnings. Real navigation `SR` / `SPL` remains blocked until candidate visit-order path smoke and trajectory execution rows exist.
 
 ## 사용자 판단 필요
 
-Proceed to E007-M02 path-source compatibility and candidate-route materialization audit before path-cost metrics, navigation execution, or broader detector reruns.
+Proceed to E008-M11 reachable-subset detector candidate visit-order path smoke before H001 navigation execution or broader detector reruns.

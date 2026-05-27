@@ -1,38 +1,38 @@
 # Semantic Mapping Research Workspace
 
-업데이트: 2026-05-27
+업데이트: 2026-05-28
 
-이 워크스페이스는 semantic mapping을 중심으로, human-friendly robot intelligence 연구를 작게 시작하기 위한 문서 기반 작업 공간이다. 목표는 로봇이 사람의 의도와 지식을 이해하고, 그 이해를 공간적 기억과 행동으로 연결하여 사람이 요구하는 복잡한 작업을 수행하게 하는 것이다.
+이 워크스페이스는 semantic mapping을 중심으로 human-friendly robot intelligence를 연구하는 작업 공간이다. 목표는 로봇이 사람의 의도와 지식을 공간적 기억과 행동으로 연결하여, 사람이 요구하는 복잡한 search/navigation task를 수행하게 하는 것이다.
 
 현재 연구 제약은 6개월~1년 규모로 둔다. 최종 목표는 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`으로, AI, ML, CV, Robotics top-tier journal/conference를 겨냥한다. 중간에 독립적인 contribution이 성립하면 workshop, short paper, 또는 관련 venue에 먼저 투고할 수 있다.
 
 ## 현재 원칙
 
-- 작업을 시작할 때 [TODO.md](TODO.md)를 먼저 확인한다.
-- 작업 중 새 task가 생기면 [TODO.md](TODO.md)에 추가한다.
-- 빈 `paper/` 폴더를 미리 만들지 않는다. 논문 폴더는 연구 질문, 핵심 그림, 실험 테이블이 최소 1개씩 생긴 뒤 만든다.
-- 먼저 Markdown으로 연구 주장, 실험 하네스, 재현성 기준, 관련 논문 읽기 방식을 고정한다.
-- 코드는 첫 번째 실험이 명확해졌을 때 만든다. 그 전에는 폴더 구조보다 문제 정의와 평가 축을 우선한다.
+- 작업을 시작할 때 [AGENTS.md](AGENTS.md) -> [README.md](README.md) -> [TODO.md](TODO.md) -> [docs/index.md](docs/index.md) 순서로 확인한다.
+- 실제 작업 우선순위는 [TODO.md](TODO.md)의 Now/Next를 따른다.
+- 작업 중 새 task가 생기면 [TODO.md](TODO.md)에 추가하고, 완료 후에는 가까운 책임 문서와 함께 갱신한다.
+- [AGENTS.md](AGENTS.md)는 repo-level 규칙, 작업 기대치, 파일 책임, novelty 기준, Docker/reproducibility 원칙만 관리한다.
+- 빈 `paper/` 폴더를 미리 만들지 않는다. 논문 폴더는 thesis, main result table, method figure, target venue, claim-evidence ledger가 구체화된 뒤 만든다.
+- 세부 결과나 긴 실험 기록은 루트 README에 반복하지 않고 해당 workflow 문서, 가까운 폴더 `README.md`, `report.md`, artifact note에 기록한다.
 - AI, ML, CV, Robotics top-tier journal/conference 제출을 목표로 하되, venue별 양식보다 먼저 "강한 주장 + 재현 가능한 증거 + 명확한 한계"를 만든다.
 
-## 문서
+## 문서 지도
 
-- [TODO.md](TODO.md): 계획, 상태, 다음 행동
-- [AGENTS.md](AGENTS.md): 작업자가 따라야 할 운영 규칙
+- [AGENTS.md](AGENTS.md): repo-level 작업 규칙과 판단 기준
+- [TODO.md](TODO.md): Now/Next/Completed 중심의 작업판
 - [summary.md](summary.md): 연구 방향, 배경, 가설, 진행 상태, 남은 쟁점, 실험 계획 요약
-- [docs/index.md](docs/index.md): workflow 문서 인덱스
+- [docs/index.md](docs/index.md): 전체 문서 지도와 읽는 순서
 - [docs/literature.md](docs/literature.md): 문헌조사 workflow와 작성 규칙
 - [docs/hypothesis.md](docs/hypothesis.md): hypothesis workflow와 작성 규칙
 - [docs/experiments.md](docs/experiments.md): experiment workflow와 작성 규칙
+- [docs/paper.md](docs/paper.md): paper framing, novelty, reviewer-defense 기준
+- [docs/reproducibility.md](docs/reproducibility.md): 데이터, checkpoint, Docker, artifact, 재현 명령 기준
+- [literature/README.md](literature/README.md): 문헌 조사 결과의 cross-paper synthesis
+- [hypothesis/README.md](hypothesis/README.md): hypothesis index와 active gate
 - [experiments/README.md](experiments/README.md): main experiment index
-- [docs/paper.md](docs/paper.md): 논문 작성 프로토콜 초안. 논문 작성 단계에서 다시 정리한다.
-- [docs/reproducibility.md](docs/reproducibility.md): 데이터, checkpoint, Docker, 재현 명령, artifact/evaluation 요약
-- [experiments/report.md](experiments/report.md): 현재 기여점, reviewer defense, 최종 논문 방향성
-- [literature/README.md](literature/README.md): field map, trend synthesis, cross-paper insights, open questions
-- [literature/PAPER.md](literature/PAPER.md): paper registry와 reading queue
-- [literature/Contribution Candidates.md](<literature/Contribution Candidates.md>): contribution candidate 목록
-- [literature/research_direction.md](literature/research_direction.md): semantic mapping 연구 방향과 초기 문제 후보
-- [hypothesis/README.md](hypothesis/README.md): hypothesis index
+- [experiments/report.md](experiments/report.md): 기여점, reviewer defense, 최종 논문 방향성
+
+각 폴더의 `README.md`는 해당 폴더의 local entry point다. 세부 결과는 가장 가까운 local README, report, 또는 artifact note에 기록한다.
 
 ## 현재 진행 상황
 
@@ -40,23 +40,24 @@
 - Active hypothesis: `H001_stale-object-memory`
 - Final paper target: Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`
 - Current implementation path: Direction A `Task-Conditioned Stale Semantic Memory`를 core method로 만들고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 붙여 Direction B로 확장
-- Current experiment: [E007_navigation_path_cost_bridge](experiments/E007_navigation_path_cost_bridge/README.md)
-- Current E004 status: E004-M01 transition gate is `ready_with_constraints`; E004-M02 metric contract is `ready`; E004-M03 memory trust policy is `ready_with_constraints`; E004-M04 claim-boundary ablation is `ready`; E004-M05 scale/split stress is `ready_limited_task_context`. E004-M05 supports a split-supported memory-trust decision claim, but task-context-specific claim strength remains limited and not label-broad. The next unit is E005 external baseline transition.
-- Current E005/E007 status: E005-M01 through E005-M101 are complete/verified with constraints through denominator-aligned `Open3DSG`, full-denominator real RGB-D/open-vocabulary proposal diagnostics, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, and map-assisted fallback claim-boundary decision. E005-M101 marks M100 selected policy `h001_then_conceptgraphs_top5_on_observed_miss_v0` as paper-facing query-level table ready with boundary: H001 success 157/195 -> 181/195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897. E007-M01 fixes the navigation/path-cost bridge contract: M100/E002 row overlap 195/195, E002 target-grid reachable overlap 186/195, selected path-cost source `e002_occupancy_grid_astar_v0`, next unit E007-M02 path-source compatibility and candidate-route materialization audit. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+- Current experiment: [E008_real_navigation_benchmark](experiments/E008_real_navigation_benchmark/README.md)
+- Current status: E001-E007 have built proxy search, perception-noise, external-baseline, and path-cost bridge evidence with constraints; E008 is validating whether `HM3D ObjectNav` + `Habitat` can support paper-facing navigation evidence. E008-M13 completed detector-goal failure audit: the shared failures are mainly observation/candidate coverage failures, not visit-order ranking failures.
+- Current next action: E008-M14 non-oracle observation-coverage expansion plan.
+- Current blocked claims: real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, `OldLocationDeadEndCostM` as a primary metric, and human intent as a main claim.
 - Current boundary: main experiment implementation 단계이며, paper 폴더는 아직 만들지 않는다.
-- Current top-tier path: E001 benchmark/proxy -> E002 search/navigation bridge -> E003 controlled perception/proposal noise -> Dockerized RGB-D/open-vocabulary proposal route -> E003-M75 expanded query-level evaluation -> E004 task-context memory trust / re-observation decision with split stress -> E005 external baselines and dataset-format staging -> E007 path-cost bridge -> Direction B mapping-navigation system evidence.
+
+Detailed experiment state lives in [TODO.md](TODO.md), [experiments/README.md](experiments/README.md), [experiments/E008_real_navigation_benchmark/README.md](experiments/E008_real_navigation_benchmark/README.md), and [docs/reproducibility.md](docs/reproducibility.md).
 
 ## 작업 루프
 
-1. `TODO.md`에서 현재 next action을 확인한다.
-2. 문헌조사는 `docs/literature.md`의 workflow를 따른다.
-3. `literature/PAPER.md`의 `Reading Queue`에서 논문을 고르고 각 paper folder에 기록한다.
-4. `literature/Contribution Candidates.md`에서 후보를 고르고 `literature/CAND-*.md`로 구체화한다.
-5. Hypothesis 작업은 `docs/hypothesis.md`의 entry context와 workflow를 따른다.
-6. `hypothesis/` 아래에서 후보 문제를 한 문장 hypothesis로 좁힌다.
-7. 실제 구현 단계에서는 `docs/experiments.md`의 규칙을 따르고 `experiments/` 아래에 experiment 내용을 기록한다.
-8. 논문 작성 단계가 오면 `docs/paper.md`를 다시 정리하고 claim-evidence ledger를 채운다.
-9. claim-evidence ledger가 채워진 뒤에만 실제 paper draft 폴더를 만든다.
+1. `AGENTS.md` -> `README.md` -> `TODO.md` -> `docs/index.md` 순서로 현재 상태를 확인한다.
+2. `TODO.md`의 Now/Next에서 실제 다음 행동을 고른다.
+3. 작업 유형에 맞는 `docs/` workflow와 가까운 폴더 `README.md`를 읽는다.
+4. 문헌조사는 `docs/literature.md`, hypothesis는 `docs/hypothesis.md`, experiment는 `docs/experiments.md`를 따른다.
+5. 논문 관련 판단은 `docs/paper.md`, 재현성과 artifact 판단은 `docs/reproducibility.md`를 우선 적용한다.
+6. 논문 본문용 experiment는 Docker 기반으로 확정하고, hypothesis-stage smoke test와 paper experiment artifact를 구분한다.
+7. 작업 후 가장 가까운 책임 문서에만 세부 내용을 기록하고, 필요한 경우 `TODO.md`의 Now/Next/Completed를 갱신한다.
+8. claim-evidence ledger가 채워진 뒤에만 실제 paper draft 폴더를 만든다.
 
 ## 연구 기준
 

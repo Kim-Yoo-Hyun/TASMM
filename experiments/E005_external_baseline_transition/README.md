@@ -4,7 +4,7 @@ Updated: 2026-05-27
 
 ## Status
 
-`E005-M01` through `E005-M101` are complete through heldout `ConceptGraphs` runtime/query conversion, H001 heldout replay, `Open3DSG` adapter checks, full-denominator real proposal diagnostics, paper-facing claim boundary, external proposal/mapping feasibility, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, and map-assisted fallback claim-boundary decision. `ConceptGraphs` is the active positive external mapping baseline route: full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M101 marks `h001_then_conceptgraphs_top5_on_observed_miss_v0` as paper-facing query-level table ready with boundary: H001 success 157 / 195 -> 181 / 195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897. The next unit is E007-M01 navigation/path-cost bridge contract. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+`E005-M01` through `E005-M101` are complete through heldout `ConceptGraphs` runtime/query conversion, H001 heldout replay, `Open3DSG` adapter checks, full-denominator real proposal diagnostics, paper-facing claim boundary, external proposal/mapping feasibility, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, and map-assisted fallback claim-boundary decision. `ConceptGraphs` is the active positive external mapping baseline route: full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M101 marks `h001_then_conceptgraphs_top5_on_observed_miss_v0` as paper-facing query-level table ready with boundary: H001 success 157 / 195 -> 181 / 195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897. Follow-up E007-M01-M07 is complete through navigation/path-cost bridge contract, route materialization, external candidate grid projection, path-cost policy metrics, paper-table boundary interpretation, source-limit/path-start sensitivity, final bridge-table packaging, and navigation-expansion decision. Next unit is E008-M01 real navigation benchmark/source preflight and episode contract. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
 
 ## E005-M101 Map-Assisted Fallback Claim Boundary
 
@@ -16,7 +16,7 @@ Updated: 2026-05-27
 - Selected route: `paper_table_integration_and_navigation_bridge_next`.
 - Paper-table integration ready: true.
 - Main table rows include `real_static_memory_only_v0`, `real_detector_confidence_top5_v0`, `conceptgraphs_only_strict_top5_v0`, `real_context_agnostic_memory_trust_reobserve_v0`, `h001_real_task_context_memory_trust_v0`, and `h001_then_conceptgraphs_top5_on_observed_miss_v0`.
-- Selected next unit: E007-M01 navigation/path-cost bridge contract.
+- Follow-up completed: E007-M01 navigation/path-cost bridge contract, E007-M02 path-source compatibility audit, E007-M03 external candidate grid projection/path-cost route computation, E007-M04 path-cost policy metric evaluation, E007-M05 path-cost result interpretation / paper-table boundary decision, E007-M06 path-start/source-limit sensitivity audit, and E007-M07 bridge-table package / navigation-expansion decision.
 
 논문 주장:
 
@@ -51,7 +51,7 @@ Updated: 2026-05-27
 
 - The selected top5 fallback improves both success and `AttemptSPL` proxy, so it is stronger than the earlier union upper-bound argument.
 - Map-first variants avoid more old-location dead ends but have worse `AttemptSPL`; they should not be the default policy yet.
-- M101 should decide whether M100 becomes a paper-facing policy table row or whether navigation/path-cost bridge should start.
+- Follow-up completed: E005-M101 paper-table decision and E007-M01-M05 navigation/path-cost bridge setup through paper-table boundary.
 
 ## E005-M99 Row-Group / External Route Decision
 

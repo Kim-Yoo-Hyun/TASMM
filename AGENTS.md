@@ -2,7 +2,10 @@
 
 ## Start Of Work
 
-- Read `TODO.md` first.
+- Treat `AGENTS.md` as the top-level project instruction, not as an experiment log.
+- Read startup context in this order: `AGENTS.md` -> `README.md` -> `TODO.md` -> `docs/index.md`.
+- After startup context, use `TODO.md` Now/Next as the active work queue.
+- Before editing or running a task, read the relevant workflow document under `docs/` and the nearest folder `README.md`.
 - Update `TODO.md` when starting, finishing, or discovering a task.
 - Keep `TODO.md` limited to plan, status, and next action.
 
@@ -32,13 +35,32 @@
 - Failure mode는 future work로 숨기지 않는다. 실패 조건, 원인, 다음 validation requirement를 claim boundary에 명시한다.
 - 우리 연구에서 금지되는 약한 claim: "semantic map에 human intent/VLM/open-vocabulary perception을 붙였다." 더 강한 claim은 stale semantic memory의 실패 원인과 memory trust/re-observation/search-cost decision의 필연성을 한 문장으로 설명해야 한다.
 
+## Workflow And Judgment Sources
+
+- `docs/index.md` is the document map and read-order hub.
+- `docs/literature.md` defines literature survey workflow.
+- `docs/hypothesis.md` defines hypothesis validation workflow.
+- `docs/paper.md` defines paper framing, top-tier novelty, claim-evidence, and reviewer-defense standards.
+- `docs/reproducibility.md` defines experiment reproduction, artifact, Docker, checkpoint, and backup/restore standards.
+- For paper-related judgments, apply `docs/paper.md` before local preference.
+- For reproducibility or artifact judgments, apply `docs/reproducibility.md` before local preference.
+- Keep hypothesis-stage smoke tests and paper-body experiment artifacts explicitly separate.
+- Paper-body experiments use Docker as the default execution environment.
+
 ## Workspace Shape
 
 - Root operational files stay limited to `README.md`, `TODO.md`, and `AGENTS.md`.
 - User-requested root-level reports such as `summary.md` are allowed, but do not add more root files unless explicitly needed.
+- `AGENTS.md` defines repo-level rules, work expectations, file responsibility, novelty standards, and Docker/reproducibility principles only.
+- Root `README.md` gives the repo-level current status and key file guide; do not duplicate long experiment records there.
+- Each folder `README.md` is the local entry point for that folder.
 - Research notes live under `literature/`.
+- `literature/README.md` maintains cross-paper synthesis.
+- `hypothesis/README.md` maintains the hypothesis index and active gate.
+- If `paper/` exists, `paper/README.md` maintains paper workspace file roles, read order, and update rules.
 - Do not create an empty `paper/` folder.
 - Create a paper folder only after the thesis, main result table, method figure, target venue, and claim-evidence ledger are concrete.
+- Put detailed results, long experiment records, and artifact interpretation in the closest responsible workflow document, folder `README.md`, `report.md`, or artifact note; do not copy them into `AGENTS.md` or root `README.md`.
 
 ## Long-running and Background Tasks
 

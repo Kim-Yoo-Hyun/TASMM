@@ -1,6 +1,6 @@
 # Experiments Workflow
 
-Updated: 2026-05-07
+Updated: 2026-05-27
 
 이 문서는 main experiment 구현과 기록을 위한 workflow / 작성 규칙만 관리한다. 실험별 내용, contract, manifest, 결과, failure analysis는 루트의 `experiments/` 폴더에 둔다.
 
@@ -18,14 +18,17 @@ Updated: 2026-05-07
 
 Experiment 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 
-1. `README.md`
-2. `TODO.md`
-3. `docs/index.md`
-4. `docs/experiments.md`
-5. `hypothesis/README.md`
-6. 대상 hypothesis folder의 `README.md`
-7. `experiments/README.md`
-8. 대상 experiment folder의 `README.md`
+1. `AGENTS.md`
+2. `README.md`
+3. `TODO.md`
+4. `docs/index.md`
+5. `docs/experiments.md`
+6. `docs/paper.md`
+7. `docs/reproducibility.md`
+8. `hypothesis/README.md`
+9. 대상 hypothesis folder의 `README.md`
+10. `experiments/README.md`
+11. 대상 experiment folder의 `README.md`
 
 ## Working Rule
 

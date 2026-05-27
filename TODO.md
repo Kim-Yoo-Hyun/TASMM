@@ -1,14 +1,15 @@
 # TODO
 
-Last updated: 2026-05-27
+Last updated: 2026-05-28
 
 이 파일은 에이전트가 다음 작업 계획과 진행 상태를 관리하는 루트 작업판이다. 자세한 문헌 조사 내용은 `literature/`에 기록하고, 이 파일에는 다음 행동과 상태만 남긴다.
 
 ## Rules
 
-- 작업을 시작할 때 이 파일을 먼저 확인한다.
+- 작업을 시작할 때 `AGENTS.md` -> `README.md` -> `TODO.md` -> `docs/index.md` 순서로 확인하고, 이후 `TODO.md`의 Now/Next를 기준으로 행동한다.
 - 작업 중 새 task가 생기면 이 파일에 추가한다.
 - 완료한 task는 체크하고, 필요한 상세 내용은 `literature/` 또는 해당 workflow 문서에 기록한다.
+- 작업 후 변경 내용은 가장 가까운 책임 문서에만 기록하고, 이 파일에는 상태와 다음 행동만 남긴다.
 - 이 파일은 긴 설명을 담지 않는다. 계획, 상태, 다음 행동만 관리한다.
 - `/home/yoohyun/research/local_dataset/Open3DSG_staged`는 read-only source로만 사용하고, 파생 데이터/변환 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 아래에 저장한다.
 
@@ -16,13 +17,13 @@ Last updated: 2026-05-27
 
 Main experiment implementation.
 
-CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M101은 `Open3DSG` read-only source, full-denominator real proposal bridge, external proposal/mapping feasibility matrix, `ConceptGraphs` reliability boundary, row-group / heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary / navigation-bridge decision까지 완료했다. M100 selected policy `h001_then_conceptgraphs_top5_on_observed_miss_v0`는 H001 success 157/195 -> 181/195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897로 바뀐다. E007-M01은 M100 195 rows와 E002 `occupancy_grid_astar_v0`의 row overlap 195/195를 확인하고 navigation/path-cost bridge contract를 고정했다. 다음 단위는 E007-M02 path-source compatibility and candidate-route materialization audit이다. final real RGB-D/open-vocabulary robustness, deployable search policy, real navigation `SR`/`SPL`, human intent main claim은 아직 false로 유지한다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
+CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M101은 `Open3DSG` read-only source, full-denominator real proposal bridge, external proposal/mapping feasibility matrix, `ConceptGraphs` reliability boundary, row-group / heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary / navigation-bridge decision까지 완료했다. E007-M01-M07은 M100 selected policy를 E002 `occupancy_grid_astar_v0` path-cost source와 연결해 route materialization, external candidate grid projection, path-cost policy metric, paper-table boundary, path-start/source-limit sensitivity audit, bridge-table package/navigation-expansion decision까지 완료했다. E008-M01-M13은 local read-only `HM3D ObjectNav` + `Habitat` source preflight, episode/source adapter, H001 candidate-to-navigation contract, oracle path/metric plumbing, candidate-source staging, semantic-coordinate negative smoke, rendered RGB-D detector-source plan, frame staging, detector candidate smoke, coordinate-frame / snap-to-navmesh validation, reachable-subset detector candidate visit-order path smoke, leakage-safe goal-evaluation smoke, detector-goal failure audit까지 완료했다. E008-M13 결과는 6 episode audit rows, 12 policy failure audit rows, all-policy failure episode 3개, pre-cap target-region miss 2개, near-miss 1개, post-cap/snap suppression 0개이며, 다음은 non-oracle observation coverage expansion plan이다. final real RGB-D/open-vocabulary robustness, deployable search policy, real navigation `SR`/`SPL`, human intent main claim은 아직 false로 유지한다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 및 E008 이후 `/home/yoohyun/research2/local_dataset/HM3D_navigation_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
 
 CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active task는 없고, CAND-001 feasibility가 약해질 때 다시 승격 여부를 판단한다.
 
 ## Active Objective
 
-- CAND-001: Direction B 최종 목표를 유지하되, E007-M02 path-source compatibility and candidate-route materialization audit로 넘어간다.
+- CAND-001: Direction B 최종 목표를 유지하되, E008-M14 non-oracle observation-coverage expansion plan으로 넘어간다.
 - CAND-002: `Common-Ground Semantic Mapping`은 benchmark 설계 부담을 보류 상태로 둔다.
 - CAND-003: `Functional Semantic Memory`는 annotation/manipulation evaluation 부담을 보류 상태로 둔다.
 
@@ -30,7 +31,7 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E007-M02 path-source compatibility and candidate-route materialization audit 진행
+- [ ] E008-M14 non-oracle observation-coverage expansion plan 진행
 
 ### CAND-002
 
@@ -55,7 +56,26 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 - [x] E005-M100에서 `ConceptGraphs`-assisted H001 fallback policy의 allowed inputs, fallback trigger, visit order, `ExpectedSearchCost`를 smoke-test
 - [x] E005-M101에서 M100 결과 기반 paper-table integration, navigation bridge, 또는 heavier external route 재개 여부 결정
 - [x] E007-M01에서 M100 candidate visit order를 path/navigation cost metric으로 연결하는 contract 작성
-- [ ] E007-M02에서 M100 policy rows, E002 grid rows, `ConceptGraphs`/real detector candidates를 route rows로 materialize
+- [x] E007-M02에서 M100 policy rows, E002 grid rows, `ConceptGraphs`/real detector candidates를 route rows로 materialize
+- [x] E007-M03에서 external candidate coordinates를 E002 grid로 project하고 path-cost route computation 준비
+- [x] E007-M04에서 path-cost policy metrics를 full denominator와 source-ready subset으로 분리 평가
+- [x] E007-M05에서 path-cost result interpretation and paper-table boundary decision 완료
+- [x] E007-M06에서 path-start/source-limit sensitivity and reviewer-defense audit 완료
+- [x] E007-M07에서 bridge-table package and navigation-expansion decision 완료
+- [x] E008-M01에서 real navigation benchmark/source preflight and episode contract 완료
+- [x] E008-M02에서 `HM3D ObjectNav` episode/source adapter smoke 완료
+- [x] E008-M03에서 `H001` candidate-to-navigation adapter contract 완료
+- [x] E008-M04에서 `ObjectNav` goal/viewpoint oracle path smoke 완료
+- [x] E008-M05에서 `HM3D` candidate-source staging plan 완료
+- [x] E008-M06에서 `HM3D` semantic annotation candidate-source smoke 완료
+- [x] E008-M07에서 `HM3D` rendered RGB-D detector candidate-source plan 완료
+- [x] E008-M08에서 `HM3D` rendered RGB-D frame staging smoke 완료
+- [x] E008-M09에서 `HM3D` rendered RGB-D detector candidate smoke 완료
+- [x] E008-M10에서 detector candidate coordinate-frame and snap-to-navmesh validation 완료
+- [x] E008-M11에서 reachable-subset detector candidate visit-order path smoke 완료
+- [x] E008-M12에서 leakage-safe detector candidate goal-evaluation smoke 완료
+- [x] E008-M13에서 detector-goal failure audit and observation-coverage expansion decision 완료
+- [ ] E008-M14에서 non-oracle observation-coverage expansion plan 진행
 - [ ] b01/b03 confidence-log-depth rerun은 complete diagnostic table이 필요할 때만 재검토
 - [ ] E006 human-context upgrade decision은 사용자가 human intent main claim을 원할 때만 진행
 - [ ] `OpenMask3D` feasibility는 external 3D instance proposal baseline 후보로 재검토
@@ -63,8 +83,8 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Running / Needs Verification
 
-- No active E005 background job. E007-M01 completed and selected E007-M02 path-source compatibility / candidate-route materialization audit.
-- Active non-E005 runtime state: tmux session `research`; Docker containers may be unrelated.
+- No active E005/E008 background job. E008-M14 non-oracle observation-coverage expansion plan is next. No long-running navigation job is launched yet.
+- Active non-E005 runtime state: tmux sessions `research`, `gdrive_upload`; Docker containers may be unrelated.
 
 ### CAND-002
 
@@ -76,6 +96,28 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] E008-M13 detector-goal failure audit 완료: status `e008_m13_detector_goal_failure_audit_ready_observation_expansion_selected`, episode audit rows 6, policy failure audit rows 12, all-policy failure episodes 3, pre-cap target-region miss 2, near-miss localization threshold 1, post-cap/snap suppression 0, selected next E008-M14, real navigation `SR`/`SPL` false
+- [x] E008-M12 leakage-safe detector candidate goal-evaluation smoke 완료: status `e008_m12_detector_candidate_goal_evaluation_smoke_ready_with_limited_proxy_success`, candidate-goal eval rows 512, scan-policy rows 24, aggregate policy rows 4, primary `any_viewpoint_xz_1p0` proxy success 3/6 for all policies, `goal_xz_1p0` proxy success 1/6, leakage audit pass, selected next E008-M13, real navigation `SR`/`SPL` false
+- [x] E008-M11 reachable-subset detector candidate visit-order path smoke 완료: status `e008_m11_detector_candidate_visit_order_path_smoke_ready`, input candidate rows 137, path-ready 125/137, failure rows 12, visit-order rows 512, policy metric rows 28, eval-only `ObjectNav` goal/viewpoint policy input false, selected next E008-M12, real navigation `SR`/`SPL` false
+- [x] E008-M10 detector candidate coordinate-frame / snap-to-navmesh validation 완료: status `e008_m10_detector_candidate_navmesh_validation_ready_with_path_warnings`, candidate rows 137, join-ready 137/137, coordinate-valid 137/137, snapped navigable 136/137, source-to-snapped path found 125/137, usable for path smoke 125/137, status counts `candidate_path_ready` 125 / `blocked_snapped_point_unreachable_from_episode_start` 11 / `blocked_snap_failed_non_finite` 1, selected next E008-M11, real navigation `SR`/`SPL` false
+- [x] Repo instruction / document responsibility update 완료: `AGENTS.md`, `README.md`, `docs/index.md`, `docs/hypothesis.md`, `docs/experiments.md`, `TODO.md`에 startup read order, 문서 책임, top-tier paper/reproducibility 판단 기준, Docker/paper artifact 분리 원칙 반영
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E008_real_navigation_benchmark/README.md`에 E008-M09 완료와 E008-M10 next action 반영
+- [x] E008-M09 `HM3D` rendered RGB-D detector candidate smoke 완료: status `e008_m09_hm3d_rendered_rgbd_detector_candidate_smoke_ready`, E003 detector status `pre_cap_candidate_pool_export_smoke_ready`, frame rows 24, raw/written predictions 441/137, prediction rows 137, coordinate candidate rows 137, pre-cap candidate rows 409, evaluated scans 6, validator errors/warnings 0/0, selected next E008-M10, real navigation `SR`/`SPL` false
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E008_real_navigation_benchmark/README.md`에 E008-M08 완료와 E008-M09 next action 반영
+- [x] E008-M08 `HM3D` rendered RGB-D frame staging smoke 완료: status `e008_m08_hm3d_rendered_rgbd_frame_staging_smoke_ready`, render plan rows 24, rendered frame rows 24, ready frames 24/24, ready scans 6/6, detector manifest rows 6, detector input files ready true, real navigation `SR`/`SPL` false, launch long job false
+- [x] E008-M07 `HM3D` rendered RGB-D detector candidate-source plan 완료: status `e008_m07_hm3d_rendered_rgbd_detector_candidate_source_plan_ready`, episode rows 6, render plan rows 24, detector manifest rows 6, detector labels 5(`bed`, `chair`, `monitor`, `television`, `tv`), `Habitat` image ready true, `real-smoke` image ready true, selected next E008-M08, real navigation `SR`/`SPL` false, launch long job false
+- [x] E008-M06 `HM3D` semantic annotation candidate-source smoke 완료: status `e008_m06_hm3d_semantic_candidate_source_smoke_ready_blocked_coordinate_extraction`, semantic label support 6/6, Habitat semantic nonzero-AABB scenes 0/2, GLB semantic geometry mapping scenes 0/2, candidate rows 0, selected next E008-M07, real navigation `SR`/`SPL` false, launch long job false
+- [x] E008-M05 `HM3D` candidate-source staging plan 완료: status `e008_m05_hm3d_candidate_source_staging_plan_ready`, semantic scene files ready 2/2, semantic category support rows 6/6, selected route `hm3d_semantic_annotation_candidate_source_smoke`, selected next E008-M06, H001 navigation execution false, real navigation `SR`/`SPL` false, launch long job false
+- [x] E008-M04 `ObjectNav` goal/viewpoint oracle path smoke 완료: status `e008_m04_objectnav_oracle_path_smoke_ready`, episode rows 6, viewpoint paths found 6/6, goal-snapped paths found 4/6, mean viewpoint path length 5.738806m, oracle metric plumbing ready true, real navigation `SR`/`SPL` false, selected next E008-M05, launch long job false
+- [x] E008-M03 `H001` candidate-to-navigation adapter contract 완료: status `e008_m03_h001_candidate_navigation_adapter_contract_ready`, M02 episodes 6, eval goal rows ready 6/6, policy adapter rows 7, H001 candidate-source rows ready 0, oracle upper-bound smoke ready true, H001 navigation execution false, selected next E008-M04, launch long job false
+- [x] E008-M02 `HM3D ObjectNav` episode/source adapter smoke 완료: status `e008_m02_hm3d_objectnav_adapter_smoke_ready`, sampled episodes 6, unique scenes 2, scene/navmesh ready 6/6, Docker `Habitat` scene smoke success true, selected next E008-M03, real navigation `SR`/`SPL` false, launch long job false
+- [x] E008-M01 real navigation benchmark/source preflight and episode contract 완료: status `e008_m01_navigation_source_episode_contract_ready`, selected source `hm3d_objectnav_habitat_local_research3`, `HM3D` `.glb` 1,095, `.navmesh` 910, `ObjectNav val_mini` episodes 30, `Habitat` import ready true, selected next E008-M02, launch long job false
+- [x] E007-M07 bridge-table package / navigation-expansion decision 완료: status `e007_m07_bridge_table_package_navigation_decision_ready`, paper table package ready true, table rows 6, allowed claims 3, blocked claims 3, selected next `E008-M01`, launch long job now false
+- [x] E007-M06 path-start/source-limit sensitivity / reviewer-defense audit 완료: status `e007_m06_path_start_source_limit_sensitivity_ready`, query-policy rows 1,170, source-limited rows 198, stop-rank rows 47, old-first non-target zero-step rows 153, bridge table defensible with proxy boundary true, real navigation `SR`/`SPL` false, next `E007-M07`
+- [x] E007-M05 path-cost result interpretation / paper-table boundary decision 완료: status `e007_m05_path_cost_result_interpretation_ready`, E007-M04를 paper-facing occupancy-grid path-cost bridge table로 채택, main navigation table ready false, real navigation `SR`/`SPL` false, `OldLocationDeadEndCostM` primary false, next `E007-M06`
+- [x] E007-M04 path-cost policy metric evaluation 완료: status `e007_m04_path_cost_policy_metrics_ready_with_source_limits`, query-policy rows 1,170, source-ready 972, source-limited 198, method full success 181/195, method source-ready success 163/174, mean path cost 2.996131m, mean `PathAttemptSPLProxy` 0.824554, paired source-ready deltas vs static +0.178161 success / +0.065933 SPL, vs `ConceptGraphs` +0.312925 success / +0.564378 SPL, vs H001-only +0.054545 success / +0.004390 SPL with +0.941948m cost
+- [x] E007-M03 external candidate grid projection / path-cost route computation 완료: status `e007_m03_external_candidate_grid_projection_ready`, query rows 195, query-policy rows 1,170, route rows 3,814, route projection-ready 3,785, route path-ready 3,331, query-policy eval-ready 928, source-limited query-policy rows 216, no-route query-policy rows 36, next `E007-M04`
+- [x] E007-M02 path-source compatibility / candidate-route materialization audit 완료: status `e007_m02_path_source_compatibility_ready_projection_pending`, query rows 195, query-policy rows 1,170, route rows 3,814, all-six-policy materialized queries 177/195, candidate grid projection-ready route rows 705, external projection pending route rows 3,097, source gap rows 36, next `E007-M03`
 - [x] E007-M01 navigation/path-cost bridge contract 완료: status `e007_m01_navigation_path_cost_bridge_contract_ready`, M100/E002 row overlap 195/195, E002 target-grid reachable overlap 186/195, `ConceptGraphs` candidate eval rows 7,470 / query overlap 195, real detector proposal rows 925, selected path-cost source `e002_occupancy_grid_astar_v0`, next `E007-M02`
 - [x] E005-M101 map-assisted fallback claim-boundary / navigation-bridge decision 완료: status `e005_m101_map_assisted_claim_boundary_navigation_decision_ready`, selected route `paper_table_integration_and_navigation_bridge_next`, M100 paper-table integration ready true, selected next `E007-M01 navigation/path-cost bridge contract`
 - [x] E005-M100 `ConceptGraphs`-assisted H001 fallback policy smoke 완료: status `e005_m100_conceptgraphs_assisted_fallback_policy_ready`, selected policy `h001_then_conceptgraphs_top5_on_observed_miss_v0`, H001 success 157/195 -> 181/195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897, next `E005-M101`

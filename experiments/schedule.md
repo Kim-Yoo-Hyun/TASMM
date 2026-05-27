@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-05-27
+Last updated: 2026-05-28
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -15,7 +15,7 @@ Last updated: 2026-05-27
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract, read-only `Open3DSG` source/interface audit, denominator-aligned query conversion, leakage-safe predicted-vocabulary policy evaluation, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge, paper-facing claim boundary, external proposal/mapping feasibility, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, and map-assisted fallback claim-boundary decision. M101 marks `h001_then_conceptgraphs_top5_on_observed_miss_v0` as paper-facing query-level table ready with boundary. Selected next unit: E007-M01 navigation/path-cost bridge contract.
+- Current E005/E007/E008 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract, read-only `Open3DSG` source/interface audit, denominator-aligned query conversion, leakage-safe predicted-vocabulary policy evaluation, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge, paper-facing claim boundary, external proposal/mapping feasibility, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, and map-assisted fallback claim-boundary decision. E007-M01-M07 packaged the path-cost bridge as a paper-facing occupancy-grid proxy table. E008-M01-M13 completed real navigation source preflight, adapter/oracle metric gates, rendered RGB-D detector candidate staging, coordinate-frame/navmesh validation, detector candidate visit-order path smoke, leakage-safe goal-evaluation smoke, and detector-goal failure audit. E008-M13 verifies 6 episode audit rows, 12 policy failure audit rows, 3 all-policy failure episodes, 2 pre-cap target-region misses, 1 near-miss localization threshold case, and 0 post-cap/snap suppression cases. E008-M13 does not claim real navigation `SR` / `SPL`; selected next unit: E008-M14 non-oracle observation-coverage expansion plan.
 
 에이전트 추론:
 
@@ -123,11 +123,31 @@ Last updated: 2026-05-27
 | E005-M99 | Row-group inspection / heavier external route decision | Complete: selected `map_assisted_h001_repair_first`; H001 failure 38 rows / 13 targets; `ConceptGraphs` repair candidate 24 rows / 8 targets; H001-or-`ConceptGraphs` upper bound 181 / 195 | Input to E005-M100 |
 | E005-M100 | `ConceptGraphs`-assisted H001 fallback policy smoke | Complete: selected `h001_then_conceptgraphs_top5_on_observed_miss_v0`; success 181 / 195; `AttemptSPL` 0.798675; mean cost 2.435897 | Input to E005-M101 |
 | E005-M101 | Map-assisted fallback claim-boundary / navigation-bridge decision | Complete: selected `paper_table_integration_and_navigation_bridge_next`; paper-table integration ready true; next E007-M01 | Input to E007 |
-| E007-M01 | Navigation/path-cost bridge contract | Next: connect M100 candidate visit order to path-aware `ExpectedSearchCost`, `AttemptSPL`/`SPL` proxy, old-location dead-end cost | No real navigation claim before bridge source is fixed |
+| E007-M01 | Navigation/path-cost bridge contract | Complete: M100/E002 row overlap 195 / 195; E002 target-grid reachable overlap 186 / 195; `ConceptGraphs` query overlap 195 / 195; selected `e002_occupancy_grid_astar_v0` | Input to E007-M02 |
+| E007-M02 | Path-source compatibility / candidate-route materialization audit | Complete: 1,170 query-policy rows, 3,814 route rows, 705 projection-ready rows, 3,097 external projection-pending rows, 36 source gap rows | Input to E007-M03 |
+| E007-M03 | External candidate grid projection / path-cost route computation | Complete: route projection-ready 3,785 / 3,814, route path-ready 3,331 / 3,814, query-policy eval-ready 928 / 1,170, no-route query-policy rows 36 | Input to E007-M04 |
+| E007-M04 | Path-cost policy metric evaluation | Complete: source-ready 972 / 1,170; method source-ready success 163 / 174; mean path cost 2.996131m; mean `PathAttemptSPLProxy` 0.824554; paired delta vs H001-only success +0.054545 / `PathAttemptSPLProxy` +0.004390 / cost +0.941948m | Input to E007-M05 |
+| E007-M05 | Path-cost result interpretation / paper-table boundary | Complete: selected paper-facing occupancy-grid path-cost bridge table; main navigation table false; `OldLocationDeadEndCostM` primary false | Input to E007-M06 |
+| E007-M06 | Path-start/source-limit sensitivity and reviewer-defense audit | Complete: source-limited 198 / 1,170; stop-rank 47 / 1,170; old-first non-target zero-step 153; bridge table defensible with proxy boundary true | Input to E007-M07 |
+| E007-M07 | Bridge-table package and navigation-expansion decision | Complete: final E007 bridge table, claim ledger, reviewer defense, and navigation expansion decision packaged | Input to E008-M01 |
+| E008-M01 | Real navigation benchmark/source preflight and episode contract | Complete: selected local read-only `HM3D ObjectNav` + `Habitat`; fixed episode schema, allowed/blocked inputs, metrics, baselines, and no-launch gate | Input to E008-M02 |
+| E008-M02 | `HM3D ObjectNav` episode/source adapter smoke | Complete: 6 episode rows, 2 scenes, 6/6 scene/navmesh ready, Docker `Habitat` pathfinder smoke success | Input to E008-M03 |
+| E008-M03 | `H001` candidate-to-navigation adapter contract | Complete: candidate schema/leakage guard fixed; eval goal rows ready 6/6; H001 `HM3D` candidate-source rows 0 | Input to E008-M04 |
+| E008-M04 | `ObjectNav` goal/viewpoint oracle path smoke | Complete: viewpoint paths 6/6, goal-snapped paths 4/6, oracle metric plumbing ready | Input to E008-M05 |
+| E008-M05 | `HM3D` candidate-source staging plan | Complete: selected annotation-derived semantic candidate-source smoke after semantic files 2/2 scenes and label support 6/6 rows | No full benchmark run |
+| E008-M06 | `HM3D` semantic annotation candidate-source smoke | Complete: label support 6/6 but Habitat nonzero-AABB 0/2 scenes and GLB geometry mapping 0/2 scenes; candidate rows 0 | Do not use ObjectNav goal/viewpoint leakage |
+| E008-M07 | `HM3D` rendered RGB-D detector candidate-source plan | Complete: 24 start-pose yaw-sweep render rows, 6 detector manifest rows, 5 labels, `Habitat` / `real-smoke` readiness, M09 command plan | Input to E008-M08 |
+| E008-M08 | `HM3D` rendered RGB-D frame staging smoke | Complete: 24/24 rendered RGB-D/pose rows, 6/6 detector-compatible sequence dirs, detector input files ready | Input to E008-M09 |
+| E008-M09 | `HM3D` rendered RGB-D detector candidate smoke | Complete: 137 detector candidate rows, 137 coordinate candidate rows, 409 pre-cap rows, validator errors/warnings 0/0 | Input to E008-M10 |
+| E008-M10 | Detector candidate coordinate-frame / snap-to-navmesh validation | Complete: candidate rows 137, join-ready 137/137, snapped navigable 136/137, source-to-snapped paths 125/137, warning/failure rows 12 | Input to E008-M11; no navigation `SR` / `SPL` claim before execution rows exist |
+| E008-M11 | Reachable-subset detector candidate visit-order path smoke | Complete: 512 visit-order rows, 28 policy metric rows, 12 explicit failure rows; `path_cost_ascending_reachable_subset_v0` mean first-ready cost 0.791484m | Input to E008-M12; no deployable policy claim before leakage-safe goal evaluation / execution rows exist |
+| E008-M12 | Leakage-safe detector candidate goal-evaluation smoke | Complete: 512 candidate-goal eval rows, leakage audit pass, primary `GoalEvalProxySR` 3/6 for all policies, `goal_xz_1p0` 1/6 | Input to E008-M13; no navigation `SR` / `SPL` claim before simulator execution rows exist |
+| E008-M13 | Detector-goal failure audit and observation-coverage expansion decision | Complete: 3 all-policy failure episodes, 2 pre-cap target-region misses, 1 near-miss localization threshold case, 0 post-cap/snap suppression cases; selected non-oracle observation coverage expansion | No full simulator benchmark until non-oracle target coverage is expanded and re-audited |
+| E008-M14 | Non-oracle observation-coverage expansion plan | Next: design `bounded_start_neighborhood_multiview_v0` using scene/navmesh/start pose/category/current candidates/reachable samples/fixed budget only | Must not use `ObjectNav` goal/viewpoints, success labels, or candidate-to-goal distance as policy input |
 | E006-M01 optional | Context-sensitive utility benchmark design | Define task-context-sensitive query rows and utility metrics | Start only if human task context is promoted beyond secondary ablation |
 | E006-M02 optional | Strong context-agnostic baseline suite | Compare against fixed trust, all-high-value, all-reobserve, risk-only, path-cost-only, detector-confidence-only | Human task context must beat these baselines beyond a 1-row gain |
 | E006-M03 optional | Context generalization stress | Test heldout scan / label / task-group transfer | Human task context main claim requires broad transfer, not one label group |
-| E007 optional | Navigation `SR` / `SPL` bridge | Add simulator/navmesh/trajectory execution and navigation baselines | Do not start before proxy table and real RGB-D robustness are stable |
+| E008 optional | Navigation `SR` / `SPL` bridge | Add simulator/navmesh/trajectory execution and navigation baselines | Do not start before E008-M01 source/episode preflight and launch gate are stable |
 
 ## Human Task Context Claim Upgrade
 
@@ -224,9 +244,29 @@ Order:
 44. E005-M99: row-group inspection / heavier external route decision. Complete.
 45. E005-M100: `ConceptGraphs`-assisted H001 fallback policy smoke. Complete.
 46. E005-M101: map-assisted fallback claim-boundary / navigation-bridge decision. Complete.
-47. E007-M01: navigation/path-cost bridge contract. Next.
-45. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
-46. E007 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
+47. E007-M01: navigation/path-cost bridge contract. Complete.
+48. E007-M02: path-source compatibility and candidate-route materialization audit. Complete.
+49. E007-M03: external candidate grid projection and path-cost route computation. Complete.
+50. E007-M04: path-cost policy metric evaluation with source-limited accounting. Complete.
+51. E007-M05: path-cost result interpretation and paper-table boundary decision. Complete.
+52. E007-M06: path-start/source-limit sensitivity and reviewer-defense audit. Complete.
+53. E007-M07: bridge-table package and navigation-expansion decision. Complete.
+54. E008-M01: real navigation benchmark/source preflight and episode contract. Complete.
+55. E008-M02: `HM3D ObjectNav` episode/source adapter smoke. Complete.
+56. E008-M03: `H001` candidate-to-navigation adapter contract. Complete.
+57. E008-M04: `ObjectNav` goal/viewpoint oracle path smoke. Complete.
+58. E008-M05: `HM3D` candidate-source staging plan. Complete.
+59. E008-M06: `HM3D` semantic annotation candidate-source smoke. Complete with coordinate-extraction blocker.
+60. E008-M07: `HM3D` rendered RGB-D detector candidate-source plan. Complete.
+61. E008-M08: `HM3D` rendered RGB-D frame staging smoke. Complete.
+62. E008-M09: `HM3D` rendered RGB-D detector candidate smoke. Complete.
+63. E008-M10: detector candidate coordinate-frame and snap-to-navmesh validation. Complete.
+64. E008-M11: reachable-subset detector candidate visit-order path smoke. Complete.
+65. E008-M12: leakage-safe detector candidate goal-evaluation smoke. Complete.
+66. E008-M13: detector-goal failure audit and observation-coverage expansion decision. Complete.
+67. E008-M14: non-oracle observation-coverage expansion plan. Next.
+68. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
+69. E008 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
 
 ## External Baseline Expansion
 
@@ -313,9 +353,9 @@ Purpose:
 
 ## Immediate Next Actions
 
-- Run E007-M01 navigation/path-cost bridge contract.
+- Run E008-M14 non-oracle observation-coverage expansion plan.
 - Do not launch b01/b03 confidence-log-depth reruns unless a complete diagnostic detector-repair row is explicitly needed.
-- Do not launch another long detector/proposal run until the `569d8f0f` exact cleanup drop reason is known.
+- Do not claim navigation `SR` / `SPL` until E008 produces policy/baseline execution rows beyond M11 visit-order path smoke.
 - Keep the main paper claim centered on memory trust, staleness handling, bounded re-observation, and proxy-search improvement over `ConceptGraphs` / static memory.
 - Keep human task context as a secondary ablation unless E006 is explicitly launched and passes context-sensitive utility gates.
 - Expand real RGB-D/open-vocabulary robustness before real navigation `SR` / `SPL`.
