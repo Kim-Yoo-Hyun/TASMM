@@ -22,6 +22,10 @@ DEFAULT_M51_DIR = EXP_ROOT / "artifacts" / "E005-M51_h001_heldout_policy_replay_
 DEFAULT_M45_DIR = EXP_ROOT / "artifacts" / "E005-M45_conceptgraphs_heldout_query_metric_v0"
 DEFAULT_OUT_ROOT = EXP_ROOT / "artifacts" / "E005-M71_real_proposal_query_metric_v0"
 VERSION = "e005_m71_real_proposal_query_metric_v0"
+READY_DETECTOR_VERIFICATION_STATUSES = {
+    "e005_m70_real_proposal_detector_batch_ready_with_false_positive_load",
+    "e005_m89_cleanup_trace_detector_batch_ready",
+}
 
 STATIC_POLICY = "real_static_memory_only_v0"
 CONTEXT_AGNOSTIC_POLICY = "real_context_agnostic_memory_trust_reobserve_v0"
@@ -798,7 +802,7 @@ def main() -> int:
     missing_adapter = sorted(row["row_uid"] for row in direct_rows if str(row["row_uid"]) not in adapter_by_uid)
     if missing_adapter:
         raise RuntimeError(f"missing M51 adapter rows: {missing_adapter[:5]}")
-    if m70.get("status") != "e005_m70_real_proposal_detector_batch_ready_with_false_positive_load":
+    if m70.get("status") not in READY_DETECTOR_VERIFICATION_STATUSES:
         raise RuntimeError(f"M70 is not ready: {m70.get('status')}")
     if matching.get("status") != "detector_matching_smoke_ready":
         raise RuntimeError(f"M69 matching is not ready: {matching.get('status')}")

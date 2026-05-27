@@ -1,6 +1,6 @@
 # Experiment Report
 
-Updated: 2026-05-26
+Updated: 2026-05-27
 
 이 문서는 현재 `experiments/` 단계에서 확인된 기여점, reviewer가 공격할 핵심 지점, 방어 전략, 최종 논문 방향성을 정리한다. 세부 산출물은 각 experiment folder와 artifact에 둔다.
 
@@ -191,6 +191,45 @@ Updated: 2026-05-26
 - E005-M81 verifies M80 completion: expected files 14/14, prediction rows 264, pre-cap candidates 6,799, matched targets 14/17, proposal precision 0.053030, scan target recall 0.823529.
 - E005-M82 converts M80/M81 into query-level metrics: `heldout_b02` target detected 42/69, detector task-budget 7/69, detector top5 15/69, H001 54/69, context-agnostic memory trust 54/69, `ConceptGraphs` same-batch 45/69.
 - E005-M82 reproduces the expected b02 top5 gain over M71/M74 baseline: detector top5 9/69 -> 15/69 and task-budget 5/69 -> 7/69, while target detected stays 42/69.
+- E005-M83 interprets the rerun result and stops immediate b01/b03 reruns. b01 expected top5 gain is 0, b03 expected top5 gain is 3 rows, all-batch fixed-policy expectation is 60/195, and H001 real memory-trust policy is 157/195.
+- E005-M83 selects `stop_remaining_reruns_record_diagnostic_boundary_then_repair_recall_or_external_proposal`.
+- E005-M84 decides the next route after M83: prompt/detector recall-miss targets are 11/65, max query-detection exposure is 33/195, remaining b01/b03 ranking gain is 3 rows, `Grounded-SAM` same-subset weak positive is false, and `OpenMask3D` has 3 hard blockers.
+- E005-M84 selects `prompt_label_recall_audit_first_then_external_proposal_baseline_gate`.
+- E005-M85 audits the 11 prompt/detector recall-miss targets: no-same-label candidate 5, localization/matcher audit 5, broad/missing label 1.
+- E005-M85 fixes a leakage-safe repair contract: repair policy may use prompt labels/aliases, RGB-D frames, and pre-cap candidate fields, but not `target_uid`, `object_instance_id`, target match distance, or query success labels.
+- E005-M86 decides prompt repair is not ready: 11 targets / 33 query rows audited; visibility/matcher audit covers 5 targets / 15 rows, zero-written scan audit covers 5 targets / 15 rows, and broad-label contract covers 1 target / 3 rows.
+- E005-M86 selects `candidate_survival_match_threshold_and_zero_written_scan_audit_before_prompt_rerun` and does not launch a detector rerun.
+- E005-M87 audits candidate survival, match thresholds, and the zero-written scan path: strict pre-cap suppressed targets are 0, selected 1.5m-threshold recovery covers 2 targets / 6 rows, pre-cap 1.5m recovery covers 3 targets / 9 rows, same-label instance ambiguity covers 2 targets / 6 rows, and the `569d8f0f` zero-written cluster covers 5 targets / 15 rows.
+- E005-M87 selects `zero_written_raw_label_trace_before_prompt_or_threshold_repair` and keeps prompt repair / detector rerun blocked.
+- E005-M88 localizes the `569d8f0f` zero-written cluster: M69/M80 raw/projected/written are 513 / 483 / 0, active scan label is `chair`, prompt has `chair=true`, pre-cap rows are 0, and the likely loss stage is prompt-label cleanup before spatial consolidation/caps.
+- E005-M88 cannot prove the exact repair because existing artifacts do not store raw `label_text`, resolved `label_canonical` distributions, or cleanup drop reasons per scan.
+- E005-M89 verifies the `569d8f0f` cleanup trace target-independently: 483 trace rows, all dropped, `drop_not_scan_prompt_label` 479, `drop_non_prompt_label` 4, canonical `stool` 479, canonical `a` 4, active scan label `chair`, blocked-field hits 0.
+- E005-M89 shows the zero-written cluster is dominated by label-resolution / scan-prompt scope mismatch rather than score ranking, cap, or match-threshold failure.
+- E005-M90 selects `active_scan_exact_label_precedence_v0` and rejects `scan_prompt_scope_expand_stool_for_chair_scan_v0`.
+- E005-M90 active-exact replay would keep 479 / 483 cleanup-trace rows, with blocked-field hits 0 and worst-case new selected proposal upper bound 24 before matching.
+- E005-M91 implements `active_scan_exact_label_precedence_v0` in the real-proposal runner and verifies a one-scan cleanup smoke on `569d8f0f`.
+- E005-M91 recovers M89 zero-written output from pre-cap/final 0 / 0 rows to pre-cap/final 479 / 24 rows, with cleanup keep/drop 479 / 4 and selected proposal cap respected.
+- E005-M91 matching smoke finds matched target rows 5 / 5, scan target recall 1.0, proposal precision 0.208333, and false positives 19 / 24 on the one-scan smoke.
+- E005-M92 converts the one-scan effect into query exposure: affected query rows 15, affected targets 5, M82 target detected 0 / 15, M91 target detected 15 / 15.
+- E005-M92 lower-bound affected detector top5 gain is +3 rows and task-budget gain is +2 rows, but H001 success stays 6 / 15 before and after one-scan conversion.
+- E005-M92 finds one b02 side-effect-risk scan with 15 `chair`/`stool` conflict-exposed query rows, including 3 `stool` rows.
+- E005-M93 completes bounded `heldout_b02` active-label precedence rerun, verification, query conversion, and result analysis.
+- E005-M93 target detected rows improve 42 / 69 -> 57 / 69, detector top5 improves 15 / 69 -> 18 / 69, detector task-budget stays 7 / 69, H001 stays 54 / 69, target detection gain/loss is 15 / 0, and observed side-effect loss is 0.
+- E005-M93 proposal precision is 0.065972 and scan target recall is 0.863636, so false-positive load remains weak.
+- E005-M94 fixes the claim-boundary decision: selected route `stop_and_record_m93_as_batch_level_repair_diagnostic`.
+- E005-M94 projected diagnostic aggregate if b02 is replaced by M93 is target detected 159 / 195, detector top5 60 / 195, detector task-budget 26 / 195, and H001 157 / 195.
+- E005-M95 fixes the paper-facing real-proposal diagnostic table and final E005 boundary: 7 main diagnostic rows, 4 repair diagnostic rows, 2 allowed diagnostic claims, and 4 blocked claims.
+- E005-M95 allowed diagnostic claims are full-denominator H001 comparison against detector-only / `ConceptGraphs` same-batch baselines and active-label precedence as b02 cleanup-failure repair evidence.
+- E005-M95 blocked claims are final real RGB-D/open-vocabulary robustness, deployable search policy, real navigation `SR` / `SPL`, and human intent as a main contribution.
+- E005-M96 selects `external_proposal_mapping_baseline_first` over `navigation_search_bridge_first`.
+- E005-M96 next recommended unit is E005-M97 external proposal/mapping baseline feasibility matrix.
+- E005-M97 completes the external proposal/mapping feasibility matrix and selects `conceptgraphs_derived_map_candidate_route` as the first smoke route.
+- E005-M97 keeps `Open3DSG` bounded vocab adapter as a supporting row, `OpenMask3D` as environment-blocked, and `HOV-SG` as source-audit required.
+- E005-M98 completes the `ConceptGraphs` reliability boundary smoke over 195 rows: `ConceptGraphs` strict top5 114, real detector top5 51, real detector task-budget 24, H001 157.
+- E005-M98 finds 54 `h001_recovers_both_map_and_real_top5_failure` rows and 24 `map_success_h001_failure` rows.
+- E005-M99 completes row-group / heavier-route decision: H001 failure 38 rows / 13 targets, `ConceptGraphs` map-assisted repair candidate 24 rows / 8 targets, H001-or-`ConceptGraphs` upper bound 181 / 195, selected next `E005-M100`.
+- E005-M100 completes `ConceptGraphs`-assisted fallback policy smoke: selected `h001_then_conceptgraphs_top5_on_observed_miss_v0`, H001 success 157 / 195 -> 181 / 195, `AttemptSPL` 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897.
+- E005-M101 marks M100 as paper-facing query-level table ready with boundary and selects E007-M01 navigation/path-cost bridge contract.
 - Real navigation `SR` / `SPL` remains unsupported.
 - Final real RGB-D/open-vocabulary robustness claim remains unsupported.
 
@@ -198,13 +237,23 @@ Updated: 2026-05-26
 
 - The currently defensible paper core is `Task-Conditioned Stale Semantic Memory Update`.
 - The current paper should not claim a better detector, deployable navigation policy, or natural-language intention understanding.
-- M78 can be used as detector-repair evidence only after the runner/rerun path is fixed; it should not be merged into the main H001 memory-decision claim.
+- M78/M83 can be used as detector-ranking repair diagnostic evidence, but they should not be merged into the main H001 memory-decision claim.
+- M89 can be used as cleanup failure diagnosis evidence, but not as prompt repair or final real RGB-D/open-vocabulary robustness evidence.
+- M90 can be used as a leakage-safe repair-route decision, but not as repair performance evidence.
+- M91 can be used as failure-specific repair smoke evidence, but not yet as full-denominator real RGB-D/open-vocabulary robustness evidence.
+- M92 can be used as a route decision: the repair should be tested with bounded `heldout_b02` rerun before updating the main real-proposal query table.
+- M93/M94 can be used as batch-level target-detection repair diagnostic evidence, but not as the main H001 semantic-memory gain.
+- M95 can be used as the final E005 paper-facing boundary: M75 is the real-proposal diagnostic table, while M93/M94 are repair/failure-analysis rows.
+- M96 can be used only as a route decision: external proposal/mapping baseline feasibility should precede navigation execution.
+- M97 can be used only as a feasibility decision: the next smoke should analyze `ConceptGraphs`-derived proposal/map reliability, not claim final robustness.
+- M98 can be used as a row-level reliability diagnostic, but it does not make final real RGB-D/open-vocabulary robustness ready.
 - The final paper target is Direction B: `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`.
 
 에이전트 추론:
 
 - The strongest current framing is a semantic memory decision problem: when a robot has stale semantic memory and noisy current proposals, task context changes memory trust, re-observation priority, search budget, and candidate visit order.
 - The current work is more defensible as semantic mapping for embodied decision-making than as a pure perception or navigation paper.
+- The current direction is technically correct for top-tier positioning because M89-M98 follow a defensible chain: failure diagnosis, leakage-safe principle, runner-level repair, batch rerun, claim-boundary decision, route selection, external feasibility gating, and row-level reliability boundary. It will become weak if presented as a detector cleanup contribution rather than as robustness support for the semantic memory decision layer.
 
 ## Current Contribution Candidates
 
@@ -290,7 +339,7 @@ Updated: 2026-05-26
 | Is the benchmark self-defined? | Query rows come from dynamic `3RScan` / `3DSSG` scan pairs and are evaluated against external `ConceptGraphs` output on all 9 heldout sequence-required scans. | Still not a standard public navigation benchmark; real `SR` / `SPL` requires simulator or navmesh episodes. |
 | Is `ConceptGraphs` enough as an external baseline? | `ConceptGraphs` is fully converted on 195 heldout rows and is a valid proxy-search external map baseline. | Not enough for final real RGB-D/open-vocabulary robustness by itself; `Open3DSG` M64 adds a second bounded external scene-graph row, but it is adapter-based. |
 | Can `Open3DSG` be claimed as a baseline? | M56-M66 prove source/interface/schema/export/query-conversion, denominator alignment, corrected query-level metrics, leakage-safe predicted-vocabulary policy evaluation, and row-level failure boundary without modifying the read-only source. | Primary-label baseline is valid but below `ConceptGraphs` at 81 / 195 strict. Predicted-vocabulary adapter is stronger at 144 / 195 strict but should be labeled as a bounded adapter row. |
-| Does this prove real RGB-D/open-vocabulary robustness? | E003-M75 gives a real proposal bridge with 87 / 96 target detected rows and 33 / 96 bounded repair success rows. M67 scales this bridge to the M38/M45 195-row denominator. M75 full aggregate has target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. M76 marks the table diagnostic-ready. M77/M78 show offline repair potential from pre-cap pools, with fixed replay top5 60 / 195. M80-M82 reproduce the b02 ranking gain in the runner path: detector top5 9 / 69 -> 15 / 69. | No. M82 improves ranking but not target detection, and detector-only remains far below H001. Final robustness remains blocked until remaining-batch decision, external proposal baseline pressure, and false-positive/recall boundary analysis are resolved. |
+| Does this prove real RGB-D/open-vocabulary robustness? | E003-M75 gives a real proposal bridge with 87 / 96 target detected rows and 33 / 96 bounded repair success rows. M67 scales this bridge to the M38/M45 195-row denominator. M75 full aggregate has target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. M76 marks the table diagnostic-ready. M77/M78 show offline repair potential from pre-cap pools, with fixed replay top5 60 / 195. M80-M82 reproduce the b02 ranking gain in the runner path: detector top5 9 / 69 -> 15 / 69. M83 stops immediate b01/b03 reruns because remaining expected gains are too small. M84-M90 diagnose recall misses: prompt repair is not ready, strict pre-cap suppressed target count is 0, selected 1.5m-threshold recovery is only 2 targets / 6 rows, and the largest unresolved exposure is the `569d8f0f` zero-written cluster at 5 targets / 15 rows. M90 selects active-label precedence as a leakage-safe repair route and rejects `stool` scan-scope expansion. M91 validates the selected repair on one scan: pre-cap/final 0 / 0 -> 479 / 24 and matched target rows 5 / 5. M93 validates the repair at b02 batch level: target detected 42 / 69 -> 57 / 69 and detector top5 15 / 69 -> 18 / 69, with no side-effect loss. M94 projects b02-replaced aggregate target detected 159 / 195 and detector top5 60 / 195. M95 fixes the paper-facing boundary and keeps this as diagnostic evidence. M96/M97 select external proposal/mapping feasibility and `ConceptGraphs` reliability smoke. M98 shows H001 recovers 54 rows where both map strict top5 and real detector top5 fail, but `ConceptGraphs` succeeds on 24 H001-failure rows. | No. M98 is a diagnostic row-group analysis from existing artifacts. Final robustness remains blocked until the 24 map-success/H001-failure rows and heavier external-route need are resolved. |
 | Does this prove real navigation `SR` / `SPL`? | E002/E005 provide `ExpectedSearchCost` and `AttemptSPL` proxy. | No. `SR` / `SPL` requires simulator, navmesh, or trajectory execution. |
 | Is human intent a main contribution? | Structured `task_context_id` is included in H001 memory trust / re-observation policies, and E005-M65 records human intent reflected as structured task context. | H001 beats context-agnostic memory trust by only 1 success row, so do not claim natural-language intent understanding or main human-intent contribution yet. |
 | Are failed baselines being hidden? | `DualMap` executed but produced no object `*.pkl`; E003-M45 and E003-M50 negative support/mask routes are documented. | Use them as failure-boundary evidence, not as performance baselines. |
@@ -305,7 +354,7 @@ Updated: 2026-05-26
 
 - The strongest reviewer defense is not to overclaim. Current results are credible if framed as a semantic memory decision layer with strict leakage control and explicit denominator boundaries.
 - The largest remaining risk is not lack of implementation effort; it is claim mismatch. If the paper claims navigation, robust open-vocabulary perception, or human-intent understanding before the required evidence exists, reviewers will correctly reject the claim.
-- M60/M62/M63/M64/M65/M66 are useful because they pre-commit and then apply the `Open3DSG` join/metric/leakage rules on denominator-aligned rows, isolate vocabulary-adapter mismatch, verify the repair without using target labels or target geometry before ranking, and state row-level failure boundaries. M67/M68 are useful because they prevent overclaiming from proxy rows by forcing the next step to execute the real RGB-D proposal bridge on the M38/M45 denominator.
+- M60/M62/M63/M64/M65/M66 are useful because they pre-commit and then apply the `Open3DSG` join/metric/leakage rules on denominator-aligned rows, isolate vocabulary-adapter mismatch, verify the repair without using target labels or target geometry before ranking, and state row-level failure boundaries. M67/M68 are useful because they prevent overclaiming from proxy rows by forcing the next step to execute the real RGB-D proposal bridge on the M38/M45 denominator. M83 is useful because it prevents spending more compute on detector reruns whose expected paper-facing gain is too small. M84 is useful because it moves the next question from ranking repair to target-detection recall diagnosis. M85 is useful because it prevents a naive prompt-only repair claim by showing that recall misses mix prompt/broad-label, localization/matcher, and detector/no-candidate causes.
 
 ## Final Paper Direction A
 
@@ -418,6 +467,16 @@ Cold assessment:
 - E005-M05 confirms that the remaining `DualMap` blocker is environment/bootstrap, not selected scan file layout. Static object schema is adapter-promising, but runtime map outputs are still required.
 - E005-M06 launches the environment/bootstrap route and confirms local `mobileclip` readiness; E005-M07 verifies Docker image and dependency readiness; E005-M08 launches one-scan runtime smoke; E005-M09 verifies failure at `CLIP` model initialization due to GPU memory contention; E005-M10 selects detector-enabled free-GPU retry; E005-M11 launches that retry; E005-M12/M13/M14/M15 repair the cache path and verify cache-fixed runtime completion; E005-M16/M17/M18 show that denser stride still yields no object `*.pkl`.
 - E005-M35 converts the 4-scan `ConceptGraphs` subset into query-level metrics; E005-M38 defines the 13-scan / 291-query scale contract; E005-M49 aggregates all 9 heldout `ConceptGraphs` scans; E005-M52/M53/M54 replay H001 and fix the paper-facing claim boundary.
+- E005-M91 shows that one major zero-written real-proposal failure mode can be repaired without target-aware leakage on one scan.
+- E005-M92 shows this repair is worth a bounded batch rerun, but not because it strengthens H001 yet; it mainly recovers target detection and exposes a side-effect test.
+- E005-M93/M94/M95 show the bounded batch rerun recovers target detection without observed side-effect loss, but still does not strengthen H001 success or detector task-budget success.
+- E005-M96 selects external proposal/mapping baseline feasibility as the next route and defers navigation/search execution.
+- E005-M97 selects the `ConceptGraphs`-derived map candidate route as the first low-burden external reliability smoke and defers `OpenMask3D` / `HOV-SG`.
+- E005-M98 confirms `ConceptGraphs` is a strong reliability diagnostic but also exposes 24 map-success/H001-failure rows that must be inspected.
+- E005-M99 inspects M98 row groups at target level: H001 failure 38 rows / 13 targets, `ConceptGraphs` map-assisted repair candidate 24 rows / 8 targets, H001-or-`ConceptGraphs` upper bound 181 / 195, H001-or-`ConceptGraphs`-or-real-top5 upper bound 183 / 195.
+- E005-M99 selects `map_assisted_h001_repair_first` and defers heavier `OpenMask3D` / `HOV-SG` routes until after map-assisted fallback cost accounting.
+- E005-M100 pays that fallback cost explicitly and still improves `AttemptSPL` proxy, so the map-assisted H001 fallback is stronger than a raw union upper bound.
+- E005-M101 selects navigation/path-cost bridging as the next top-tier expansion, while keeping `OpenMask3D` / `HOV-SG` as later baseline pressure routes.
 - Current real navigation `SR` / `SPL` remains unsupported because no simulator, navmesh, or trajectory execution source is integrated.
 
 논문 주장:
@@ -431,7 +490,7 @@ Cold assessment:
 - Real RGB-D/open-vocabulary robustness is not just higher detector recall. It must show transfer across heldout scenes/labels and robustness to prompt, depth, pose, and proposal noise.
 - Deployable search policy is currently the nearest claim to mature, but E004-M05 still supports only a diagnostic memory-trust decision claim, not a final deployable policy claim.
 - Real navigation `SR` / `SPL` is the farthest claim because query-level success must be connected to actual path execution and candidate visit order.
-- The correct immediate route is E005-M78 fixed offline repair replay over existing pre-cap candidate pools before any new long detector run.
+- The correct immediate route is E007-M01: define the navigation/path-cost bridge contract before any real navigation claim.
 
 사용자 판단 필요:
 
@@ -443,7 +502,8 @@ Cold assessment:
 
 - Use Direction A as the backbone now.
 - Treat Direction B as the final target, not a separate replacement.
-- The next technical step should be E005-M78 fixed offline repair replay and then a targeted rerun only if the replay validates the M77 repair signal.
+- The next technical step should be E007-M01 navigation/path-cost bridge contract.
+- M93 should preserve the current claim boundary: it tests net target-detection recovery and `chair`/`stool` side effects, not final real RGB-D/open-vocabulary robustness.
 - E005 should preserve the E004 claim boundary: split-supported memory trust, limited task-context specificity, no final real RGB-D/open-vocabulary robustness, no deployable search policy, and no real navigation `SR` / `SPL`.
 - External proposal/mapping baselines such as `OpenMask3D`, `ConceptGraphs`, and `HOV-SG` should be evaluated as claim-expansion routes, not retrofitted as detector improvements.
 - Do not claim real navigation `SR` / `SPL` until simulator, navmesh, or trajectory execution is integrated.

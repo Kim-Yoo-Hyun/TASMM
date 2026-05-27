@@ -21,6 +21,7 @@ VERIFY_VERSION = "e005_m70_full_denominator_real_proposal_detector_verifier_v0"
 READY_RUN_STATUSES = {
     "detector_projection_smoke_ready",
     "pre_cap_candidate_pool_export_smoke_ready",
+    "cleanup_trace_diagnostic_ready",
 }
 ERROR_PATTERNS = [
     r"\bERROR\b",
@@ -224,32 +225,54 @@ def main() -> int:
 
     prediction_path = run_dir / "container_output" / "real_proposals.jsonl"
     pre_cap_path = run_dir / "container_output" / "pre_cap_candidate_pool.jsonl"
+    cleanup_trace_path = run_dir / "container_output" / "cleanup_trace.jsonl"
     matched_path = run_dir / "matching" / "matched_proposals.jsonl"
     recall_path = run_dir / "matching" / "target_recall_rows.jsonl"
     validation_path = run_dir / "validator" / "validation_rows.jsonl"
 
     line_counts = {
         "matched_proposal_rows": count_lines(matched_path),
+        "cleanup_trace_rows": count_lines(cleanup_trace_path),
         "pre_cap_candidate_rows": count_lines(pre_cap_path),
         "prediction_rows": count_lines(prediction_path),
         "target_recall_rows": count_lines(recall_path),
         "validator_validation_rows": count_lines(validation_path),
     }
-    checks = {
+    cleanup_trace_export = run_coverage.get("cleanup_trace_export", {})
+    cleanup_trace_mode = bool(cleanup_trace_export.get("enabled"))
+    common_checks = {
         "expected_files_complete": expected_ready == len(expected_rows) and bool(expected_rows),
         "log_no_error_hits_in_sample": not log["error_hits"],
+        "tmux_session_finished": not tmux_running,
+    }
+    detector_checks = {
         "matching_ready": matching.get("status") == "detector_matching_smoke_ready",
         "prediction_rows_positive": line_counts["prediction_rows"] > 0,
         "pre_cap_candidate_rows_positive": line_counts["pre_cap_candidate_rows"] > 0,
         "run_status_ready": run_coverage.get("status") in READY_RUN_STATUSES,
-        "tmux_session_finished": not tmux_running,
         "validator_ready": validator.get("status") == "proposal_schema_smoke_valid"
         and validator.get("valid") is True
         and validator.get("error_rows") == 0
         and validator.get("warning_rows") == 0,
     }
-    ready = all(checks.values())
+    cleanup_checks = {
+        "cleanup_trace_ready": bool(cleanup_trace_export.get("ready")),
+        "cleanup_trace_rows_positive": line_counts["cleanup_trace_rows"] > 0,
+        "cleanup_trace_blocked_field_clean": int(cleanup_trace_export.get("blocked_field_hit_count", 0) or 0) == 0,
+        "cleanup_trace_field_clean": int(cleanup_trace_export.get("field_error_count", 0) or 0) == 0,
+        "cleanup_trace_row_count_matches": (
+            not int(cleanup_trace_export.get("expected_model_status_rows", 0) or 0)
+            or line_counts["cleanup_trace_rows"] == int(cleanup_trace_export.get("expected_model_status_rows", 0) or 0)
+        ),
+    }
+    detector_ready = all({**common_checks, **detector_checks}.values())
+    cleanup_ready = all({**common_checks, **cleanup_checks}.values()) if cleanup_trace_mode else False
+    checks = {**common_checks, **(cleanup_checks if cleanup_trace_mode else detector_checks)}
+    ready = cleanup_ready if cleanup_trace_mode else detector_ready
     status = (
+        "e005_m89_cleanup_trace_detector_batch_ready"
+        if cleanup_trace_mode and ready
+        else
         "e005_m70_real_proposal_detector_batch_ready_with_false_positive_load"
         if ready
         else "e005_m70_real_proposal_detector_batch_needs_attention"
@@ -267,12 +290,20 @@ def main() -> int:
         "log": log,
         "log_path": str(log_path),
         "matching": matching,
-        "next_recommended_unit": "E005-M71 heldout_b01 real proposal query-level metric conversion",
-        "query_metric_conversion_ready": ready,
+        "next_recommended_unit": (
+            "E005-M71 real proposal query-level metric conversion"
+            if detector_ready
+            else "E005-M89 cleanup trace analysis"
+            if cleanup_trace_mode
+            else "E005-M71 heldout_b01 real proposal query-level metric conversion"
+        ),
+        "query_metric_conversion_ready": detector_ready,
         "real_navigation_sr_spl_ready": False,
         "real_rgbd_open_vocab_robustness_ready": False,
         "run_dir": str(run_dir),
         "run_summary": summarize_run(run_coverage),
+        "cleanup_trace_export": cleanup_trace_export,
+        "cleanup_trace_mode": cleanup_trace_mode,
         "status": status,
         "tmux_session": tmux_session,
         "tmux_session_running": tmux_running,
@@ -287,6 +318,7 @@ def main() -> int:
                 "batch_id": batch_id,
                 "matched_target_rows": matching.get("matched_target_rows"),
                 "next_recommended_unit": coverage["next_recommended_unit"],
+                "cleanup_trace_rows": line_counts["cleanup_trace_rows"],
                 "prediction_rows": line_counts["prediction_rows"],
                 "proposal_precision_smoke": matching.get("proposal_precision_smoke"),
                 "query_metric_conversion_ready": coverage["query_metric_conversion_ready"],
@@ -298,7 +330,11 @@ def main() -> int:
             sort_keys=True,
         )
     )
-    if args.require_ready and status != "e005_m70_real_proposal_detector_batch_ready_with_false_positive_load":
+    ready_statuses = {
+        "e005_m70_real_proposal_detector_batch_ready_with_false_positive_load",
+        "e005_m89_cleanup_trace_detector_batch_ready",
+    }
+    if args.require_ready and status not in ready_statuses:
         return 1
     return 0
 

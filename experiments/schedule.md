@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-05-26
+Last updated: 2026-05-27
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -15,7 +15,7 @@ Last updated: 2026-05-26
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M82 completed the two-table robustness denominator contract, read-only `Open3DSG` source/interface audit, output schema contract, object-candidate export, denominator-aligned query conversion, target-geometry loader repair, route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge planning, all b01/b02/b03 detector verification/query conversion, full aggregate route decision, real-proposal claim-boundary decision, offline detector/prompt repair design, fixed offline repair replay, runner insertion/targeted rerun planning, and `heldout_b02` confidence-log-depth targeted detector rerun launch/completion/query conversion. M64 predicted-vocabulary policy reaches strict 144 / 195 and relaxed 147 / 195 with leakage audit pass. M65 includes this row as a bounded external scene-graph baseline, excludes primary-label adapter from the main table, and keeps human intent as structured task-context secondary evidence. Full real-proposal aggregate has target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. M76 marks the table diagnostic-ready but keeps final real RGB-D/open-vocabulary robustness blocked because detector precision is 0.051892, target detection is 0.738462, and mean false positives before target is 8.104167. M78 fixed replay policy `offline_confidence_log_depth_radius0p5_cap24_fixed_replay_v0` reproduces M77 with 0 top5/rank mismatches and reaches 60 / 195 top5 success, target detected 147 / 195, and proposal precision 0.105832. M80-M82 reproduces the expected b02 runner gain: detector top5 9 / 69 -> 15 / 69 and task-budget 5 / 69 -> 7 / 69, while target detected remains 42 / 69. Next unit: E005-M83 confidence-log-depth rerun result interpretation and remaining-batch decision.
+- Current E005 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract, read-only `Open3DSG` source/interface audit, denominator-aligned query conversion, leakage-safe predicted-vocabulary policy evaluation, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge, paper-facing claim boundary, external proposal/mapping feasibility, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, and map-assisted fallback claim-boundary decision. M101 marks `h001_then_conceptgraphs_top5_on_observed_miss_v0` as paper-facing query-level table ready with boundary. Selected next unit: E007-M01 navigation/path-cost bridge contract.
 
 에이전트 추론:
 
@@ -104,7 +104,26 @@ Last updated: 2026-05-26
 | E005-M80 | Confidence-log-depth targeted detector rerun launch | Complete: `heldout_b02` launched in tmux `e005_m80_confidence_log_depth_heldout_b02` | Input to E005-M81 verification |
 | E005-M81 | Confidence-log-depth detector completion verification | Complete: expected files 14 / 14, prediction rows 264, matched targets 14 / 17, precision 0.053030 | Input to M82 query metrics |
 | E005-M82 | Confidence-log-depth query-level metric conversion | Complete: b02 detector top5 15 / 69, task-budget 7 / 69, target detected 42 / 69 | Input to M83 remaining-batch decision |
-| E005-M83 | Confidence-log-depth rerun interpretation | Decide whether b02 reproduction justifies b01/b03 reruns or should stop at diagnostic detector-repair evidence | Required before more detector reruns |
+| E005-M83 | Confidence-log-depth rerun interpretation | Complete: b02 reproduction supports only limited ranking repair; b01/b03 reruns skipped now | Input to E005-M84 prompt/label recall repair or external proposal route decision |
+| E005-M84 | Prompt/label recall repair or external proposal route decision | Complete: selected prompt/label recall audit first; external proposal route remains later | Input to E005-M85 prompt/label recall miss audit and repair contract |
+| E005-M85 | Prompt/label recall miss audit and repair contract | Complete: no-same-label candidate 5, localization/matcher audit 5, broad/missing label 1; leakage-safe repair contract fixed | Input to E005-M86 prompt repair preflight or visibility/matcher audit |
+| E005-M86 | Prompt repair preflight or visibility/matcher audit | Complete: bounded prompt repair preflight false; visibility/matcher 5 targets / 15 rows, zero-written scan 5 targets / 15 rows, broad contract 1 target / 3 rows | Input to E005-M87 candidate-survival / match-threshold / zero-written scan audit |
+| E005-M87 | Candidate survival / match-threshold / zero-written scan audit | Complete: strict pre-cap suppressed 0, selected 1.5m recovery 2 targets / 6 rows, pre-cap 1.5m recovery 3 targets / 9 rows, zero-written scan 5 targets / 15 rows | Input to E005-M88 zero-written trace |
+| E005-M88 | Zero-written raw-label trace / post-filter instrumentation audit | Complete: `569d8f0f` M69/M80 raw/projected/written 513 / 483 / 0, active label `chair`, prompt has `chair=true`, pre-cap rows 0, likely loss at prompt-label cleanup | Exact drop reason unavailable without raw-label trace |
+| E005-M89 | Target-independent cleanup-trace runner patch / `heldout_b02` trace rerun | Complete: verification status `e005_m89_cleanup_trace_detector_batch_ready`; analysis status `e005_m89_cleanup_trace_analysis_ready`; trace rows 483, all drop, `drop_not_scan_prompt_label` 479, canonical `stool` 479, active scan label `chair`, blocked-field hits 0 | Input to E005-M90 label-normalization / scan-prompt scope repair decision |
+| E005-M90 | Label-normalization / scan-prompt scope repair decision | Complete: selected `active_scan_exact_label_precedence_v0`; rejected `scan_prompt_scope_expand_stool_for_chair_scan_v0`; active-exact replay keep rows 479 / 483; blocked-field hits 0; upper-bound selected proposals 24 | Input to E005-M91 active-label precedence runner patch / one-scan cleanup smoke |
+| E005-M91 | Active-label precedence runner patch / one-scan cleanup smoke | Complete: M89 pre-cap/final 0 / 0 -> M91 479 / 24; cleanup keep/drop 479 / 4; cap respected; matched target rows 5 / 5; precision 0.208333 | Input to E005-M92 decision |
+| E005-M92 | Active-label precedence query/rerun decision | Complete: affected query rows 15; target detected 0 -> 15; detector top5 lower-bound +3; task-budget lower-bound +2; H001 delta 0; `chair`/`stool` side-effect risk 1 scan / 15 rows / 3 `stool` rows | Input to E005-M93 bounded b02 rerun |
+| E005-M93 | Bounded `heldout_b02` active-label precedence rerun / result analysis | Complete: target detected 42 / 69 -> 57 / 69; detector top5 15 / 69 -> 18 / 69; detector task-budget 7 / 69 unchanged; H001 54 / 69 unchanged; side-effect observed false | Input to E005-M94 |
+| E005-M94 | Active-label precedence claim-boundary / broader repair decision | Complete: selected `stop_and_record_m93_as_batch_level_repair_diagnostic`; diagnostic projection target detected 159 / 195, detector top5 60 / 195, detector task-budget 26 / 195, H001 157 / 195 | Input to E005-M95 |
+| E005-M95 | Paper-facing real-proposal diagnostic table and final E005 boundary refresh | Complete: 7 main diagnostic rows, 4 repair rows, 2 allowed diagnostic claims, 4 blocked claims | Input to E005-M96 |
+| E005-M96 | Next expansion route decision | Complete: selected `external_proposal_mapping_baseline_first`; navigation/search bridge deferred | Input to E005-M97 |
+| E005-M97 | External proposal/mapping baseline feasibility matrix | Complete: selected `conceptgraphs_derived_map_candidate_route`; `Open3DSG` supporting, `OpenMask3D` environment-blocked, `HOV-SG` source-audit required | Input to E005-M98 |
+| E005-M98 | `ConceptGraphs`-derived proposal/map reliability smoke | Complete: `ConceptGraphs` strict top5 114 / 195, real detector top5 51 / 195, real detector task-budget 24 / 195, H001 157 / 195; H001 recovers both map/top5 failure 54 rows; map-only H001 failure 24 rows | Input to E005-M99 |
+| E005-M99 | Row-group inspection / heavier external route decision | Complete: selected `map_assisted_h001_repair_first`; H001 failure 38 rows / 13 targets; `ConceptGraphs` repair candidate 24 rows / 8 targets; H001-or-`ConceptGraphs` upper bound 181 / 195 | Input to E005-M100 |
+| E005-M100 | `ConceptGraphs`-assisted H001 fallback policy smoke | Complete: selected `h001_then_conceptgraphs_top5_on_observed_miss_v0`; success 181 / 195; `AttemptSPL` 0.798675; mean cost 2.435897 | Input to E005-M101 |
+| E005-M101 | Map-assisted fallback claim-boundary / navigation-bridge decision | Complete: selected `paper_table_integration_and_navigation_bridge_next`; paper-table integration ready true; next E007-M01 | Input to E007 |
+| E007-M01 | Navigation/path-cost bridge contract | Next: connect M100 candidate visit order to path-aware `ExpectedSearchCost`, `AttemptSPL`/`SPL` proxy, old-location dead-end cost | No real navigation claim before bridge source is fixed |
 | E006-M01 optional | Context-sensitive utility benchmark design | Define task-context-sensitive query rows and utility metrics | Start only if human task context is promoted beyond secondary ablation |
 | E006-M02 optional | Strong context-agnostic baseline suite | Compare against fixed trust, all-high-value, all-reobserve, risk-only, path-cost-only, detector-confidence-only | Human task context must beat these baselines beyond a 1-row gain |
 | E006-M03 optional | Context generalization stress | Test heldout scan / label / task-group transfer | Human task context main claim requires broad transfer, not one label group |
@@ -186,9 +205,28 @@ Order:
 25. E005-M79: runner insertion point and targeted repair rerun plan. Complete.
 26. E005-M80: confidence-log-depth targeted detector rerun launch for `heldout_b02`. Complete.
 27. E005-M81/M82: completion verification and query metric conversion for targeted rerun. Complete.
-28. E005-M83: result interpretation and remaining-batch decision. Current next action.
-29. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
-30. E007 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
+28. E005-M83: result interpretation and remaining-batch decision. Complete.
+29. E005-M84: prompt/label recall repair or external proposal baseline route decision. Complete.
+30. E005-M85: prompt/label recall miss audit and repair contract. Complete.
+31. E005-M86: prompt repair preflight or visibility/matcher audit. Complete.
+32. E005-M87: candidate-survival / match-threshold / zero-written scan audit. Complete.
+33. E005-M88: zero-written raw-label trace / post-filter instrumentation audit. Complete.
+34. E005-M89: target-independent cleanup-trace runner patch / `heldout_b02` trace rerun. Complete; `569d8f0f` zero-written cluster is dominated by label-resolution / scan-prompt scope mismatch.
+35. E005-M90: label-normalization / scan-prompt scope repair decision. Complete.
+36. E005-M91: active-label precedence runner patch / one-scan cleanup smoke. Complete.
+37. E005-M92: one-scan matched-target/query conversion or bounded heldout rerun decision. Complete.
+38. E005-M93: bounded `heldout_b02` active-label precedence rerun launch/verification. Complete.
+39. E005-M94: claim-boundary update or broader repair decision. Complete.
+40. E005-M95: paper-facing real-proposal diagnostic table and final E005 boundary refresh. Complete.
+41. E005-M96: next expansion route decision. Complete.
+42. E005-M97: external proposal/mapping baseline feasibility matrix. Complete.
+43. E005-M98: `ConceptGraphs`-derived proposal/map reliability and failure-boundary smoke. Complete.
+44. E005-M99: row-group inspection / heavier external route decision. Complete.
+45. E005-M100: `ConceptGraphs`-assisted H001 fallback policy smoke. Complete.
+46. E005-M101: map-assisted fallback claim-boundary / navigation-bridge decision. Complete.
+47. E007-M01: navigation/path-cost bridge contract. Next.
+45. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
+46. E007 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
 
 ## External Baseline Expansion
 
@@ -275,8 +313,9 @@ Purpose:
 
 ## Immediate Next Actions
 
-- Run E005-M78 fixed offline repair replay for `offline_confidence_log_depth_radius0p5_cap24`.
-- Do not launch another long detector run until M78 verifies the offline repair policy against M75/M76 and records remaining prompt/recall misses.
+- Run E007-M01 navigation/path-cost bridge contract.
+- Do not launch b01/b03 confidence-log-depth reruns unless a complete diagnostic detector-repair row is explicitly needed.
+- Do not launch another long detector/proposal run until the `569d8f0f` exact cleanup drop reason is known.
 - Keep the main paper claim centered on memory trust, staleness handling, bounded re-observation, and proxy-search improvement over `ConceptGraphs` / static memory.
 - Keep human task context as a secondary ablation unless E006 is explicitly launched and passes context-sensitive utility gates.
 - Expand real RGB-D/open-vocabulary robustness before real navigation `SR` / `SPL`.

@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -60,6 +61,30 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
             f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
 
 
+def summarize_cleanup_trace(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    decision_counts: Counter[str] = Counter()
+    scan_decision_counts: Counter[str] = Counter()
+    scan_label_decision_counts: Counter[str] = Counter()
+    frame_decision_counts: Counter[str] = Counter()
+    for row in rows:
+        decision = str(row.get("cleanup_decision"))
+        scan_id = str(row.get("scan_id"))
+        frame_id = str(row.get("frame_id"))
+        label = str(row.get("label_canonical"))
+        decision_counts[decision] += 1
+        scan_decision_counts[f"{scan_id}::{decision}"] += 1
+        scan_label_decision_counts[f"{scan_id}::{label}::{decision}"] += 1
+        frame_decision_counts[f"{scan_id}::{frame_id}::{decision}"] += 1
+    return {
+        "cleanup_trace_version": "candidate_cleanup_trace_v0",
+        "decision_counts": dict(sorted(decision_counts.items())),
+        "frame_decision_counts": dict(sorted(frame_decision_counts.items())),
+        "row_count": len(rows),
+        "scan_decision_counts": dict(sorted(scan_decision_counts.items())),
+        "scan_label_decision_counts": dict(sorted(scan_label_decision_counts.items())),
+    }
+
+
 def frame_triplet_paths(sequence_dir: Path, frame_index: int) -> dict[str, Path]:
     stem = f"frame-{frame_index:06d}"
     return {
@@ -99,6 +124,14 @@ def normalize_label_text(label: Any) -> str:
 
 def resolve_canonical_label(label: Any, prompt_map: dict[str, str], active_labels: list[str]) -> str:
     normalized = normalize_label_text(label)
+    active_exact = {
+        normalize_label_text(candidate): candidate
+        for candidate in active_labels
+        if normalize_label_text(candidate)
+    }
+    if normalized in active_exact:
+        return active_exact[normalized]
+
     direct = prompt_map.get(normalized)
     if direct:
         return direct
@@ -646,18 +679,45 @@ def select_cap_aware_label_balanced_candidates(
     spatial_consolidation_radius_m: float,
     support_evidence_policy: str,
     support_evidence_radii_m: list[float],
-) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]]]:
+    export_cleanup_trace: bool,
+) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
     cleaned = []
+    cleanup_trace_rows: list[dict[str, Any]] = []
     dropped_non_prompt = 0
     dropped_not_scan_prompt = 0
     for row in candidates:
         scan_id = str(row["scan_id"])
         label = str(row["label_canonical"])
+        active_labels = sorted(active_scan_labels.get(scan_id, set()))
+        frame_id = str(row.get("frame_ids", ["unknown"])[0])
+        cleanup_decision = "keep"
+        drop_reason = None
         if label not in enabled_labels:
             dropped_non_prompt += 1
-            continue
-        if require_scan_prompt_label and label not in active_scan_labels.get(scan_id, set()):
+            cleanup_decision = "drop"
+            drop_reason = "drop_non_prompt_label"
+        elif require_scan_prompt_label and label not in active_scan_labels.get(scan_id, set()):
             dropped_not_scan_prompt += 1
+            cleanup_decision = "drop"
+            drop_reason = "drop_not_scan_prompt_label"
+        if export_cleanup_trace:
+            cleanup_trace_rows.append(
+                {
+                    "active_scan_labels": active_labels,
+                    "cleanup_decision": cleanup_decision,
+                    "cleanup_stage": "after_projection_before_pre_cap_pool",
+                    "drop_reason": drop_reason,
+                    "enabled_prompt_label_count": len(enabled_labels),
+                    "enabled_prompt_labels": sorted(enabled_labels),
+                    "frame_id": frame_id,
+                    "label_canonical": label,
+                    "label_text": row.get("label_text"),
+                    "raw_candidate_uid": row.get("raw_candidate_uid"),
+                    "record_type": "candidate_cleanup_trace_v0",
+                    "scan_id": scan_id,
+                }
+            )
+        if drop_reason is not None:
             continue
         cleaned.append(dict(row))
 
@@ -744,7 +804,7 @@ def select_cap_aware_label_balanced_candidates(
             }
         )
         summary["_support_summary"] = support_summary
-    return selected, summary, candidate_pool_rows
+    return selected, summary, candidate_pool_rows, cleanup_trace_rows
 
 
 def run_model_smoke(
@@ -777,6 +837,9 @@ def run_model_smoke(
     support_evidence_output: Path,
     export_pre_cap_candidate_pool: bool,
     pre_cap_candidate_pool_output: Path,
+    export_cleanup_trace: bool,
+    cleanup_trace_output: Path,
+    selected_scan_ids: list[str],
     segmentation_backend: str,
     sam_model_id: str,
     mask_depth_filter: str,
@@ -814,7 +877,15 @@ def run_model_smoke(
     raw_prediction_count = 0
     mask_projected_candidate_count = 0
     active_scan_labels: dict[str, set[str]] = {}
-    selected_scan_rows = manifest_rows[:max_scans]
+    selected_scan_set = {str(scan_id) for scan_id in selected_scan_ids if str(scan_id)}
+    if selected_scan_set:
+        selected_scan_rows = [
+            row for row in manifest_rows if str(row.get("scan_id")) in selected_scan_set
+        ][:max_scans]
+        if not selected_scan_rows:
+            raise ValueError(f"no manifest rows matched --scan-id values: {sorted(selected_scan_set)}")
+    else:
+        selected_scan_rows = manifest_rows[:max_scans]
     use_cap_aware_policy = candidate_selection_policy == "cap_aware_label_balanced_ranking_v0"
 
     for manifest_row in selected_scan_rows:
@@ -1029,8 +1100,15 @@ def run_model_smoke(
     pre_cap_policy_summary: dict[str, Any] | None = None
     support_evidence_summary: dict[str, Any] | None = None
     pre_cap_candidate_pool_rows: list[dict[str, Any]] = []
+    cleanup_trace_rows: list[dict[str, Any]] = []
+    cleanup_trace_summary: dict[str, Any] | None = None
     if use_cap_aware_policy:
-        selected_rows, pre_cap_policy_summary, pre_cap_candidate_pool_rows = select_cap_aware_label_balanced_candidates(
+        (
+            selected_rows,
+            pre_cap_policy_summary,
+            pre_cap_candidate_pool_rows,
+            cleanup_trace_rows,
+        ) = select_cap_aware_label_balanced_candidates(
             candidates=raw_candidates,
             active_scan_labels=active_scan_labels,
             enabled_labels=set(detector_prompt_labels(prompt_payload)),
@@ -1041,9 +1119,27 @@ def run_model_smoke(
             spatial_consolidation_radius_m=pre_cap_spatial_consolidation_radius_m,
             support_evidence_policy=support_evidence_policy,
             support_evidence_radii_m=support_evidence_radii_m,
+            export_cleanup_trace=bool(export_cleanup_trace),
         )
         if export_pre_cap_candidate_pool:
             write_jsonl(pre_cap_candidate_pool_output, pre_cap_candidate_pool_rows)
+        if export_cleanup_trace:
+            cleanup_trace_summary = summarize_cleanup_trace(cleanup_trace_rows)
+            cleanup_trace_summary.update(
+                {
+                    "cleanup_trace_output": str(cleanup_trace_output),
+                    "cleanup_trace_stage": "after_projection_before_pre_cap_pool",
+                    "cleanup_trace_target_independent": True,
+                    "blocked_fields": [
+                        "target_uid",
+                        "candidate_is_target",
+                        "matched_3dssg_instance_id",
+                        "nearest_target_distance",
+                        "query_success_label",
+                    ],
+                }
+            )
+            write_jsonl(cleanup_trace_output, cleanup_trace_rows)
         support_evidence_summary = pre_cap_policy_summary.pop("_support_summary", None)
         rows = []
         frame_selected_counts: dict[tuple[str, str], int] = {}
@@ -1068,6 +1164,9 @@ def run_model_smoke(
                 "pre_cap_candidate_pool_rows": len(pre_cap_candidate_pool_rows)
                 if export_pre_cap_candidate_pool
                 else 0,
+                "cleanup_trace_exported": bool(export_cleanup_trace),
+                "cleanup_trace_output": str(cleanup_trace_output) if export_cleanup_trace else None,
+                "cleanup_trace_rows": len(cleanup_trace_rows) if export_cleanup_trace else 0,
                 "projected_candidate_count": len(raw_candidates),
                 "raw_candidate_collection_cap": raw_candidate_collection_cap,
                 "raw_candidate_collection_cap_reached": raw_candidate_collection_cap_reached,
@@ -1126,6 +1225,10 @@ def run_model_smoke(
         "pre_cap_candidate_pool_rows": len(pre_cap_candidate_pool_rows)
         if export_pre_cap_candidate_pool and use_cap_aware_policy
         else 0,
+        "cleanup_trace_exported": bool(export_cleanup_trace and use_cap_aware_policy),
+        "cleanup_trace_output": str(cleanup_trace_output) if export_cleanup_trace and use_cap_aware_policy else None,
+        "cleanup_trace_rows": len(cleanup_trace_rows) if export_cleanup_trace and use_cap_aware_policy else 0,
+        "cleanup_trace_summary": cleanup_trace_summary,
         "pre_cap_policy_applied": use_cap_aware_policy,
         "pre_cap_policy_output": str(pre_cap_policy_output) if use_cap_aware_policy else None,
         "pre_cap_policy_summary": pre_cap_policy_summary,
@@ -1143,6 +1246,7 @@ def run_model_smoke(
         "scanned_frame_count": scanned_frame_count,
         "segmentation_backend": segmentation_backend if use_grounded_sam else SEGMENTATION_NONE,
         "selected_scan_count": len(selected_scan_rows),
+        "selected_scan_ids": [str(row.get("scan_id")) for row in selected_scan_rows],
         "selected_candidate_count": len(rows) if use_cap_aware_policy else None,
         "skipped_no_depth_predictions": skipped_no_depth,
         "skipped_mask_projection_count": skipped_mask_projection if use_grounded_sam else 0,
@@ -1295,6 +1399,7 @@ def main() -> int:
     parser.add_argument("--max-predictions-per-frame", type=int)
     parser.add_argument("--max-scans", default=1, type=int)
     parser.add_argument("--min-predictions", default=1, type=int)
+    parser.add_argument("--scan-id", action="append", default=[])
     parser.add_argument("--model-id", default=DEFAULT_MODEL_ID)
     parser.add_argument("--prompt-set", required=True, type=Path)
     parser.add_argument("--proposal-run-id", default="m20")
@@ -1332,6 +1437,8 @@ def main() -> int:
         default=Path("/outputs/pre_cap_candidate_pool.jsonl"),
         type=Path,
     )
+    parser.add_argument("--export-cleanup-trace", action="store_true")
+    parser.add_argument("--cleanup-trace-output", default=Path("/outputs/cleanup_trace.jsonl"), type=Path)
     parser.add_argument(
         "--support-evidence-policy",
         choices=[SUPPORT_EVIDENCE_NONE, SUPPORT_EVIDENCE_POLICY_ID],
@@ -1445,6 +1552,9 @@ def main() -> int:
                 support_evidence_output=args.support_evidence_output,
                 export_pre_cap_candidate_pool=bool(args.export_pre_cap_candidate_pool),
                 pre_cap_candidate_pool_output=args.pre_cap_candidate_pool_output,
+                export_cleanup_trace=bool(args.export_cleanup_trace),
+                cleanup_trace_output=args.cleanup_trace_output,
+                selected_scan_ids=[str(scan_id) for scan_id in args.scan_id],
                 segmentation_backend=args.segmentation_backend,
                 sam_model_id=args.sam_model_id,
                 mask_depth_filter=args.mask_depth_filter,

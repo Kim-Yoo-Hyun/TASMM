@@ -1,6 +1,6 @@
 # TODO
 
-Last updated: 2026-05-26
+Last updated: 2026-05-27
 
 이 파일은 에이전트가 다음 작업 계획과 진행 상태를 관리하는 루트 작업판이다. 자세한 문헌 조사 내용은 `literature/`에 기록하고, 이 파일에는 다음 행동과 상태만 남긴다.
 
@@ -16,13 +16,13 @@ Last updated: 2026-05-26
 
 Main experiment implementation.
 
-CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M82는 `Open3DSG` read-only source, real RGB-D/open-vocabulary robustness route decision, M38/M45 full-denominator real proposal bridge, b01/b02/b03 detector verification/query conversion, full aggregate route decision, real-proposal claim boundary decision, offline detector/prompt repair design, fixed offline repair replay, runner insertion/targeted rerun plan, `heldout_b02` confidence-log-depth detector rerun launch/completion/query conversion까지 완료했다. Real-proposal full aggregate는 query rows 195, target detected 144/195, H001 157/195, context-agnostic 156/195, `ConceptGraphs` same-batch 114/195, detector task-budget 24/195, detector top5 51/195이다. M76은 M75를 diagnostic real-proposal search table로는 포함 가능하지만 final real RGB-D/open-vocabulary robustness는 detector precision 0.051892, target detection 0.738462, mean false positives before target 8.104167 때문에 blocked로 고정했다. M78은 `offline_confidence_log_depth_radius0p5_cap24_fixed_replay_v0`를 fixed replay로 구현해 M77 best policy를 top5/rank mismatch 0으로 재현했고, top5 success 60/195, proposal precision 0.105832, target detected 147/195를 확인했다. M79는 runner source edit 불필요, insertion point `select_cap_aware_label_balanced_candidates.score_candidate_before_spatial_consolidation_and_caps`, score mode `confidence_log_depth`로 고정했고, 개선 폭이 가장 큰 `heldout_b02`를 first rerun batch로 선택했다. M80-M82는 `heldout_b02` rerun에서 detector top5 15/69와 task-budget 7/69를 얻어 M79 expected gain을 재현했지만, target detected는 42/69로 그대로라 final robustness claim은 여전히 blocked다. Human intent main claim은 context-agnostic 대비 gain 1 row와 더 높은 `ExpectedSearchCost` 때문에 false다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. final real RGB-D/open-vocabulary robustness와 real navigation `SR`/`SPL`은 아직 not ready다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
+CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M101은 `Open3DSG` read-only source, full-denominator real proposal bridge, external proposal/mapping feasibility matrix, `ConceptGraphs` reliability boundary, row-group / heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary / navigation-bridge decision까지 완료했다. M100 selected policy `h001_then_conceptgraphs_top5_on_observed_miss_v0`는 H001 success 157/195 -> 181/195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897로 바뀐다. E007-M01은 M100 195 rows와 E002 `occupancy_grid_astar_v0`의 row overlap 195/195를 확인하고 navigation/path-cost bridge contract를 고정했다. 다음 단위는 E007-M02 path-source compatibility and candidate-route materialization audit이다. final real RGB-D/open-vocabulary robustness, deployable search policy, real navigation `SR`/`SPL`, human intent main claim은 아직 false로 유지한다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
 
 CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active task는 없고, CAND-001 feasibility가 약해질 때 다시 승격 여부를 판단한다.
 
 ## Active Objective
 
-- CAND-001: Direction B 최종 목표를 유지하되, E005-M83 confidence-log-depth rerun result interpretation and remaining-batch decision을 진행한다.
+- CAND-001: Direction B 최종 목표를 유지하되, E007-M02 path-source compatibility and candidate-route materialization audit로 넘어간다.
 - CAND-002: `Common-Ground Semantic Mapping`은 benchmark 설계 부담을 보류 상태로 둔다.
 - CAND-003: `Functional Semantic Memory`는 annotation/manipulation evaluation 부담을 보류 상태로 둔다.
 
@@ -30,7 +30,7 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E005-M83 confidence-log-depth rerun result interpretation and remaining-batch decision
+- [ ] E007-M02 path-source compatibility and candidate-route materialization audit 진행
 
 ### CAND-002
 
@@ -44,15 +44,26 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E005-M83 결과가 positive라면 b01/b03 confidence-log-depth rerun launch plan 작성
-- [ ] E005-M83 결과가 limited라면 diagnostic detector-repair table boundary로 고정하고 prompt/label repair 또는 external proposal baseline route 재검토
+- [x] M93 launch 전 GPU/Docker 상태 확인
+- [x] M93 결과를 diagnostic repair evidence로 claim boundary에 반영
+- [x] M94에서 b01/b03 확장, 추가 prompt repair, 또는 stop-and-record 중 선택
+- [x] E005-M95에서 paper-facing real-proposal diagnostic table과 final E005 boundary를 갱신
+- [x] E005-M96에서 external proposal baseline 우선인지 navigation bridge 우선인지 결정
+- [x] E005-M97에서 external proposal/mapping baseline feasibility matrix 작성
+- [x] E005-M98에서 `ConceptGraphs` map candidates와 real-proposal/H001 row groups를 비교
+- [x] E005-M99에서 M98 row groups 기반으로 row inspection, heavier external route, navigation bridge 중 선택
+- [x] E005-M100에서 `ConceptGraphs`-assisted H001 fallback policy의 allowed inputs, fallback trigger, visit order, `ExpectedSearchCost`를 smoke-test
+- [x] E005-M101에서 M100 결과 기반 paper-table integration, navigation bridge, 또는 heavier external route 재개 여부 결정
+- [x] E007-M01에서 M100 candidate visit order를 path/navigation cost metric으로 연결하는 contract 작성
+- [ ] E007-M02에서 M100 policy rows, E002 grid rows, `ConceptGraphs`/real detector candidates를 route rows로 materialize
+- [ ] b01/b03 confidence-log-depth rerun은 complete diagnostic table이 필요할 때만 재검토
 - [ ] E006 human-context upgrade decision은 사용자가 human intent main claim을 원할 때만 진행
 - [ ] `OpenMask3D` feasibility는 external 3D instance proposal baseline 후보로 재검토
 - [ ] `HOV-SG` / additional map-navigation baselines는 `Open3DSG` query-conversion feasibility 이후 재검토
 
 ## Running / Needs Verification
 
-- No active E005 background job.
+- No active E005 background job. E007-M01 completed and selected E007-M02 path-source compatibility / candidate-route materialization audit.
 - Active non-E005 runtime state: tmux session `research`; Docker containers may be unrelated.
 
 ### CAND-002
@@ -65,6 +76,38 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] E007-M01 navigation/path-cost bridge contract 완료: status `e007_m01_navigation_path_cost_bridge_contract_ready`, M100/E002 row overlap 195/195, E002 target-grid reachable overlap 186/195, `ConceptGraphs` candidate eval rows 7,470 / query overlap 195, real detector proposal rows 925, selected path-cost source `e002_occupancy_grid_astar_v0`, next `E007-M02`
+- [x] E005-M101 map-assisted fallback claim-boundary / navigation-bridge decision 완료: status `e005_m101_map_assisted_claim_boundary_navigation_decision_ready`, selected route `paper_table_integration_and_navigation_bridge_next`, M100 paper-table integration ready true, selected next `E007-M01 navigation/path-cost bridge contract`
+- [x] E005-M100 `ConceptGraphs`-assisted H001 fallback policy smoke 완료: status `e005_m100_conceptgraphs_assisted_fallback_policy_ready`, selected policy `h001_then_conceptgraphs_top5_on_observed_miss_v0`, H001 success 157/195 -> 181/195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897, next `E005-M101`
+- [x] E005-M99 row-group inspection / heavier external route decision 완료: status `e005_m99_row_group_heavier_route_decision_ready`, query rows 195, unique targets 65, H001 failure 38 rows / 13 targets, `ConceptGraphs` map-assisted repair candidate 24 rows / 8 targets, H001-or-`ConceptGraphs` upper bound 181/195, selected next `E005-M100 ConceptGraphs-assisted H001 fallback policy smoke`
+- [x] E005-M98 `ConceptGraphs` reliability boundary smoke 완료: status `e005_m98_conceptgraphs_reliability_boundary_ready`, `ConceptGraphs` strict top5 114/195, real detector top5 51/195, real task-budget 24/195, H001 157/195, `h001_recovers_both_map_and_real_top5_failure` 54 rows, `map_success_h001_failure` 24 rows, next `E005-M99`
+- [x] E005-M97 external proposal/mapping feasibility matrix 완료: status `e005_m97_external_proposal_mapping_feasibility_ready`, selected first route `conceptgraphs_derived_map_candidate_route`, next `E005-M98 ConceptGraphs-derived proposal/map reliability and failure-boundary smoke`
+- [x] E005-M96 next expansion route decision 완료: status `e005_m96_next_expansion_route_decision_ready`, selected route `external_proposal_mapping_baseline_first`, next `E005-M97 external proposal/mapping baseline feasibility matrix`
+- [x] E005-M95 paper-facing real-proposal diagnostic table / final E005 boundary refresh 완료: status `e005_m95_real_proposal_paper_boundary_ready`, main table rows 7, repair rows 4, allowed diagnostic claims 2, blocked claims 4, next `E005-M96`
+- [x] E005-M94 claim-boundary update / broader repair decision 완료: status `e005_m94_active_label_precedence_claim_boundary_ready`, selected route `stop_and_record_m93_as_batch_level_repair_diagnostic`, projected diagnostic aggregate target detected 159/195, detector top5 60/195, detector task-budget 26/195, H001 157/195, final robustness false
+- [x] E005-M93 result analysis 완료: status `e005_m93_active_label_precedence_result_analysis_ready`, target detected 42/69 -> 57/69, detector top5 15/69 -> 18/69, detector task-budget 7/69 -> 7/69, H001 54/69 -> 54/69, target detection gain/loss 15/0, side-effect observed false
+- [x] E005-M93 query metric conversion 완료: status `e005_m71_real_proposal_query_metric_ready_with_false_positive_boundary`, query rows 69, prediction rows 288, pre-cap 7,498, cleanup trace 7,840, matched targets 19, proposal precision 0.065972, scan target recall 0.863636
+- [x] E005-M93 completion verification 완료: status `e005_m89_cleanup_trace_detector_batch_ready`, query metric conversion ready true, expected files ready
+- [x] E005-M93 bounded `heldout_b02` active-label precedence rerun launch 완료: GPU free 26,207 MiB, tmux `e005_m93_active_label_b02`, log `logs/20260527_010158_e005_m93_active_label_b02.log`, output `artifacts/E005-M93_active_label_precedence_detector_run_v0/heldout_b02/`, `selection_score_mode=confidence_log_depth`, cleanup trace requested true
+- [x] E005-M92 one-scan matched-target/query conversion or bounded heldout rerun decision 완료: affected query rows 15, M82 target detected 0 -> M91 15, detector top5 lower-bound +3, task-budget lower-bound +2, H001 delta 0, `chair`/`stool` side-effect risk 1 scan / 15 rows / `stool` 3 rows, selected next `bounded_heldout_b02_rerun_before_full_query_claim`
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M92 결과와 E005-M93 next action 반영
+- [x] E005-M91 active-label precedence runner patch / one-scan cleanup smoke 완료: `run_rgbd_ov_proposals.py` patch, M91 pre-cap rows 479 vs M89 0, final prediction rows 24 vs M89 0, cleanup keep/drop 479/4, selected proposal cap respected true, matching smoke matched target rows 5/5, proposal precision 0.208333, next `E005-M92`
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M90 결과와 E005-M91 next action 반영
+- [x] E005-M90 label-normalization / scan-prompt scope repair decision 완료: status `e005_m90_label_normalization_prompt_scope_repair_decision_ready`, selected route `active_scan_exact_label_precedence_then_one_scan_cleanup_smoke`, active-exact replay keep rows 479/483, blocked-field hits 0, worst-case new selected proposal upper bound 24, next `E005-M91`
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M89 결과와 E005-M90 next action 반영
+- [x] E005-M89 cleanup-trace rerun completion verification / analysis 완료: verification status `e005_m89_cleanup_trace_detector_batch_ready`, analysis status `e005_m89_cleanup_trace_analysis_ready`, trace rows 483, all drop, `drop_not_scan_prompt_label` 479, `drop_non_prompt_label` 4, canonical `stool` 479, active scan label `chair`, blocked-field hits 0, next `E005-M90`
+- [x] E005-M89 cleanup trace runner patch / launch 완료: `run_rgbd_ov_proposals.py`, `run_m22_frame_scaling_diagnostics.py`, `verify_m70_full_denominator_real_proposal_detector_batch.py`, `launch_m89_cleanup_trace_detector.py`, `analyze_m89_cleanup_trace_result.py`; target-independent fields and blocked-field checks 추가; full run 결과는 위 M89 verification/analysis 항목으로 완료
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M88 결과와 E005-M89 next action 반영
+- [x] E005-M88 zero-written raw-label trace / post-filter instrumentation audit 완료: `plan_m88_zero_written_raw_label_trace.py`, status `e005_m88_zero_written_raw_label_trace_audit_ready_trace_missing`, scan `569d8f0f`, zero-written 5 targets / 15 rows, M69/M80 raw/projected/written 513/483/0, active scan label `chair`, prompt has `chair=true`, pre-cap loss rate 1.0, likely loss stage `prompt_label_cleanup_before_spatial_consolidation_and_caps`, exact filter reason unknown because raw-label trace is missing, next `E005-M89`
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M87 결과와 E005-M88 next action 반영
+- [x] E005-M87 candidate-survival / match-threshold / zero-written scan audit 완료: `plan_m87_candidate_survival_threshold_zero_written.py`, status `e005_m87_candidate_survival_threshold_zero_written_audit_ready`, audited targets 11, query exposure 33/195, strict pre-cap suppressed 0, selected 1.5m recoverable 2 targets / 6 rows, pre-cap 1.5m recoverable 3 targets / 9 rows, instance ambiguity 2 targets / 6 rows, zero-written scan 5 targets / 15 rows, next `E005-M88`
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M86 결과와 E005-M87 next action 반영
+- [x] E005-M86 prompt repair preflight / visibility-matcher decision 완료: `plan_m86_prompt_repair_preflight_visibility_matcher.py`, status `e005_m86_prompt_repair_preflight_visibility_matcher_decision_ready`, audited targets 11, query exposure 33/195, visibility/matcher audit 5 targets / 15 rows, zero-written scan 5 targets / 15 rows, broad-label contract 1 target / 3 rows, bounded prompt repair preflight ready false, selected route `candidate_survival_match_threshold_and_zero_written_scan_audit_before_prompt_rerun`, next `E005-M87`
+- [x] E005-M85 prompt/label recall miss audit and repair contract 완료: `plan_m85_prompt_label_recall_audit.py`, status `e005_m85_prompt_label_recall_audit_ready`, recall-miss 11/65 targets, no-same-label candidate 5, localization/matcher audit 5, broad/missing label 1, selected route `visibility_matcher_audit_then_bounded_prompt_repair_preflight`, next `E005-M86`
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M85 결과와 E005-M86 next action 반영
+- [x] E005-M84 prompt/label recall repair or external proposal baseline route decision 완료: `plan_m84_prompt_label_external_route.py`, status `e005_m84_prompt_label_external_route_decision_ready`, selected route `prompt_label_recall_audit_first_then_external_proposal_baseline_gate`, recall-miss 11/65 targets, max query exposure 33/195, remaining b01/b03 expected gain 3 rows, `OpenMask3D` hard blockers 3, next `E005-M85`
+- [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M83 결과와 E005-M84 next action 반영
+- [x] E005-M83 confidence-log-depth rerun result interpretation and remaining-batch decision 완료: `plan_m83_confidence_log_depth_rerun_decision.py`, status `e005_m83_confidence_log_depth_rerun_decision_ready_limited_detector_ranking_gain`, b02 actual top5 gain +6 rows, target-detection gain 0, expected all-batch top5 60/195, H001 157/195, b01/b03 remaining rerun skip now, next `E005-M84`
 - [x] 최신 Markdown 상태 동기화 완료: `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, `experiments/schedule.md`, `experiments/report.md`, `experiments/E005_external_baseline_transition/README.md`에 E005-M82 결과와 E005-M83 next action 반영
 - [x] E005-M82 confidence-log-depth query-level metric conversion 완료: `run_m71_real_proposal_query_metrics.py --batch-id heldout_b02 --m69-root ...E005-M80... --m70-root ...E005-M81... --out-root ...E005-M82...`, status `e005_m71_real_proposal_query_metric_ready_target_detection_weak`, query rows 69, target detected 42/69, detector task-budget 7/69, detector top5 15/69, H001 54/69, context-agnostic 54/69, `ConceptGraphs` same-batch 45/69, final real robustness false
 - [x] E005-M81 confidence-log-depth detector completion verification 완료: `verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b02 --launch-root ...E005-M80... --run-root ...E005-M80... --out-root ...E005-M81... --require-ready`, status `e005_m70_real_proposal_detector_batch_ready_with_false_positive_load`, expected files ready, prediction rows 264, matched targets 14, scan target recall 0.823529, proposal precision 0.053030, query metric conversion ready true

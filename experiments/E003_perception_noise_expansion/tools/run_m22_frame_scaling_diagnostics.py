@@ -297,16 +297,86 @@ def summarize_candidate_pool_export(
     }
 
 
+def summarize_cleanup_trace_export(
+    cleanup_trace_rows: list[dict[str, Any]],
+    model_status: dict[str, Any],
+    *,
+    export_enabled: bool,
+    output_path: Path,
+) -> dict[str, Any]:
+    if not export_enabled:
+        return {"enabled": False, "ready": True, "row_count": 0}
+
+    required_fields = [
+        "active_scan_labels",
+        "cleanup_decision",
+        "cleanup_stage",
+        "drop_reason",
+        "frame_id",
+        "label_canonical",
+        "label_text",
+        "raw_candidate_uid",
+        "record_type",
+        "scan_id",
+    ]
+    field_errors = []
+    blocked_fields = {
+        "target_uid",
+        "candidate_is_target",
+        "matched_3dssg_instance_id",
+        "nearest_target_distance",
+        "query_success_label",
+    }
+    blocked_field_hits = []
+    decision_counts = Counter(str(row.get("cleanup_decision")) for row in cleanup_trace_rows)
+    drop_reason_counts = Counter(str(row.get("drop_reason")) for row in cleanup_trace_rows)
+    for row_index, row in enumerate(cleanup_trace_rows, start=1):
+        missing = [field for field in required_fields if field not in row]
+        if missing:
+            field_errors.append({"missing_fields": missing, "row_index": row_index})
+        hits = sorted(field for field in blocked_fields if field in row)
+        if hits:
+            blocked_field_hits.append({"blocked_fields": hits, "row_index": row_index})
+        if len(field_errors) >= 10 and len(blocked_field_hits) >= 10:
+            break
+
+    expected_rows = int(model_status.get("cleanup_trace_rows", 0) or 0)
+    ready = (
+        output_path.exists()
+        and len(cleanup_trace_rows) > 0
+        and (not expected_rows or len(cleanup_trace_rows) == expected_rows)
+        and not field_errors
+        and not blocked_field_hits
+    )
+    return {
+        "blocked_field_hit_count": len(blocked_field_hits),
+        "blocked_field_hit_examples": blocked_field_hits[:10],
+        "decision_counts": dict(sorted(decision_counts.items())),
+        "drop_reason_counts": dict(sorted(drop_reason_counts.items())),
+        "enabled": True,
+        "expected_model_status_rows": expected_rows,
+        "field_error_count": len(field_errors),
+        "field_error_examples": field_errors[:10],
+        "output": str(output_path),
+        "ready": ready,
+        "row_count": len(cleanup_trace_rows),
+    }
+
+
 def build_report(coverage: dict[str, Any]) -> str:
     matching = coverage.get("matching_coverage", {})
     centroid_error = matching.get("matched_centroid_error_m", {})
     support = coverage.get("support_evidence", {})
     candidate_pool = coverage.get("candidate_pool_export", {})
+    cleanup_trace = coverage.get("cleanup_trace_export", {})
+    cleanup_trace_enabled = bool(coverage.get("run_config", {}).get("export_cleanup_trace"))
     support_enabled = coverage.get("run_config", {}).get("support_evidence_policy") != SUPPORT_EVIDENCE_NONE
     support_aware = coverage.get("run_config", {}).get("selection_score_mode") == SUPPORT_AWARE_SCORE_MODE
     candidate_pool_enabled = bool(coverage.get("run_config", {}).get("export_pre_cap_candidate_pool"))
     title = (
-        "# E003-M44 Pre-Cap Candidate-Pool Export Smoke"
+        "# E005-M89 Cleanup Trace Diagnostic"
+        if cleanup_trace_enabled
+        else "# E003-M44 Pre-Cap Candidate-Pool Export Smoke"
         if candidate_pool_enabled
         else "# E003-M42 Support-Aware Selection Runner Smoke"
         if support_aware
@@ -315,6 +385,12 @@ def build_report(coverage: dict[str, Any]) -> str:
         else "# E003-M22 Frame Scaling Projection Diagnostic"
     )
     claim_lines = (
+        [
+            "- E005-M89 supports target-independent cleanup trace instrumentation for detector candidate loss diagnosis.",
+            "- E005-M89 does not support prompt repair, detector repair, final real RGB-D/open-vocabulary robustness, or real navigation `SR` / `SPL` claims.",
+        ]
+        if cleanup_trace_enabled
+        else
         [
             "- E003-M44 supports runner-side export of the cleaned pre-cap candidate pool for offline replay.",
             "- E003-M44 does not support final real RGB-D/open-vocabulary robustness because it is a short export/replay smoke.",
@@ -338,6 +414,12 @@ def build_report(coverage: dict[str, Any]) -> str:
     )
     inference_lines = (
         [
+            "- Cleanup trace rows should identify whether projected candidates are dropped as non-prompt labels or non-scan-prompt labels.",
+            "- A prompt/label repair should be considered only if the trace shows a repairable label-normalization failure without target-linked leakage.",
+        ]
+        if cleanup_trace_enabled
+        else
+        [
             "- The candidate pool should allow score-mode ablations without repeating detector inference.",
             "- The next check is whether offline replay reproduces the runner-selected stable candidates.",
         ]
@@ -359,7 +441,9 @@ def build_report(coverage: dict[str, Any]) -> str:
         ]
     )
     user_line = (
-        "- None for E003-M44 smoke."
+        "- None for E005-M89 cleanup trace diagnostic."
+        if cleanup_trace_enabled
+        else "- None for E003-M44 smoke."
         if candidate_pool_enabled
         else "- None for E003-M42 smoke."
         if support_aware
@@ -395,6 +479,10 @@ def build_report(coverage: dict[str, Any]) -> str:
             f"- Candidate pool export ready: {candidate_pool.get('ready')}",
             f"- Candidate pool rows: {candidate_pool.get('candidate_pool_rows')}",
             f"- Candidate pool field errors: {candidate_pool.get('field_error_count')}",
+            f"- Cleanup trace export ready: {cleanup_trace.get('ready')}",
+            f"- Cleanup trace rows: {cleanup_trace.get('row_count')}",
+            f"- Cleanup trace decisions: {cleanup_trace.get('decision_counts')}",
+            f"- Cleanup trace drop reasons: {cleanup_trace.get('drop_reason_counts')}",
             f"- Skipped no-depth predictions: {coverage['frame_diagnostics']['skipped_no_depth_prediction_count']}",
             f"- Validator errors/warnings: {coverage['validator_error_rows']} / {coverage['validator_warning_rows']}",
             f"- Matched proposal rows: {matching.get('matched_proposal_rows')}",
@@ -436,6 +524,7 @@ def main() -> int:
     parser.add_argument("--max-labels", default=12, type=int)
     parser.add_argument("--max-predictions", default=120, type=int)
     parser.add_argument("--max-predictions-per-frame", default=20, type=int)
+    parser.add_argument("--scan-id", action="append", default=[])
     parser.add_argument("--threshold", default=0.08, type=float)
     parser.add_argument("--text-threshold", default=0.08, type=float)
     parser.add_argument(
@@ -459,6 +548,7 @@ def main() -> int:
     )
     parser.add_argument("--support-evidence-radii-m", default="0.75,1.0,1.5,2.0")
     parser.add_argument("--export-pre-cap-candidate-pool", action="store_true")
+    parser.add_argument("--export-cleanup-trace", action="store_true")
     args = parser.parse_args()
 
     args.m17_dir = args.m17_dir.resolve()
@@ -488,6 +578,7 @@ def main() -> int:
     model_smoke = container_output / "model_smoke.json"
     support_evidence_output = container_output / "support_evidence_summary.json"
     pre_cap_candidate_pool_output = container_output / "pre_cap_candidate_pool.jsonl"
+    cleanup_trace_output = container_output / "cleanup_trace.jsonl"
     validator_out = args.out_dir / "validator"
     matching_out = args.out_dir / "matching"
 
@@ -539,44 +630,50 @@ def main() -> int:
         MODEL_ID,
         "--max-scans",
         str(args.max_scans),
-        "--max-frames-per-scan",
-        str(args.max_frames_per_scan),
-        "--max-labels",
-        str(args.max_labels),
-        "--max-predictions",
-        str(args.max_predictions),
-        "--max-predictions-per-frame",
-        str(args.max_predictions_per_frame),
-        "--min-predictions",
-        "1",
-        "--proposal-run-id",
-        "m22",
-        "--continue-after-min-predictions",
-        "--threshold",
-        str(args.threshold),
-        "--text-threshold",
-        str(args.text_threshold),
-        "--seed",
-        "101",
-        "--candidate-selection-policy",
-        args.candidate_selection_policy,
-        "--selection-score-mode",
-        args.selection_score_mode,
-        "--pre-cap-per-scan-label-cap",
-        str(args.pre_cap_per_scan_label_cap),
-        "--pre-cap-spatial-consolidation-radius-m",
-        str(args.pre_cap_spatial_consolidation_radius_m),
-        "--raw-candidate-collection-cap",
-        str(args.raw_candidate_collection_cap),
-        "--pre-cap-policy-output",
-        "/outputs/pre_cap_policy_summary.json",
-        "--support-evidence-policy",
-        args.support_evidence_policy,
-        "--support-evidence-radii-m",
-        args.support_evidence_radii_m,
-        "--support-evidence-output",
-        "/outputs/support_evidence_summary.json",
     ]
+    for scan_id in args.scan_id:
+        run_cmd.extend(["--scan-id", str(scan_id)])
+    run_cmd.extend(
+        [
+            "--max-frames-per-scan",
+            str(args.max_frames_per_scan),
+            "--max-labels",
+            str(args.max_labels),
+            "--max-predictions",
+            str(args.max_predictions),
+            "--max-predictions-per-frame",
+            str(args.max_predictions_per_frame),
+            "--min-predictions",
+            "1",
+            "--proposal-run-id",
+            "m22",
+            "--continue-after-min-predictions",
+            "--threshold",
+            str(args.threshold),
+            "--text-threshold",
+            str(args.text_threshold),
+            "--seed",
+            "101",
+            "--candidate-selection-policy",
+            args.candidate_selection_policy,
+            "--selection-score-mode",
+            args.selection_score_mode,
+            "--pre-cap-per-scan-label-cap",
+            str(args.pre_cap_per_scan_label_cap),
+            "--pre-cap-spatial-consolidation-radius-m",
+            str(args.pre_cap_spatial_consolidation_radius_m),
+            "--raw-candidate-collection-cap",
+            str(args.raw_candidate_collection_cap),
+            "--pre-cap-policy-output",
+            "/outputs/pre_cap_policy_summary.json",
+            "--support-evidence-policy",
+            args.support_evidence_policy,
+            "--support-evidence-radii-m",
+            args.support_evidence_radii_m,
+            "--support-evidence-output",
+            "/outputs/support_evidence_summary.json",
+        ]
+    )
     if args.export_pre_cap_candidate_pool:
         run_cmd.extend(
             [
@@ -585,6 +682,8 @@ def main() -> int:
                 "/outputs/pre_cap_candidate_pool.jsonl",
             ]
         )
+    if args.export_cleanup_trace:
+        run_cmd.extend(["--export-cleanup-trace", "--cleanup-trace-output", "/outputs/cleanup_trace.jsonl"])
     if args.no_require_scan_prompt_label:
         run_cmd.append("--no-require-scan-prompt-label")
 
@@ -640,6 +739,7 @@ def main() -> int:
     pre_cap_candidate_pool_rows = (
         load_jsonl(pre_cap_candidate_pool_output) if pre_cap_candidate_pool_output.exists() else []
     )
+    cleanup_trace_rows = load_jsonl(cleanup_trace_output) if cleanup_trace_output.exists() else []
     prediction_rows = load_jsonl(predictions) if predictions.exists() else []
     matched_rows = load_jsonl(matching_out / "matched_proposals.jsonl") if (matching_out / "matched_proposals.jsonl").exists() else []
 
@@ -658,19 +758,29 @@ def main() -> int:
         output_path=pre_cap_candidate_pool_output,
         support_evidence_policy=args.support_evidence_policy,
     )
+    cleanup_trace_export = summarize_cleanup_trace_export(
+        cleanup_trace_rows=cleanup_trace_rows,
+        model_status=model_status,
+        export_enabled=bool(args.export_cleanup_trace),
+        output_path=cleanup_trace_output,
+    )
     validator_errors = int(validator_coverage.get("error_rows", 0) or 0)
     validator_warnings = int(validator_coverage.get("warning_rows", 0) or 0)
 
     status = "frame_scaling_projection_diagnostic_ready"
+    cleanup_trace_soft_ready = bool(args.export_cleanup_trace and cleanup_trace_export["ready"])
+
     if not docker_info["available"]:
         status = "docker_daemon_unavailable"
     elif args.build and build_result and not build_result["available"]:
         status = "frame_scaling_docker_build_failed"
-    elif not run_result["available"]:
+    elif not run_result["available"] and not cleanup_trace_soft_ready:
         status = "frame_scaling_docker_run_failed"
+    elif cleanup_trace_soft_ready:
+        status = "cleanup_trace_diagnostic_ready"
     elif validator_result.returncode != 0 or validator_errors:
         status = "frame_scaling_validator_failed"
-    elif matching_result.returncode != 0:
+    elif matching_result.returncode != 0 and not cleanup_trace_soft_ready:
         status = "frame_scaling_matching_failed"
     elif args.support_evidence_policy != SUPPORT_EVIDENCE_NONE and not support_evidence["ready"]:
         status = "temporal_spatial_support_runner_smoke_failed"
@@ -686,6 +796,7 @@ def main() -> int:
     coverage = {
         "backend_contract_ready": bool(backend_payload.get("backend_status", {}).get("valid")),
         "candidate_pool_export": candidate_pool_export,
+        "cleanup_trace_export": cleanup_trace_export,
         "docker_build_executed": build_result is not None,
         "docker_build_result": build_result,
         "docker_info": docker_info,
@@ -715,6 +826,7 @@ def main() -> int:
             "max_predictions": args.max_predictions,
             "max_predictions_per_frame": args.max_predictions_per_frame,
             "max_scans": args.max_scans,
+            "scan_ids": [str(scan_id) for scan_id in args.scan_id],
             "pre_cap_per_scan_label_cap": args.pre_cap_per_scan_label_cap,
             "pre_cap_spatial_consolidation_radius_m": args.pre_cap_spatial_consolidation_radius_m,
             "raw_candidate_collection_cap": args.raw_candidate_collection_cap,
@@ -723,6 +835,7 @@ def main() -> int:
             "support_evidence_policy": args.support_evidence_policy,
             "support_evidence_radii_m": args.support_evidence_radii_m,
             "export_pre_cap_candidate_pool": bool(args.export_pre_cap_candidate_pool),
+            "export_cleanup_trace": bool(args.export_cleanup_trace),
             "text_threshold": args.text_threshold,
             "threshold": args.threshold,
         },
@@ -748,6 +861,7 @@ def main() -> int:
         "temporal_spatial_support_runner_smoke_ready",
         "support_aware_selection_runner_smoke_ready",
         "pre_cap_candidate_pool_export_smoke_ready",
+        "cleanup_trace_diagnostic_ready",
     }
     return 0 if status in ready_statuses else 2
 

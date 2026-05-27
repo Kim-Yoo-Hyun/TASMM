@@ -1,10 +1,504 @@
 # E005 External Baseline Transition
 
-Updated: 2026-05-26
+Updated: 2026-05-27
 
 ## Status
 
-`E005-M01` through `E005-M82` are complete through 4-scan scale decision, heldout `ConceptGraphs` runtime/query conversion, full 9-scan aggregation, H001 heldout replay, paper-table claim ledger, real RGB-D/open-vocabulary robustness gate, `Open3DSG` source/schema/object-candidate contracts, denominator-aligned `Open3DSG` export, corrected query conversion, route decision, leakage-safe predicted-vocabulary policy evaluation, paper-table integration boundary, external-baseline failure-boundary rows, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge planning, all b01/b02/b03 detector verification/query conversion, full aggregate route decision, real-proposal claim-boundary decision, offline detector/prompt repair design, fixed offline repair replay, runner insertion/targeted rerun planning, and `heldout_b02` confidence-log-depth targeted detector rerun launch/completion/query conversion. `ConceptGraphs` is the active positive external mapping baseline route: full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M52 replays H001 on the same `M38` query contract: H001 `task_context_memory_trust_reobserve_v0` is 172 / 195 = 0.882051, `static_memory_only_v0` is 141 / 195 = 0.723077, and `context_agnostic_memory_trust_reobserve_v0` is 171 / 195 = 0.876923. E005-M64 verifies the bounded predicted-vocabulary adapter policy leakage-safely: strict bbox top5 144 / 195 = 0.738462 and relaxed bbox 1m top3 147 / 195 = 0.753846. Full real-proposal aggregate over b01/b02/b03 has 195 query rows, target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. E005-M76 marks this as diagnostic-table ready, but final robustness is blocked by detector precision 0.051892, target detection 0.738462, and mean false positives before target 8.104167. E005-M78 fixes and verifies the M77 repair policy: `offline_confidence_log_depth_radius0p5_cap24_fixed_replay_v0` reproduces M77 with 0 top5/rank mismatches and reaches top5 60 / 195, target detected 147 / 195, proposal precision 0.105832. E005-M79 confirms no runner source edit is needed and selects `heldout_b02` as the first rerun batch because expected top5 gain is largest there. E005-M80-M82 confirms the runner-integrated rerun reproduces the expected b02 gain: detector top5 improves from 9 / 69 to 15 / 69 and task-budget success from 5 / 69 to 7 / 69, while target detected stays 42 / 69. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Next unit: E005-M83 result interpretation and remaining-batch decision. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+`E005-M01` through `E005-M101` are complete through heldout `ConceptGraphs` runtime/query conversion, H001 heldout replay, `Open3DSG` adapter checks, full-denominator real proposal diagnostics, paper-facing claim boundary, external proposal/mapping feasibility, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, and map-assisted fallback claim-boundary decision. `ConceptGraphs` is the active positive external mapping baseline route: full heldout strict bbox top5 is 114 / 195 = 0.584615, relaxed bbox 1m top3 is 144 / 195 = 0.738462, and centroid strict top5 is 75 / 195 = 0.384615. E005-M101 marks `h001_then_conceptgraphs_top5_on_observed_miss_v0` as paper-facing query-level table ready with boundary: H001 success 157 / 195 -> 181 / 195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897. The next unit is E007-M01 navigation/path-cost bridge contract. Keep `OpenMask3D` as a later proposal baseline because Docker/`MinkowskiEngine` remains blocked. Final real RGB-D/open-vocabulary robustness and real navigation `SR` / `SPL` remain blocked.
+
+## E005-M101 Map-Assisted Fallback Claim Boundary
+
+사실:
+
+- Status: `e005_m101_map_assisted_claim_boundary_navigation_decision_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M101_map_assisted_claim_boundary_navigation_decision_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m101_map_assisted_claim_boundary_navigation_decision.py`.
+- Selected route: `paper_table_integration_and_navigation_bridge_next`.
+- Paper-table integration ready: true.
+- Main table rows include `real_static_memory_only_v0`, `real_detector_confidence_top5_v0`, `conceptgraphs_only_strict_top5_v0`, `real_context_agnostic_memory_trust_reobserve_v0`, `h001_real_task_context_memory_trust_v0`, and `h001_then_conceptgraphs_top5_on_observed_miss_v0`.
+- Selected next unit: E007-M01 navigation/path-cost bridge contract.
+
+논문 주장:
+
+- M101 allows M100 as a paper-facing query-level policy row with explicit boundary labels.
+- M101 still blocks final real RGB-D/open-vocabulary robustness, deployable search policy, real navigation `SR` / `SPL`, and human intent main claim.
+
+에이전트 추론:
+
+- The immediate top-tier expansion should be navigation/path-cost bridging, not another external mapping route.
+- `OpenMask3D` / `HOV-SG` remain later routes if navigation bridge exposes proposal-source bottlenecks or reviewer pressure requires more external baselines.
+
+## E005-M100 ConceptGraphs-Assisted H001 Fallback Policy
+
+사실:
+
+- Status: `e005_m100_conceptgraphs_assisted_fallback_policy_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M100_conceptgraphs_assisted_fallback_policy_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/run_m100_conceptgraphs_assisted_fallback_policy.py`.
+- Selected policy: `h001_then_conceptgraphs_top5_on_observed_miss_v0`.
+- H001 success / selected fallback success: 157 / 195 -> 181 / 195.
+- H001 `AttemptSPL` proxy / selected fallback `AttemptSPL` proxy: 0.773932 -> 0.798675.
+- H001 mean `ExpectedSearchCost` / selected fallback mean `ExpectedSearchCost`: 1.758974 -> 2.435897.
+- Top6 sensitivity success: 184 / 195, diagnostic only.
+- Follow-up completed: E005-M101 map-assisted fallback claim-boundary / navigation-bridge decision.
+
+논문 주장:
+
+- M100 supports a query-level map-assisted fallback smoke with explicit cost accounting.
+- M100 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, real navigation `SR` / `SPL`, or human intent main contribution.
+
+에이전트 추론:
+
+- The selected top5 fallback improves both success and `AttemptSPL` proxy, so it is stronger than the earlier union upper-bound argument.
+- Map-first variants avoid more old-location dead ends but have worse `AttemptSPL`; they should not be the default policy yet.
+- M101 should decide whether M100 becomes a paper-facing policy table row or whether navigation/path-cost bridge should start.
+
+## E005-M99 Row-Group / External Route Decision
+
+사실:
+
+- Status: `e005_m99_row_group_heavier_route_decision_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M99_row_group_heavier_route_decision_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m99_row_group_heavier_route_decision.py`.
+- Query rows / unique targets: 195 / 65.
+- H001 failure rows / targets: 38 / 13.
+- `ConceptGraphs` map-assisted repair candidate rows / targets: 24 / 8.
+- H001-or-`ConceptGraphs` upper bound: 181 / 195.
+- H001-or-`ConceptGraphs`-or-real-top5 upper bound: 183 / 195.
+- H001 context-sensitive targets: 1 / 65.
+- Follow-up completed: E005-M100 `ConceptGraphs`-assisted H001 fallback policy smoke.
+
+논문 주장:
+
+- M99 supports `ConceptGraphs` as a method-facing repair opportunity, not only as an external baseline row.
+- M99 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, human intent main contribution, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The immediate blocker is now policy form and cost accounting for map-assisted fallback, not another heavy external baseline.
+- `OpenMask3D` / `HOV-SG` should be revisited after M100 if shared gaps or reviewer baseline pressure remain high.
+- Navigation bridge should wait until the fallback trigger, candidate visit order, and `ExpectedSearchCost` accounting are fixed.
+
+## E005-M98 ConceptGraphs Reliability Boundary
+
+사실:
+
+- Status: `e005_m98_conceptgraphs_reliability_boundary_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M98_conceptgraphs_reliability_boundary_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/analyze_m98_conceptgraphs_reliability_boundary.py`.
+- Query rows: 195.
+- `ConceptGraphs` target detected / strict top5 success: 138 / 195, 114 / 195.
+- Real detector target detected / top5 / task-budget: 144 / 195, 51 / 195, 24 / 195.
+- H001 real memory-trust success: 157 / 195.
+- H001 recovers both `ConceptGraphs` strict top5 and real detector top5 failure: 54 rows.
+- `ConceptGraphs` succeeds while H001 fails: 24 rows.
+- Neither `ConceptGraphs` nor real detector target-detects: 12 rows.
+- Follow-up completed: E005-M99 row-group inspection / heavier external route decision.
+
+논문 주장:
+
+- M98 supports `ConceptGraphs` as a reliability diagnostic under the same 195-row denominator.
+- M98 supports a diagnostic memory-decision claim because H001 recovers many rows where both external map strict top5 and real detector top5 fail.
+- M98 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- H001 is not reducible to external map retrieval because it recovers 54 rows where both `ConceptGraphs` strict top5 and real detector top5 fail.
+- The 24 `map_success_h001_failure` rows are reviewer-critical and should be inspected before any broad superiority claim.
+- M99 should decide whether to inspect those rows first, repair/launch a heavier external route, or move to navigation bridge design.
+
+## E005-M97 External Proposal/Mapping Feasibility Matrix
+
+사실:
+
+- Status: `e005_m97_external_proposal_mapping_feasibility_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M97_external_proposal_mapping_feasibility_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m97_external_proposal_mapping_feasibility.py`.
+- Selected first route: `conceptgraphs_derived_map_candidate_route`.
+- Candidate routes: `ConceptGraphs`-derived route, `Open3DSG` bounded vocab adapter, `OpenMask3D`, `HOV-SG`.
+- `ConceptGraphs` route: data ready true, Docker ready true, denominator alignment ready at 195 rows.
+- `Open3DSG` bounded vocab adapter: supporting row, not first route.
+- `OpenMask3D`: deferred because Docker image is not ready after `MinkowskiEngine` build failure.
+- `HOV-SG`: deferred because source/runtime audit is not present in this workspace.
+- Next unit: E005-M98 `ConceptGraphs`-derived proposal/map reliability and failure-boundary smoke.
+
+논문 주장:
+
+- M97 is a feasibility decision, not a performance claim.
+- M97 does not make final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL` ready.
+
+에이전트 추론:
+
+- `ConceptGraphs`-derived route is the best immediate next step because it reuses denominator-aligned 195-row external map evidence without a heavy run.
+- `OpenMask3D` and `HOV-SG` are still valuable for top-tier pressure, but they should not block the next low-burden failure-boundary smoke.
+- M98 must avoid repeating M49 retrieval scores; it should connect external map/proposal coverage to H001, real proposal, and shared-failure row groups.
+
+## E005-M96 Next Expansion Route Decision
+
+사실:
+
+- Status: `e005_m96_next_expansion_route_decision_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M96_next_expansion_route_decision_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m96_next_expansion_route.py`.
+- M95 blocked claims: 4.
+- M95 allowed diagnostic claims: 2.
+- Selected route: `external_proposal_mapping_baseline_first`.
+- Deferred route: `navigation_search_bridge_first`.
+- Next unit: E005-M97 external proposal/mapping baseline feasibility matrix.
+
+논문 주장:
+
+- M96 is a route decision, not a new performance claim.
+- M96 keeps final real RGB-D/open-vocabulary robustness, deployable search policy, and real navigation `SR` / `SPL` blocked.
+- The next claim-expansion pressure should come from external proposal/mapping baselines before navigation execution.
+
+에이전트 추론:
+
+- External proposal/mapping baseline feasibility should precede navigation because M95's active blocker is robustness of the proposal/mapping evidence.
+- Starting navigation now would confound mapping/proposal failures with search policy failures.
+- E005-M97 should compare `ConceptGraphs`-derived proposal/map route, `OpenMask3D`, `HOV-SG`, and `Open3DSG` bounded vocab adapter before launching a heavy route.
+
+## E005-M95 Real-Proposal Paper Boundary
+
+사실:
+
+- Status: `e005_m95_real_proposal_paper_boundary_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M95_real_proposal_paper_boundary_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m95_real_proposal_paper_boundary.py`.
+- Paper-facing diagnostic table rows: 7.
+- Repair diagnostic rows: 4.
+- Allowed diagnostic claims: 2.
+- Blocked claims: 4.
+- M75 H001 / context-agnostic / `ConceptGraphs` / detector top5: 157 / 156 / 114 / 51 over 195 rows.
+- M94 projected b02-replaced aggregate: target detected 159 / 195, detector top5 60 / 195, detector task-budget 26 / 195, H001 157 / 195.
+- Selected next route: `close_current_e005_boundary_and_choose_next_expansion_route`.
+- Next unit: E005-M96 next expansion route decision.
+
+논문 주장:
+
+- M95 allows only diagnostic claims for the real-proposal table and active-label repair.
+- M95 blocks final real RGB-D/open-vocabulary robustness, deployable search policy, real navigation `SR` / `SPL`, and human intent main contribution.
+
+에이전트 추론:
+
+- The paper-facing E005 result should use M75 as the full-denominator real-proposal diagnostic table.
+- M93/M94 should remain repair/failure-analysis evidence, not a main method result.
+- Next progress should come from choosing between stronger external proposal/mapping evidence and navigation/search execution evidence.
+
+## E005-M94 Active-Label Precedence Claim Boundary
+
+사실:
+
+- Status: `e005_m94_active_label_precedence_claim_boundary_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M94_active_label_precedence_claim_boundary_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m94_active_label_precedence_claim_boundary.py`.
+- Selected route: `stop_and_record_m93_as_batch_level_repair_diagnostic`.
+- M93 b02 target detected rows: 42 / 69 -> 57 / 69.
+- M93 b02 detector top5 rows: 15 / 69 -> 18 / 69.
+- M93 b02 detector task-budget rows: 7 / 69 -> 7 / 69.
+- M93 b02 H001 rows: 54 / 69 -> 54 / 69.
+- Projected diagnostic aggregate if b02 is replaced by M93: target detected 159 / 195, detector top5 60 / 195, detector task-budget 26 / 195, H001 157 / 195.
+- Completed next unit: E005-M95 paper-facing real-proposal diagnostic table and final E005 boundary refresh.
+
+논문 주장:
+
+- M94 supports recording M93 as batch-level target-detection repair diagnostic evidence.
+- M94 blocks final real RGB-D/open-vocabulary robustness, deployable search policy, and real navigation `SR` / `SPL` claims.
+
+에이전트 추론:
+
+- b01/b03 active-label reruns are not the best immediate use of effort because M93 does not improve H001 success or detector task-budget success.
+- The next paper-facing task should refresh the real-proposal diagnostic table and claim boundary, then decide whether stronger external proposal/mapping baselines or navigation/search execution should be prioritized.
+
+## E005-M93 Active-Label Precedence Bounded Rerun / Result Analysis
+
+사실:
+
+- Result status: `e005_m93_active_label_precedence_result_analysis_ready`.
+- Launch artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_detector_launch_v0/heldout_b02/`.
+- Run artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_detector_run_v0/heldout_b02/`.
+- Verification artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_detector_verification_v0/heldout_b02/`.
+- Query metric artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_query_metric_v0/heldout_b02/`.
+- Result analysis artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_result_analysis_v0/`.
+- Selection score mode: `confidence_log_depth`.
+- Prediction / pre-cap / cleanup rows: 288 / 7,498 / 7,840.
+- Matched target rows / proposal precision / scan target recall: 19 / 0.065972 / 0.863636.
+- Query target detected rows: 42 / 69 -> 57 / 69.
+- Detector top5 success rows: 15 / 69 -> 18 / 69.
+- Detector task-budget success rows: 7 / 69 -> 7 / 69.
+- H001 success rows: 54 / 69 -> 54 / 69.
+- Target detection gain/loss rows: 15 / 0.
+- `chair`/`stool` side-effect observed: false.
+- Completed next unit: E005-M94 claim-boundary update or broader repair decision.
+
+논문 주장:
+
+- M93 supports batch-level target-detection repair evidence for `active_scan_exact_label_precedence_v0`.
+- M93 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The repair is useful as detector/prompt bridge evidence, not as a main H001 method gain, because H001 success is unchanged.
+
+## E005-M92 Active-Label Precedence Next-Step Decision
+
+사실:
+
+- Status: `e005_m92_active_label_precedence_next_step_decision_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M92_active_label_precedence_next_step_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m92_active_label_precedence_next_step.py`.
+- Affected scan: `569d8f0f-72aa-2f24-89a6-77f8b8779ae9`.
+- Affected query rows / targets: 15 / 5.
+- M82 target detected rows on affected scan: 0 / 15.
+- M91 target detected rows on affected scan: 15 / 15.
+- M91 detector top5 / task-budget success rows on affected scan: 3 / 2.
+- H001 success before / after one-scan conversion: 6 / 6.
+- b02 no-side-effect lower-bound target detected rows/rate: 57 / 69 = 0.826087.
+- Side-effect risk: 1 scan, 15 query rows, including 3 `stool` rows.
+- Selected route: `bounded_heldout_b02_rerun_before_full_query_claim`.
+- Next unit: E005-M93 bounded `heldout_b02` active-label precedence rerun launch/verification.
+
+논문 주장:
+
+- M92 supports only a route decision: M91 should be promoted to a bounded b02 rerun before updating full query-level real-proposal claims.
+- M92 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- M91 recovers target detection on the audited scan, but most recovered target ranks are outside H001's detector budget, so it does not yet strengthen the H001 memory-decision success table.
+- A bounded b02 rerun is more defensible than one-scan-only conversion because it can measure net gain and `chair`/`stool` side effects under the same batch contract.
+
+## E005-M91 Active-Label Precedence Runner Patch / One-Scan Cleanup Smoke
+
+사실:
+
+- Status: `e005_m91_active_label_precedence_smoke_ready`.
+- Run artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M91_active_label_precedence_smoke_v0/heldout_b02/`.
+- Analysis artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M91_active_label_precedence_analysis_v0/`.
+- Runner patch: `resolve_canonical_label()` now gives exact normalized active scan labels precedence before global prompt aliases.
+- M89 pre-cap / final rows: 0 / 0.
+- M91 pre-cap / final rows: 479 / 24.
+- M91 cleanup keep/drop: 479 / 4.
+- M91 canonical labels: `chair` 479, `a` 4.
+- Selected proposal cap respected: true.
+- Matching smoke: matched target rows 5 / 5, proposal precision 0.208333, scan target recall 1.0.
+- Next unit: E005-M92 one-scan matched-target/query conversion or bounded heldout rerun decision.
+
+논문 주장:
+
+- M91 supports a narrow implementation claim: the selected leakage-safe label-resolution repair fixes the cleanup-stage zero-written failure on the audited scan.
+- M91 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- This is a strong reviewer-defense step because it follows the chain `failure diagnosis -> minimal repair principle -> bounded smoke evidence`.
+- The next decision should avoid overclaiming from one scan and decide whether to run query-level conversion or a bounded heldout rerun first.
+
+## E005-M90 Label Normalization / Prompt Scope Repair Decision
+
+사실:
+
+- Status: `e005_m90_label_normalization_prompt_scope_repair_decision_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M90_label_normalization_prompt_scope_repair_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m90_label_normalization_prompt_scope_repair.py`.
+- Selected route: `active_scan_exact_label_precedence_then_one_scan_cleanup_smoke`.
+- Selected option: `active_scan_exact_label_precedence_v0`.
+- Rejected option: `scan_prompt_scope_expand_stool_for_chair_scan_v0`.
+- Prompt conflict count: 1, normalized prompt `chair` maps to canonical labels `chair` and `stool`.
+- Active-exact replay keep rows: 479 / 483.
+- Blocked-field hits: 0.
+- Worst-case new selected proposal upper bound before matching: 24.
+- Next unit: E005-M91 active-label precedence runner patch / one-scan cleanup smoke.
+
+논문 주장:
+
+- M90 supports only a leakage-safe repair route decision.
+- M90 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The repair should change label resolution, not scan-prompt scope. If normalized detector text exactly matches an active scan canonical label, that active label should win before global prompt aliases.
+- Simply allowing `stool` in a `chair`-only scan is semantically unsafe and likely inflates false positives.
+
+## E005-M89 Cleanup Trace Runner Patch / Rerun
+
+사실:
+
+- Status: `e005_m89_cleanup_trace_analysis_ready`.
+- Runner patch files:
+  - `experiments/E003_perception_noise_expansion/docker/real_proposals/run_rgbd_ov_proposals.py`
+  - `experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py`
+  - `experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py`
+- Launch artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_launch_v0/heldout_b02/`.
+- Run artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_run_v0/heldout_b02/`.
+- Verification artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_verification_v0/heldout_b02/`.
+- Analysis artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_analysis_v0/`.
+- tmux session: `e005_m89_cleanup_trace_heldout_b02_569d8f0f` completed.
+- Log: `logs/20260526_182011_e005_m89_cleanup_trace_heldout_b02_569d8f0f.log`.
+- Verification status: `e005_m89_cleanup_trace_detector_batch_ready`.
+- Analysis command: `python experiments/E005_external_baseline_transition/tools/analyze_m89_cleanup_trace_result.py`.
+- Trace rows: 483.
+- Decision counts: `drop` 483.
+- Drop reason counts: `drop_not_scan_prompt_label` 479, `drop_non_prompt_label` 4.
+- Canonical label counts: `stool` 479, `a` 4.
+- Active scan labels: `chair`.
+- Blocked-field hits: 0.
+- Target-independent trace fields: raw `label_text`, resolved `label_canonical`, active scan labels, enabled prompt labels, cleanup decision, cleanup drop reason.
+- Blocked fields: `target_uid`, `candidate_is_target`, `matched_3dssg_instance_id`, nearest target distance, query success label.
+
+논문 주장:
+
+- M89 supports an instrumentation and failure-diagnosis claim: the zero-written cluster is post-projection cleanup loss dominated by label-resolution / scan-prompt scope mismatch.
+- M89 does not support prompt repair, final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The `569d8f0f` zero-written cluster is not primarily a score ranking, cap, or match-threshold failure.
+- The next decision should be E005-M90: a leakage-safe label-normalization or scan-prompt scope repair gate with false-positive inflation checks.
+
+## E005-M88 Zero-Written Raw-Label Trace Audit
+
+사실:
+
+- Status: `e005_m88_zero_written_raw_label_trace_audit_ready_trace_missing`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M88_zero_written_raw_label_trace_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m88_zero_written_raw_label_trace.py`.
+- Scan: `569d8f0f-72aa-2f24-89a6-77f8b8779ae9`.
+- Zero-written cluster: 5 targets / 15 query rows.
+- M69 raw/projected/written: 513 / 483 / 0.
+- M80 raw/projected/written: 513 / 483 / 0.
+- M69/M80 pre-cap rows for this scan: 0 / 0.
+- Reconstructed active scan labels: `chair`.
+- Prompt has `chair`: true.
+- Existing artifact has raw-label text distribution: false.
+- Likely loss stage: `prompt_label_cleanup_before_spatial_consolidation_and_caps`.
+
+논문 주장:
+
+- M88 supports a narrow failure localization claim: this zero-written cluster is post-projection and pre-pre-cap-pool, not a score-mode, ranking, cap, or match-threshold failure.
+- M88 does not support prompt repair, detector repair, final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The next step should patch target-independent cleanup tracing into the runner and rerun `heldout_b02` or the `569d8f0f` scan if a scan filter is added.
+- The trace must record raw `label_text`, resolved `label_canonical`, active scan labels, enabled prompt labels, and cleanup drop reason without target uid, query success, or match labels.
+
+## E005-M87 Candidate Survival / Threshold / Zero-Written Audit
+
+사실:
+
+- Status: `e005_m87_candidate_survival_threshold_zero_written_audit_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M87_candidate_survival_threshold_zero_written_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m87_candidate_survival_threshold_zero_written.py`.
+- Audited targets: 11, query exposure 33 / 195.
+- Strict pre-cap candidate suppressed targets: 0.
+- Selected candidate recoverable at 1.5m: 2 targets / 6 query rows.
+- Pre-cap candidate recoverable at 1.5m: 3 targets / 9 query rows.
+- Same-label instance ambiguity: 2 targets / 6 query rows.
+- Zero-written scan cluster: 5 targets / 15 query rows.
+- Bounded prompt repair ready: false.
+- Launch detector rerun now: false.
+- Selected route: `zero_written_raw_label_trace_before_prompt_or_threshold_repair`.
+
+논문 주장:
+
+- M87 supports a failure-boundary decision: the current detector/prompt route is diagnostic, not final robustness evidence.
+- M87 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- This route decision was executed by E005-M88. The 1.5m threshold remains diagnostic because the `569d8f0f` cluster has zero pre-cap rows.
+
+## E005-M86 Prompt Repair Preflight / Visibility-Matcher Decision
+
+사실:
+
+- Status: `e005_m86_prompt_repair_preflight_visibility_matcher_decision_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M86_prompt_repair_preflight_visibility_matcher_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m86_prompt_repair_preflight_visibility_matcher.py`.
+- Audited targets: 11, query exposure 33 / 195.
+- Visibility/matcher audit: 5 targets / 15 query rows.
+- Zero-written scan audit: 5 targets / 15 query rows.
+- Broad-label contract: 1 target / 3 query rows.
+- Bounded prompt repair preflight ready: false.
+- Launch detector rerun now: false.
+- Selected route: `candidate_survival_match_threshold_and_zero_written_scan_audit_before_prompt_rerun`.
+
+논문 주장:
+
+- M86 supports a route decision: prompt repair is not yet a defensible paper claim.
+- M86 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- This route decision was executed by E005-M87. M86 should now be read as the pre-M87 split that motivated candidate-survival / threshold / zero-written auditing.
+
+## E005-M85 Prompt/Label Recall Miss Audit
+
+사실:
+
+- Status: `e005_m85_prompt_label_recall_audit_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M85_prompt_label_recall_audit_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m85_prompt_label_recall_audit.py`.
+- Audited recall-miss targets: 11 / 65.
+- Audit class counts: `detector_or_label_parse_no_same_label_candidates` 5, `localization_or_match_threshold_gap` 4, `matcher_or_target_assignment_audit_needed` 1, `prompt_contract_gap_broad_or_missing_label` 1.
+- Selected route: `visibility_matcher_audit_then_bounded_prompt_repair_preflight`.
+- Blocked repair-policy inputs: `target_uid`, `object_instance_id`, `matched_3dssg_instance_id`, target match distance, query success labels.
+
+논문 주장:
+
+- M85 supports a diagnosis contract for prompt/label recall misses.
+- M85 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- Prompt repair alone is not sufficient. Five targets need no-same-label candidate diagnosis, five need visibility/matcher or threshold audit, and one broad `object` target needs denominator/prompt-contract handling.
+
+## E005-M84 Prompt/Label vs External Proposal Route Decision
+
+사실:
+
+- Status: `e005_m84_prompt_label_external_route_decision_ready`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M84_prompt_label_external_route_decision_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m84_prompt_label_external_route.py`.
+- Selected route: `prompt_label_recall_audit_first_then_external_proposal_baseline_gate`.
+- Prompt/detector recall-miss targets: 11 / 65.
+- Max query-detection exposure if those targets are recovered: 33 / 195.
+- Remaining b01/b03 confidence-log-depth expected gain after b02: 3 rows.
+- Miss labels: `chair` 6, `stool` 2, `commode` 1, `door` 1, `object` 1.
+- `Grounded-SAM` same-subset weak positive: false.
+- `OpenMask3D` hard blockers: 3 (`docker_build_failed`, `minkowskiengine_build_requirement_error`, `image_not_ready`).
+
+논문 주장:
+
+- M84 supports the route decision that recall diagnosis is the next lightweight step.
+- M84 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The next step should not be b01/b03 rerun or a heavy external proposal job. First separate prompt alias, broad-label, visibility, and detector-miss causes for the 11 recall-miss targets.
+
+## E005-M83 Confidence-Log-Depth Rerun Decision
+
+사실:
+
+- Status: `e005_m83_confidence_log_depth_rerun_decision_ready_limited_detector_ranking_gain`.
+- Artifact: `experiments/E005_external_baseline_transition/artifacts/E005-M83_confidence_log_depth_rerun_decision_v0/`.
+- Command: `python experiments/E005_external_baseline_transition/tools/plan_m83_confidence_log_depth_rerun_decision.py`.
+- Actual b02 detector top5 gain: 9 / 69 -> 15 / 69.
+- Actual b02 target-detection gain: 42 / 69 -> 42 / 69.
+- Expected all-batch detector top5 if b01/b03 fixed-policy gains are also realized: 60 / 195.
+- H001 real memory-trust policy on the same real-proposal aggregate: 157 / 195.
+- Remaining rerun recommendation: skip b01 now because expected top5 gain is 0; skip b03 now unless a complete diagnostic detector-repair table is needed.
+
+논문 주장:
+
+- M83 supports only a limited detector-ranking repair diagnostic.
+- M83 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or real navigation `SR` / `SPL`.
+
+에이전트 추론:
+
+- The next useful unit is not another detector rerun. It is E005-M84: decide whether to repair prompt/label recall misses or move to an external proposal baseline route.
 
 ## E005-M82 Confidence-Log-Depth Query Metrics
 
@@ -29,7 +523,7 @@ Updated: 2026-05-26
 
 에이전트 추론:
 
-- E005-M83 should decide whether the reproduced b02 gain is enough to rerun b01/b03 or whether the route should stop at a diagnostic detector-repair table.
+- E005-M83 already decided that the reproduced b02 gain is diagnostic-only and not enough to justify immediate b01/b03 reruns.
 
 ## E005-M81 Confidence-Log-Depth Detector Verification
 

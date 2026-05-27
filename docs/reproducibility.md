@@ -1,6 +1,6 @@
 # Reproducibility Notes
 
-Updated: 2026-05-26
+Updated: 2026-05-27
 
 이 문서는 현재 repo에서 실험을 다시 실행하기 위해 필요한 데이터 위치, 다운로드 명령, checkpoint 위치, Docker 실행법, 재현 명령, artifact/evaluation 요약을 한 곳에 모은다. 세부 workflow 규칙은 `docs/experiments.md`를 따른다.
 
@@ -12,7 +12,7 @@ Updated: 2026-05-26
 - Active external baselines: `ConceptGraphs`; bounded `Open3DSG` predicted-vocabulary adapter row candidate.
 - Docker images: `research2/conceptgraphs-smoke:latest`, `research2/real-smoke:latest`.
 - Current `ConceptGraphs` heldout state: `heldout_b01/b02/b03` runtime/metric conversion and full 9-scan aggregation are complete.
-- Current claim state: E005-M56-M82 use `/home/yoohyun/research/local_dataset/Open3DSG_staged` as a read-only source and store derived outputs under `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`. E005-M61 generated denominator-aligned `Open3DSG` object candidates for all 9 query scans: 7,600 rows and 51 / 51 completed batches. Corrected E005-M60 verifies query-level conversion for the 195-row M38/M45 denominator: 759 query candidate/eval rows and 585 policy rows. Corrected primary-label `Open3DSG` strict bbox top5 is 81 / 195 and relaxed bbox 1m top3 is 90 / 195. E005-M64 verifies the leakage-safe predicted-vocabulary adapter policy: strict bbox top5 144 / 195 and relaxed bbox 1m top3 147 / 195. E005-M68 materializes the M38/M45 full-denominator real proposal bridge plan from local `3RScan` / `3DSSG`: 195 rows, 9 ready scans, 65 object targets, 22 prompt labels, and 3 heldout batches. E005-M75 full real-proposal aggregate has 195 query rows, target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. E005-M76 marks M75 diagnostic-table ready but keeps final real RGB-D/open-vocabulary robustness false because detector precision is 0.051892, target detection is 0.738462, and mean false positives before target is 8.104167. E005-M78 fixed replay verifies `offline_confidence_log_depth_radius0p5_cap24_fixed_replay_v0`: M77 reproduction mismatch 0, selected proposals 926, proposal precision 0.105832, target detected 147 / 195, and top5 success 60 / 195. E005-M80-M82 verifies the first runner-integrated `confidence_log_depth` rerun on `heldout_b02`: detector top5 9 / 69 -> 15 / 69, task-budget 5 / 69 -> 7 / 69, and target detected unchanged at 42 / 69.
+- Current claim state: E005-M56-M101 use `/home/yoohyun/research/local_dataset/Open3DSG_staged` as a read-only source and store derived outputs under `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`. E005-M61 generated denominator-aligned `Open3DSG` object candidates for all 9 query scans: 7,600 rows and 51 / 51 completed batches. E005-M64 verifies the leakage-safe predicted-vocabulary adapter policy: strict bbox top5 144 / 195 and relaxed bbox 1m top3 147 / 195. E005-M75 full real-proposal aggregate has 195 query rows, target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. E005-M100 selects `h001_then_conceptgraphs_top5_on_observed_miss_v0`: H001 success 157 / 195 -> 181 / 195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897. E005-M101 marks M100 as paper-facing query-level table ready with boundary and selects E007-M01 navigation/path-cost bridge contract. Final real RGB-D/open-vocabulary robustness is still false.
 
 ## Data Location
 
@@ -212,6 +212,62 @@ python experiments/E005_external_baseline_transition/tools/plan_m79_runner_inser
 E005_M80_SUDO_PASSWORD=<password> python experiments/E005_external_baseline_transition/tools/launch_m80_confidence_log_depth_detector_batch.py --batch-id heldout_b02
 python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b02 --launch-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_launch_v0 --run-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_run_v0 --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M81_confidence_log_depth_detector_verification_v0 --require-ready
 python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal_query_metrics.py --batch-id heldout_b02 --m69-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_run_v0 --m70-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M81_confidence_log_depth_detector_verification_v0 --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M82_confidence_log_depth_query_metric_v0
+python experiments/E005_external_baseline_transition/tools/plan_m83_confidence_log_depth_rerun_decision.py
+python experiments/E005_external_baseline_transition/tools/plan_m84_prompt_label_external_route.py
+python experiments/E005_external_baseline_transition/tools/plan_m85_prompt_label_recall_audit.py
+python experiments/E005_external_baseline_transition/tools/plan_m86_prompt_repair_preflight_visibility_matcher.py
+python experiments/E005_external_baseline_transition/tools/plan_m87_candidate_survival_threshold_zero_written.py
+python experiments/E005_external_baseline_transition/tools/plan_m88_zero_written_raw_label_trace.py
+E005_M89_SUDO_PASSWORD=<password> python experiments/E005_external_baseline_transition/tools/launch_m89_cleanup_trace_detector.py
+python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py \
+  --batch-id heldout_b02 \
+  --launch-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_launch_v0 \
+  --run-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_run_v0 \
+  --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_verification_v0 \
+  --require-ready
+python experiments/E005_external_baseline_transition/tools/analyze_m89_cleanup_trace_result.py
+python experiments/E005_external_baseline_transition/tools/plan_m90_label_normalization_prompt_scope_repair.py
+printf '<sudo-password>\n' | python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py \
+  --m17-dir /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M68_full_denominator_real_proposal_bridge_plan_v0/batches/heldout_b02 \
+  --out-dir /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M91_active_label_precedence_smoke_v0/heldout_b02 \
+  --max-scans 1 \
+  --scan-id 569d8f0f-72aa-2f24-89a6-77f8b8779ae9 \
+  --max-frames-per-scan 24 \
+  --max-labels 9 \
+  --max-predictions 64800 \
+  --max-predictions-per-frame 100 \
+  --threshold 0.08 \
+  --text-threshold 0.08 \
+  --candidate-selection-policy cap_aware_label_balanced_ranking_v0 \
+  --selection-score-mode confidence \
+  --pre-cap-per-scan-label-cap 24 \
+  --pre-cap-spatial-consolidation-radius-m 0.5 \
+  --raw-candidate-collection-cap 400000 \
+  --export-pre-cap-candidate-pool \
+  --export-cleanup-trace \
+  --build \
+  --docker-sudo \
+  --sudo-password-stdin
+python experiments/E005_external_baseline_transition/tools/analyze_m91_active_label_precedence_smoke.py
+python experiments/E005_external_baseline_transition/tools/plan_m92_active_label_precedence_next_step.py
+E005_M93_SUDO_PASSWORD=<password> python experiments/E005_external_baseline_transition/tools/launch_m93_active_label_precedence_b02.py
+python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py \
+  --batch-id heldout_b02 \
+  --launch-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_detector_launch_v0 \
+  --run-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_detector_run_v0 \
+  --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_detector_verification_v0 \
+  --require-ready
+python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal_query_metrics.py \
+  --batch-id heldout_b02 \
+  --m69-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_detector_run_v0 \
+  --m70-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_detector_verification_v0 \
+  --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_query_metric_v0
+python experiments/E005_external_baseline_transition/tools/analyze_m93_active_label_precedence_result.py
+python experiments/E005_external_baseline_transition/tools/plan_m94_active_label_precedence_claim_boundary.py
+python experiments/E005_external_baseline_transition/tools/plan_m95_real_proposal_paper_boundary.py
+python experiments/E005_external_baseline_transition/tools/plan_m96_next_expansion_route.py
+python experiments/E005_external_baseline_transition/tools/plan_m97_external_proposal_mapping_feasibility.py
+python experiments/E005_external_baseline_transition/tools/analyze_m98_conceptgraphs_reliability_boundary.py
 ```
 
 ## Artifact And Evaluation Summary
@@ -260,6 +316,25 @@ python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal
 | `E005-M80_confidence_log_depth_detector_launch_v0` / `heldout_b02` | confidence-log-depth targeted detector launch | tmux `e005_m80_confidence_log_depth_heldout_b02`; log `logs/20260526_020840_e005_m80_confidence_log_depth_heldout_b02.log`; output `E005-M80_confidence_log_depth_detector_run_v0/heldout_b02/`; GPU free at launch 24,421 MiB | launch record |
 | `E005-M81_confidence_log_depth_detector_verification_v0` / `heldout_b02` | detector completion verification | expected files 14 / 14; prediction rows 264; pre-cap candidates 6,799; matched targets 14 / 17; precision 0.053030 | ready for query-level conversion |
 | `E005-M82_confidence_log_depth_query_metric_v0` / `heldout_b02` | query-level metric conversion | query rows 69; target detected 42 / 69; detector task-budget 7 / 69; detector top5 15 / 69; H001 54 / 69 | ranking gain reproduced; final robustness still false |
+| `E005-M83_confidence_log_depth_rerun_decision_v0` | remaining-batch decision | b02 actual top5 gain +6 rows; b02 target-detection gain 0; expected all-batch fixed-policy top5 60 / 195; H001 157 / 195; b01/b03 rerun skipped now | diagnostic detector-ranking repair only; next E005-M84 |
+| `E005-M84_prompt_label_external_route_decision_v0` | prompt/label vs external proposal route decision | recall-miss 11 / 65 targets; max query exposure 33 / 195; remaining b01/b03 ranking gain 3 rows; `Grounded-SAM` weak positive false; `OpenMask3D` hard blockers 3 | route decision ready; next E005-M85 |
+| `E005-M85_prompt_label_recall_audit_v0` | prompt/label recall miss audit | no-same-label candidate 5; localization/matcher audit 5; broad/missing label 1; repair contract blocks target-linked leakage fields | audit ready; next E005-M86 |
+| `E005-M86_prompt_repair_preflight_visibility_matcher_v0` | prompt repair preflight / visibility-matcher decision | audited targets 11; query exposure 33 / 195; visibility/matcher 5 targets / 15 rows; zero-written scan 5 targets / 15 rows; broad contract 1 target / 3 rows; prompt repair preflight false | decision ready; superseded by E005-M87 audit |
+| `E005-M87_candidate_survival_threshold_zero_written_v0` | candidate survival / match-threshold / zero-written scan audit | audited targets 11; query exposure 33 / 195; strict pre-cap suppressed 0; selected 1.5m recovery 2 targets / 6 rows; pre-cap 1.5m recovery 3 targets / 9 rows; instance ambiguity 2 targets / 6 rows; zero-written scan 5 targets / 15 rows | audit ready; superseded by E005-M88 trace audit |
+| `E005-M88_zero_written_raw_label_trace_v0` | zero-written raw-label trace / post-filter instrumentation audit | scan `569d8f0f`; zero-written 5 targets / 15 rows; M69/M80 raw/projected/written 513 / 483 / 0; active label `chair`; prompt has `chair=true`; likely loss at prompt-label cleanup; raw-label trace missing | audit ready; superseded by E005-M89 |
+| `E005-M89_cleanup_trace_analysis_v0` | target-independent cleanup trace analysis | trace rows 483; all dropped; `drop_not_scan_prompt_label` 479; canonical `stool` 479; active scan label `chair`; blocked-field hits 0 | analysis ready; input to E005-M90 |
+| `E005-M90_label_normalization_prompt_scope_repair_v0` | label-normalization / prompt-scope repair decision | selected `active_scan_exact_label_precedence_v0`; active-exact replay keep rows 479 / 483; blocked-field hits 0; upper-bound selected proposals 24 | route decision ready; next E005-M91 |
+| `E005-M91_active_label_precedence_smoke_v0` | active-label precedence one-scan cleanup smoke | pre-cap rows 479; final prediction rows 24; cleanup keep/drop 479 / 4; matched target rows 5 / 5; proposal precision 0.208333 | one-scan repair smoke ready; final robustness still false |
+| `E005-M92_active_label_precedence_next_step_v0` | query/rerun decision for M91 repair | affected query rows 15; target detected 0 -> 15; detector top5 lower-bound +3; task-budget lower-bound +2; H001 delta 0; side-effect risk 1 scan / 15 rows / 3 `stool` rows | bounded b02 rerun selected; final robustness still false |
+| `E005-M93_active_label_precedence_result_analysis_v0` | bounded b02 active-label precedence rerun analysis | target detected 42 / 69 -> 57 / 69; detector top5 15 / 69 -> 18 / 69; detector task-budget 7 / 69 unchanged; H001 54 / 69 unchanged; side-effect loss 0 | batch-level repair diagnostic; final robustness still false |
+| `E005-M94_active_label_precedence_claim_boundary_v0` | claim-boundary / broader repair decision | selected `stop_and_record_m93_as_batch_level_repair_diagnostic`; projected diagnostic aggregate target detected 159 / 195, detector top5 60 / 195, detector task-budget 26 / 195, H001 157 / 195 | stop-and-record route ready; next E005-M95 |
+| `E005-M95_real_proposal_paper_boundary_v0` | paper-facing real-proposal table and final E005 boundary | 7 main diagnostic rows; 4 repair diagnostic rows; 2 allowed diagnostic claims; 4 blocked claims; next E005-M96 | final E005 boundary ready; robustness/navigation still false |
+| `E005-M96_next_expansion_route_decision_v0` | external proposal/mapping vs navigation route decision | selected `external_proposal_mapping_baseline_first`; deferred navigation/search bridge; next E005-M97 | route decision ready; robustness/navigation still false |
+| `E005-M97_external_proposal_mapping_feasibility_v0` | external proposal/mapping baseline feasibility matrix | selected `conceptgraphs_derived_map_candidate_route`; `Open3DSG` supporting row; `OpenMask3D` env-blocked; `HOV-SG` source-audit required; next E005-M98 | feasibility ready; robustness/navigation still false |
+| `E005-M98_conceptgraphs_reliability_boundary_v0` | `ConceptGraphs` / real detector / H001 row-group reliability smoke | `ConceptGraphs` strict top5 114 / 195; real detector top5 51 / 195; real task-budget 24 / 195; H001 157 / 195; H001 recovers both map/top5 failure 54 rows; map-success H001-failure 24 rows | diagnostic ready; final robustness/navigation still false |
+| `E005-M99_row_group_heavier_route_decision_v0` | row-group inspection / heavier external route decision | H001 failure 38 rows / 13 targets; `ConceptGraphs` map-assisted repair candidate 24 rows / 8 targets; H001-or-`ConceptGraphs` upper bound 181 / 195; selected `map_assisted_h001_repair_first` | route decision ready; next E005-M100 |
+| `E005-M100_conceptgraphs_assisted_fallback_policy_v0` | `ConceptGraphs`-assisted H001 fallback policy smoke | selected `h001_then_conceptgraphs_top5_on_observed_miss_v0`; success 181 / 195; `AttemptSPL` 0.798675; mean `ExpectedSearchCost` 2.435897; top6 sensitivity 184 / 195 | policy smoke ready; next E005-M101 |
+| `E005-M101_map_assisted_claim_boundary_navigation_decision_v0` | map-assisted fallback claim-boundary / navigation-bridge decision | selected `paper_table_integration_and_navigation_bridge_next`; paper-table integration ready true; next E007-M01 | route decision ready; navigation still false |
 
 논문 주장:
 
@@ -270,7 +345,7 @@ python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal
 
 사실:
 
-- Run E005-M83: interpret the `heldout_b02` confidence-log-depth rerun result and decide whether b01/b03 reruns are justified.
+- Run E007-M01: navigation/path-cost bridge contract.
 - Keep lower-memory runtime patch active to avoid unnecessary `InstructBLIP` GPU loading for object-candidate export.
 - Keep `OpenMask3D` as a later proposal baseline until its Docker/`MinkowskiEngine` blocker is worth revisiting.
 
@@ -280,7 +355,7 @@ python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal
 
 - `.gitignore` intentionally excludes `local_dataset/`, `**/artifacts/`, `*.log`, and `*.jsonl`.
 - Therefore raw datasets, generated bridge outputs, heavy artifacts, logs, and row-level JSONL files do not go to GitHub.
-- Reproduction-critical scripts and docs are not ignored: `experiments/E005_external_baseline_transition/tools/launch_m59_open3dsg_object_export_smoke.py`, `m59_open3dsg_object_dump_runtime_patch.py`, `run_m60_open3dsg_query_conversion.py`, `run_m64_open3dsg_vocab_expansion_policy.py`, `verify_m64_open3dsg_vocab_expansion_policy.py`, `plan_m65_open3dsg_table_integration.py`, `analyze_m66_external_baseline_failure_boundary.py`, `plan_m67_real_rgbd_ov_robustness_route.py`, `plan_m68_full_denominator_real_proposal_bridge.py`, `analyze_m75_real_proposal_aggregate_route.py`, `plan_m76_real_proposal_claim_boundary.py`, `plan_m77_offline_detector_prompt_repair.py`, `run_m78_offline_repair_replay.py`, `plan_m79_runner_insertion_targeted_rerun.py`, `launch_m80_confidence_log_depth_detector_batch.py`, `README.md`, `TODO.md`, and this document are visible to git.
+- Reproduction-critical scripts and docs are not ignored: `experiments/E005_external_baseline_transition/tools/launch_m59_open3dsg_object_export_smoke.py`, `m59_open3dsg_object_dump_runtime_patch.py`, `run_m60_open3dsg_query_conversion.py`, `run_m64_open3dsg_vocab_expansion_policy.py`, `verify_m64_open3dsg_vocab_expansion_policy.py`, `plan_m65_open3dsg_table_integration.py`, `analyze_m66_external_baseline_failure_boundary.py`, `plan_m67_real_rgbd_ov_robustness_route.py`, `plan_m68_full_denominator_real_proposal_bridge.py`, `analyze_m75_real_proposal_aggregate_route.py`, `plan_m76_real_proposal_claim_boundary.py`, `plan_m77_offline_detector_prompt_repair.py`, `run_m78_offline_repair_replay.py`, `plan_m79_runner_insertion_targeted_rerun.py`, `launch_m80_confidence_log_depth_detector_batch.py`, `plan_m83_confidence_log_depth_rerun_decision.py`, `plan_m84_prompt_label_external_route.py`, `plan_m85_prompt_label_recall_audit.py`, `plan_m86_prompt_repair_preflight_visibility_matcher.py`, `plan_m87_candidate_survival_threshold_zero_written.py`, `plan_m88_zero_written_raw_label_trace.py`, `launch_m89_cleanup_trace_detector.py`, `analyze_m89_cleanup_trace_result.py`, `plan_m90_label_normalization_prompt_scope_repair.py`, `launch_m93_active_label_precedence_b02.py`, `analyze_m93_active_label_precedence_result.py`, `plan_m94_active_label_precedence_claim_boundary.py`, `plan_m95_real_proposal_paper_boundary.py`, `plan_m96_next_expansion_route.py`, `plan_m97_external_proposal_mapping_feasibility.py`, `analyze_m98_conceptgraphs_reliability_boundary.py`, `README.md`, `TODO.md`, and this document are visible to git.
 
 에이전트 추론:
 
@@ -329,6 +404,27 @@ The payloads below are intentionally ignored but can be regenerated when raw dat
 | E005-M80 confidence-log-depth detector launch | `E005_M80_SUDO_PASSWORD=<password> python experiments/E005_external_baseline_transition/tools/launch_m80_confidence_log_depth_detector_batch.py --batch-id heldout_b02` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_launch_v0/heldout_b02/coverage.json` |
 | E005-M81 confidence-log-depth detector verification | `python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b02 --launch-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_launch_v0 --run-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_run_v0 --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M81_confidence_log_depth_detector_verification_v0 --require-ready` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M81_confidence_log_depth_detector_verification_v0/heldout_b02/coverage.json` |
 | E005-M82 confidence-log-depth query metrics | `python experiments/E005_external_baseline_transition/tools/run_m71_real_proposal_query_metrics.py --batch-id heldout_b02 --m69-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M80_confidence_log_depth_detector_run_v0 --m70-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M81_confidence_log_depth_detector_verification_v0 --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M82_confidence_log_depth_query_metric_v0` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M82_confidence_log_depth_query_metric_v0/heldout_b02/coverage.json` |
+| E005-M83 confidence-log-depth rerun decision | `python experiments/E005_external_baseline_transition/tools/plan_m83_confidence_log_depth_rerun_decision.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M83_confidence_log_depth_rerun_decision_v0/coverage.json` |
+| E005-M84 prompt/label vs external proposal route decision | `python experiments/E005_external_baseline_transition/tools/plan_m84_prompt_label_external_route.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M84_prompt_label_external_route_decision_v0/coverage.json` |
+| E005-M85 prompt/label recall miss audit | `python experiments/E005_external_baseline_transition/tools/plan_m85_prompt_label_recall_audit.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M85_prompt_label_recall_audit_v0/coverage.json` |
+| E005-M86 prompt repair preflight / visibility-matcher decision | `python experiments/E005_external_baseline_transition/tools/plan_m86_prompt_repair_preflight_visibility_matcher.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M86_prompt_repair_preflight_visibility_matcher_v0/coverage.json` |
+| E005-M87 candidate survival / threshold / zero-written audit | `python experiments/E005_external_baseline_transition/tools/plan_m87_candidate_survival_threshold_zero_written.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M87_candidate_survival_threshold_zero_written_v0/coverage.json` |
+| E005-M88 zero-written raw-label trace audit | `python experiments/E005_external_baseline_transition/tools/plan_m88_zero_written_raw_label_trace.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M88_zero_written_raw_label_trace_v0/coverage.json` |
+| E005-M89 cleanup trace detector launch | `E005_M89_SUDO_PASSWORD=<password> python experiments/E005_external_baseline_transition/tools/launch_m89_cleanup_trace_detector.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_launch_v0/heldout_b02/coverage.json` |
+| E005-M89 cleanup trace detector verification | `python experiments/E005_external_baseline_transition/tools/verify_m70_full_denominator_real_proposal_detector_batch.py --batch-id heldout_b02 --launch-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_launch_v0 --run-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_run_v0 --out-root /home/yoohyun/research2/experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_verification_v0 --require-ready` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_detector_verification_v0/heldout_b02/coverage.json` |
+| E005-M89 cleanup trace analysis | `python experiments/E005_external_baseline_transition/tools/analyze_m89_cleanup_trace_result.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M89_cleanup_trace_analysis_v0/coverage.json` |
+| E005-M90 label-normalization / prompt-scope repair decision | `python experiments/E005_external_baseline_transition/tools/plan_m90_label_normalization_prompt_scope_repair.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M90_label_normalization_prompt_scope_repair_v0/coverage.json` |
+| E005-M91 active-label precedence smoke analysis | `python experiments/E005_external_baseline_transition/tools/analyze_m91_active_label_precedence_smoke.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M91_active_label_precedence_analysis_v0/coverage.json` |
+| E005-M92 active-label precedence next-step decision | `python experiments/E005_external_baseline_transition/tools/plan_m92_active_label_precedence_next_step.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M92_active_label_precedence_next_step_v0/coverage.json` |
+| E005-M93 active-label precedence b02 launch / analysis | `E005_M93_SUDO_PASSWORD=<password> python experiments/E005_external_baseline_transition/tools/launch_m93_active_label_precedence_b02.py`; verify/convert with the M93 roots; then `python experiments/E005_external_baseline_transition/tools/analyze_m93_active_label_precedence_result.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M93_active_label_precedence_result_analysis_v0/coverage.json` |
+| E005-M94 active-label precedence claim boundary | `python experiments/E005_external_baseline_transition/tools/plan_m94_active_label_precedence_claim_boundary.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M94_active_label_precedence_claim_boundary_v0/coverage.json` |
+| E005-M95 real-proposal paper boundary | `python experiments/E005_external_baseline_transition/tools/plan_m95_real_proposal_paper_boundary.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M95_real_proposal_paper_boundary_v0/coverage.json` |
+| E005-M96 next expansion route decision | `python experiments/E005_external_baseline_transition/tools/plan_m96_next_expansion_route.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M96_next_expansion_route_decision_v0/coverage.json` |
+| E005-M97 external proposal/mapping feasibility | `python experiments/E005_external_baseline_transition/tools/plan_m97_external_proposal_mapping_feasibility.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M97_external_proposal_mapping_feasibility_v0/coverage.json` |
+| E005-M98 ConceptGraphs reliability boundary | `python experiments/E005_external_baseline_transition/tools/analyze_m98_conceptgraphs_reliability_boundary.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M98_conceptgraphs_reliability_boundary_v0/coverage.json` |
+| E005-M99 row-group / route decision | `python experiments/E005_external_baseline_transition/tools/plan_m99_row_group_heavier_route_decision.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M99_row_group_heavier_route_decision_v0/coverage.json` |
+| E005-M100 ConceptGraphs-assisted fallback policy | `python experiments/E005_external_baseline_transition/tools/run_m100_conceptgraphs_assisted_fallback_policy.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M100_conceptgraphs_assisted_fallback_policy_v0/coverage.json` |
+| E005-M101 map-assisted claim boundary | `python experiments/E005_external_baseline_transition/tools/plan_m101_map_assisted_claim_boundary_navigation_decision.py` | Inspect `experiments/E005_external_baseline_transition/artifacts/E005-M101_map_assisted_claim_boundary_navigation_decision_v0/coverage.json` |
 | `local_dataset/Open3DSG_bridge/E005-M57_output_schema_contract_v0/` | `python experiments/E005_external_baseline_transition/tools/plan_m57_open3dsg_output_schema_contract.py` | Inspect generated `README.md` / `coverage.json` under the output directory |
 | `local_dataset/Open3DSG_bridge/E005-M58_object_candidate_export_plan_v0/` | `python experiments/E005_external_baseline_transition/tools/plan_m58_open3dsg_object_candidate_export.py` | `python experiments/E005_external_baseline_transition/tools/verify_m58_open3dsg_object_candidate_export.py` |
 | `local_dataset/Open3DSG_bridge/E005-M59_object_candidate_export_smoke_v0/` | `python experiments/E005_external_baseline_transition/tools/launch_m59_open3dsg_object_export_smoke.py --launch` | `python experiments/E005_external_baseline_transition/tools/verify_m59_open3dsg_object_export_smoke.py --require-ready` |
@@ -459,7 +555,7 @@ Docker images with tracked build recipes:
 
 에이전트 추론:
 
-- The safest minimal Drive package for moving machines is: selected `Open3DSG` checkpoint, `h001-open3dsg-repro:cu128` image tar, E005-M45/M49/M52/M53/M54/M66/M67/M68/M69/M70/M71/M75/M76/M77/M78/M79 row-level artifacts, E003-M75 bridge artifact, `local_dataset/Open3DSG_bridge/`, and dataset manifests/raw data only if license permits.
+- The safest minimal Drive package for moving machines is: selected `Open3DSG` checkpoint, `h001-open3dsg-repro:cu128` image tar, E005-M45/M49/M52/M53/M54/M66/M67/M68/M69/M70/M71/M75/M76/M77/M78/M79/M80/M81/M82/M83/M84/M85/M86/M87/M88/M89/M90/M91/M92/M93/M94/M95/M96/M97/M98 row-level artifacts, E003-M75 bridge artifact, `local_dataset/Open3DSG_bridge/`, and dataset manifests/raw data only if license permits.
 
 ## Open3DSG Backup And Restore Checklist
 
