@@ -291,6 +291,16 @@ Updated: 2026-05-28
 - E008-M13 completes detector-goal failure audit over 6 episodes and 12 policy failure rows.
 - E008-M13 finds 3 all-policy failure episodes: 2 `target_region_missing_in_precap_detector_pool`, 1 `near_miss_localization_threshold`, and 0 `post_cap_or_snap_suppression`.
 - E008-M13 selects `bounded_start_neighborhood_multiview_v0` as the next non-oracle observation-coverage route.
+- E008-M14 completes the non-oracle observation-coverage expansion plan.
+- E008-M14 plans 54 observation poses and 216 expanded render rows over all 6 episodes, with 36 frames per episode.
+- E008-M14 uses `start_pose` plus local shell poses at 1.5m and 3.0m radius with 4 bearing directions and 4 yaw views per pose.
+- E008-M14 does not use `ObjectNav` eval goals/viewpoints, success labels, or candidate-to-goal distances as policy inputs.
+- E008-M14 selects E008-M15 non-oracle observation expansion frame staging smoke as the next step.
+- E008-M15 completes non-oracle observation expansion frame staging and snap validation.
+- E008-M15 renders/stages 216 / 216 expanded RGB-D/pose frames over 6 scans.
+- E008-M15 verifies 216 / 216 snap-ready rows and 6 / 6 ready scans, with 8 large snap warnings.
+- E008-M15 does not use `ObjectNav` eval goals/viewpoints as policy inputs.
+- E008-M15 selects E008-M16 non-oracle observation expansion detector candidate smoke as the next step.
 - Real navigation `SR` / `SPL` remains unsupported.
 - Final real RGB-D/open-vocabulary robustness claim remains unsupported.
 
@@ -405,7 +415,7 @@ Updated: 2026-05-28
 | Is `ConceptGraphs` enough as an external baseline? | `ConceptGraphs` is fully converted on 195 heldout rows and is a valid proxy-search external map baseline. | Not enough for final real RGB-D/open-vocabulary robustness by itself; `Open3DSG` M64 adds a second bounded external scene-graph row, but it is adapter-based. |
 | Can `Open3DSG` be claimed as a baseline? | M56-M66 prove source/interface/schema/export/query-conversion, denominator alignment, corrected query-level metrics, leakage-safe predicted-vocabulary policy evaluation, and row-level failure boundary without modifying the read-only source. | Primary-label baseline is valid but below `ConceptGraphs` at 81 / 195 strict. Predicted-vocabulary adapter is stronger at 144 / 195 strict but should be labeled as a bounded adapter row. |
 | Does this prove real RGB-D/open-vocabulary robustness? | E003-M75 gives a real proposal bridge with 87 / 96 target detected rows and 33 / 96 bounded repair success rows. M67 scales this bridge to the M38/M45 195-row denominator. M75 full aggregate has target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. M76 marks the table diagnostic-ready. M77/M78 show offline repair potential from pre-cap pools, with fixed replay top5 60 / 195. M80-M82 reproduce the b02 ranking gain in the runner path: detector top5 9 / 69 -> 15 / 69. M83 stops immediate b01/b03 reruns because remaining expected gains are too small. M84-M90 diagnose recall misses: prompt repair is not ready, strict pre-cap suppressed target count is 0, selected 1.5m-threshold recovery is only 2 targets / 6 rows, and the largest unresolved exposure is the `569d8f0f` zero-written cluster at 5 targets / 15 rows. M90 selects active-label precedence as a leakage-safe repair route and rejects `stool` scan-scope expansion. M91 validates the selected repair on one scan: pre-cap/final 0 / 0 -> 479 / 24 and matched target rows 5 / 5. M93 validates the repair at b02 batch level: target detected 42 / 69 -> 57 / 69 and detector top5 15 / 69 -> 18 / 69, with no side-effect loss. M94 projects b02-replaced aggregate target detected 159 / 195 and detector top5 60 / 195. M95 fixes the paper-facing boundary and keeps this as diagnostic evidence. M96/M97 select external proposal/mapping feasibility and `ConceptGraphs` reliability smoke. M98 shows H001 recovers 54 rows where both map strict top5 and real detector top5 fail, but `ConceptGraphs` succeeds on 24 H001-failure rows. | No. M98 is a diagnostic row-group analysis from existing artifacts. Final robustness remains blocked until the 24 map-success/H001-failure rows and heavier external-route need are resolved. |
-| Does this prove real navigation `SR` / `SPL`? | E002/E005 provide `ExpectedSearchCost` and `AttemptSPL` proxy. E007-M07 packages an occupancy-grid path-cost proxy table. E008-M13 verifies a tiny local `HM3D ObjectNav` + `Habitat` route, H001 candidate schema, oracle path plumbing, rendered RGB-D detector-source plan, 24/24 detector-compatible rendered RGB-D/pose rows, 137 detector coordinate candidates, navmesh snapping/path availability for 125/137 candidates, 512 visit-order rows, leakage-safe `GoalEvalProxy` rows, and detector-goal failure audit across 6 scans. | No. `SR` / `SPL` still requires non-oracle observation coverage expansion, H001 candidate-source execution, simulator execution, and trajectory metrics. |
+| Does this prove real navigation `SR` / `SPL`? | E002/E005 provide `ExpectedSearchCost` and `AttemptSPL` proxy. E007-M07 packages an occupancy-grid path-cost proxy table. E008-M15 verifies a tiny local `HM3D ObjectNav` + `Habitat` route, H001 candidate schema, oracle path plumbing, rendered RGB-D detector-source plan, 24/24 detector-compatible rendered RGB-D/pose rows, 137 detector coordinate candidates, navmesh snapping/path availability for 125/137 candidates, 512 visit-order rows, leakage-safe `GoalEvalProxy` rows, detector-goal failure audit, non-oracle 216-frame observation expansion plan, and 216/216 expanded staged frames with 216/216 snap-ready rows. | No. `SR` / `SPL` still requires detector rerun on expanded observations, candidate-goal evaluation, H001 candidate-source execution, simulator execution, and trajectory metrics. |
 | Is human intent a main contribution? | Structured `task_context_id` is included in H001 memory trust / re-observation policies, and E005-M65 records human intent reflected as structured task context. | H001 beats context-agnostic memory trust by only 1 success row, so do not claim natural-language intent understanding or main human-intent contribution yet. |
 | Are failed baselines being hidden? | `DualMap` executed but produced no object `*.pkl`; E003-M45 and E003-M50 negative support/mask routes are documented. | Use them as failure-boundary evidence, not as performance baselines. |
 
@@ -551,6 +561,8 @@ Cold assessment:
 - E007-M07 packages the final proxy table and claim ledger: allowed claims are limited to occupancy-grid path-cost proxy evidence and map-assisted repair tradeoff; blocked claims remain real navigation `SR` / `SPL`, `OldLocationDeadEndCostM` primary metric, and final real RGB-D/open-vocabulary robustness.
 - E008-M12 confirms that leakage-safe goal evaluation is possible, but it also exposes limited target coverage: all current detector policies hit 3/6 under `any_viewpoint_xz_1p0`, while object-center `goal_xz_1p0` succeeds on only 1/6.
 - E008-M13 shows the immediate bottleneck is observation/candidate coverage rather than visit-order ranking: all three failed episodes fail across all four policies, two are already target-region misses in the pre-cap detector pool, and one is a near-miss around the localization threshold.
+- E008-M14 turns that diagnosis into a leakage-safe expansion plan: use bounded start-neighborhood multiview observations for every episode rather than only failed episodes, so the next detector run is not conditioned on eval failure labels.
+- E008-M15 verifies that the M14 expansion is executable in `Habitat`, while preserving the leakage boundary. The 8 large snap warnings should be carried into E008-M16/M17 accounting rather than hidden.
 - Current real navigation `SR` / `SPL` remains unsupported because no H001 candidate-source execution rows or trajectory execution metrics have been produced yet.
 
 논문 주장:
@@ -564,7 +576,7 @@ Cold assessment:
 - Real RGB-D/open-vocabulary robustness is not just higher detector recall. It must show transfer across heldout scenes/labels and robustness to prompt, depth, pose, and proposal noise.
 - Deployable search policy is currently the nearest claim to mature, but E004-M05 still supports only a diagnostic memory-trust decision claim, not a final deployable policy claim.
 - Real navigation `SR` / `SPL` is the farthest claim because `GoalEvalProxy` success must be connected to actual simulator trajectory execution.
-- The correct immediate route is E008-M14: design non-oracle observation coverage expansion before any full simulator benchmark or H001 execution table.
+- The correct immediate route is E008-M16: rerun detector candidates on the expanded, leakage-safe observation set before any full simulator benchmark or H001 execution table.
 
 사용자 판단 필요:
 
@@ -576,7 +588,7 @@ Cold assessment:
 
 - Use Direction A as the backbone now.
 - Treat Direction B as the final target, not a separate replacement.
-- The next technical step should be E008-M14 non-oracle observation-coverage expansion plan.
+- The next technical step should be E008-M16 non-oracle observation expansion detector candidate smoke.
 - M93 should preserve the current claim boundary: it tests net target-detection recovery and `chair`/`stool` side effects, not final real RGB-D/open-vocabulary robustness.
 - E005 should preserve the E004 claim boundary: split-supported memory trust, limited task-context specificity, no final real RGB-D/open-vocabulary robustness, no deployable search policy, and no real navigation `SR` / `SPL`.
 - External proposal/mapping baselines such as `OpenMask3D`, `ConceptGraphs`, and `HOV-SG` should be evaluated as claim-expansion routes, not retrofitted as detector improvements.

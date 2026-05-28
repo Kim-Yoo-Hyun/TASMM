@@ -4,9 +4,9 @@ Updated: 2026-05-28
 
 ## Status
 
-E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M13 are complete as source/adapter/contract/oracle-metric/candidate-source staging, negative semantic-coordinate smoke, rendered RGB-D detector-source plan, rendered RGB-D frame staging, detector candidate smoke, coordinate-frame/navmesh validation, detector candidate visit-order path smoke, leakage-safe goal-evaluation smoke, and detector-goal failure-audit steps only; they do not execute an H001 policy benchmark.
+E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M18 are complete as source/adapter/contract/oracle-metric/candidate-source staging, negative semantic-coordinate smoke, rendered RGB-D detector-source plan, rendered RGB-D frame staging, detector candidate smoke, coordinate-frame/navmesh validation, detector candidate visit-order path smoke, leakage-safe goal-evaluation smoke, detector-goal failure audit, non-oracle observation-coverage planning, expanded frame staging/snap validation, expanded detector candidate smoke, expanded candidate navmesh validation, and expanded visit-order path smoke steps only; they do not execute an H001 policy benchmark.
 
-Next unit: E008-M14 non-oracle observation-coverage expansion plan.
+Next unit: E008-M19 expanded leakage-safe detector candidate goal-evaluation smoke.
 
 ## Source Rule
 
@@ -25,15 +25,15 @@ Next unit: E008-M14 non-oracle observation-coverage expansion plan.
 | method | Define episode schema, candidate visit order interface, allowed/blocked inputs, and metric mapping from H001 policy rows to executed navigation episodes. |
 | comparison | Static stale memory, detector-confidence ranking, `ConceptGraphs`-only map, task-agnostic memory trust, H001 task-conditioned memory trust, and H001 + `ConceptGraphs` fallback. |
 | metrics | `SR`, `SPL`, path length, candidate visits, `ExpectedSearchCost`, `OldLocationDeadEndCostM`, failure type, and E007 proxy-to-execution consistency. |
-| command | `python experiments/E008_real_navigation_benchmark/tools/plan_m01_navigation_source_episode_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m02_hm3d_objectnav_adapter_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m03_h001_candidate_navigation_adapter.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m04_objectnav_oracle_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m05_hm3d_candidate_source_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m06_hm3d_semantic_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m07_hm3d_rendered_rgbd_detector_source.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m08_hm3d_rendered_rgbd_frame_staging_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m09_hm3d_rendered_rgbd_detector_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m10_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m11_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m12_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m13_detector_goal_failure_audit.py` |
+| command | `python experiments/E008_real_navigation_benchmark/tools/plan_m01_navigation_source_episode_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m02_hm3d_objectnav_adapter_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m03_h001_candidate_navigation_adapter.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m04_objectnav_oracle_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m05_hm3d_candidate_source_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m06_hm3d_semantic_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m07_hm3d_rendered_rgbd_detector_source.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m08_hm3d_rendered_rgbd_frame_staging_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m09_hm3d_rendered_rgbd_detector_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m10_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m11_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m12_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m13_detector_goal_failure_audit.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m14_non_oracle_observation_coverage.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m16_non_oracle_observation_expansion_detector_candidate_smoke.py --require-ready`; `python experiments/E008_real_navigation_benchmark/tools/run_m17_expanded_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m18_expanded_detector_candidate_visit_order_path_smoke.py` |
 | output | Source preflight rows, episode schema rows, metric contract rows, baseline contract rows, allowed/blocked input rows, candidate visit-order rows, route decision rows, next action rows, and report. |
-| conclusion | E008-M01 selects `HM3D ObjectNav` + `Habitat` as the first real navigation source. E008-M02 verifies tiny `val_mini` episode/source rows and Docker scene/navmesh loading. E008-M03 fixes the H001 candidate-to-navigation schema and leakage guard. E008-M04 verifies oracle path/metric plumbing with eval-only `ObjectNav` viewpoints. E008-M05 selects annotation-derived `HM3D` semantic candidate staging as the next smoke route. E008-M06 shows that semantic labels exist but reliable non-oracle semantic geometry coordinates are not available from the current annotation path. E008-M07 fixes the rendered RGB-D detector-source plan with start-pose fixed yaw sweep observations and E003 detector compatibility layout. E008-M08 stages and verifies 24 rendered RGB-D frames in detector-compatible sequence layout. E008-M09 generates 137 detector candidate rows with valid `centroid_world_m` coordinates. E008-M10 validates that 137/137 candidates join to frames/scenes, 136/137 snap to navigable points, and 125/137 have source-to-snapped paths, with 12 warning/failure rows retained for later policy accounting. E008-M11 materializes 512 detector candidate visit-order rows and 28 policy metric rows over 4 policies without using eval-only `ObjectNav` goal/viewpoint fields as policy input. E008-M12 joins the visit-order rows to eval-only `ObjectNav` goals/viewpoints and reports limited `GoalEvalProxy` success: all 4 policies hit 3/6 under `any_viewpoint_xz_1p0`, while `goal_xz_1p0` is only 1/6. E008-M13 audits those failures and selects non-oracle observation coverage expansion because 3 failures are shared across all policies, with 2 clear pre-cap target-region misses and 1 near-miss localization threshold case. |
+| conclusion | E008-M01 selects `HM3D ObjectNav` + `Habitat` as the first real navigation source. E008-M02 verifies tiny `val_mini` episode/source rows and Docker scene/navmesh loading. E008-M03 fixes the H001 candidate-to-navigation schema and leakage guard. E008-M04 verifies oracle path/metric plumbing with eval-only `ObjectNav` viewpoints. E008-M05 selects annotation-derived `HM3D` semantic candidate staging as the next smoke route. E008-M06 shows that semantic labels exist but reliable non-oracle semantic geometry coordinates are not available from the current annotation path. E008-M07 fixes the rendered RGB-D detector-source plan with start-pose fixed yaw sweep observations and E003 detector compatibility layout. E008-M08 stages and verifies 24 rendered RGB-D frames in detector-compatible sequence layout. E008-M09 generates 137 detector candidate rows with valid `centroid_world_m` coordinates. E008-M10 validates that 137/137 candidates join to frames/scenes, 136/137 snap to navigable points, and 125/137 have source-to-snapped paths, with 12 warning/failure rows retained for later policy accounting. E008-M11 materializes 512 detector candidate visit-order rows and 28 policy metric rows over 4 policies without using eval-only `ObjectNav` goal/viewpoint fields as policy input. E008-M12 joins the visit-order rows to eval-only `ObjectNav` goals/viewpoints and reports limited `GoalEvalProxy` success: all 4 policies hit 3/6 under `any_viewpoint_xz_1p0`, while `goal_xz_1p0` is only 1/6. E008-M13 audits those failures and selects non-oracle observation coverage expansion because 3 failures are shared across all policies, with 2 clear pre-cap target-region misses and 1 near-miss localization threshold case. E008-M14 fixes `bounded_start_neighborhood_multiview_v0`: 54 planned observation poses and 216 expanded render rows over all 6 episodes, using start pose, category, scene/navmesh, current candidates, reachable samples, and fixed budget only. E008-M15 renders and verifies those expanded observations: 216/216 ready frames, 6/6 ready scans, 216/216 snap-ready rows, 8 large snap warnings, and no `ObjectNav` eval goal/viewpoint policy input. E008-M16 verifies detector output on the expanded observation set: 216 frame rows, 4,009 raw predictions, 214 coordinate candidate rows, and 3,801 pre-cap candidate rows. E008-M17 validates expanded candidates against the navmesh: 214/214 coordinate-valid, 213/214 snapped navigable, 189/214 source-to-snapped path found, and every scan has at least one path-ready candidate. E008-M18 materializes 781 visit-order rows and 28 policy metric rows; reachable-subset policies have top1-ready candidates on 6/6 scans, while non-path-ready candidates remain explicit accounting rows. |
 
 ## Claim Boundary
 
-- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13 do not claim real navigation `SR` / `SPL`.
-- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13 do not claim final real RGB-D/open-vocabulary robustness.
-- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13 do not make human intent a main contribution.
+- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13/M14/M15/M16/M17/M18 do not claim real navigation `SR` / `SPL`.
+- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13/M14/M15/M16/M17/M18 do not claim final real RGB-D/open-vocabulary robustness.
+- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13/M14/M15/M16/M17/M18 do not make human intent a main contribution.
 - `3RScan` / `3DSSG` remains the dynamic stale-memory source, but the first real navigation execution source is `HM3D ObjectNav` because local `Habitat` runtime and navmesh-backed scenes are available.
 - Any `HM3D ObjectNav` result must be described as a navigation-source transfer/adapter experiment unless stale-memory state injection is explicitly implemented.
 
@@ -544,3 +544,244 @@ Artifacts:
 - `local_dataset/HM3D_navigation_bridge/E008-M13_detector_goal_failure_audit_v0/episode_failure_audit_rows.jsonl`
 - `local_dataset/HM3D_navigation_bridge/E008-M13_detector_goal_failure_audit_v0/precap_final_coverage_rows.jsonl`
 - `local_dataset/HM3D_navigation_bridge/E008-M13_detector_goal_failure_audit_v0/policy_failure_audit_rows.jsonl`
+
+## E008-M14
+
+Implementation unit: `E008-M14_non_oracle_observation_coverage_plan_v0`.
+
+- Status: `e008_m14_non_oracle_observation_coverage_plan_ready`.
+- Input M13 status: `e008_m13_detector_goal_failure_audit_ready_observation_expansion_selected`.
+- Episode rows: 6.
+- Observation pose rows: 54.
+- Expanded render plan rows: 216.
+- Frames per episode: 36.
+- Pose types: `start_pose` 6, `local_shell_pose` 48.
+- Local shell radii: 1.5m, 3.0m.
+- Local shell bearings: 0, 90, 180, 270 degrees.
+- Yaw offsets per pose: 0, 90, 180, 270 degrees.
+- Detector manifest rows: 6.
+- Object target rows: 10.
+- Prompt label count: 5.
+- Selected route: `bounded_start_neighborhood_multiview_v0`.
+- Uses `ObjectNav` eval goal/viewpoint for policy: false.
+- Uses eval failure labels to select episode subset: false.
+- Requires M15 navmesh snap validation: true.
+- Requires M15 frame staging: true.
+- Requires detector rerun after M15: true.
+- H001 navigation policy execution ready: false.
+- Real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+- Long job launched: false.
+- Selected next unit: E008-M15 non-oracle observation expansion frame staging smoke.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m14_non_oracle_observation_coverage.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M14_non_oracle_observation_coverage_plan_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M14_non_oracle_observation_coverage_plan_v0/observation_pose_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M14_non_oracle_observation_coverage_plan_v0/expanded_render_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M14_non_oracle_observation_coverage_plan_v0/expanded_detector_manifest_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M14_non_oracle_observation_coverage_plan_v0/expanded_real_proposal_object_targets.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M14_non_oracle_observation_coverage_plan_v0/coverage_route_policy_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M14_non_oracle_observation_coverage_plan_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M14_non_oracle_observation_coverage_plan_v0/next_action_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M14_non_oracle_observation_coverage_plan_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M14_non_oracle_observation_coverage_plan_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M14_non_oracle_observation_coverage_plan_v0/observation_pose_plan_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M14_non_oracle_observation_coverage_plan_v0/expanded_render_plan_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M14_non_oracle_observation_coverage_plan_v0/expanded_detector_manifest_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M14_non_oracle_observation_coverage_plan_v0/expanded_real_proposal_object_targets.jsonl`
+
+## E008-M15
+
+Implementation unit: `E008-M15_non_oracle_observation_expansion_frame_staging_v0`.
+
+- Status: `e008_m15_non_oracle_observation_expansion_frame_staging_smoke_ready`.
+- Verification status: `e008_m15_non_oracle_observation_expansion_frame_staging_verified_with_snap_warnings`.
+- Input M14 status: `e008_m14_non_oracle_observation_coverage_plan_ready`.
+- Render plan rows: 216.
+- Rendered frame rows: 216.
+- Ready frame rows: 216.
+- Ready scan rows: 6 / 6.
+- Detector manifest rows: 6.
+- Detector input files ready: true.
+- Snap validation rows: 216.
+- Snap required rows: 192.
+- Snap-ready rows: 216.
+- Large snap warning rows: 8.
+- Mean snap distance: 0.421799m.
+- Max snap distance: 3.485701m.
+- Uses `ObjectNav` eval goal/viewpoint for policy: false.
+- H001 navigation policy execution ready: false.
+- Real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+- Long job launched: false.
+- Selected next unit: E008-M16 non-oracle observation expansion detector candidate smoke.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m15_non_oracle_observation_expansion_frame_staging.py
+python experiments/E008_real_navigation_benchmark/tools/verify_m15_non_oracle_observation_expansion_frame_staging.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M15_non_oracle_observation_expansion_frame_staging_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M15_non_oracle_observation_expansion_frame_staging_v0/verification_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M15_non_oracle_observation_expansion_frame_staging_v0/verification_frame_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M15_non_oracle_observation_expansion_frame_staging_v0/verification_scan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M15_non_oracle_observation_expansion_frame_staging_v0/verification_issue_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M15_non_oracle_observation_expansion_frame_staging_v0/detector_input_copy_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M15_non_oracle_observation_expansion_frame_staging_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M15_non_oracle_observation_expansion_frame_staging_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M15_non_oracle_observation_expansion_frame_staging_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M15_non_oracle_observation_expansion_frame_staging_v0/render_inputs/render_plan_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M15_non_oracle_observation_expansion_frame_staging_v0/rendered_frame_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M15_non_oracle_observation_expansion_frame_staging_v0/snap_validation_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M15_non_oracle_observation_expansion_frame_staging_v0/detector_inputs/real_proposal_query_manifest.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M15_non_oracle_observation_expansion_frame_staging_v0/detector_inputs/real_proposal_object_targets.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M15_non_oracle_observation_expansion_frame_staging_v0/detector_inputs/prompt_set.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M15_non_oracle_observation_expansion_frame_staging_v0/detector_inputs/proposal_output_schema.json`
+
+## E008-M16
+
+Implementation unit: `E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0`.
+
+- Status: `e008_m16_non_oracle_observation_expansion_detector_candidate_smoke_ready`.
+- Launcher status: `e008_m16_detector_candidate_smoke_launched`.
+- tmux session: `e008_m16_hm3d_expanded_detector`.
+- Log: `logs/20260528_161152_e008_m16_hm3d_expanded_detector.log`.
+- Output root: `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/`.
+- Input dataset root: `local_dataset/HM3D_navigation_bridge/E008-M15_non_oracle_observation_expansion_frame_staging_v0/`.
+- M16 detector input manifest: `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/detector_inputs/real_proposal_query_manifest.jsonl`.
+- Detector input manifest rows: 6.
+- Repaired sampled frame indices: 216.
+- Target rows: 10.
+- Frame rows: 216.
+- Frames with written predictions: 145.
+- Raw predictions: 4,009.
+- Prediction rows: 214.
+- Coordinate candidate rows: 214.
+- Pre-cap candidate rows: 3,801.
+- Validator errors / warnings: 0 / 0.
+- Initial failure note: first launch used copied M15 detector inputs without `sampled_frame_indices`, so the detector runner scanned 0 frames. The M16 launcher now materializes an explicit M16 detector input directory before launch.
+- Verification status: completed.
+- Selected next unit: E008-M17 expanded detector candidate navmesh validation.
+- H001 navigation policy execution ready: false.
+- Real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+
+Launch command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/launch_m16_non_oracle_observation_expansion_detector.py --force
+```
+
+Verification command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/verify_m16_non_oracle_observation_expansion_detector_candidate_smoke.py --require-ready
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/e008_m16_launch_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/long_job_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/detector_inputs/real_proposal_query_manifest.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/detector_inputs/real_proposal_object_targets.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/detector_inputs/prompt_set.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/detector_inputs/proposal_output_schema.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/e008_m16_verification_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/real_proposals.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/pre_cap_candidate_pool.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/model_smoke.json`
+
+## E008-M17
+
+Implementation unit: `E008-M17_expanded_detector_candidate_navmesh_validation_v0`.
+
+- Status: `e008_m17_expanded_detector_candidate_navmesh_validation_ready_with_path_warnings`.
+- Input M16 status: `e008_m16_non_oracle_observation_expansion_detector_candidate_smoke_ready`.
+- Candidate rows: 214.
+- Join-ready rows: 214 / 214.
+- Coordinate-valid rows: 214 / 214.
+- Source navigable rows: 214 / 214.
+- Snapped navigable rows: 213 / 214.
+- Source-to-snapped path found rows: 189 / 214.
+- Source-to-snapped path found rate: 0.883178.
+- Candidate usable for path smoke rows: 189.
+- Every scan has path-ready candidate: true.
+- Navmesh status counts: `candidate_path_ready` 189 / `blocked_snapped_point_unreachable_from_episode_start` 24 / `blocked_snap_failed_non_finite` 1.
+- Source basis: E008-M15 `snap_validation_rows.render_position_m`; this avoids treating unsnapped render-plan local shell poses as policy start points.
+- Selected next unit: E008-M18 expanded detector candidate visit-order path smoke.
+- H001 navigation policy execution ready: false.
+- Real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m17_expanded_detector_candidate_navmesh_validation.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M17_expanded_detector_candidate_navmesh_validation_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M17_expanded_detector_candidate_navmesh_validation_v0/candidate_navmesh_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M17_expanded_detector_candidate_navmesh_validation_v0/scan_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M17_expanded_detector_candidate_navmesh_validation_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M17_expanded_detector_candidate_navmesh_validation_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M17_expanded_detector_candidate_navmesh_validation_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M17_expanded_detector_candidate_navmesh_validation_v0/candidate_navmesh_rows.jsonl`
+
+## E008-M18
+
+Implementation unit: `E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0`.
+
+- Status: `e008_m18_expanded_detector_candidate_visit_order_path_smoke_ready`.
+- Input M17 status: `e008_m17_expanded_detector_candidate_navmesh_validation_ready_with_path_warnings`.
+- Input candidate rows: 214.
+- Query-compatible candidate rows: 214.
+- Path-ready candidate rows: 189 / 214.
+- Failure rows retained for policy accounting: 25.
+- Visit-order rows: 781.
+- Policy metric rows: 28.
+- Policy count: 4.
+- Reachable-subset top1-ready scans: 6 / 6.
+- `ObjectNav` eval goal/viewpoint fields used for policy: false.
+- Selected next unit: E008-M19 expanded leakage-safe detector candidate goal-evaluation smoke.
+- H001 navigation policy execution ready: false.
+- Real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+
+Policy aggregate:
+
+| policy_id | ranked rows | path-ready rows | blocked rows | top1-ready scans | mean first-ready cost m | mean top5 known cost m |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `detector_confidence_all_candidates_v0` | 214 | 189 | 25 | 5 | 1.648578 | 11.152889 |
+| `detector_confidence_reachable_subset_v0` | 189 | 189 | 0 | 6 | 1.648578 | 12.662480 |
+| `path_cost_ascending_reachable_subset_v0` | 189 | 189 | 0 | 6 | 0.153562 | 1.978676 |
+| `confidence_path_cost_tradeoff_reachable_subset_v0` | 189 | 189 | 0 | 6 | 0.224944 | 3.038404 |
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m18_expanded_detector_candidate_visit_order_path_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/candidate_visit_order_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/candidate_visit_order_rows.jsonl`

@@ -41,8 +41,8 @@
 - Final paper target: Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`
 - Current implementation path: Direction A `Task-Conditioned Stale Semantic Memory`를 core method로 만들고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 붙여 Direction B로 확장
 - Current experiment: [E008_real_navigation_benchmark](experiments/E008_real_navigation_benchmark/README.md)
-- Current status: E001-E007 have built proxy search, perception-noise, external-baseline, and path-cost bridge evidence with constraints; E008 is validating whether `HM3D ObjectNav` + `Habitat` can support paper-facing navigation evidence. E008-M13 completed detector-goal failure audit: the shared failures are mainly observation/candidate coverage failures, not visit-order ranking failures.
-- Current next action: E008-M14 non-oracle observation-coverage expansion plan.
+- Current status: E001-E007 have built proxy search, perception-noise, external-baseline, and path-cost bridge evidence with constraints; E008 is validating whether `HM3D ObjectNav` + `Habitat` can support paper-facing navigation evidence. E008-M15 completed non-oracle observation expansion frame staging with 216/216 ready frames, 6/6 ready scans, and 216/216 snap-ready rows, with 8 large snap warnings.
+- Current next action: E008-M16 non-oracle observation expansion detector candidate smoke.
 - Current blocked claims: real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, `OldLocationDeadEndCostM` as a primary metric, and human intent as a main claim.
 - Current boundary: main experiment implementation 단계이며, paper 폴더는 아직 만들지 않는다.
 
