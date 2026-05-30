@@ -1,12 +1,12 @@
 # E008 Real Navigation Benchmark
 
-Updated: 2026-05-28
+Updated: 2026-05-30
 
 ## Status
 
-E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M18 are complete as source/adapter/contract/oracle-metric/candidate-source staging, negative semantic-coordinate smoke, rendered RGB-D detector-source plan, rendered RGB-D frame staging, detector candidate smoke, coordinate-frame/navmesh validation, detector candidate visit-order path smoke, leakage-safe goal-evaluation smoke, detector-goal failure audit, non-oracle observation-coverage planning, expanded frame staging/snap validation, expanded detector candidate smoke, expanded candidate navmesh validation, and expanded visit-order path smoke steps only; they do not execute an H001 policy benchmark.
+E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M45 are complete as source/adapter/contract/oracle-metric/candidate-source staging, rendered RGB-D detector route, leakage-safe goal evaluation, trajectory execution, H001 fallback execution, dynamic-stale overlay execution, M38 baseline-aligned result interpretation, M39 budget-matched repair/source-gap contract, M40 repaired row materialization, M41 repaired trajectory execution, M42 result interpretation/scale decision, M43 source-diverse policy redesign contract, M44 source-diverse row materialization, and M45 source-diverse trajectory execution contract/Docker preflight. M45 fixes a Docker-ready execution contract for `h001_task_conditioned_source_diverse_budget5_v1` and matched baselines because detector source-gap rows have full-candidate `SR` 1.0 but cap5 `SR` 0.0 under confidence order.
 
-Next unit: E008-M19 expanded leakage-safe detector candidate goal-evaluation smoke.
+Next unit: E008-M46 source-diverse redesign trajectory execution smoke.
 
 ## Source Rule
 
@@ -25,15 +25,28 @@ Next unit: E008-M19 expanded leakage-safe detector candidate goal-evaluation smo
 | method | Define episode schema, candidate visit order interface, allowed/blocked inputs, and metric mapping from H001 policy rows to executed navigation episodes. |
 | comparison | Static stale memory, detector-confidence ranking, `ConceptGraphs`-only map, task-agnostic memory trust, H001 task-conditioned memory trust, and H001 + `ConceptGraphs` fallback. |
 | metrics | `SR`, `SPL`, path length, candidate visits, `ExpectedSearchCost`, `OldLocationDeadEndCostM`, failure type, and E007 proxy-to-execution consistency. |
-| command | `python experiments/E008_real_navigation_benchmark/tools/plan_m01_navigation_source_episode_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m02_hm3d_objectnav_adapter_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m03_h001_candidate_navigation_adapter.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m04_objectnav_oracle_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m05_hm3d_candidate_source_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m06_hm3d_semantic_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m07_hm3d_rendered_rgbd_detector_source.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m08_hm3d_rendered_rgbd_frame_staging_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m09_hm3d_rendered_rgbd_detector_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m10_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m11_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m12_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m13_detector_goal_failure_audit.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m14_non_oracle_observation_coverage.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m16_non_oracle_observation_expansion_detector_candidate_smoke.py --require-ready`; `python experiments/E008_real_navigation_benchmark/tools/run_m17_expanded_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m18_expanded_detector_candidate_visit_order_path_smoke.py` |
+| command | `python experiments/E008_real_navigation_benchmark/tools/plan_m01_navigation_source_episode_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m02_hm3d_objectnav_adapter_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m03_h001_candidate_navigation_adapter.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m04_objectnav_oracle_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m05_hm3d_candidate_source_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m06_hm3d_semantic_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m07_hm3d_rendered_rgbd_detector_source.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m08_hm3d_rendered_rgbd_frame_staging_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m09_hm3d_rendered_rgbd_detector_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m10_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m11_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m12_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m13_detector_goal_failure_audit.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m14_non_oracle_observation_coverage.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m16_non_oracle_observation_expansion_detector_candidate_smoke.py --require-ready`; `python experiments/E008_real_navigation_benchmark/tools/run_m17_expanded_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m18_expanded_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m19_expanded_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m20_expanded_detector_goal_failure_comparison_navigation_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m21_expanded_detector_policy_trajectory_execution_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m23_trajectory_proxy_consistency_h001_source_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m24_h001_candidate_source_instantiation_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m25_h001_candidate_source_materialization_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m26_h001_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m27_h001_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m28_h001_goal_evaluation_comparison_trajectory_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m29_h001_current_observation_fallback_source_repair.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m30_h001_current_observation_fallback_replay_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m31_h001_fallback_trajectory_contract_source_gap_boundary.py`; `docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m32_h001_fallback_trajectory_execution_smoke.py --m31-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M32_h001_fallback_trajectory_execution_smoke_v0"`; `python experiments/E008_real_navigation_benchmark/tools/plan_m33_h001_trajectory_result_interpretation_baseline_alignment.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m34_dynamic_stale_navigation_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m35_dynamic_stale_overlay_materialization_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m36_dynamic_stale_overlay_trajectory_contract.py` |
 | output | Source preflight rows, episode schema rows, metric contract rows, baseline contract rows, allowed/blocked input rows, candidate visit-order rows, route decision rows, next action rows, and report. |
-| conclusion | E008-M01 selects `HM3D ObjectNav` + `Habitat` as the first real navigation source. E008-M02 verifies tiny `val_mini` episode/source rows and Docker scene/navmesh loading. E008-M03 fixes the H001 candidate-to-navigation schema and leakage guard. E008-M04 verifies oracle path/metric plumbing with eval-only `ObjectNav` viewpoints. E008-M05 selects annotation-derived `HM3D` semantic candidate staging as the next smoke route. E008-M06 shows that semantic labels exist but reliable non-oracle semantic geometry coordinates are not available from the current annotation path. E008-M07 fixes the rendered RGB-D detector-source plan with start-pose fixed yaw sweep observations and E003 detector compatibility layout. E008-M08 stages and verifies 24 rendered RGB-D frames in detector-compatible sequence layout. E008-M09 generates 137 detector candidate rows with valid `centroid_world_m` coordinates. E008-M10 validates that 137/137 candidates join to frames/scenes, 136/137 snap to navigable points, and 125/137 have source-to-snapped paths, with 12 warning/failure rows retained for later policy accounting. E008-M11 materializes 512 detector candidate visit-order rows and 28 policy metric rows over 4 policies without using eval-only `ObjectNav` goal/viewpoint fields as policy input. E008-M12 joins the visit-order rows to eval-only `ObjectNav` goals/viewpoints and reports limited `GoalEvalProxy` success: all 4 policies hit 3/6 under `any_viewpoint_xz_1p0`, while `goal_xz_1p0` is only 1/6. E008-M13 audits those failures and selects non-oracle observation coverage expansion because 3 failures are shared across all policies, with 2 clear pre-cap target-region misses and 1 near-miss localization threshold case. E008-M14 fixes `bounded_start_neighborhood_multiview_v0`: 54 planned observation poses and 216 expanded render rows over all 6 episodes, using start pose, category, scene/navmesh, current candidates, reachable samples, and fixed budget only. E008-M15 renders and verifies those expanded observations: 216/216 ready frames, 6/6 ready scans, 216/216 snap-ready rows, 8 large snap warnings, and no `ObjectNav` eval goal/viewpoint policy input. E008-M16 verifies detector output on the expanded observation set: 216 frame rows, 4,009 raw predictions, 214 coordinate candidate rows, and 3,801 pre-cap candidate rows. E008-M17 validates expanded candidates against the navmesh: 214/214 coordinate-valid, 213/214 snapped navigable, 189/214 source-to-snapped path found, and every scan has at least one path-ready candidate. E008-M18 materializes 781 visit-order rows and 28 policy metric rows; reachable-subset policies have top1-ready candidates on 6/6 scans, while non-path-ready candidates remain explicit accounting rows. |
+| conclusion | E008-M01 selects `HM3D ObjectNav` + `Habitat` as the first real navigation source. E008-M02-M42 build and execute the detector/H001/dynamic-stale trajectory smoke chain with final navigation claims blocked. E008-M43 fixes source-diverse policy redesign because detector source-gap rows are recoverable in the full current candidate pool but not under confidence top-5. E008-M44 materializes 108 source-diverse execution plan rows and 468 candidate rows with policy leakage pass and budget cap compliance pass. E008-M45 fixes the Docker-ready trajectory contract and runner wrapper. E008-M46 must execute these rows before any broader scale-up decision. |
 
 ## Claim Boundary
 
-- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13/M14/M15/M16/M17/M18 do not claim real navigation `SR` / `SPL`.
-- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13/M14/M15/M16/M17/M18 do not claim final real RGB-D/open-vocabulary robustness.
-- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13/M14/M15/M16/M17/M18 do not make human intent a main contribution.
+- E008-M01 through E008-M45 do not claim final real navigation `SR` / `SPL`.
+- E008-M01 through E008-M45 do not claim final real RGB-D/open-vocabulary robustness.
+- E008-M01/M02/M03/M04/M05/M06/M07/M08/M09/M10/M11/M12/M13/M14/M15/M16/M17/M18/M19/M20/M21/M22/M23/M24/M25/M26/M27/M28/M29/M30/M31/M32/M33/M34/M35/M36/M37/M38/M39/M40/M41/M42/M43 do not make human intent a main contribution.
+- E008-M33 explicitly blocks scaling the current H001 fallback trajectory as a main navigation result because it underperforms detector trajectories and lacks controlled stale-memory intervention.
+- E008-M34 is a contract/design unit only; it does not produce trajectory results or dynamic-stale navigation performance.
+- E008-M35 is an input materialization unit only; it does not produce trajectory results or dynamic-stale navigation performance.
+- E008-M36 is a contract/runner-adaptation unit only; it does not execute trajectories or produce dynamic-stale navigation performance.
+- E008-M37 executes a 6-episode counterfactual dynamic-stale overlay smoke; it does not support final real navigation `SR` / `SPL`.
+- E008-M38 supports only result interpretation and baseline alignment; it recommends repair-before-scale and does not support a final H001 navigation claim.
+- E008-M39 supports only a budget-matched policy/source-gap contract; it does not materialize repaired rows, execute trajectories, or support a final H001 navigation claim.
+- E008-M40 supports only repaired row materialization; it does not execute trajectories or support final navigation improvement.
+- E008-M41 executes repaired rows as a smoke test; it does not support final navigation improvement because H001 does not beat detector/fixed current top-k or task-agnostic memory trust on `SR`/`SPL`.
+- E008-M42 supports result interpretation and scale decision only; it blocks scale-up and selects policy redesign before broader navigation reruns.
+- E008-M43 supports policy redesign contract and M44 row plan only; it does not materialize rows, execute trajectories, or support final navigation improvement.
+- E008-M44 supports source-diverse row materialization only; it does not execute trajectories or support final navigation improvement.
+- E008-M45 supports trajectory execution contract and Docker preflight only; it does not execute trajectories or support final navigation improvement.
 - `3RScan` / `3DSSG` remains the dynamic stale-memory source, but the first real navigation execution source is `HM3D ObjectNav` because local `Habitat` runtime and navmesh-backed scenes are available.
 - Any `HM3D ObjectNav` result must be described as a navigation-source transfer/adapter experiment unless stale-memory state injection is explicitly implemented.
 
@@ -698,9 +711,9 @@ Artifacts:
 - `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/detector_inputs/prompt_set.json`
 - `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/detector_inputs/proposal_output_schema.json`
 - `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/e008_m16_verification_coverage.json`
-- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/real_proposals.jsonl`
-- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/pre_cap_candidate_pool.jsonl`
-- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/model_smoke.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/container_output/real_proposals.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/container_output/pre_cap_candidate_pool.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M16_non_oracle_observation_expansion_detector_candidate_smoke_v0/container_output/model_smoke.json`
 
 ## E008-M17
 
@@ -785,3 +798,1615 @@ Artifacts:
 - `experiments/E008_real_navigation_benchmark/artifacts/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/report.md`
 - `local_dataset/HM3D_navigation_bridge/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/coverage.json`
 - `local_dataset/HM3D_navigation_bridge/E008-M18_expanded_detector_candidate_visit_order_path_smoke_v0/candidate_visit_order_rows.jsonl`
+
+## E008-M19
+
+Implementation unit: `E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0`.
+
+- Status: `e008_m19_expanded_detector_candidate_goal_evaluation_smoke_ready`.
+- Input M18 status: `e008_m18_expanded_detector_candidate_visit_order_path_smoke_ready`.
+- Candidate-goal eval rows: 781.
+- Scan-policy rows: 24.
+- Aggregate policy rows: 4.
+- Primary eval metric: `any_viewpoint_xz_1p0`.
+- Primary proxy hit rows: 6 / 6 for all 4 policies.
+- `goal_xz_1p0` proxy hit rows: 4 / 6 for all 4 policies.
+- Primary failure rows: 0.
+- Leakage audit pass: true.
+- `ObjectNav` eval goal/viewpoint fields used for policy: false.
+- Selected next unit: E008-M20 expanded detector-goal failure comparison and navigation-execution decision.
+- H001 navigation policy execution ready: false.
+- Real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+
+Policy aggregate:
+
+| policy_id | primary hits | primary proxy SR | primary proxy SPL | mean hit rank | any-vp 1.5m proxy SR | goal 1.0m proxy SR |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `detector_confidence_all_candidates_v0` | 6/6 | 1.000000 | 0.456966 | 13.000000 | 1.000000 | 0.666667 |
+| `detector_confidence_reachable_subset_v0` | 6/6 | 1.000000 | 0.456966 | 10.500000 | 1.000000 | 0.666667 |
+| `path_cost_ascending_reachable_subset_v0` | 6/6 | 1.000000 | 0.535389 | 20.333333 | 1.000000 | 0.666667 |
+| `confidence_path_cost_tradeoff_reachable_subset_v0` | 6/6 | 1.000000 | 0.374943 | 18.166667 | 1.000000 | 0.666667 |
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m19_expanded_detector_candidate_goal_evaluation_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0/candidate_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0/policy_goal_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0/failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0/candidate_goal_eval_rows.jsonl`
+
+## E008-M20
+
+Implementation unit: `E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0`.
+
+- Status: `e008_m20_expanded_detector_goal_failure_comparison_navigation_decision_ready`.
+- M12 primary failure rows: 12.
+- M19 primary failure rows: 0.
+- Episodes with resolved primary proxy failures: 3.
+- Policies with 6/6 primary proxy success after expansion: 4 / 4.
+- Gate status counts: pass 3 / warning 4 / fail 2.
+- Key pass gates: leakage-safe goal evaluation, expanded goal proxy coverage, path-ready candidates.
+- Key warning gates: object-center proxy, path warning accounting, rank/cost warning accounting, scale.
+- Key fail gates: H001 navigation candidate sources, trajectory execution metrics.
+- Selected next unit: E008-M21 expanded detector-policy trajectory execution contract and Docker preflight.
+- H001 navigation policy execution ready: false.
+- Real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m20_expanded_detector_goal_failure_comparison_navigation_decision.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0/policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0/scan_comparison_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0/episode_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0/navigation_readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0/coverage.json`
+
+## E008-M21
+
+Implementation unit: `E008-M21_expanded_detector_policy_trajectory_execution_contract_v0`.
+
+- Status: `e008_m21_expanded_detector_policy_trajectory_execution_contract_ready_runner_missing`.
+- Trajectory execution contract ready: true.
+- Docker/data preflight ready: true.
+- Docker preflight status counts: pass 6 / warning 1.
+- Policy execution contracts: 4.
+- Policy execution plan rows: 24.
+- Candidate visit-order rows under contract: 781.
+- Candidate navmesh rows under contract: 214.
+- Blocked eval policy fields: 9.
+- M22 runner implemented: false.
+- Selected next unit: E008-M22 expanded detector-policy trajectory execution runner scaffold.
+- H001 navigation policy execution ready: false.
+- Real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m21_expanded_detector_policy_trajectory_execution_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/execution_input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/policy_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/trajectory_policy_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/trajectory_metric_schema_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/runner_output_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/docker_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0/coverage.json`
+
+## E008-M22
+
+Implementation unit: `E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0`.
+
+- Status: `e008_m22_expanded_detector_policy_trajectory_execution_smoke_ready_h001_blocked`.
+- Trajectory execution rows: 372.
+- Scan-policy metric rows: 24.
+- Aggregate policy metric rows: 4.
+- Trajectory failure rows: 15.
+- Leakage audit pass: true.
+- Detector-policy smoke `SR`: 1.0 for 4 / 4 policies over 6 episodes.
+- Aggregate `SPL` range: 0.303595-0.410800.
+- Best aggregate `SPL`: `detector_confidence_all_candidates_v0` and `detector_confidence_reachable_subset_v0` at 0.410800.
+- Real navigation `SR` / `SPL` smoke rows ready: true.
+- Final real navigation `SR` / `SPL` ready: false.
+- H001 navigation policy execution ready: false.
+- Selected next unit: E008-M23 trajectory-vs-proxy consistency and H001 candidate-source decision.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work \
+  -w /work \
+  research3/habitat-h001:20260508-calib-artifacts \
+  bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m22_expanded_detector_policy_trajectory_execution_smoke.py --m21-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0"
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0/trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0/trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0/trajectory_failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0/scene_execution_meta.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0/coverage.json`
+
+## E008-M23
+
+Implementation unit: `E008-M23_trajectory_proxy_consistency_h001_source_decision_v0`.
+
+- Status: `e008_m23_trajectory_proxy_consistency_ready_h001_source_missing`.
+- Scan-policy consistency rows: 24.
+- Policy consistency rows: 4.
+- Proxy/trajectory success agreement: 24 / 24.
+- Proxy `SPL` order consistency: 0 / 4 policies.
+- Path inflation warning rows: 8.
+- H001 candidate-source rows ready: 0.
+- Selected next unit: E008-M24 H001 candidate-source instantiation contract.
+- Real navigation `SR` / `SPL` smoke rows ready: true.
+- Final real navigation `SR` / `SPL` ready: false.
+- H001 navigation policy execution ready: false.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m23_trajectory_proxy_consistency_h001_source_decision.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M23_trajectory_proxy_consistency_h001_source_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M23_trajectory_proxy_consistency_h001_source_decision_v0/scan_consistency_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M23_trajectory_proxy_consistency_h001_source_decision_v0/policy_consistency_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M23_trajectory_proxy_consistency_h001_source_decision_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M23_trajectory_proxy_consistency_h001_source_decision_v0/h001_candidate_source_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M23_trajectory_proxy_consistency_h001_source_decision_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M23_trajectory_proxy_consistency_h001_source_decision_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M23_trajectory_proxy_consistency_h001_source_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M23_trajectory_proxy_consistency_h001_source_decision_v0/coverage.json`
+
+## E008-M24
+
+Implementation unit: `E008-M24_h001_candidate_source_instantiation_contract_v0`.
+
+- Status: `e008_m24_h001_candidate_source_contract_ready_materialization_next`.
+- Initial memory-proxy candidate rows: 137.
+- Initial memory-proxy path-ready rows: 125.
+- Current-observation candidate rows: 214.
+- Current-observation path-ready rows: 189.
+- Detector visit-order rows available: 781.
+- Task-context rows planned: 18.
+- Policy contract rows: 5.
+- Policy contracts with source inputs ready: 4 / 5.
+- Source input leakage pass: true.
+- H001 candidate-source materialization inputs ready: true.
+- H001 candidate-source rows ready: 0.
+- Selected next unit: E008-M25 H001 candidate-source materialization smoke.
+- Dynamic stale-memory claim ready on `HM3D`: false.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Source boundary:
+
+| Source role | Rows | Path-ready | Boundary |
+| --- | ---: | ---: | --- |
+| `initial_memory_proxy` | 137 | 125 | Initial non-oracle observation memory proxy, not true dynamic stale memory. |
+| `current_observation` | 214 | 189 | Non-oracle expanded detector observations, not final robustness evidence. |
+| `external_map` | 0 | 0 | `ConceptGraphs` / `Open3DSG` / `HOV-SG` style `HM3D` map candidates are missing. |
+| `runtime_event` | 0 | 0 | Observed miss must come from execution, not `ObjectNav` goal labels. |
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m24_h001_candidate_source_instantiation_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/candidate_source_schema_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/source_availability_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/task_context_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/policy_instantiation_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/leakage_guard_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/source_materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M24_h001_candidate_source_instantiation_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M24_h001_candidate_source_instantiation_contract_v0/coverage.json`
+
+## E008-M25
+
+Implementation unit: `E008-M25_h001_candidate_source_materialization_smoke_v0`.
+
+- Status: `e008_m25_h001_candidate_source_materialization_smoke_ready_policy_path_next`.
+- H001 candidate-source rows: 1,053.
+- Query context rows: 18.
+- Policy execution plan rows: 90.
+- Materialized-ready policy plan rows: 72.
+- Blocked policy plan rows: 18.
+- Initial memory-proxy materialized rows: 411.
+- Initial memory-proxy path-ready rows: 375.
+- Current-observation materialized rows: 642.
+- Current-observation path-ready rows: 567.
+- Source pair summary rows: 18.
+- Source pair ready rows: 18.
+- Source input leakage pass: true.
+- Selected next unit: E008-M26 H001 visit-order/path smoke.
+- H001 policy execution plan ready: true.
+- H001 navigation policy execution ready: false.
+- Dynamic stale-memory claim ready on `HM3D`: false.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Policy plan summary:
+
+| Policy | Plan rows | Ready rows | Blocked rows | Status |
+| --- | ---: | ---: | ---: | --- |
+| `real_static_memory_proxy_v0` | 18 | 18 | 0 | `ready_for_h001_visit_order_path_smoke` |
+| `real_detector_confidence_expanded_v0` | 18 | 18 | 0 | `ready_for_h001_visit_order_path_smoke` |
+| `real_context_agnostic_memory_trust_reobserve_v0` | 18 | 18 | 0 | `ready_for_h001_visit_order_path_smoke` |
+| `h001_real_task_context_memory_trust_v0` | 18 | 18 | 0 | `ready_for_h001_visit_order_path_smoke` |
+| `h001_then_external_map_after_observed_miss_v0` | 18 | 0 | 18 | `blocked_or_partial` |
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m25_h001_candidate_source_materialization_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/h001_candidate_source_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/h001_query_context_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/h001_source_pair_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/h001_policy_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/policy_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M25_h001_candidate_source_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M25_h001_candidate_source_materialization_smoke_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M25_h001_candidate_source_materialization_smoke_v0/h001_candidate_source_rows.jsonl`
+
+## E008-M26
+
+Implementation unit: `E008-M26_h001_visit_order_path_smoke_v0`.
+
+- Status: `e008_m26_h001_visit_order_path_smoke_ready_goal_eval_next`.
+- H001 candidate-source rows input: 1,053.
+- Policy execution plan rows input: 90.
+- Evaluated ready policy plan rows: 72.
+- Blocked external-map/runtime-event policy plan rows: 18.
+- H001 candidate visit-order rows: 252.
+- Policy path metric rows: 77.
+- Source filter accounting rows: 180.
+- Selected visit rows path-ready: 252 / 252.
+- Source input leakage pass: true.
+- Selected next unit: E008-M27 H001 leakage-safe goal-evaluation smoke.
+- H001 visit-order/path smoke ready: true.
+- H001 navigation policy execution ready: false.
+- Dynamic stale-memory claim ready on `HM3D`: false.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Policy path aggregate:
+
+| Policy | Scan rows | Ready rows | Visit rows | Mean first path m | Mean known path sum m |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `real_static_memory_proxy_v0` | 18 | 18 | 18 | 4.355265 | 4.355264 |
+| `real_detector_confidence_expanded_v0` | 18 | 18 | 90 | 1.648578 | 12.662480 |
+| `real_context_agnostic_memory_trust_reobserve_v0` | 18 | 18 | 72 | 4.355265 | 12.113443 |
+| `h001_real_task_context_memory_trust_v0` | 18 | 18 | 72 | 2.967776 | 6.419191 |
+| `h001_then_external_map_after_observed_miss_v0` | 0 | 0 | 0 | null | null |
+
+Claim boundary:
+
+- M26 materializes H001 visit order and known source-to-candidate path-cost proxy rows only.
+- M26 does not execute a `Habitat` navigation policy and does not compute final `SR` / `SPL`.
+- `initial_memory_proxy` is still an `HM3D` static-memory proxy, not true dynamic stale memory.
+- Structured `task_context_id` changes memory trust/re-observation budget, but natural-language human intent is not tested.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m26_h001_visit_order_path_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M26_h001_visit_order_path_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M26_h001_visit_order_path_smoke_v0/h001_candidate_visit_order_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M26_h001_visit_order_path_smoke_v0/h001_policy_path_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M26_h001_visit_order_path_smoke_v0/source_filter_accounting_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M26_h001_visit_order_path_smoke_v0/blocked_policy_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M26_h001_visit_order_path_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M26_h001_visit_order_path_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M26_h001_visit_order_path_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M26_h001_visit_order_path_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M26_h001_visit_order_path_smoke_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M26_h001_visit_order_path_smoke_v0/h001_candidate_visit_order_rows.jsonl`
+
+## E008-M27
+
+Implementation unit: `E008-M27_h001_goal_evaluation_smoke_v0`.
+
+- Status: `e008_m27_h001_goal_evaluation_smoke_ready`.
+- Candidate-goal eval rows: 252.
+- Scan-policy metric rows: 72.
+- Aggregate policy-task rows: 12.
+- Aggregate policy rows: 4.
+- Blocked external-map/runtime-event policy plan rows retained: 18.
+- Primary eval metric: `any_viewpoint_xz_1p0`.
+- Leakage audit pass: true.
+- Eval-only `ObjectNav` goal/viewpoint fields used for policy: false.
+- Selected next unit: E008-M28 H001 goal-evaluation comparison and trajectory-execution decision.
+- H001 goal-evaluation proxy ready: true.
+- H001 navigation policy execution ready: false.
+- Dynamic stale-memory claim ready on `HM3D`: false.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Policy goal-evaluation aggregate:
+
+| Policy | Primary hits | `GoalEvalProxySR` | `GoalEvalProxySPL` | `goal_xz_1p0` proxy SR |
+| --- | ---: | ---: | ---: | ---: |
+| `real_static_memory_proxy_v0` | 0 / 18 | 0.000000 | 0.000000 | 0.000000 |
+| `real_detector_confidence_expanded_v0` | 9 / 18 | 0.500000 | 0.381619 | 0.333333 |
+| `real_context_agnostic_memory_trust_reobserve_v0` | 6 / 18 | 0.333333 | 0.194209 | 0.166667 |
+| `h001_real_task_context_memory_trust_v0` | 6 / 18 | 0.333333 | 0.257070 | 0.055556 |
+
+Claim boundary:
+
+- M27 is a leakage-safe `GoalEvalProxy` smoke, not a `Habitat` trajectory execution.
+- H001 is not better than detector-confidence ranking on the current 6-episode `HM3D ObjectNav` goal proxy.
+- `initial_memory_proxy` is still an `HM3D` static-memory proxy, not true dynamic stale memory.
+- The next step must compare failure rows before deciding whether H001 trajectory execution is meaningful.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m27_h001_goal_evaluation_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M27_h001_goal_evaluation_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M27_h001_goal_evaluation_smoke_v0/h001_candidate_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M27_h001_goal_evaluation_smoke_v0/h001_policy_goal_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M27_h001_goal_evaluation_smoke_v0/h001_goal_failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M27_h001_goal_evaluation_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M27_h001_goal_evaluation_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M27_h001_goal_evaluation_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M27_h001_goal_evaluation_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M27_h001_goal_evaluation_smoke_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M27_h001_goal_evaluation_smoke_v0/h001_candidate_goal_eval_rows.jsonl`
+
+## E008-M28
+
+Implementation unit: `E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0`.
+
+- Status: `e008_m28_h001_goal_eval_comparison_decision_ready_repair_first`.
+- Episode-task comparison rows: 18.
+- H001 primary success rows: 6 / 18.
+- Detector-confidence primary success rows: 9 / 18.
+- Context-agnostic primary success rows: 6 / 18.
+- Static-memory primary success rows: 0 / 18.
+- H001-vs-detector detector-only rows: 3.
+- H001-vs-detector H001-only rows: 0.
+- H001 failure rows: 12.
+- Failure taxonomy: `all_policy_miss_candidate_source_gap` 9, `detector_only_success_h001_near_miss` 2, `detector_only_success_h001_candidate_gap` 1.
+- Trajectory gate: pass 2 / warning 1 / fail 4.
+- H001 trajectory execution recommended now: false.
+- Repair recommended before trajectory execution: true.
+- Selected next unit: E008-M29 H001 current-observation fallback/source repair contract.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Baseline deltas:
+
+| Baseline | Success delta | `GoalEvalProxySR` delta | `GoalEvalProxySPL` delta |
+| --- | ---: | ---: | ---: |
+| `real_static_memory_proxy_v0` | +6 | +0.333333 | +0.257070 |
+| `real_detector_confidence_expanded_v0` | -3 | -0.166667 | -0.124549 |
+| `real_context_agnostic_memory_trust_reobserve_v0` | 0 | 0.000000 | +0.062861 |
+
+Claim boundary:
+
+- M28 supports a leakage-safe comparison and route decision only.
+- M28 does not support positive H001 real navigation `SR` / `SPL`.
+- H001 is better than static memory but not better than detector-confidence ranking in this 6-episode proxy.
+- Structured task context remains secondary because H001 does not improve success over context-agnostic memory trust.
+- The next step is H001 current-observation fallback/source repair, not immediate H001 trajectory execution.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m28_h001_goal_evaluation_comparison_trajectory_decision.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/h001_baseline_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/episode_task_comparison_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/pair_outcome_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/failure_taxonomy_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/trajectory_execution_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M28_h001_goal_evaluation_comparison_trajectory_decision_v0/episode_task_comparison_rows.jsonl`
+
+## E008-M29
+
+Implementation unit: `E008-M29_h001_current_observation_fallback_source_repair_contract_v0`.
+
+- Status: `e008_m29_h001_current_observation_fallback_source_repair_contract_ready_replay_next`.
+- Backstop plan rows: 18.
+- Repair contract rows: 2.
+- Repair opportunity rows: 12.
+- Detector-only recoverable rows: 3.
+- All-policy source-gap rows: 9.
+- Allowed / blocked policy input rows: 28 / 22.
+- Source input leakage pass: true.
+- `ObjectNav` eval goal/viewpoint used for policy input: false.
+- Fallback replay recommended: true.
+- Trajectory execution recommended now: false.
+- Selected next unit: E008-M30 H001 current-observation fallback replay smoke.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Claim boundary:
+
+- M29 supports a leakage-safe replay contract and diagnostic opportunity taxonomy only.
+- M29 does not report a repaired H001 score.
+- Detector-only failures are testable by `h001_current_observation_backstop_top5_v0`; all-policy failures remain candidate-source expansion blockers.
+- Immediate next step is M30 replay, not Docker trajectory execution.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m29_h001_current_observation_fallback_source_repair.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/allowed_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/blocked_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/repair_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/backstop_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/repair_opportunity_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/repair_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/backstop_plan_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M29_h001_current_observation_fallback_source_repair_contract_v0/repair_opportunity_rows.jsonl`
+
+## E008-M30
+
+Implementation unit: `E008-M30_h001_current_observation_fallback_replay_smoke_v0`.
+
+- Status: `e008_m30_h001_current_observation_fallback_replay_smoke_ready_trajectory_contract_next`.
+- Repaired candidate-goal eval rows: 141.
+- Repaired primary success rows: 9 / 18.
+- Base H001 primary success rows: 6 / 18.
+- Detector-confidence primary success rows: 9 / 18.
+- Recovered H001 failure rows: 3.
+- H001 success-loss rows: 0.
+- Remaining all-policy source-gap rows: 9.
+- Repaired `GoalEvalProxySPL`: 0.291005.
+- Detector-confidence `GoalEvalProxySPL`: 0.381619.
+- `ObjectNav` eval goal/viewpoint used for policy input: false.
+- Selected next unit: E008-M31 H001 fallback trajectory-execution contract and source-gap boundary.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Claim boundary:
+
+- M30 supports a leakage-safe replay result only.
+- M30 recovers the 3 detector-only M28 rows without losing prior H001 successes.
+- M30 matches detector-confidence `GoalEvalProxySR` but does not beat detector-confidence `GoalEvalProxySPL`.
+- H001 trajectory execution, source-gap expansion, scale, and navigation/search baselines are still required before final claim.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m30_h001_current_observation_fallback_replay_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/fallback_replay_candidate_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/fallback_replay_policy_goal_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/aggregate_policy_comparison_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/fallback_replay_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/failure_transition_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/fallback_replay_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/replay_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M30_h001_current_observation_fallback_replay_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M30_h001_current_observation_fallback_replay_smoke_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M30_h001_current_observation_fallback_replay_smoke_v0/fallback_replay_candidate_goal_eval_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M30_h001_current_observation_fallback_replay_smoke_v0/fallback_replay_policy_goal_metric_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M30_h001_current_observation_fallback_replay_smoke_v0/failure_transition_rows.jsonl`
+
+## E008-M31
+
+Implementation unit: `E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0`.
+
+- Status: `e008_m31_h001_fallback_trajectory_contract_source_gap_boundary_ready_runner_next`.
+- Sanitized H001 fallback candidate visit rows: 141.
+- Trajectory execution plan rows: 18.
+- Source-gap boundary rows: 9.
+- Proxy-success / proxy-failure plan rows: 9 / 9.
+- Source roles: `current_observation` 123, `initial_memory_proxy` 18.
+- Policy input leakage pass: true.
+- Sanitized policy eval-field hits: 0.
+- Execute all episode-task rows next: true.
+- Filtering to proxy-success rows allowed: false.
+- Docker preflight status: pass 5 / warning 1.
+- Selected next unit: E008-M32 H001 fallback trajectory-execution runner scaffold.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Claim boundary:
+
+- M31 supports a leakage-safe H001 fallback trajectory-input contract.
+- M31 records the 9 all-policy source-gap rows as post-hoc diagnostics, not as execution filters.
+- M31 does not execute H001 trajectories and does not support final real navigation `SR` / `SPL`.
+- M31 does not support final real RGB-D/open-vocabulary robustness.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m31_h001_fallback_trajectory_contract_source_gap_boundary.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/h001_fallback_candidate_visit_order_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/source_gap_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/blocked_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/metric_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/baseline_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/docker_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/h001_fallback_candidate_visit_order_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0/source_gap_boundary_rows.jsonl`
+
+## E008-M32
+
+Implementation unit: `E008-M32_h001_fallback_trajectory_execution_smoke_v0`.
+
+- Status: `e008_m32_h001_fallback_trajectory_execution_smoke_ready`.
+- Docker `Habitat` execution: true.
+- M31 candidate visit rows: 141.
+- M31 execution plan rows: 18.
+- Trajectory attempt rows: 104.
+- Scan-task metric rows: 18.
+- Trajectory success rows: 9 / 18.
+- H001 fallback trajectory `SR`: 0.500000.
+- H001 fallback trajectory `SPL`: 0.141996.
+- Mean `PathLengthM`: 24.136379.
+- Mean `CandidateVisits`: 5.777778.
+- Proxy/trajectory success agreement: 18 / 18.
+- Proxy-success trajectory-failure rows: 0.
+- Proxy-failure trajectory-success rows: 0.
+- Source-gap trajectory success rows: 0 / 9.
+- Leakage audit pass: true.
+- Eval-only `ObjectNav` goal/viewpoint fields used for policy: false.
+- Selected next unit: E008-M33 H001 trajectory result interpretation and baseline alignment decision.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Claim boundary:
+
+- M32 supports a bounded H001 fallback trajectory smoke over the current 6-episode `HM3D ObjectNav` transfer setup.
+- M32 does not support final real navigation `SR` / `SPL`.
+- M32 does not support dynamic stale-memory navigation because `initial_memory_proxy` is not true dynamic stale-memory state injection in `HM3D`.
+- M32 does not support final real RGB-D/open-vocabulary robustness.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work \
+  -w /work \
+  research3/habitat-h001:20260508-calib-artifacts \
+  bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m32_h001_fallback_trajectory_execution_smoke.py \
+    --m31-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0 \
+    --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0 \
+    --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M32_h001_fallback_trajectory_execution_smoke_v0"
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/trajectory_failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/proxy_trajectory_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/source_gap_outcome_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/scene_execution_meta.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M32_h001_fallback_trajectory_execution_smoke_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M32_h001_fallback_trajectory_execution_smoke_v0/trajectory_policy_metric_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M32_h001_fallback_trajectory_execution_smoke_v0/proxy_trajectory_delta_rows.jsonl`
+
+## E008-M33
+
+Implementation unit: `E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0`.
+
+- Status: `e008_m33_h001_trajectory_result_interpretation_baseline_alignment_ready`.
+- Baseline alignment ready: true.
+- M32 H001 scan-task metric rows: 18.
+- M22 detector scan-policy metric rows: 24.
+- Primary detector baseline: `detector_confidence_reachable_subset_v0`.
+- H001 trajectory `SR` / `SPL`: 0.500000 / 0.141996.
+- Primary detector replicated `SR` / `SPL`: 1.000000 / 0.410800.
+- H001 minus primary detector `SR` / `SPL`: -0.500000 / -0.268804.
+- Source-ready H001 subset `SR` / `SPL`: 1.000000 / 0.283993.
+- Source-gap H001 subset `SR` / `SPL`: 0.000000 / 0.000000.
+- Source-gap primary detector `SR`: 1.000000.
+- Proxy/trajectory success agreement: 18 / 18.
+- H001 navigation improvement claim ready: false.
+- Dynamic-stale navigation benchmark needed: true.
+- Selected next unit: E008-M34 dynamic-stale navigation benchmark contract and source-intervention design.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Claim boundary:
+
+- M33 supports a bounded claim that H001 fallback trajectory rows can be executed without policy leakage.
+- M33 blocks the current H001 real-navigation improvement claim because detector trajectories dominate on aligned `SR` and `SPL`.
+- M33 treats source-gap rows as candidate-source / task-construction failures, not as navigation execution failures.
+- M33 says the current `HM3D ObjectNav` setup tests navigation plumbing, not controlled dynamic stale-memory semantic mapping.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m33_h001_trajectory_result_interpretation_baseline_alignment.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/denominator_alignment_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/aligned_navigation_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/pairwise_baseline_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/proxy_execution_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/aligned_navigation_metric_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/pairwise_baseline_delta_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M33_h001_trajectory_result_interpretation_baseline_alignment_v0/claim_boundary_rows.jsonl`
+
+## E008-M34
+
+Implementation unit: `E008-M34_dynamic_stale_navigation_contract_v0`.
+
+- Status: `e008_m34_dynamic_stale_navigation_contract_ready`.
+- Selected route: `hm3d_counterfactual_stale_overlay_v0`.
+- Selected next unit: E008-M35 dynamic-stale overlay row materialization smoke.
+- Planned intervention rows: 18.
+- Source-gap diagnostic rows: 9.
+- Current H001 vs primary detector `SR` / `SPL` delta from M33: -0.500000 / -0.268804.
+- True `3RScan` / `3DSSG` dynamic-pair query rows available as proxy source: 294.
+- Contract ready: true.
+- Materialization ready next: true.
+- Dynamic-stale navigation result ready: false.
+- True temporal dynamic navigation ready: false.
+- Final real navigation `SR` / `SPL` ready: false.
+- Launch long job now: false.
+
+Claim boundary:
+
+- M34 supports only a leakage-safe benchmark/source-intervention contract.
+- M34 rejects scaling the current HM3D H001 fallback trajectory as a main navigation claim.
+- M34 selects a counterfactual stale overlay route because it can use existing `Habitat` executable rows while adding explicit stale-memory intervention.
+- M34 does not support true temporal dynamic navigation, final H001 real-navigation improvement, final real RGB-D/open-vocabulary robustness, or human intent as a main claim.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m34_dynamic_stale_navigation_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/source_intervention_option_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/dynamic_stale_intervention_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/policy_baseline_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/metric_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/blocked_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M34_dynamic_stale_navigation_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M34_dynamic_stale_navigation_contract_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M34_dynamic_stale_navigation_contract_v0/dynamic_stale_intervention_plan_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M34_dynamic_stale_navigation_contract_v0/policy_baseline_contract_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M34_dynamic_stale_navigation_contract_v0/metric_contract_rows.jsonl`
+
+## E008-M35
+
+Implementation unit: `E008-M35_dynamic_stale_overlay_materialization_smoke_v0`.
+
+- Status: `e008_m35_dynamic_stale_overlay_materialization_smoke_ready_runner_next`.
+- Selected route: `hm3d_counterfactual_stale_overlay_v0`.
+- Intervention rows: 18.
+- Materialized policy ids: `static_stale_memory_top1_v0`, `fixed_topk_current_observation_v0`, `detector_confidence_reachable_subset_v0`, `task_agnostic_memory_trust_navigation_v0`, `h001_task_conditioned_memory_trust_navigation_v0`.
+- Policy execution plan rows: 90.
+- Candidate rows: 924.
+- Candidate source roles: current observation 870, stale old memory 54.
+- Source-gap policy plan rows: 45.
+- Blocked field hits: 0.
+- Policy input leakage pass: true.
+- Dynamic stale overlay materialized: true.
+- Trajectory execution ready: false.
+- Generalized runner required: true.
+- Selected next unit: E008-M36 dynamic-stale overlay trajectory execution contract and runner adaptation.
+- Final real navigation `SR` / `SPL` ready: false.
+
+Policy materialization summary:
+
+| Policy | Plans | Candidates | Stale-first plans | Current-first plans |
+| --- | ---: | ---: | ---: | ---: |
+| `static_stale_memory_top1_v0` | 18 | 18 | 18 | 0 |
+| `fixed_topk_current_observation_v0` | 18 | 90 | 0 | 18 |
+| `detector_confidence_reachable_subset_v0` | 18 | 567 | 0 | 18 |
+| `task_agnostic_memory_trust_navigation_v0` | 18 | 108 | 18 | 0 |
+| `h001_task_conditioned_memory_trust_navigation_v0` | 18 | 141 | 12 | 6 |
+
+Claim boundary:
+
+- M35 supports only leakage-safe counterfactual stale overlay input materialization.
+- M35 does not execute trajectories and does not produce `SR` / `SPL`.
+- M35 does not prove true temporal dynamic navigation because the overlay is counterfactual on `HM3D ObjectNav`.
+- M36 must generalize the H001-specific M32 runner before any dynamic-stale overlay trajectory result is valid.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m35_dynamic_stale_overlay_materialization_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/dynamic_stale_overlay_policy_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/dynamic_stale_overlay_policy_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/policy_materialization_status_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/materialization_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/policy_materialization_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/dynamic_stale_overlay_policy_candidate_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/dynamic_stale_overlay_policy_execution_plan_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M35_dynamic_stale_overlay_materialization_smoke_v0/policy_materialization_summary_rows.jsonl`
+
+## E008-M36
+
+Implementation unit: `E008-M36_dynamic_stale_overlay_trajectory_contract_v0`.
+
+- Status: `e008_m36_dynamic_stale_overlay_trajectory_contract_ready_runner_next`.
+- M35 status: `e008_m35_dynamic_stale_overlay_materialization_smoke_ready_runner_next`.
+- Trajectory candidate rows: 924.
+- Trajectory execution plan rows: 90.
+- Execute-in-next-runner rows: 90.
+- Intervention rows: 18.
+- Policy count: 5.
+- Source-gap plan rows: 45.
+- Blocked field hits: 0.
+- Blocked flag hits: 0.
+- Leakage audit pass: true.
+- Runner script: `experiments/E008_real_navigation_benchmark/tools/run_m37_dynamic_stale_overlay_trajectory_execution_smoke.py`.
+- Runner py_compile pass: true.
+- `Habitat` Docker image inspect pass: true.
+- Trajectory execution contract ready: true.
+- Runner adaptation ready: true.
+- Trajectory execution result ready: false.
+- Final real navigation `SR` / `SPL` ready: false.
+- Selected next unit: E008-M37 dynamic-stale overlay trajectory execution smoke.
+
+Runner adaptation summary:
+
+| Adaptation | Purpose |
+| --- | --- |
+| `generalize_policy_id` | M32's H001-only policy id is replaced by row-level `policy_id` / `policy_role`. |
+| `generalize_input_files` | M37 reads M36 trajectory candidate rows and plan rows instead of M31-specific files. |
+| `multi_policy_aggregation` | M37 aggregates five materialized policies by policy, task context, and source-gap boundary. |
+| `dynamic_stale_metrics` | M37 reports stale/current source role, old-location dead-end cost, and H001-vs-baseline deltas. |
+
+Claim boundary:
+
+- M36 supports only trajectory contract readiness and generalized runner scaffold readiness.
+- M36 does not execute `Habitat` trajectories and does not produce `SR` / `SPL`.
+- Dynamic-stale navigation claims require M37 execution and post-run interpretation.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m36_dynamic_stale_overlay_trajectory_contract.py
+```
+
+Next Docker command is recorded in `docker_command_rows.jsonl`; it is not launched by M36.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/trajectory_execution_plan_rows.jsonl`
+
+## E008-M37
+
+Implementation unit: `E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0`.
+
+- Status: `e008_m37_dynamic_stale_overlay_trajectory_execution_smoke_ready`.
+- Docker inside: true.
+- M36 status: `e008_m36_dynamic_stale_overlay_trajectory_contract_ready_runner_next`.
+- Trajectory candidate rows: 924.
+- Trajectory execution plan rows: 90.
+- Trajectory attempt rows: 467.
+- Scan-task-policy metric rows: 90.
+- Aggregate metric rows: 10.
+- Pairwise policy delta rows: 72.
+- Old-location outcome rows: 48.
+- Trajectory success rows: 45 / 90.
+- Overall smoke `SR`: 0.500000.
+- Overall mean `SPL`: 0.218178.
+- Mean `PathLengthM`: 27.602670.
+- Mean candidate visits: 5.188889.
+- Mean `OldLocationDeadEndCostM`: 1.552844.
+- Leakage audit pass: true.
+- Uses `ObjectNav` eval goal/viewpoint for policy: false.
+- Dynamic-stale overlay trajectory smoke ready: true.
+- Final real navigation `SR` / `SPL` ready: false.
+- Selected next unit: E008-M38 dynamic-stale overlay result interpretation and baseline alignment.
+
+Policy aggregates:
+
+| Policy | Success | SR | SPL | Mean path | Mean old-dead-end |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `detector_confidence_reachable_subset_v0` | 18 / 18 | 1.000000 | 0.407894 | 73.336223 | 0.000000 |
+| `fixed_topk_current_observation_v0` | 9 / 18 | 0.500000 | 0.373373 | 16.926073 | 0.000000 |
+| `h001_task_conditioned_memory_trust_navigation_v0` | 9 / 18 | 0.500000 | 0.141996 | 24.136379 | 1.941056 |
+| `static_stale_memory_top1_v0` | 0 / 18 | 0.000000 | 0.000000 | 2.911583 | 2.911583 |
+| `task_agnostic_memory_trust_navigation_v0` | 9 / 18 | 0.500000 | 0.167627 | 20.703090 | 2.911583 |
+
+H001 pairwise boundary:
+
+- H001 vs `static_stale_memory_top1_v0`: `SR` +0.500000, `SPL` +0.141996.
+- H001 vs `fixed_topk_current_observation_v0`: `SR` +0.000000, `SPL` -0.231377.
+- H001 vs `task_agnostic_memory_trust_navigation_v0`: `SR` +0.000000, `SPL` -0.025631.
+- H001 vs `detector_confidence_reachable_subset_v0`: `SR` -0.500000, `SPL` -0.265897.
+
+Claim boundary:
+
+- M37 supports only a counterfactual dynamic-stale overlay trajectory smoke.
+- M37 does not support final real navigation `SR` / `SPL` because scale is 6 episodes, the overlay is counterfactual on `HM3D ObjectNav`, and navigation/search baselines still need alignment.
+- H001 is better than static stale memory but not better than detector confidence and not better than task-agnostic memory trust on `SR`.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work \
+  -w /work research3/habitat-h001:20260508-calib-artifacts \
+  bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m37_dynamic_stale_overlay_trajectory_execution_smoke.py --m36-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0"
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['dynamic_stale_overlay_trajectory_smoke_ready'] is True
+assert c['scan_task_policy_rows'] == 90
+print('m37 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/dynamic_stale_trajectory_failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/old_location_dead_end_outcome_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/runner_adaptation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/docker_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/coverage.json`
+- `local_dataset/HM3D_navigation_bridge/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M36_dynamic_stale_overlay_trajectory_contract_v0/trajectory_execution_plan_rows.jsonl`
+
+## E008-M38
+
+Implementation unit: `E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0`.
+
+Facts:
+
+- Status: `e008_m38_dynamic_stale_overlay_result_interpretation_baseline_alignment_ready`.
+- Input M37 status: `e008_m37_dynamic_stale_overlay_trajectory_execution_smoke_ready`.
+- Policy result rows: 5.
+- Pairwise baseline summary rows: 4.
+- Failure diagnosis rows: 7.
+- Claim boundary rows: 6.
+- H001 `SR` / `SPL`: 0.500000 / 0.141996.
+- Detector confidence `SR` / `SPL`: 1.000000 / 0.407894.
+- Fixed current top-k `SR` / `SPL`: 0.500000 / 0.373373.
+- Task-agnostic memory trust `SR` / `SPL`: 0.500000 / 0.167627.
+- Static stale memory `SR` / `SPL`: 0.000000 / 0.000000.
+- H001 beats static memory: true.
+- H001 beats detector confidence: false.
+- H001 beats fixed current top-k success: false.
+- H001 beats task-agnostic success: false.
+- Budget-matched policy repair needed: true.
+- Source-gap repair needed: true.
+- Scale-up recommended now: false.
+- Selected next unit: E008-M39 budget-matched dynamic-stale policy repair and source-gap contract.
+
+Interpretation:
+
+- Static stale memory is a valid naive failure, but beating it is only a lower-bound claim.
+- Detector confidence is not rebutted in the current smoke: `SR`/`SPL` 1.000000 / 0.407894 vs H001 0.500000 / 0.141996.
+- Fixed current top-k matches H001 success and has higher `SPL`, so H001 does not yet prove a better bounded search policy.
+- Task-agnostic memory trust matches H001 `SR` and has higher `SPL`, so structured task context remains an ablation, not a human-intent main claim.
+- Source-gap rows must stay visible because source-gap subset H001 `SR` is 0.000000 while detector confidence `SR` is 1.000000.
+
+Claim boundary:
+
+- M38 supports only baseline-aligned interpretation of the M37 smoke.
+- M38 does not support final real navigation `SR` / `SPL`.
+- M38 does not support final real RGB-D/open-vocabulary robustness.
+- M38 does not support human intent as a main contribution.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m38_dynamic_stale_overlay_result_interpretation_baseline_alignment.py
+```
+
+Verification:
+
+```bash
+python -m py_compile experiments/E008_real_navigation_benchmark/tools/plan_m38_dynamic_stale_overlay_result_interpretation_baseline_alignment.py
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['status'] == 'e008_m38_dynamic_stale_overlay_result_interpretation_baseline_alignment_ready'
+assert c['scale_up_recommended_now'] is False
+assert c['selected_next_unit'] == 'E008-M39 budget-matched dynamic-stale policy repair and source-gap contract'
+print('m38 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/policy_result_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/pairwise_baseline_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/task_context_effect_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/source_gap_diagnosis_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/failure_diagnosis_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M38_dynamic_stale_overlay_result_interpretation_baseline_alignment_v0/coverage.json`
+
+## E008-M39
+
+Implementation unit: `E008-M39_budget_matched_policy_repair_source_gap_contract_v0`.
+
+Facts:
+
+- Status: `e008_m39_budget_matched_policy_repair_source_gap_contract_ready`.
+- Input M38 status: `e008_m38_dynamic_stale_overlay_result_interpretation_baseline_alignment_ready`.
+- Primary budget cap: 5 stops.
+- Budget alignment rows: 15.
+- Repair policy contract rows: 7.
+- Source-gap contract rows: 3.
+- M40 materialization plan rows: 90.
+- Source-ready rows: 9.
+- Source-gap rows: 9.
+- Budget-matched policy repair contract ready: true.
+- Source-gap contract ready: true.
+- Scale-up recommended now: false.
+- Trajectory execution launched: false.
+- Final real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+- Human intent main claim ready: false.
+- Selected next unit: E008-M40 budget-matched repair row materialization smoke.
+
+Budget alignment:
+
+- Source-ready rows are eligible for primary policy comparison after M40/M41 execution. On this subset, detector cap5 `SR` is 1.000000, fixed current top-k cap5 `SR` is 1.000000, task-agnostic cap5 `SR` is 1.000000, and H001 full/cap5 `SR` is 1.000000 / 0.777778.
+- Source-gap rows are separated from primary policy failure. Detector full `SR` is 1.000000 but cap5 `SR` is 0.000000 with mean visits 20.333333, so this is a source-expansion / over-budget diagnostic rather than a fair budget-matched win.
+- H001 source-ready failure is a delayed visit-order problem, not a pure target absence problem.
+
+Repair policies for M40:
+
+- `static_stale_memory_top1_v0`
+- `fixed_topk_current_observation_budget5_v0`
+- `detector_confidence_budget5_v0`
+- `task_agnostic_dead_end_penalized_budget5_v0`
+- `h001_dead_end_penalized_budget5_v0`
+
+Claim boundary:
+
+- M39 supports a policy/source-gap contract for row materialization only.
+- M39 does not support H001 navigation improvement.
+- M39 does not solve source-gap policy failure.
+- M39 does not support human intent as a main contribution.
+- M39 does not support final real navigation `SR` / `SPL`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m39_budget_matched_dynamic_stale_policy_repair_source_gap_contract.py
+```
+
+Verification:
+
+```bash
+python -m py_compile experiments/E008_real_navigation_benchmark/tools/plan_m39_budget_matched_dynamic_stale_policy_repair_source_gap_contract.py
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['status']=='e008_m39_budget_matched_policy_repair_source_gap_contract_ready'
+assert c['primary_budget_cap']==5
+assert c['m40_materialization_plan_rows']==90
+assert c['scale_up_recommended_now'] is False
+assert c['selected_next_unit']=='E008-M40 budget-matched repair row materialization smoke'
+print('m39 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/budget_alignment_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/repair_policy_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/source_gap_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/m40_materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M39_budget_matched_policy_repair_source_gap_contract_v0/coverage.json`
+
+## E008-M40
+
+Implementation unit: `E008-M40_budget_matched_repair_row_materialization_smoke_v0`.
+
+Facts:
+
+- Status: `e008_m40_budget_matched_repair_row_materialization_smoke_ready`.
+- Input M39 status: `e008_m39_budget_matched_policy_repair_source_gap_contract_ready`.
+- M40 materialization plan rows: 90.
+- Materialized policy plan rows: 90.
+- Trajectory candidate rows: 378.
+- Policy count: 5.
+- Intervention rows: 18.
+- Source-ready/source-gap plan rows: 45 / 45.
+- Policy input leakage pass: true.
+- Budget cap compliance pass: true.
+- M41 runner input ready: true.
+- Trajectory execution launched: false.
+- Final real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+- Human intent main claim ready: false.
+- Selected next unit: E008-M41 budget-matched repair trajectory execution smoke.
+
+Policy materialization summary:
+
+- `static_stale_memory_top1_v0`: 18 candidate rows, stale-first 18 / 18.
+- `fixed_topk_current_observation_budget5_v0`: 90 candidate rows, current-first 18 / 18.
+- `detector_confidence_budget5_v0`: 90 candidate rows, current-first 18 / 18.
+- `task_agnostic_dead_end_penalized_budget5_v0`: 90 candidate rows, stale-first 3 / 18.
+- `h001_dead_end_penalized_budget5_v0`: 90 candidate rows, stale-first 1 / 18.
+
+Claim boundary:
+
+- M40 supports repaired row materialization only.
+- M40 does not produce trajectory `SR` / `SPL`.
+- M40 keeps source-gap rows as a separate boundary.
+- M40 uses structured task context only as memory-trust/re-observation conditioning, not as a natural-language human-intent claim.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m40_budget_matched_repair_row_materialization_smoke.py
+```
+
+Verification:
+
+```bash
+python -m py_compile experiments/E008_real_navigation_benchmark/tools/run_m40_budget_matched_repair_row_materialization_smoke.py
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['status']=='e008_m40_budget_matched_repair_row_materialization_smoke_ready'
+assert c['m40_plan_rows']==90
+assert c['materialized_policy_plan_rows']==90
+assert c['trajectory_candidate_rows']==378
+assert c['policy_count']==5
+assert c['policy_input_leakage_pass'] is True
+assert c['budget_cap_compliance_pass'] is True
+assert c['m41_runner_input_ready'] is True
+assert c['trajectory_execution_launched'] is False
+assert c['selected_next_unit']=='E008-M41 budget-matched repair trajectory execution smoke'
+print('m40 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/repair_policy_materialization_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/source_gap_materialization_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/policy_design_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/m41_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M40_budget_matched_repair_row_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M40_budget_matched_repair_row_materialization_smoke_v0/coverage.json`
+
+## E008-M41
+
+Implementation unit: `E008-M41_budget_matched_repair_trajectory_execution_smoke_v0`.
+
+Facts:
+
+- Status: `e008_m41_budget_matched_repair_trajectory_execution_smoke_ready`.
+- Input M40 status: `e008_m40_budget_matched_repair_row_materialization_smoke_ready`.
+- Docker inside: true.
+- Trajectory candidate rows: 378.
+- Trajectory execution plan rows: 90.
+- Scan-task-policy metric rows: 90.
+- Trajectory attempt rows: 270.
+- Success rows: 36.
+- Overall trajectory `SR`: 0.400000.
+- Overall mean `SPL`: 0.298698.
+- Leakage audit pass: true.
+- ObjectNav eval goal/viewpoint used for policy: false.
+- Final real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+- Human intent main claim ready: false.
+- Selected next unit: E008-M42 budget-matched repair result interpretation and scale decision.
+
+Policy aggregates:
+
+- `static_stale_memory_top1_v0`: `SR` 0.000000, `SPL` 0.000000, mean `OldLocationDeadEndCostM` 2.911583.
+- `fixed_topk_current_observation_budget5_v0`: `SR` 0.500000, `SPL` 0.373373.
+- `detector_confidence_budget5_v0`: `SR` 0.500000, `SPL` 0.373373.
+- `task_agnostic_dead_end_penalized_budget5_v0`: `SR` 0.500000, `SPL` 0.373373, mean `OldLocationDeadEndCostM` 0.210660.
+- `h001_dead_end_penalized_budget5_v0`: `SR` 0.500000, `SPL` 0.373373, mean `OldLocationDeadEndCostM` 0.070220.
+
+Claim boundary:
+
+- M41 is a budget-matched repaired trajectory smoke, not a final navigation benchmark.
+- H001 repaired policy beats static stale memory but does not beat detector/fixed current top-k or task-agnostic memory trust on `SR` / `SPL`.
+- Source-gap rows remain a separate source-expansion boundary: source-gap aggregate `SR` is 0.000000.
+- M41 does not support final real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, or human intent as a main claim.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work \
+  -w /work research3/habitat-h001:20260508-calib-artifacts \
+  bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m41_budget_matched_repair_trajectory_execution_smoke.py"
+```
+
+Verification:
+
+```bash
+python -m py_compile \
+  experiments/E008_real_navigation_benchmark/tools/run_m37_dynamic_stale_overlay_trajectory_execution_smoke.py \
+  experiments/E008_real_navigation_benchmark/tools/run_m41_budget_matched_repair_trajectory_execution_smoke.py
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['status']=='e008_m41_budget_matched_repair_trajectory_execution_smoke_ready'
+assert c['inside_docker'] is True
+assert c['scan_task_policy_rows']==90
+assert c['trajectory_candidate_rows']==378
+assert c['leakage_audit_pass'] is True
+assert c['uses_objectnav_eval_goal_or_viewpoint_for_policy'] is False
+assert c['selected_next_unit']=='E008-M42 budget-matched repair result interpretation and scale decision'
+print('m41 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/dynamic_stale_trajectory_failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/old_location_dead_end_outcome_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M41_budget_matched_repair_trajectory_execution_smoke_v0/coverage.json`
+
+## E008-M42
+
+Implementation unit: `E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0`.
+
+Facts:
+
+- Status: `e008_m42_budget_matched_repair_result_interpretation_scale_decision_ready`.
+- Input M41 status: `e008_m41_budget_matched_repair_trajectory_execution_smoke_ready`.
+- Policy result rows: 5.
+- Source boundary rows: 10.
+- Pairwise decision rows: 4.
+- Task-context effect rows: 3.
+- Scale gate rows: 6.
+- H001 source-ready `SR`: 1.000000.
+- H001 source-gap `SR`: 0.000000.
+- H001 vs detector/fixed/task-agnostic mean `delta_SR`: 0.000000.
+- H001 vs detector/fixed/task-agnostic mean `delta_SPL`: 0.000000.
+- Scale-up recommended now: false.
+- Final real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+- Human intent main claim ready: false.
+- Selected route: `policy_redesign_before_scale`.
+- Selected next unit: E008-M43 dynamic-stale navigation policy redesign contract.
+
+Claim boundary:
+
+- M42 supports only result interpretation and scale decision.
+- H001 beats static stale memory only; this is a lower-bound failure diagnosis, not a final navigation claim.
+- H001 does not beat detector/fixed current top-k or task-agnostic memory trust on `SR` / `SPL`.
+- Source-gap rows are not solved by ranking or dead-end penalty.
+- Human intent/task context remains a conditioning variable, not a main contribution.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m42_budget_matched_repair_result_interpretation_scale_decision.py
+```
+
+Verification:
+
+```bash
+python -m py_compile \
+  experiments/E008_real_navigation_benchmark/tools/plan_m42_budget_matched_repair_result_interpretation_scale_decision.py
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['status']=='e008_m42_budget_matched_repair_result_interpretation_scale_decision_ready'
+assert c['m41_status']=='e008_m41_budget_matched_repair_trajectory_execution_smoke_ready'
+assert c['policy_result_rows']==5
+assert c['source_boundary_rows']==10
+assert c['scale_up_recommended_now'] is False
+assert c['real_navigation_sr_spl_ready'] is False
+assert c['source_gap_unsolved'] is True
+assert c['selected_next_unit']=='E008-M43 dynamic-stale navigation policy redesign contract'
+print('m42 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/policy_result_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/source_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/pairwise_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/task_context_effect_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/scale_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M42_budget_matched_repair_result_interpretation_scale_decision_v0/coverage.json`
+
+## E008-M43
+
+Implementation unit: `E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0`.
+
+Facts:
+
+- Status: `e008_m43_dynamic_stale_navigation_policy_redesign_contract_ready`.
+- Input M42 status: `e008_m42_budget_matched_repair_result_interpretation_scale_decision_ready`.
+- Selected policy: `h001_task_conditioned_source_diverse_budget5_v1`.
+- Selected source expansion route: `source_diverse_current_candidate_pool_rerank_v1`.
+- Detector source-gap full `SR`: 1.000000.
+- Detector source-gap cap5 `SR`: 0.000000.
+- Detector source-gap mean stop rank: 20.333333.
+- Unique scan-task rows: 18.
+- Source-gap scan-task rows: 9.
+- M44 materialization plan rows: 108.
+- M44 policy rows: static stale memory, detector confidence budget5, fixed current top-k budget5, source-diverse current observation, task-agnostic source-diverse, H001 task-conditioned source-diverse.
+- M44 materialization ready: true.
+- M45 trajectory execution ready: false.
+- Final real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+- Human intent main claim ready: false.
+- Selected next unit: E008-M44 source-diverse redesign row materialization smoke.
+
+Claim boundary:
+
+- M43 fixes a redesign contract; it is not a new trajectory result.
+- Source-diverse top-5 is selected because source-gap rows are recoverable only when the full current candidate pool is allowed, but not under confidence top-5.
+- Structured task context remains a conditioning variable until `h001_task_conditioned_source_diverse_budget5_v1` beats `task_agnostic_source_diverse_budget5_v1`.
+- M43 does not support final real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, or human intent as a main contribution.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m43_dynamic_stale_navigation_policy_redesign_contract.py
+```
+
+Verification:
+
+```bash
+python -m py_compile \
+  experiments/E008_real_navigation_benchmark/tools/plan_m43_dynamic_stale_navigation_policy_redesign_contract.py
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['status']=='e008_m43_dynamic_stale_navigation_policy_redesign_contract_ready'
+assert c['m42_status']=='e008_m42_budget_matched_repair_result_interpretation_scale_decision_ready'
+assert c['detector_source_gap_full_SR']==1.0
+assert c['detector_source_gap_cap5_SR']==0.0
+assert c['unique_scan_task_rows']==18
+assert c['source_gap_scan_task_rows']==9
+assert c['m44_materialization_plan_rows']==108
+assert c['selected_policy_id']=='h001_task_conditioned_source_diverse_budget5_v1'
+assert c['selected_next_unit']=='E008-M44 source-diverse redesign row materialization smoke'
+print('m43 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/failed_gate_diagnosis_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/redesign_principle_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/policy_redesign_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/source_expansion_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/task_context_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/input_guard_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/m44_materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/evaluation_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M43_dynamic_stale_navigation_policy_redesign_contract_v0/coverage.json`
+
+## E008-M44
+
+Implementation unit: `E008-M44_source_diverse_redesign_row_materialization_smoke_v0`.
+
+Facts:
+
+- Status: `e008_m44_source_diverse_redesign_row_materialization_smoke_ready`.
+- Input M36 status: `e008_m36_dynamic_stale_overlay_trajectory_contract_ready_runner_next`.
+- Input M40 status: `e008_m40_budget_matched_repair_row_materialization_smoke_ready`.
+- Input M43 status: `e008_m43_dynamic_stale_navigation_policy_redesign_contract_ready`.
+- M43 materialization plan rows: 108.
+- Execution plan rows: 108.
+- Candidate rows: 468.
+- Policies: `static_stale_memory_top1_v0`, `detector_confidence_budget5_v0`, `fixed_topk_current_observation_budget5_v0`, `source_diverse_current_observation_budget5_v1`, `task_agnostic_source_diverse_budget5_v1`, `h001_task_conditioned_source_diverse_budget5_v1`.
+- Source-ready/source-gap plan rows: 54 / 54.
+- Policy input leakage pass: true.
+- Budget cap compliance pass: true.
+- M45 runner input ready: true.
+- Final real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+- Human intent main claim ready: false.
+- Selected next unit: E008-M45 source-diverse redesign trajectory execution contract and Docker preflight.
+
+Claim boundary:
+
+- M44 is materialization only; it does not produce trajectory `SR` / `SPL`.
+- Source-diverse policies are distinct from detector-confidence order, but this is only a pre-execution audit.
+- `diagnostic_source_gap_boundary_for_reporting` is retained for later analysis and is not a policy input.
+- Structured task context remains a memory-trust/re-observation condition, not natural-language intent understanding.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m44_source_diverse_redesign_row_materialization_smoke.py
+```
+
+Verification:
+
+```bash
+python -m py_compile \
+  experiments/E008_real_navigation_benchmark/tools/run_m44_source_diverse_redesign_row_materialization_smoke.py
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['status']=='e008_m44_source_diverse_redesign_row_materialization_smoke_ready'
+assert c['m43_m44_plan_rows']==108
+assert c['source_diverse_execution_plan_rows']==108
+assert c['source_diverse_candidate_rows']==468
+assert c['policy_input_leakage_pass'] is True
+assert c['budget_cap_compliance_pass'] is True
+assert c['m45_runner_input_ready'] is True
+assert c['selected_next_unit']=='E008-M45 source-diverse redesign trajectory execution contract and Docker preflight'
+print('m44 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/source_diverse_redesign_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/source_diverse_redesign_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/policy_materialization_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/candidate_pool_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/source_diversity_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/policy_distinctness_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/m45_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M44_source_diverse_redesign_row_materialization_smoke_v0/coverage.json`
+
+## E008-M45
+
+Implementation unit: `E008-M45_source_diverse_redesign_trajectory_contract_v0`.
+
+Facts:
+
+- Status: `e008_m45_source_diverse_redesign_trajectory_contract_ready_runner_next`.
+- Input M44 status: `e008_m44_source_diverse_redesign_row_materialization_smoke_ready`.
+- Candidate rows: 468.
+- Execution plan rows: 108.
+- Source-gap/source-ready reporting plan rows: 54 / 54.
+- H001 policy id: `h001_task_conditioned_source_diverse_budget5_v1`.
+- Baseline policy ids: `static_stale_memory_top1_v0`, `detector_confidence_budget5_v0`, `fixed_topk_current_observation_budget5_v0`, `source_diverse_current_observation_budget5_v1`, `task_agnostic_source_diverse_budget5_v1`.
+- Docker CLI/image/data/navmesh/ObjectNav checks: pass.
+- `nvidia-smi` check: pass.
+- M37 runner `py_compile`: pass.
+- M46 runner wrapper `py_compile`: pass.
+- Source-gap reporting fallback in M37: ready.
+- Final real navigation `SR` / `SPL` ready: false.
+- Final real RGB-D/open-vocabulary robustness ready: false.
+- Human intent main claim ready: false.
+- Selected next unit: E008-M46 source-diverse redesign trajectory execution smoke.
+
+Claim boundary:
+
+- M45 is contract and Docker preflight only; it does not produce trajectory `SR` / `SPL`.
+- M45 formalizes E008-M46 execution through `run_m46_source_diverse_redesign_trajectory_execution_smoke.py`.
+- `diagnostic_source_gap_boundary_for_reporting` remains reporting-only and is not a policy input.
+- Structured task context remains a memory-trust/re-observation condition, not natural-language intent understanding.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m45_source_diverse_redesign_trajectory_contract.py
+```
+
+Verification:
+
+```bash
+python -m py_compile \
+  experiments/E008_real_navigation_benchmark/tools/plan_m45_source_diverse_redesign_trajectory_contract.py \
+  experiments/E008_real_navigation_benchmark/tools/run_m46_source_diverse_redesign_trajectory_execution_smoke.py \
+  experiments/E008_real_navigation_benchmark/tools/run_m37_dynamic_stale_overlay_trajectory_execution_smoke.py
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['status']=='e008_m45_source_diverse_redesign_trajectory_contract_ready_runner_next'
+assert c['trajectory_candidate_rows']==468
+assert c['trajectory_execution_plan_rows']==108
+assert c['docker_preflight_pass'] is True
+assert c['runner_py_compile_pass'] is True
+assert c['m37_source_gap_reporting_fallback_ready'] is True
+assert c['selected_next_unit']=='E008-M46 source-diverse redesign trajectory execution smoke'
+print('m45 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/trajectory_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/metric_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/runner_compatibility_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/m46_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M45_source_diverse_redesign_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M45_source_diverse_redesign_trajectory_contract_v0/coverage.json`

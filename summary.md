@@ -1,6 +1,6 @@
 # Research Summary
 
-Updated: 2026-05-28
+Updated: 2026-05-30
 
 이 문서는 `research2/`의 연구 방향, 배경, 가설, 현재 상태, 남은 쟁점, 실험 계획을 간단히 정리한 working research report다. 세부 진행 로그는 `TODO.md`, `hypothesis/`, `experiments/`, `docs/reproducibility.md`에 둔다.
 
@@ -129,7 +129,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - E008-M06은 annotation-derived `HM3D` semantic candidate-source smoke를 완료했다. Semantic label support는 6/6이지만 Habitat semantic nonzero-AABB scenes는 0/2, GLB semantic geometry mapping scenes도 0/2라 candidate rows는 0이다.
 - E008-M07은 rendered RGB-D detector candidate-source plan을 완료했다. 6 episode rows에서 24 start-pose yaw-sweep render rows, 6 detector manifest rows, 5 detector labels(`bed`, `chair`, `monitor`, `television`, `tv`)를 고정했고, `Habitat` image와 `real-smoke` detector image readiness를 확인했다.
 - E008-M08은 Docker `Habitat` render smoke로 24/24 rendered RGB-D/pose rows, 6/6 detector-compatible sequence dirs, 6 detector manifest rows, detector input files ready를 검증했다.
-- E008-M09-M15는 `HM3D ObjectNav` rendered RGB-D detector candidate route와 non-oracle observation expansion path를 검증했다. 137 detector coordinate candidates 중 125개는 path-ready이고, leakage-safe goal evaluation에서는 모든 정책이 primary `any_viewpoint_xz_1p0` 기준 3/6만 성공했다. M13 failure audit 결과, 실패 3개는 모든 정책에서 공유되며 2개는 pre-cap target-region miss, 1개는 near-miss localization threshold다. M14는 ranking 조정보다 observation coverage 확장이 먼저라고 보고, 6 episodes 전체에 대해 54 observation poses와 216 expanded render rows를 계획했다. M15는 이를 실제로 render/stage하여 216/216 ready frames, 6/6 ready scans, 216/216 snap-ready rows를 확인했고, large snap warning 8개를 남겼다. Main navigation table, real navigation `SR`/`SPL`, `OldLocationDeadEndCostM` primary metric, final real RGB-D/open-vocabulary robustness는 아직 false다.
+- E008-M09-M45는 `HM3D ObjectNav` rendered RGB-D detector candidate route와 non-oracle observation expansion path를 trajectory execution smoke, proxy/trajectory consistency gate, H001 source materialization, H001 fallback trajectory execution, dynamic-stale overlay trajectory execution, result interpretation / baseline alignment, budget-matched repair/source-gap contract, repaired row materialization/execution, result interpretation/scale decision, source-diverse policy redesign contract, source-diverse row materialization, source-diverse trajectory execution contract/Docker preflight까지 검증했다. E008-M45 기준 `h001_task_conditioned_source_diverse_budget5_v1`와 matched baselines는 108개 execution plan row / 468개 candidate row로 Docker-ready contract가 고정됐고 Docker/data/runner/source-gap reporting checks를 통과했다. Main navigation table, final real navigation `SR`/`SPL`, `OldLocationDeadEndCostM` primary metric, final real RGB-D/open-vocabulary robustness는 아직 false다.
 
 논문 주장:
 
@@ -143,19 +143,19 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - H001은 `ConceptGraphs`와 static memory 대비 개선을 보였지만, context-agnostic memory trust 대비 gain은 1 row로 좁다.
 - real RGB-D/open-vocabulary proposal route는 full denominator까지 확장됐지만 final robustness claim은 아직 불가하다. Detector target detection, false-positive load, cleanup/label scope, real navigation evidence가 남아 있다.
 - `OpenMask3D`는 checkpoint는 준비됐지만 local Docker/`MinkowskiEngine` build blocker가 있다.
-- real navigation `SR` / `SPL`은 simulator/navmesh source adapter, candidate schema, oracle metric plumbing, candidate-source staging plan, rendered RGB-D detector-source plan, rendered RGB-D frame staging, detector candidate rows, coordinate-frame/snap-to-navmesh validation, reachable-subset candidate visit-order path smoke, leakage-safe goal evaluation, detector-goal failure audit, non-oracle observation expansion plan, expanded frame staging까지 생겼지만, expanded detector rerun, H001 candidate coordinate rows, deployable policy trajectory execution metric이 아직 없다.
+- real navigation `SR` / `SPL`은 simulator/navmesh source adapter부터 M44 source-diverse row materialization까지 생겼지만, H001은 아직 detector confidence, fixed current top-k, task-agnostic memory trust를 넘는 실행 결과를 만들지 못했다.
 
 에이전트 추론:
 
 - 다음 방어 포인트는 detector/prompt repair와 semantic memory decision contribution을 분리하는 것이다.
 - M93/M94/M95 결과상 active-label precedence repair는 b02 target-detection recovery에 타당하다. 하지만 H001 success와 detector task-budget을 개선하지 못했으므로 full heldout robustness가 아니라 failure-specific repair와 diagnostic boundary evidence로만 써야 한다.
-- E007-M07 기준으로 bridge table은 proxy boundary 안에서 paper-facing package로 사용할 수 있지만, real navigation과 old-location dead-end cost claim은 아직 막혀 있다. E008-M15 기준으로 executable `HM3D ObjectNav` episode/source row, candidate schema, oracle path plumbing, rendered RGB-D detector-source plan, detector-compatible rendered frame layout, detector candidate coordinate rows, navmesh snap validation, visit-order path smoke, leakage-safe goal evaluation, failure audit, non-oracle observation expansion plan, expanded frame staging은 준비됐지만, expanded detector rerun과 trajectory execution row는 아직 없다. `HM3D ObjectNav`는 native dynamic stale-memory benchmark가 아니므로 H001 state injection과 non-oracle rendered RGB-D/external-map candidate execution 없이는 stale-memory dynamics claim으로 쓰면 안 된다. H001 + `ConceptGraphs` fallback은 H001-only보다 success와 `PathAttemptSPLProxy`가 조금 높지만 path cost도 증가하므로 repair tradeoff로 해석해야 한다.
+- E008-M45 기준으로 바로 scale-up하면 여전히 약하다. 다음은 M46에서 source-diverse rows를 Docker `Habitat` trajectory execution으로 검증해야 한다.
 
 ## Experiment Plan
 
 사실:
 
-- Immediate next unit: E008-M16 non-oracle observation expansion detector candidate smoke.
+- Immediate next unit: E008-M46 source-diverse redesign trajectory execution smoke.
 - Strict 0.5m, relaxed 1.0m, center-localization metrics는 external baseline table에서 분리해 유지한다.
 - Docker는 논문 본문용 실제 구현 실험의 기본 실행 환경이다.
 
@@ -164,7 +164,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - Main experiment는 `Task-Conditioned Stale Semantic Memory Update`가 dynamic object search에서 stale old-location failure와 search cost를 줄이는지 검증한다.
 - Robustness experiment는 controlled perception noise와 real RGB-D/open-vocabulary proposals에서 memory decision layer가 유지되는지 확인한다.
 - External baseline experiment는 `ConceptGraphs`, bounded `Open3DSG`, 가능하면 `HOV-SG` 또는 추가 proposal baseline과 비교해 novelty boundary를 방어한다.
-- Navigation/search-cost extension은 E007에서 `ExpectedSearchCost`, `AttemptSPL`, candidate visit order bridge를 만든 상태다. E008-M01-M15는 simulator/navmesh/source, episode schema, leakage guard, oracle path plumbing, rendered RGB-D detector source, detector candidate generation, coordinate-frame/snap validation, visit-order path smoke, leakage-safe goal evaluation, detector-goal failure audit, `bounded_start_neighborhood_multiview_v0` non-oracle observation coverage plan, expanded frame staging을 완료했다. 다음은 expanded observations에서 detector candidate를 다시 생성하고 target coverage가 개선되는지 확인하는 것이다.
+- Navigation/search-cost extension은 E007에서 `ExpectedSearchCost`, `AttemptSPL`, candidate visit order bridge를 만들었고, E008-M45까지 Docker `Habitat` trajectory smoke, baseline alignment, budget-matched repair/source-gap contract, repaired row materialization/execution, result interpretation/scale decision, source-diverse policy redesign contract, source-diverse row materialization, trajectory execution contract/Docker preflight를 완료했다. 다음은 E008-M46에서 source-diverse trajectory execution smoke를 진행하는 것이다.
 
 사용자 판단 필요:
 

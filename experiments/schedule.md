@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-05-28
+Last updated: 2026-05-30
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -15,7 +15,7 @@ Last updated: 2026-05-28
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005/E007/E008 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract, read-only `Open3DSG` source/interface audit, denominator-aligned query conversion, leakage-safe predicted-vocabulary policy evaluation, real RGB-D/open-vocabulary robustness route decision, full-denominator real proposal bridge, paper-facing claim boundary, external proposal/mapping feasibility, `ConceptGraphs` reliability boundary, row-group/heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, and map-assisted fallback claim-boundary decision. E007-M01-M07 packaged the path-cost bridge as a paper-facing occupancy-grid proxy table. E008-M01-M15 completed real navigation source preflight, adapter/oracle metric gates, rendered RGB-D detector candidate staging, coordinate-frame/navmesh validation, detector candidate visit-order path smoke, leakage-safe goal-evaluation smoke, detector-goal failure audit, non-oracle observation-coverage expansion planning, and expanded frame staging/snap validation. E008-M15 verifies 216/216 rendered/ready frames, 6/6 ready scans, 216/216 snap-ready rows, and 8 large snap warnings. E008-M15 does not claim real navigation `SR` / `SPL`; selected next unit: E008-M16 non-oracle observation expansion detector candidate smoke.
+- Current E005/E007/E008 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract through map-assisted fallback claim-boundary decision. E007-M01-M07 packaged the path-cost bridge as a paper-facing occupancy-grid proxy table. E008-M01-M45 completed real navigation source preflight through dynamic-stale overlay trajectory execution smoke, result interpretation / baseline alignment, budget-matched repair/source-gap contract, repaired row materialization/execution, result interpretation/scale decision, source-diverse policy redesign contract, source-diverse row materialization, and source-diverse trajectory execution contract/Docker preflight. E008-M45 fixes Docker-ready execution for `h001_task_conditioned_source_diverse_budget5_v1` and matched baselines; scale-up is blocked and E008-M46 trajectory execution smoke is next.
 
 에이전트 추론:
 
@@ -145,6 +145,30 @@ Last updated: 2026-05-28
 | E008-M13 | Detector-goal failure audit and observation-coverage expansion decision | Complete: 3 all-policy failure episodes, 2 pre-cap target-region misses, 1 near-miss localization threshold case, 0 post-cap/snap suppression cases; selected non-oracle observation coverage expansion | No full simulator benchmark until non-oracle target coverage is expanded and re-audited |
 | E008-M14 | Non-oracle observation-coverage expansion plan | Complete: 54 observation poses, 216 expanded render rows, 36 frames per episode, selected `bounded_start_neighborhood_multiview_v0` | Input to E008-M15; must not use `ObjectNav` goal/viewpoints, success labels, or candidate-to-goal distance as policy input |
 | E008-M15 | Non-oracle observation expansion frame staging / snap validation | Complete: 216/216 ready frames, 6/6 ready scans, 216/216 snap-ready rows, 8 large snap warnings | Input to E008-M16 detector rerun; no navigation `SR` / `SPL` claim before candidate-goal and trajectory execution rows |
+| E008-M16 | Non-oracle observation expansion detector candidate smoke | Complete: 216 frame rows, 4,009 raw predictions, 214 coordinate candidate rows, 3,801 pre-cap candidate rows | Input to E008-M17; no eval goal/viewpoint policy input |
+| E008-M17 | Expanded detector candidate navmesh validation | Complete: 214/214 coordinate-valid, 213/214 snapped navigable, 189/214 source-to-snapped paths, every scan path-ready | Input to E008-M18; path warnings retained |
+| E008-M18 | Expanded detector candidate visit-order path smoke | Complete: 781 visit-order rows, 28 policy metric rows, reachable-subset top1-ready 6/6 scans | Input to E008-M19; still not real navigation `SR` / `SPL` |
+| E008-M19 | Expanded leakage-safe detector candidate goal-evaluation smoke | Complete: 781 candidate-goal eval rows, `any_viewpoint_xz_1p0` proxy hit 6/6, `goal_xz_1p0` proxy hit 4/6, leakage audit pass | Input to E008-M20; still not real navigation `SR` / `SPL` |
+| E008-M20 | Expanded detector-goal failure comparison / navigation-execution decision | Complete: M12 failure rows 12 -> M19 0, gate counts pass 3 / warning 4 / fail 2, selected trajectory-execution contract next | Input to E008-M21; H001 source and trajectory metrics still missing |
+| E008-M21 | Expanded detector-policy trajectory execution contract / Docker preflight | Complete: contract ready true, Docker preflight pass 6 / warning 1, policy execution plan rows 24, M22 runner missing | Input to E008-M22; real `SR` / `SPL` still false |
+| E008-M22 | Expanded detector-policy trajectory execution smoke | Complete: trajectory rows 372, scan-policy rows 24, aggregate rows 4, leakage audit pass, detector-policy smoke `SR` 1.0, `SPL` 0.303595-0.410800 | Input to E008-M23; final H001 navigation claim still false |
+| E008-M23 | Trajectory-vs-proxy consistency and H001 candidate-source decision | Complete: success agreement 24/24, proxy `SPL` order consistency 0/4, H001 candidate-source rows 0 | Input to E008-M24; instantiate H001 source before scaling navigation |
+| E008-M24 | H001 candidate-source instantiation contract | Complete: initial memory-proxy 137 rows / 125 path-ready, current-observation 214 rows / 189 path-ready, task-context rows 18, leakage pass true | Input to E008-M25; materialize H001 rows before execution/scaling |
+| E008-M25 | H001 candidate-source materialization smoke | Complete: H001 candidate-source rows 1,053, query context rows 18, policy execution plan rows 90, ready rows 72, blocked rows 18, leakage pass true | Input to E008-M26; build H001 visit-order/path rows before trajectory execution |
+| E008-M26 | H001 visit-order/path smoke | Complete: H001 candidate visit-order rows 252, policy path metric rows 77, evaluated ready policy plans 72, blocked external-map/runtime-event rows 18, leakage pass true | Input to E008-M27; evaluate H001 visit rows against eval-only goals without policy leakage |
+| E008-M27 | H001 leakage-safe goal-evaluation smoke | Complete: candidate-goal eval rows 252, scan-policy rows 72, aggregate policy rows 4, leakage pass true, primary `GoalEvalProxySR` detector confidence 0.500000 / H001 0.333333 / context-agnostic 0.333333 / static 0.000000 | Input to E008-M28; compare H001 failures before trajectory execution |
+| E008-M28 | H001 goal-evaluation comparison / trajectory decision | Complete: H001 6/18, detector confidence 9/18, context-agnostic 6/18, static 0/18; detector-only rows 3, H001-only rows 0; trajectory gate pass 2 / warning 1 / fail 4 | Input to E008-M29; repair current-observation fallback/source before trajectory execution |
+| E008-M29 | H001 current-observation fallback/source repair contract | Complete: backstop plan rows 18, repair opportunity rows 12, detector-only recoverable rows 3, all-policy source-gap rows 9, allowed/blocked input rows 28/22 | Input to E008-M30; replay fallback before trajectory execution |
+| E008-M30 | H001 current-observation fallback replay smoke | Complete: repaired H001 `GoalEvalProxySR` 9/18 vs H001 6/18 vs detector 9/18; recovered rows 3; success-loss 0; remaining source-gap 9; repaired `GoalEvalProxySPL` 0.291005 vs detector 0.381619 | Input to E008-M31; define bounded trajectory contract and source-gap boundary |
+| E008-M31 | H001 fallback trajectory-execution contract / source-gap boundary | Complete: sanitized candidate visit rows 141; execution plan rows 18; source-gap boundary rows 9; policy leakage pass true; no proxy-success filtering | Input to E008-M32; implement Docker H001 fallback trajectory runner |
+| E008-M32 | H001 fallback trajectory execution smoke | Complete: Docker inside true; trajectory attempt rows 104; scan-task metrics 18; `SR` 0.5; `SPL` 0.141996; proxy/trajectory success agreement 18/18; source-gap success 0/9 | Input to E008-M33; interpret result and align detector/H001 baselines |
+| E008-M33 | H001 trajectory result interpretation / baseline alignment | Complete: baseline alignment ready; H001 vs primary detector `SR` delta -0.5 and `SPL` delta -0.268804; source-gap H001 `SR` 0.0 vs detector `SR` 1.0 | Input to E008-M34; design dynamic-stale navigation benchmark/source intervention before scaling |
+| E008-M34 | Dynamic-stale navigation benchmark / source-intervention contract | Complete: selected `hm3d_counterfactual_stale_overlay_v0`, intervention plan rows 18, source-gap diagnostic rows 9, final navigation result false | Input to E008-M35; materialize dynamic-stale overlay rows before any scale-up |
+| E008-M35 | Dynamic-stale overlay row materialization smoke | Complete: intervention rows 18, policy execution plan rows 90, candidate rows 924, source-gap plan rows 45, leakage pass true | Input to E008-M36; adapt trajectory runner before dynamic-stale `SR` / `SPL` |
+| E008-M36 | Dynamic-stale overlay trajectory contract / runner adaptation | Complete: trajectory candidate rows 924, execution plan rows 90, execute-in-runner rows 90, runner `py_compile` pass true, Docker image inspect pass true, leakage pass true | Input to E008-M37; execute dynamic-stale overlay trajectories before any `SR` / `SPL` claim |
+| E008-M37 | Dynamic-stale overlay trajectory execution smoke | Complete: Docker trajectory attempts 467, scan-task-policy rows 90, H001 `SR` 0.5 / `SPL` 0.141996, detector confidence `SR` 1.0 / `SPL` 0.407894, leakage pass true | Input to E008-M38; interpret negative/limited H001 navigation result before scaling |
+| E008-M38 | Dynamic-stale overlay result interpretation / baseline alignment | Complete: H001 beats static memory but not detector confidence, fixed current top-k efficiency, or task-agnostic memory trust; scale-up recommended false | Input to E008-M39; repair policy/source-gap contract before scaling |
+| E008-M39 | Budget-matched dynamic-stale policy repair / source-gap contract | Complete: primary budget cap 5, source-ready/source-gap separation, repair policy contract rows 7, M40 materialization plan rows 90, scale-up recommended false | Input to E008-M40; materialize repaired rows before trajectory rerun |
 | E006-M01 optional | Context-sensitive utility benchmark design | Define task-context-sensitive query rows and utility metrics | Start only if human task context is promoted beyond secondary ablation |
 | E006-M02 optional | Strong context-agnostic baseline suite | Compare against fixed trust, all-high-value, all-reobserve, risk-only, path-cost-only, detector-confidence-only | Human task context must beat these baselines beyond a 1-row gain |
 | E006-M03 optional | Context generalization stress | Test heldout scan / label / task-group transfer | Human task context main claim requires broad transfer, not one label group |
@@ -267,9 +291,39 @@ Order:
 66. E008-M13: detector-goal failure audit and observation-coverage expansion decision. Complete.
 67. E008-M14: non-oracle observation-coverage expansion plan. Complete.
 68. E008-M15: non-oracle observation expansion frame staging smoke. Complete.
-69. E008-M16: non-oracle observation expansion detector candidate smoke. Next.
-70. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
-71. E008 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
+69. E008-M16: non-oracle observation expansion detector candidate smoke. Complete.
+70. E008-M17: expanded detector candidate navmesh validation. Complete.
+71. E008-M18: expanded detector candidate visit-order path smoke. Complete.
+72. E008-M19: expanded leakage-safe detector candidate goal-evaluation smoke. Complete.
+73. E008-M20: expanded detector-goal failure comparison and navigation-execution decision. Complete.
+74. E008-M21: expanded detector-policy trajectory execution contract and Docker preflight. Complete.
+75. E008-M22: expanded detector-policy trajectory execution runner scaffold. Complete.
+76. E008-M23: trajectory-vs-proxy consistency and H001 candidate-source decision. Complete.
+77. E008-M24: H001 candidate-source instantiation contract. Complete.
+78. E008-M25: H001 candidate-source materialization smoke. Complete.
+79. E008-M26: H001 visit-order/path smoke. Complete.
+80. E008-M27: H001 leakage-safe goal-evaluation smoke. Complete.
+81. E008-M28: H001 goal-evaluation comparison and trajectory-execution decision. Complete.
+82. E008-M29: H001 current-observation fallback/source repair contract. Complete.
+83. E008-M30: H001 current-observation fallback replay smoke. Complete.
+84. E008-M31: H001 fallback trajectory-execution contract and source-gap boundary. Complete.
+85. E008-M32: H001 fallback trajectory-execution runner scaffold. Complete.
+86. E008-M33: H001 trajectory result interpretation and baseline alignment decision. Complete.
+87. E008-M34: dynamic-stale navigation benchmark contract and source-intervention design. Complete.
+88. E008-M35: dynamic-stale overlay row materialization smoke. Complete.
+89. E008-M36: dynamic-stale overlay trajectory execution contract and runner adaptation. Complete.
+90. E008-M37: dynamic-stale overlay trajectory execution smoke. Complete.
+91. E008-M38: dynamic-stale overlay result interpretation and baseline alignment. Complete.
+92. E008-M39: budget-matched dynamic-stale policy repair and source-gap contract. Complete.
+93. E008-M40: budget-matched repair row materialization smoke. Complete.
+94. E008-M41: budget-matched repair trajectory execution smoke. Complete.
+95. E008-M42: budget-matched repair result interpretation and scale decision. Complete.
+96. E008-M43: dynamic-stale navigation policy redesign contract. Complete.
+97. E008-M44: source-diverse redesign row materialization smoke. Complete.
+98. E008-M45: source-diverse redesign trajectory execution contract and Docker preflight. Complete.
+99. E008-M46: source-diverse redesign trajectory execution smoke. Next.
+100. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
+101. E008 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
 
 ## External Baseline Expansion
 
@@ -356,9 +410,9 @@ Purpose:
 
 ## Immediate Next Actions
 
-- Run E008-M16 non-oracle observation expansion detector candidate smoke.
+- Run E008-M46 source-diverse redesign trajectory execution smoke.
 - Do not launch b01/b03 confidence-log-depth reruns unless a complete diagnostic detector-repair row is explicitly needed.
-- Do not claim navigation `SR` / `SPL` until E008 produces policy/baseline execution rows beyond M11 visit-order path smoke.
+- Do not claim navigation `SR` / `SPL` until H001 beats budget-matched baselines, source-gap failures are separated, dynamic-stale overlay trajectories scale beyond the 6-episode smoke, and navigation/search baseline rows are added.
 - Keep the main paper claim centered on memory trust, staleness handling, bounded re-observation, and proxy-search improvement over `ConceptGraphs` / static memory.
 - Keep human task context as a secondary ablation unless E006 is explicitly launched and passes context-sensitive utility gates.
 - Expand real RGB-D/open-vocabulary robustness before real navigation `SR` / `SPL`.
