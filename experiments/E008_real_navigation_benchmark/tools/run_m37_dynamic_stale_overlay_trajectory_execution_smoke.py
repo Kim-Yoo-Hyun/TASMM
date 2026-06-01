@@ -38,6 +38,7 @@ BASELINE_POLICIES = [
     "detector_confidence_reachable_subset_v0",
     "task_agnostic_memory_trust_navigation_v0",
 ]
+REPORTING_ONLY_FIELDS = {"diagnostic_source_gap_boundary_for_reporting"}
 
 
 def data_root() -> Path:
@@ -599,10 +600,14 @@ def build_leakage_audit_rows(contract_dir: Path, candidate_rows: list[dict[str, 
         ("trajectory_execution_plan_rows", plan_rows),
     ]:
         field_hits = Counter()
+        reporting_only_hits = Counter()
         flag_hits = 0
         for row in rows:
             for field in blocked_fields:
                 if field in row:
+                    if field in REPORTING_ONLY_FIELDS:
+                        reporting_only_hits[field] += 1
+                        continue
                     field_hits[field] += 1
             if row.get("policy_input_uses_eval_goal_or_viewpoint") or row.get("policy_input_uses_success_label"):
                 flag_hits += 1
@@ -613,6 +618,8 @@ def build_leakage_audit_rows(contract_dir: Path, candidate_rows: list[dict[str, 
                 "row_count": len(rows),
                 "blocked_field_hits": dict(sorted(field_hits.items())),
                 "blocked_field_hit_count": sum(field_hits.values()),
+                "reporting_only_field_hits": dict(sorted(reporting_only_hits.items())),
+                "reporting_only_field_hit_count": sum(reporting_only_hits.values()),
                 "blocked_flag_hit_count": flag_hits,
                 "leakage_audit_pass": sum(field_hits.values()) == 0 and flag_hits == 0,
             }
@@ -814,8 +821,9 @@ def main() -> None:
     leakage_pass = all(row.get("leakage_audit_pass") for row in leakage_rows)
 
     success_rows = sum(1 for row in scan_metric_rows if row.get("trajectory_success"))
+    expected_scan_metric_rows = sum(1 for row in plan_rows if row.get("execute_in_next_runner"))
     ready = (
-        len(scan_metric_rows) == 90
+        len(scan_metric_rows) == expected_scan_metric_rows
         and bool(attempt_rows)
         and leakage_pass
         and len(scene_meta.get("scene_errors", [])) == 0
@@ -837,6 +845,7 @@ def main() -> None:
         "trajectory_execution_plan_rows": len(plan_rows),
         "trajectory_attempt_rows": len(attempt_rows),
         "scan_task_policy_rows": len(scan_metric_rows),
+        "expected_scan_task_policy_rows": expected_scan_metric_rows,
         "aggregate_metric_rows": len(aggregate_rows),
         "trajectory_failure_rows": len(failure_rows),
         "pairwise_policy_delta_rows": len(pairwise_rows),

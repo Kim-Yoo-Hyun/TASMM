@@ -1,6 +1,6 @@
 # Semantic Mapping Research Workspace
 
-업데이트: 2026-05-30
+업데이트: 2026-06-01
 
 이 워크스페이스는 semantic mapping을 중심으로 human-friendly robot intelligence를 연구하는 작업 공간이다. 목표는 로봇이 사람의 의도와 지식을 공간적 기억과 행동으로 연결하여, 사람이 요구하는 복잡한 search/navigation task를 수행하게 하는 것이다.
 
@@ -41,8 +41,8 @@
 - Final paper target: Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`
 - Current implementation path: Direction A `Task-Conditioned Stale Semantic Memory`를 core method로 만들고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 붙여 Direction B로 확장
 - Current experiment: [E008_real_navigation_benchmark](experiments/E008_real_navigation_benchmark/README.md)
-- Current status: E001-E007 have built proxy search, perception-noise, external-baseline, and path-cost bridge evidence with constraints; E008 is validating whether `HM3D ObjectNav` + `Habitat` can support paper-facing navigation evidence. E008-M45 fixed a Docker-ready source-diverse trajectory execution contract for 108 execution plan rows / 468 candidate rows, with Docker/data/runner/source-gap reporting preflight passing.
-- Current next action: E008-M46 source-diverse redesign trajectory execution smoke.
+- Current status: E001-E007 have built proxy search, perception-noise, external-baseline, and path-cost bridge evidence with constraints; E008 is validating whether `HM3D ObjectNav` + `Habitat` can support paper-facing navigation evidence. E008-M86 verified source-gap detector candidate-source generation with 48 final candidates, 1,896 pre-cap candidates, 48/192 frames with written predictions, and 0 validator errors/warnings.
+- Current next action: E008-M87 source-gap detector candidate navmesh/source-readiness validation.
 - Current blocked claims: real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, `OldLocationDeadEndCostM` as a primary metric, and human intent as a main claim.
 - Current boundary: main experiment implementation 단계이며, paper 폴더는 아직 만들지 않는다.
 
