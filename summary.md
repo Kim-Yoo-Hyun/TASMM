@@ -1,6 +1,6 @@
 # Research Summary
 
-Updated: 2026-06-01
+Updated: 2026-06-06
 
 이 문서는 `research2/`의 연구 방향, 배경, 가설, 현재 상태, 남은 쟁점, 실험 계획을 간단히 정리한 working research report다. 세부 진행 로그는 `TODO.md`, `hypothesis/`, `experiments/`, `docs/reproducibility.md`에 둔다.
 
@@ -104,6 +104,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - E003는 controlled perception/proposal noise와 Dockerized RGB-D/open-vocabulary proposal route를 구축했다.
 - E004는 `task_context_memory_trust_reobserve_v0`를 평가했다. Memory-trust decision claim은 split stress에서 지지되지만 task-context-specific claim은 `limited_positive_not_label_broad`다.
 - E005는 external baseline transition 단계다. `DualMap`은 object `*.pkl` output이 없어 performance baseline으로는 부적합하고, `ConceptGraphs`와 bounded `Open3DSG` predicted-vocabulary adapter가 현재 external baseline route다.
+- E006-M01/M02/M03/M04/M05/M06는 human intent를 main claim으로 승격하기 위한 contract, schema materialization, and baseline policy row materialization을 고정했다. Same-evidence paired task contexts, structured utility schema, strong context-agnostic baseline suite, frozen utility formula, frozen policy rows, utility/regret metrics, leakage audit, and heldout scan/label/task transfer gates를 요구하지만 아직 performance evidence claim은 아니다.
 - `ConceptGraphs` full heldout strict bbox top5는 114/195이고, H001 replay는 172/195다. `Open3DSG` bounded predicted-vocabulary adapter strict bbox top5는 144/195다.
 - Full real-proposal aggregate는 target detected 144/195, H001 157/195, context-agnostic 156/195, `ConceptGraphs` same-batch 114/195, detector top5 51/195다.
 - E005-M89는 `569d8f0f` zero-written cluster를 target-independent cleanup trace로 검증했다. 483 rows가 모두 drop됐고, dominant pattern은 `a chair` / `chair`가 canonical `stool`로 정규화된 뒤 active scan label `chair`와 맞지 않아 `drop_not_scan_prompt_label`로 제거되는 것이다.
@@ -129,7 +130,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - E008-M06은 annotation-derived `HM3D` semantic candidate-source smoke를 완료했다. Semantic label support는 6/6이지만 Habitat semantic nonzero-AABB scenes는 0/2, GLB semantic geometry mapping scenes도 0/2라 candidate rows는 0이다.
 - E008-M07은 rendered RGB-D detector candidate-source plan을 완료했다. 6 episode rows에서 24 start-pose yaw-sweep render rows, 6 detector manifest rows, 5 detector labels(`bed`, `chair`, `monitor`, `television`, `tv`)를 고정했고, `Habitat` image와 `real-smoke` detector image readiness를 확인했다.
 - E008-M08은 Docker `Habitat` render smoke로 24/24 rendered RGB-D/pose rows, 6/6 detector-compatible sequence dirs, 6 detector manifest rows, detector input files ready를 검증했다.
-- E008-M09-M86은 `HM3D ObjectNav` rendered RGB-D detector candidate route와 non-oracle observation expansion path를 trajectory execution smoke, H001 source materialization, dynamic-stale overlay trajectory execution, budget-matched repair, source-diverse redesign/materialization/execution, routine-fetch repair, task-context boundary, navigation boundary package, source-gap candidate-source expansion, high-path tail-slot materialization, full-val-mini detector route, detector-policy trajectory execution smoke, source-gap/SPL repair contract, loss-safe candidate-source expansion, source-gap non-oracle source/observation expansion, source-gap render frame staging, source-gap detector candidate-source verification까지 검증했다.
+- E008-M09-M103는 `HM3D ObjectNav` rendered RGB-D detector candidate route와 non-oracle observation expansion path를 trajectory execution smoke, H001 source materialization, dynamic-stale overlay trajectory execution, budget-matched repair, source-diverse redesign, full-val-mini detector route, source-gap repair chain, coverage-expansion repair closure, alternative proposal-source feasibility contract까지 검증했다.
 - E008-M78은 direct trajectory promotion과 rerank-only repair를 reject했다. E008-M79는 source-gap expansion cases 2, budget-5 loss sentinel 1, localization controls 4를 고정했고, E008-M80은 detector-confidence budget-5 core 150 rows와 append policy 240 rows를 materialize해 30/30 top-5 preservation invariant와 leakage audit를 통과했다. E008-M81은 detector budget-5 core와 append policy가 같은 13/30 `GoalEvalProxySR`을 유지하고, policy-budget append scope에서는 15/30으로 2 rows gain / 0 loss를 보였지만 source-gap append gain은 0이다. E008-M82는 direct trajectory promotion을 막고 E008-M83 source/observation expansion contract를 선택했다. E008-M85는 2 source-gap cases에 대해 192/192 rendered frames, 2/2 scans, 192/192 snap-ready rows, detector input files ready를 검증했다.
 
 논문 주장:
@@ -142,21 +143,22 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 사실:
 
 - H001은 `ConceptGraphs`와 static memory 대비 개선을 보였지만, context-agnostic memory trust 대비 gain은 1 row로 좁다.
+- human intent main claim은 E006 실행 결과에서 frozen utility formula, strong context-agnostic baseline, and heldout scan/label/task transfer를 통과하기 전까지 보류한다.
 - real RGB-D/open-vocabulary proposal route는 full denominator까지 확장됐지만 final robustness claim은 아직 불가하다. Detector target detection, false-positive load, cleanup/label scope, real navigation evidence가 남아 있다.
 - `OpenMask3D`는 checkpoint는 준비됐지만 local Docker/`MinkowskiEngine` build blocker가 있다.
-- real navigation `SR` / `SPL`은 simulator/navmesh trajectory smoke와 diagnostic table까지 생겼고, 최신 high-path tail-slot 개선은 M62에서 bounded diagnostic evidence로 정리됐다. E008-M86 source-gap detector verification은 통과했지만, M87 navmesh/source-readiness validation, source-gap recovery evaluation, later trajectory check, heldout transfer, stronger navigation/search baseline이 필요하다.
+- real navigation `SR` / `SPL`은 simulator/navmesh trajectory smoke와 diagnostic table까지 생겼지만 final claim은 아직 불가하다. E008-M123은 GPU memory 확보 후 relaunch되어 320/320 color/depth/pose files를 만들었지만, 25개 depth frame의 positive-depth check 실패로 verifier ready frames는 295/320에 머문다.
 
 에이전트 추론:
 
 - 다음 방어 포인트는 detector/prompt repair와 semantic memory decision contribution을 분리하는 것이다.
 - M93/M94/M95 결과상 active-label precedence repair는 b02 target-detection recovery에 타당하다. 하지만 H001 success와 detector task-budget을 개선하지 못했으므로 full heldout robustness가 아니라 failure-specific repair와 diagnostic boundary evidence로만 써야 한다.
-- E008-M86 verification 기준으로도 바로 final navigation claim을 하면 안 된다. Detector candidate-source availability만 확인됐고, source-gap navmesh/path validation, proxy evaluation, trajectory check가 필요하다.
+- E008-M123 기준으로도 바로 final navigation claim을 하면 안 된다. M123은 아직 render-frame readiness를 통과하지 못했고, target-free detector execution, deployable trigger, trajectory execution, external navigation/search baseline이 아직 필요하다.
 
 ## Experiment Plan
 
 사실:
 
-- Immediate next unit: E008-M87 source-gap detector candidate navmesh/source-readiness validation.
+- Immediate next units: E008-M123 depth-validity repair/verification, and E006-M07 `utility_metric_rows.jsonl` materialization smoke.
 - Strict 0.5m, relaxed 1.0m, center-localization metrics는 external baseline table에서 분리해 유지한다.
 - Docker는 논문 본문용 실제 구현 실험의 기본 실행 환경이다.
 
@@ -165,7 +167,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - Main experiment는 `Task-Conditioned Stale Semantic Memory Update`가 dynamic object search에서 stale old-location failure와 search cost를 줄이는지 검증한다.
 - Robustness experiment는 controlled perception noise와 real RGB-D/open-vocabulary proposals에서 memory decision layer가 유지되는지 확인한다.
 - External baseline experiment는 `ConceptGraphs`, bounded `Open3DSG`, 가능하면 `HOV-SG` 또는 추가 proposal baseline과 비교해 novelty boundary를 방어한다.
-- Navigation/search-cost extension은 E007에서 `ExpectedSearchCost`, `AttemptSPL`, candidate visit order bridge를 만들었고, E008-M86까지 Docker `Habitat` trajectory smoke, baseline alignment, budget-matched repair, source-diverse policy redesign/materialization/execution, routine-fetch repair, task-context boundary, diagnostic paper-table freeze, source-gap repair chain, high-path tail-slot policy materialization, full-val-mini detector-policy trajectory execution smoke, loss-safe candidate-source expansion, source/observation expansion, source-gap render frame staging, source-gap detector candidate-source verification까지 완료했다. 다음은 M87 navmesh/source-readiness validation이다.
+- Navigation/search-cost extension은 E007에서 `ExpectedSearchCost`, `AttemptSPL`, candidate visit order bridge를 만들었고, E008-M122까지 target-free render/detector launcher contract를 완료했다. E008-M123은 GPU relaunch 후 320/320 files를 만들었지만 295/320 ready frame 상태라 depth-validity repair가 필요하다. Human-intent extension은 E006-M06까지 frozen policy rows를 만들었고, 다음은 E006-M07에서 utility/regret rows를 계산하는 단계다.
 
 사용자 판단 필요:
 

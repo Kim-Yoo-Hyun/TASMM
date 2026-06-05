@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-06-01
+Last updated: 2026-06-06
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -15,7 +15,7 @@ Last updated: 2026-06-01
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005/E007/E008 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract through map-assisted fallback claim-boundary decision. E007-M01-M07 packaged the path-cost bridge as a paper-facing occupancy-grid proxy table. E008-M01-M86 completed real navigation source preflight through dynamic-stale overlay trajectory execution smoke, repair/redesign gates, full-val-mini detector-policy trajectory smoke, loss-safe candidate-source expansion, source-gap non-oracle source/observation expansion, source-gap render frame staging verification, and source-gap detector candidate-source verification. E008-M86 produced 48 final source-gap detector candidates from 1,896 pre-cap candidates with validator errors/warnings 0/0 and matching target rows 0. Final navigation claims remain blocked.
+- Current E005/E007/E008 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract through map-assisted fallback claim-boundary decision. E006-M01-M06 completed human-intent contract/schema/policy-row readiness, but utility and transfer evidence remain absent. E007-M01-M07 packaged the path-cost bridge as a paper-facing occupancy-grid proxy table. E008-M01-M122 completed real navigation source preflight through target-free render/detector launcher contract. E008-M123 was relaunched after GPU memory became available and generated 320 / 320 color/depth/pose files, but verification failed with ready frames 295 / 320 because 25 depth frames failed positive-depth validation. M124 remains blocked and final navigation claims remain blocked.
 
 에이전트 추론:
 
@@ -217,10 +217,50 @@ Last updated: 2026-06-01
 | E008-M84 | Full-val-mini source-gap non-oracle source/observation expansion materialization smoke | Complete: source-gap cases 2, observation poses 24, render plan rows 192, detector manifests 2, selected route materializations 4, long-job command rows 2 | Input to E008-M85 render launch; no source-gap recovery, detector inference, trajectory, or final navigation claim |
 | E008-M85 | Full-val-mini source-gap non-oracle render frame staging background launch / verification | Complete: launch status `e008_m85_source_gap_render_frame_staging_launched`; verification status `e008_m85_source_gap_render_frame_staging_verified`; ready frames 192/192; ready scans 2/2; snap-ready rows 192/192; detector input files ready | Input to E008-M86 detector candidate-source launch; no detector quality, source-gap recovery, trajectory, or final navigation claim |
 | E008-M86 | Full-val-mini source-gap detector candidate-source background launch / verification | Complete: launch tmux `e008_m86_source_gap_detector`; verification status `e008_m86_source_gap_detector_candidate_source_verified`; final candidates 48; pre-cap candidates 1,896; raw predictions 1,964; validator errors/warnings 0/0; matching target rows 0 | Input to E008-M87 source-gap candidate navmesh/source-readiness validation; no detector recall, source-gap recovery, trajectory, or final navigation claim |
-| E008-M87 | Source-gap detector candidate navmesh/source-readiness validation | Next | Validate source-gap candidate coordinates against `HM3D` / `Habitat` navmesh before any source-gap recovery or trajectory claim |
-| E006-M01 optional | Context-sensitive utility benchmark design | Define task-context-sensitive query rows and utility metrics | Start only if human task context is promoted beyond secondary ablation |
-| E006-M02 optional | Strong context-agnostic baseline suite | Compare against fixed trust, all-high-value, all-reobserve, risk-only, path-cost-only, detector-confidence-only | Human task context must beat these baselines beyond a 1-row gain |
-| E006-M03 optional | Context generalization stress | Test heldout scan / label / task-group transfer | Human task context main claim requires broad transfer, not one label group |
+| E008-M87 | Source-gap detector candidate navmesh/source-readiness validation | Complete: status `e008_m87_source_gap_detector_candidate_navmesh_validation_ready`; gate pass; source-ready cases 2/2; candidate rows 48; coordinate-valid 48/48; snapped navigable 48/48; path-ready 30/48 | Input to E008-M88 source-gap detector candidate visit-order/path smoke; no source-gap recovery or trajectory claim |
+| E008-M88 | Source-gap detector candidate visit-order/path smoke | Complete: status `e008_m88_source_gap_detector_candidate_visit_order_path_smoke_ready`; query-compatible 48; path-ready 30/48; visit-order rows 138; source-gap case policy rows 8; eval-goal/viewpoint leakage false | Input to E008-M89 source-gap goal-evaluation smoke; no source-gap recovery or trajectory claim |
+| E008-M89 | Source-gap leakage-safe detector candidate goal-evaluation smoke | Complete: status `e008_m89_source_gap_detector_candidate_goal_evaluation_smoke_ready`; leakage pass; primary proxy success 0/2 for all detector policies; source-gap proxy recovery false | Input to E008-M90 result interpretation; no source-gap recovery or trajectory claim |
+| E008-M90 | Source-gap detector-goal result interpretation and trajectory-execution decision | Complete: status `e008_m90_source_gap_detector_goal_result_interpretation_trajectory_decision_ready`; direct trajectory promotion false; severe coverage gap 1, moderate localization gap 1 | Input to E008-M91 failure diagnosis; no source-gap recovery or trajectory claim |
+| E008-M91 | Source-gap target-coverage and candidate-source failure diagnosis | Complete: status `e008_m91_source_gap_target_coverage_candidate_source_failure_diagnosis_ready`; pre-cap primary target-near cases 0/2; pre-cap relaxed target-near cases 1/2; final primary cases 0/2; coverage gap 1, low-confidence cap suppression 1 | Input to E008-M92 two-branch repair contract; no source-gap recovery or trajectory claim |
+| E008-M92 | Source-gap two-branch coverage/cap repair contract | Complete: status `e008_m92_source_gap_two_branch_coverage_cap_repair_contract_ready`; coverage branch case 1; cap/threshold branch case 1; M93 materialization ready true; long job launch false | Input to E008-M93 row materialization; no source-gap recovery or trajectory claim |
+| E008-M93 | Source-gap two-branch repair row materialization smoke | Complete: coverage observation/render/manifest rows 12/96/1, cap-threshold probe rows 72, leakage pass, long job launch false | Input to E008-M94 route decision |
+| E008-M94 | Source-gap two-branch repair evaluation route decision | Complete: cap branch has primary/relaxed supported rows 0/0; selected `coverage_expansion_launcher_adaptation_first` | Input to E008-M95 launcher adaptation |
+| E008-M95 | Coverage-expansion render/detector launcher adaptation | Complete: coverage render rows 96, detector manifest rows 1, long-job command rows 2 | Input to E008-M96 render staging |
+| E008-M96 | Coverage-expansion render frame staging verification | Complete: ready frames 96/96, ready scans 1/1, detector input files ready | Input to E008-M97 detector candidate-source verification |
+| E008-M97 | Coverage-expansion detector candidate-source verification | Complete: prediction rows 24, pre-cap candidate rows 853, coordinate candidate rows 24, validator errors/warnings 0/0 | Input to E008-M98 navmesh validation |
+| E008-M98 | Coverage-expansion detector candidate navmesh/source-readiness validation | Complete: candidate rows 24, coordinate-valid 24/24, snapped navigable 24/24, path-ready 11/24, unreachable 13 | Input to E008-M99 visit-order/path smoke |
+| E008-M99 | Coverage-expansion detector candidate visit-order/path smoke | Complete: visit-order rows 57, policy rows 8, path-ready candidates 11/24, leakage false | Input to E008-M100 leakage-safe goal-evaluation smoke |
+| E008-M100 | Coverage-expansion leakage-safe detector candidate goal-evaluation smoke | Complete: candidate-goal rows 57, aggregate policies 4, leakage pass, primary proxy success 0/1 for all policies, best any-vp XZ mean 5.484739m | Input to E008-M101 result interpretation; no source-gap recovery or trajectory claim |
+| E008-M101 | Coverage-expansion detector-goal result interpretation and trajectory-execution decision | Complete: current two-branch repair route failed true, direct trajectory promotion false, additional long job recommended false | Input to E008-M102 failure audit / closure package |
+| E008-M102 | Coverage-expansion failure audit and source-gap repair closure package | Complete: source-gap cases 2/2 closed negative, current detector repair route closed true, no trajectory or long job | Input to E008-M103 alternative proposal-source feasibility |
+| E008-M103 | Alternative proposal-source feasibility and source-gap recovery contract | Complete: selected `conceptgraphs_hm3d_map_candidate_adapter`; same-detector rerun rejected; `OpenMask3D` fallback image blocked | Input to E008-M104 |
+| E008-M104 | `ConceptGraphs` HM3D source-gap adapter/preflight contract | Complete: selected cases materialization-ready 2/2; direct runtime-ready 0/2; source leakage rows 0; no long job | Input to E008-M105 |
+| E008-M105 | `ConceptGraphs` HM3D source-gap staging materialization smoke | Complete: staged scans 2/2, color/depth/pose 192/192/192, regular files 576/576, container readability true | Input to E008-M106 |
+| E008-M106 | `ConceptGraphs` HM3D source-gap runtime launch/verification contract | Complete: staged scans 2, image/checkpoints ready, M107/M108 command ledger fixed | Input to E008-M107 |
+| E008-M107 | `ConceptGraphs` HM3D source-gap runtime background launch | Complete: background status completed, log `logs/20260602_165543_e008_m107_conceptgraphs_hm3d_source_gap_runtime.log` | Input to E008-M108 completion verification; no source-gap recovery claim yet |
+| E008-M108 | `ConceptGraphs` HM3D source-gap runtime completion verification | Complete: runtime outputs ready 2/2, GSA detections 20 per scan, full/post PCD ready | Input to E008-M109; candidate rows and source-gap recovery still false |
+| E008-M109 | `ConceptGraphs` HM3D candidate export adapter contract | Complete: adapter materialization ready, post-PCD object counts 29/42, candidate rows not yet exported | Input to E008-M110 candidate export materialization smoke |
+| E008-M110 | `ConceptGraphs` HM3D candidate export materialization smoke | Complete: query rows 2, object/candidate rows 71/71, semantic-scored rows 71/71, leakage audit pass | Input to E008-M111 candidate navmesh/source-readiness validation; no source-gap recovery or trajectory claim |
+| E008-M111 | `ConceptGraphs` HM3D candidate navmesh/source-readiness validation | Complete: gate pass, coordinate/snapped navigable 71/71, path-ready 48/71, source-ready queries 2/2 | Input to E008-M112 candidate visit-order/path smoke; no source-gap recovery or trajectory claim |
+| E008-M112 | `ConceptGraphs` HM3D candidate visit-order/path smoke | Complete: input candidates 71, path-ready 48/71, visit-order rows 215, policy rows 12, leakage audit pass | Input to E008-M113 leakage-safe candidate goal-evaluation smoke; no source-gap recovery or trajectory claim |
+| E008-M113 | `ConceptGraphs` HM3D leakage-safe candidate goal-evaluation smoke | Complete: query rows 2, candidate-goal rows 215, primary proxy success 0/2 for all policies, leakage audit pass, mean best any-viewpoint XZ 3.468193m | Input to E008-M114 result interpretation; no source-gap recovery or trajectory claim |
+| E008-M114 | `ConceptGraphs` HM3D result interpretation and trajectory decision | Complete: trajectory promotion rejected, failure split severe source coverage gap 1 / stop-region viewpoint alignment gap 1, no long job | Input to E008-M115 case-level failure audit and repair route contract |
+| E008-M115 | `ConceptGraphs` HM3D case-level failure audit and repair route contract | Complete: case rows 2, selected repair families alternative source/visibility audit 1 / stop-region alignment audit 1, no long job | Input to E008-M116 stop-region/source-coverage audit materialization contract |
+| E008-M116 | `ConceptGraphs` HM3D stop-region/source-coverage audit materialization contract | Complete: source-coverage audit rows 1, stop-region alignment rows 1, blocked-input audit pass, no long job | Input to E008-M117 stop-region transform/source-coverage route decision |
+| E008-M117 | `ConceptGraphs` HM3D stop-region/source-coverage route decision contract | Complete: stop-region transform contract rows 1, source-coverage route decision rows 1, M118 selected, no long job | Input to E008-M118 non-oracle stop-region transform materialization smoke |
+| E008-M118 | `ConceptGraphs` HM3D non-oracle stop-region transform materialization smoke | Complete: stop-region candidates 50, path-ready 50/50, leakage audit pass, budget-5 proxy recovery observed for `toilet`, source-coverage gap remains 1 | Input to E008-M119 source-coverage external-or-visibility preflight |
+| E008-M119 | `ConceptGraphs/HM3D` source-coverage external-or-visibility preflight | Complete: source-coverage case rows 1, visibility proxy rows 2, external route rows 6, source poses far from target view region, same-source rerank rejected | Input to E008-M120 target-free source-coverage expansion contract |
+| E008-M120 | `HM3D` target-free source-coverage expansion contract | Complete: target-free route rows 3, selected routes 2, M121 materialization contract rows 2, target/viewpoint source-placement leakage false, no long job | Input to E008-M121 materialization smoke |
+| E008-M121 | `HM3D` target-free source-coverage materialization smoke | Complete with snap warnings: observation pose rows 40, snap-ready 30/40, render plan rows 320, detector manifest rows 2, target/viewpoint source-placement leakage false | Input to E008-M122 render/detector launcher contract |
+| E008-M122 | `HM3D` target-free source-coverage render/detector launcher contract | Complete with snap warnings: render rows 320, detector manifest rows 2, object target rows 1, launcher input rows 6, long-job command rows 2, readiness fail/warning rows 0/1, target/viewpoint source-placement leakage false | Input to E008-M123 render frame staging background launch |
+| E008-M123 | `HM3D` target-free source-coverage render frame staging launch | Relaunched but not complete: 320/320 color/depth/pose files generated, verification failed with ready frames 295/320, 25 depth-positive failures | Repair depth-validity and verify; do not launch M124 before verification |
+| E006-M01 | Context-sensitive utility benchmark design | Complete: human-intent main-claim contract, same-evidence paired contexts, utility metrics, pass/warning/fail gates fixed in `experiments/E006_human_intent_main_claim/` | Human intent remains blocked until E006 implementation evidence exists |
+| E006-M02 | Strong context-agnostic baseline suite | Complete: fixed baseline fairness rules, strong baseline families, required ablations, paired-context row schema, utility metric schema, leakage audit | Human task context must beat best non-oracle context-agnostic baselines beyond a 1-row gain |
+| E006-M03 | Context generalization stress | Complete: fixed scan/label/task/source/external-route split axes, transfer pass/warning/fail gates, claim permission rules, and transfer artifacts | Human task context main claim requires these gates to pass in execution |
+| E006-M04 | Utility formula and implementation readiness | Complete: fixed `ContextUtility`, `IntentRegret`, `ContextSpecificGain`, `search_cost_contract_v0`, frozen task profiles, row-generation order, and `implementation_manifest.json` fields | Input to E006-M05 implementation smoke; no human-intent evidence yet |
+| E006-M05 | Schema and paired-context row materialization smoke | Complete: generated 65 evidence groups, 520 paired-context rows, 2,600 transfer manifest rows, 23 label groups, 5 task groups, blocked output term hits 0 | Input to E006-M06 baseline policy row materialization; no human-intent evidence yet |
+| E006-M06 | Baseline policy row materialization smoke | Complete: 520 paired-context rows x 20 policies = 10,400 policy rows, leakage fail rows 0 | Input to E006-M07 utility metric row materialization; no human-intent evidence yet |
+| E006-M07 | Utility metric row materialization smoke | Next E006 implementation unit | Generate `utility_metric_rows.jsonl`, strongest context-agnostic comparison, and no policy-row mutation audit |
 | E008 scale-up optional | Broader navigation `SR` / `SPL` benchmark | Expand beyond current diagnostic `HM3D ObjectNav` smoke after source-gap and efficiency gates improve | Do not start before E008-M55 source-gap feasibility and a stronger policy route are ready |
 
 ## Human Task Context Claim Upgrade
@@ -230,31 +270,35 @@ Last updated: 2026-06-01
 - E005-M53 shows H001 improves over `ConceptGraphs` and static memory on the heldout proxy-search table.
 - E005-M53 also shows that H001 improves over context-agnostic memory trust by only 1 row.
 - Current evidence supports task context as a secondary ablation, not as the main contribution.
+- The project direction now intends to promote human intent to a main claim, and E006-M01/M02/M03/M04/M05 fix the claim-design, strong-baseline, transfer-stress, utility-formula, implementation-readiness, and schema materialization contracts.
 
 논문 주장:
 
-- Do not write the current paper as a human-intent understanding paper.
-- The current paper can say structured task context conditions memory trust and re-observation decisions, but it should not claim that human task context is the main source of improvement.
+- Do not write a human-intent main claim before E006 implementation evidence passes the E006-M03 transfer gates.
+- The future paper can promote structured human intent only if E006 shows that task context changes memory trust, re-observation, and candidate visit order beyond strong context-agnostic alternatives.
 - Natural language or LLM parsing should remain an adapter until structured context has a strong independent effect.
 
 에이전트 추론:
 
-- Human intent is worth keeping in the research direction, but not worth expanding before the real RGB-D/open-vocabulary robustness gate is planned.
-- Promote human task context only if a dedicated context-sensitive utility benchmark shows clear gains over strong context-agnostic policies.
+- Human intent is worth expanding next as a claim-design problem, not as an LLM parsing problem.
+- Promote human task context only if the dedicated E006 context-sensitive utility benchmark shows clear gains over strong context-agnostic policies.
 - The right upgrade target is not generic natural-language understanding; it is context-dependent utility: different task contexts should rationally change memory trust, re-observation budget, candidate visit order, and old-location dead-end cost.
 
 Upgrade requirements:
 
 - Build `task-context-sensitive` query rows where the same object/location evidence should lead to different decisions under different task contexts.
-- Add strong context-agnostic baselines: fixed trust, all-high-value trust, all-reobserve, risk-threshold only, path-cost only, and detector-confidence only.
+- Add strong context-agnostic baselines: fixed trust, all-high-value trust, all-reobserve, risk-threshold only, path-cost only, detector-confidence only, dev-best global mixture, and external-map-only pressure rows.
 - Add context-dependent utility metrics: `ExpectedSearchCost`, old-location dead-end cost, unnecessary re-observation cost, missed-high-value penalty, false trust penalty, and candidate visit order.
-- Require heldout scan / label / task-group transfer before writing a general human-context claim.
+- Require heldout scan / label / task-group transfer, source-ready/source-gap separation, and external-route pressure before writing a general human-context claim.
+- Use the frozen E006-M04 formula and profile table before computing heldout utility/regret metrics.
 - Treat LLM-based natural-language intent parsing as a later input adapter, not as a source of method novelty.
 
 Decision:
 
-- Immediate paper path: keep human task context as secondary evidence.
-- Optional expansion path: launch E006 only after E005-M54 if the paper needs a stronger human-intent claim.
+- Current evidence: human task context remains secondary.
+- Completed E006 gates: E006-M01 human-intent main-claim upgrade contract, E006-M02 strong context-agnostic baseline suite, E006-M03 context generalization stress, E006-M04 utility formula / implementation readiness, and E006-M05 schema / paired-context row materialization smoke.
+- Planned next implementation gate: E006-M07 utility metric row materialization smoke.
+- Claim rule: human intent becomes a main paper claim only after E006 passes utility, strong-baseline, and transfer gates.
 
 ## Claim Expansion Order
 
@@ -413,13 +457,79 @@ Order:
 139. E008-M85: full-val-mini source-gap non-oracle render frame staging background launch and verification. Complete.
 140. E008-M86: full-val-mini source-gap detector candidate-source background launch. Complete.
 141. E008-M86: detector candidate-source completion verification. Complete.
-142. E008-M87: source-gap detector candidate navmesh/source-readiness validation. Next.
-131. Optional E006 human task-context upgrade: context-sensitive utility benchmark and strong context-agnostic baselines.
-132. E008 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
+142. E008-M87: source-gap detector candidate navmesh/source-readiness validation. Complete.
+143. E008-M88: source-gap detector candidate visit-order/path smoke. Complete.
+144. E008-M89: source-gap leakage-safe detector candidate goal-evaluation smoke. Complete.
+145. E008-M90: source-gap detector-goal result interpretation and trajectory-execution decision. Complete.
+146. E008-M91: source-gap target-coverage and candidate-source failure diagnosis. Complete.
+147. E008-M92: source-gap two-branch coverage/cap repair contract. Complete.
+148. E008-M93: source-gap two-branch repair row materialization smoke. Complete.
+149. E008-M94: source-gap two-branch repair evaluation route decision. Complete.
+150. E008-M95: coverage-expansion render/detector launcher adaptation. Complete.
+151. E008-M96: coverage-expansion render frame staging verification. Complete.
+152. E008-M97: coverage-expansion detector candidate-source verification. Complete.
+153. E008-M98: coverage-expansion detector candidate navmesh/source-readiness validation. Complete.
+154. E008-M99: coverage-expansion detector candidate visit-order/path smoke. Complete.
+155. E008-M100: coverage-expansion leakage-safe detector candidate goal-evaluation smoke. Complete.
+156. E008-M101: coverage-expansion detector-goal result interpretation and trajectory-execution decision. Complete.
+157. E008-M102: coverage-expansion failure audit and source-gap repair closure package. Complete.
+158. E008-M103: alternative proposal-source feasibility and source-gap recovery contract. Complete.
+159. E008-M104: `ConceptGraphs` HM3D source-gap adapter/preflight contract. Complete.
+160. E008-M105: `ConceptGraphs` HM3D source-gap staging materialization smoke. Complete.
+161. E008-M106: `ConceptGraphs` HM3D source-gap runtime launch/verification contract. Complete.
+162. E008-M107: `ConceptGraphs` HM3D source-gap runtime background launch. Complete.
+163. E008-M108: `ConceptGraphs` HM3D source-gap runtime completion verification. Complete.
+164. E008-M109: `ConceptGraphs` HM3D candidate export adapter contract. Complete.
+165. E008-M110: `ConceptGraphs` HM3D candidate export materialization smoke. Complete.
+166. E008-M111: `ConceptGraphs` HM3D candidate navmesh/source-readiness validation. Complete.
+167. E008-M112: `ConceptGraphs` HM3D candidate visit-order/path smoke. Complete.
+168. E008-M113: `ConceptGraphs` HM3D leakage-safe candidate goal-evaluation smoke. Complete.
+169. E008-M114: `ConceptGraphs` HM3D result interpretation and trajectory decision. Complete.
+131. E006-M01 human task-context upgrade contract: complete.
+132. E006-M02 strong context-agnostic baseline suite: complete.
+133. E006-M03 context generalization stress: complete.
+134. E006-M04 utility formula and implementation readiness: complete.
+135. E006-M05 schema and paired-context row materialization smoke: complete.
+136. E006-M06 baseline policy row materialization smoke: complete, 10,400 policy rows, leakage fail rows 0.
+137. E006-M07 utility metric row materialization smoke: next implementation unit.
+137. E008 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
 
 ## External Baseline Expansion
 
 Top-tier submission needs external baselines beyond current internal policies.
+
+### Baseline Contract And Priority
+
+사실:
+
+- `ConceptGraphs` and bounded `Open3DSG` are already the closest runnable map/retrieval baselines in this workspace.
+- `HOV-SG`, `VLFM`, `HM3D-OVON`, `GOAT-Bench`, and `3D-Mem` have not been run in this workspace.
+- E008 currently has an `HM3D ObjectNav` / `Habitat` source, trajectory runner, navmesh validation path, and `ConceptGraphs` HM3D staging contract, but final navigation `SR` / `SPL` is still blocked.
+
+에이전트 추론:
+
+- The next baseline expansion should not be a broad benchmark grab. Each route must answer one reviewer question.
+- Execution priority should be: `HOV-SG` source/runtime audit first, `VLFM` or `HM3D-OVON` navigation baseline contract second, `3D-Mem` memory-baseline positioning third, and `GOAT-Bench` only after E006 human-intent task design is concrete.
+- `HOV-SG` is the most relevant next non-data contract because it pressures the map-to-navigation claim: if a hierarchical open-vocabulary semantic graph can recover source-gap candidates without H001's memory-trust decision, H001's contribution must be narrowed.
+- `VLFM` / `HM3D-OVON` should be used for navigation `SR` / `SPL` pressure, not for stale-memory update novelty. They become fair only when H001 and the baseline are evaluated on the same `HM3D` episodes, start states, goal categories, and blocked-input contract.
+- `3D-Mem` should pressure the scene-memory claim. It is not a direct navigation baseline unless converted into the same query/candidate visit-order interface.
+- `GOAT-Bench` is best aligned with broader human-intent / long-horizon task claims, so it should wait until E006 fixes human-intent tasks, utility metrics, and language/structured-context boundary.
+
+Baseline contract:
+
+| Baseline route | Reviewer question | Required interface | Primary metrics | Current status | Next non-data action |
+| --- | --- | --- | --- | --- | --- |
+| `HOV-SG` | Does a stronger hierarchical open-vocabulary semantic graph solve map-to-navigation candidate generation without H001? | posed RGB-D or map input -> object/category candidates with 3D coordinates and confidence | source-gap recovery, candidate top-k hit, path-ready rate, `ExpectedSearchCost`, proxy `SR` / `SPL` | not run; source/runtime audit required | source/runtime/input-output audit contract |
+| `VLFM` | Does an existing open-vocabulary navigation policy outperform H001's candidate visit-order policy on `HM3D`? | same `HM3D` episodes/start states/category goals, no eval-goal coordinate leakage | `SR`, `SPL`, path length, failure type | not run; navigation baseline contract required | fair episode/metric contract |
+| `HM3D-OVON` baseline | Is H001 competitive with an ObjectNav/open-vocabulary navigation benchmark baseline? | official or reproducible ObjectNav/OVON policy rows on same split | `SR`, `SPL`, goal category success, path length | not run; benchmark source contract required | split and allowed-input audit |
+| `3D-Mem` | Is H001 more than generic scene memory retrieval? | scene memory retrieval rows -> candidate locations or ranked object memories | retrieval hit, stale-location suppression, re-observation utility | not run; memory-interface audit required | query/candidate adapter contract |
+| `GOAT-Bench` modular baseline | Does the method support broader human-facing task assignment beyond object search? | task/instruction episodes after E006 task design | task success, cost, plan validity, `SR` / `SPL` if navigation-backed | deferred until E006 | wait for human-intent task contract |
+
+Claim boundary:
+
+- Do not claim superiority over `HOV-SG`, `VLFM`, `HM3D-OVON`, `GOAT-Bench`, or `3D-Mem` before they are executed or converted under a shared allowed-input contract.
+- Do not use `HOV-SG` / `VLFM` failures as novelty evidence unless failure cases are tied to stale-memory trust, re-observation, or task-conditioned search-cost decisions.
+- Do not merge benchmark roles: map/retrieval baselines test candidate generation; navigation baselines test executable `SR` / `SPL`; scene-memory baselines test memory management.
 
 ### Open-Vocabulary Mapping Baseline
 
@@ -457,6 +567,7 @@ Purpose:
 
 - Connect semantic memory to downstream `SR`, `SPL`, `ExpectedSearchCost`, and lifelong/multimodal navigation metrics.
 - Avoid limiting the paper to proxy object retrieval.
+- Keep `VLFM` / `HM3D-OVON` as navigation-policy pressure baselines rather than stale-memory baselines.
 
 ### Scene Memory Baseline
 
@@ -502,11 +613,11 @@ Purpose:
 
 ## Immediate Next Actions
 
-- Run E008-M87 source-gap detector candidate navmesh/source-readiness validation.
+- Repair and verify E008-M123 `HM3D` target-free source-coverage render frame staging depth-validity before E008-M124.
 - Do not launch b01/b03 confidence-log-depth reruns unless a complete diagnostic detector-repair row is explicitly needed.
 - Do not claim navigation `SR` / `SPL` until H001 source-ready/source-gap behavior is reported at scale, heldout transfer is tested, and navigation/search baseline rows are added.
 - Keep the main paper claim centered on memory trust, staleness handling, bounded re-observation, and proxy-search improvement over `ConceptGraphs` / static memory.
-- Keep human task context as a secondary ablation unless E006 is explicitly launched and passes context-sensitive utility gates.
+- Prepare E006-M07 next because E006-M06 has frozen baseline policy rows, but do not claim human intent until context-sensitive utility, strong context-agnostic baseline, and heldout transfer gates pass in execution.
 - Expand real RGB-D/open-vocabulary robustness before real navigation `SR` / `SPL`.
 - Keep `OpenMask3D` as the later 3D instance proposal baseline candidate.
 - Keep `Open3DSG`, `ConceptGraphs`, and `HOV-SG` for map/scene-graph/navigation baseline expansion.

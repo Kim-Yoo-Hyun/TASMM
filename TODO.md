@@ -1,6 +1,6 @@
 # TODO
 
-Last updated: 2026-06-01
+Last updated: 2026-06-06
 
 이 파일은 에이전트가 다음 작업 계획과 진행 상태를 관리하는 루트 작업판이다. 자세한 문헌 조사 내용은 `literature/`에 기록하고, 이 파일에는 다음 행동과 상태만 남긴다.
 
@@ -17,13 +17,13 @@ Last updated: 2026-06-01
 
 Main experiment implementation.
 
-CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M101은 `Open3DSG` read-only source, full-denominator real proposal bridge, external proposal/mapping feasibility matrix, `ConceptGraphs` reliability boundary, row-group / heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary / navigation-bridge decision까지 완료했다. E007-M01-M07은 M100 selected policy를 E002 `occupancy_grid_astar_v0` path-cost source와 연결해 route materialization, external candidate grid projection, path-cost policy metric, paper-table boundary, path-start/source-limit sensitivity audit, bridge-table package/navigation-expansion decision까지 완료했다. E008-M01-M86은 local read-only `HM3D ObjectNav` + `Habitat` source preflight부터 full-val-mini detector candidate-source, navmesh/source-readiness validation, visit-order/path smoke, leakage-safe goal evaluation, trajectory execution, source-gap/SPL repair chain, repair result interpretation, loss-safe candidate-source expansion, source-gap non-oracle source/observation expansion, source-gap render frame staging verification, source-gap detector candidate-source launch/verification까지 완료했다. E008-M86 verification 결과 final candidate rows 48, pre-cap candidate rows 1,896, raw predictions 1,964, coordinate candidate rows 48, validator errors/warnings 0/0이고 matching target rows는 0이다. Matching target rows가 없으므로 detector recall claim은 막고, external navigation/search baselines가 아직 없어 final real navigation claim은 false다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 및 E008 이후 `/home/yoohyun/research2/local_dataset/HM3D_navigation_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
+CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M101은 `Open3DSG` read-only source, full-denominator real proposal bridge, external proposal/mapping feasibility matrix, `ConceptGraphs` reliability boundary, row-group / heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary / navigation-bridge decision까지 완료했다. E006-M01-M06은 human intent를 main claim으로 승격하기 위한 same-evidence paired context / utility-regret / strong-baseline / transfer-stress / frozen utility-formula / implementation-readiness / schema materialization / baseline policy row materialization smoke까지 완료했고, E006-M07 utility metric row materialization smoke가 다음 E006 구현 단위다. E007-M01-M07은 M100 selected policy를 E002 `occupancy_grid_astar_v0` path-cost source와 연결해 route materialization, external candidate grid projection, path-cost policy metric, paper-table boundary, path-start/source-limit sensitivity audit, bridge-table package/navigation-expansion decision까지 완료했다. E008-M01-M122는 local read-only `HM3D ObjectNav` + `Habitat` source preflight부터 target-free render/detector launcher contract까지 완료했다. E008-M123은 GPU memory 확보 후 relaunch됐고 320/320 RGB-D/pose files를 생성했지만 verifier 기준 ready frames는 295/320이다. 실패 원인은 25개 depth frame의 positive-depth check 실패이며, 다음 E008 단위는 M123 depth-validity repair/verification이다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 및 E008 이후 `/home/yoohyun/research2/local_dataset/HM3D_navigation_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
 
 CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active task는 없고, CAND-001 feasibility가 약해질 때 다시 승격 여부를 판단한다.
 
 ## Active Objective
 
-- CAND-001: Direction B 최종 목표를 유지하되, E008-M87 source-gap detector candidate navmesh/source-readiness validation을 다음 단위로 둔다.
+- CAND-001: Direction B 최종 목표를 유지하되, E008-M123은 depth-positive failure repair/verification이 필요하고, E006-M07 utility metric row materialization smoke를 병렬 다음 단위로 둔다.
 - CAND-002: `Common-Ground Semantic Mapping`은 benchmark 설계 부담을 보류 상태로 둔다.
 - CAND-003: `Functional Semantic Memory`는 annotation/manipulation evaluation 부담을 보류 상태로 둔다.
 
@@ -31,7 +31,8 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E008-M87 source-gap detector candidate navmesh/source-readiness validation
+- [ ] E008-M123 `HM3D` target-free source-coverage render frame staging depth-validity repair / verification
+- [ ] E006-M07 utility metric row materialization smoke
 
 ### CAND-002
 
@@ -47,7 +48,7 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 - [x] M93 launch 전 GPU/Docker 상태 확인
 - [x] M93 결과를 diagnostic repair evidence로 claim boundary에 반영
-- [x] M94에서 b01/b03 확장, 추가 prompt repair, 또는 stop-and-record 중 선택
+- [x] M94에서 cap-branch probe evaluation, coverage render/detector launch, 또는 stop-and-record 중 선택
 - [x] E005-M95에서 paper-facing real-proposal diagnostic table과 final E005 boundary를 갱신
 - [x] E005-M96에서 external proposal baseline 우선인지 navigation bridge 우선인지 결정
 - [x] E005-M97에서 external proposal/mapping baseline feasibility matrix 작성
@@ -154,16 +155,58 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 - [x] E008-M85 full-val-mini source-gap non-oracle render frame staging background launch and verification
 - [x] E008-M86 full-val-mini source-gap detector candidate-source background launch
 - [x] E008-M86 completion verification after background job finishes
-- [ ] E008-M87 source-gap detector candidate navmesh/source-readiness validation
+- [x] E008-M87 source-gap detector candidate navmesh/source-readiness validation
+- [x] E008-M88 source-gap detector candidate visit-order/path smoke
+- [x] E008-M89 source-gap leakage-safe detector candidate goal-evaluation smoke
+- [x] E008-M90 source-gap detector-goal result interpretation and trajectory-execution decision
+- [x] E008-M91 source-gap target-coverage and candidate-source failure diagnosis
+- [x] E008-M92 source-gap two-branch coverage/cap repair contract 완료
+- [x] E008-M93 source-gap two-branch repair row materialization smoke 완료
+- [x] E008-M95 coverage-expansion render/detector launcher adaptation contract 완료
+- [x] E008-M96 coverage-expansion render frame staging background launch/verification 완료
+- [x] E008-M100 coverage-expansion leakage-safe detector candidate goal-evaluation smoke 완료
+- [x] E008-M101 coverage-expansion detector-goal result interpretation and trajectory-execution decision 완료
+- [x] E008-M102 coverage-expansion failure audit and source-gap repair closure package 완료
+- [x] E008-M103 alternative proposal-source feasibility and source-gap recovery contract 완료
+- [x] E008-M104 `ConceptGraphs` HM3D source-gap adapter/preflight contract 완료
+- [x] E008-M105 `ConceptGraphs` HM3D source-gap staging materialization smoke 완료
+- [x] E008-M106 `ConceptGraphs` HM3D source-gap runtime launch/verification contract 완료
+- [x] E008-M107 `ConceptGraphs` HM3D source-gap runtime background launch 완료
+- [x] E008-M108 `ConceptGraphs` HM3D source-gap runtime completion verification 완료
+- [x] E008-M109 `ConceptGraphs` HM3D candidate export adapter contract 완료
+- [x] E008-M110 `ConceptGraphs` HM3D candidate export materialization smoke 완료
+- [x] E008-M111 `ConceptGraphs` HM3D candidate navmesh/source-readiness validation 완료
 - [ ] b01/b03 confidence-log-depth rerun은 complete diagnostic table이 필요할 때만 재검토
-- [ ] E006 human-context upgrade decision은 사용자가 human intent main claim을 원할 때만 진행
+- [x] 비데이터 TODO 2: `HOV-SG` / additional map-navigation baseline contract 정리
+- [x] E006 human-context upgrade decision: E006-M01 human-intent main-claim contract 완료
+- [x] E006-M03 context generalization stress: heldout scan / label / task-group transfer gate
+- [x] E006-M04 utility formula and implementation readiness: utility weights, row-generation plan, implementation manifest
+- [x] E006-M05 schema and paired-context row materialization smoke: `task_context_schema.json`, `implementation_manifest.json`, `paired_context_queries.jsonl`, `transfer_split_manifest.jsonl`
+- [x] E006-M06 baseline policy row materialization smoke: `baseline_policy_rows.jsonl` and leakage audit
+- [ ] E006-M07 utility metric row materialization smoke: `utility_metric_rows.jsonl`, strongest context-agnostic comparison, and no policy-row mutation audit
+- [x] E008-M112 `ConceptGraphs` HM3D candidate visit-order/path smoke 완료
+- [x] E008-M113 `ConceptGraphs` HM3D leakage-safe candidate goal-evaluation smoke 완료
+- [x] E008-M114 `ConceptGraphs` HM3D goal-evaluation result interpretation and trajectory decision 완료
+- [x] E008-M115 `ConceptGraphs` HM3D case-level failure audit and repair route contract 완료
+- [x] E008-M116 `ConceptGraphs` HM3D stop-region/source-coverage audit materialization contract 완료
+- [x] E008-M117 `ConceptGraphs` HM3D stop-region transform and source-coverage route decision contract 완료
+- [x] E008-M118 `ConceptGraphs` HM3D non-oracle stop-region transform materialization smoke
+- [x] E008-M119 `ConceptGraphs/HM3D` source-coverage external-or-visibility preflight
+- [x] E008-M120 `HM3D` target-free source-coverage expansion contract
+- [x] E008-M121 `HM3D` target-free source-coverage expansion materialization smoke
+- [x] E008-M122 `HM3D` target-free source-coverage render/detector launcher contract
+- [x] E008-M123 `HM3D` target-free source-coverage render frame staging relaunch
+- [ ] E008-M123 depth-positive frame repair and verification
 - [ ] `OpenMask3D` feasibility는 external 3D instance proposal baseline 후보로 재검토
-- [ ] `HOV-SG` / additional map-navigation baselines는 `Open3DSG` query-conversion feasibility 이후 재검토
 
 ## Running / Needs Verification
 
-- Active non-E008 runtime state: tmux sessions include `research`, `gdrive_upload`, and `h001_open3dsg_train_full_nonavg_retry_20260601_071908`; Docker containers may be unrelated.
-- Active E008 background job: none. E008-M86 tmux `e008_m86_source_gap_detector` has stopped and verification passed.
+- Active non-E008 runtime state: tmux sessions observed `research`, `gdrive_upload`, and `h001_open3dsg_h001_r2_raw_clean_return_20260606_003130`; Docker containers may be unrelated.
+- Active E008 background job: none. E008-M123 relaunch completed, but verification failed with ready frames 295/320 because 25 rendered depth frames failed positive-depth validation. Verify after repair with `python experiments/E008_real_navigation_benchmark/tools/verify_m123_target_free_render_frame_staging.py --require-ready`.
+
+## Needs Repair / Verification
+
+- [ ] E008-M123 target-free render depth-positive repair: latest log `logs/20260606_025834_e008_m123_target_free_render.log`, artifact `experiments/E008_real_navigation_benchmark/artifacts/E008-M123_target_free_source_coverage_render_frame_staging_launch_v0/`
 
 ### CAND-002
 
@@ -175,6 +218,54 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] E008-M123 GPU-available relaunch and verification diagnosis 완료: GPU free memory 31,282MiB, log `logs/20260606_025834_e008_m123_target_free_render.log`, 320/320 color/depth/pose files generated, verifier ready frames 295/320, frame issue rows 25, M124 still blocked
+- [x] E006-M06 baseline policy row materialization smoke 완료: status `ready`, paired context rows 520, policy count 20, baseline policy rows 10,400, leakage fail rows 0, task-context rows true/false 3,640/6,760, selected next E006-M07
+- [x] E008-M123 launch attempt and verification diagnosis 완료: launch artifact ready, tmux `e008_m123_target_free_render`, log `logs/20260606_003432_e008_m123_target_free_render.log`, verification failed with ready frames 0/320, detector input files ready true, GPU free memory observed 77MiB, relaunch required when GPU is available
+- [x] E008-M122 `HM3D` target-free source-coverage render/detector launcher contract 완료: status `e008_m122_hm3d_target_free_source_coverage_render_detector_launcher_contract_ready_with_snap_warnings`, render rows 320, detector manifest rows 2, object target rows 1, launcher input rows 6, long-job command rows 2, readiness fail/warning rows 0/1, target/viewpoint source-placement leakage false, selected next E008-M123, long job not launched
+- [x] E008-M121 `HM3D` target-free source-coverage expansion materialization smoke 완료: status `e008_m121_hm3d_target_free_source_coverage_expansion_materialization_smoke_ready_with_snap_warnings`, observation pose rows 40, snap-ready 30/40, render plan rows 320, detector manifest rows 2, target/viewpoint source-placement leakage false, selected next E008-M122
+- [x] E008-M120 `HM3D` target-free source-coverage expansion contract 완료: status `e008_m120_hm3d_target_free_source_coverage_expansion_contract_ready`, source-coverage case rows 1, target-free route rows 3, selected route rows 2, M121 materialization contract rows 2, target/viewpoint source-placement leakage false, selected next E008-M121
+- [x] E008-M119 `ConceptGraphs/HM3D` source-coverage external-or-visibility preflight 완료: status `e008_m119_conceptgraphs_hm3d_source_coverage_external_visibility_preflight_ready`, source-coverage case rows 1, visibility proxy rows 2, external route rows 6, existing source poses far from target view region true, selected next E008-M120, direct trajectory promotion false
+- [x] E008-M118 `ConceptGraphs` HM3D non-oracle stop-region transform materialization smoke 완료: status `e008_m118_conceptgraphs_hm3d_non_oracle_stop_region_transform_materialization_smoke_ready`, stop-region candidates 50, path-ready 50/50, leakage audit pass true, budget-5 proxy recovery observed true for `toilet`, remaining source-coverage gap rows 1, selected next E008-M119, direct trajectory promotion false
+- [x] E008-M117 `ConceptGraphs` HM3D stop-region transform/source-coverage route decision contract 완료: status `e008_m117_conceptgraphs_hm3d_stop_region_transform_source_coverage_route_decision_ready`, stop-region transform contract rows 1, source-coverage route decision rows 1, M118 next, source-coverage route deferred but required, direct trajectory promotion false, long job launch false
+- [x] 지정된 `DualMap` local runtime/cache 경로 삭제 완료: `DualMap_model_cache`, `DualMap_outputs`, `DualMap_runtime_home`, `DualMap_staged`, `external_repos/DualMap`
+- [x] Workspace status refresh and cleanup-candidate path audit 완료: 최신 상태는 E008-M117 완료 / E008-M118 next로 유지했고, 실패/보류/삭제 후보 경로는 `docs/reproducibility.md`의 `Cleanup Candidate Paths`에 기록
+- [x] E008-M116 `ConceptGraphs` HM3D stop-region/source-coverage audit materialization contract 완료: status `e008_m116_conceptgraphs_hm3d_stop_region_source_coverage_audit_materialization_contract_ready`, source-coverage audit rows 1, stop-region alignment audit rows 1, blocked-input audit pass true, `sofa` path-ready candidates 20 with min any-vp XZ 5.204041m, `toilet` goal XZ 1.388981m / nearest viewpoint XZ 1.732344m / min policy rank 23, selected next E008-M117, long job launch false
+- [x] E008-M115 `ConceptGraphs` HM3D case-level failure audit and repair route contract 완료: status `e008_m115_conceptgraphs_hm3d_case_level_failure_audit_repair_route_contract_ready`, case rows 2, failure split severe source coverage gap 1 / stop-region viewpoint alignment gap 1, selected repair families alternative source/visibility audit 1 / stop-region alignment audit 1, direct trajectory promotion false, selected next E008-M116, long job launch false
+- [x] E008-M114 `ConceptGraphs` HM3D goal-evaluation result interpretation and trajectory decision 완료: status `e008_m114_conceptgraphs_hm3d_goal_result_interpretation_trajectory_decision_ready`, failure split severe source coverage gap 1 / stop-region viewpoint alignment gap 1, direct trajectory promotion false, selected next E008-M115, long job launch false
+- [x] E008-M113 `ConceptGraphs` HM3D leakage-safe candidate goal-evaluation smoke 완료: status `e008_m113_conceptgraphs_hm3d_candidate_goal_evaluation_smoke_ready`, query rows 2, candidate-goal eval rows 215, policy goal metric rows 12, primary proxy success 0/2 for all policies, best any-viewpoint XZ mean 3.468193m, leakage audit pass true, next E008-M114, real navigation `SR`/`SPL` still false
+- [x] E008-M112 `ConceptGraphs` HM3D candidate visit-order/path smoke 완료: status `e008_m112_conceptgraphs_hm3d_candidate_visit_order_path_smoke_ready`, input candidate rows 71, query-compatible rows 71, path-ready 48/71, visit-order rows 215, policy metric rows 12, leakage audit pass true, next E008-M113, source-gap recovery/real navigation `SR`/`SPL` still false
+- [x] E008-M111 `ConceptGraphs` HM3D candidate navmesh/source-readiness validation 완료: status `e008_m111_conceptgraphs_hm3d_candidate_navmesh_source_readiness_validation_ready`, gate `pass`, candidate rows 71, coordinate/snapped navigable 71/71, path-ready 48/71, source-ready query rows 2/2, source-gap recovery/real navigation `SR`/`SPL` still false
+- [x] E008-M110 `ConceptGraphs` HM3D candidate export materialization smoke 완료: status `e008_m110_conceptgraphs_hm3d_candidate_export_materialization_smoke_ready`, query rows 2, object rows 71, candidate rows 71, semantic scored rows 71/71, leakage audit pass true, source-gap recovery/real navigation `SR`/`SPL` still false
+- [x] E008-M109 `ConceptGraphs` HM3D candidate export adapter contract 완료: status `e008_m109_conceptgraphs_hm3d_candidate_export_adapter_contract_ready`, runtime-ready scans 2/2, post-PCD object counts 29/42, required object fields checked in Docker, candidate rows/source-gap recovery/real navigation `SR`/`SPL` still false
+- [x] E008-M108 `ConceptGraphs` HM3D source-gap runtime completion verification 완료: status `e008_m108_conceptgraphs_hm3d_source_gap_runtime_outputs_ready`, runtime outputs ready 2/2, GSA detections 20 per scan, full/post PCD ready, candidate rows/source-gap recovery/real navigation `SR`/`SPL` still false
+- [x] E008-M107 background runtime 완료: background status `completed`, returncode 0, scan ids `hm3dnav_00800_TEEsavR23oF_ep22`, `hm3dnav_00802_wcojb4TFT35_ep13`, log `logs/20260602_165543_e008_m107_conceptgraphs_hm3d_source_gap_runtime.log`
+- [x] E006-M05 schema and paired-context row materialization smoke 완료: 65 evidence groups, 520 paired-context rows, 2,600 transfer rows, 23 label groups, 5 task groups, blocked output term hits 0
+- [x] E006-M04 utility formula and implementation readiness 완료: `experiments/E006_human_intent_main_claim/README.md`에 `ContextUtility`, `IntentRegret`, `ContextSpecificGain`, `search_cost_contract_v0`, frozen task profiles, row-generation order, M04 gates, `implementation_manifest.json` fields 고정
+- [x] E006-M03 context generalization stress 완료: `experiments/E006_human_intent_main_claim/README.md`에 heldout scan/label/task/source/external-route split axes, transfer gates, claim permission rules, transfer artifacts 고정; 후속 E006-M04 완료
+- [x] E006-M02 strong context-agnostic baseline suite 완료: `experiments/E006_human_intent_main_claim/README.md`에 baseline fairness rules, strong baseline families, required ablations, row schema, utility schema, leakage audit 고정; 후속 E006-M03 완료
+- [x] E006-M01 human-intent main-claim upgrade contract 완료: `experiments/E006_human_intent_main_claim/README.md` 생성, same-evidence paired context, structured utility schema, utility/regret metrics, pass/warning/fail gate, LLM adapter boundary 고정; 후속 E006-M02 완료
+- [x] 비데이터 TODO 2 완료: `experiments/schedule.md`, `docs/paper.md`, `experiments/report.md`에 `HOV-SG`, `VLFM`, `HM3D-OVON`, `GOAT-Bench`, `3D-Mem` baseline role, fair interface, metric, priority, claim boundary를 정리; 후속 E006-M01 contract 완료
+- [x] E008-M107 launch preflight check 완료: GPU free memory 23,593MiB < 24,000MiB, tmux `e008_m107_conceptgraphs_hm3d_source_gap_runtime` not running, M108 verifier reports `e008_m108_conceptgraphs_hm3d_source_gap_runtime_waiting_gpu`, runtime output ready 0/2
+- [x] E008-M106 `ConceptGraphs` HM3D source-gap runtime launch/verification contract 완료: status `e008_m106_conceptgraphs_hm3d_source_gap_runtime_launch_verification_contract_ready_waiting_gpu`, staged payload ready 2/2, Docker image ready true, checkpoints ready true, GPU free 13,403MiB < 24,000MiB, launch now false, M108 verifier added and reports waiting GPU, source-gap recovery supported false, selected next E008-M107
+- [x] E008-M105 `ConceptGraphs` HM3D source-gap staging materialization smoke 완료: status `e008_m105_conceptgraphs_hm3d_source_gap_staging_materialization_smoke_ready`, staged scans 2/2, color/depth/pose 192/192/192, regular input files 576/576, container readability true, leakage rows 0, runtime launched false, source-gap recovery supported false, selected next E008-M106
+- [x] E008-M104 `ConceptGraphs` HM3D source-gap adapter/preflight contract 완료: status `e008_m104_conceptgraphs_hm3d_source_gap_adapter_preflight_contract_ready`, selected cases materialization-ready 2/2, direct `ConceptGraphs`-ready 0/2, source leakage rows 0, `ConceptGraphs` image ready true, long job launch false, source-gap recovery supported false, selected next E008-M105
+- [x] E008-M103 alternative proposal-source feasibility and source-gap recovery contract 완료: status `e008_m103_alternative_proposal_source_feasibility_source_gap_recovery_contract_ready`, selected route `conceptgraphs_hm3d_map_candidate_adapter`, `ConceptGraphs` image ready true, `OpenMask3D` checkpoints ready true but image ready false, same-detector rerun rejected, source-gap recovery supported false, selected next E008-M104
+- [x] E008-M102 coverage-expansion failure audit and source-gap repair closure package 완료: status `e008_m102_coverage_expansion_failure_audit_source_gap_repair_closure_ready`, source-gap cases 2/2 closed, current detector source-gap repair route closed true, M97 proposals/pre-cap 24/853, M98 path-ready 11/24, M100 primary success max 0, direct trajectory promotion false, additional long job recommended false, selected next E008-M103
+- [x] E008-M101 coverage-expansion detector-goal result interpretation and trajectory-execution decision 완료: status `e008_m101_coverage_expansion_detector_goal_result_interpretation_trajectory_decision_ready`, current two-branch repair route failed true, cap branch primary/relaxed 0/0, coverage branch primary 0/1, direct trajectory promotion false, additional long job recommended false, selected next E008-M102
+- [x] E008-M100 coverage-expansion leakage-safe detector candidate goal-evaluation smoke 완료: status `e008_m100_coverage_expansion_detector_candidate_goal_evaluation_smoke_ready`, coverage target rows 1, candidate-goal eval rows 57, policy aggregate rows 4, leakage audit pass true, primary proxy success 0/1 for all policies, best any-vp XZ mean 5.484739m, source-gap proxy recovery observed false, selected next E008-M101
+- [x] E008-M99 coverage-expansion detector candidate visit-order/path smoke 완료: status `e008_m99_coverage_expansion_detector_candidate_visit_order_path_smoke_ready`, input/query-compatible candidates 24/24, path-ready 11, failure rows 13, visit-order rows 57, policy metric rows 8, selected next E008-M100
+- [x] E008-M98 coverage-expansion detector candidate navmesh/source-readiness validation 완료: status `e008_m98_coverage_expansion_detector_candidate_navmesh_validation_ready`, gate `pass`, candidate rows 24, coordinate-valid 24/24, snapped navigable 24/24, source-to-snapped path-ready 11/24, unreachable 13, selected next E008-M99
+- [x] E008-M97 coverage-expansion detector candidate-source launch/verification 완료: status `e008_m97_coverage_expansion_detector_candidate_source_verified`, prediction rows 24, pre-cap candidate rows 853, coordinate candidate rows 24, validator errors/warnings 0/0, frames with written predictions 24/96, selected next E008-M98
+- [x] E008-M96 coverage-expansion render frame staging launch/verification 완료: status `e008_m96_coverage_expansion_render_frame_staging_verified`, log `logs/20260602_103900_e008_m96_coverage_render.log`, ready frames 96/96, ready scans 1/1, snap-ready rows 96/96, large snap warnings 0, detector input files ready true, selected next E008-M97
+- [x] E008-M95 coverage-expansion render/detector launcher adaptation contract 완료: status `e008_m95_coverage_expansion_render_detector_launcher_adaptation_contract_ready`, coverage render rows 96, detector manifest rows 1, launcher input rows 3, long-job command rows 2, render script syntax check 통과, selected next E008-M96, long job launch false
+- [x] E008-M94 source-gap two-branch repair evaluation route decision 완료: status `e008_m94_source_gap_two_branch_repair_evaluation_route_decision_ready`, cap probe eval rows 72, cap policy metric rows 3, primary/relaxed supported policy rows 0/0, selected route `coverage_expansion_launcher_adaptation_first`, selected next E008-M95, long job launch false
+- [x] E008-M93 source-gap two-branch repair row materialization smoke 완료: status `e008_m93_source_gap_two_branch_repair_row_materialization_smoke_ready`, coverage observation/render/manifest rows 12/96/1, cap-threshold probe rows 72, budget loss sentinel rows 5, contract check rows 6/6 pass, leakage audit rows 4/4 pass, long job launch false, selected next E008-M94
+- [x] E008-M92 source-gap two-branch coverage/cap repair contract 완료: status `e008_m92_source_gap_two_branch_coverage_cap_repair_contract_ready`, repair branch rows 2, case assignments 2, coverage-expansion branch case 1, cap/threshold-rescue branch case 1, allowed/blocked input rows 7/8, M93 materialization ready true, long job launch false, selected next E008-M93
+- [x] E008-M91 source-gap target-coverage and candidate-source failure diagnosis 완료: status `e008_m91_source_gap_target_coverage_candidate_source_failure_diagnosis_ready`, render-ready frames 192/192, pre-cap candidates 1,896, final candidates 48, pre-cap primary target-near hit cases 0/2, pre-cap relaxed target-near hit cases 1/2, final primary hit cases 0/2, failure types coverage gap 1 / low-confidence cap suppression 1, selected next E008-M92
+- [x] E008-M90 source-gap detector-goal result interpretation and trajectory-execution decision 완료: status `e008_m90_source_gap_detector_goal_result_interpretation_trajectory_decision_ready`, source-gap cases 2, M88 path-ready detector candidates 30/48, M89 primary success count max 0, direct trajectory promotion ready false, distance failure class severe coverage gap 1 / moderate localization gap 1, selected next E008-M91
+- [x] E008-M89 source-gap leakage-safe detector candidate goal-evaluation smoke 완료: status `e008_m89_source_gap_detector_candidate_goal_evaluation_smoke_ready`, candidate-goal eval rows 138, source-gap case goal metric rows 8, primary proxy success 0/2 for all detector policies, best any-vp XZ mean 3.968230m, leakage audit pass true, source-gap proxy recovery observed false, selected next E008-M90
+- [x] E008-M88 source-gap detector candidate visit-order/path smoke 완료: status `e008_m88_source_gap_detector_candidate_visit_order_path_smoke_ready`, source-gap cases 2/2, candidate rows 48, query-compatible 48, path-ready 30/48, failure rows 18, visit-order rows 138, source-gap case policy metric rows 8, eval-goal/viewpoint policy leakage false, selected next E008-M89
+- [x] E008-M87 source-gap detector candidate navmesh/source-readiness validation 완료: status `e008_m87_source_gap_detector_candidate_navmesh_validation_ready`, gate `pass`, source-ready source-gap cases 2/2, candidate rows 48, coordinate-valid 48/48, snapped navigable 48/48, source-to-snapped path rows 30/48, selected next E008-M88
 - [x] E008-M86 completion verification 완료: status `e008_m86_source_gap_detector_candidate_source_verified`, final candidate rows 48, pre-cap candidate rows 1,896, raw predictions 1,964, frames with written predictions 48/192, coordinate candidate rows 48, validator errors/warnings 0/0, matching target rows 0, selected next E008-M87
 - [x] E008-M86 full-val-mini source-gap detector candidate-source background launch 완료: status `e008_m86_source_gap_detector_candidate_source_launched`, tmux `e008_m86_source_gap_detector`, manifest rows 2, object target rows 2, log `logs/20260601_222320_e008_m86_source_gap_detector.log`, output `experiments/E008_real_navigation_benchmark/artifacts/E008-M86_source_gap_detector_candidate_source_v0/`
 - [x] E008-M85 full-val-mini source-gap non-oracle render frame staging launch/verification 완료: launch status `e008_m85_source_gap_render_frame_staging_launched`, verification status `e008_m85_source_gap_render_frame_staging_verified`, ready frames 192/192, ready scans 2/2, snap-ready rows 192/192, large snap warnings 0, detector input files ready true, selected next E008-M86

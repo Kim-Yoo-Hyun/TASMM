@@ -1,6 +1,6 @@
 # Experiments
 
-Updated: 2026-06-01
+Updated: 2026-06-06
 
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
@@ -8,7 +8,7 @@ Updated: 2026-06-01
 
 ## Status
 
-Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, E005-M01 through E005-M101, E007-M01 through E007-M07, and E008-M01 through E008-M86 are complete/verified with constraints through denominator-aligned `Open3DSG`, full-denominator real proposal diagnostics, `ConceptGraphs` reliability boundary, map-assisted fallback claim-boundary decision, navigation/path-cost bridge packaging, real navigation source preflight, detector/H001/dynamic-stale trajectory smoke, source-gap repair chains, full-val-mini detector-policy trajectory smoke, loss-safe candidate-source expansion, source-gap non-oracle source/observation expansion, source-gap render frame staging, and source-gap detector candidate-source verification. E008-M86 produced 48 final source-gap detector candidates from 1,896 pre-cap candidates with validator errors/warnings 0/0 and matching target rows 0. Final real navigation claims remain blocked because M87 navmesh/source-readiness validation, source-gap recovery, trajectory evaluation, heldout transfer, and stronger baselines remain unresolved.
+Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, E005-M01 through E005-M101, E006-M01 through E006-M06, E007-M01 through E007-M07, and E008-M01 through E008-M122 are complete/verified with constraints through denominator-aligned `Open3DSG`, full-denominator real proposal diagnostics, `ConceptGraphs` reliability boundary, human-intent main-claim, strong-baseline, transfer-stress, utility-formula, implementation-readiness, schema materialization, baseline policy row materialization, map-assisted fallback claim-boundary decision, navigation/path-cost bridge packaging, real navigation source preflight, detector/H001/dynamic-stale trajectory smoke, source-gap repair chains, full-val-mini detector-policy trajectory smoke, loss-safe candidate-source expansion, source-gap non-oracle source/observation expansion, source-gap render frame staging, source-gap detector candidate-source verification, source-gap detector candidate navmesh/source-readiness validation, source-gap detector candidate visit-order/path smoke, source-gap leakage-safe goal-evaluation smoke, source-gap detector-goal result interpretation, source-gap target-coverage/candidate-source failure diagnosis, source-gap two-branch coverage/cap repair contract, coverage-expansion repair closure, alternative proposal-source feasibility, `ConceptGraphs` HM3D source-gap adapter preflight, source-gap staging materialization, bounded runtime launch/verification contract, M107 runtime completion, M108 runtime output verification, M109 candidate export adapter contract, M110 candidate row materialization, M111 candidate navmesh/source-readiness validation, M112 candidate visit-order/path smoke, M113 leakage-safe candidate goal-evaluation smoke, M114 result interpretation/trajectory decision, M115 case-level failure audit / repair route contract, M116 stop-region/source-coverage audit materialization, M117 route decision, M118 non-oracle stop-region transform materialization, M119 source-coverage external/visibility preflight, M120 target-free source-coverage expansion contract, M121 target-free source materialization smoke, and M122 render/detector launcher contract. E008-M123 was relaunched after GPU memory became available and generated 320 / 320 color/depth/pose files, but verification failed with 295 / 320 ready frames because 25 depth frames failed positive-depth validation. Final navigation claims remain blocked until target-free render/detector execution, downstream trajectory execution, heldout transfer, and external navigation/search baseline evaluation.
 
 ## Active Experiment
 
@@ -19,8 +19,9 @@ Main experiment implementation stage has started. E001-M01 through E001-M05, E00
 | E003 | M00-M75 query bridge ready | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Input to E004 |
 | E004 | M01-M05 ready with constraints | [E004_task_context_memory_trust](E004_task_context_memory_trust/README.md) | Input to E005 |
 | E005 | M01-M101 ready | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Input to E007 |
+| E006 | M01-M06 human-intent contract, strong baseline suite, transfer stress, utility formula, schema materialization, and baseline policy rows ready | [E006_human_intent_main_claim](E006_human_intent_main_claim/README.md) | E006-M07 utility metric row materialization smoke |
 | E007 | M01-M07 paper-facing path-cost proxy bridge package ready | [E007_navigation_path_cost_bridge](E007_navigation_path_cost_bridge/README.md) | Input to E008-M01 |
-| E008 | M01-M86 navigation source/adapter/oracle metric/staging, rendered detector-source plan, detector candidates, navmesh validation, visit-order path smoke, goal-evaluation smoke, trajectory smoke, source-gap repair/expansion, full-val-mini scale, source-gap non-oracle source/observation expansion, render frame verification, and source-gap detector candidate-source verification ready with final H001 navigation blocked | [E008_real_navigation_benchmark](E008_real_navigation_benchmark/README.md) | E008-M87 source-gap detector candidate navmesh/source-readiness validation |
+| E008 | M01-M122 ready; M123 relaunch generated files but render verification failed 295 / 320 frames | [E008_real_navigation_benchmark](E008_real_navigation_benchmark/README.md) | E008-M123 depth-positive frame repair and verification |
 
 ## 사실
 
@@ -254,7 +255,7 @@ Main experiment implementation stage has started. E001-M01 through E001-M05, E00
 - E005-M03 depth conversion `.pgm` -> `.png` required: true.
 - E005-M03 object `*.pkl` schema inspection ready: false.
 - E005-M04 `DualMap` staging root materialization is complete with status `e005_m04_dualmap_staging_root_materialized_smoke_ready`.
-- E005-M04 staged dataset root: `local_dataset/DualMap_staged/3rscan_scannet_exported/scannet`.
+- E005-M04 staged dataset root was `local_dataset/DualMap_staged/3rscan_scannet_exported/scannet`; the local `DualMap` runtime/cache paths were later deleted after deprioritization.
 - E005-M04 materialized scans: 4 / 4.
 - E005-M04 color symlinks / depth PNG / pose symlinks: 826 / 826 / 826.
 - E005-M04 intrinsic files: 4.
@@ -294,7 +295,7 @@ Main experiment implementation stage has started. E001-M01 through E001-M05, E00
 - E005-M08 verifier status is `e005_m08_dualmap_runtime_running`.
 - E005-M08 tmux session: `e005_m08_dualmap_runtime`.
 - E005-M08 log path: `logs/20260513_153046_e005_m08_dualmap_one_scan_runtime.log`.
-- E005-M08 output path: `local_dataset/DualMap_outputs/ddc73795-765b-241a-9c5d-b97744afe077`.
+- E005-M08 output path was `local_dataset/DualMap_outputs/ddc73795-765b-241a-9c5d-b97744afe077`; the local `DualMap` runtime/cache paths were later deleted after deprioritization.
 - E005-M08 scan id: `ddc73795-765b-241a-9c5d-b97744afe077`.
 - E005-M08 runtime object `*.pkl` count while running: 0.
 - E005-M09 `DualMap` runtime completion verification is complete with status `e005_m08_dualmap_runtime_failed`.

@@ -1,6 +1,6 @@
 # Experiment Report
 
-Updated: 2026-06-01
+Updated: 2026-06-06
 
 이 문서는 현재 `experiments/` 단계에서 확인된 기여점, reviewer가 공격할 핵심 지점, 방어 전략, 최종 논문 방향성을 정리한다. 세부 산출물은 각 experiment folder와 artifact에 둔다.
 
@@ -11,9 +11,10 @@ Updated: 2026-06-01
 - Active direction: `CAND-001` / `Intent- and Staleness-Aware Semantic Mapping`.
 - Active hypothesis: `H001_stale-object-memory`.
 - Main experiment stage has started under `experiments/`.
-- Latest E008 status: E008-M86 source-gap detector candidate-source verification is complete with status `e008_m86_source_gap_detector_candidate_source_verified`; E008-M87 navmesh/source-readiness validation is next.
+- Latest E008 status: E008-M123 target-free render was relaunched after GPU memory became available. It generated 320 / 320 color/depth/pose files, but verification failed with ready frames 295 / 320 because 25 depth frames failed positive-depth validation. E008-M123 must be repaired and verified before E008-M124 detector execution.
+- Latest E006 status: E006-M01 through E006-M06 are complete in `experiments/E006_human_intent_main_claim/`; M06 materialized 10,400 baseline policy rows with leakage fail rows 0. E006-M07 utility metric row materialization is the next E006 implementation unit if human intent remains a main-claim target.
 - Latest E008 execution result: E008-M73 is the latest Docker trajectory execution. It runs 1,598 trajectory attempts over 120 scan-task-policy rows with aggregate `trajectory_SR` 0.8 and mean `trajectory_SPL` 0.194696.
-- Latest claim boundary: M86 verifies source-gap detector candidate-source availability and schema/coordinate readiness only. It does not yet verify navmesh reachability, source-gap recovery, proxy-evaluation, or trajectory result. Final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, detector target-recall claim, and human intent as a main claim remain false.
+- Latest claim boundary: M123 is not complete and does not support rendered-frame readiness, detector/mapper output, source-gap recovery, deployable source-expansion trigger, or trajectory `SR` / `SPL`. E006-M06 is policy-row readiness only and does not support utility improvement or human intent as a main claim. Final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, detector target-recall claim, source-gap recovery, and human intent as a main claim remain false.
 - E001 provides a semantic-pair dynamic object search proxy benchmark.
 - E002 provides path/search-cost bridge fields and `occupancy_grid_astar_v0` proxy path costs.
 - E003 provides controlled perception/proposal-noise tests and a Dockerized RGB-D/open-vocabulary proposal route.
@@ -36,6 +37,11 @@ Updated: 2026-06-01
 - E004-M05 supports memory-trust claim strength `split_supported`.
 - E004-M05 task-context-specific claim strength is `limited_positive_not_label_broad`.
 - E004-M05 task-context vs context-agnostic success delta is +2 rows, bootstrap positive rate is 0.872, and positive label groups are `chair` / `pillow`.
+- E006-M01 fixes the human-intent upgrade contract: same-evidence paired task contexts, structured task utility schema, strong context-agnostic baselines, utility/regret metrics, and pass/warning/fail gates. It does not execute data or support a human-intent claim yet.
+- E006-M02 fixes the strong baseline suite and schemas: `static_stale_memory_v0`, `detector_confidence_topk_v0`, `fixed_topk_always5_v0`, `context_agnostic_memory_trust_reobserve_v0`, `all_high_value_memory_trust_counterfactual_v0`, `all_reobserve_budget5_v0`, `risk_threshold_only_v0`, `path_cost_only_reachable_first_v0`, `proposal_reliability_only_v0`, `dev_best_global_mixture_v0`, external-map-only pressure rows, required ablations, and `paired_context_queries.jsonl` / `baseline_policy_rows.jsonl` / `utility_metric_rows.jsonl` fields.
+- E006-M03 fixes the context generalization stress gate: heldout scan, label, task, source-ready/source-gap, and external-route split axes; transfer pass/warning/fail gates; claim permission rules; and `transfer_split_manifest.jsonl` / `group_transfer_metrics.jsonl` artifact contracts.
+- E006-M04 fixes the utility formula and implementation-readiness contract: `ContextUtility`, `IntentRegret`, `ContextSpecificGain`, `search_cost_contract_v0`, frozen task profiles, profile pairs, row-generation order, M04 pass/warning/fail gates, and `implementation_manifest.json` fields. It does not execute data or support a human-intent claim yet.
+- E006-M05 materializes the schema and paired-context smoke rows: 65 evidence groups, 520 paired-context rows, 2,600 transfer manifest rows, 23 label groups, 5 task groups, source-ready/source-gap rows 464/56, required-field validation missing rows 0, and blocked output term hits 0. It does not execute policies, compute utility, or support a human-intent claim yet.
 - E005-M01 external baseline transition is complete with status `e005_m01_external_baseline_transition_ready`.
 - E005-M01 scored 10 candidate baselines and selected `DualMap` as the first external baseline route.
 - E005-M01 selected `ConceptGraphs` as the backup route.
@@ -50,7 +56,7 @@ Updated: 2026-06-01
 - E005-M03 selected adapter `scannet_exported_3rscan_adapter_v0` and keeps materialization/depth conversion required.
 - E005-M03 did not launch `DualMap` runtime and did not inspect object `*.pkl` schema.
 - E005-M04 `DualMap` staging root materialization is complete with status `e005_m04_dualmap_staging_root_materialized_smoke_ready`.
-- E005-M04 staged dataset root is `local_dataset/DualMap_staged/3rscan_scannet_exported/scannet`.
+- E005-M04 staged dataset root was `local_dataset/DualMap_staged/3rscan_scannet_exported/scannet`; the local `DualMap` runtime/cache paths were deleted after the route was deprioritized.
 - E005-M04 materialized scans 4 / 4 with 826 color symlinks, 826 depth PNG files, 826 pose symlinks, and 4 intrinsic files.
 - E005-M04 runtime command plan is ready for `ddc73795-765b-241a-9c5d-b97744afe077`.
 - E005-M04 did not launch `DualMap` runtime and did not inspect object `*.pkl` schema.
@@ -80,7 +86,7 @@ Updated: 2026-06-01
 - E005-M08 verifier status is `e005_m08_dualmap_runtime_running`.
 - E005-M08 tmux session is `e005_m08_dualmap_runtime`.
 - E005-M08 log path is `logs/20260513_153046_e005_m08_dualmap_one_scan_runtime.log`.
-- E005-M08 output path is `local_dataset/DualMap_outputs/ddc73795-765b-241a-9c5d-b97744afe077`.
+- E005-M08 output path was `local_dataset/DualMap_outputs/ddc73795-765b-241a-9c5d-b97744afe077`; the local `DualMap` runtime/cache paths were deleted after the route was deprioritized.
 - E005-M08 runtime object `*.pkl` count while running is 0.
 - E005-M09 `DualMap` runtime completion verification is complete with status `e005_m08_dualmap_runtime_failed`.
 - E005-M09 confirms tmux stopped and background returncode is 137.
@@ -464,6 +470,37 @@ Updated: 2026-06-01
 - Defense 8: scale from diagnostic scans to heldout splits only after the detector/evaluation bridge is stable.
 - Defense 9: treat `ConceptGraphs` heldout scale as baseline rigor, not novelty; the novelty claim must come from H001 improving `ExpectedSearchCost`, proxy `SR`, proxy `SPL`, stale-memory recovery, and failure reduction over static stale memory, detector-confidence ranking, `ConceptGraphs`-only map retrieval, and task-agnostic re-observation.
 - Defense 10: report `Open3DSG` primary-label and predicted-vocabulary rows separately, and make clear that the adapter uses only `scan_id`, `query_label`, predicted `candidate_label`, `candidate_score`, and `candidate_rank` before ranking.
+- Defense 11: separate external baseline roles. `HOV-SG` pressures map-to-navigation candidate generation, `VLFM` / `HM3D-OVON` pressure executable navigation `SR` / `SPL`, `3D-Mem` pressures scene-memory retrieval, and `GOAT-Bench` should wait for the E006 human-intent task contract.
+- Defense 12: if human intent is promoted, require E006 to show task-context utility gains over `context_agnostic_memory_trust_reobserve_v0`, `all_high_value_memory_trust_counterfactual_v0`, `all_reobserve_budget5_v0`, `path_cost_only_reachable_first_v0`, `detector_confidence_topk_v0`, `fixed_topk_always5_v0`, and `dev_best_global_mixture_v0` on same-evidence paired contexts.
+
+## External Baseline Contract
+
+사실:
+
+- `ConceptGraphs` and bounded `Open3DSG` are already converted into the current query-level evidence path.
+- `HOV-SG`, `VLFM`, `HM3D-OVON`, `GOAT-Bench`, and `3D-Mem` have not been run in this workspace.
+- E008 has the local `HM3D ObjectNav` / `Habitat` route needed to define navigation `SR` / `SPL` contracts, but final navigation evidence is still blocked.
+
+에이전트 추론:
+
+- The most useful next non-data baseline work is a `HOV-SG` source/runtime/input-output audit because it directly pressures whether a stronger hierarchical open-vocabulary semantic map can recover source-gap candidates.
+- `VLFM` or `HM3D-OVON` should be added only after the shared episode and blocked-input contract is fixed; otherwise the comparison will test different navigation problems.
+- `3D-Mem` is useful for reviewer defense around "is this just scene memory?", but it needs an adapter into H001's candidate visit-order interface.
+- `GOAT-Bench` is relevant only if human intent becomes a main claim. Since the project will promote human intent next, `GOAT-Bench` should be treated as a later E006-dependent baseline, not an immediate E008 dependency.
+
+Baseline priority:
+
+| Priority | Baseline | Why it matters | Blocked until |
+| --- | --- | --- | --- |
+| 1 | `HOV-SG` | strongest next pressure on map-to-navigation candidate generation and source-gap recovery | source/runtime audit and candidate-coordinate export contract |
+| 2 | `VLFM` or `HM3D-OVON` | required for real navigation `SR` / `SPL` reviewer defense | same `HM3D` episode/split/allowed-input contract |
+| 3 | `3D-Mem` | pressures whether H001 is distinct from generic scene memory | query/candidate memory adapter |
+| 4 | `GOAT-Bench` | relevant to human-facing task/intention claims | E006 human-intent task and utility metric contract |
+
+논문 주장:
+
+- Current paper evidence should still phrase these as planned baseline pressure routes, not completed comparisons.
+- A fair baseline table must keep map retrieval, scene memory, and navigation policy baselines in separate blocks unless they share the same input/output contract.
 
 ## Reviewer Defense Ledger
 
@@ -476,8 +513,8 @@ Updated: 2026-06-01
 | Is `ConceptGraphs` enough as an external baseline? | `ConceptGraphs` is fully converted on 195 heldout rows and is a valid proxy-search external map baseline. | Not enough for final real RGB-D/open-vocabulary robustness by itself; `Open3DSG` M64 adds a second bounded external scene-graph row, but it is adapter-based. |
 | Can `Open3DSG` be claimed as a baseline? | M56-M66 prove source/interface/schema/export/query-conversion, denominator alignment, corrected query-level metrics, leakage-safe predicted-vocabulary policy evaluation, and row-level failure boundary without modifying the read-only source. | Primary-label baseline is valid but below `ConceptGraphs` at 81 / 195 strict. Predicted-vocabulary adapter is stronger at 144 / 195 strict but should be labeled as a bounded adapter row. |
 | Does this prove real RGB-D/open-vocabulary robustness? | E003-M75 gives a real proposal bridge with 87 / 96 target detected rows and 33 / 96 bounded repair success rows. M67 scales this bridge to the M38/M45 195-row denominator. M75 full aggregate has target detected 144 / 195, H001 157 / 195, context-agnostic 156 / 195, `ConceptGraphs` same-batch 114 / 195, detector task-budget 24 / 195, and detector top5 51 / 195. M76 marks the table diagnostic-ready. M77/M78 show offline repair potential from pre-cap pools, with fixed replay top5 60 / 195. M80-M82 reproduce the b02 ranking gain in the runner path: detector top5 9 / 69 -> 15 / 69. M83 stops immediate b01/b03 reruns because remaining expected gains are too small. M84-M90 diagnose recall misses: prompt repair is not ready, strict pre-cap suppressed target count is 0, selected 1.5m-threshold recovery is only 2 targets / 6 rows, and the largest unresolved exposure is the `569d8f0f` zero-written cluster at 5 targets / 15 rows. M90 selects active-label precedence as a leakage-safe repair route and rejects `stool` scan-scope expansion. M91 validates the selected repair on one scan: pre-cap/final 0 / 0 -> 479 / 24 and matched target rows 5 / 5. M93 validates the repair at b02 batch level: target detected 42 / 69 -> 57 / 69 and detector top5 15 / 69 -> 18 / 69, with no side-effect loss. M94 projects b02-replaced aggregate target detected 159 / 195 and detector top5 60 / 195. M95 fixes the paper-facing boundary and keeps this as diagnostic evidence. M96/M97 select external proposal/mapping feasibility and `ConceptGraphs` reliability smoke. M98 shows H001 recovers 54 rows where both map strict top5 and real detector top5 fail, but `ConceptGraphs` succeeds on 24 H001-failure rows. | No. M98 is a diagnostic row-group analysis from existing artifacts. Final robustness remains blocked until the 24 map-success/H001-failure rows and heavier external-route need are resolved. |
-| Does this prove real navigation `SR` / `SPL`? | E002/E005 provide `ExpectedSearchCost` and `AttemptSPL` proxy. E007-M07 packages an occupancy-grid path-cost proxy table. E008-M22 verifies a tiny local `HM3D ObjectNav` + `Habitat` route. E008-M37 executes the dynamic-stale overlay smoke. E008-M61 executes high-path tail-slot rows and reaches `SR`/`SPL` 1.0000/0.3961 against budget-matched baselines. E008-M62 makes a bounded diagnostic navigation table and scale-up contract ready. E008-M63-M72 scale to full `val_mini`, render frames, detector proposals, navmesh validation, visit-order/path rows, leakage-safe goal-evaluation proxy, trajectory contract, and Docker preflight. E008-M73 executes 1,598 trajectory attempts over 120 scan-task-policy rows. E008-M74 interprets this as diagnostic-only. E008-M75-M82 test and reject rerank-only/source-expansion repairs as final trajectory routes. E008-M83-M85 fix and verify non-oracle source-gap source/observation expansion and 192/192 rendered frames. E008-M86 verifies 48 final source-gap detector candidates from 1,896 pre-cap candidates with 0 validator errors/warnings. | Not yet. M86 does not validate navmesh reachability for those candidates, recover source-gap rows, or execute trajectories. Final real navigation `SR` / `SPL`, deployable fixed-budget search, final RGB-D/open-vocabulary robustness, detector target-recall claim, and human-intent main claims remain blocked by E008-M87 navmesh/source-readiness validation, source-gap recovery evaluation, trajectory checks, heldout transfer, and stronger baselines. |
-| Is human intent a main contribution? | Structured `task_context_id` is included in H001 memory trust / re-observation policies, and E005-M65 records human intent reflected as structured task context. | H001 beats context-agnostic memory trust by only 1 success row, so do not claim natural-language intent understanding or main human-intent contribution yet. |
+| Does this prove real navigation `SR` / `SPL`? | E002/E005 provide `ExpectedSearchCost` and `AttemptSPL` proxy. E007-M07 packages an occupancy-grid path-cost proxy table. E008-M22 verifies a tiny local `HM3D ObjectNav` + `Habitat` route. E008-M37 executes the dynamic-stale overlay smoke. E008-M61 executes high-path tail-slot rows and reaches `SR`/`SPL` 1.0000/0.3961 against budget-matched baselines. E008-M62 makes a bounded diagnostic navigation table and scale-up contract ready. E008-M63-M72 scale to full `val_mini`, render frames, detector proposals, navmesh validation, visit-order/path rows, leakage-safe goal-evaluation proxy, trajectory contract, and Docker preflight. E008-M73 executes 1,598 trajectory attempts over 120 scan-task-policy rows. E008-M74 interprets this as diagnostic-only. E008-M75-M82 test and reject rerank-only/source-expansion repairs as final trajectory routes. E008-M83-M90 expand and evaluate source-gap observations, still finding 0/2 primary proxy success. E008-M91 diagnoses coverage/cap failure modes. E008-M92-M101 materialize the coverage branch, render/detect 96 frames for the remaining case, validate 24 candidates with 11 path-ready, create 57 visit-order rows, run leakage-safe goal evaluation, and reject trajectory promotion. M102 closes 2/2 source-gap cases negative and selects alternative proposal-source feasibility. | Not yet. M102 is negative repair-closure and route-selection evidence, not trajectory evidence. Final real navigation `SR` / `SPL`, deployable fixed-budget search, final RGB-D/open-vocabulary robustness, detector target-recall claim, and human-intent main claims remain blocked by alternative proposal-source feasibility, heldout transfer, and stronger baselines. |
+| Is human intent a main contribution? | Structured `task_context_id` is included in H001 memory trust / re-observation policies, and E005-M65 records human intent reflected as structured task context. E006-M01 fixes same-evidence paired contexts and utility fields. E006-M02 fixes strong context-agnostic baselines, required ablations, row schemas, and leakage audit. E006-M03 fixes scan/label/task/source/external-route transfer gates. E006-M04 freezes utility formula, cost-source contract, task profiles, and implementation manifest fields before execution. E006-M05 materializes paired-context and transfer rows with blocked output term hits 0. | Current evidence is too narrow: H001 beats context-agnostic memory trust by only 1 success row. E006-M01/M02/M03/M04/M05 are contracts/schema evidence, not performance evidence. Human intent can be promoted only if later execution results pass strong-baseline and transfer gates. |
 | Are failed baselines being hidden? | `DualMap` executed but produced no object `*.pkl`; E003-M45 and E003-M50 negative support/mask routes are documented. | Use them as failure-boundary evidence, not as performance baselines. |
 
 논문 주장:
@@ -652,11 +689,12 @@ Cold assessment:
 
 - Use Direction A as the backbone now.
 - Treat Direction B as the final target, not a separate replacement.
-- The next technical step should be E008-M76 full-val-mini source-gap/SPL repair row materialization smoke.
+- The next E008 technical step should be E008-M123 depth-positive frame repair, followed by M123 completion verification.
 - M93 should preserve the current claim boundary: it tests net target-detection recovery and `chair`/`stool` side effects, not final real RGB-D/open-vocabulary robustness.
 - E005 should preserve the E004 claim boundary: split-supported memory trust, limited task-context specificity, no final real RGB-D/open-vocabulary robustness, no deployable search policy, and no real navigation `SR` / `SPL`.
 - External proposal/mapping baselines such as `OpenMask3D`, `ConceptGraphs`, and `HOV-SG` should be evaluated as claim-expansion routes, not retrofitted as detector improvements.
 - Do not claim real navigation `SR` / `SPL` until H001 beats budget-matched baselines, source-gap failures are separated, dynamic-stale overlay trajectories are scaled beyond the 6-episode smoke, and navigation/search baselines are added.
+- E006-M01/M02/M03/M04/M05/M06 have fixed task utility, strong context-agnostic baseline, transfer-stress, utility-formula, implementation-readiness, paired-context schema materialization, and baseline policy rows. The next E006 item is E006-M07 utility metric row materialization because human intent still cannot be claimed without utility/regret metrics and heldout scan / label / task-group transfer evidence.
 
 사용자 판단 필요:
 
