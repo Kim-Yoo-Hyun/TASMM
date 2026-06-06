@@ -4,9 +4,11 @@ Updated: 2026-06-06
 
 ## Status
 
-E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M122 are complete as source/adapter/contract/oracle-metric/candidate-source staging, rendered RGB-D detector route, leakage-safe goal evaluation, trajectory execution, H001 fallback execution, dynamic-stale overlay execution, budget-matched repair, source-diverse redesign/materialization/execution, routine-fetch repair, task-context boundary, navigation boundary package, source-gap repair chain, high-path tail-slot materialization, leakage-safe goal-evaluation smoke, Docker trajectory execution, result interpretation/scale decision, scale-up/source-boundary contract, full-val-mini detector source chain, source-gap non-oracle source/observation expansion, source-gap render frame staging, source-gap detector candidate-source verification, source-gap detector candidate navmesh/source-readiness validation, source-gap detector candidate visit-order/path smoke, source-gap leakage-safe goal-evaluation smoke, source-gap detector-goal result interpretation, source-gap target-coverage/candidate-source failure diagnosis, source-gap two-branch coverage/cap repair contract, coverage-expansion repair closure, alternative proposal-source feasibility, `ConceptGraphs` HM3D source-gap adapter preflight, source-gap staging materialization, bounded runtime launch/verification contract, runtime completion verification, candidate export adapter contract, candidate row materialization smoke, candidate navmesh/source-readiness validation, candidate visit-order/path smoke, leakage-safe candidate goal-evaluation smoke, result interpretation / trajectory decision, case-level failure audit / repair route contract, stop-region/source-coverage audit materialization, stop-region/source-coverage route decision, non-oracle stop-region transform materialization smoke, source-coverage external/visibility preflight, target-free source-coverage expansion contract, target-free source materialization smoke, and target-free render/detector launcher contract. Final navigation, deployable policy, real RGB-D/open-vocabulary robustness, and human-intent main claims remain blocked pending target-free render/detector execution, trajectory execution, heldout transfer, and external navigation/search baselines.
+Current concise status: E008-M01 through E008-M136 are complete. M130 executed the one-case target-free detector-policy trajectory smoke, M131 interpreted it as a proxy-to-trajectory flip, M132 fixed a trajectory-aware visit-order repair contract, M133 materialized repair rows plus runner aliases, M134 fixed the execution contract / Docker preflight, M135 executed the repair trajectory smoke, and M136 interpreted the result. M136 rejects scaling the current repair because selected repair `SPL` 0.329622 is below detector-confidence / confidence-only `SPL` 0.701267. Next unit is E008-M137 confidence-preserving trajectory-aware repair contract.
 
-Next unit: E008-M123 `HM3D` target-free source-coverage render frame staging depth-positive repair, then completion verification.
+E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M136 are complete as source/adapter/contract/oracle-metric/candidate-source staging, rendered RGB-D detector route, leakage-safe goal evaluation, trajectory execution, H001 fallback execution, dynamic-stale overlay execution, budget-matched repair, source-diverse redesign/materialization/execution, routine-fetch repair, task-context boundary, navigation boundary package, source-gap repair chain, high-path tail-slot materialization, leakage-safe goal-evaluation smoke, Docker trajectory execution, result interpretation/scale decision, scale-up/source-boundary contract, full-val-mini detector source chain, source-gap non-oracle source/observation expansion, `ConceptGraphs` HM3D source-gap route, target-free source-coverage expansion, target-free detector candidate-source route, trajectory-contract gates, trajectory-aware repair materialization, repair trajectory execution smoke, and repair result interpretation. M130 confirms execution works but the path-cost method loses `SPL` to detector-confidence baselines on the one target-free case; M135 confirms the repair runner works but the selected repair still loses `SPL` to detector-confidence / confidence-only baselines; M136 rejects current repair scale-up and selects confidence-preserving repair. Final navigation, deployable policy, real RGB-D/open-vocabulary robustness, and human-intent main claims remain blocked pending stronger repair evidence, heldout transfer, and external navigation/search baselines.
+
+Next unit: E008-M137 `HM3D` target-free confidence-preserving trajectory-aware repair contract.
 
 ## Source Rule
 
@@ -27,13 +29,13 @@ Next unit: E008-M123 `HM3D` target-free source-coverage render frame staging dep
 | metrics | `SR`, `SPL`, path length, candidate visits, `ExpectedSearchCost`, `OldLocationDeadEndCostM`, failure type, and E007 proxy-to-execution consistency. |
 | command | `python experiments/E008_real_navigation_benchmark/tools/plan_m01_navigation_source_episode_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m02_hm3d_objectnav_adapter_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m03_h001_candidate_navigation_adapter.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m04_objectnav_oracle_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m05_hm3d_candidate_source_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m06_hm3d_semantic_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m07_hm3d_rendered_rgbd_detector_source.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m08_hm3d_rendered_rgbd_frame_staging_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m09_hm3d_rendered_rgbd_detector_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m10_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m11_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m12_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m13_detector_goal_failure_audit.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m14_non_oracle_observation_coverage.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m16_non_oracle_observation_expansion_detector_candidate_smoke.py --require-ready`; `python experiments/E008_real_navigation_benchmark/tools/run_m17_expanded_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m18_expanded_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m19_expanded_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m20_expanded_detector_goal_failure_comparison_navigation_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m21_expanded_detector_policy_trajectory_execution_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m23_trajectory_proxy_consistency_h001_source_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m24_h001_candidate_source_instantiation_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m25_h001_candidate_source_materialization_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m26_h001_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m27_h001_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m28_h001_goal_evaluation_comparison_trajectory_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m29_h001_current_observation_fallback_source_repair.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m30_h001_current_observation_fallback_replay_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m31_h001_fallback_trajectory_contract_source_gap_boundary.py`; `docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m32_h001_fallback_trajectory_execution_smoke.py --m31-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M32_h001_fallback_trajectory_execution_smoke_v0"`; `python experiments/E008_real_navigation_benchmark/tools/plan_m33_h001_trajectory_result_interpretation_baseline_alignment.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m34_dynamic_stale_navigation_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m35_dynamic_stale_overlay_materialization_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m36_dynamic_stale_overlay_trajectory_contract.py` |
 | output | Source preflight rows, episode schema rows, metric contract rows, baseline contract rows, allowed/blocked input rows, candidate visit-order rows, route decision rows, next action rows, and report. |
-| conclusion | E008-M01 selects `HM3D ObjectNav` + `Habitat` as the first real navigation source. E008-M02-M42 build and execute the detector/H001/dynamic-stale trajectory smoke chain with final navigation claims blocked. E008-M43 fixes source-diverse policy redesign because detector source-gap rows are recoverable in the full current candidate pool but not under confidence top-5. E008-M44-M82 iterate through source-diverse, routine-fetch, high-path tail-slot, full-val-mini, trajectory, source-gap/SPL repair, and loss-safe source-expansion gates while keeping final navigation claims blocked. E008-M83 fixes the non-oracle source/observation expansion contract. E008-M84 materializes source-gap render/detector inputs. E008-M85 verifies source-gap rendered frame staging. E008-M86 verifies source-gap detector candidate-source generation. E008-M87 validates source-gap candidates against navmesh/source-readiness and passes 2/2 source-gap cases. E008-M88 materializes source-gap visit-order/path rows. E008-M89 shows leakage-safe goal-evaluation proxy recovery is still 0/2. E008-M90 rejects trajectory promotion. E008-M91 separates target-coverage failure modes. E008-M92 fixes the two-branch coverage/cap repair contract. E008-M93 materializes coverage-expansion rows and cap-threshold probe rows. E008-M94 rejects the cap branch as immediate recovery and selects coverage launcher adaptation. E008-M95 adapts M93 coverage rows into M96/M97 launcher inputs and command ledger. E008-M96 verifies coverage-expansion rendered frame staging. E008-M97 verifies coverage-expansion detector candidate-source generation. E008-M98 validates coverage-expansion candidates against navmesh/source-readiness. E008-M99 materializes coverage-expansion candidate visit-order/path rows. E008-M100 runs leakage-safe goal evaluation and shows coverage expansion still does not recover the remaining source-gap case. E008-M101 rejects trajectory promotion. E008-M102 closes the current two-branch detector source-gap repair route. E008-M103 selects `ConceptGraphs` HM3D source-gap adapter/preflight as the next alternative proposal-source route. E008-M104 confirms selected source-gap cases are adapter materialization-ready for `ConceptGraphs`. E008-M105 materializes the staged `ConceptGraphs` input layout and passes container-readability smoke. E008-M106 fixes the bounded runtime launch/verification contract and M108 verifier. E008-M107 completes the bounded runtime, E008-M108 verifies runtime outputs ready for 2/2 scans, E008-M109 confirms adapter-ready post-PCD object schemas with 29/42 objects, E008-M110 materializes 71 leakage-safe candidate rows with CLIP text scores, E008-M111 validates 48/71 candidates as path-ready over 2/2 source-ready queries, E008-M112 materializes 215 visit-order/path rows with leakage audit pass, E008-M113 evaluates those rows against `ObjectNav` targets with primary proxy success 0/2 for all policies, E008-M114 rejects trajectory promotion while splitting the failures into one severe source coverage gap and one stop-region/viewpoint alignment gap, E008-M115 fixes M116 as the next audit materialization contract, E008-M116 materializes one source-coverage audit row plus one stop-region alignment audit row, E008-M117 selects M118 stop-region transform smoke while deferring the source-coverage gap to external/visibility preflight, E008-M118 materializes 50 stop-region candidates with 50/50 path-ready rows and budget-5 proxy recovery for the selected `toilet` case, E008-M119 verifies that the remaining `sofa` case is a source-coverage failure because current source poses are far from the target view region, E008-M120 fixes a target-free source-coverage expansion contract with two selected M121 materialization routes, E008-M121 materializes 40 target-free source poses, 320 render-plan rows, and 2 detector manifests with target/viewpoint leakage false, and E008-M122 fixes launcher inputs and long-job command ledgers for M123 render and M124 detector execution. Source-gap recovery remains unsupported until render/detector and leakage-safe goal evaluation pass. |
+| conclusion | E008-M01 selects `HM3D ObjectNav` + `Habitat` as the first real navigation source. E008-M02-M42 build and execute the detector/H001/dynamic-stale trajectory smoke chain with final navigation claims blocked. E008-M43 fixes source-diverse policy redesign because detector source-gap rows are recoverable in the full current candidate pool but not under confidence top-5. E008-M44-M82 iterate through source-diverse, routine-fetch, high-path tail-slot, full-val-mini, trajectory, source-gap/SPL repair, and loss-safe source-expansion gates while keeping final navigation claims blocked. E008-M83 fixes the non-oracle source/observation expansion contract. E008-M84 materializes source-gap render/detector inputs. E008-M85 verifies source-gap rendered frame staging. E008-M86 verifies source-gap detector candidate-source generation. E008-M87 validates source-gap candidates against navmesh/source-readiness and passes 2/2 source-gap cases. E008-M88 materializes source-gap visit-order/path rows. E008-M89 shows leakage-safe goal-evaluation proxy recovery is still 0/2. E008-M90 rejects trajectory promotion. E008-M91 separates target-coverage failure modes. E008-M92 fixes the two-branch coverage/cap repair contract. E008-M93 materializes coverage-expansion rows and cap-threshold probe rows. E008-M94 rejects the cap branch as immediate recovery and selects coverage launcher adaptation. E008-M95 adapts M93 coverage rows into M96/M97 launcher inputs and command ledger. E008-M96 verifies coverage-expansion rendered frame staging. E008-M97 verifies coverage-expansion detector candidate-source generation. E008-M98 validates coverage-expansion candidates against navmesh/source-readiness. E008-M99 materializes coverage-expansion candidate visit-order/path rows. E008-M100 runs leakage-safe goal evaluation and shows coverage expansion still does not recover the remaining source-gap case. E008-M101 rejects trajectory promotion. E008-M102 closes the current two-branch detector source-gap repair route. E008-M103 selects `ConceptGraphs` HM3D source-gap adapter/preflight as the next alternative proposal-source route. E008-M104 confirms selected source-gap cases are adapter materialization-ready for `ConceptGraphs`. E008-M105 materializes the staged `ConceptGraphs` input layout and passes container-readability smoke. E008-M106 fixes the bounded runtime launch/verification contract and M108 verifier. E008-M107 completes the bounded runtime, E008-M108 verifies runtime outputs ready for 2/2 scans, E008-M109 confirms adapter-ready post-PCD object schemas with 29/42 objects, E008-M110 materializes 71 leakage-safe candidate rows with CLIP text scores, E008-M111 validates 48/71 candidates as path-ready over 2/2 source-ready queries, E008-M112 materializes 215 visit-order/path rows with leakage audit pass, E008-M113 evaluates those rows against `ObjectNav` targets with primary proxy success 0/2 for all policies, E008-M114 rejects trajectory promotion while splitting the failures into one severe source coverage gap and one stop-region/viewpoint alignment gap, E008-M115 fixes M116 as the next audit materialization contract, E008-M116 materializes one source-coverage audit row plus one stop-region alignment audit row, E008-M117 selects M118 stop-region transform smoke while deferring the source-coverage gap to external/visibility preflight, E008-M118 materializes 50 stop-region candidates with 50/50 path-ready rows and budget-5 proxy recovery for the selected `toilet` case, E008-M119 verifies that the remaining `sofa` case is a source-coverage failure because current source poses are far from the target view region, E008-M120 fixes a target-free source-coverage expansion contract with two selected M121 materialization routes, E008-M121 materializes 40 target-free source poses, 320 render-plan rows, and 2 detector manifests with target/viewpoint leakage false, E008-M122 fixes launcher inputs and long-job command ledgers for M123 render and M124 detector execution, E008-M123 verifies a 295-frame depth-filtered detector-usable render subset, E008-M124 verifies 24 detector prediction rows over that subset, E008-M125 validates 15/24 candidates as path-smoke usable, E008-M126 materializes 69 visit-order/path rows with leakage audit pass, E008-M127 observes leakage-safe `any_viewpoint_xz_1p0` proxy recovery 1/1 for all four policies, E008-M128 selects a bounded trajectory contract/preflight gate, E008-M129 materializes 69 runner-compatible trajectory candidate rows, 4 execution plans, 1 eval-goal/oracle row pair, leakage audit pass, and Docker/data/runner preflight pass, and E008-M130 executes 4 policy trajectories with `SR` 1.0. M130 is diagnostic-negative for path-cost improvement because the path-cost policy `SPL` 0.092750 is below detector-confidence `SPL` 0.701267. Real navigation claims remain unsupported until result interpretation, heldout transfer, and baseline comparison pass. |
 
 ## Claim Boundary
 
-- E008-M01 through E008-M122 do not claim final real navigation `SR` / `SPL`.
-- E008-M01 through E008-M122 do not claim final real RGB-D/open-vocabulary robustness.
-- E008-M01 through E008-M122 do not make human intent a main contribution.
+- E008-M01 through E008-M136 do not claim final real navigation `SR` / `SPL`.
+- E008-M01 through E008-M136 do not claim final real RGB-D/open-vocabulary robustness.
+- E008-M01 through E008-M136 do not make human intent a main contribution.
 - E008-M33 explicitly blocks scaling the current H001 fallback trajectory as a main navigation result because it underperforms detector trajectories and lacks controlled stale-memory intervention.
 - E008-M34 is a contract/design unit only; it does not produce trajectory results or dynamic-stale navigation performance.
 - E008-M35 is an input materialization unit only; it does not produce trajectory results or dynamic-stale navigation performance.
@@ -120,7 +122,20 @@ Next unit: E008-M123 `HM3D` target-free source-coverage render frame staging dep
 - E008-M120 supports target-free source-coverage expansion contract only; it selects M121 materialization routes and input guards, but it does not materialize source poses, render frames, run detectors/mappers, recover source-gap rows, execute trajectories, or support final navigation claims.
 - E008-M121 supports target-free source materialization only; it writes source pose, snap-validation, render-plan, and detector-manifest rows with target/viewpoint leakage false, but it does not render frames, run detectors/mappers, recover source-gap rows, execute trajectories, or support final navigation claims.
 - E008-M122 supports target-free render/detector launcher contract only; it writes launcher inputs, expected-file checks, long-job command rows, verification commands, and claim-boundary rows, but it does not launch rendering, run detectors/mappers, recover source-gap rows, execute trajectories, or support final navigation claims.
-- E008-M123 relaunch generates target-free color/depth/pose files, but it does not pass render-frame readiness because 25 depth frames fail positive-depth validation.
+- E008-M123 verifies target-free detector-usable rendered frame staging after filtering 25 zero-depth frames from the detector manifest; it does not claim all 320 rendered frames are depth-valid.
+- E008-M124 verifies target-free detector candidate-source generation only; it does not validate navmesh reachability, evaluate source-gap recovery, execute trajectories, or support final navigation claims.
+- E008-M125 validates target-free detector candidates against coordinate/navmesh/source-readiness only; it does not materialize visit-order/path rows, evaluate goal recovery, execute trajectories, or support final navigation claims.
+- E008-M126 materializes target-free detector candidate visit-order/path rows only; it does not evaluate goal recovery, execute trajectories, or support final navigation claims.
+- E008-M127 evaluates fixed M126 rows against `ObjectNav` goals/viewpoints only as evaluation labels; it does not execute trajectories or support final navigation claims.
+- E008-M128 supports moving to a bounded target-free trajectory-contract gate only; it does not execute `Habitat` trajectories or support final navigation claims.
+- E008-M129 supports a runner-compatible target-free detector-policy trajectory execution contract and Docker/data/runner preflight only; it does not execute `Habitat` trajectories or support final navigation claims.
+- E008-M130 executes one target-free detector-policy trajectory smoke, but it does not support final navigation claims because it is one case and the path-cost method loses `SPL` to detector-confidence baselines.
+- E008-M131 supports result interpretation and scale decision only; it rejects current path-cost scale-up because source-to-candidate proxy path cost flips against executed candidate-to-candidate trajectory cost.
+- E008-M132 supports trajectory-aware repair contract and allowed/blocked input design only; it does not materialize repaired rows, execute trajectories, or support final navigation claims.
+- E008-M133 supports trajectory-aware repair row and cost-matrix materialization only; it does not execute repaired trajectories or support final navigation claims.
+- E008-M134 supports trajectory-aware repair execution contract and Docker/data/runner preflight only; it does not execute trajectories or support final navigation claims.
+- E008-M135 executes one target-free trajectory-aware repair trajectory smoke, but it does not support final navigation claims because it is one case and selected repair loses `SPL` to detector-confidence / confidence-only baselines.
+- E008-M136 supports result interpretation and scale decision only; it rejects current repair scale-up and selects confidence-preserving repair before any broader navigation run.
 - `3RScan` / `3DSSG` remains the dynamic stale-memory source, but the first real navigation execution source is `HM3D ObjectNav` because local `Habitat` runtime and navmesh-backed scenes are available.
 - Any `HM3D ObjectNav` result must be described as a navigation-source transfer/adapter experiment unless stale-memory state injection is explicitly implemented.
 
@@ -6488,15 +6503,15 @@ Artifacts:
 
 Long-job ledger:
 
-- E008-M123 render session: `e008_m123_target_free_render`, log `logs/20260605_160155_e008_m123_target_free_render.log`, output under `local_dataset/HM3D_navigation_bridge/E008-M121_hm3d_target_free_source_coverage_expansion_materialization_smoke_v0/`.
-- E008-M124 detector session: `e008_m124_target_free_detector`, log `logs/20260605_160155_e008_m124_target_free_detector.log`, output under `experiments/E008_real_navigation_benchmark/artifacts/E008-M124_target_free_source_coverage_detector_candidate_source_v0/`.
-- E008-M124 is deferred until E008-M123 render verification passes.
+- E008-M123 render session: `e008_m123_target_free_render`, latest successful log `logs/20260606_025834_e008_m123_target_free_render.log`, output under `local_dataset/HM3D_navigation_bridge/E008-M121_hm3d_target_free_source_coverage_expansion_materialization_smoke_v0/`.
+- E008-M124 detector session: `e008_m124_target_free_detector`, latest successful log `logs/20260606_094032_e008_m124_target_free_detector.log`, output under `experiments/E008_real_navigation_benchmark/artifacts/E008-M124_target_free_source_coverage_detector_candidate_source_v0/`.
+- E008-M124 completed after E008-M123 depth-filtered render verification.
 
 Claim boundary:
 
 - M122 supports launcher/readiness evidence only.
 - M122 does not launch rendering, run open-vocabulary detector/mapping inference, recover the `sofa` source-gap case, execute trajectories, or support final real navigation `SR` / `SPL`.
-- M122 keeps the M121 snap-warning boundary visible; M123 must verify actual RGB-D/depth/pose file readiness before M124 detector execution.
+- M122 keeps the M121 snap-warning boundary visible; M123 has verified a depth-filtered detector-usable frame subset before M124 detector execution.
 
 ## E008-M123
 
@@ -6512,7 +6527,7 @@ python experiments/E008_real_navigation_benchmark/tools/verify_m123_target_free_
 Facts:
 
 - Launch status after GPU-available relaunch: `e008_m123_target_free_render_frame_staging_launched`.
-- Verification status after relaunch: `e008_m123_target_free_render_frame_staging_verification_failed`.
+- Verification status after depth repair: `e008_m123_target_free_render_frame_staging_verified_with_depth_filtered_frames`.
 - tmux session: `e008_m123_target_free_render`.
 - Log path: `logs/20260606_025834_e008_m123_target_free_render.log`.
 - Render plan rows: 320.
@@ -6520,12 +6535,18 @@ Facts:
 - Ready frames after verification: 295 / 320.
 - Frame issue rows: 25.
 - Failure type: depth files exist, but `depth_positive` is false for 25 frames.
+- Depth repair status: `e008_m123_target_free_render_depth_validity_repair_ready`.
+- Original / repaired detector sampled frames: 320 / 295.
+- Detector sampled ready frames after repair: 295 / 295.
+- Detector sampled invalid frames after repair: 0.
+- Repaired manifest counts by route: 174 and 121 sampled frames.
 - Detector input files ready: true.
 - `tmux` running after verification: false.
-- Rendered RGB-D/depth/pose outputs ready: false by verifier because not all depth frames pass positive-depth validation.
+- Full render-frame staging ready: false.
+- Depth-filtered detector manifest ready: true.
 - GPU free memory observed before relaunch: 31,282MiB / 32,607MiB.
 - Container smoke with `research3/habitat-h001:20260508-calib-artifacts` passed for `habitat_sim` import and render script visibility.
-- Selected next unit: repair E008-M123 target-free render frame staging, then E008-M124 detector candidate-source background launch only after M123 verification passes.
+- Selected next unit: E008-M124 target-free source-coverage detector candidate-source background launch.
 
 Artifacts:
 
@@ -6535,10 +6556,594 @@ Artifacts:
 - `experiments/E008_real_navigation_benchmark/artifacts/E008-M123_target_free_source_coverage_render_frame_staging_launch_v0/coverage.json`
 - `experiments/E008_real_navigation_benchmark/artifacts/E008-M123_target_free_source_coverage_render_frame_staging_launch_v0/job_status_rows.jsonl`
 - `experiments/E008_real_navigation_benchmark/artifacts/E008-M123_target_free_source_coverage_render_frame_staging_launch_v0/report.md`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M123_target_free_source_coverage_render_frame_staging_launch_v0/depth_repair_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M123_target_free_source_coverage_render_frame_staging_launch_v0/depth_repair_dropped_frame_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M123_target_free_source_coverage_render_frame_staging_launch_v0/depth_repair_manifest_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M121_hm3d_target_free_source_coverage_expansion_materialization_smoke_v0/detector_inputs/real_proposal_query_manifest.m122_pre_m123_depth_repair.jsonl`
 
 Claim boundary:
 
-- M123 is not complete.
-- M123 relaunch shows the GPU-memory blocker is cleared, but render-frame validity is still blocked by 25 positive-depth failures.
-- M123 does not support rendered-frame readiness, detector candidate quality, source-gap recovery, real navigation `SR` / `SPL`, deployable search policy, or final RGB-D/open-vocabulary robustness.
-- M124 must not be launched until M123 verification reports ready.
+- M123 is complete only as detector-input frame staging with depth-filtered frames.
+- M123 does not support full 320-frame render validity, detector candidate quality, source-gap recovery, real navigation `SR` / `SPL`, deployable search policy, or final RGB-D/open-vocabulary robustness.
+- M124 is complete; its detector output carries the 295-frame detector-subset boundary.
+
+## E008-M124
+
+Implementation unit: `E008-M124_target_free_source_coverage_detector_candidate_source_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/launch_m124_target_free_detector_candidate_source.py
+python experiments/E008_real_navigation_benchmark/tools/verify_m124_target_free_detector_candidate_source.py --require-ready
+```
+
+Facts:
+
+- Initial launch status: `e008_m124_target_free_detector_candidate_source_failed_or_needs_review`.
+- Initial failure cause: `HF_CACHE` permission error under `local_dataset/ConceptGraphs_model_cache/huggingface`.
+- Repair: launcher now uses writable cache `local_dataset/HM3D_navigation_bridge/model_cache/huggingface`.
+- Relaunch status: `e008_m124_target_free_detector_candidate_source_launched`.
+- Final verifier status: `e008_m124_target_free_detector_candidate_source_ready`.
+- tmux session: `e008_m124_target_free_detector`.
+- tmux running after verification: false.
+- Latest log path: `logs/20260606_094032_e008_m124_target_free_detector.log`.
+- Detector manifest rows: 2.
+- Detector sampled frames: 295.
+- Prediction rows: 24.
+- Raw prediction count: 2,986.
+- Pre-cap candidate rows: 2,910.
+- Validator errors/warnings: 0/0.
+- Source frames: M123 depth-filtered detector manifest.
+- Output path: `experiments/E008_real_navigation_benchmark/artifacts/E008-M124_target_free_source_coverage_detector_candidate_source_v0/`.
+- Selected next unit: E008-M125 target-free detector candidate navmesh/source-readiness validation.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M124_target_free_source_coverage_detector_candidate_source_v0/e008_m124_launch_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M124_target_free_source_coverage_detector_candidate_source_v0/e008_m124_verification_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M124_target_free_source_coverage_detector_candidate_source_v0/long_job_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M124_target_free_source_coverage_detector_candidate_source_v0/launch_report.md`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M124_target_free_source_coverage_detector_candidate_source_v0/e008_m124_verification_report.md`
+
+Claim boundary:
+
+- M124 supports target-free detector candidate-source generation over the M123 depth-filtered subset only.
+- M124 does not support source-gap recovery, real navigation `SR` / `SPL`, deployable search policy, or final RGB-D/open-vocabulary robustness.
+
+## E008-M125
+
+Implementation unit: `E008-M125_target_free_detector_candidate_navmesh_validation_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m125_target_free_detector_candidate_navmesh_validation.py
+```
+
+Facts:
+
+- Status: `e008_m125_target_free_detector_candidate_navmesh_validation_ready`.
+- Gate verdict: `pass`.
+- Gate reason: `target_free_detector_candidates_source_ready_for_visit_order_path_smoke`.
+- Input candidates: 24.
+- Coordinate-valid candidates: 24/24.
+- Snapped navigable candidates: 24/24.
+- Source-to-snapped path found: 15/24.
+- Candidate usable for path smoke: 15.
+- Blocked snapped point unreachable from episode start: 9.
+- Source-ready scans: 1/1.
+- Label counts: `sofa` 24.
+- Selected next unit: E008-M126 target-free detector candidate visit-order/path smoke.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M125_target_free_detector_candidate_navmesh_validation_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M125_target_free_detector_candidate_navmesh_validation_v0/candidate_navmesh_validation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M125_target_free_detector_candidate_navmesh_validation_v0/candidate_failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M125_target_free_detector_candidate_navmesh_validation_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M125_target_free_detector_candidate_navmesh_validation_v0/`
+
+Claim boundary:
+
+- M125 supports candidate coordinate/navmesh/source-readiness validation only.
+- M125 does not support source-gap recovery, leakage-safe goal recovery, trajectory execution, deployable search policy, real navigation `SR` / `SPL`, or final RGB-D/open-vocabulary robustness.
+
+## E008-M126
+
+Implementation unit: `E008-M126_target_free_detector_candidate_visit_order_path_smoke_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m126_target_free_detector_candidate_visit_order_path_smoke.py
+```
+
+Facts:
+
+- Status: `e008_m126_target_free_detector_candidate_visit_order_path_smoke_ready`.
+- Input M125 status: `e008_m125_target_free_detector_candidate_navmesh_validation_ready`.
+- Input candidates: 24.
+- Query-compatible candidates: 24.
+- Path-ready candidates: 15/24.
+- Failure rows: 9, all `blocked_snapped_point_unreachable_from_episode_start`.
+- Visit-order rows: 69.
+- Policy count: 4.
+- Leakage audit pass: true.
+- Eval-only `ObjectNav` goal/viewpoint fields used for policy: false.
+- `detector_confidence_all_candidates_v0`: first path-ready rank 2, first path-ready cost 2.273105m, top1 path-ready false.
+- `path_cost_ascending_reachable_subset_v0`: first path-ready rank 1, first path-ready cost 0.050025m.
+- `confidence_path_cost_tradeoff_reachable_subset_v0`: first path-ready rank 1, first path-ready cost 0.083614m.
+- Selected next unit: E008-M127 target-free leakage-safe detector candidate goal-evaluation smoke.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M126_target_free_detector_candidate_visit_order_path_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M126_target_free_detector_candidate_visit_order_path_smoke_v0/candidate_visit_order_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M126_target_free_detector_candidate_visit_order_path_smoke_v0/policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M126_target_free_detector_candidate_visit_order_path_smoke_v0/scan_source_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M126_target_free_detector_candidate_visit_order_path_smoke_v0/failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M126_target_free_detector_candidate_visit_order_path_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M126_target_free_detector_candidate_visit_order_path_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M126_target_free_detector_candidate_visit_order_path_smoke_v0/`
+
+Claim boundary:
+
+- M126 supports target-free detector candidate visit-order/path-cost materialization only.
+- M126 does not support source-gap recovery, leakage-safe goal recovery, trajectory execution, deployable search policy, real navigation `SR` / `SPL`, or final RGB-D/open-vocabulary robustness.
+
+## E008-M127
+
+Implementation unit: `E008-M127_target_free_detector_candidate_goal_evaluation_smoke_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m127_target_free_detector_candidate_goal_evaluation_smoke.py
+```
+
+Facts:
+
+- Status: `e008_m127_target_free_detector_candidate_goal_evaluation_smoke_ready`.
+- Input M126 status: `e008_m126_target_free_detector_candidate_visit_order_path_smoke_ready`.
+- Scan-source rows: 1.
+- Eval episode rows: 1.
+- Candidate-goal eval rows: 69.
+- Leakage audit pass: true.
+- Eval-only `ObjectNav` goal/viewpoint fields used for policy: false.
+- Primary metric: `any_viewpoint_xz_1p0`.
+- Primary proxy recovery observed: true.
+- Primary proxy SR: 1/1 for all 4 policies.
+- `detector_confidence_all_candidates_v0`: primary hit rank 5, proxy SPL 0.357073.
+- `detector_confidence_reachable_subset_v0`: primary hit rank 3, proxy SPL 0.357073.
+- `path_cost_ascending_reachable_subset_v0`: primary hit rank 10, proxy SPL 0.779043.
+- `confidence_path_cost_tradeoff_reachable_subset_v0`: primary hit rank 12, proxy SPL 0.779043.
+- `goal_xz_1p0` proxy SR: 0 for all policies.
+- Selected next unit: E008-M128 target-free detector-goal result interpretation and trajectory-execution decision.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M127_target_free_detector_candidate_goal_evaluation_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M127_target_free_detector_candidate_goal_evaluation_smoke_v0/target_free_eval_goal_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M127_target_free_detector_candidate_goal_evaluation_smoke_v0/candidate_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M127_target_free_detector_candidate_goal_evaluation_smoke_v0/policy_goal_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M127_target_free_detector_candidate_goal_evaluation_smoke_v0/target_free_scan_goal_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M127_target_free_detector_candidate_goal_evaluation_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M127_target_free_detector_candidate_goal_evaluation_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M127_target_free_detector_candidate_goal_evaluation_smoke_v0/`
+
+Claim boundary:
+
+- M127 supports leakage-safe target-free goal-evaluation proxy only.
+- M127 does not support trajectory execution, deployable search policy, real navigation `SR` / `SPL`, or final RGB-D/open-vocabulary robustness.
+
+## E008-M128
+
+Implementation unit: `E008-M128_target_free_detector_goal_result_interpretation_trajectory_decision_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m128_target_free_detector_goal_result_interpretation_trajectory_decision.py
+```
+
+Facts:
+
+- Status: `e008_m128_target_free_detector_goal_result_interpretation_trajectory_decision_ready`.
+- Input M125 status: `e008_m125_target_free_detector_candidate_navmesh_validation_ready`.
+- Input M126 status: `e008_m126_target_free_detector_candidate_visit_order_path_smoke_ready`.
+- Input M127 status: `e008_m127_target_free_detector_candidate_goal_evaluation_smoke_ready`.
+- Target-free scan rows: 1.
+- M125 path-ready candidates: 15 / 24.
+- M126 visit-order rows: 69.
+- M127 candidate-goal eval rows: 69.
+- Best any-viewpoint XZ distance: 0.856516m.
+- Best goal-center XZ distance: 2.857646m.
+- Primary proxy success: 1 / 1 for all four policies.
+- `goal_xz_1p0` proxy success: 0 / 1 for all policies.
+- Trajectory contract promotion ready: true.
+- Direct trajectory execution ready: false.
+- Long job launch now: false.
+- Selected next unit: E008-M129 target-free detector-policy trajectory execution contract and Docker preflight.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M128_target_free_detector_goal_result_interpretation_trajectory_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M128_target_free_detector_goal_result_interpretation_trajectory_decision_v0/target_free_case_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M128_target_free_detector_goal_result_interpretation_trajectory_decision_v0/policy_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M128_target_free_detector_goal_result_interpretation_trajectory_decision_v0/trajectory_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M128_target_free_detector_goal_result_interpretation_trajectory_decision_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M128_target_free_detector_goal_result_interpretation_trajectory_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M128_target_free_detector_goal_result_interpretation_trajectory_decision_v0/`
+
+Claim boundary:
+
+- M128 supports a bounded trajectory-contract gate because M127 recovered the selected target-free case under a leakage-safe viewpoint proxy.
+- M128 does not support real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, or human intent as a main claim.
+- The result remains one target-free case; M129/M130 must separate executed navigation behavior from proxy goal-evaluation behavior.
+
+## E008-M129
+
+Implementation unit: `E008-M129_target_free_detector_policy_trajectory_contract_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m129_target_free_detector_policy_trajectory_contract.py
+```
+
+Facts:
+
+- Status: `e008_m129_target_free_detector_policy_trajectory_contract_ready_runner_next`.
+- Trajectory candidate rows: 69.
+- Trajectory execution plan rows: 4.
+- Eval goal rows: 1.
+- Oracle path rows: 1.
+- Policy count: 4.
+- Full-ranked min `GoalEvalProxySR`: 1.000000.
+- Budget-5 min `GoalEvalProxySR`: 0.000000.
+- Leakage audit pass: true.
+- Docker preflight pass: true.
+- `Habitat` Docker image inspect: true.
+- `nvidia-smi` preflight: true.
+- M37 generalized runner compile pass: true.
+- M130 runner wrapper compile pass: true.
+- Selected next unit: E008-M130 target-free detector-policy trajectory execution smoke.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/episode_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/oracle_path_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/trajectory_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/m130_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M129_target_free_detector_policy_trajectory_contract_v0/`
+
+Claim boundary:
+
+- M129 supports only the runner-compatible target-free trajectory execution contract and Docker/data/runner preflight.
+- M129 does not execute `Habitat` trajectories and does not produce real navigation `SR` / `SPL`.
+- The next unit must run M130 before any trajectory result interpretation.
+
+## E008-M130
+
+Implementation unit: `E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0`.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work -w /work \
+  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m130_target_free_detector_policy_trajectory_execution_smoke.py \
+  --m129-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0 \
+  --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0 \
+  --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0"
+```
+
+Facts:
+
+- Status: `e008_m130_target_free_detector_policy_trajectory_execution_smoke_ready`.
+- Inside Docker: true.
+- Trajectory candidate rows: 69.
+- Trajectory attempt rows: 30.
+- Scan-policy metric rows: 4.
+- Trajectory success rows: 4.
+- Aggregate trajectory `SR`: 1.000000.
+- Mean trajectory `SPL`: 0.398100.
+- Leakage audit pass: true.
+- `path_cost_ascending_reachable_subset_v0` `SR` / `SPL`: 1.000000 / 0.092750.
+- `detector_confidence_reachable_subset_v0` `SR` / `SPL`: 1.000000 / 0.701267.
+- `detector_confidence_all_candidates_v0` `SR` / `SPL`: 1.000000 / 0.701267.
+- `confidence_path_cost_tradeoff_reachable_subset_v0` `SR` / `SPL`: 1.000000 / 0.097119.
+- Path-cost method pairwise `delta_SPL` vs detector-confidence baselines: -0.608517.
+- Selected next unit: E008-M131 target-free detector-policy trajectory result interpretation and scale decision.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0/`
+
+Claim boundary:
+
+- M130 supports executed one-case target-free trajectory smoke and metric plumbing.
+- M130 does not support a positive navigation-policy claim because all policies tie on `SR` and path-cost ordering loses `SPL` to detector-confidence baselines.
+- M130 does not support final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, or human intent as a main claim.
+
+## E008-M131
+
+Implementation unit: `E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m131_target_free_detector_policy_trajectory_result_interpretation_scale_decision.py
+```
+
+Facts:
+
+- Status: `e008_m131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_ready`.
+- M130 trajectory `SR` / mean `SPL`: 1.000000 / 0.398100.
+- Method policy: `path_cost_ascending_reachable_subset_v0`.
+- Method `SR` / `SPL`: 1.000000 / 0.092750.
+- Primary detector baseline: `detector_confidence_reachable_subset_v0`.
+- Primary detector `SR` / `SPL`: 1.000000 / 0.701267.
+- Method `delta_SPL` vs detector-confidence: -0.608517.
+- Method `delta_PathLengthM` vs detector-confidence: +94.858374.
+- Proxy-to-trajectory flip detected: true.
+- Scale current path-cost policy ready: false.
+- Selected next unit: E008-M132 target-free trajectory-aware visit-order repair contract.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/policy_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/proxy_trajectory_consistency_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/failure_diagnosis_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_v0/`
+
+Claim boundary:
+
+- M131 makes M130 usable as a diagnostic execution table, not a positive navigation result.
+- M131 rejects scaling the current source-to-candidate path-cost policy because it accumulates target-far visits in executed trajectory space.
+- M131 does not support final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, or human intent as a main claim.
+
+## E008-M132
+
+Implementation unit: `E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m132_target_free_trajectory_aware_visit_order_repair_contract.py
+```
+
+Facts:
+
+- Status: `e008_m132_target_free_trajectory_aware_visit_order_repair_contract_ready`.
+- Path-ready candidate rows for repair: 15.
+- Selected repair policy: `trajectory_greedy_confidence_path_repair_v0`.
+- Selected pairwise matrix: `candidate_to_candidate_geodesic_matrix_v0`.
+- Allowed input rows: 12.
+- Blocked input rows: 15.
+- Policy repair contract rows: 5.
+- M133 materialization plan rows: 1.
+- Selected next unit: E008-M133 target-free trajectory-aware visit-order repair materialization smoke.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/failure_to_repair_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/allowed_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/blocked_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/trajectory_cost_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/policy_repair_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/m133_materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M132_target_free_trajectory_aware_visit_order_repair_contract_v0/`
+
+Claim boundary:
+
+- M132 fixes a repair contract only. It does not create repaired rows or execute trajectories.
+- M132 blocks scale-up of the current source-to-candidate path-cost policy and selects M133 pairwise/current-pose cost materialization.
+- M132 does not support final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, or human intent as a main claim.
+
+## E008-M133
+
+Implementation unit: `E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0`.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work -w /work \
+  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m133_target_free_trajectory_aware_visit_order_repair_materialization.py \
+  --m129-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0 \
+  --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0 \
+  --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0"
+```
+
+Facts:
+
+- Status: `e008_m133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_ready`.
+- Path-ready candidate universe rows: 15.
+- Cost matrix rows: 225 / 225 expected.
+- Cost matrix path-found rows: 171; path-missing rows: 54.
+- Repair candidate rows: 75.
+- Repair execution plan rows: 5.
+- Leakage audit pass: true.
+- Runner alias files ready: `dynamic_stale_overlay_trajectory_candidate_rows.jsonl`, `trajectory_execution_plan_rows.jsonl`.
+- Selected next unit: E008-M134 target-free trajectory-aware repair trajectory execution contract / Docker preflight.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/trajectory_cost_matrix_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/trajectory_repair_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/trajectory_repair_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/policy_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0/`
+
+Claim boundary:
+
+- M133 materializes repaired visit-order rows only. It does not execute trajectories.
+- `ObjectNav` goal/viewpoint fields are copied only for metric use by the next runner and are not present in policy rows.
+- M133 does not support final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, or human intent as a main claim.
+
+## E008-M134
+
+Implementation unit: `E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m134_target_free_trajectory_aware_repair_trajectory_contract.py
+```
+
+Facts:
+
+- Status: `e008_m134_target_free_trajectory_aware_repair_trajectory_contract_ready_runner_next`.
+- Candidate rows: 75.
+- Execution plan rows: 5.
+- Eval goal rows / oracle path rows: 1 / 1.
+- Trajectory cost matrix rows: 225.
+- Leakage audit pass: true.
+- Docker preflight pass: true.
+- Runner compile pass: true.
+- Selected next unit: E008-M135 target-free trajectory-aware repair trajectory execution smoke.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/episode_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/oracle_path_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/trajectory_cost_matrix_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/trajectory_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/m135_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0/`
+
+Claim boundary:
+
+- M134 supports only execution contract / Docker preflight.
+- M134 does not execute trajectories or support final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, or human intent as a main claim.
+
+## E008-M135
+
+Implementation unit: `E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0`.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work -w /work \
+  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m135_target_free_trajectory_aware_repair_trajectory_execution_smoke.py \
+  --m134-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0 \
+  --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0 \
+  --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0"
+```
+
+Facts:
+
+- Status: `e008_m135_target_free_trajectory_aware_repair_trajectory_execution_smoke_ready`.
+- Trajectory candidate rows: 75.
+- Trajectory attempt rows: 31.
+- Scan-policy metric rows: 5.
+- Leakage audit pass: true.
+- Aggregate `SR`: 1.0.
+- Mean aggregate `SPL`: 0.422187.
+- Selected repair policy `trajectory_greedy_confidence_path_repair_v0`: `SR` 1.0, `SPL` 0.329622, path length 30.759799m, candidate visits 5.
+- Detector-confidence / confidence-only baselines: `SR` 1.0, `SPL` 0.701267, path length 14.458268m, candidate visits 3.
+- Path-only baseline: `SPL` 0.286028.
+- Path-cost ascending baseline: `SPL` 0.092750.
+- Selected next unit: E008-M136 target-free trajectory-aware repair trajectory result interpretation and scale decision.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0/`
+
+Claim boundary:
+
+- M135 supports only a one-case executed trajectory-aware repair smoke.
+- M135 does not support final real navigation `SR` / `SPL` because the selected repair policy loses `SPL` to detector-confidence / confidence-only baselines.
+- M135 does not support final RGB-D/open-vocabulary robustness, deployable search policy, or human intent as a main claim.
+
+## E008-M136
+
+Implementation unit: `E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m136_target_free_trajectory_aware_repair_result_interpretation_scale_decision.py
+```
+
+Facts:
+
+- Status: `e008_m136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_ready`.
+- M135 scan-policy rows: 5.
+- M135 trajectory attempts: 31.
+- Selected repair policy: `trajectory_greedy_confidence_path_repair_v0`.
+- Selected repair `SPL`: 0.329622.
+- Detector-confidence / confidence-only `SPL`: 0.701267.
+- Path-family repair diagnostic ready: true.
+- Scale current repair ready: false.
+- Gate fail count: 6.
+- Selected next unit: E008-M137 target-free confidence-preserving trajectory-aware repair contract.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/policy_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/pairwise_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/repair_diagnosis_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_v0/`
+
+Claim boundary:
+
+- M136 supports an executed repair diagnostic, not a positive navigation-improvement claim.
+- Current repair should not be scaled as a main result because it loses `SPL` to detector-confidence / confidence-only baselines.
+- M136 selects confidence-preserving trajectory repair before any scale-up.

@@ -104,7 +104,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - E003는 controlled perception/proposal noise와 Dockerized RGB-D/open-vocabulary proposal route를 구축했다.
 - E004는 `task_context_memory_trust_reobserve_v0`를 평가했다. Memory-trust decision claim은 split stress에서 지지되지만 task-context-specific claim은 `limited_positive_not_label_broad`다.
 - E005는 external baseline transition 단계다. `DualMap`은 object `*.pkl` output이 없어 performance baseline으로는 부적합하고, `ConceptGraphs`와 bounded `Open3DSG` predicted-vocabulary adapter가 현재 external baseline route다.
-- E006-M01/M02/M03/M04/M05/M06는 human intent를 main claim으로 승격하기 위한 contract, schema materialization, and baseline policy row materialization을 고정했다. Same-evidence paired task contexts, structured utility schema, strong context-agnostic baseline suite, frozen utility formula, frozen policy rows, utility/regret metrics, leakage audit, and heldout scan/label/task transfer gates를 요구하지만 아직 performance evidence claim은 아니다.
+- E006-M01/M02/M03/M04/M05/M06/M07/M08은 human intent를 main claim으로 승격하기 위한 contract, schema materialization, baseline policy row materialization, utility metric materialization, and claim decision을 고정했다. E006-M08 결론은 current evidence에서 human intent main claim을 지지하지 않고, structured task context를 secondary conditioning / ablation axis로 유지하는 것이다.
 - `ConceptGraphs` full heldout strict bbox top5는 114/195이고, H001 replay는 172/195다. `Open3DSG` bounded predicted-vocabulary adapter strict bbox top5는 144/195다.
 - Full real-proposal aggregate는 target detected 144/195, H001 157/195, context-agnostic 156/195, `ConceptGraphs` same-batch 114/195, detector top5 51/195다.
 - E005-M89는 `569d8f0f` zero-written cluster를 target-independent cleanup trace로 검증했다. 483 rows가 모두 drop됐고, dominant pattern은 `a chair` / `chair`가 canonical `stool`로 정규화된 뒤 active scan label `chair`와 맞지 않아 `drop_not_scan_prompt_label`로 제거되는 것이다.
@@ -143,22 +143,22 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 사실:
 
 - H001은 `ConceptGraphs`와 static memory 대비 개선을 보였지만, context-agnostic memory trust 대비 gain은 1 row로 좁다.
-- human intent main claim은 E006 실행 결과에서 frozen utility formula, strong context-agnostic baseline, and heldout scan/label/task transfer를 통과하기 전까지 보류한다.
+- human intent main claim은 E006-M08 기준으로 current paper path에서는 사용하지 않는다. 후속 판단은 explicit policy redesign 또는 E008 evidence 이후 재평가할 때만 진행한다.
 - real RGB-D/open-vocabulary proposal route는 full denominator까지 확장됐지만 final robustness claim은 아직 불가하다. Detector target detection, false-positive load, cleanup/label scope, real navigation evidence가 남아 있다.
 - `OpenMask3D`는 checkpoint는 준비됐지만 local Docker/`MinkowskiEngine` build blocker가 있다.
-- real navigation `SR` / `SPL`은 simulator/navmesh trajectory smoke와 diagnostic table까지 생겼지만 final claim은 아직 불가하다. E008-M123은 GPU memory 확보 후 relaunch되어 320/320 color/depth/pose files를 만들었지만, 25개 depth frame의 positive-depth check 실패로 verifier ready frames는 295/320에 머문다.
+- real navigation `SR` / `SPL`은 simulator/navmesh trajectory smoke와 diagnostic table까지 생겼지만 final claim은 아직 불가하다. E008-M136은 E008-M135 trajectory-aware repair 결과를 해석해 current repair scale-up을 거절하고, confidence-preserving trajectory repair를 다음 단계로 선택했다.
 
 에이전트 추론:
 
 - 다음 방어 포인트는 detector/prompt repair와 semantic memory decision contribution을 분리하는 것이다.
 - M93/M94/M95 결과상 active-label precedence repair는 b02 target-detection recovery에 타당하다. 하지만 H001 success와 detector task-budget을 개선하지 못했으므로 full heldout robustness가 아니라 failure-specific repair와 diagnostic boundary evidence로만 써야 한다.
-- E008-M123 기준으로도 바로 final navigation claim을 하면 안 된다. M123은 아직 render-frame readiness를 통과하지 못했고, target-free detector execution, deployable trigger, trajectory execution, external navigation/search baseline이 아직 필요하다.
+- E008-M136 기준으로도 바로 final navigation claim을 하면 안 된다. 현재는 one-case repair trajectory diagnostic 단계이며, confidence-preserving repair evidence, heldout transfer, external navigation/search baseline이 아직 필요하다.
 
 ## Experiment Plan
 
 사실:
 
-- Immediate next units: E008-M123 depth-validity repair/verification, and E006-M07 `utility_metric_rows.jsonl` materialization smoke.
+- Immediate next unit: E008-M137 target-free confidence-preserving trajectory-aware repair contract.
 - Strict 0.5m, relaxed 1.0m, center-localization metrics는 external baseline table에서 분리해 유지한다.
 - Docker는 논문 본문용 실제 구현 실험의 기본 실행 환경이다.
 
@@ -167,7 +167,7 @@ Working name은 `TASMM`로 둔다: `Task- and Staleness-aware Semantic Memory Ma
 - Main experiment는 `Task-Conditioned Stale Semantic Memory Update`가 dynamic object search에서 stale old-location failure와 search cost를 줄이는지 검증한다.
 - Robustness experiment는 controlled perception noise와 real RGB-D/open-vocabulary proposals에서 memory decision layer가 유지되는지 확인한다.
 - External baseline experiment는 `ConceptGraphs`, bounded `Open3DSG`, 가능하면 `HOV-SG` 또는 추가 proposal baseline과 비교해 novelty boundary를 방어한다.
-- Navigation/search-cost extension은 E007에서 `ExpectedSearchCost`, `AttemptSPL`, candidate visit order bridge를 만들었고, E008-M122까지 target-free render/detector launcher contract를 완료했다. E008-M123은 GPU relaunch 후 320/320 files를 만들었지만 295/320 ready frame 상태라 depth-validity repair가 필요하다. Human-intent extension은 E006-M06까지 frozen policy rows를 만들었고, 다음은 E006-M07에서 utility/regret rows를 계산하는 단계다.
+- Navigation/search-cost extension은 E007에서 `ExpectedSearchCost`, `AttemptSPL`, candidate visit order bridge를 만들었고, E008-M136까지 target-free trajectory execution, result interpretation, repair contract, repair row materialization, repair trajectory smoke, scale decision을 완료했다. 현재 결과는 실행 가능성 및 failure-diagnosis evidence이지만 positive navigation-improvement evidence는 아니다. Human-intent extension은 E006-M08까지 current evidence에서 main claim false로 결정됐다.
 
 사용자 판단 필요:
 

@@ -89,6 +89,47 @@ def rewrite_status(old_status: str) -> str:
     return "e008_m123_target_free_render_frame_staging_verification_failed"
 
 
+def frame_index(frame_id: str) -> int:
+    return int(str(frame_id).replace("frame-", ""))
+
+
+def detector_manifest_frame_status(data_out_dir: Path, frame_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    manifest_rows = read_jsonl(data_out_dir / "detector_inputs" / "real_proposal_query_manifest.jsonl")
+    ready_by_index: dict[int, bool] = {
+        frame_index(str(row.get("frame_id"))): bool(row.get("frame_ready")) for row in frame_rows
+    }
+    invalid_rows: list[dict[str, Any]] = []
+    total = 0
+    ready = 0
+    repaired_rows = 0
+    for manifest in manifest_rows:
+        repaired_rows += 1 if manifest.get("m123_depth_validity_repaired") else 0
+        for index in [int(item) for item in manifest.get("sampled_frame_indices", [])]:
+            total += 1
+            if ready_by_index.get(index, False):
+                ready += 1
+            else:
+                invalid_rows.append(
+                    {
+                        "frame_id": f"frame-{index:06d}",
+                        "frame_index": index,
+                        "manifest_route_id": manifest.get("route_id"),
+                        "scan_id": manifest.get("scan_id"),
+                    }
+                )
+    return {
+        "detector_manifest_rows": len(manifest_rows),
+        "detector_manifest_repaired_rows": repaired_rows,
+        "detector_sampled_frame_rows": total,
+        "detector_sampled_ready_frame_rows": ready,
+        "detector_sampled_invalid_frame_rows": len(invalid_rows),
+        "detector_sampled_invalid_rows": invalid_rows,
+        "depth_filtered_detector_manifest_ready": bool(
+            manifest_rows and total > 0 and repaired_rows == len(manifest_rows) and not invalid_rows
+        ),
+    }
+
+
 def build_report(coverage: dict[str, Any]) -> str:
     return "\n".join(
         [
@@ -102,6 +143,8 @@ def build_report(coverage: dict[str, Any]) -> str:
             f"- Output path: `{coverage['derived_output_root']}`.",
             f"- Expected frames: {coverage['expected_frame_rows']}.",
             f"- Ready frames: {coverage['ready_frame_rows']}.",
+            f"- Detector sampled ready frames: {coverage['detector_sampled_ready_frame_rows']} / {coverage['detector_sampled_frame_rows']}.",
+            f"- Depth-filtered detector manifest ready: {coverage['depth_filtered_detector_manifest_ready']}.",
             f"- Ready scans: {coverage['ready_scan_rows']} / {coverage['scan_rows']}.",
             f"- Snap validation rows: {coverage['snap_validation_rows']}.",
             f"- Snap-ready rows: {coverage['snap_ready_rows']}.",
@@ -113,6 +156,7 @@ def build_report(coverage: dict[str, Any]) -> str:
             "",
             "- M123 is the target-free rendered RGB-D frame staging gate.",
             "- If M123 fails, it does not support rendered-frame readiness.",
+            "- If M123 passes only via depth-filtered detector manifest readiness, it supports detector-input readiness but not all-frame render validity.",
             "- M123 does not run detector inference, evaluate source-gap recovery, execute trajectories, or support final real navigation `SR` / `SPL`.",
             "",
             "## Next",
@@ -137,11 +181,18 @@ def main() -> int:
     module.VERSION = VERSION
     coverage = module.run()
     old_status = str(coverage.get("status"))
-    ready = old_status.startswith("e008_m15_non_oracle_observation_expansion_frame_staging_verified")
+    frame_rows = read_jsonl(args.artifact_dir / "verification_frame_rows.jsonl")
+    detector_status = detector_manifest_frame_status(args.data_out_dir, frame_rows)
+    full_render_ready = old_status.startswith("e008_m15_non_oracle_observation_expansion_frame_staging_verified")
+    depth_filtered_ready = bool(detector_status["depth_filtered_detector_manifest_ready"])
+    ready = bool(full_render_ready or depth_filtered_ready)
+    status = rewrite_status(old_status)
+    if depth_filtered_ready and not full_render_ready:
+        status = "e008_m123_target_free_render_frame_staging_verified_with_depth_filtered_frames"
     coverage.update(
         {
             "version": VERSION,
-            "status": rewrite_status(old_status),
+            "status": status,
             "artifact_output_root": str(args.artifact_dir),
             "derived_output_root": str(args.data_out_dir),
             "tmux_session": TMUX_SESSION,
@@ -149,6 +200,8 @@ def main() -> int:
             "log_path": command.get("log_path"),
             "launch_command": command.get("command"),
             "verification_command": command.get("verification_command"),
+            "full_render_frame_staging_ready": full_render_ready,
+            **{key: value for key, value in detector_status.items() if key != "detector_sampled_invalid_rows"},
             "selected_next_unit": "E008-M124 target-free source-coverage detector candidate-source background launch"
             if ready
             else "repair E008-M123 target-free render frame staging",
@@ -165,6 +218,11 @@ def main() -> int:
         {
             "job_id": "E008-M123",
             "job_status": "completed_needs_downstream_detector" if ready else "failed_needs_repair",
+            "completion_mode": "full_render_ready"
+            if full_render_ready
+            else "depth_filtered_detector_manifest_ready"
+            if depth_filtered_ready
+            else "not_ready",
             "tmux_session": TMUX_SESSION,
             "tmux_running_after_verification": tmux_running(TMUX_SESSION),
             "log_path": command.get("log_path"),
@@ -174,6 +232,7 @@ def main() -> int:
     ]
     write_json(args.artifact_dir / "coverage.json", coverage)
     write_jsonl(args.artifact_dir / "job_status_rows.jsonl", command_status_rows)
+    write_jsonl(args.artifact_dir / "detector_sampled_invalid_frame_rows.jsonl", detector_status["detector_sampled_invalid_rows"])
     write_text(args.artifact_dir / "report.md", build_report(coverage))
     print(json.dumps(coverage, indent=2, sort_keys=True))
     if args.require_ready and not ready:

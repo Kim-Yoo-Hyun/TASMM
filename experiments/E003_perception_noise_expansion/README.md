@@ -4625,7 +4625,7 @@ Artifacts:
 - Expected file 1: `openmask3d_arbitrary_scene_model.ckpt`, minimum size 50 MB.
 - Expected file 2: `sam_vit_h_4b8939.pth`, minimum size 2 GB.
 - Verification command: `python experiments/E003_perception_noise_expansion/tools/verify_m67_openmask3d_checkpoints.py --cache-dir /home/yoohyun/research2/local_dataset/checkpoints/openmask3d --openmask3d-repo /home/yoohyun/research2/experiments/E003_perception_noise_expansion/external/openmask3d --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M67_openmask3d_checkpoint_env_route_v0`.
-- First two launch attempts failed quickly due to PEP 668 `pip --user` blocking and `gdown` v6 CLI syntax. The download script now uses `.venv_tools/gdown` and positional `gdown` id syntax.
+- First two launch attempts failed quickly due to PEP 668 `pip --user` blocking and `gdown` v6 CLI syntax. The download script used a local `.venv_tools/gdown` helper and positional `gdown` id syntax. `.venv_tools` is a recreatable operational byproduct and was later deleted.
 
 논문 주장:
 

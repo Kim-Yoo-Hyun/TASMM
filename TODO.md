@@ -17,13 +17,13 @@ Last updated: 2026-06-06
 
 Main experiment implementation.
 
-CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M101은 `Open3DSG` read-only source, full-denominator real proposal bridge, external proposal/mapping feasibility matrix, `ConceptGraphs` reliability boundary, row-group / heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary / navigation-bridge decision까지 완료했다. E006-M01-M06은 human intent를 main claim으로 승격하기 위한 same-evidence paired context / utility-regret / strong-baseline / transfer-stress / frozen utility-formula / implementation-readiness / schema materialization / baseline policy row materialization smoke까지 완료했고, E006-M07 utility metric row materialization smoke가 다음 E006 구현 단위다. E007-M01-M07은 M100 selected policy를 E002 `occupancy_grid_astar_v0` path-cost source와 연결해 route materialization, external candidate grid projection, path-cost policy metric, paper-table boundary, path-start/source-limit sensitivity audit, bridge-table package/navigation-expansion decision까지 완료했다. E008-M01-M122는 local read-only `HM3D ObjectNav` + `Habitat` source preflight부터 target-free render/detector launcher contract까지 완료했다. E008-M123은 GPU memory 확보 후 relaunch됐고 320/320 RGB-D/pose files를 생성했지만 verifier 기준 ready frames는 295/320이다. 실패 원인은 25개 depth frame의 positive-depth check 실패이며, 다음 E008 단위는 M123 depth-validity repair/verification이다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 및 E008 이후 `/home/yoohyun/research2/local_dataset/HM3D_navigation_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
+CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M101은 `Open3DSG` read-only source, full-denominator real proposal bridge, external proposal/mapping feasibility matrix, `ConceptGraphs` reliability boundary, row-group / heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary / navigation-bridge decision까지 완료했다. E006-M01-M08은 human intent를 main claim으로 승격하기 위한 same-evidence paired context / utility-regret / strong-baseline / transfer-stress / frozen utility-formula / implementation-readiness / schema materialization / baseline policy row / utility metric row / claim-decision gate까지 완료했다. E006-M08 결론은 current E006 evidence로 human intent main claim을 지지하지 않고, structured task context를 secondary conditioning/ablation axis로 유지하는 것이다. E007-M01-M07은 M100 selected policy를 E002 `occupancy_grid_astar_v0` path-cost source와 연결해 route materialization, external candidate grid projection, path-cost policy metric, paper-table boundary, path-start/source-limit sensitivity audit, bridge-table package/navigation-expansion decision까지 완료했다. E008-M01-M136은 local read-only `HM3D ObjectNav` + `Habitat` source preflight부터 target-free trajectory-aware repair trajectory result interpretation / scale decision까지 완료했다. E008-M123은 full 320-frame render validity가 아니라 25개 zero-depth frame을 detector manifest에서 제외한 `verified_with_depth_filtered_frames` 상태다. E008-M124는 295-frame detector subset에서 prediction 24 rows / pre-cap candidates 2,910 rows를 검증했고, E008-M125는 24 candidates 중 15 path-smoke usable / 9 unreachable로 pass했으며, E008-M126은 69 visit-order rows와 leakage audit pass를 생성했다. E008-M127은 `any_viewpoint_xz_1p0` proxy recovery 1/1을 관측했고, E008-M130은 4 policy trajectory smoke에서 `SR` 1.0을 관측했지만 path-cost method `SPL` 0.092750이 detector-confidence baselines `SPL` 0.701267보다 낮았다. E008-M131은 proxy-to-trajectory flip을 확인하고 current path-cost policy scale-up을 reject했다. E008-M132는 `trajectory_greedy_confidence_path_repair_v0`와 M133 materialization contract를 고정했고, E008-M133은 225 cost-matrix rows, 75 repair candidate rows, 5 execution plan rows를 materialize했다. E008-M134는 75 candidate rows / 5 plan rows를 다음 runner contract로 고정하고 Docker preflight를 통과했다. E008-M135는 5 policy trajectory smoke를 실행해 `SR` 1.0을 관측했지만 selected repair policy `SPL` 0.329622가 detector-confidence / confidence-only baseline `SPL` 0.701267보다 낮아 positive navigation-improvement claim은 아직 지지하지 않는다. E008-M136은 현재 repair scale-up을 reject하고, trajectory cost를 confidence ordering의 대체가 아니라 guarded/tie-break signal로 쓰는 E008-M137 confidence-preserving repair contract를 선택했다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 및 E008 이후 `/home/yoohyun/research2/local_dataset/HM3D_navigation_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
 
 CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active task는 없고, CAND-001 feasibility가 약해질 때 다시 승격 여부를 판단한다.
 
 ## Active Objective
 
-- CAND-001: Direction B 최종 목표를 유지하되, E008-M123은 depth-positive failure repair/verification이 필요하고, E006-M07 utility metric row materialization smoke를 병렬 다음 단위로 둔다.
+- CAND-001: Direction B 최종 목표를 유지하되, E008-M137 target-free confidence-preserving trajectory-aware repair contract를 active 다음 단위로 둔다. E006은 optional E006-M09 policy redesign 전까지 no active execution이다.
 - CAND-002: `Common-Ground Semantic Mapping`은 benchmark 설계 부담을 보류 상태로 둔다.
 - CAND-003: `Functional Semantic Memory`는 annotation/manipulation evaluation 부담을 보류 상태로 둔다.
 
@@ -31,8 +31,8 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E008-M123 `HM3D` target-free source-coverage render frame staging depth-validity repair / verification
-- [ ] E006-M07 utility metric row materialization smoke
+- [ ] E008-M137 target-free confidence-preserving trajectory-aware repair contract
+- No active E006 task.
 
 ### CAND-002
 
@@ -183,7 +183,9 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 - [x] E006-M04 utility formula and implementation readiness: utility weights, row-generation plan, implementation manifest
 - [x] E006-M05 schema and paired-context row materialization smoke: `task_context_schema.json`, `implementation_manifest.json`, `paired_context_queries.jsonl`, `transfer_split_manifest.jsonl`
 - [x] E006-M06 baseline policy row materialization smoke: `baseline_policy_rows.jsonl` and leakage audit
-- [ ] E006-M07 utility metric row materialization smoke: `utility_metric_rows.jsonl`, strongest context-agnostic comparison, and no policy-row mutation audit
+- [x] E006-M07 utility metric row materialization smoke: `utility_metric_rows.jsonl`, strongest context-agnostic comparison, and no policy-row mutation audit
+- [x] E006-M08 utility result interpretation and human-intent claim decision
+- [ ] E006-M09 task-conditioned utility policy redesign은 human intent를 다시 main claim으로 승격할 때만 진행
 - [x] E008-M112 `ConceptGraphs` HM3D candidate visit-order/path smoke 완료
 - [x] E008-M113 `ConceptGraphs` HM3D leakage-safe candidate goal-evaluation smoke 완료
 - [x] E008-M114 `ConceptGraphs` HM3D goal-evaluation result interpretation and trajectory decision 완료
@@ -196,17 +198,27 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 - [x] E008-M121 `HM3D` target-free source-coverage expansion materialization smoke
 - [x] E008-M122 `HM3D` target-free source-coverage render/detector launcher contract
 - [x] E008-M123 `HM3D` target-free source-coverage render frame staging relaunch
-- [ ] E008-M123 depth-positive frame repair and verification
+- [x] E008-M123 depth-positive frame repair and verification
+- [x] E008-M124 target-free detector completion verification
+- [x] E008-M125 target-free detector candidate navmesh/source-readiness validation
+- [x] E008-M126 target-free detector candidate visit-order/path smoke
+- [x] E008-M127 target-free leakage-safe detector candidate goal-evaluation smoke
+- [x] E008-M128 target-free detector-goal result interpretation and trajectory-execution decision
+- [x] E008-M129 target-free detector-policy trajectory execution contract and Docker preflight
+- [x] E008-M130 target-free detector-policy trajectory execution smoke
+- [x] E008-M131 target-free detector-policy trajectory result interpretation and scale decision
+- [x] E008-M132 target-free trajectory-aware visit-order repair contract
+- [x] E008-M133 target-free trajectory-aware visit-order repair materialization smoke
+- [x] E008-M134 target-free trajectory-aware repair trajectory execution contract / Docker preflight
+- [x] E008-M135 target-free trajectory-aware repair trajectory execution smoke
+- [x] E008-M136 target-free trajectory-aware repair trajectory result interpretation and scale decision
+- [ ] E008-M137 target-free confidence-preserving trajectory-aware repair contract
 - [ ] `OpenMask3D` feasibility는 external 3D instance proposal baseline 후보로 재검토
 
 ## Running / Needs Verification
 
-- Active non-E008 runtime state: tmux sessions observed `research`, `gdrive_upload`, and `h001_open3dsg_h001_r2_raw_clean_return_20260606_003130`; Docker containers may be unrelated.
-- Active E008 background job: none. E008-M123 relaunch completed, but verification failed with ready frames 295/320 because 25 rendered depth frames failed positive-depth validation. Verify after repair with `python experiments/E008_real_navigation_benchmark/tools/verify_m123_target_free_render_frame_staging.py --require-ready`.
-
-## Needs Repair / Verification
-
-- [ ] E008-M123 target-free render depth-positive repair: latest log `logs/20260606_025834_e008_m123_target_free_render.log`, artifact `experiments/E008_real_navigation_benchmark/artifacts/E008-M123_target_free_source_coverage_render_frame_staging_launch_v0/`
+- Active non-E008 runtime state: tmux sessions observed `research` and `gdrive_upload`; Docker containers may be unrelated.
+- Active E008 background job: none observed after E008-M136 completion.
 
 ### CAND-002
 
@@ -218,6 +230,26 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] Cleanup documentation refresh 완료: `docs/reproducibility.md`와 E003 local README에 삭제 완료 operational byproducts 반영
+- [x] Operational cleanup 완료: `.venv_tools`와 지정된 `__pycache__` 경로 10개 삭제 확인
+- [x] E008-M136 target-free trajectory-aware repair trajectory result interpretation / scale decision 완료: status `e008_m136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_ready`, current repair scale-up rejected, path-family diagnostic ready, selected repair `SPL` 0.329622 vs confidence baseline `SPL` 0.701267, selected next E008-M137
+- [x] E008-M135 target-free trajectory-aware repair trajectory execution smoke 완료: status `e008_m135_target_free_trajectory_aware_repair_trajectory_execution_smoke_ready`, scan-policy rows 5, trajectory attempts 31, aggregate `SR` 1.0, selected repair `SPL` 0.329622 vs detector-confidence / confidence-only `SPL` 0.701267, leakage audit pass, selected next E008-M136
+- [x] E008-M134 target-free trajectory-aware repair trajectory execution contract / Docker preflight 완료: status `e008_m134_target_free_trajectory_aware_repair_trajectory_contract_ready_runner_next`, candidate rows 75, execution plan rows 5, Docker preflight pass, runner compile pass, selected next E008-M135
+- [x] E008-M133 target-free trajectory-aware visit-order repair materialization smoke 완료: status `e008_m133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_ready`, cost matrix rows 225, repair candidate rows 75, execution plan rows 5, leakage audit pass, selected next E008-M134
+- [x] E008-M132 target-free trajectory-aware visit-order repair contract 완료: status `e008_m132_target_free_trajectory_aware_visit_order_repair_contract_ready`, selected repair policy `trajectory_greedy_confidence_path_repair_v0`, path-ready candidate rows 15, selected next E008-M133
+- [x] E008-M131 target-free detector-policy trajectory result interpretation and scale decision 완료: status `e008_m131_target_free_detector_policy_trajectory_result_interpretation_scale_decision_ready`, proxy-to-trajectory flip detected true, current path-cost scale-up false, selected next E008-M132
+- [x] E008-M130 target-free detector-policy trajectory execution smoke 완료: status `e008_m130_target_free_detector_policy_trajectory_execution_smoke_ready`, Docker inside true, scan-policy rows 4, trajectory attempts 30, success rows 4, aggregate SR 1.0, mean SPL 0.398100, path-cost policy SPL 0.092750 vs detector-confidence SPL 0.701267, selected next E008-M131
+- [x] E008-M129 target-free detector-policy trajectory execution contract / Docker preflight 완료: status `e008_m129_target_free_detector_policy_trajectory_contract_ready_runner_next`, candidate rows 69, plan rows 4, Docker preflight pass, runner compile pass, selected next E008-M130
+- [x] E008-M128 target-free detector-goal result interpretation / trajectory decision 완료: status `e008_m128_target_free_detector_goal_result_interpretation_trajectory_decision_ready`, trajectory contract promotion ready true, best any-vp XZ 0.856516m, best goal XZ 2.857646m, selected next E008-M129
+- [x] E008-M127 target-free leakage-safe detector candidate goal-evaluation smoke 완료: status `e008_m127_target_free_detector_candidate_goal_evaluation_smoke_ready`, candidate-goal rows 69, leakage audit pass, primary proxy SR 1/1 for all 4 policies, proxy SPL 0.357073-0.779043, goal_xz_1p0 proxy SR 0, selected next E008-M128
+- [x] E008-M126 target-free detector candidate visit-order/path smoke 완료: status `e008_m126_target_free_detector_candidate_visit_order_path_smoke_ready`, candidates 24, path-ready 15, failure rows 9, visit-order rows 69, leakage audit pass, selected next E008-M127
+- [x] E008-M125 target-free detector candidate navmesh/source-readiness validation 완료: status `e008_m125_target_free_detector_candidate_navmesh_validation_ready`, gate `pass`, candidates 24, path-smoke usable 15, source-ready scans 1/1, unreachable snapped candidates 9, selected next E008-M126
+- [x] E008-M124 completion verification 완료: status `e008_m124_target_free_detector_candidate_source_ready`, tmux stopped, detector sampled frames 295, prediction rows 24, raw predictions 2,986, pre-cap candidates 2,910, validator errors/warnings 0/0, selected next E008-M125
+- [x] E006-M08 utility result interpretation / human-intent claim decision 완료: current E006 evidence로 human intent main claim false, structured task context는 secondary conditioning/ablation axis로 유지, optional future route는 E006-M09 policy redesign
+- [x] E006-M07 utility metric row materialization smoke 완료: status `ready`, utility metric rows 20,800, missing eval rows 0, policy-row mutation audit `pass`, blocked output audit `pass`, claim gate `fail_strong_context_agnostic_baseline_not_beaten`, primary `candidate_plus_path` mean `ContextSpecificGain` -4.253654, proxy `SR` 0.886538, human intent main claim ready false
+- [x] E008-M124 relaunch 완료: patched launcher uses writable cache `local_dataset/HM3D_navigation_bridge/model_cache/huggingface`, tmux `e008_m124_target_free_detector`, log `logs/20260606_094032_e008_m124_target_free_detector.log`, final verifier status `ready`
+- [x] E008-M124 initial launch diagnosis 완료: detector run failed before inference due `HF_CACHE` permission error under `local_dataset/ConceptGraphs_model_cache/huggingface`; launcher patched to use `local_dataset/HM3D_navigation_bridge/model_cache/huggingface`
+- [x] E008-M123 depth-positive frame repair and verification 완료: repaired detector manifest rows 2, sampled frames 320 -> 295, dropped zero-depth frames 25, detector sampled invalid frames 0, verifier status `e008_m123_target_free_render_frame_staging_verified_with_depth_filtered_frames`, selected next E008-M124
 - [x] E008-M123 GPU-available relaunch and verification diagnosis 완료: GPU free memory 31,282MiB, log `logs/20260606_025834_e008_m123_target_free_render.log`, 320/320 color/depth/pose files generated, verifier ready frames 295/320, frame issue rows 25, M124 still blocked
 - [x] E006-M06 baseline policy row materialization smoke 완료: status `ready`, paired context rows 520, policy count 20, baseline policy rows 10,400, leakage fail rows 0, task-context rows true/false 3,640/6,760, selected next E006-M07
 - [x] E008-M123 launch attempt and verification diagnosis 완료: launch artifact ready, tmux `e008_m123_target_free_render`, log `logs/20260606_003432_e008_m123_target_free_render.log`, verification failed with ready frames 0/320, detector input files ready true, GPU free memory observed 77MiB, relaunch required when GPU is available

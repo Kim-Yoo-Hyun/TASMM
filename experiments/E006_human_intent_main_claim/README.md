@@ -2,7 +2,7 @@
 
 Updated: 2026-06-06
 
-This experiment folder defines the contract for promoting human intent from a secondary conditioning variable to a main paper claim. E006-M01 through E006-M04 are non-data claim-design gates, not execution results. E006-M05 is a schema and paired-context row materialization smoke. E006-M06 is a baseline policy row materialization smoke, not a utility or transfer result.
+This experiment folder defines the contract for promoting human intent from a secondary conditioning variable to a main paper claim. E006-M01 through E006-M04 are non-data claim-design gates, not execution results. E006-M05 is a schema and paired-context row materialization smoke. E006-M06 is a baseline policy row materialization smoke. E006-M07 is a utility metric materialization smoke over frozen policy rows. E006-M08 fixes the current decision: human intent is not a main claim under current evidence.
 
 ## Question
 
@@ -20,17 +20,21 @@ The required effect is not "the robot parses natural language." The required eff
 - E005-M66 reports only 1 human task-context-specific gain row on the 195-row external-baseline denominator.
 - E008-M53 demotes task context to a secondary condition because task-context distinct gain is 0 / 3 in that navigation repair setting.
 - E006-M06 materializes 10,400 frozen baseline/policy output rows over 520 paired-context rows and 20 policy ids, with leakage fail rows 0.
+- E006-M07 materializes 20,800 utility metric rows, with missing eval rows 0, policy-row mutation audit `pass`, blocked metric output audit `pass`, and claim gate `fail_strong_context_agnostic_baseline_not_beaten`.
+- E006-M07 primary `candidate_plus_path` result for `h001_task_conditioned_memory_trust_v0`: mean `ContextSpecificGain` -4.253654, proxy `SR` 0.886538, positive gain rows 15 / 520, positive task / label / scan groups 0 / 1 / 0.
 
 논문 주장:
 
 - Current evidence does not support human intent as a main contribution.
 - Current evidence supports using structured task context as a conditioning signal inside memory trust and re-observation policies.
 - E006-M06 does not support utility improvement or human intent as a main contribution because it does not compute `ContextUtility`, `IntentRegret`, transfer metrics, or success outcomes.
+- E006-M07 does not support human intent as a main contribution because the task-conditioned policy does not beat the strongest context-agnostic baseline under the frozen utility metric.
 
 에이전트 추론:
 
 - Human intent can become a main claim only if E006 constructs a utility-sensitive benchmark where context changes the correct decision under the same evidence.
 - A natural-language or LLM parser should be treated as an input adapter until structured intent has a strong independent decision effect.
+- The current E006-M07 failure suggests that the structured task context is changing decisions, but those changes are not yet utility-optimal compared with strong static, detector, and external-map pressure baselines.
 
 ## Hypothesis
 
@@ -566,6 +570,78 @@ Artifacts:
 
 Paper-table command is not fixed yet. E006-M01/M02/M03/M04 are design contracts only. E006-M05 is a schema materialization smoke only. E006-M06 is a policy-row materialization smoke only.
 
+## Utility Metric Materialization Smoke
+
+E006-M07 materializes utility metrics from the frozen E006-M06 policy rows.
+
+사실:
+
+- Status: `ready`.
+- Command: `python experiments/E006_human_intent_main_claim/tools/materialize_m07_utility_metric_rows.py`.
+- Syntax check: `python -m py_compile experiments/E006_human_intent_main_claim/tools/materialize_m07_utility_metric_rows.py`.
+- Output root: `experiments/E006_human_intent_main_claim/artifacts/E006-M07_utility_metric_materialization_smoke_v0/`.
+- Paired context rows: 520.
+- Baseline policy rows: 10,400.
+- Utility metric rows: 20,800 across `candidate_rank_only` and `candidate_plus_path`.
+- Missing eval rows: 0.
+- Policy-row mutation audit: `pass`.
+- Blocked metric output audit: `pass`.
+- Claim gate: `fail_strong_context_agnostic_baseline_not_beaten`.
+- Primary policy: `h001_task_conditioned_memory_trust_v0`.
+- Primary `candidate_plus_path` mean `ContextSpecificGain`: -4.253654.
+- Primary `candidate_rank_only` mean `ContextSpecificGain`: -4.095798.
+- Primary `candidate_plus_path` proxy `SR`: 0.886538.
+- Primary positive gain rows: 15 / 520.
+- Positive task / label / scan groups: 0 / 1 / 0.
+- Strongest context-agnostic winners against the primary policy: `static_stale_memory_v0` 376 rows, `conceptgraphs_only_open_vocab_map_v0` 95 rows, `risk_threshold_only_v0` 28 rows, `detector_confidence_topk_v0` 21 rows.
+
+Artifacts:
+
+| Artifact | Path |
+| --- | --- |
+| `utility_metric_rows.jsonl` | `artifacts/E006-M07_utility_metric_materialization_smoke_v0/utility_metric_rows.jsonl` |
+| `group_transfer_metrics.jsonl` | `artifacts/E006-M07_utility_metric_materialization_smoke_v0/group_transfer_metrics.jsonl` |
+| `failure_rows.jsonl` | `artifacts/E006-M07_utility_metric_materialization_smoke_v0/failure_rows.jsonl` |
+| `summary.json` | `artifacts/E006-M07_utility_metric_materialization_smoke_v0/summary.json` |
+| `report.md` | `artifacts/E006-M07_utility_metric_materialization_smoke_v0/report.md` |
+
+논문 주장:
+
+- E006-M07 supports utility metric materialization after policy-output freeze.
+- E006-M07 does not support human intent as a main contribution.
+- E006-M07 does not support real navigation `SR` / `SPL` or final real RGB-D/open-vocabulary robustness.
+
+에이전트 추론:
+
+- The current human-intent path is not dead, but it cannot be claimed as a main contribution from this denominator.
+- E006-M08 answers this by narrowing human intent back to secondary conditioning under current evidence.
+
+## Utility Result Interpretation
+
+E006-M08 interprets E006-M07 and fixes the current human-intent claim decision.
+
+사실:
+
+- Status: `ready_with_negative_main_claim_decision`.
+- Source artifact: `artifacts/E006-M07_utility_metric_materialization_smoke_v0/summary.json`.
+- E006-M07 policy rows were frozen before utility metrics and were not mutated.
+- E006-M07 computes utility metrics over the E007 path-cost denominator, not over final real navigation `SR` / `SPL`.
+- Primary `h001_task_conditioned_memory_trust_v0` loses to the strongest context-agnostic baselines on mean `ContextSpecificGain`.
+- Positive group support is insufficient: task groups 0, label groups 1, scan groups 0.
+
+논문 주장:
+
+- Human intent is not supported as a main contribution in the current E006 evidence.
+- Structured task context can remain in the method as a conditioning variable and an ablation axis.
+- Do not claim that human intent improves utility, transfer, or navigation until a redesigned task-conditioned policy beats strong context-agnostic baselines on heldout task / label / scan groups.
+
+에이전트 추론:
+
+- The failure is not a schema or leakage failure; it is a decision-quality failure.
+- The current task-conditioned policy changes decisions, but the changes are not utility-optimal under the frozen metric. Static memory, `ConceptGraphs`-only, risk-threshold, and detector-confidence baselines often produce higher utility.
+- For the current top-tier path, the safer decision is to keep human intent as secondary evidence while prioritizing E008 target-free detector/source and navigation evidence.
+- If human intent must become a main claim later, the next E006 route should be a policy redesign, not another metric wrapper.
+
 ## Next Unit
 
-E006-M07: implement `utility_metric_rows.jsonl` materialization smoke from frozen `baseline_policy_rows.jsonl`, then report `ContextUtility`, `IntentRegret`, `ContextSpecificGain`, and strongest context-agnostic baseline comparison without changing policy rows.
+No active E006 execution unit. Optional future route: E006-M09 task-conditioned utility policy redesign, only if human intent is re-promoted after E008 evidence or explicit user decision.

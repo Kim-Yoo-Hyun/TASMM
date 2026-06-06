@@ -15,7 +15,7 @@ Last updated: 2026-06-06
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005/E007/E008 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract through map-assisted fallback claim-boundary decision. E006-M01-M06 completed human-intent contract/schema/policy-row readiness, but utility and transfer evidence remain absent. E007-M01-M07 packaged the path-cost bridge as a paper-facing occupancy-grid proxy table. E008-M01-M122 completed real navigation source preflight through target-free render/detector launcher contract. E008-M123 was relaunched after GPU memory became available and generated 320 / 320 color/depth/pose files, but verification failed with ready frames 295 / 320 because 25 depth frames failed positive-depth validation. M124 remains blocked and final navigation claims remain blocked.
+- Current E005/E007/E008 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract through map-assisted fallback claim-boundary decision. E006-M01-M08 completed human-intent contract/schema/policy/utility readiness and claim decision; current evidence keeps human intent as secondary conditioning / ablation evidence, not a main claim. E007-M01-M07 packaged the path-cost bridge as a paper-facing occupancy-grid proxy table. E008-M01-M136 completed real navigation source preflight through target-free trajectory-aware repair result interpretation / scale decision. E008-M136 rejects current repair scale-up because selected repair `SPL` 0.329622 is below detector-confidence / confidence-only `SPL` 0.701267, so final navigation claims remain blocked until confidence-preserving repair evidence, heldout transfer, and navigation/search baseline evaluation.
 
 에이전트 추론:
 
@@ -253,14 +253,28 @@ Last updated: 2026-06-06
 | E008-M120 | `HM3D` target-free source-coverage expansion contract | Complete: target-free route rows 3, selected routes 2, M121 materialization contract rows 2, target/viewpoint source-placement leakage false, no long job | Input to E008-M121 materialization smoke |
 | E008-M121 | `HM3D` target-free source-coverage materialization smoke | Complete with snap warnings: observation pose rows 40, snap-ready 30/40, render plan rows 320, detector manifest rows 2, target/viewpoint source-placement leakage false | Input to E008-M122 render/detector launcher contract |
 | E008-M122 | `HM3D` target-free source-coverage render/detector launcher contract | Complete with snap warnings: render rows 320, detector manifest rows 2, object target rows 1, launcher input rows 6, long-job command rows 2, readiness fail/warning rows 0/1, target/viewpoint source-placement leakage false | Input to E008-M123 render frame staging background launch |
-| E008-M123 | `HM3D` target-free source-coverage render frame staging launch | Relaunched but not complete: 320/320 color/depth/pose files generated, verification failed with ready frames 295/320, 25 depth-positive failures | Repair depth-validity and verify; do not launch M124 before verification |
+| E008-M123 | `HM3D` target-free source-coverage render frame staging launch and depth repair | Complete with boundary: 320/320 color/depth/pose files generated, 25 zero-depth frames filtered, detector sampled ready frames 295/295, full 320-frame render validity false | Input to E008-M124 detector launch |
+| E008-M124 | `HM3D` target-free detector candidate-source generation | Complete: detector sampled frames 295, prediction rows 24, raw predictions 2,986, pre-cap candidates 2,910, validator errors/warnings 0/0 | Input to E008-M125 navmesh/source-readiness validation |
+| E008-M125 | `HM3D` target-free detector candidate navmesh/source-readiness validation | Complete: gate pass, candidates 24, path-smoke usable 15, snapped unreachable 9, source-ready scans 1/1 | Input to E008-M126 visit-order/path smoke |
+| E008-M126 | `HM3D` target-free detector candidate visit-order/path smoke | Complete: status ready, candidates 24, path-ready 15, failure rows 9, visit-order rows 69, leakage audit pass | Input to E008-M127 leakage-safe goal-evaluation smoke |
+| E008-M127 | `HM3D` target-free detector candidate goal-evaluation smoke | Complete: status ready, candidate-goal rows 69, leakage audit pass, primary proxy SR 1/1 for all 4 policies, proxy SPL 0.357073-0.779043, `goal_xz_1p0` proxy SR 0 | Input to E008-M128 result interpretation / trajectory decision |
+| E008-M128 | `HM3D` target-free detector-goal result interpretation / trajectory decision | Complete: status ready, target-free scan rows 1, path-ready candidates 15/24, best any-viewpoint XZ 0.856516m, best goal-center XZ 2.857646m, trajectory contract promotion ready true | Input to E008-M129 trajectory execution contract / Docker preflight |
+| E008-M129 | `HM3D` target-free detector-policy trajectory execution contract / Docker preflight | Complete: status ready, trajectory candidate rows 69, execution plan rows 4, eval-goal/oracle rows 1/1, leakage audit pass, Docker preflight pass, M130 runner compile pass | Input to E008-M130 trajectory execution smoke |
+| E008-M130 | `HM3D` target-free detector-policy trajectory execution smoke | Complete: status ready, scan-policy rows 4, trajectory attempts 30, aggregate SR 1.0, mean SPL 0.398100, path-cost SPL 0.092750 vs detector-confidence SPL 0.701267 | Input to E008-M131 result interpretation / scale decision |
+| E008-M131 | `HM3D` target-free detector-policy trajectory result interpretation / scale decision | Complete: status ready, proxy-to-trajectory flip true, current path-cost scale-up false, diagnostic table ready | Input to E008-M132 trajectory-aware visit-order repair contract |
+| E008-M132 | `HM3D` target-free trajectory-aware visit-order repair contract | Complete: status ready, selected repair policy `trajectory_greedy_confidence_path_repair_v0`, path-ready candidate rows 15, M133 materialization plan ready | Input to E008-M133 repair materialization smoke |
+| E008-M133 | `HM3D` target-free trajectory-aware visit-order repair materialization smoke | Complete: status ready, cost matrix rows 225, repair candidate rows 75, execution plan rows 5, leakage audit pass | Input to E008-M134 trajectory execution contract / Docker preflight |
+| E008-M134 | `HM3D` target-free trajectory-aware repair trajectory execution contract / Docker preflight | Complete: status ready runner next, candidate rows 75, execution plan rows 5, Docker preflight pass, runner compile pass | Input to E008-M135 trajectory execution smoke |
+| E008-M135 | `HM3D` target-free trajectory-aware repair trajectory execution smoke | Complete: status ready, scan-policy rows 5, trajectory attempts 31, aggregate `SR` 1.0, selected repair `SPL` 0.329622 vs detector-confidence / confidence-only `SPL` 0.701267 | Input to E008-M136 result interpretation / scale decision |
+| E008-M136 | `HM3D` target-free trajectory-aware repair result interpretation / scale decision | Complete: status ready, current repair scale-up rejected, path-family diagnostic ready, selected next `confidence_preserving_trajectory_repair_contract` | Input to E008-M137 confidence-preserving repair contract |
 | E006-M01 | Context-sensitive utility benchmark design | Complete: human-intent main-claim contract, same-evidence paired contexts, utility metrics, pass/warning/fail gates fixed in `experiments/E006_human_intent_main_claim/` | Human intent remains blocked until E006 implementation evidence exists |
 | E006-M02 | Strong context-agnostic baseline suite | Complete: fixed baseline fairness rules, strong baseline families, required ablations, paired-context row schema, utility metric schema, leakage audit | Human task context must beat best non-oracle context-agnostic baselines beyond a 1-row gain |
 | E006-M03 | Context generalization stress | Complete: fixed scan/label/task/source/external-route split axes, transfer pass/warning/fail gates, claim permission rules, and transfer artifacts | Human task context main claim requires these gates to pass in execution |
 | E006-M04 | Utility formula and implementation readiness | Complete: fixed `ContextUtility`, `IntentRegret`, `ContextSpecificGain`, `search_cost_contract_v0`, frozen task profiles, row-generation order, and `implementation_manifest.json` fields | Input to E006-M05 implementation smoke; no human-intent evidence yet |
 | E006-M05 | Schema and paired-context row materialization smoke | Complete: generated 65 evidence groups, 520 paired-context rows, 2,600 transfer manifest rows, 23 label groups, 5 task groups, blocked output term hits 0 | Input to E006-M06 baseline policy row materialization; no human-intent evidence yet |
 | E006-M06 | Baseline policy row materialization smoke | Complete: 520 paired-context rows x 20 policies = 10,400 policy rows, leakage fail rows 0 | Input to E006-M07 utility metric row materialization; no human-intent evidence yet |
-| E006-M07 | Utility metric row materialization smoke | Next E006 implementation unit | Generate `utility_metric_rows.jsonl`, strongest context-agnostic comparison, and no policy-row mutation audit |
+| E006-M07 | Utility metric row materialization smoke | Complete: 20,800 utility metric rows, policy-row mutation audit pass, strongest context-agnostic comparison computed | Human intent main-claim gate failed |
+| E006-M08 | Utility result interpretation / claim decision | Complete: human intent remains secondary conditioning / ablation evidence under current data | Optional E006-M09 policy redesign only if human intent is re-promoted |
 | E008 scale-up optional | Broader navigation `SR` / `SPL` benchmark | Expand beyond current diagnostic `HM3D ObjectNav` smoke after source-gap and efficiency gates improve | Do not start before E008-M55 source-gap feasibility and a stronger policy route are ready |
 
 ## Human Task Context Claim Upgrade
@@ -270,18 +284,18 @@ Last updated: 2026-06-06
 - E005-M53 shows H001 improves over `ConceptGraphs` and static memory on the heldout proxy-search table.
 - E005-M53 also shows that H001 improves over context-agnostic memory trust by only 1 row.
 - Current evidence supports task context as a secondary ablation, not as the main contribution.
-- The project direction now intends to promote human intent to a main claim, and E006-M01/M02/M03/M04/M05 fix the claim-design, strong-baseline, transfer-stress, utility-formula, implementation-readiness, and schema materialization contracts.
+- The project tested whether human intent can be promoted to a main claim through E006-M01/M02/M03/M04/M05/M06/M07/M08, but current evidence rejects that promotion.
 
 논문 주장:
 
-- Do not write a human-intent main claim before E006 implementation evidence passes the E006-M03 transfer gates.
-- The future paper can promote structured human intent only if E006 shows that task context changes memory trust, re-observation, and candidate visit order beyond strong context-agnostic alternatives.
+- Do not write a human-intent main claim from current E006 evidence.
+- The future paper can promote structured human intent only after an optional E006-M09-style policy redesign beats strong context-agnostic alternatives across task, label, and scan groups.
 - Natural language or LLM parsing should remain an adapter until structured context has a strong independent effect.
 
 에이전트 추론:
 
 - Human intent is worth expanding next as a claim-design problem, not as an LLM parsing problem.
-- Promote human task context only if the dedicated E006 context-sensitive utility benchmark shows clear gains over strong context-agnostic policies.
+- Keep human task context as secondary unless a redesigned E006 context-sensitive utility benchmark shows clear gains over strong context-agnostic policies.
 - The right upgrade target is not generic natural-language understanding; it is context-dependent utility: different task contexts should rationally change memory trust, re-observation budget, candidate visit order, and old-location dead-end cost.
 
 Upgrade requirements:
@@ -296,9 +310,9 @@ Upgrade requirements:
 Decision:
 
 - Current evidence: human task context remains secondary.
-- Completed E006 gates: E006-M01 human-intent main-claim upgrade contract, E006-M02 strong context-agnostic baseline suite, E006-M03 context generalization stress, E006-M04 utility formula / implementation readiness, and E006-M05 schema / paired-context row materialization smoke.
-- Planned next implementation gate: E006-M07 utility metric row materialization smoke.
-- Claim rule: human intent becomes a main paper claim only after E006 passes utility, strong-baseline, and transfer gates.
+- Completed E006 gates: E006-M01 human-intent main-claim upgrade contract, E006-M02 strong context-agnostic baseline suite, E006-M03 context generalization stress, E006-M04 utility formula / implementation readiness, E006-M05 schema / paired-context row materialization smoke, E006-M06 baseline policy row materialization smoke, E006-M07 utility metric row materialization smoke, and E006-M08 claim decision.
+- Planned E006 gate: none. Optional E006-M09 policy redesign only if human intent is re-promoted.
+- Claim rule: human intent remains secondary unless a redesigned policy passes utility, strong-baseline, and transfer gates.
 
 ## Claim Expansion Order
 
@@ -491,7 +505,8 @@ Order:
 134. E006-M04 utility formula and implementation readiness: complete.
 135. E006-M05 schema and paired-context row materialization smoke: complete.
 136. E006-M06 baseline policy row materialization smoke: complete, 10,400 policy rows, leakage fail rows 0.
-137. E006-M07 utility metric row materialization smoke: next implementation unit.
+137. E006-M07 utility metric row materialization smoke: complete, 20,800 utility rows, claim gate failed.
+138. E006-M08 utility result interpretation / claim decision: complete, human intent secondary under current evidence.
 137. E008 navigation bridge: simulator/navmesh/trajectory execution, `SR`, `SPL`, `ExpectedSearchCost`, candidate visit order, stale old-location dead-end cost.
 
 ## External Baseline Expansion
@@ -513,7 +528,7 @@ Top-tier submission needs external baselines beyond current internal policies.
 - `HOV-SG` is the most relevant next non-data contract because it pressures the map-to-navigation claim: if a hierarchical open-vocabulary semantic graph can recover source-gap candidates without H001's memory-trust decision, H001's contribution must be narrowed.
 - `VLFM` / `HM3D-OVON` should be used for navigation `SR` / `SPL` pressure, not for stale-memory update novelty. They become fair only when H001 and the baseline are evaluated on the same `HM3D` episodes, start states, goal categories, and blocked-input contract.
 - `3D-Mem` should pressure the scene-memory claim. It is not a direct navigation baseline unless converted into the same query/candidate visit-order interface.
-- `GOAT-Bench` is best aligned with broader human-intent / long-horizon task claims, so it should wait until E006 fixes human-intent tasks, utility metrics, and language/structured-context boundary.
+- `GOAT-Bench` is best aligned with broader human-intent / long-horizon task claims, so it should wait until human intent is explicitly re-promoted and a redesigned E006-style utility policy passes.
 
 Baseline contract:
 
@@ -613,11 +628,11 @@ Purpose:
 
 ## Immediate Next Actions
 
-- Repair and verify E008-M123 `HM3D` target-free source-coverage render frame staging depth-validity before E008-M124.
+- Run E008-M137 `HM3D` target-free confidence-preserving trajectory-aware repair contract.
 - Do not launch b01/b03 confidence-log-depth reruns unless a complete diagnostic detector-repair row is explicitly needed.
 - Do not claim navigation `SR` / `SPL` until H001 source-ready/source-gap behavior is reported at scale, heldout transfer is tested, and navigation/search baseline rows are added.
 - Keep the main paper claim centered on memory trust, staleness handling, bounded re-observation, and proxy-search improvement over `ConceptGraphs` / static memory.
-- Prepare E006-M07 next because E006-M06 has frozen baseline policy rows, but do not claim human intent until context-sensitive utility, strong context-agnostic baseline, and heldout transfer gates pass in execution.
+- E006-M07/M08 are complete; do not claim human intent from current evidence. Revisit only through optional E006-M09 policy redesign or later E008 evidence.
 - Expand real RGB-D/open-vocabulary robustness before real navigation `SR` / `SPL`.
 - Keep `OpenMask3D` as the later 3D instance proposal baseline candidate.
 - Keep `Open3DSG`, `ConceptGraphs`, and `HOV-SG` for map/scene-graph/navigation baseline expansion.
