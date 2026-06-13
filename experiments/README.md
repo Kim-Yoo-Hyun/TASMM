@@ -1,6 +1,6 @@
 # Experiments
 
-Updated: 2026-06-06
+Updated: 2026-06-13
 
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
@@ -8,7 +8,9 @@ Updated: 2026-06-06
 
 ## Status
 
-Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, E005-M01 through E005-M101, E006-M01 through E006-M08, E007-M01 through E007-M07, and E008-M01 through E008-M136 are complete/verified with constraints through denominator-aligned `Open3DSG`, full-denominator real proposal diagnostics, `ConceptGraphs` reliability boundary, human-intent main-claim contracts, strong-baseline and transfer-stress design, utility-formula/schema/policy/metric materialization, human-intent claim-decision, map-assisted fallback claim-boundary decision, navigation/path-cost bridge packaging, real navigation source preflight, detector/H001/dynamic-stale trajectory smoke, source-gap repair chains, `ConceptGraphs` HM3D candidate export/validation, M123 depth-filtered detector-usable render staging, M124 target-free detector candidate-source verification, M125 navmesh/source-readiness validation, M126 visit-order/path materialization, M127 leakage-safe goal-evaluation proxy recovery, M128 trajectory-contract promotion decision, M129 trajectory execution contract / Docker preflight, M130 target-free detector-policy trajectory execution smoke, M131 trajectory result interpretation, M132 trajectory-aware repair contract, M133 repair row materialization, M134 repair trajectory execution contract / Docker preflight, M135 repair trajectory execution smoke, and M136 result interpretation / scale decision. E006-M08 keeps human intent as a secondary conditioning / ablation axis rather than a main claim under current evidence. M136 rejects scaling `trajectory_greedy_confidence_path_repair_v0` because it loses `SPL` to detector-confidence / confidence-only baselines, and selects a confidence-preserving trajectory repair contract before any scale-up.
+Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, E005-M01 through E005-M101, E006-M01 through E006-M08, E007-M01 through E007-M07, and E008-M01 through E008-M191 are complete/verified with constraints through denominator-aligned `Open3DSG`, full-denominator real proposal diagnostics, `ConceptGraphs` reliability boundary, human-intent main-claim contracts, path-cost bridge packaging, real navigation source preflight, detector/H001/dynamic-stale trajectory smoke, source-gap repair chains, target-free trajectory execution, confidence-preserving full-val-mini execution, failure decomposition, source-coverage memory-interface method pivot, row materialization, Docker trajectory execution, protected-baseline interpretation, source-coverage tradeoff decomposition, source-coverage utility/Pareto contract, utility row materialization, utility conservatism failure decomposition, source-coverage trigger/candidate-source expansion contract, trigger row materialization smoke, budgeted source-pool pose/render-plan materialization, source-pool render/detector execution, source-pool trajectory smoke, repaired-policy proxy evaluation, failure decomposition, method-boundary/scale decision, and source-pool protected-confidence scale-up contract. E006-M08 keeps human intent as a secondary conditioning / ablation axis rather than a main claim under current evidence. M191 selects M192 scale denominator materialization next.
+
+The 2026-06-09 targeted literature refresh constrains E008-M137: detector-confidence remains the protected naive baseline, and trajectory cost may only act as confidence-band tie-break, hard feasibility veto, or source-gap/source-coverage trigger until it beats the M130/M135 `SPL` regressions.
 
 ## Active Experiment
 
@@ -21,7 +23,7 @@ Main experiment implementation stage has started. E001-M01 through E001-M05, E00
 | E005 | M01-M101 ready | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Input to E007 |
 | E006 | M01-M08 ready; human intent main claim false under current evidence, secondary conditioning / ablation axis retained | [E006_human_intent_main_claim](E006_human_intent_main_claim/README.md) | No active unit; optional E006-M09 policy redesign only if re-promoted |
 | E007 | M01-M07 paper-facing path-cost proxy bridge package ready | [E007_navigation_path_cost_bridge](E007_navigation_path_cost_bridge/README.md) | Input to E008-M01 |
-| E008 | M01-M136 ready; M136 rejects current repair scale-up and selects confidence-preserving trajectory repair | [E008_real_navigation_benchmark](E008_real_navigation_benchmark/README.md) | E008-M137 target-free confidence-preserving trajectory-aware repair contract |
+| E008 | M01-M191 ready with constraints; source-pool protected-confidence scale denominator fixed | [E008_real_navigation_benchmark](E008_real_navigation_benchmark/README.md) | E008-M192 source-pool protected-confidence scale denominator materialization |
 
 ## 사실
 

@@ -26,8 +26,10 @@
 - Motivation을 novelty로 쓰지 않는다. "기존 방법이 dynamic object, RGB-D noise, open-vocabulary query, stale memory에서 실패한다"는 문제 제기일 뿐이다.
 - 새 module, LLM/VLM adapter, detector, reranker, map layer를 붙였다는 사실만으로 contribution이라고 쓰지 않는다.
 - 각 paper claim은 `motivation -> naive baseline -> failure diagnosis -> principle -> method form -> ablation/evidence` 순서로 방어되어야 한다.
+- Hypothesis와 experiment는 증명하고 싶은 결론에 맞춰 끼워 맞추지 않는다. 실패 진단에서 나온 원리가 다음 method form, ablation, scale-up gate를 자연스럽게 요구해야 한다.
 - 가장 단순한 naive baseline을 먼저 정의하고, 왜 실패하는지 case-level failure taxonomy로 기록한다.
 - Method component는 failure diagnosis에서 도출되어야 한다. component를 다른 module로 쉽게 바꿔도 설명이 유지되면 novelty가 약한 것이다.
+- 결과가 기대와 다르면 claim을 유지한 채 threshold나 denominator를 조정하지 않는다. 먼저 failure mode, disconfirmation rule, 다음 validation requirement를 기록하고, 그 기록에서 다음 실험을 도출한다.
 - "왜 더 단순한 X로는 안 되는가?"에 대해 최소 3개의 X를 준비한다. 예: static memory, detector-confidence ranking, fixed top-k, context-agnostic memory trust.
 - Contribution sentence에서 "we propose"를 지워도 남는 insight가 있어야 한다.
 - Ablation은 전체 system vs baseline만으로 끝내지 않는다. task context, staleness/memory trust, re-observation budget, path/search cost, proposal reliability, external map baseline 연결이 각각 무엇을 깨뜨리는지 보여야 한다.

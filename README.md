@@ -1,6 +1,6 @@
 # Semantic Mapping Research Workspace
 
-업데이트: 2026-06-06
+업데이트: 2026-06-13
 
 이 워크스페이스는 semantic mapping을 중심으로 human-friendly robot intelligence를 연구하는 작업 공간이다. 목표는 로봇이 사람의 의도와 지식을 공간적 기억과 행동으로 연결하여, 사람이 요구하는 복잡한 search/navigation task를 수행하게 하는 것이다.
 
@@ -20,7 +20,7 @@
 
 - [AGENTS.md](AGENTS.md): repo-level 작업 규칙과 판단 기준
 - [TODO.md](TODO.md): Now/Next/Completed 중심의 작업판
-- [summary.md](summary.md): 연구 방향, 배경, 가설, 진행 상태, 남은 쟁점, 실험 계획 요약
+- [summary.md](summary.md): 연구 방향, 배경, 동기, 기존 한계, 문제 정의, 핵심 가설, framework, metric/baseline 중심 실험 계획 요약
 - [docs/index.md](docs/index.md): 전체 문서 지도와 읽는 순서
 - [docs/literature.md](docs/literature.md): 문헌조사 workflow와 작성 규칙
 - [docs/hypothesis.md](docs/hypothesis.md): hypothesis workflow와 작성 규칙
@@ -28,6 +28,7 @@
 - [docs/paper.md](docs/paper.md): paper framing, novelty, reviewer-defense 기준
 - [docs/reproducibility.md](docs/reproducibility.md): 데이터, checkpoint, Docker, artifact, 재현 명령 기준
 - [literature/README.md](literature/README.md): 문헌 조사 결과의 cross-paper synthesis
+- [literature/CAND-001_top-tier-refresh-2026.md](literature/CAND-001_top-tier-refresh-2026.md): E008-M137 설계에 연결한 targeted literature refresh
 - [hypothesis/README.md](hypothesis/README.md): hypothesis index와 active gate
 - [experiments/README.md](experiments/README.md): main experiment index
 - [experiments/report.md](experiments/report.md): 기여점, reviewer defense, 최종 논문 방향성
@@ -41,8 +42,9 @@
 - Final paper target: Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`
 - Current implementation path: Direction A `Task-Conditioned Stale Semantic Memory`를 core method로 만들고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 붙여 Direction B로 확장
 - Current experiment: [E008_real_navigation_benchmark](experiments/E008_real_navigation_benchmark/README.md)
-- Current status: E001-E007 have built proxy search, perception-noise, external-baseline, path-cost bridge, and E006 human-intent claim/strong-baseline/transfer-stress/utility-formula/schema/policy/metric materialization with constraints; E006-M08 keeps human intent as secondary conditioning / ablation evidence because the main-claim gate fails against the strongest context-agnostic baselines. E008 is validating whether `HM3D ObjectNav` + `Habitat` can support paper-facing navigation evidence. E008-M123 verified a 295-frame depth-filtered detector-usable subset, E008-M124 verified target-free detector candidate-source generation, E008-M125 passed navmesh/source-readiness validation with 15 / 24 candidates usable for path-smoke, E008-M126 materialized 69 visit-order/path rows with leakage audit pass, E008-M127 observed leakage-safe target-free proxy recovery on 1 case, E008-M128 selected bounded trajectory contract/preflight, E008-M129 generated the runner-compatible trajectory contract with Docker/data/runner preflight pass, E008-M130 executed the one-case target-free detector-policy trajectory smoke, E008-M131 interpreted it, E008-M132 fixed the trajectory-aware repair contract, E008-M133 materialized 225 cost-matrix rows, 75 repair candidate rows, and 5 execution plan rows with leakage audit pass, E008-M134 fixed the repair trajectory runner contract / Docker preflight, E008-M135 executed the one-case repair trajectory smoke, and E008-M136 interpreted the result. M136 rejects scaling the current repair because selected repair `SPL` 0.329622 remains below detector-confidence / confidence-only `SPL` 0.701267, while preserving it as a trajectory-cost diagnostic.
-- Current next action: run E008-M137 target-free confidence-preserving trajectory-aware repair contract.
+- Current status: E001-E007 have built proxy search, perception-noise, external-baseline, path-cost bridge, and E006 human-intent claim/strong-baseline/transfer-stress/utility-formula/schema/policy/metric materialization with constraints; E006-M08 keeps human intent as secondary conditioning / ablation evidence because the main-claim gate fails against the strongest context-agnostic baselines. E008 is validating whether `HM3D ObjectNav` + `Habitat` can support paper-facing navigation evidence. E008-M177-M191 completed the fixed-budget source-pool branch through render/detector verification, candidate navmesh validation, leakage-safe proxy evaluation, Docker trajectory smoke, protected-baseline interpretation, transition-cost repair failure decomposition, method-boundary decision, and scale-up contract. M191 fixes the next denominator as 30 triggered `HM3D ObjectNav val_mini` episodes with source-pool acquisition plus protected detector-confidence and a required no-source-pool ablation.
+- Current literature refresh: E008-M137 설계를 위해 [CAND-001_top-tier-refresh-2026.md](literature/CAND-001_top-tier-refresh-2026.md)를 추가했다. 결론은 trajectory cost를 detector-confidence ordering의 대체가 아니라 confidence band 안의 guarded tie-break / veto / source-gap trigger로 써야 한다는 것이다.
+- Current next action: E008-M192 source-pool protected-confidence scale denominator materialization.
 - Current blocked claims: real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, `OldLocationDeadEndCostM` as a primary metric, and human intent as a main claim.
 - Current boundary: main experiment implementation 단계이며, paper 폴더는 아직 만들지 않는다.
 

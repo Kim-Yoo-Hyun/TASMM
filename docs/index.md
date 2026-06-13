@@ -1,6 +1,6 @@
 # Docs Index
 
-Updated: 2026-05-27
+Updated: 2026-06-09
 
 이 파일은 `docs/` 아래 workflow 문서들의 짧은 입구다. `docs/index.md`는 세부 연구 내용을 반복하지 않고, 새 작업자가 어떤 문서를 어떤 순서로 읽어야 하는지 알려주는 navigation hub로 쓴다.
 
@@ -28,6 +28,7 @@ Updated: 2026-05-27
 
 - Root `README.md`: repo 전체의 현재 상태와 핵심 파일 안내
 - `literature/README.md`: 문헌 조사 결과의 cross-paper synthesis
+- `literature/CAND-001_top-tier-refresh-2026.md`: E008-M137 confidence-preserving trajectory repair에 직접 연결한 targeted literature refresh
 - `hypothesis/README.md`: hypothesis index와 active gate
 - `experiments/README.md`: main experiment index와 experiment 간 연결
 - `paper/README.md`: paper workspace의 파일 역할, 읽는 순서, 업데이트 규칙. 단, `paper/`는 thesis, main result table, method figure, target venue, claim-evidence ledger가 concrete해진 뒤에만 만든다.

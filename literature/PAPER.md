@@ -1,6 +1,6 @@
 # Paper Registry
 
-Updated: 2026-05-05
+Updated: 2026-06-09
 
 ## Paper Registry
 
@@ -39,6 +39,9 @@ Updated: 2026-05-05
 
 | Priority | Paper / topic | Status | Next action |
 | --- | --- | --- | --- |
+| P0 | E008-M137 top-tier targeted refresh | First pass complete | Use [CAND-001_top-tier-refresh-2026.md](CAND-001_top-tier-refresh-2026.md) to design confidence-preserving trajectory repair |
+| P0 | `Remember with Confidence` + `SCOUT` + `RAVEN` + uncertainty/active-perception papers | Queued | Promote to paper folders if E008-M137 uses uncertainty/source-coverage language |
+| P0 | `VLFM` + `HM3D-OVON` + `GOAT-Bench` + `HOV-SG` + `3D-Mem` | Queued | Update deep-read cards before any final navigation `SR` / `SPL` claim |
 | P0 | DualMap + OpenIN + OGScene3D | In progress | Extract dynamic-memory metrics and baselines |
 | P0 | Clio + HOV-SG + LangMap | In progress | Compare granularity/hierarchy assumptions |
 | P1 | OpenMap + Open-Vocabulary Functional 3D Scene Graphs | Pending | Check whether instruction/function can be combined with staleness |
@@ -47,6 +50,6 @@ Updated: 2026-05-05
 
 ## Source Notes
 
-확인일: 2026-05-05.
+확인일: 2026-06-09.
 
-Primary sources used include arXiv, CVF Open Access, OpenReview, official project pages, and official code/project pages where available. Items marked `Queued` are not yet strong enough to support a contribution claim.
+Primary sources used include arXiv, CVF Open Access, OpenReview, official project pages, and official code/project pages where available. The 2026-06-09 targeted refresh additionally used arXiv API metadata and shallow/filter GitHub clone inspection under `local_dataset/external_repos/literature_audit/`. Items marked `Queued` are not yet strong enough to support a contribution claim.

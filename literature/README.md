@@ -1,8 +1,19 @@
 # Literature Survey: Semantic Mapping For Human-Friendly Robot Intelligence
 
-Updated: 2026-05-05
+Updated: 2026-06-09
 
 검색/확인 범위: 2024-2026 primary sources 중심. 사용한 우선순위는 논문 PDF, arXiv, CVF Open Access, OpenReview, 공식 project page, 공식 code repository 순서다.
+
+## Current Targeted Refresh
+
+사실:
+
+- E008-M137 설계를 위해 [CAND-001_top-tier-refresh-2026.md](CAND-001_top-tier-refresh-2026.md)를 추가했다.
+- 이 문서는 100-paper metadata scan, 25-paper deep-read shortlist, 9-codebase audit, 7개 H001 integration proposal, 3-persona orthogonal review를 관리한다.
+
+에이전트 추론:
+
+- 현재 추가 문헌 조사의 목적은 broad survey 확장이 아니라 `confidence-preserving trajectory-aware repair`, source-gap/source-coverage decision, external map/navigation baseline 방어를 E008-M137에 연결하는 것이다.
 
 ## Field Map
 

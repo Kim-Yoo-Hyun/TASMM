@@ -1,6 +1,6 @@
 # TODO
 
-Last updated: 2026-06-06
+Last updated: 2026-06-13
 
 이 파일은 에이전트가 다음 작업 계획과 진행 상태를 관리하는 루트 작업판이다. 자세한 문헌 조사 내용은 `literature/`에 기록하고, 이 파일에는 다음 행동과 상태만 남긴다.
 
@@ -17,13 +17,15 @@ Last updated: 2026-06-06
 
 Main experiment implementation.
 
-CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M101은 `Open3DSG` read-only source, full-denominator real proposal bridge, external proposal/mapping feasibility matrix, `ConceptGraphs` reliability boundary, row-group / heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary / navigation-bridge decision까지 완료했다. E006-M01-M08은 human intent를 main claim으로 승격하기 위한 same-evidence paired context / utility-regret / strong-baseline / transfer-stress / frozen utility-formula / implementation-readiness / schema materialization / baseline policy row / utility metric row / claim-decision gate까지 완료했다. E006-M08 결론은 current E006 evidence로 human intent main claim을 지지하지 않고, structured task context를 secondary conditioning/ablation axis로 유지하는 것이다. E007-M01-M07은 M100 selected policy를 E002 `occupancy_grid_astar_v0` path-cost source와 연결해 route materialization, external candidate grid projection, path-cost policy metric, paper-table boundary, path-start/source-limit sensitivity audit, bridge-table package/navigation-expansion decision까지 완료했다. E008-M01-M136은 local read-only `HM3D ObjectNav` + `Habitat` source preflight부터 target-free trajectory-aware repair trajectory result interpretation / scale decision까지 완료했다. E008-M123은 full 320-frame render validity가 아니라 25개 zero-depth frame을 detector manifest에서 제외한 `verified_with_depth_filtered_frames` 상태다. E008-M124는 295-frame detector subset에서 prediction 24 rows / pre-cap candidates 2,910 rows를 검증했고, E008-M125는 24 candidates 중 15 path-smoke usable / 9 unreachable로 pass했으며, E008-M126은 69 visit-order rows와 leakage audit pass를 생성했다. E008-M127은 `any_viewpoint_xz_1p0` proxy recovery 1/1을 관측했고, E008-M130은 4 policy trajectory smoke에서 `SR` 1.0을 관측했지만 path-cost method `SPL` 0.092750이 detector-confidence baselines `SPL` 0.701267보다 낮았다. E008-M131은 proxy-to-trajectory flip을 확인하고 current path-cost policy scale-up을 reject했다. E008-M132는 `trajectory_greedy_confidence_path_repair_v0`와 M133 materialization contract를 고정했고, E008-M133은 225 cost-matrix rows, 75 repair candidate rows, 5 execution plan rows를 materialize했다. E008-M134는 75 candidate rows / 5 plan rows를 다음 runner contract로 고정하고 Docker preflight를 통과했다. E008-M135는 5 policy trajectory smoke를 실행해 `SR` 1.0을 관측했지만 selected repair policy `SPL` 0.329622가 detector-confidence / confidence-only baseline `SPL` 0.701267보다 낮아 positive navigation-improvement claim은 아직 지지하지 않는다. E008-M136은 현재 repair scale-up을 reject하고, trajectory cost를 confidence ordering의 대체가 아니라 guarded/tie-break signal로 쓰는 E008-M137 confidence-preserving repair contract를 선택했다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 및 E008 이후 `/home/yoohyun/research2/local_dataset/HM3D_navigation_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
+CAND-001은 H001 main experiment implementation 트랙이다. 연구 제약은 6개월~1년으로 수정했고, 최종 목표는 AI, ML, CV, Robotics top-tier journal/conference를 겨냥한 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 현재 진행은 Direction A `Task-Conditioned Stale Semantic Memory`를 core method/backbone으로 고정하고, real RGB-D/open-vocabulary proposal bridge, external baselines, search/navigation metrics를 순차적으로 붙여 Direction B로 확장하는 방식이다. E001/E002/E003/E004는 proxy search, path-cost bridge, real RGB-D/open-vocabulary proposal diagnostics, memory-trust policy gate까지 완료했다. E005는 external baseline transition 단계이며 `DualMap`은 실행됐지만 object `*.pkl` output을 만들지 못했고, `ConceptGraphs`와 `Open3DSG` bounded predicted-vocabulary adapter가 external baseline route로 정리됐다. M56-M101은 `Open3DSG` read-only source, full-denominator real proposal bridge, external proposal/mapping feasibility matrix, `ConceptGraphs` reliability boundary, row-group / heavier-route decision, `ConceptGraphs`-assisted H001 fallback policy smoke, map-assisted fallback claim-boundary / navigation-bridge decision까지 완료했다. E006-M01-M08은 human intent를 main claim으로 승격하기 위한 same-evidence paired context / utility-regret / strong-baseline / transfer-stress / frozen utility-formula / implementation-readiness / schema materialization / baseline policy row / utility metric row / claim-decision gate까지 완료했다. E006-M08 결론은 current E006 evidence로 human intent main claim을 지지하지 않고, structured task context를 secondary conditioning/ablation axis로 유지하는 것이다. E007-M01-M07은 M100 selected policy를 E002 `occupancy_grid_astar_v0` path-cost source와 연결해 route materialization, external candidate grid projection, path-cost policy metric, paper-table boundary, path-start/source-limit sensitivity audit, bridge-table package/navigation-expansion decision까지 완료했다. E008-M01-M191은 local read-only `HM3D ObjectNav` + `Habitat` source preflight부터 source-coverage memory-interface trajectory execution, source-coverage trigger/candidate-source expansion, fixed-budget source-pool render/detector branch, Docker trajectory execution, protected-baseline interpretation, failure decomposition, confidence-protected transition-cost repair row materialization, leakage-safe proxy evaluation, proxy failure decomposition, source-pool protected-confidence method boundary와 scale-up contract까지 완료했다. 파생 결과는 `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/` 및 E008 이후 `/home/yoohyun/research2/local_dataset/HM3D_navigation_bridge/` 아래에 저장한다. Novelty contract는 `static_stale_memory`, `detector_confidence_ranking`, `ConceptGraphs-only open-vocabulary map`, `task-agnostic re-observation`, H001 `task-conditioned memory trust / re-observation / search-cost policy` 비교로 고정했다. `OpenMask3D`는 Docker/`MinkowskiEngine` blocker 때문에 later proposal baseline으로 유지한다. 논문 본문용 실제 구현 실험은 Docker를 기본 실행 환경으로 둔다.
+
+Latest: E008-M177-M191 source-pool branch 완료. M179는 render 256/256 frames, detector prediction rows 192, coordinate candidate rows 192를 ready로 검증했다. M180은 180/192 path-ready candidates와 8/8 source-ready scans로 통과했고, M181은 732 visit-order rows를 materialize했다. M182는 leakage-safe proxy에서 8개 episode 중 7개 recovery를 관찰했고, M183 Docker preflight와 M184 bounded trajectory execution도 통과했다. M184 raw trajectory는 32 scan-policy rows 중 28 success, aggregate `SR` 0.875, mean `SPL` 0.2411이다. M185는 selected method `path_cost_ascending_reachable_subset_v0`가 protected baseline `detector_confidence_reachable_subset_v0`와 `SR` 0.875로 동률이지만 `SPL` 0.1716 vs 0.2926으로 낮아 source-pool branch direct scale-up을 거부했다. M186은 원인을 source-to-candidate proxy cost와 executed transition cost mismatch로 분해했다. M187은 `confidence_protected_transition_cost_policy_v1` row materialization을 완료했고, 8/8 episode order change, confidence-bin violation 0, leakage audit pass를 확인했다. M188은 leakage-safe proxy evaluation ready지만 selected `SR`/`SPL` 0.875/0.2449가 protected baseline 0.875/0.2926보다 `SPL`에서 낮아 trajectory promotion을 거부했다. M189는 같은 성공 후보 7개 중 2개가 selected에서 더 늦거나 비싸고, 1개는 더 싸며, 1개는 source-coverage/localization gap임을 확인했다. M190은 transition repair positive claim과 immediate Docker launch를 거부하고, source-pool candidate generation을 method component로 유지하며, 현재 안전한 execution default를 `detector_confidence_reachable_subset_v0`로 고정했다. M191은 첫 scale denominator를 30 triggered `HM3D ObjectNav val_mini` episodes, 240 source poses, 960 render rows, 3 batches로 고정하고 `no_source_pool_detector_confidence_reachable_subset_v0` ablation을 필수로 설정했다.
 
 CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active task는 없고, CAND-001 feasibility가 약해질 때 다시 승격 여부를 판단한다.
 
 ## Active Objective
 
-- CAND-001: Direction B 최종 목표를 유지하되, E008-M137 target-free confidence-preserving trajectory-aware repair contract를 active 다음 단위로 둔다. E006은 optional E006-M09 policy redesign 전까지 no active execution이다.
+- CAND-001: Direction B 최종 목표를 유지하되, M191 결과에 따라 source-pool protected-confidence scale denominator를 M192에서 materialize한다. E006은 optional E006-M09 policy redesign 전까지 no active execution이다.
 - CAND-002: `Common-Ground Semantic Mapping`은 benchmark 설계 부담을 보류 상태로 둔다.
 - CAND-003: `Functional Semantic Memory`는 annotation/manipulation evaluation 부담을 보류 상태로 둔다.
 
@@ -31,7 +33,34 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ### CAND-001
 
-- [ ] E008-M137 target-free confidence-preserving trajectory-aware repair contract
+- [x] E008-M166 navigation failure-boundary package and method-pivot contract
+- [x] E008-M167 method-pivot contract
+- [x] E008-M168 method-pivot row materialization
+- [x] E008-M169 Docker trajectory execution contract / preflight
+- [x] E008-M170 source-coverage memory-interface trajectory execution
+- [x] E008-M171 source-coverage memory-interface trajectory result interpretation / protected-baseline gate
+- [x] E008-M172 source-coverage ablation tradeoff decomposition and policy decision
+- [x] E008-M173 source-coverage utility/Pareto contract and bounded method redesign
+- [x] E008-M174 source-coverage utility/Pareto row materialization smoke
+- [x] E008-M174b source-coverage utility conservatism failure decomposition
+- [x] E008-M175 source-coverage trigger/candidate-source expansion contract
+- [x] E008-M176 source-coverage trigger row materialization smoke
+- [x] E008-M177 source-pool pose/render-plan materialization contract
+- [x] E008-M178 navmesh/snap validation and render/detector launcher contract
+- [x] E008-M179 bounded render/detector execution completion verification
+- [x] E008-M180 candidate navmesh/source-readiness validation
+- [x] E008-M181 expanded candidate visit-order/path materialization
+- [x] E008-M182 leakage-safe goal-evaluation proxy
+- [x] E008-M183 Docker trajectory execution contract/preflight
+- [x] E008-M184 Docker trajectory execution with SR, SPL, path length, visits
+- [x] E008-M185 protected detector-confidence interpretation and scale decision
+- [x] E008-M186 source-pool protected-baseline failure decomposition / policy repair contract
+- [x] E008-M187 source-pool confidence-protected transition-cost repair row materialization
+- [x] E008-M188 source-pool repaired policy leakage-safe goal-evaluation proxy
+- [x] E008-M189 source-pool repaired policy proxy failure decomposition
+- [x] E008-M190 source-pool protected-confidence method boundary and scale decision
+- [x] E008-M191 source-pool protected-confidence scale-up contract
+- [ ] E008-M192 source-pool protected-confidence scale denominator materialization
 - No active E006 task.
 
 ### CAND-002
@@ -212,13 +241,57 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 - [x] E008-M134 target-free trajectory-aware repair trajectory execution contract / Docker preflight
 - [x] E008-M135 target-free trajectory-aware repair trajectory execution smoke
 - [x] E008-M136 target-free trajectory-aware repair trajectory result interpretation and scale decision
-- [ ] E008-M137 target-free confidence-preserving trajectory-aware repair contract
+- [x] E008-M137 target-free confidence-preserving trajectory-aware repair contract
+- [x] E008-M138 target-free confidence-preserving trajectory repair materialization smoke
+- [x] E008-M139 target-free confidence-preserving repair trajectory execution contract / Docker preflight
+- [x] E008-M140 target-free confidence-preserving repair trajectory execution smoke
+- [x] E008-M141 target-free confidence-preserving repair trajectory result interpretation / scale decision
+- [x] E008-M142 target-free confidence-preserving controlled scale-up contract
+- [x] E008-M143 full-val-mini confidence-preserving trajectory-cost materialization
+- [x] E008-M144 full-val-mini confidence-preserving trajectory execution contract / Docker preflight
+- [x] E008-M145 full-val-mini confidence-preserving trajectory execution
+- [x] E008-M146 full-val-mini confidence-preserving trajectory result interpretation / scale decision
+- [x] E008-M147 full-val-mini policy-family failure decomposition / redesign contract
+- [x] E008-M148 full-val-mini budget-guarded confidence/path redesign contract
+- [x] E008-M149 full-val-mini budget-guarded confidence/path row materialization smoke
+- [x] E008-M150 full-val-mini budget-guarded confidence/path trajectory execution contract / Docker preflight
+- [x] E008-M151 full-val-mini budget-guarded confidence/path trajectory execution launch / verification
+- [x] E008-M152 full-val-mini budget-guarded confidence/path trajectory result interpretation / scale decision
+- [x] E008-M153 full-val-mini budget/SPL Pareto failure decomposition / next-route decision
+- [x] E008-M154 budget-aware utility objective contract / policy-selection rule
+- [x] E008-M155 budget-aware utility policy materialization smoke
+- [x] E008-M156 budget-aware utility trajectory execution contract / Docker preflight
+- [x] E008-M157 budget-aware utility trajectory execution
+- [x] E008-M158 budget-aware utility trajectory result interpretation / protected-baseline gate
+- [x] E008-M159 budget-aware utility component failure decomposition / next-route decision
+- [x] E008-M160 confidence-first constrained utility repair contract / metric target decision
+- [x] E008-M161 confidence-first constrained repair row materialization smoke
+- [x] E008-M162 confidence-first constrained repair trajectory execution contract / Docker preflight
+- [x] E008-M163 confidence-first constrained repair trajectory execution
+- [x] E008-M164 confidence-first constrained repair trajectory result interpretation / protected-baseline gate
+- [x] E008-M165 confidence-first constrained repair failure decomposition / next-route decision
+- [x] E008-M166 navigation failure-boundary package and method-pivot contract
+- [x] E008-M167 source-coverage memory-interface method contract
+- [x] E008-M168 source-coverage memory-interface row materialization
+- [x] E008-M169 source-coverage memory-interface Docker trajectory execution contract / preflight
+- [x] E008-M170 source-coverage memory-interface trajectory execution
+- [x] E008-M171 source-coverage memory-interface trajectory result interpretation / protected-baseline gate
+- [x] E008-M172 source-coverage ablation tradeoff decomposition and policy decision
+- [x] E008-M173 source-coverage utility/Pareto contract and bounded method redesign
+- [x] E008-M174 source-coverage utility/Pareto row materialization smoke
+- [x] E008-M174b source-coverage utility conservatism failure decomposition
+- [x] E008-M175 source-coverage trigger/candidate-source expansion contract
+- [x] E008-M176 source-coverage trigger row materialization smoke
+- [x] E008-M177 source-pool pose/render-plan materialization contract
+- [x] E008-M178 navmesh/snap validation and render/detector launcher contract
+- [x] E008-M179 bounded render/detector execution completion verification
+- [ ] E008-M192 source-pool protected-confidence scale denominator materialization
 - [ ] `OpenMask3D` feasibility는 external 3D instance proposal baseline 후보로 재검토
 
 ## Running / Needs Verification
 
-- Active non-E008 runtime state: tmux sessions observed `research` and `gdrive_upload`; Docker containers may be unrelated.
-- Active E008 background job: none observed after E008-M136 completion.
+- Active non-E008 runtime state: tmux sessions observed `research`, `gdrive_upload`, and `h001_qwen_fullval_infer_loop`; Docker containers may be unrelated.
+- Active E008 background job: none. E008-M192 in progress; render, detector, and Docker trajectory execution remain blocked until M192 materializes scale denominator source-pose/render-plan rows and later launcher/preflight gates pass.
 
 ### CAND-002
 
@@ -230,6 +303,89 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] E008-M191 source-pool protected-confidence scale-up contract 완료: status `e008_m191_source_pool_protected_confidence_scaleup_contract_ready`, selected denominator `hm3d_val_mini_all_triggered_source_pool_scale_v1`, 30 triggered episodes, planned source poses/render rows 240/960, 3 batches, selected method `source_pool_plus_detector_confidence_reachable_subset_v1`, required ablation `no_source_pool_detector_confidence_reachable_subset_v0`, selected next E008-M192
+- [x] E008-M190 source-pool protected-confidence method boundary / scale decision 완료: status `e008_m190_source_pool_protected_confidence_method_boundary_scale_decision_ready`, source-pool candidate generation kept, protected default `detector_confidence_reachable_subset_v0`, transition repair positive claim rejected, immediate Docker launch rejected, selected next E008-M191 scale-up contract
+- [x] E008-M189 source-pool repaired policy proxy failure decomposition 완료: status `e008_m189_source_pool_repaired_policy_proxy_failure_decomposition_ready`, same success proposal rows 7, delayed/costlier rows 2, cheaper route rows 1, shared source-coverage/localization gap rows 1, transition repair positive claim rejected, source-pool generation kept, protected detector-confidence set as current execution default
+- [x] E008-M188 source-pool repaired policy leakage-safe goal-evaluation proxy 완료: status `e008_m188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_ready`, candidate-goal rows 900, scan-policy rows 40, selected `SR`/`SPL` 0.875/0.2449 vs protected detector-confidence 0.875/0.2926, leakage audit pass, trajectory promotion gate fail, next M189 proxy failure decomposition
+- [x] E008-M187 source-pool confidence-protected transition-cost repair row materialization 완료: status `e008_m187_source_pool_confidence_protected_transition_cost_materialization_ready`, base candidates 180, transition matrix rows 4,072/4,072, candidate-policy rows 900, execution plans 40, selected order changed 8/8 episodes, confidence-bin violations 0, leakage audit pass
+- [x] E008-M186 source-pool protected-baseline failure decomposition 완료: status `e008_m186_source_pool_protected_baseline_failure_decomposition_ready`, method worse `SPL` rows 6/8, mean delta `SPL` -0.1210, mean delta path +19.81m, mean delta visits +5.125, root cause `source_proxy_cost_is_not_execution_cost`, next repair `confidence_protected_transition_cost_policy_v1`
+- [x] E008-M185 protected detector-confidence interpretation / scale decision 완료: status `e008_m185_protected_detector_confidence_interpretation_scale_decision_ready`, scale-up recommended false, method `SR`/`SPL` 0.875/0.1716 vs protected detector-confidence 0.875/0.2926, selected next repair source-pool policy before scale-up
+- [x] E008-M184 Docker trajectory execution 완료: status `e008_m184_docker_trajectory_execution_sr_spl_ready`, scan-policy rows 32, success rows 28, aggregate `SR` 0.875, mean `SPL` 0.2411, leakage audit pass
+- [x] E008-M183 Docker trajectory execution contract/preflight 완료: status `e008_m183_docker_trajectory_execution_contract_preflight_ready_runner_next`, trajectory candidate rows 732, execution plans 32, eval/oracle rows 8/8, Docker preflight pass
+- [x] E008-M182 leakage-safe goal-evaluation proxy 완료: status `e008_m182_leakage_safe_goal_evaluation_proxy_ready`, proxy recovery 7/8 for all four policies, leakage audit pass, eval goal rows 8
+- [x] E008-M181 expanded candidate visit-order/path materialization 완료: status `e008_m181_expanded_candidate_visit_order_path_materialization_ready`, visit-order rows 732, path-ready candidates 180, leakage audit pass
+- [x] E008-M180 candidate navmesh/source-readiness validation 완료: status `e008_m180_candidate_navmesh_source_readiness_validation_ready`, candidate rows 192, path-ready 180, source-ready scans 8/8, coordinate-valid 192/192
+- [x] E008-M179 bounded render/detector execution 완료: status `e008_m179_bounded_render_detector_execution_ready`, render ready 256/256 frames, detector prediction rows 192, coordinate candidate rows 192, pre-cap candidate rows 2,519, selected next E008-M180
+- [x] E008-M178 navmesh/snap render/detector launcher contract 완료: status `e008_m178_navmesh_snap_render_detector_launcher_contract_ready`, source poses 64, snap-ready/source-ready 64/64, render plan rows 256, detector manifest rows 8, readiness fail/warning rows 0/0, selected next E008-M179
+- [x] E008-M177 source-pool pose/render-plan materialization contract 완료: status `e008_m177_source_pool_pose_render_plan_materialization_contract_ready`, trigger request rows 30 -> selected request rows 8, source pose rows 64, render plan rows 256, blocked input hit rows 0, selected scenes 2, selected categories 4
+- [x] E008-M176 source-coverage trigger row materialization smoke 완료: status `e008_m176_source_coverage_trigger_row_materialization_smoke_ready`, trigger rows 30, trigger request rows 30, expansion plan rows 30, blocked input hit rows 0, trigger selectivity warning true, selected next E008-M177
+- [x] E008-M175 source-coverage trigger/candidate-source expansion contract 완료: status `e008_m175_source_coverage_trigger_candidate_source_expansion_contract_ready`, selected method `source_coverage_triggered_candidate_source_expansion_v1`, M176 materialization ready next true, Docker trajectory execution ready false, long job launch now false
+- [x] E008-M174b source-coverage utility conservatism failure decomposition 완료: status `e008_m174b_source_coverage_utility_conservatism_failure_decomposition_ready`, selected positive utility rows 0, no-confidence-guard positive utility rows 0, selected utility max -0.008847, source-coverage rerank branch closed negative true, selected next E008-M175 source-coverage trigger/candidate-source expansion contract
+- [x] E008-M174 source-coverage utility/Pareto row materialization 완료: status `e008_m174_source_coverage_utility_pareto_materialization_blocked`, candidate rows 6,300, policy plans 210, leakage/order/guard audit pass, selected policy changed episode rows 0/30, selected policy activity gate fail, Docker execution not launched, selected next E008-M174b
+- [x] E008-M173 source-coverage utility/Pareto contract 완료: status `e008_m173_source_coverage_utility_pareto_contract_ready`, selected policy contract `source_coverage_budgeted_utility_policy_v1`, audited candidate rows 4,500, required fields ready true, performance claim ready false, trajectory execution ready false, selected next E008-M174
+- [x] Latest state sync 완료: root `README.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M173 utility/Pareto contract / E008-M174 next gate 기준 반영
+- [x] E008-M172 source-coverage ablation tradeoff decomposition 완료: status `e008_m172_source_coverage_ablation_tradeoff_decomposition_ready`, selected policy primary Pareto dominated by detector/confidence-floor, source-coverage-only delta `SPL` +0.002761 / visits +0.766667 vs detector, win/loss/tie 12/12/6, main-method promotion false, selected next E008-M173
+- [x] Latest state sync 완료: root `README.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M170/M171 execution / protected-baseline interpretation / M172 next gate 기준 반영
+- [x] E008-M171 source-coverage memory-interface trajectory result interpretation 완료: status `e008_m171_source_coverage_memory_interface_result_interpretation_ready`, selected policy `SR`/`SPL` 0.800000/0.225556 vs detector-confidence 0.800000/0.231845, delta `SPL` -0.006289, delta visits +0.466667, source-coverage-only `SPL` 0.234605, positive navigation-improvement ready false, selected next E008-M172
+- [x] E008-M170 source-coverage memory-interface trajectory execution 완료: status `e008_m170_source_coverage_memory_interface_trajectory_execution_ready`, scan-task-policy rows 150, trajectory attempts 1,862, success rows 120/150, aggregate `SR` 0.800000, aggregate mean `SPL` 0.213581, leakage audit pass, selected next E008-M171
+- [x] E008-M169 source-coverage memory-interface Docker trajectory execution contract / preflight 완료: status `e008_m169_source_coverage_memory_interface_trajectory_contract_ready_runner_next`, trajectory candidate rows 4,500, execution plans 150, eval goal rows 30, oracle path rows 30, Docker preflight pass, M170 runner compile pass, selected next E008-M170
+- [x] E008-M168 source-coverage memory-interface row materialization 완료: status `e008_m168_source_coverage_memory_interface_materialization_ready`, candidate rows 4,500, policy plans 150, selected changed episodes 30, selected promoted rows 268, leakage audit pass, selected next E008-M169
+- [x] E008-M167 source-coverage memory-interface method contract 완료: status `e008_m167_source_coverage_memory_interface_method_contract_ready`, selected policy `source_coverage_memory_interface_policy_v1`, protected baseline `detector_confidence_reachable_subset_v0`, posthoc threshold/denominator change false, selected next E008-M168
+- [x] E008-M166 navigation failure-boundary package and method-pivot contract 완료: status `e008_m166_navigation_failure_boundary_method_pivot_contract_ready`, selected method family `source_coverage_memory_interface`, local path tie-break main method false, confidence floor retained true, selected next E008-M167
+- [x] Latest state sync 완료: root `README.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M166-M169 method pivot / materialization / Docker preflight 기준 반영
+- [x] E008-M165 confidence-first constrained repair failure decomposition 완료: status `e008_m165_confidence_first_repair_failure_decomposition_ready`, changed episodes 24/30, selected success proposal changes vs detector-confidence 0, mean delta `SPL` -0.003213, mean delta visits +0.200000, local rerank scale-up ready false, selected next E008-M166
+- [x] Latest state sync 완료: root `README.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M165 decomposition / E008-M166 next unit 기준 반영
+- [x] E008-M164 confidence-first constrained repair trajectory result interpretation 완료: status `e008_m164_confidence_first_constrained_repair_result_interpretation_ready`, selected policy `SR`/`SPL` 0.800000/0.228632 vs detector-confidence 0.800000/0.231845, delta `SPL` -0.003213, delta visits +0.200000, best `SPL` policy `budget_guarded_no_visit_guard_v1`, gate pass/warning/fail 6/2/7, positive navigation-improvement ready false, selected next E008-M165
+- [x] Latest state sync 완료: root `README.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M164 interpretation / E008-M165 next unit 기준 반영
+- [x] E008-M163 confidence-first constrained repair trajectory execution 완료: status `e008_m163_confidence_first_constrained_repair_trajectory_execution_ready`, scan-task-policy rows 180, trajectory attempts 2,187, success rows 144/180, aggregate `SR` 0.800000, aggregate mean `SPL` 0.214863, selected policy `SR`/`SPL` 0.800000/0.228632 vs detector-confidence 0.800000/0.231845, selected next E008-M164
+- [x] Latest state sync 완료: root `README.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M163 execution / E008-M164 next unit 기준 반영
+- [x] E008-M162 confidence-first constrained repair trajectory execution contract / Docker preflight 완료: status `e008_m162_confidence_first_constrained_repair_trajectory_contract_ready_runner_next`, candidate rows 5,400, execution plans 180, eval goal rows 30, oracle path rows 30, selected changed episodes 24, local-swap promoted rows 106, max rank displacement 1, Docker preflight pass, M163 runner compile pass, selected next E008-M163
+- [x] Latest state sync 완료: root `README.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M162 contract / E008-M163 next unit 기준 반영
+- [x] E008-M161 confidence-first constrained repair row materialization smoke 완료: status `e008_m161_confidence_first_constrained_repair_materialization_smoke_ready`, source candidate rows 6,300, base detector rows 900, materialized rows 5,400, repair component rows 765, selected changed episode rows 24, selected local-swap promoted rows 106, max selected rank displacement 1, leakage/order audits pass, selected next E008-M162
+- [x] Latest state sync 완료: root `README.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M161 materialization / E008-M162 next unit 기준 반영
+- [x] E008-M160 confidence-first constrained utility repair contract 완료: status `e008_m160_confidence_first_constrained_utility_repair_contract_ready`, selected policy `confidence_first_path_veto_tiebreak_repair_v1`, protected baseline `detector_confidence_reachable_subset_v0`, metric target `protected_spl_no_extra_visits_v0`, method/repair/metric rows 4/6/4, allowed/blocked input rows 8/9, positive navigation-improvement ready false, selected next E008-M161
+- [x] `summary.md` research report 핵심 섹션 재구성 완료: 요청 섹션만 유지하고 `Proposed Framework`를 구체화
+- [x] Latest state sync 완료: root `README.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M160 contract / E008-M161 next unit 기준 반영
+- [x] E008-M159 budget-aware utility component failure decomposition 완료: status `e008_m159_budget_aware_utility_component_failure_decomposition_ready`, component rows 6, supported `confidence_floor_guard`, rejected/inert `scalar_path_gain` / `source_gap_bonus` / `visit_penalty_scalar`, tradeoff `visit_guard`, positive navigation-improvement ready false, selected next E008-M160
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M159 decomposition / E008-M160 next unit 기준 반영
+- [x] E008-M158 budget-aware utility trajectory result interpretation 완료: status `e008_m158_budget_aware_utility_trajectory_result_interpretation_ready`, selected policy `SR`/`SPL` 0.800000/0.231619 vs detector-confidence 0.800000/0.231845, delta `SPL` -0.000226, delta visits +0.066667, best `SPL` policy `budget_guarded_no_visit_guard_v1`, gate pass/warning/fail 6/2/8, positive navigation-improvement ready false, selected next E008-M159
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M158 interpretation / E008-M159 next unit 기준 반영
+- [x] E008-M157 budget-aware utility trajectory execution 완료: status `e008_m157_budget_aware_utility_trajectory_execution_ready`, scan-task-policy rows 210, trajectory attempts 2,523, success rows 168/210, aggregate `SR` 0.800000, aggregate mean `SPL` 0.217651, selected next E008-M158
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M157 execution / E008-M158 next unit 기준 반영
+- [x] E008-M156 budget-aware utility trajectory execution contract / Docker preflight 완료: status `e008_m156_budget_aware_utility_trajectory_contract_ready_runner_next`, candidate rows 6,300, execution plans 210, eval goal rows 30, oracle path rows 30, Docker preflight pass, M157 runner compile pass, selected next E008-M157
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M156 contract / E008-M157 next unit 기준 반영
+- [x] E008-M155 budget-aware utility policy materialization smoke 완료: status `e008_m155_budget_aware_utility_policy_materialization_smoke_ready`, source candidate rows 5,400, materialized candidate rows 6,300, selected policy changed episode rows 8, utility-promoted rows 17, leakage audit pass, trajectory execution ready true, performance claim ready false, selected next E008-M156
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M155 materialization / E008-M156 next unit 기준 반영
+- [x] E008-M154 budget-aware utility objective contract / policy-selection rule 완료: status `e008_m154_budget_aware_utility_objective_contract_ready`, selected objective `budget_aware_confidence_path_utility_v0`, protected baseline `detector_confidence_reachable_subset_v0`, input contract rows 20, guard rows 5, performance claim ready false, trajectory execution ready false, selected next E008-M155
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M154 contract / E008-M155 next unit 기준 반영
+- [x] E008-M153 full-val-mini budget/SPL Pareto failure decomposition / next-route decision 완료: status `e008_m153_full_val_mini_budget_spl_pareto_failure_decomposition_ready`, selected policy primary dominated by detector/confidence/source-gap baselines, expanded path-length Pareto member true, no-visit-guard best `SPL` but visit-expensive, positive navigation-improvement ready false, selected next E008-M154
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M153 decomposition / E008-M154 next unit 기준 반영
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M152 interpretation / E008-M153 next unit 기준 반영
+- [x] E008-M152 full-val-mini budget-guarded confidence/path trajectory result interpretation / scale decision 완료: status `e008_m152_full_val_mini_budget_guarded_confidence_path_result_interpretation_ready`, selected policy `SR` 0.800000 / `SPL` 0.230290, detector-confidence `SPL` 0.231845, candidate-visit delta +0.133333, path-length delta -8.239214, positive navigation-improvement ready false, selected next E008-M153
+- [x] E008-M151 full-val-mini budget-guarded confidence/path trajectory execution 완료: status `e008_m151_full_val_mini_budget_guarded_confidence_path_execution_ready`, log `logs/20260611_110132_e008_m151_full_val_mini_budget_guarded_confidence_path.log`, 5,400 candidate rows, 180 scan-task-policy rows, 2,185 trajectory attempts, aggregate `SR` 0.800000, mean `SPL` 0.215140, selected next E008-M152
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M151 execution / E008-M152 next unit 기준 반영
+- [x] E008-M150 full-val-mini budget-guarded confidence/path trajectory execution contract / Docker preflight 완료: status `e008_m150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_ready_runner_next`, base candidates 900, candidate rows 5,400, execution plans 180, eval goal rows 30, oracle path rows 30, Docker preflight pass, runner compile pass, selected next E008-M151
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M149 materialization / E008-M150 next unit 기준 반영
+- [x] E008-M149 full-val-mini budget-guarded confidence/path row materialization smoke 완료: status `e008_m149_full_val_mini_budget_guarded_confidence_path_materialization_ready`, 30 episodes, 900 base candidates, 5,400 budget-guarded candidate rows, 180 execution plans, selected policy rows 900, selected repair-trigger rows 394, max rank displacement 1, leakage audit pass, selected next E008-M150
+- [x] E008-M148 full-val-mini budget-guarded confidence/path redesign contract 완료: status `e008_m148_full_val_mini_budget_guarded_confidence_path_redesign_contract_ready`, selected policy `budget_guarded_confidence_path_repair_v1`, M143 candidate rows 5,400, policy contract rows 5, trigger rows 4, allowed/blocked input rows 14/12, confidence band 0.03, max rank displacement 1, positive navigation-improvement ready false, selected next E008-M149
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M148 redesign contract / E008-M149 next unit 기준 반영
+- [x] E008-M147 full-val-mini policy-family failure decomposition / redesign contract 완료: status `e008_m147_full_val_mini_policy_family_failure_decomposition_ready`, case rows 30, policy families 4, failure diagnoses 4, redesign contract rows 4, selected redesign family `budget_guarded_confidence_path_repair_v1`, positive navigation-improvement ready false, selected next E008-M148
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M147 failure decomposition / E008-M148 next unit 기준 반영
+- [x] E008-M146 full-val-mini confidence-preserving trajectory result interpretation / scale decision 완료: status `e008_m146_full_val_mini_confidence_preserving_trajectory_result_interpretation_ready`, selected policy `SPL` 0.227289 vs detector-confidence `SPL` 0.231845, delta `SPL` -0.004556, delta visits +0.700000, gate fail 5 / warning 1, positive navigation-improvement ready false, selected next E008-M147
+- [x] Latest state sync 완료: `docs/reproducibility.md`, `summary.md`에 E008-M146 interpretation / E008-M147 next unit 기준 반영
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M145 execution result 기준 반영
+- [x] E008-M145 full-val-mini confidence-preserving trajectory execution 완료: status `e008_m145_full_val_mini_confidence_preserving_trajectory_execution_ready`, log `logs/20260611_034154_e008_m145_full_val_mini.log`, scan-policy rows 180, trajectory attempts 2,202, aggregate `SR` 0.800000, aggregate mean `SPL` 0.214639, selected policy `SPL` 0.227289 vs detector-confidence `SPL` 0.231845, leakage audit pass, selected next E008-M146
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M144 execution contract / Docker preflight 기준 반영
+- [x] E008-M144 full-val-mini confidence-preserving trajectory execution contract / Docker preflight 완료: status `e008_m144_full_val_mini_confidence_preserving_trajectory_contract_ready_runner_next`, base candidates 900, candidate rows 5,400, execution plans 180, eval goal rows 30, oracle path rows 30, Docker preflight pass, runner compile pass, selected next E008-M145
+- [x] E008-M143 full-val-mini confidence-preserving trajectory-cost materialization 완료: status `e008_m143_full_val_mini_confidence_preserving_trajectory_cost_materialization_ready`, 30 episodes, 900 base candidates, cost matrix rows 33,354 / expected 33,354, candidate-policy rows 5,400, execution plans 180, leakage audit pass, selected policy confidence-band violations 0, selected next E008-M144
+- [x] E008-M142 target-free confidence-preserving controlled scale-up contract 완료: status `e008_m142_target_free_confidence_preserving_controlled_scaleup_contract_ready`, first scale denominator `full_val_mini_source_ready_confidence_preserving_scale`, 30 episodes, 900 path-ready candidates, expected execution plans 180, final navigation claim false, selected next E008-M143
+- [x] E008-M141 target-free confidence-preserving repair result interpretation / scale decision 완료: status `e008_m141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_ready`, controlled scale-up ready true, selected policy detector-confidence `SPL` tie, candidate visits delta -1, final real navigation claim false, selected next E008-M142
+- [x] E008-M140 target-free confidence-preserving repair trajectory execution smoke 완료: status `e008_m140_target_free_confidence_preserving_repair_trajectory_execution_smoke_ready`, policy rows 6, attempts 25, selected policy `SR` 1.0 / `SPL` 0.701267, detector-confidence `SPL` tie, candidate visits 2 vs 3, selected next E008-M141
+- [x] E008-M139 target-free confidence-preserving repair trajectory execution contract / Docker preflight 완료: status `e008_m139_target_free_confidence_preserving_repair_trajectory_contract_ready_runner_next`, candidate rows 90, execution plan rows 6, Docker preflight pass, runner compile pass, selected next E008-M140
+- [x] E008-M138 target-free confidence-preserving repair materialization smoke 완료: status `e008_m138_target_free_confidence_preserving_repair_materialization_smoke_ready`, base candidates 15, policy rows 90, execution plan rows 6, leakage audit pass, confidence-band violations 0, selected next E008-M139
+- [x] E008-M137 target-free confidence-preserving trajectory repair contract 완료: status `e008_m137_target_free_confidence_preserving_trajectory_repair_contract_ready`, selected policy `confidence_band_trajectory_tiebreak_v0`, base path-ready candidates 15, confidence band 0.03, gate fail count 0, selected next E008-M138
+- [x] Latest state sync 완료: root `README.md`, `summary.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, E008 README에 E008-M139 confidence-preserving execution contract 기준 반영
+- [x] CAND-001 top-tier literature refresh for E008-M137 완료: `literature/CAND-001_top-tier-refresh-2026.md`, 100-paper metadata scan, 25-paper deep-read shortlist, 9-codebase audit, 7 integration proposals, 3-persona orthogonal review
 - [x] Cleanup documentation refresh 완료: `docs/reproducibility.md`와 E003 local README에 삭제 완료 operational byproducts 반영
 - [x] Operational cleanup 완료: `.venv_tools`와 지정된 `__pycache__` 경로 10개 삭제 확인
 - [x] E008-M136 target-free trajectory-aware repair trajectory result interpretation / scale decision 완료: status `e008_m136_target_free_trajectory_aware_repair_result_interpretation_scale_decision_ready`, current repair scale-up rejected, path-family diagnostic ready, selected repair `SPL` 0.329622 vs confidence baseline `SPL` 0.701267, selected next E008-M137

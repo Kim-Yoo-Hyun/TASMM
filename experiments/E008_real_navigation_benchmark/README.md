@@ -1,14 +1,14 @@
 # E008 Real Navigation Benchmark
 
-Updated: 2026-06-06
+Updated: 2026-06-13
 
 ## Status
 
-Current concise status: E008-M01 through E008-M136 are complete. M130 executed the one-case target-free detector-policy trajectory smoke, M131 interpreted it as a proxy-to-trajectory flip, M132 fixed a trajectory-aware visit-order repair contract, M133 materialized repair rows plus runner aliases, M134 fixed the execution contract / Docker preflight, M135 executed the repair trajectory smoke, and M136 interpreted the result. M136 rejects scaling the current repair because selected repair `SPL` 0.329622 is below detector-confidence / confidence-only `SPL` 0.701267. Next unit is E008-M137 confidence-preserving trajectory-aware repair contract.
+Current concise status: E008-M01 through E008-M191 are complete. M130-M165 exposed and decomposed the proxy-to-trajectory, confidence-preserving, budget-aware, and local-rerank failure pattern. M166-M176 freeze that boundary, reject within-pool source-coverage reranking as a positive navigation-improvement claim, and move source coverage to `source_coverage_triggered_candidate_source_expansion_v1`. M177-M179 materialize, render, and run detector inference for a fixed-budget source-pool branch, yielding 192 coordinate candidate rows from 256 rendered frames. M180 validates 180 / 192 candidates as path-ready over 8 / 8 source-ready scans. M181-M182 materialize 732 visit-order rows and observe leakage-safe proxy recovery on 7 / 8 episodes. M183-M184 execute a Docker `Habitat` trajectory smoke with 32 scan-policy rows, 28 successes, aggregate `SR` 0.875, and mean `SPL` 0.2411. M185 rejects direct source-pool scale-up because `path_cost_ascending_reachable_subset_v0` ties protected detector confidence on `SR` but loses `SPL` 0.1716 vs 0.2926. M186 decomposes the failure: source-to-candidate proxy cost is not execution transition cost, causing 6 / 8 worse-`SPL` rows, mean delta `SPL` -0.1210, mean path +19.81m, and mean visits +5.125. M187 materializes `confidence_protected_transition_cost_policy_v1` over the fixed 8-episode / 180-candidate source-pool denominator with 4,072 / 4,072 transition matrix rows, 900 candidate-policy rows, 40 execution plans, 8 / 8 changed selected orders, 0 confidence-bin violations, and leakage audit pass. M188 evaluates those rows with leakage-safe ObjectNav goal labels: selected `SR`/`SPL` is 0.875/0.2449 vs protected detector-confidence 0.875/0.2926, so trajectory promotion is rejected. M189 decomposes that failure: transition rerank hits the same 7 success proposals, delays/costs more in 2 episodes, improves 1 episode, ties 4, and leaves 1 shared source-coverage/localization gap. M190 fixes the boundary: keep source-pool candidate-source expansion, reject transition repair as a positive claim, and use `detector_confidence_reachable_subset_v0` as the current safe execution default before scale-up. M191 fixes the scale contract: 30 triggered `HM3D ObjectNav val_mini` episodes, 240 planned source poses, 960 planned render rows, 3 batches, selected method `source_pool_plus_detector_confidence_reachable_subset_v1`, and required ablation `no_source_pool_detector_confidence_reachable_subset_v0`.
 
-E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M136 are complete as source/adapter/contract/oracle-metric/candidate-source staging, rendered RGB-D detector route, leakage-safe goal evaluation, trajectory execution, H001 fallback execution, dynamic-stale overlay execution, budget-matched repair, source-diverse redesign/materialization/execution, routine-fetch repair, task-context boundary, navigation boundary package, source-gap repair chain, high-path tail-slot materialization, leakage-safe goal-evaluation smoke, Docker trajectory execution, result interpretation/scale decision, scale-up/source-boundary contract, full-val-mini detector source chain, source-gap non-oracle source/observation expansion, `ConceptGraphs` HM3D source-gap route, target-free source-coverage expansion, target-free detector candidate-source route, trajectory-contract gates, trajectory-aware repair materialization, repair trajectory execution smoke, and repair result interpretation. M130 confirms execution works but the path-cost method loses `SPL` to detector-confidence baselines on the one target-free case; M135 confirms the repair runner works but the selected repair still loses `SPL` to detector-confidence / confidence-only baselines; M136 rejects current repair scale-up and selects confidence-preserving repair. Final navigation, deployable policy, real RGB-D/open-vocabulary robustness, and human-intent main claims remain blocked pending stronger repair evidence, heldout transfer, and external navigation/search baselines.
+E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M191 are complete as source/adapter/contract/oracle-metric/candidate-source staging, rendered RGB-D detector route, leakage-safe goal evaluation, trajectory execution, H001 fallback execution, dynamic-stale overlay execution, source-gap repair chains, `ConceptGraphs` HM3D source-gap route, target-free source-coverage expansion, trajectory-aware repair, confidence-preserving full-val-mini execution, policy-family failure decomposition, method-pivot boundary, source-coverage memory-interface method contract, source-coverage trigger/candidate-source expansion, fixed-budget source-pool rendering/detection, source-pool navmesh validation, proxy evaluation, Docker trajectory execution, protected-baseline interpretation, source-pool failure decomposition, repaired row materialization, repaired proxy evaluation, proxy failure decomposition, method-boundary/scale decision, and scale-up contract. M191 keeps final navigation, deployable policy, real RGB-D/open-vocabulary robustness, and human-intent main claims blocked until M192+ materialization, launcher/preflight, proxy gate, Docker trajectory execution, heldout transfer, and external baseline comparison pass.
 
-Next unit: E008-M137 `HM3D` target-free confidence-preserving trajectory-aware repair contract.
+Next unit: E008-M192 source-pool protected-confidence scale denominator materialization.
 
 ## Source Rule
 
@@ -33,9 +33,9 @@ Next unit: E008-M137 `HM3D` target-free confidence-preserving trajectory-aware r
 
 ## Claim Boundary
 
-- E008-M01 through E008-M136 do not claim final real navigation `SR` / `SPL`.
-- E008-M01 through E008-M136 do not claim final real RGB-D/open-vocabulary robustness.
-- E008-M01 through E008-M136 do not make human intent a main contribution.
+- E008-M01 through E008-M176 do not claim final real navigation `SR` / `SPL`.
+- E008-M01 through E008-M176 do not claim final real RGB-D/open-vocabulary robustness.
+- E008-M01 through E008-M176 do not make human intent a main contribution.
 - E008-M33 explicitly blocks scaling the current H001 fallback trajectory as a main navigation result because it underperforms detector trajectories and lacks controlled stale-memory intervention.
 - E008-M34 is a contract/design unit only; it does not produce trajectory results or dynamic-stale navigation performance.
 - E008-M35 is an input materialization unit only; it does not produce trajectory results or dynamic-stale navigation performance.
@@ -136,6 +136,62 @@ Next unit: E008-M137 `HM3D` target-free confidence-preserving trajectory-aware r
 - E008-M134 supports trajectory-aware repair execution contract and Docker/data/runner preflight only; it does not execute trajectories or support final navigation claims.
 - E008-M135 executes one target-free trajectory-aware repair trajectory smoke, but it does not support final navigation claims because it is one case and selected repair loses `SPL` to detector-confidence / confidence-only baselines.
 - E008-M136 supports result interpretation and scale decision only; it rejects current repair scale-up and selects confidence-preserving repair before any broader navigation run.
+- E008-M137 supports a confidence-preserving repair contract only; it does not materialize new visit-order rows or execute trajectories.
+- E008-M138 supports confidence-preserving row materialization only; it does not execute trajectories or support final navigation claims.
+- E008-M139 supports the confidence-preserving trajectory execution contract and Docker/data preflight only; it does not execute trajectories or support final navigation claims.
+- E008-M140 supports a one-case confidence-preserving trajectory smoke only; it does not support final navigation claims without M141 interpretation, scale, heldout transfer, and external navigation/search baselines.
+- E008-M141 supports result interpretation and controlled scale-up decision only; it authorizes M142 scale-up contract design but does not support final navigation claims.
+- E008-M142 supports controlled scale-up contract design only; it does not materialize full-val-mini trajectory cost rows, execute trajectories, or support final navigation claims.
+- E008-M143 supports full-val-mini trajectory-cost materialization only; it materializes 33,354 cost-matrix rows, 5,400 candidate-policy rows, and 180 execution plans, but it does not execute trajectories or support final navigation claims.
+- E008-M144 supports full-val-mini trajectory execution contract / Docker preflight only; it fixes M145 inputs and readiness, but it does not execute trajectories or support final navigation claims.
+- E008-M145 supports a full-val-mini execution result only; it does not support final navigation claims because M146/M147 interpretation, heldout transfer, and external navigation/search baselines are still required.
+- E008-M146 supports full-val-mini result interpretation and route decision only; it rejects positive navigation-improvement for the selected policy and selects M147 failure decomposition.
+- E008-M147 supports policy-family failure decomposition and redesign contract only; it selects M148 budget-guarded confidence/path redesign and still blocks positive navigation-improvement claims.
+- E008-M148 supports pre-execution budget-guarded confidence/path redesign contract only; it selects M149 row materialization and still blocks positive navigation-improvement claims.
+- E008-M149 supports budget-guarded row materialization only; it creates runner-compatible candidate/plan rows and audits leakage/budget/order guards, but it does not execute `Habitat` trajectories or support positive navigation-improvement claims.
+- E008-M150 supports budget-guarded trajectory execution contract / Docker preflight only; it does not execute `Habitat` trajectories or support positive navigation-improvement claims.
+- E008-M151 supports raw full-val-mini budget-guarded trajectory execution only; M152 later rejects positive navigation-improvement for the selected policy.
+- E008-M152 supports result interpretation and scale decision only; it rejects selected-policy positive navigation improvement because protected `SPL` and visit-efficiency gates fail, and selects M153 Pareto failure decomposition.
+- E008-M153 supports Pareto failure decomposition only; it rejects selected-policy positive navigation improvement because the selected policy is dominated in primary `SR`/`SPL`/candidate-visit space, treats no-visit-guard as a tradeoff witness rather than a selected method, and selects M154 budget-aware utility objective contract.
+- E008-M154 supports a pre-execution budget-aware utility contract only; it does not materialize policy rows, execute trajectories, or support navigation performance claims.
+- E008-M155 supports budget-aware utility policy materialization and leakage audit only; the selected policy changes 8 episode orders and promotes 17 rows, but it does not execute trajectories or support navigation performance claims.
+- E008-M156 supports budget-aware utility trajectory execution contract / Docker preflight only; it writes runner-compatible rows and M157 command ledger but does not execute trajectories or support navigation performance claims.
+- E008-M157 supports budget-aware utility trajectory execution only; it still requires M158 protected-baseline interpretation before any positive navigation-improvement claim.
+- E008-M158 supports protected-baseline interpretation only; it rejects selected utility positive navigation improvement and does not support final navigation claims.
+- E008-M159 supports component failure decomposition only; it keeps confidence floor as supported, rejects current scalar path gain, marks source-gap/visit-penalty terms inert on this denominator, and selects a constrained repair contract before any new execution or claim.
+- E008-M160 supports a confidence-first constrained repair contract only; it fixes method rules, input guards, and metric targets, but it does not materialize repaired rows, execute trajectories, or support positive navigation-improvement claims.
+- E008-M161 supports confidence-first constrained repair row materialization only; it changes selected visit orders under leakage/order guards, but it does not execute trajectories or support positive navigation-improvement claims.
+- E008-M162 supports confidence-first constrained repair trajectory execution contract / Docker preflight only; it writes runner-compatible rows and M163 command ledger, but it does not execute `Habitat` trajectories or support positive navigation-improvement claims.
+- E008-M163 supports raw confidence-first constrained repair trajectory execution only; protected-baseline interpretation is deferred to M164, and raw selected-policy `SPL` does not support positive navigation-improvement.
+- E008-M164 supports protected-baseline interpretation only; it rejects selected confidence-first repair as a positive navigation-improvement claim and selects M165 failure decomposition before any new scale-up.
+- E008-M165 supports failure decomposition only; it blocks local rerank scale-up because selected local swaps change order but not successful target recovery, and selects M166 boundary/method-pivot contract.
+- E008-M166 supports failure-boundary packaging and method-pivot selection only; it selects `source_coverage_memory_interface_policy_v1` but does not materialize rows or execute trajectories.
+- E008-M167 supports method/input/baseline/metric contract only; it does not materialize rows or execute trajectories.
+- E008-M168 supports source-coverage memory-interface row materialization only; it does not execute trajectories or support positive navigation claims.
+- E008-M169 supports Docker trajectory execution contract / preflight only; it does not execute trajectories or support positive navigation claims.
+- E008-M170 supports raw source-coverage memory-interface trajectory execution only; protected-baseline interpretation is deferred to M171.
+- E008-M171 supports protected-baseline interpretation only; it rejects selected-policy positive navigation improvement because selected `SPL` is 0.225556 vs detector-confidence 0.231845 and selected mean visits are 11.666667 vs detector-confidence 11.200000.
+- E008-M172 supports source-coverage tradeoff decomposition only; it does not promote source-coverage-only as the main method because it is task-agnostic, not preselected, and requires a precommitted SPL/visit/path utility objective.
+- E008-M173 supports source-coverage utility/Pareto contract design only; it does not materialize new rows, execute trajectories, or support performance claims.
+- E008-M174 supports source-coverage utility/Pareto row materialization and leakage/order/guard audit only; it blocks the then-planned Docker execution path because the selected policy activity gate fails with 0 / 30 changed episode orders.
+- E008-M174b supports failure decomposition and route decision only; it rejects Docker execution/posthoc utility tuning, closes within-pool source-coverage reranking as negative, and selects candidate-source expansion contract next.
+- E008-M175 supports source-coverage trigger/candidate-source expansion contract only; it does not materialize trigger rows, launch render/detector jobs, execute trajectories, or support navigation performance claims.
+- E008-M176 supports source-trigger row materialization only; it does not materialize source poses, launch render/detector jobs, execute trajectories, or support navigation performance claims. Because trigger requests fire on 30 / 30 rows, M177 must add a fixed budget/priority guard before long jobs.
+- E008-M177 supports fixed-budget source-pool pose/render-plan materialization only; it does not run render, detector inference, or trajectories.
+- E008-M178 supports navmesh/snap validation and render/detector launcher contract only; it does not run detector inference or trajectories.
+- E008-M179 supports bounded render/detector execution only; it does not validate candidate reachability, evaluate goals, or execute trajectories.
+- E008-M180 supports candidate navmesh/source-readiness validation only; it does not evaluate goal recovery or execute trajectories.
+- E008-M181 supports visit-order/path materialization only; it does not evaluate goal recovery or execute trajectories.
+- E008-M182 supports leakage-safe proxy goal evaluation only; it does not execute trajectories or support final `SR` / `SPL`.
+- E008-M183 supports Docker trajectory contract/preflight only; it does not execute trajectories.
+- E008-M184 supports a bounded Docker `Habitat` trajectory smoke only; it is not a final navigation benchmark.
+- E008-M185 supports protected-baseline interpretation only; it rejects direct source-pool scale-up because the selected path-cost method loses `SPL` to `detector_confidence_reachable_subset_v0`.
+- E008-M186 supports failure decomposition and repair-contract design only; it does not materialize repaired policy rows or support a positive navigation claim.
+- E008-M187 supports confidence-protected transition-cost row materialization only; it does not evaluate goal recovery, execute trajectories, or support a positive navigation claim.
+- E008-M188 supports leakage-safe proxy evaluation only; it rejects immediate Docker trajectory promotion because selected proxy `SPL` remains below protected detector confidence.
+- E008-M189 supports proxy failure decomposition only; it rejects `confidence_protected_transition_cost_policy_v1` as a positive navigation-improvement policy and does not execute trajectories.
+- E008-M190 supports method-boundary and scale-decision only; it keeps source-pool candidate-source expansion, rejects transition repair as a positive claim, sets `detector_confidence_reachable_subset_v0` as the current safe execution default, and blocks immediate Docker launch until M191 scale-up contract.
+- E008-M191 supports scale-up contract readiness only; it fixes the denominator, source-pool budget, protected-confidence default, required no-source-pool ablation, leakage audit, and command ledger, but does not materialize source poses, render frames, run detectors, evaluate goals, or execute trajectories.
 - `3RScan` / `3DSSG` remains the dynamic stale-memory source, but the first real navigation execution source is `HM3D ObjectNav` because local `Habitat` runtime and navmesh-backed scenes are available.
 - Any `HM3D ObjectNav` result must be described as a navigation-source transfer/adapter experiment unless stale-memory state injection is explicitly implemented.
 
@@ -7147,3 +7203,2563 @@ Claim boundary:
 - M136 supports an executed repair diagnostic, not a positive navigation-improvement claim.
 - Current repair should not be scaled as a main result because it loses `SPL` to detector-confidence / confidence-only baselines.
 - M136 selects confidence-preserving trajectory repair before any scale-up.
+
+## E008-M137
+
+Implementation unit: `E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m137_target_free_confidence_preserving_trajectory_repair_contract.py
+```
+
+Facts:
+
+- Status: `e008_m137_target_free_confidence_preserving_trajectory_repair_contract_ready`.
+- Base path-ready candidate rows: 15.
+- M135 selected repair `SPL`: 0.329622.
+- M135 detector-confidence `SPL`: 0.701267.
+- Selected policy: `confidence_band_trajectory_tiebreak_v0`.
+- Confidence band: 0.03.
+- Minimum path advantage inside confidence band: 1.0m.
+- Top-band candidate rows: 2.
+- Gate fail count: 0.
+- M138 materialization ready: true.
+- Selected next unit: E008-M138 target-free confidence-preserving trajectory repair materialization smoke.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/policy_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/confidence_band_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/policy_guardrail_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/m138_materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0/`
+
+Claim boundary:
+
+- M137 supports a confidence-preserving repair contract only.
+- M137 does not materialize new visit-order rows or execute trajectories.
+- Final real navigation `SR` / `SPL`, final RGB-D/open-vocabulary robustness, deployable search policy, and human intent as a main claim remain unsupported.
+
+## E008-M138
+
+Implementation unit: `E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m138_target_free_confidence_preserving_repair_materialization.py --m133-root experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0 --m137-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M137_target_free_confidence_preserving_trajectory_repair_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0
+```
+
+Facts:
+
+- Status: `e008_m138_target_free_confidence_preserving_repair_materialization_smoke_ready`.
+- Base candidate rows: 15.
+- Materialized candidate rows: 90.
+- Execution plan rows: 6.
+- Selected policy: `confidence_band_trajectory_tiebreak_v0`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Confidence band: 0.03.
+- Minimum path advantage inside confidence band: 1.0m.
+- Selected policy hard-veto rows: 13.
+- Selected policy confidence-band violations: 0.
+- Leakage audit pass: true.
+- Selected next unit: E008-M139 target-free confidence-preserving repair trajectory execution contract / Docker preflight.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0/confidence_preserving_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0/confidence_preserving_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0/policy_order_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M138_target_free_confidence_preserving_repair_materialization_smoke_v0/`
+
+Claim boundary:
+
+- M138 supports confidence-preserving row materialization only.
+- M138 does not execute `Habitat` trajectories or support final real navigation `SR` / `SPL`.
+- The high hard-veto count is diagnostic and must be tested by M139 before any navigation-improvement claim.
+
+## E008-M139
+
+Implementation unit: `E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m139_target_free_confidence_preserving_repair_trajectory_contract.py
+```
+
+Facts:
+
+- Status: `e008_m139_target_free_confidence_preserving_repair_trajectory_contract_ready_runner_next`.
+- Candidate rows: 90.
+- Execution plan rows: 6.
+- Eval goal rows: 1.
+- Oracle path rows: 1.
+- Docker preflight pass: true.
+- Runner implemented: true.
+- Method policy: `confidence_band_trajectory_tiebreak_v0`.
+- Primary baseline: `detector_confidence_reachable_subset_v0`.
+- Selected hard-veto rows: 13.
+- Confidence-band violations: 0.
+- Selected next unit: E008-M140 target-free confidence-preserving repair trajectory execution smoke.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0/trajectory_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0/m140_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0/`
+
+Claim boundary:
+
+- M139 supports the confidence-preserving repair execution contract and Docker/data preflight only.
+- M139 does not execute `Habitat` trajectories or support final real navigation `SR` / `SPL`.
+- M140 must test whether hard-veto-heavy confidence preservation keeps or improves `SPL` against detector-confidence.
+
+## E008-M140
+
+Implementation unit: `E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0`.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m140_target_free_confidence_preserving_repair_trajectory_execution_smoke.py --m139-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0"
+```
+
+Facts:
+
+- Status: `e008_m140_target_free_confidence_preserving_repair_trajectory_execution_smoke_ready`.
+- Inside Docker: true.
+- Trajectory candidate rows: 90.
+- Trajectory execution plan rows: 6.
+- Trajectory attempt rows: 25.
+- Scan-policy metric rows: 6.
+- Leakage audit pass: true.
+- Selected policy `SR`: 1.0.
+- Selected policy `SPL`: 0.701267.
+- Detector-confidence baseline `SPL`: 0.701267.
+- Selected policy candidate visits: 2.
+- Detector-confidence candidate visits: 3.
+- Negative prior repair `SPL`: 0.329622.
+- Path-cost-only baseline `SPL`: 0.092750.
+- Selected next unit: E008-M141 target-free confidence-preserving repair trajectory result interpretation / scale decision.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0/`
+
+Claim boundary:
+
+- M140 supports a one-case executed confidence-preserving repair smoke.
+- M140 shows selected policy ties detector-confidence `SPL` and reduces candidate visits on this case.
+- M140 does not support final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, or human intent as a main claim.
+- M141 must decide whether this is scale-up-worthy or only a bounded diagnostic repair.
+
+## E008-M141
+
+Implementation unit: `E008-M141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m141_target_free_confidence_preserving_repair_result_interpretation_scale_decision.py
+```
+
+Facts:
+
+- Status: `e008_m141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_ready`.
+- Controlled scale-up ready: true.
+- Selected policy: `confidence_band_trajectory_tiebreak_v0`.
+- Selected policy `SR` / `SPL`: 1.0 / 0.701267.
+- Detector-confidence `SR` / `SPL`: 1.0 / 0.701267.
+- Candidate visits delta vs detector-confidence: -1.0.
+- Prior repair `SPL`: 0.329622.
+- Path-cost baseline `SPL`: 0.092750.
+- Final real navigation `SR` / `SPL` ready: false.
+- Selected next unit: E008-M142 target-free confidence-preserving controlled scale-up contract.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_v0/policy_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_v0/pairwise_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_v0/principle_trace_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_v0/gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_v0/scale_up_seed_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M141_target_free_confidence_preserving_repair_result_interpretation_scale_decision_v0/`
+
+Claim boundary:
+
+- M141 supports controlled scale-up contract design, not final real navigation claims.
+- M141 records the novelty trace: motivation -> protected detector-confidence baseline -> M130/M135 failure diagnosis -> confidence-preserving method form -> M140 one-case evidence -> disconfirmation rule.
+- M142 must freeze the selected policy and predefine pass/warning/fail gates before any broader run.
+
+## E008-M142
+
+Implementation unit: `E008-M142_target_free_confidence_preserving_controlled_scaleup_contract_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m142_target_free_confidence_preserving_controlled_scaleup_contract.py
+```
+
+Facts:
+
+- Status: `e008_m142_target_free_confidence_preserving_controlled_scaleup_contract_ready`.
+- Selected policy: `confidence_band_trajectory_tiebreak_v0`.
+- First scale denominator: `full_val_mini_source_ready_confidence_preserving_scale`.
+- Scale episode rows: 30.
+- Path-ready candidate rows: 900.
+- Expected policy candidate rows upper bound: 5,400.
+- Expected trajectory cost matrix rows upper bound: 33,354.
+- Expected execution plan rows: 180.
+- Launch long job now: false.
+- Final real navigation `SR` / `SPL` ready: false.
+- Selected next unit: E008-M143 full-val-mini confidence-preserving trajectory-cost materialization.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M142_target_free_confidence_preserving_controlled_scaleup_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M142_target_free_confidence_preserving_controlled_scaleup_contract_v0/denominator_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M142_target_free_confidence_preserving_controlled_scaleup_contract_v0/policy_freeze_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M142_target_free_confidence_preserving_controlled_scaleup_contract_v0/input_guard_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M142_target_free_confidence_preserving_controlled_scaleup_contract_v0/pass_warning_fail_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M142_target_free_confidence_preserving_controlled_scaleup_contract_v0/m143_materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M142_target_free_confidence_preserving_controlled_scaleup_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M142_target_free_confidence_preserving_controlled_scaleup_contract_v0/`
+
+Claim boundary:
+
+- M142 supports only controlled scale-up contract design.
+- M142 freezes the policy suite and pass/warning/fail gates before any broader materialization or execution, so the next scale run is not fitted after seeing results.
+
+## E008-M143
+
+Implementation unit: `E008-M143_full_val_mini_confidence_preserving_trajectory_cost_materialization_v0`.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m143_full_val_mini_confidence_preserving_trajectory_cost_materialization.py"
+```
+
+Facts:
+
+- Status: `e008_m143_full_val_mini_confidence_preserving_trajectory_cost_materialization_ready`.
+- Base path-ready candidate rows: 900.
+- Episode rows: 30.
+- Trajectory cost matrix rows: 33,354 / expected 33,354.
+- Candidate-policy rows: 5,400.
+- Execution plan rows: 180.
+- Selected policy: `confidence_band_trajectory_tiebreak_v0`.
+- Selected policy hard-veto rows: 19.
+- Selected policy confidence-band violations: 0.
+- Leakage audit pass: true.
+- Selected next unit: E008-M144 full-val-mini confidence-preserving trajectory execution contract / Docker preflight.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M143_full_val_mini_confidence_preserving_trajectory_cost_materialization_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M143_full_val_mini_confidence_preserving_trajectory_cost_materialization_v0/trajectory_cost_matrix_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M143_full_val_mini_confidence_preserving_trajectory_cost_materialization_v0/confidence_preserving_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M143_full_val_mini_confidence_preserving_trajectory_cost_materialization_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M143_full_val_mini_confidence_preserving_trajectory_cost_materialization_v0/policy_order_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M143_full_val_mini_confidence_preserving_trajectory_cost_materialization_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M143_full_val_mini_confidence_preserving_trajectory_cost_materialization_v0/`
+
+Claim boundary:
+
+- M143 supports full-val-mini trajectory-cost and runner-input materialization only.
+- M143 does not execute trajectories, compute `SR` / `SPL`, or support final navigation claims.
+- M143 keeps the scale-up principle-driven: detector confidence remains protected, and trajectory cost is limited to confidence-band tie-break / hard feasibility veto behavior fixed before execution.
+
+## E008-M144
+
+Implementation unit: `E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m144_full_val_mini_confidence_preserving_trajectory_contract.py
+```
+
+Facts:
+
+- Status: `e008_m144_full_val_mini_confidence_preserving_trajectory_contract_ready_runner_next`.
+- Base path-ready candidate rows: 900.
+- Trajectory candidate rows: 5,400.
+- Execution plan rows: 180.
+- Eval goal rows: 30.
+- Oracle path rows: 30.
+- Docker/data/runner preflight pass: true.
+- Runner implemented / `py_compile` pass: true / true.
+- Selected policy hard-veto rows: 19.
+- Selected policy confidence-band violations: 0.
+- Selected next unit: E008-M145 full-val-mini confidence-preserving trajectory execution.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0/trajectory_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0/m145_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0/`
+
+Claim boundary:
+
+- M144 supports trajectory execution contract and Docker preflight only.
+- M144 does not execute trajectories, compute full-val-mini `SR` / `SPL`, or support final navigation claims.
+- M145 must execute the frozen 180-plan full-val-mini policy suite before M146 can interpret scale evidence.
+
+## E008-M145
+
+Implementation unit: `E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0`.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m145_full_val_mini_confidence_preserving_trajectory_execution.py --m144-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0"
+```
+
+Launch log:
+
+- `logs/20260611_034154_e008_m145_full_val_mini.log`
+
+Facts:
+
+- Status: `e008_m145_full_val_mini_confidence_preserving_trajectory_execution_ready`.
+- Inside Docker: true.
+- Trajectory candidate rows: 5,400.
+- Execution plan rows: 180.
+- Scan-policy metric rows: 180.
+- Trajectory attempt rows: 2,202.
+- Aggregate success rows / failure rows: 144 / 36.
+- Aggregate `SR`: 0.800000.
+- Aggregate mean `SPL`: 0.214639.
+- Leakage audit pass: true.
+- Selected policy `confidence_band_trajectory_tiebreak_v0`: `SR` 0.800000, `SPL` 0.227289, `CandidateVisits_mean` 11.900000.
+- Protected detector-confidence baseline: `SR` 0.800000, `SPL` 0.231845, `CandidateVisits_mean` 11.200000.
+- Best observed policy by `SPL`: `trajectory_greedy_confidence_path_repair_v0`, `SR` 0.800000, `SPL` 0.236760.
+- Selected next unit: E008-M146 full-val-mini confidence-preserving trajectory result interpretation / scale decision.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0/`
+
+Claim boundary:
+
+- M145 supports full-val-mini execution evidence, not final real navigation claims.
+- M145 does not by itself support `confidence_band_trajectory_tiebreak_v0` as a positive navigation-improvement claim because its `SPL` is below the protected detector-confidence baseline on this 30-episode execution.
+- M146 interpreted pass/warning/fail gates and rejected selected-policy scale-up before M147 failure decomposition.
+
+## E008-M146
+
+Implementation unit: `E008-M146_full_val_mini_confidence_preserving_trajectory_result_interpretation_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m146_full_val_mini_confidence_preserving_trajectory_result_interpretation.py
+```
+
+Facts:
+
+- Status: `e008_m146_full_val_mini_confidence_preserving_trajectory_result_interpretation_ready`.
+- Selected policy: `confidence_band_trajectory_tiebreak_v0`.
+- Selected policy `SR` / `SPL`: 0.800000 / 0.227289.
+- Detector-confidence `SR` / `SPL`: 0.800000 / 0.231845.
+- Selected policy delta `SPL` vs detector-confidence: -0.004556.
+- Selected policy delta candidate visits vs detector-confidence: +0.700000.
+- Best `SPL` policy: `trajectory_greedy_confidence_path_repair_v0`, `SPL` 0.236760.
+- Gate counts: pass 6, warning 1, fail 5.
+- Positive navigation-improvement ready: false.
+- Diagnostic table ready: true.
+- Selected next unit: E008-M147 full-val-mini policy-family failure decomposition / redesign contract.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M146_full_val_mini_confidence_preserving_trajectory_result_interpretation_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M146_full_val_mini_confidence_preserving_trajectory_result_interpretation_v0/policy_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M146_full_val_mini_confidence_preserving_trajectory_result_interpretation_v0/pairwise_delta_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M146_full_val_mini_confidence_preserving_trajectory_result_interpretation_v0/episode_delta_profile_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M146_full_val_mini_confidence_preserving_trajectory_result_interpretation_v0/gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M146_full_val_mini_confidence_preserving_trajectory_result_interpretation_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M146_full_val_mini_confidence_preserving_trajectory_result_interpretation_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M146_full_val_mini_confidence_preserving_trajectory_result_interpretation_v0/`
+
+Claim boundary:
+
+- M146 rejects a positive navigation-improvement claim for the selected confidence-band policy.
+- M145 remains a full-val-mini diagnostic execution table.
+- M147 must diagnose why confidence-band loses `SPL`, why prior repair wins `SPL`, and which precommitted policy family is defensible before any further scale-up.
+
+## E008-M147
+
+Implementation unit: `E008-M147_full_val_mini_policy_family_failure_decomposition_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m147_full_val_mini_policy_family_failure_decomposition.py
+```
+
+Facts:
+
+- Status: `e008_m147_full_val_mini_policy_family_failure_decomposition_ready`.
+- Case delta rows: 30.
+- Policy family rows: 4.
+- Failure diagnosis rows: 4.
+- Redesign contract rows: 4.
+- Selected policy remains not positive: `confidence_band_trajectory_tiebreak_v0` `SPL` 0.227289 vs detector-confidence `SPL` 0.231845, delta visits +0.700000.
+- Best observed policy remains diagnostic only: `trajectory_greedy_confidence_path_repair_v0` `SPL` 0.236760, delta visits +1.066667.
+- Case profiles vs detector-confidence: clean `SPL` gain 4, `SPL` gain with visit cost 7, neutral/tie 15, `SPL` loss with more visits 4.
+- Selected redesign family: `budget_guarded_confidence_path_repair_v1`.
+- Selected next unit: E008-M148 full-val-mini budget-guarded confidence/path redesign contract.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M147_full_val_mini_policy_family_failure_decomposition_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M147_full_val_mini_policy_family_failure_decomposition_v0/policy_family_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M147_full_val_mini_policy_family_failure_decomposition_v0/case_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M147_full_val_mini_policy_family_failure_decomposition_v0/profile_decomposition_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M147_full_val_mini_policy_family_failure_decomposition_v0/failure_diagnosis_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M147_full_val_mini_policy_family_failure_decomposition_v0/redesign_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M147_full_val_mini_policy_family_failure_decomposition_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M147_full_val_mini_policy_family_failure_decomposition_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M147_full_val_mini_policy_family_failure_decomposition_v0/`
+
+Claim boundary:
+
+- M147 does not claim real navigation improvement.
+- M147 explains why the current selected policy is not paper-facing as a positive method.
+- M148 must freeze a budget-guarded confidence/path policy before any new execution.
+- External navigation/search baselines remain required after the internal policy form is stable.
+
+## E008-M148
+
+Implementation unit: `E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m148_full_val_mini_budget_guarded_confidence_path_redesign_contract.py
+```
+
+Facts:
+
+- Status: `e008_m148_full_val_mini_budget_guarded_confidence_path_redesign_contract_ready`.
+- Selected policy: `budget_guarded_confidence_path_repair_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- M143 candidate rows: 5,400.
+- M143 policy counts: 6 policies x 900 rows.
+- Policy contract rows: 5.
+- Trigger contract rows: 4.
+- Allowed input rows: 14.
+- Blocked input rows: 12.
+- Budget guard rows: 4.
+- Confidence band: 0.03.
+- Max rank displacement: 1.
+- Positive navigation-improvement ready: false.
+- Selected next unit: E008-M149 full-val-mini budget-guarded confidence/path row materialization smoke.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/policy_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/trigger_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/allowed_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/blocked_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/budget_guard_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/m149_materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0/`
+
+Claim boundary:
+
+- M148 does not claim real navigation improvement.
+- M148 prevents posthoc policy selection by freezing the selected policy and ablations before M149.
+- M149 must materialize rows and audit leakage/budget guards before any Docker trajectory execution.
+
+## E008-M149
+
+Implementation unit: `E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m149_full_val_mini_budget_guarded_confidence_path_materialization.py \
+  --m143-root experiments/E008_real_navigation_benchmark/artifacts/E008-M143_full_val_mini_confidence_preserving_trajectory_cost_materialization_v0 \
+  --m148-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M148_full_val_mini_budget_guarded_confidence_path_redesign_contract_v0 \
+  --out-root /home/yoohyun/research2/experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0 \
+  --derived-out-root /home/yoohyun/research2/local_dataset/HM3D_navigation_bridge/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0
+```
+
+Facts:
+
+- Status: `e008_m149_full_val_mini_budget_guarded_confidence_path_materialization_ready`.
+- Episode rows: 30.
+- Base path-ready candidate rows: 900.
+- Budget-guarded candidate rows: 5,400.
+- Execution plan rows: 180.
+- Selected policy: `budget_guarded_confidence_path_repair_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Candidate rows by policy: 900 each for selected policy, protected baseline, `budget_guarded_confidence_only_v1`, `budget_guarded_no_visit_guard_v1`, `budget_guarded_no_confidence_floor_v1`, and `budget_guarded_source_gap_only_v1`.
+- Selected policy path-repair trigger rows: 394.
+- Selected policy hard-feasibility veto rows: 6.
+- Selected policy max rank displacement: 1.
+- Selected policy confidence-band violations: 0.
+- Selected policy rank-displacement violations: 0.
+- Leakage audit pass: true.
+- Budget guard audit pass: true.
+- Policy order audit pass: true.
+- Runner aliases ready: `dynamic_stale_overlay_trajectory_candidate_rows.jsonl`, `trajectory_execution_plan_rows.jsonl`.
+- Selected next unit: E008-M150 full-val-mini budget-guarded confidence/path trajectory execution contract / Docker preflight.
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/budget_guarded_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/budget_guarded_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/policy_order_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/budget_guard_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M149_full_val_mini_budget_guarded_confidence_path_materialization_smoke_v0/`
+
+Claim boundary:
+
+- M149 does not claim real navigation improvement.
+- M149 shows only that the budget-guarded policy family is materialized on the fixed denominator with leakage/budget/order audits passing.
+- M150 must create the Docker execution contract before any trajectory rerun.
+
+## E008-M150
+
+Implementation unit: `E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0`.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m150_full_val_mini_budget_guarded_confidence_path_trajectory_contract.py
+```
+
+Facts:
+
+- Status: `e008_m150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_ready_runner_next`.
+- Base candidate rows: 900.
+- Trajectory candidate rows: 5,400.
+- Trajectory execution plan rows: 180.
+- Eval goal rows: 30.
+- Oracle path rows: 30.
+- Policy count: 6.
+- Selected policy: `budget_guarded_confidence_path_repair_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Selected policy path-repair trigger rows: 394.
+- Selected policy hard-feasibility veto rows: 6.
+- Selected policy max rank displacement: 1.
+- Docker preflight pass: true.
+- `docker --version`: pass.
+- `research3/habitat-h001:20260508-calib-artifacts` image inspect: pass.
+- `nvidia-smi`: pass, free memory tail `22124`.
+- Read-only `HM3D` data root: pass.
+- Scene files: 2 / 2 ready.
+- Navmesh files: 2 / 2 ready.
+- `ObjectNav val_mini` content files: 2.
+- M37 runner compile: pass.
+- M151 runner compile: pass.
+- Selected next unit: E008-M151 full-val-mini budget-guarded confidence/path trajectory execution.
+
+M151 command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work -w /work \
+  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m151_full_val_mini_budget_guarded_confidence_path_execution.py \
+  --m150-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0 \
+  --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0 \
+  --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0"
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0/trajectory_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0/m151_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0/`
+
+Claim boundary:
+
+- M150 does not claim real navigation improvement.
+- M150 is a Docker/data/runner preflight and command-ledger unit only.
+- M151 must execute trajectories before `SR` / `SPL` can be interpreted.
+
+## E008-M151
+
+Implementation unit: `E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0`.
+
+- Status: `e008_m151_full_val_mini_budget_guarded_confidence_path_execution_ready`.
+- Launch session: `e008_m151_20260611_110132` completed.
+- Log: `logs/20260611_110132_e008_m151_full_val_mini_budget_guarded_confidence_path.log`.
+- Inside Docker: true.
+- Trajectory candidate rows: 5,400.
+- Trajectory execution plan rows: 180.
+- Scan-task-policy rows: 180.
+- Trajectory attempt rows: 2,185.
+- Trajectory success/failure rows: 144 / 36.
+- Aggregate `SR`: 0.800000.
+- Aggregate mean `SPL`: 0.215140.
+- Pairwise policy delta rows: 150.
+- Leakage audit pass: true.
+- Selected next unit: E008-M152 full-val-mini budget-guarded confidence/path trajectory result interpretation / scale decision.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work \
+  -w /work \
+  research3/habitat-h001:20260508-calib-artifacts \
+  bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m151_full_val_mini_budget_guarded_confidence_path_execution.py \
+  --m150-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0 \
+  --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0 \
+  --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0"
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p=Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0/coverage.json')
+c=json.loads(p.read_text())
+assert c['status']=='e008_m151_full_val_mini_budget_guarded_confidence_path_execution_ready'
+assert c['scan_task_policy_rows'] == 180
+print('m151 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0/`
+
+Claim boundary:
+
+- M151 is a raw full-val-mini trajectory execution result, not final interpretation.
+- Positive navigation-improvement remains blocked because M152 rejects `budget_guarded_confidence_path_repair_v1` against protected `detector_confidence_reachable_subset_v0` and ablations.
+- Final real navigation `SR` / `SPL`, deployable policy, final RGB-D/open-vocabulary robustness, and human intent as a main claim remain blocked.
+
+## E008-M152
+
+Implementation unit: `E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0`.
+
+- Status: `e008_m152_full_val_mini_budget_guarded_confidence_path_result_interpretation_ready`.
+- Selected policy: `budget_guarded_confidence_path_repair_v1`.
+- Selected policy `SR` / `SPL`: 0.800000 / 0.230290.
+- Detector-confidence `SR` / `SPL`: 0.800000 / 0.231845.
+- Selected policy delta `SPL` vs detector-confidence: -0.001555.
+- Selected policy delta candidate visits vs detector-confidence: +0.133333.
+- Selected policy delta path length vs detector-confidence: -8.239214 m.
+- Best `SPL` policy: `budget_guarded_no_visit_guard_v1`, `SPL` 0.236760.
+- Gate pass/warning/fail: 6 / 3 / 6.
+- Positive navigation-improvement ready: false.
+- Diagnostic table ready: true.
+- Selected next unit: E008-M153 full-val-mini budget/SPL Pareto failure decomposition / next-route decision.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m152_full_val_mini_budget_guarded_confidence_path_result_interpretation.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/policy_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/pairwise_delta_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/episode_delta_profile_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M152_full_val_mini_budget_guarded_confidence_path_result_interpretation_v0/`
+
+Claim boundary:
+
+- M152 rejects a positive navigation-improvement claim for the selected budget-guarded policy.
+- M151 remains a full-val-mini diagnostic execution table.
+- Confidence floor remains necessary because the no-confidence-floor ablation is much worse.
+- The current path repair form is not supported as a positive method because it reduces path length but loses `SPL` and visit efficiency against detector-confidence.
+- M153 decomposed the budget/SPL Pareto failure before any new scale-up or external-baseline push.
+
+## E008-M153
+
+Implementation unit: `E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0`.
+
+- Status: `e008_m153_full_val_mini_budget_spl_pareto_failure_decomposition_ready`.
+- Scan-task-policy rows: 180.
+- Selected policy: `budget_guarded_confidence_path_repair_v1`.
+- Selected primary dominated by: `budget_guarded_confidence_only_v1`, `budget_guarded_source_gap_only_v1`, `detector_confidence_reachable_subset_v0`.
+- Selected expanded path-length Pareto member: true.
+- Best `SPL` ablation: `budget_guarded_no_visit_guard_v1`, `SPL` 0.236760, `CandidateVisits` 12.266667.
+- No-confidence-floor ablation: `SPL` 0.128254, `CandidateVisits` 15.633333.
+- Positive navigation-improvement ready: false.
+- Final real navigation claim ready: false.
+- Selected next unit: E008-M154 budget-aware utility objective contract / policy-selection rule.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m153_full_val_mini_budget_spl_pareto_failure_decomposition.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/pareto_policy_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/episode_tradeoff_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/pareto_case_profile_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/failure_diagnosis_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M153_full_val_mini_budget_spl_pareto_failure_decomposition_v0/`
+
+Claim boundary:
+
+- M153 supports a diagnostic statement about the budget/SPL Pareto failure.
+- M153 does not support a positive selected-policy navigation claim because the selected policy is dominated in primary `SR`/`SPL`/candidate-visit space.
+- `budget_guarded_no_visit_guard_v1` is a tradeoff witness, not a selected method, because it is posthoc and visit-expensive.
+- Confidence floor remains supported as necessary by the no-confidence-floor negative control.
+- M154 precommitted a budget-aware utility objective before any new scale-up, heldout transfer, or external navigation/search baseline run.
+
+## E008-M154
+
+Implementation unit: `E008-M154_budget_aware_utility_objective_contract_v0`.
+
+- Status: `e008_m154_budget_aware_utility_objective_contract_ready`.
+- Selected objective: `budget_aware_confidence_path_utility_v0`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Input contract rows: 20.
+- Guard contract rows: 5.
+- Utility objective rows: 2.
+- Blocked input fields: 7.
+- Performance claim ready: false.
+- Trajectory execution ready: false.
+- Selected next unit: E008-M155 budget-aware utility policy materialization smoke.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m154_budget_aware_utility_objective_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/prior_policy_audit_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/utility_objective_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/guard_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/policy_selection_rule_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/ablation_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/evaluation_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M154_budget_aware_utility_objective_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M154_budget_aware_utility_objective_contract_v0/`
+
+Claim boundary:
+
+- M154 supports method precommitment and reviewer defense only.
+- M154 does not support positive navigation performance because no policy rows or trajectories are executed.
+- `budget_guarded_no_visit_guard_v1` remains a required ablation / tradeoff witness, not a selected method.
+- M155 materialized the utility rows without eval leakage; M156 must fix the Docker trajectory contract before any new execution claim.
+
+## E008-M155
+
+Implementation unit: `E008-M155_budget_aware_utility_policy_materialization_smoke_v0`.
+
+- Status: `e008_m155_budget_aware_utility_policy_materialization_smoke_ready`.
+- Source candidate rows: 5,400.
+- Materialized candidate rows: 6,300.
+- Utility component rows: 3,600.
+- Policy plan rows: 210.
+- Policy order audit rows: 210.
+- Leakage audit rows: 7.
+- Selected policy: `budget_aware_confidence_path_utility_v0`.
+- Selected changed episode rows: 8.
+- Selected utility-promoted rows: 17.
+- Materialization ready: true.
+- Trajectory execution ready: true.
+- Performance claim ready: false.
+- Selected next unit: E008-M156 budget-aware utility trajectory execution contract / Docker preflight.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m155_budget_aware_utility_policy_materialization.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/budget_aware_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/utility_component_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/policy_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/policy_order_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/materialization_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M155_budget_aware_utility_policy_materialization_smoke_v0/`
+
+Claim boundary:
+
+- M155 supports row materialization, policy-order audit, leakage audit, and Docker-execution readiness only.
+- M155 does not execute `Habitat` trajectories and does not support real navigation `SR` / `SPL` improvement.
+- `budget_aware_confidence_path_utility_v0` is now a materialized and executed candidate policy; M158 rejects it as a positive navigation-improvement claim.
+- Human intent remains a secondary conditioning / ablation axis; M155 is target-free and does not change the E006-M08 decision.
+
+## E008-M156
+
+Implementation unit: `E008-M156_budget_aware_utility_trajectory_contract_v0`.
+
+- Status: `e008_m156_budget_aware_utility_trajectory_contract_ready_runner_next`.
+- Method policy: `budget_aware_confidence_path_utility_v0`.
+- Primary baseline: `detector_confidence_reachable_subset_v0`.
+- Candidate rows: 6,300.
+- Execution plan rows: 210.
+- Eval goal rows: 30.
+- Oracle path rows: 30.
+- Scene count: 2.
+- Policy count: 7.
+- Selected policy changed episode rows: 8.
+- Selected policy utility-promoted rows: 17.
+- Docker preflight pass: true.
+- `M37` runner compile pass: true.
+- `M157` runner compile pass: true.
+- Trajectory execution contract ready: true.
+- Trajectory execution result ready: false.
+- Final real navigation `SR` / `SPL` ready: false.
+- Selected next unit: E008-M157 budget-aware utility trajectory execution.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m156_budget_aware_utility_trajectory_contract.py
+```
+
+M157 command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work -w /work \
+  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m157_budget_aware_utility_trajectory_execution.py \
+  --m156-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0 \
+  --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0 \
+  --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M157_budget_aware_utility_trajectory_execution_v0"
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/budget_aware_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/trajectory_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/m157_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M156_budget_aware_utility_trajectory_contract_v0/`
+
+Claim boundary:
+
+- M156 supports runner-compatible trajectory input rows, Docker/data preflight, and the M157 command ledger only.
+- M156 does not execute `Habitat` trajectories and does not support real navigation `SR` / `SPL` improvement.
+- M157 executed the selected method and ablation/reference policies; M158 interprets them against the protected baseline and rejects a positive navigation-improvement claim.
+- Human intent remains a secondary conditioning / ablation axis; M156 is target-free and does not change the E006-M08 decision.
+
+## E008-M157
+
+Implementation unit: `E008-M157_budget_aware_utility_trajectory_execution_v0`.
+
+- Status: `e008_m157_budget_aware_utility_trajectory_execution_ready`.
+- Inside Docker: true.
+- Method policy: `budget_aware_confidence_path_utility_v0`.
+- Primary baseline: `detector_confidence_reachable_subset_v0`.
+- Trajectory candidate rows: 6,300.
+- Trajectory execution plan rows: 210.
+- Scan-task-policy metric rows: 210.
+- Trajectory attempt rows: 2,523.
+- Trajectory success rows: 168.
+- Trajectory failure rows: 42.
+- Aggregate `SR`: 0.800000.
+- Aggregate mean `SPL`: 0.217651.
+- Selected method `SR` / `SPL`: 0.800000 / 0.231619.
+- Primary detector-confidence baseline `SR` / `SPL`: 0.800000 / 0.231845.
+- Leakage audit pass: true.
+- Final real navigation `SR` / `SPL` ready: false.
+- Selected next unit: E008-M158 budget-aware utility trajectory result interpretation / protected-baseline gate.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work -w /work \
+  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m157_budget_aware_utility_trajectory_execution.py \
+  --m156-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0 \
+  --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0 \
+  --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M157_budget_aware_utility_trajectory_execution_v0"
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p = Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0/coverage.json')
+c = json.loads(p.read_text())
+assert c['status'] == 'e008_m157_budget_aware_utility_trajectory_execution_ready'
+assert c['scan_task_policy_rows'] == 210
+print('m157 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M157_budget_aware_utility_trajectory_execution_v0/`
+
+Claim boundary:
+
+- M157 is an execution result, not final interpretation.
+- M158 rejects a positive navigation-improvement claim for this selected method.
+- `ObjectNav` goal/viewpoints are used only after stops for metric computation.
+- Final `SR` / `SPL`, deployable policy, final RGB-D/open-vocabulary robustness, and human intent as a main claim remain blocked.
+
+## E008-M158
+
+Implementation unit: `E008-M158_budget_aware_utility_trajectory_result_interpretation_v0`.
+
+- Status: `e008_m158_budget_aware_utility_trajectory_result_interpretation_ready`.
+- M157 status: `e008_m157_budget_aware_utility_trajectory_execution_ready`.
+- Selected policy: `budget_aware_confidence_path_utility_v0`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Selected policy `SR` / `SPL`: 0.800000 / 0.231619.
+- Detector-confidence `SR` / `SPL`: 0.800000 / 0.231845.
+- Selected policy delta `SPL` vs detector-confidence: -0.000226.
+- Selected policy delta candidate visits vs detector-confidence: +0.066667.
+- Selected policy delta path length vs detector-confidence: +0.308625m.
+- Best `SPL` policy: `budget_guarded_no_visit_guard_v1`, `SPL` 0.236760.
+- Gate pass / warning / fail: 6 / 2 / 8.
+- Positive navigation-improvement ready: false.
+- Component failure decomposition ready: true.
+- Final real navigation `SR` / `SPL` ready: false.
+- Selected next unit: E008-M159 budget-aware utility component failure decomposition / next-route decision.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m158_budget_aware_utility_trajectory_result_interpretation.py
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p = Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/coverage.json')
+c = json.loads(p.read_text())
+assert c['status'] == 'e008_m158_budget_aware_utility_trajectory_result_interpretation_ready'
+assert c['positive_navigation_improvement_ready'] is False
+assert c['selected_next_unit'] == 'E008-M159 budget-aware utility component failure decomposition / next-route decision'
+print('m158 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/policy_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/pairwise_delta_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/episode_delta_profile_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M158_budget_aware_utility_trajectory_result_interpretation_v0/`
+
+Claim boundary:
+
+- M158 rejects selected utility positive navigation improvement.
+- The selected utility ties detector-confidence on `SR` but loses mean `SPL`, path length, and candidate visits.
+- `budget_aware_utility_without_path_gain_v0` matches detector-confidence and is better than the selected utility on aggregate, so current path gain is not supported.
+- Source-gap bonus and visit-penalty terms are inert on this denominator.
+- Confidence floor remains necessary because `budget_guarded_no_confidence_floor_v1` is strongly worse.
+- `budget_guarded_no_visit_guard_v1` has the best `SPL` but is visit-budget expensive, so it is a tradeoff witness, not a posthoc selected method.
+- Final `SR` / `SPL`, deployable policy, final RGB-D/open-vocabulary robustness, and human intent as a main claim remain blocked.
+
+## E008-M159
+
+Implementation unit: `E008-M159_budget_aware_utility_component_failure_decomposition_v0`.
+
+- Status: `e008_m159_budget_aware_utility_component_failure_decomposition_ready`.
+- M155 status: `e008_m155_budget_aware_utility_policy_materialization_smoke_ready`.
+- M157 status: `e008_m157_budget_aware_utility_trajectory_execution_ready`.
+- M158 status: `e008_m158_budget_aware_utility_trajectory_result_interpretation_ready`.
+- Component failure rows: 6.
+- Supported component: `confidence_floor_guard`.
+- Rejected / inert components: `scalar_path_gain`, `source_gap_bonus`, `visit_penalty_scalar`.
+- Tradeoff witness: `visit_guard`.
+- Positive navigation-improvement ready: false.
+- Component repair contract required: true.
+- Final real navigation `SR` / `SPL` ready: false.
+- Selected next unit: E008-M160 confidence-first constrained utility repair contract / metric target decision.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m159_budget_aware_utility_component_failure_decomposition.py
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p = Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/coverage.json')
+c = json.loads(p.read_text())
+assert c['status'] == 'e008_m159_budget_aware_utility_component_failure_decomposition_ready'
+assert c['positive_navigation_improvement_ready'] is False
+assert c['selected_next_unit'] == 'E008-M160 confidence-first constrained utility repair contract / metric target decision'
+print('m159 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/component_failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/failure_mechanism_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/principle_revision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/m160_contract_seed_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M159_budget_aware_utility_component_failure_decomposition_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M159_budget_aware_utility_component_failure_decomposition_v0/`
+
+Claim boundary:
+
+- M159 supports component-level failure diagnosis only.
+- M159 does not support a positive selected utility navigation claim.
+- The supported component is the confidence floor; current scalar path gain is harmful, source-gap bonus and visit penalty are inert on this denominator, and no-visit-guard is a tradeoff witness rather than a selected method.
+- E008-M160 must precommit a confidence-first constrained repair contract before any new execution.
+- Final `SR` / `SPL`, deployable policy, final RGB-D/open-vocabulary robustness, and human intent as a main claim remain blocked.
+
+## E008-M160
+
+Implementation unit: `E008-M160_confidence_first_constrained_utility_repair_contract_v0`.
+
+- Status: `e008_m160_confidence_first_constrained_utility_repair_contract_ready`.
+- M159 status: `e008_m159_budget_aware_utility_component_failure_decomposition_ready`.
+- Selected policy contract: `confidence_first_path_veto_tiebreak_repair_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Primary metric target: `protected_spl_no_extra_visits_v0`.
+- Method contract rows: 4.
+- Repair rule rows: 6.
+- Metric target rows: 4.
+- Allowed / blocked input rows: 8 / 9.
+- Ablation contract rows: 4.
+- Row materialization ready: true.
+- Trajectory execution ready: false.
+- Positive navigation-improvement ready: false.
+- Selected next unit: E008-M161 confidence-first constrained repair row materialization smoke.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m160_confidence_first_constrained_utility_repair_contract.py
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p = Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/coverage.json')
+c = json.loads(p.read_text())
+assert c['status'] == 'e008_m160_confidence_first_constrained_utility_repair_contract_ready'
+assert c['selected_next_unit'] == 'E008-M161 confidence-first constrained repair row materialization smoke'
+assert c['positive_navigation_improvement_ready'] is False
+print('m160 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/method_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/repair_rule_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/metric_target_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/allowed_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/blocked_input_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/ablation_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M160_confidence_first_constrained_utility_repair_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M160_confidence_first_constrained_utility_repair_contract_v0/`
+
+Claim boundary:
+
+- M160 is a contract-only unit.
+- M160 does not materialize repaired candidate rows or execute `Habitat` trajectories.
+- The selected repair must start from detector-confidence order, keep a confidence floor, use path cost only as hard feasibility veto / confidence-band tie-break / bounded local repair, and keep source-gap as a trigger only.
+- Positive navigation-improvement requires later M161 materialization, execution, `delta_SR >= 0`, `delta_SPL > 0`, and `delta_CandidateVisits <= 0` against `detector_confidence_reachable_subset_v0`.
+- Final `SR` / `SPL`, deployable policy, final RGB-D/open-vocabulary robustness, and human intent as a main claim remain blocked.
+
+## E008-M161
+
+Implementation unit: `E008-M161_confidence_first_constrained_repair_materialization_smoke_v0`.
+
+- Status: `e008_m161_confidence_first_constrained_repair_materialization_smoke_ready`.
+- M155 status: `e008_m155_budget_aware_utility_policy_materialization_smoke_ready`.
+- M156 status: `e008_m156_budget_aware_utility_trajectory_contract_ready_runner_next`.
+- M160 status: `e008_m160_confidence_first_constrained_utility_repair_contract_ready`.
+- Selected policy: `confidence_first_path_veto_tiebreak_repair_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Primary metric target: `protected_spl_no_extra_visits_v0`.
+- Source candidate rows: 6,300.
+- Base detector candidate rows: 900.
+- Materialized candidate rows: 5,400.
+- Candidate rows by policy: 900 each for selected, protected baseline, `confidence_first_no_path_tiebreak_v1`, `source_gap_trigger_only_v1`, `budget_guarded_no_confidence_floor_v1`, and `budget_guarded_no_visit_guard_v1`.
+- Repair component rows: 765.
+- Selected changed episode rows: 24 / 30.
+- Selected local-swap promoted rows: 106.
+- Max selected rank displacement: 1.
+- Leakage/order audits: pass.
+- Positive navigation-improvement ready: false.
+- Selected next unit: E008-M162 confidence-first constrained repair trajectory execution contract / Docker preflight.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m161_confidence_first_constrained_repair_materialization.py
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p = Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/coverage.json')
+c = json.loads(p.read_text())
+assert c['status'] == 'e008_m161_confidence_first_constrained_repair_materialization_smoke_ready'
+assert c['selected_next_unit'] == 'E008-M162 confidence-first constrained repair trajectory execution contract / Docker preflight'
+assert c['materialization_ready'] is True
+assert c['positive_navigation_improvement_ready'] is False
+print('m161 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/confidence_first_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/repair_component_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/policy_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/policy_order_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/materialization_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M161_confidence_first_constrained_repair_materialization_smoke_v0/`
+
+Claim boundary:
+
+- M161 is row materialization only.
+- M161 operationalizes M160 without reintroducing additive path gain: detector-confidence remains the base order, path cost acts only as adjacent confidence-band tie-break, and rank displacement is capped at 1.
+- M161 supports only pre-execution visit-order changes, not navigation performance.
+- Positive navigation-improvement still requires Docker trajectory execution and protected `SR` / `SPL` / candidate-visit gates.
+- Final `SR` / `SPL`, deployable policy, final RGB-D/open-vocabulary robustness, and human intent as a main claim remain blocked.
+
+## E008-M162
+
+Implementation unit: `E008-M162_confidence_first_constrained_repair_trajectory_contract_v0`.
+
+- Status: `e008_m162_confidence_first_constrained_repair_trajectory_contract_ready_runner_next`.
+- M161 status: `e008_m161_confidence_first_constrained_repair_materialization_smoke_ready`.
+- Selected policy: `confidence_first_path_veto_tiebreak_repair_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Runner candidate rows: 5,400.
+- Candidate rows by policy: 900 each for selected, protected baseline, `confidence_first_no_path_tiebreak_v1`, `source_gap_trigger_only_v1`, `budget_guarded_no_confidence_floor_v1`, and `budget_guarded_no_visit_guard_v1`.
+- Execution plan rows: 180.
+- Eval goal rows: 30.
+- Oracle path rows: 30.
+- Trajectory cost matrix rows: 33,354.
+- Selected changed episode rows: 24 / 30.
+- Selected local-swap promoted rows: 106.
+- Max selected rank displacement: 1.
+- Leakage audit: pass.
+- Docker/data/runner preflight: pass.
+- M163 runner compile: pass.
+- Trajectory execution result ready: false.
+- Positive navigation-improvement ready: false.
+- Selected next unit: E008-M163 confidence-first constrained repair trajectory execution.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m162_confidence_first_constrained_repair_trajectory_contract.py
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p = Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/coverage.json')
+c = json.loads(p.read_text())
+assert c['status'] == 'e008_m162_confidence_first_constrained_repair_trajectory_contract_ready_runner_next'
+assert c['trajectory_execution_contract_ready'] is True
+assert c['trajectory_execution_result_ready'] is False
+assert c['selected_next_unit'] == 'E008-M163 confidence-first constrained repair trajectory execution'
+assert c['trajectory_candidate_rows'] == 5400
+assert c['trajectory_execution_plan_rows'] == 180
+assert c['docker_preflight_pass'] is True
+print('m162 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/confidence_first_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/confidence_first_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/episode_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/oracle_path_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/trajectory_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/m163_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/`
+
+Claim boundary:
+
+- M162 is trajectory contract and Docker/data/runner preflight only.
+- M162 preserves M161's selected visit-order changes but does not execute `Habitat` trajectories.
+- M162 supports only readiness for M163 execution, not positive navigation-improvement.
+- Positive navigation-improvement requires M163 execution and M164 protected-baseline interpretation.
+- Final `SR` / `SPL`, deployable policy, final RGB-D/open-vocabulary robustness, and human intent as a main claim remain blocked.
+
+## E008-M163
+
+Implementation unit: `E008-M163_confidence_first_constrained_repair_trajectory_execution_v0`.
+
+- Status: `e008_m163_confidence_first_constrained_repair_trajectory_execution_ready`.
+- Launched at: 2026-06-11 21:58 KST.
+- Completed at: 2026-06-11 21:58 KST.
+- tmux session: `e008_m163_confidence_repair`.
+- Log: `logs/20260611_215822_e008_m163_confidence_first_repair_trajectory.log`.
+- Input contract: `experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0/`.
+- Output path: `experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0/`.
+- Derived output path: `local_dataset/HM3D_navigation_bridge/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0/`.
+- Scan-task-policy rows: 180.
+- Trajectory attempt rows: 2,187.
+- Success rows: 144 / 180.
+- Aggregate `SR`: 0.800000.
+- Aggregate mean `SPL`: 0.214863.
+- Selected policy `SR` / `SPL`: 0.800000 / 0.228632.
+- Protected detector-confidence `SR` / `SPL`: 0.800000 / 0.231845.
+- Selected policy candidate visits: 11.400000.
+- Protected detector-confidence candidate visits: 11.200000.
+- Leakage audit: pass.
+- Scene error rows: 0.
+- Positive navigation-improvement ready: false until M164 interpretation.
+- Selected next unit: E008-M164 confidence-first constrained repair trajectory result interpretation / protected-baseline gate.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work -w /work \
+  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m163_confidence_first_constrained_repair_trajectory_execution.py \
+  --m162-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0 \
+  --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0 \
+  --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0"
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p = Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0/coverage.json')
+c = json.loads(p.read_text())
+assert c['status'] == 'e008_m163_confidence_first_constrained_repair_trajectory_execution_ready'
+assert c['scan_task_policy_rows'] == 180
+print('m163 ready')
+PY
+```
+
+Expected artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0/report.md`
+
+Claim boundary:
+
+- M163 is an execution unit; it is not final interpretation.
+- Raw execution does not support positive navigation-improvement: selected policy ties detector-confidence on `SR` but has lower `SPL` and higher candidate visits.
+- Positive navigation-improvement requires M164 protected-baseline interpretation.
+- Final `SR` / `SPL`, deployable policy, final RGB-D/open-vocabulary robustness, and human intent as a main claim remain blocked until later gates.
+
+## E008-M164
+
+Implementation unit: `E008-M164_confidence_first_constrained_repair_result_interpretation_v0`.
+
+- Status: `e008_m164_confidence_first_constrained_repair_result_interpretation_ready`.
+- M163 status: `e008_m163_confidence_first_constrained_repair_trajectory_execution_ready`.
+- Selected policy: `confidence_first_path_veto_tiebreak_repair_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Selected policy `SR` / `SPL`: 0.800000 / 0.228632.
+- Protected detector-confidence `SR` / `SPL`: 0.800000 / 0.231845.
+- Selected policy delta `SPL`: -0.003213.
+- Selected policy delta candidate visits: +0.200000.
+- Best `SPL` policy: `budget_guarded_no_visit_guard_v1` with `SPL` 0.236760.
+- Gate pass / warning / fail: 6 / 2 / 7.
+- Positive navigation-improvement ready: false.
+- Diagnostic table ready: true.
+- Selected next unit: E008-M165 confidence-first constrained repair failure decomposition / next-route decision.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m164_confidence_first_constrained_repair_result_interpretation.py
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p = Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/coverage.json')
+c = json.loads(p.read_text())
+assert c['status'] == 'e008_m164_confidence_first_constrained_repair_result_interpretation_ready'
+assert c['positive_navigation_improvement_ready'] is False
+assert c['selected_next_unit'] == 'E008-M165 confidence-first constrained repair failure decomposition / next-route decision'
+print('m164 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/policy_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/pairwise_delta_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/episode_delta_profile_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/component_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M164_confidence_first_constrained_repair_result_interpretation_v0/`
+
+Claim boundary:
+
+- M164 rejects a positive navigation-improvement claim for the selected confidence-first constrained repair policy.
+- `confidence_floor_guard` remains diagnostic-supported because no-confidence-floor is much worse.
+- `local_path_tiebreak_repair` is rejected in its current form because selected repair loses `SPL` and candidate-visit efficiency to detector-confidence / no-path.
+- `source_gap_trigger` is inert on the current denominator because source-gap-only equals detector-confidence.
+- `budget_guarded_no_visit_guard_v1` is a tradeoff witness, not a posthoc selected method, because it has best `SPL` but more visits than detector-confidence.
+- Final `SR` / `SPL`, deployable policy, final RGB-D/open-vocabulary robustness, and human intent as a main claim remain blocked until later gates.
+
+## E008-M165
+
+Implementation unit: `E008-M165_confidence_first_repair_failure_decomposition_v0`.
+
+- Status: `e008_m165_confidence_first_repair_failure_decomposition_ready`.
+- M161 status: `e008_m161_confidence_first_constrained_repair_materialization_ready`.
+- M163 status: `e008_m163_confidence_first_constrained_repair_trajectory_execution_ready`.
+- M164 status: `e008_m164_confidence_first_constrained_repair_result_interpretation_ready`.
+- Changed episodes: 24 / 30.
+- Selected success proposal changes vs detector-confidence: 0.
+- Selected failure type changes vs detector-confidence: 0.
+- Mean delta `SPL` / candidate visits / path length: -0.003213 / +0.200000 / +0.249997.
+- Selected better / worse / tie `SPL` rows: 5 / 6 / 19.
+- Selected more / fewer visit rows: 7 / 1.
+- Supported components: `protected_detector_confidence_base`, `confidence_floor_guard`.
+- Rejected/exhausted components: `local_path_tiebreak_repair`, `source_gap_trigger`, `ranking_only_navigation_repair`.
+- Tradeoff component: `no_visit_guard_route`.
+- Positive navigation-improvement ready: false.
+- Local rerank scale-up ready: false.
+- Selected next unit: E008-M166 navigation failure-boundary package and method-pivot contract.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m165_confidence_first_repair_failure_decomposition.py
+```
+
+Verification:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+p = Path('experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/coverage.json')
+c = json.loads(p.read_text())
+assert c['status'] == 'e008_m165_confidence_first_repair_failure_decomposition_ready'
+assert c['positive_navigation_improvement_ready'] is False
+assert c['selected_success_proposal_changed_rows'] == 0
+assert c['changed_episode_rows'] == 24
+assert c['selected_next_unit'] == 'E008-M166 navigation failure-boundary package and method-pivot contract'
+print('m165 ready')
+PY
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/episode_failure_profile_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/component_failure_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/failure_mechanism_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/principle_revision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/m166_route_seed_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M165_confidence_first_repair_failure_decomposition_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M165_confidence_first_repair_failure_decomposition_v0/`
+
+Claim boundary:
+
+- M165 decomposes the M163/M164 negative gate; it is not a positive navigation result.
+- Local path tie-break should not be scaled as the main method in its current form.
+- Confidence floor remains a necessary guard only.
+- Source-gap trigger must be evaluated only on source-gap/source-coverage or external proposal-source rows.
+- M166 must decide the failure-boundary package and method-pivot / external-baseline contract.
+
+## E008-M166
+
+Implementation unit: `E008-M166_navigation_failure_boundary_method_pivot_contract_v0`.
+
+- Status: `e008_m166_navigation_failure_boundary_method_pivot_contract_ready`.
+- Selected method family: `source_coverage_memory_interface`.
+- Selected policy id: `source_coverage_memory_interface_policy_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Local path tie-break as main method: false.
+- Confidence floor guard retained: true.
+- Source-gap claim ready on current denominator: false.
+- Selected next unit: E008-M167 source-coverage memory-interface method contract.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m166_navigation_failure_boundary_method_pivot_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M166_navigation_failure_boundary_method_pivot_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M166_navigation_failure_boundary_method_pivot_contract_v0/failure_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M166_navigation_failure_boundary_method_pivot_contract_v0/method_pivot_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M166_navigation_failure_boundary_method_pivot_contract_v0/comparison_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M166_navigation_failure_boundary_method_pivot_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M166_navigation_failure_boundary_method_pivot_contract_v0/`
+
+Claim boundary:
+
+- M166 is a boundary/contract step, not a positive navigation result.
+- M166 excludes local path tie-break from the main method family.
+- M166 keeps `confidence_floor_guard` as a necessary guard.
+
+## E008-M167
+
+Implementation unit: `E008-M167_source_coverage_memory_interface_method_contract_v0`.
+
+- Status: `e008_m167_source_coverage_memory_interface_method_contract_ready`.
+- Selected policy id: `source_coverage_memory_interface_policy_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Method contract rows: 2.
+- Input contract rows: 18.
+- Comparison contract rows: 5.
+- Ablation contract rows: 3.
+- Metric target rows: 3.
+- Posthoc threshold change allowed: false.
+- Denominator change allowed: false.
+- Selected next unit: E008-M168 source-coverage memory-interface row materialization.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m167_source_coverage_memory_interface_method_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M167_source_coverage_memory_interface_method_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M167_source_coverage_memory_interface_method_contract_v0/method_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M167_source_coverage_memory_interface_method_contract_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M167_source_coverage_memory_interface_method_contract_v0/comparison_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M167_source_coverage_memory_interface_method_contract_v0/metric_target_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M167_source_coverage_memory_interface_method_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M167_source_coverage_memory_interface_method_contract_v0/`
+
+Claim boundary:
+
+- M167 is a pre-materialization contract step.
+- `ConceptGraphs-only` and static stale memory stay in the comparison ledger but are not mixed into the M168 detector denominator.
+
+## E008-M168
+
+Implementation unit: `E008-M168_source_coverage_memory_interface_materialization_v0`.
+
+- Status: `e008_m168_source_coverage_memory_interface_materialization_ready`.
+- Selected policy id: `source_coverage_memory_interface_policy_v1`.
+- Candidate rows: 4,500.
+- Policy plan rows: 150.
+- Policies: `source_coverage_memory_interface_policy_v1`, `detector_confidence_reachable_subset_v0`, `source_coverage_only_task_agnostic_v1`, `confidence_floor_only_v1`, `path_cost_only_reachable_subset_v1`.
+- Selected changed episode rows: 30.
+- Selected promoted rows: 268.
+- Selected mean coverage gain in first 10 candidates: 0.200000.
+- Source-gap prelabel rows: 0.
+- Leakage audit pass: true.
+- Selected next unit: E008-M169 source-coverage memory-interface Docker trajectory execution contract / preflight.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m168_source_coverage_memory_interface_materialization.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M168_source_coverage_memory_interface_materialization_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M168_source_coverage_memory_interface_materialization_v0/source_coverage_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M168_source_coverage_memory_interface_materialization_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M168_source_coverage_memory_interface_materialization_v0/policy_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M168_source_coverage_memory_interface_materialization_v0/policy_order_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M168_source_coverage_memory_interface_materialization_v0/source_ready_split_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M168_source_coverage_memory_interface_materialization_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M168_source_coverage_memory_interface_materialization_v0/`
+
+Claim boundary:
+
+- M168 materializes rows only; it does not execute `Habitat` trajectories.
+- Source-gap trigger remains inactive on this denominator.
+
+## E008-M169
+
+Implementation unit: `E008-M169_source_coverage_memory_interface_trajectory_contract_v0`.
+
+- Status: `e008_m169_source_coverage_memory_interface_trajectory_contract_ready_runner_next`.
+- Selected policy id: `source_coverage_memory_interface_policy_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Trajectory candidate rows: 4,500.
+- Trajectory execution plan rows: 150.
+- Eval goal rows: 30.
+- Oracle path rows: 30.
+- Trajectory cost matrix rows: 33,354.
+- Docker preflight pass: true.
+- Runner implemented: true.
+- Runner py_compile pass: true.
+- Selected next unit: E008-M170 source-coverage memory-interface trajectory execution.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m169_source_coverage_memory_interface_trajectory_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/trajectory_execution_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/m170_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/`
+
+Claim boundary:
+
+- M169 is a contract/preflight step and does not execute `Habitat` trajectories.
+- M170 should be launched as a background Docker job if execution is requested.
+- At the M169 contract stage, positive navigation claims still required M170 execution and M171 protected-baseline interpretation.
+
+## E008-M170
+
+Implementation unit: `E008-M170_source_coverage_memory_interface_trajectory_execution_v0`.
+
+- Status: `e008_m170_source_coverage_memory_interface_trajectory_execution_ready`.
+- Docker image: `research3/habitat-h001:20260508-calib-artifacts`.
+- Source mount: `/home/yoohyun/research3/local_dataset/data:/data:ro`.
+- Trajectory candidate rows: 4,500.
+- Trajectory execution plan rows: 150.
+- Scan-task-policy rows: 150.
+- Trajectory attempt rows: 1,862.
+- Trajectory success rows: 120 / 150.
+- Aggregate `SR`: 0.800000.
+- Aggregate mean `SPL`: 0.213581.
+- Leakage audit pass: true.
+- Log: `logs/20260612_021937_e008_m170_source_coverage_memory_interface_trajectory.log`.
+- Selected next unit: E008-M171 source-coverage memory-interface trajectory result interpretation / protected-baseline gate.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work \
+  -w /work research3/habitat-h001:20260508-calib-artifacts \
+  bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m170_source_coverage_memory_interface_trajectory_execution.py --m169-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M170_source_coverage_memory_interface_trajectory_execution_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M170_source_coverage_memory_interface_trajectory_execution_v0"
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M170_source_coverage_memory_interface_trajectory_execution_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M170_source_coverage_memory_interface_trajectory_execution_v0/dynamic_stale_trajectory_attempt_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M170_source_coverage_memory_interface_trajectory_execution_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M170_source_coverage_memory_interface_trajectory_execution_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M170_source_coverage_memory_interface_trajectory_execution_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M170_source_coverage_memory_interface_trajectory_execution_v0/`
+
+Claim boundary:
+
+- M170 executes `Habitat` trajectories, but it does not by itself support positive navigation improvement.
+- Protected-baseline interpretation is fixed in M171.
+
+## E008-M171
+
+Implementation unit: `E008-M171_source_coverage_memory_interface_result_interpretation_v0`.
+
+- Status: `e008_m171_source_coverage_memory_interface_result_interpretation_ready`.
+- Selected policy: `source_coverage_memory_interface_policy_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Selected `SR` / `SPL`: 0.800000 / 0.225556.
+- Protected `SR` / `SPL`: 0.800000 / 0.231845.
+- Source-coverage-only `SR` / `SPL`: 0.800000 / 0.234605.
+- Selected delta `SPL` vs protected: -0.006289.
+- Selected delta candidate visits vs protected: +0.466667.
+- Gate rows: 7, fail rows: 4.
+- Positive navigation-improvement ready: false.
+- Selected next unit: E008-M172 source-coverage ablation tradeoff decomposition and policy decision.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m171_source_coverage_memory_interface_result_interpretation.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M171_source_coverage_memory_interface_result_interpretation_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M171_source_coverage_memory_interface_result_interpretation_v0/policy_result_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M171_source_coverage_memory_interface_result_interpretation_v0/pairwise_delta_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M171_source_coverage_memory_interface_result_interpretation_v0/gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M171_source_coverage_memory_interface_result_interpretation_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M171_source_coverage_memory_interface_result_interpretation_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M171_source_coverage_memory_interface_result_interpretation_v0/`
+
+Claim boundary:
+
+- M171 rejects the selected source-coverage memory-interface policy as a positive navigation-improvement claim.
+- The result is still useful because it isolates a tradeoff witness: `source_coverage_only_task_agnostic_v1` has higher `SPL` but uses more candidate visits.
+- M172 later fixes source-coverage-only as a Pareto/budget tradeoff witness rather than a precommitted main method.
+
+## E008-M172
+
+Implementation unit: `E008-M172_source_coverage_ablation_tradeoff_decomposition_v0`.
+
+- Status: `e008_m172_source_coverage_ablation_tradeoff_decomposition_ready`.
+- Selected policy: `source_coverage_memory_interface_policy_v1`.
+- Selected policy primary Pareto member: false.
+- Selected policy primary dominated by: `confidence_floor_only_v1`, `detector_confidence_reachable_subset_v0`.
+- Source-coverage-only policy: `source_coverage_only_task_agnostic_v1`.
+- Source-coverage-only primary Pareto member: true.
+- Source-coverage-only delta `SPL` vs detector: +0.002761.
+- Source-coverage-only delta candidate visits vs detector: +0.766667.
+- Source-coverage-only delta path length vs detector: -13.116417m.
+- Source-coverage-only better/worse/tie `SPL` rows vs detector: 12 / 12 / 6.
+- Source-coverage-only changed successful proposal rows vs detector: 12.
+- Promote source-coverage-only as main method now: false.
+- Selected next unit: E008-M173 source-coverage utility/Pareto contract and bounded method redesign.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m172_source_coverage_ablation_tradeoff_decomposition.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M172_source_coverage_ablation_tradeoff_decomposition_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M172_source_coverage_ablation_tradeoff_decomposition_v0/policy_pareto_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M172_source_coverage_ablation_tradeoff_decomposition_v0/episode_tradeoff_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M172_source_coverage_ablation_tradeoff_decomposition_v0/comparison_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M172_source_coverage_ablation_tradeoff_decomposition_v0/failure_diagnosis_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M172_source_coverage_ablation_tradeoff_decomposition_v0/policy_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M172_source_coverage_ablation_tradeoff_decomposition_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M172_source_coverage_ablation_tradeoff_decomposition_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M172_source_coverage_ablation_tradeoff_decomposition_v0/`
+
+Claim boundary:
+
+- M172 supports a diagnostic statement that source coverage creates a Pareto tradeoff, not a clean method win.
+- `source_coverage_only_task_agnostic_v1` is not promoted as the main method because it is task-agnostic, not the preselected method, and spends more candidate visits.
+- M173 should precommit whether the next method optimizes fixed-budget `SPL`, expected search cost, or a Pareto utility before any new long trajectory execution.
+
+## E008-M173
+
+Implementation unit: `E008-M173_source_coverage_utility_pareto_contract_v0`.
+
+- Status: `e008_m173_source_coverage_utility_pareto_contract_ready`.
+- Selected policy contract: `source_coverage_budgeted_utility_policy_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Previous selected policy: `source_coverage_memory_interface_policy_v1`.
+- Source-coverage witness: `source_coverage_only_task_agnostic_v1`.
+- Candidate rows audited: 4,500.
+- Required fields ready: true.
+- Method contract rows: 2.
+- Utility objective rows: 2.
+- Guard contract rows: 5.
+- Metric target rows: 4.
+- Ablation contract rows: 6.
+- Source-coverage-only delta `SPL` vs detector: +0.002761.
+- Source-coverage-only delta candidate visits vs detector: +0.766667.
+- Performance claim ready: false.
+- Trajectory execution ready: false.
+- Selected next unit: E008-M174 source-coverage utility/Pareto row materialization smoke.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m173_source_coverage_utility_pareto_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/field_availability_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/method_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/utility_objective_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/guard_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/metric_target_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/ablation_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/disconfirmation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M173_source_coverage_utility_pareto_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M173_source_coverage_utility_pareto_contract_v0/`
+
+Claim boundary:
+
+- M173 is a pre-materialization method contract, not a performance result.
+- `source_coverage_only_task_agnostic_v1` remains a Pareto witness, not the selected method.
+- `source_coverage_budgeted_utility_policy_v1` must be materialized in M174 under the fixed utility formula, detector-confidence fallback, and leakage/order guards before any Docker trajectory execution.
+
+## E008-M174
+
+Implementation unit: `E008-M174_source_coverage_utility_pareto_materialization_smoke_v0`.
+
+- Status: `e008_m174_source_coverage_utility_pareto_materialization_blocked`.
+- Selected policy: `source_coverage_budgeted_utility_policy_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Source-coverage witness: `source_coverage_only_task_agnostic_v1`.
+- Candidate rows: 6,300.
+- Policy plan rows: 210.
+- Utility component rows: 2,215.
+- Leakage audit pass: true.
+- Order audit pass: true.
+- Guard audit pass: true.
+- Selected policy changed episode rows: 0 / 30.
+- Selected policy promoted rows: 0.
+- Source-coverage witness changed episode rows: 30 / 30.
+- Selected policy activity gate pass: false.
+- Trajectory contract ready next: false.
+- Docker trajectory execution launched: false.
+- Selected next unit: E008-M174b source-coverage utility conservatism failure decomposition.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m174_source_coverage_utility_pareto_materialization.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/source_coverage_utility_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/policy_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/utility_component_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/policy_order_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/guard_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/materialization_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M174_source_coverage_utility_pareto_materialization_smoke_v0/`
+
+Claim boundary:
+
+- M174 materializes rows and audits them; it does not execute `Habitat` trajectories.
+- Leakage/order/guard audits pass, but selected policy activity fails because the precommitted utility is too conservative to change detector-confidence ordering.
+- The then-planned Docker execution path remains blocked; M174b later closes within-pool source-coverage reranking as negative and selects a candidate-source expansion contract.
+
+## E008-M174b
+
+Implementation unit: `E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0`.
+
+- Status: `e008_m174b_source_coverage_utility_conservatism_failure_decomposition_ready`.
+- Selected policy: `source_coverage_budgeted_utility_policy_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Component rows: 2,215.
+- Selected changed episode rows: 0 / 30.
+- Selected promoted rows: 0.
+- Selected positive utility rows: 0.
+- Selected utility max: -0.008847.
+- Selected utility mean: -0.081486.
+- Selected confidence guard fail rows: 304.
+- Selected prefix path guard fail rows: 99.
+- Selected coverage positive rows: 55.
+- Selected path-saving positive rows: 84.
+- Selected source-gap prelabel rows: 0.
+- No-confidence-guard positive utility rows: 0.
+- Docker trajectory execution ready: false.
+- Posthoc tuning allowed: false.
+- Source-coverage rerank branch closed negative: true.
+- Selected next unit: E008-M175 source-coverage trigger/candidate-source expansion contract.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m174b_source_coverage_utility_conservatism_failure_decomposition.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/policy_component_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/selected_utility_factor_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/failure_mechanism_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/next_contract_seed_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M174b_source_coverage_utility_conservatism_failure_decomposition_v0/`
+
+Claim boundary:
+
+- M174b does not support real navigation `SR` / `SPL`.
+- Within-pool source-coverage utility reranking is closed as a negative branch under the current fixed denominator and guards.
+- The next method form must use source coverage as a candidate-source expansion / re-observation trigger before detector-confidence ranking, not as posthoc weight tuning.
+
+## E008-M175
+
+Implementation unit: `E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0`.
+
+- Status: `e008_m175_source_coverage_trigger_candidate_source_expansion_contract_ready`.
+- Selected method family: `source_coverage_triggered_candidate_source_expansion_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- M174b selected changed episode rows: 0.
+- M174b selected positive utility rows: 0.
+- M121 target-free source-pool template rows: 40 observation poses / 320 render-plan rows.
+- M124 target-free detector prediction rows available as diagnostic template: 24.
+- Trigger rows fixed for M176: 4.
+- Candidate-source routes fixed for M176: 4.
+- M176 materialization ready next: true.
+- Docker trajectory execution ready: false.
+- Render/detector long job ready now: false.
+- Posthoc tuning allowed: false.
+- Selected next unit: E008-M176 source-coverage trigger row materialization smoke.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m175_source_coverage_trigger_candidate_source_expansion_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/method_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/trigger_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/input_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/candidate_source_route_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/m176_materialization_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/pre_execution_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/disconfirmation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M175_source_coverage_trigger_candidate_source_expansion_contract_v0/`
+
+Claim boundary:
+
+- M175 does not support real navigation `SR` / `SPL`.
+- M175 does not launch Docker, render, detector, or trajectory jobs.
+- M175 keeps within-pool source-coverage reranking closed negative and moves source coverage to the map/source acquisition interface.
+- M176 must materialize non-leaky trigger/source-expansion rows before downstream execution is justified.
+
+## E008-M176
+
+Implementation unit: `E008-M176_source_coverage_trigger_row_materialization_smoke_v0`.
+
+- Status: `e008_m176_source_coverage_trigger_row_materialization_smoke_ready`.
+- Selected method family: `source_coverage_triggered_candidate_source_expansion_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Trigger rows: 30.
+- Trigger request rows: 30.
+- Trigger request rate: 1.0.
+- Source sparse trigger rows: 16.
+- Detector uncertainty trigger rows: 7.
+- Path/source-ready gap trigger rows: 23.
+- Candidate-source expansion plan rows: 30.
+- Policy-visible source request changed rows: 30.
+- Blocked input hit rows: 0.
+- Trigger selectivity warning: true.
+- Budget/priority guard required next: true.
+- Render/detector long job ready now: false.
+- Docker trajectory execution ready: false.
+- Selected next unit: E008-M177 source-pool pose/render-plan materialization contract.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m176_source_coverage_trigger_row_materialization_smoke.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/source_coverage_trigger_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/candidate_source_expansion_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/allowed_input_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/blocked_input_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/policy_visible_change_probe_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/next_verification_sequence_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M176_source_coverage_trigger_row_materialization_smoke_v0/`
+
+Next verification sequence if M176 proceeds normally:
+
+1. E008-M177: materialize target-free source-pose/render-plan rows with fixed budget/priority guard.
+2. E008-M178: validate source pose navmesh/snap readiness and write render/detector launcher contract.
+3. E008-M179: run and verify bounded render/detector candidate generation.
+4. E008-M180: validate candidate coordinates, navmesh readiness, and source-ready/source-gap split.
+5. E008-M181: materialize expanded candidate visit-order/path rows and verify selected method changes candidate order or candidate-source availability.
+6. E008-M182: run leakage-safe goal-evaluation proxy and failure taxonomy before trajectory execution.
+7. E008-M183: write Docker trajectory execution contract/preflight only if M182 shows a policy-visible gain worth executing.
+8. E008-M184: execute Docker trajectories and collect `SR`, `SPL`, path length, visits, and failure type.
+9. E008-M185: interpret against protected `detector_confidence_reachable_subset_v0` and decide scale/claim boundary.
+10. Post-M185: run heldout transfer, ablations, and external baselines such as `ConceptGraphs`, `Open3DSG`, `HOV-SG`, or navigation baselines.
+
+Claim boundary:
+
+- M176 does not support real navigation `SR` / `SPL`.
+- M176 does not launch render, detector, external-map, or Docker trajectory jobs.
+- M176 confirms source-expansion requests can be materialized without blocked-input leakage, but the trigger is too broad for a deployable policy without M177 budget/priority guard.
+
+## E008-M177
+
+Implementation unit: `E008-M177_source_pool_pose_render_plan_materialization_contract_v0`.
+
+- Status: `e008_m177_source_pool_pose_render_plan_materialization_contract_ready`.
+- Input M176 trigger request rows: 30.
+- Selected request rows after fixed budget/priority guard: 8.
+- Source pose rows: 64.
+- Render plan rows: 256 / budget 256.
+- Selected scenes: 2.
+- Selected categories: 4.
+- Missing source-anchor rows: 0.
+- Blocked input hit rows: 0.
+- Render/detector long job launched: false.
+- Selected next unit: E008-M178 navmesh/snap validation and render/detector launcher contract.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m177_source_pool_pose_render_plan_materialization_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M177_source_pool_pose_render_plan_materialization_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M177_source_pool_pose_render_plan_materialization_contract_v0/budget_priority_guard_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M177_source_pool_pose_render_plan_materialization_contract_v0/selected_source_request_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M177_source_pool_pose_render_plan_materialization_contract_v0/source_pool_observation_pose_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M177_source_pool_pose_render_plan_materialization_contract_v0/source_pool_render_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M177_source_pool_pose_render_plan_materialization_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M177_source_pool_pose_render_plan_materialization_contract_v0/`
+
+Claim boundary:
+
+- M177 supports only leakage-audited, budgeted source-pool pose/render-plan materialization.
+- M177 does not render frames, run detector inference, evaluate targets, execute trajectories, or support real navigation `SR` / `SPL`.
+
+## E008-M178
+
+Implementation unit: `E008-M178_navmesh_snap_render_detector_launcher_contract_v0`.
+
+- Status: `e008_m178_navmesh_snap_render_detector_launcher_contract_ready`.
+- Selected request rows: 8.
+- Source pose rows: 64.
+- Snap-ready rows: 64 / 64.
+- Source-ready rows for M180: 64 / 64.
+- Render plan rows: 256.
+- Detector manifest rows: 8.
+- Readiness gate fail/warning rows: 0 / 0.
+- Long-job command rows: 2.
+- Render/detector jobs launched in M178: false.
+- Selected next unit: E008-M179 bounded render/detector execution and verification.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m178_navmesh_snap_render_detector_launcher_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M178_navmesh_snap_render_detector_launcher_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M178_navmesh_snap_render_detector_launcher_contract_v0/snap_validation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M178_navmesh_snap_render_detector_launcher_contract_v0/source_pool_render_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M178_navmesh_snap_render_detector_launcher_contract_v0/source_pool_detector_manifest_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M178_navmesh_snap_render_detector_launcher_contract_v0/long_job_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M178_navmesh_snap_render_detector_launcher_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M178_navmesh_snap_render_detector_launcher_contract_v0/`
+
+Claim boundary:
+
+- M178 validates source-pool pose feasibility and records render/detector launcher inputs only.
+- M178 does not run detector inference, evaluate ObjectNav goals, execute trajectories, or support real navigation `SR` / `SPL`.
+
+## E008-M179
+
+Implementation unit: `E008-M179_bounded_render_detector_execution_verification_v0`.
+
+- Status: `e008_m179_bounded_render_detector_execution_ready`.
+- Render status: `e008_m179_render_ready`.
+- Detector status: `e008_m179_detector_candidate_source_ready`.
+- Render plan rows: 256.
+- Ready render frames: 256 / 256.
+- Detector manifest ready rows: 8.
+- Detector prediction rows: 192.
+- Coordinate candidate rows: 192.
+- Pre-cap candidate rows: 2,519.
+- Detector tmux session: completed `e008_m179_source_pool_detector`.
+- Detector log: `logs/20260613_004908_e008_m179_source_pool_detector.log`.
+- Detector output path: `experiments/E008_real_navigation_benchmark/artifacts/E008-M179_bounded_render_detector_execution_verification_v0/detector`.
+- Selected next unit: E008-M180 candidate navmesh/source-readiness validation.
+
+Commands:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/launch_m179_bounded_render_detector_execution.py --stage render
+python experiments/E008_real_navigation_benchmark/tools/verify_m179_bounded_render_detector_execution.py --require-render-ready
+python experiments/E008_real_navigation_benchmark/tools/launch_m179_bounded_render_detector_execution.py --stage detector
+python experiments/E008_real_navigation_benchmark/tools/verify_m179_bounded_render_detector_execution.py --require-ready
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M179_bounded_render_detector_execution_verification_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M179_bounded_render_detector_execution_verification_v0/render_verification_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M179_bounded_render_detector_execution_verification_v0/render_verification_frame_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M179_bounded_render_detector_execution_verification_v0/detector_manifest_repair_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M179_bounded_render_detector_execution_verification_v0/detector_verification_coverage.json`
+
+Claim boundary:
+
+- M179 verifies bounded render/detector execution only.
+- M179 does not validate candidate reachability, evaluate ObjectNav goals, execute trajectories, or support real navigation `SR` / `SPL`.
+
+## E008-M180
+
+Implementation unit: `E008-M180_candidate_navmesh_source_readiness_validation_v0`.
+
+- Status: `e008_m180_candidate_navmesh_source_readiness_validation_ready`.
+- Candidate rows: 192.
+- Path-ready candidates: 180.
+- Source-ready scans: 8 / 8.
+- Coordinate-valid rows: 192 / 192.
+- Selected next unit: E008-M181 expanded candidate visit-order/path materialization.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m180_candidate_navmesh_source_readiness_validation.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M180_candidate_navmesh_source_readiness_validation_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M180_candidate_navmesh_source_readiness_validation_v0/candidate_navmesh_validation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M180_candidate_navmesh_source_readiness_validation_v0/scan_source_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M180_candidate_navmesh_source_readiness_validation_v0/report.md`
+
+## E008-M181
+
+Implementation unit: `E008-M181_expanded_candidate_visit_order_path_materialization_v0`.
+
+- Status: `e008_m181_expanded_candidate_visit_order_path_materialization_ready`.
+- Visit-order rows: 732.
+- Scan-policy metric rows: 32.
+- Path-ready candidates: 180.
+- Leakage audit pass: true.
+- Selected next unit: E008-M182 leakage-safe goal-evaluation proxy.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m181_expanded_candidate_visit_order_path_materialization.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M181_expanded_candidate_visit_order_path_materialization_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M181_expanded_candidate_visit_order_path_materialization_v0/candidate_visit_order_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M181_expanded_candidate_visit_order_path_materialization_v0/policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M181_expanded_candidate_visit_order_path_materialization_v0/report.md`
+
+## E008-M182
+
+Implementation unit: `E008-M182_leakage_safe_goal_evaluation_proxy_v0`.
+
+- Status: `e008_m182_leakage_safe_goal_evaluation_proxy_ready`.
+- Eval episode rows: 8.
+- Candidate goal-eval rows: 732.
+- Proxy recovery observed: true, 7 / 8 for all four policies.
+- Leakage audit pass: true.
+- Selected next unit: E008-M183 Docker trajectory execution contract/preflight.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m182_leakage_safe_goal_evaluation_proxy.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M182_leakage_safe_goal_evaluation_proxy_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M182_leakage_safe_goal_evaluation_proxy_v0/candidate_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M182_leakage_safe_goal_evaluation_proxy_v0/policy_goal_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M182_leakage_safe_goal_evaluation_proxy_v0/report.md`
+
+## E008-M183
+
+Implementation unit: `E008-M183_docker_trajectory_execution_contract_preflight_v0`.
+
+- Status: `e008_m183_docker_trajectory_execution_contract_preflight_ready_runner_next`.
+- Trajectory candidate rows: 732.
+- Execution plan rows: 32.
+- Eval goal / oracle rows: 8 / 8.
+- Docker preflight pass: true.
+- Selected next unit: E008-M184 Docker trajectory execution with `SR`, `SPL`, path length, visits.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m183_docker_trajectory_execution_contract_preflight.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M183_docker_trajectory_execution_contract_preflight_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M183_docker_trajectory_execution_contract_preflight_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M183_docker_trajectory_execution_contract_preflight_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M183_docker_trajectory_execution_contract_preflight_v0/report.md`
+
+## E008-M184
+
+Implementation unit: `E008-M184_docker_trajectory_execution_sr_spl_v0`.
+
+- Status: `e008_m184_docker_trajectory_execution_sr_spl_ready`.
+- Scan-policy rows: 32.
+- Success rows: 28.
+- Aggregate `SR`: 0.875.
+- Mean `SPL`: 0.2411.
+- Leakage audit pass: true.
+- Selected next unit: E008-M185 protected detector-confidence interpretation and scale decision.
+
+Command:
+
+```bash
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m184_docker_trajectory_execution_sr_spl.py --m129-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M183_docker_trajectory_execution_contract_preflight_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M184_docker_trajectory_execution_sr_spl_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M184_docker_trajectory_execution_sr_spl_v0"
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M184_docker_trajectory_execution_sr_spl_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M184_docker_trajectory_execution_sr_spl_v0/dynamic_stale_trajectory_policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M184_docker_trajectory_execution_sr_spl_v0/pairwise_policy_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M184_docker_trajectory_execution_sr_spl_v0/report.md`
+
+## E008-M185
+
+Implementation unit: `E008-M185_protected_detector_confidence_interpretation_scale_decision_v0`.
+
+- Status: `e008_m185_protected_detector_confidence_interpretation_scale_decision_ready`.
+- Scale-up recommended: false.
+- Method: `path_cost_ascending_reachable_subset_v0`, `SR` 0.875, `SPL` 0.1716.
+- Protected baseline: `detector_confidence_reachable_subset_v0`, `SR` 0.875, `SPL` 0.2926.
+- Decision: `method_not_yet_better_than_protected_baseline`.
+- Selected next unit: repair source-pool policy before scale-up.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/interpret_m185_protected_detector_confidence_scale_decision.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M185_protected_detector_confidence_interpretation_scale_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M185_protected_detector_confidence_interpretation_scale_decision_v0/policy_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M185_protected_detector_confidence_interpretation_scale_decision_v0/pairwise_delta_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M185_protected_detector_confidence_interpretation_scale_decision_v0/report.md`
+
+## E008-M186
+
+Implementation unit: `E008-M186_source_pool_protected_baseline_failure_decomposition_v0`.
+
+- Status: `e008_m186_source_pool_protected_baseline_failure_decomposition_ready`.
+- Method worse `SPL` rows: 6 / 8.
+- Mean delta `SPL`: -0.1210.
+- Mean delta `PathLengthM`: +19.81m.
+- Mean delta `CandidateVisits`: +5.125.
+- Root cause: `source_proxy_cost_is_not_execution_cost`.
+- Repair policy: `confidence_protected_transition_cost_policy_v1`.
+- Selected next unit: E008-M187 source-pool confidence-protected transition-cost repair row materialization.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m186_source_pool_protected_baseline_failure_decomposition.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M186_source_pool_protected_baseline_failure_decomposition_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M186_source_pool_protected_baseline_failure_decomposition_v0/episode_delta_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M186_source_pool_protected_baseline_failure_decomposition_v0/root_cause_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M186_source_pool_protected_baseline_failure_decomposition_v0/repair_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M186_source_pool_protected_baseline_failure_decomposition_v0/report.md`
+
+Claim boundary:
+
+- M186 diagnoses why direct source-pool scale-up is blocked.
+- M186 does not materialize repaired rows, execute trajectories, or support final real navigation `SR` / `SPL`.
+
+## E008-M187
+
+Implementation unit: `E008-M187_source_pool_confidence_protected_transition_cost_materialization_v0`.
+
+- Status: `e008_m187_source_pool_confidence_protected_transition_cost_materialization_ready`.
+- Base source-pool candidate rows: 180.
+- Transition matrix rows: 4,072 / 4,072.
+- Candidate-policy rows: 900.
+- Execution plan rows: 40.
+- Selected policy: `confidence_protected_transition_cost_policy_v1`.
+- Confidence bin width: 0.05.
+- Selected changed episode orders: 8 / 8.
+- Selected confidence-bin violations: 0.
+- Leakage audit pass: true.
+- Selected next unit: E008-M188 source-pool repaired policy leakage-safe goal-evaluation proxy.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m187_source_pool_confidence_protected_transition_cost_materialization.py
+```
+
+The command self-runs in Docker when `habitat_sim` is unavailable on the host:
+
+```bash
+docker run --rm --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m187_source_pool_confidence_protected_transition_cost_materialization.py --inside-docker"
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M187_source_pool_confidence_protected_transition_cost_materialization_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M187_source_pool_confidence_protected_transition_cost_materialization_v0/transition_cost_matrix_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M187_source_pool_confidence_protected_transition_cost_materialization_v0/confidence_protected_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M187_source_pool_confidence_protected_transition_cost_materialization_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M187_source_pool_confidence_protected_transition_cost_materialization_v0/policy_order_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M187_source_pool_confidence_protected_transition_cost_materialization_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M187_source_pool_confidence_protected_transition_cost_materialization_v0/`
+
+Claim boundary:
+
+- M187 materializes repaired rows only.
+- M187 does not compute goal recovery, `SR`, `SPL`, or final navigation performance.
+- The selected policy may reorder candidates only inside a fixed 0.05 confidence bin.
+
+## E008-M188
+
+Implementation unit: `E008-M188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_v0`.
+
+- Status: `e008_m188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_ready`.
+- Candidate-goal eval rows: 900.
+- Scan-policy rows: 40.
+- Aggregate policy rows: 5.
+- Selected policy: `confidence_protected_transition_cost_policy_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Selected proxy `SR` / `SPL`: 0.875 / 0.2449.
+- Protected proxy `SR` / `SPL`: 0.875 / 0.2926.
+- Leakage audit pass: true.
+- Trajectory promotion gate pass: false.
+- Selected next unit: E008-M189 source-pool repaired policy proxy failure decomposition.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_v0/candidate_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_v0/aggregate_policy_goal_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_v0/pairwise_policy_delta_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M188_source_pool_repaired_policy_leakage_safe_goal_evaluation_proxy_v0/`
+
+Claim boundary:
+
+- M188 uses `ObjectNav` goal/viewpoint fields only as evaluation labels.
+- M188 reports leakage-safe proxy `SR`/`SPL`, not executed navigation `SR`/`SPL`.
+- M188 does not support Docker trajectory promotion because the selected repaired policy ties protected `SR` but loses proxy `SPL`.
+
+## E008-M189
+
+Implementation unit: `E008-M189_source_pool_repaired_policy_proxy_failure_decomposition_v0`.
+
+- Status: `e008_m189_source_pool_repaired_policy_proxy_failure_decomposition_ready`.
+- Selected policy: `confidence_protected_transition_cost_policy_v1`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Selected/protected proxy `SR`: 0.875 / 0.875.
+- Selected/protected proxy `SPL`: 0.2449 / 0.2926.
+- Same success proposal rows: 7.
+- Same-success delayed/costlier rows: 2.
+- Same-success cheaper route rows: 1.
+- Same-success tie rows: 4.
+- Shared source-coverage/localization gap rows: 1.
+- Method decision: reject transition repair as main policy, keep source-pool candidate generation, use protected detector confidence as current execution default.
+- Selected next unit: E008-M190 source-pool protected-confidence method boundary and scale decision.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m189_source_pool_repaired_policy_proxy_failure_decomposition.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M189_source_pool_repaired_policy_proxy_failure_decomposition_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M189_source_pool_repaired_policy_proxy_failure_decomposition_v0/episode_decomposition_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M189_source_pool_repaired_policy_proxy_failure_decomposition_v0/root_cause_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M189_source_pool_repaired_policy_proxy_failure_decomposition_v0/method_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M189_source_pool_repaired_policy_proxy_failure_decomposition_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M189_source_pool_repaired_policy_proxy_failure_decomposition_v0/`
+
+Claim boundary:
+
+- M189 rejects `confidence_protected_transition_cost_policy_v1` as a positive navigation-improvement claim.
+- M189 keeps source-pool candidate generation as useful, but ranking defaults to protected detector confidence until stronger success-likelihood evidence exists.
+- M189 does not execute trajectories or support final real navigation `SR` / `SPL`.
+
+## E008-M190
+
+Implementation unit: `E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0`.
+
+- Status: `e008_m190_source_pool_protected_confidence_method_boundary_scale_decision_ready`.
+- Kept method component: `fixed_budget_source_pool_candidate_generation`.
+- Safe execution default: `detector_confidence_reachable_subset_v0`.
+- Rejected repair policy: `confidence_protected_transition_cost_policy_v1`.
+- Protected Docker `SR` / `SPL`: 0.875 / 0.2926.
+- Selected repair proxy `SR` / `SPL`: 0.875 / 0.2449.
+- Protected proxy `SR` / `SPL`: 0.875 / 0.2926.
+- Transition repair positive claim supported: false.
+- Immediate Docker trajectory launch: false.
+- Selected next unit: E008-M191 source-pool protected-confidence scale-up contract.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m190_source_pool_protected_confidence_method_boundary_scale_decision.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/method_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/claim_evidence_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/scale_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/baseline_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M190_source_pool_protected_confidence_method_boundary_scale_decision_v0/`
+
+Claim boundary:
+
+- M190 supports only a method-boundary claim: source-pool candidate-source expansion remains useful, but execution should default to protected detector confidence until a stronger success-likelihood policy is proven.
+- M190 rejects transition-cost repair as a positive navigation/search claim.
+- M190 does not support final real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, deployable search policy, or human intent as a main claim.
+
+## E008-M191
+
+Implementation unit: `E008-M191_source_pool_protected_confidence_scaleup_contract_v0`.
+
+- Status: `e008_m191_source_pool_protected_confidence_scaleup_contract_ready`.
+- Selected scale denominator: `hm3d_val_mini_all_triggered_source_pool_scale_v1`.
+- Triggered episode rows: 30.
+- Scale scenes / categories: 2 / 6.
+- Planned source poses / render rows: 240 / 960.
+- Scale batches: 3.
+- Selected method: `source_pool_plus_detector_confidence_reachable_subset_v1`.
+- Primary ablation: `no_source_pool_detector_confidence_reachable_subset_v0`.
+- Safe execution default: `detector_confidence_reachable_subset_v0`.
+- Render/detector long job launch now: false.
+- Docker trajectory execution now: false.
+- Selected next unit: E008-M192 source-pool protected-confidence scale denominator materialization.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m191_source_pool_protected_confidence_scaleup_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/scale_denominator_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/m192_materialization_seed_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/source_pool_budget_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/baseline_ablation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/metric_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/leakage_audit_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/command_ledger_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M191_source_pool_protected_confidence_scaleup_contract_v0/`
+
+Claim boundary:
+
+- M191 supports only a scale-up contract/readiness claim.
+- M191 does not support source-pool navigation improvement until M192+ materialization, leakage-safe proxy comparison, Docker trajectory execution, and no-source-pool ablation pass.
+- M191 keeps transition-cost repair as a rejected/optional negative ablation, not a positive claim.
