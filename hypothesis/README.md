@@ -1,18 +1,18 @@
 # Hypotheses
 
-Updated: 2026-05-06
+Updated: 2026-06-14
 
 ## Active Candidate
 
 CAND-001: `Intent- and Staleness-Aware Semantic Mapping`
 
-Status: H001 main experiment transition accepted; E001 implementation is active in `experiments/`
+Status: H001 main experiment transition accepted; main experiment implementation is now active in `experiments/E008_real_navigation_benchmark/`.
 
 ## Hypothesis Registry
 
 | ID | Candidate | Status | Folder | Next action |
 | --- | --- | --- | --- | --- |
-| H001 | CAND-001 | Main experiment transition accepted | [H001_stale-object-memory](CAND-001/H001_stale-object-memory/README.md) | Continue E001 in `experiments/` |
+| H001 | CAND-001 | Main experiment transition accepted | [H001_stale-object-memory](CAND-001/H001_stale-object-memory/README.md) | Continue current experiment route in `experiments/E008_real_navigation_benchmark/` |
 
 ## Promotion Criteria
 

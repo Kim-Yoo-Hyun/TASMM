@@ -41,9 +41,9 @@ Not safe yet:
 
 ## 다음 Gate
 
-Recommended next decision:
+Completed decision:
 
-`main_experiment_readiness_gate`
+`main_experiment_readiness_gate` has been accepted. The current downstream experiment gate is `E008-M199 source-pool scale failure decomposition and candidate-generation repair decision`.
 
 Completed top-tier expansion sub-gate:
 
@@ -56,7 +56,7 @@ Remaining hypothesis sub-gates:
 
 - None.
 
-Do not edit `docs/experiments.md` until the main experiment transition is explicitly accepted.
+Main experiment transition has been accepted. Experiment-stage workflow and results now live under `experiments/` and `docs/experiments.md`.
 
 ## Experiment Promotion Contract
 
@@ -100,4 +100,4 @@ Do not edit `docs/experiments.md` until the main experiment transition is explic
 
 ## 사용자 판단 필요
 
-`ready_with_constraints` has been accepted as the working transition state. Next workflow is `experiments/E001_semantic_pair_dynamic_search_proxy/`.
+`ready_with_constraints` has been accepted as the working transition state. Current downstream experiment route is `experiments/E008_real_navigation_benchmark/`, with M199 as the next active gate.

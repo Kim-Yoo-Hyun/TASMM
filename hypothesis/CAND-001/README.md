@@ -1,6 +1,6 @@
 # CAND-001
 
-Updated: 2026-05-06
+Updated: 2026-06-14
 
 ## Candidate Summary
 
@@ -23,7 +23,7 @@ Updated: 2026-05-06
 
 | ID | Status | Short title | Next action |
 | --- | --- | --- | --- |
-| H001 | Main experiment transition accepted | [stale-object-memory](H001_stale-object-memory/README.md) | Continue E001 in `experiments/` |
+| H001 | Main experiment transition accepted | [stale-object-memory](H001_stale-object-memory/README.md) | Continue current E008 route in `experiments/` |
 
 ## Current Gate
 
@@ -42,4 +42,4 @@ Updated: 2026-05-06
 - `budget_baseline_gate`: `budget_baseline_pass`, `routine_fetch` success/returned-location 0.3811 vs `always_top5` 0.2754, `high_value_fetch` matches `always_top5`.
 - Safe claim: `Task-Conditioned Stale Semantic Memory Update`.
 - Main experiment readiness gate: `ready_with_constraints`.
-- Main experiment transition: accepted for `E001_semantic_pair_dynamic_search_proxy`.
+- Main experiment transition: accepted for `E001_semantic_pair_dynamic_search_proxy`; current downstream implementation is `E008_real_navigation_benchmark` with M199 as the next gate.

@@ -4,7 +4,7 @@
 
 Hypothesis-stage main experiment readiness gate complete and accepted.
 
-Current workflow: `experiments/E001_semantic_pair_dynamic_search_proxy/`.
+Current workflow: main experiment implementation under `experiments/`, currently `experiments/E008_real_navigation_benchmark/`.
 
 ## Files
 
@@ -43,7 +43,7 @@ Detailed generated outputs remain in `artifacts/`. Executable scripts remain in 
 - Experiment promotion contract is fixed in `04_method.md` and `06_summary.md`.
 - Main experiment readiness gate status: `ready_with_constraints`.
 - Main experiment transition: accepted for proxy semantic-pair benchmark design.
-- Current evidence uses annotation-level `semseg.v2.json`, not real RGB-D or open-vocabulary perception.
+- Hypothesis-stage evidence uses annotation-level `semseg.v2.json`. Later experiment-stage evidence now includes real RGB-D/open-vocabulary diagnostics and `HM3D ObjectNav` / `Habitat` navigation gates, but final robustness and navigation claims remain unsupported.
 
 ## 논문 주장
 
@@ -81,4 +81,4 @@ Human task context is represented as structured cost/reward context that changes
 
 ## 사용자 판단 필요
 
-Next workflow is `experiments/E001_semantic_pair_dynamic_search_proxy/`; do not broaden the claim to real navigation or real perception yet.
+The accepted main experiment workflow has progressed beyond E001. Current next gate is `E008-M199 source-pool scale failure decomposition and candidate-generation repair decision`; do not broaden the claim to final real navigation or final real perception robustness yet.
