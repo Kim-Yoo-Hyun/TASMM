@@ -311,6 +311,7 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] Reproducibility missing-dataset bootstrap 업데이트 완료: `docs/reproducibility.md`에 fresh-machine / missing-dataset decision tree, restore/regenerate 순서, E008 M193/M64/M70 support-input requirement를 추가하고 `scripts/run_e008_source_pool_scale.sh` 통과 확인
 - [x] 공유/배포용 repository 구조 정리 완료: `src/`, `scripts/`, `configs/`, `results/`, `archive/` 생성, 폴더별 `README.md` 추가, historical hypothesis / blocked routes / generated artifacts를 archive로 이동, 실행 문서와 reproducibility 경로 갱신
 - [x] Internal status document refresh 완료: `TODO.md`와 `docs/reproducibility.md`를 E008-M198 완료 / M199 next gate 기준으로 정정
 - [x] Root README 간결화 완료: 연구 요약, 핵심 문제의식, structure, 핵심 실행 chain, artifact policy, docs navigation만 유지

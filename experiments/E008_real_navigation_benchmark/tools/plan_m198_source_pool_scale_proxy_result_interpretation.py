@@ -21,6 +21,21 @@ DATA_OUT_DIR = (
     / "E008-M198_source_pool_scale_proxy_result_interpretation_v0"
 )
 M70_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M70_full_val_mini_detector_candidate_goal_evaluation_smoke_v0"
+M70_DATA_DIR = (
+    ROOT
+    / "local_dataset"
+    / "HM3D_navigation_bridge"
+    / "E008-M70_full_val_mini_detector_candidate_goal_evaluation_smoke_v0"
+)
+ARCHIVED_M70_ARTIFACT_DIR = (
+    ROOT
+    / "archive"
+    / "generated_artifacts"
+    / "experiments"
+    / "E008_real_navigation_benchmark"
+    / "artifacts"
+    / "E008-M70_full_val_mini_detector_candidate_goal_evaluation_smoke_v0"
+)
 M197_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M197_source_pool_scale_leakage_safe_goal_evaluation_proxy_v0"
 
 PROTECTED_POLICY = "detector_confidence_reachable_subset_v0"
@@ -36,6 +51,13 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def first_existing(paths: list[Path]) -> Path:
+    for path in paths:
+        if path.exists():
+            return path
+    raise FileNotFoundError("missing all candidate inputs: " + ", ".join(str(path) for path in paths))
 
 
 def sanitize_json(payload: Any) -> Any:
@@ -224,7 +246,15 @@ M197 is leakage-safe and informative, but it is a negative scale gate. Source-po
 
 
 def main() -> None:
-    m70 = read_json(M70_ARTIFACT_DIR / "coverage.json")
+    m70 = read_json(
+        first_existing(
+            [
+                M70_ARTIFACT_DIR / "coverage.json",
+                M70_DATA_DIR / "coverage.json",
+                ARCHIVED_M70_ARTIFACT_DIR / "coverage.json",
+            ]
+        )
+    )
     m197 = read_json(M197_ARTIFACT_DIR / "coverage.json")
     if not m70:
         raise SystemExit("missing M70 coverage.json")

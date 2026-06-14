@@ -31,6 +31,15 @@ M193_DATA_DIR = (
     / "E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0"
 )
 M194_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M194_source_pool_scale_render_detector_execution_v0"
+ARCHIVED_M193_ARTIFACT_DIR = (
+    ROOT
+    / "archive"
+    / "generated_artifacts"
+    / "experiments"
+    / "E008_real_navigation_benchmark"
+    / "artifacts"
+    / "E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0"
+)
 
 READY_STATUSES = {
     "e008_m195_source_pool_scale_candidate_navmesh_source_readiness_validation_ready",
@@ -74,6 +83,13 @@ def copy_required(src: Path, dst: Path) -> None:
     shutil.copyfile(src, dst)
 
 
+def first_existing(paths: list[Path]) -> Path:
+    for path in paths:
+        if path.exists():
+            return path
+    raise FileNotFoundError("missing all candidate inputs: " + ", ".join(str(path) for path in paths))
+
+
 def build_compat_inputs() -> tuple[Path, Path]:
     compat_root = ARTIFACT_DIR / "_compat_inputs"
     compat_m124 = compat_root / "m124_detector"
@@ -99,7 +115,13 @@ def build_compat_inputs() -> tuple[Path, Path]:
         },
     )
 
-    manifest_src = M193_ARTIFACT_DIR / "source_pool_detector_manifest_rows.jsonl"
+    manifest_src = first_existing(
+        [
+            M193_ARTIFACT_DIR / "source_pool_detector_manifest_rows.jsonl",
+            M193_DATA_DIR / "source_pool_detector_manifest_rows.jsonl",
+            ARCHIVED_M193_ARTIFACT_DIR / "source_pool_detector_manifest_rows.jsonl",
+        ]
+    )
     copy_required(manifest_src, compat_m122 / "target_free_detector_manifest_rows.jsonl")
     return compat_m124, compat_m122
 

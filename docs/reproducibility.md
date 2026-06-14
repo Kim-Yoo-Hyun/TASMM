@@ -38,6 +38,82 @@ Updated: 2026-06-14
 - Current lightweight result summaries: `results/`.
 - Local ignored historical generated artifact archive: `archive/generated_artifacts/`.
 
+## Fresh Machine Or Missing Dataset Bootstrap
+
+사실:
+
+- Git-tracked files alone are not sufficient to reproduce paper-body experiments. `local_dataset/`, `logs/`, `experiments/*/artifacts/`, row-level `*.jsonl`, checkpoints, raw RGB-D frames, and most generated bridge outputs are intentionally ignored.
+- If datasets are missing, first decide whether the goal is code inspection, lightweight result inspection, or full experiment reproduction.
+- Code inspection and document review require only the Git repo.
+- Lightweight result inspection uses `results/`, `README.md`, `summary.md`, `TODO.md`, and this document.
+- Full experiment reproduction requires raw datasets, checkpoints, Docker images/build recipes, and either regenerated or restored intermediate artifacts.
+
+에이전트 추론:
+
+- The safest reproduction path on a new machine is restore-first, regenerate-second. Some sources require licenses, credentials, or external workspaces, so this repo should not pretend that all data can be downloaded anonymously from one command.
+
+### Missing Dataset Decision Tree
+
+1. Check which reproduction level is needed.
+
+```bash
+cd /home/yoohyun/research2
+test -f README.md
+test -f docs/reproducibility.md
+test -x scripts/run_e008_source_pool_scale.sh
+```
+
+2. If only the current paper-facing summary is needed, use tracked summaries and do not download data.
+
+```bash
+sed -n '1,220p' results/e008_m198_summary.md
+```
+
+3. If exact row-level results or historical artifacts are needed, restore ignored artifacts from `archive/generated_artifacts/` if present locally, or from the Drive package described below.
+
+```bash
+test -d archive/generated_artifacts
+find archive/generated_artifacts -maxdepth 3 -type f | head
+```
+
+4. If full rerun is needed and `local_dataset/` is missing, recreate only the expected roots first.
+
+```bash
+mkdir -p local_dataset logs
+mkdir -p local_dataset/{3RScan,3DSSG,3DSSG_subset,ConceptGraphs_model_cache,ConceptGraphs_staged,Open3DSG_bridge,HM3D_navigation_bridge,checkpoints,external_repos}
+```
+
+5. Restore or acquire required datasets in this order.
+
+| Required for | Preferred action when missing | Expected verification |
+| --- | --- | --- |
+| `3RScan` / `3DSSG` proxy and `ConceptGraphs` staging | Restore `local_dataset/3RScan/`, `local_dataset/3DSSG/`, `local_dataset/3DSSG_subset/` from a licensed backup, or obtain the official releases under their terms and place them in the expected layout. | `test -f local_dataset/3DSSG/objects.json`; `test -f local_dataset/3DSSG/relationships.json`; `test -f local_dataset/3RScan/files/3RScan.json` |
+| `3RScan` sequence frames | Use the launcher or per-scan fallback commands in `Data Download Commands`. Long downloads must run in `tmux` with logs under `logs/`. | `find local_dataset/3RScan/scans -name sequence.zip | wc -l` and the relevant verifier command below |
+| `ConceptGraphs` runtime | Run acquisition/build commands in `Checkpoints` and `Environment Setup`, then materialize staged RGB-D layout. | `python experiments/E005_external_baseline_transition/tools/verify_m23_conceptgraphs_acquisition.py`; `python experiments/E005_external_baseline_transition/tools/verify_m25_conceptgraphs_docker_build.py` |
+| `Open3DSG` baseline | Restore `/home/yoohyun/research/local_dataset/Open3DSG_staged` as read-only, or skip `Open3DSG` reproduction and mark that baseline unavailable. Do not write derived files there. | `test -d /home/yoohyun/research/local_dataset/Open3DSG_staged`; then run the M58/M59 verifiers if that route is needed |
+| `HM3D ObjectNav` / `Habitat` E008 route | Restore or install the licensed `HM3D` scene data and `ObjectNav` episodes under `/home/yoohyun/research3/local_dataset/data`, or intentionally update path contracts/configs before running E008. | `test -d /home/yoohyun/research3/local_dataset/data`; then run E008 source/episode preflight from the experiment README if regenerating from scratch |
+| Current E008 M194-M198 source-pool chain | Restore `local_dataset/HM3D_navigation_bridge/` and active `experiments/E008_real_navigation_benchmark/artifacts/E008-M194...` through `E008-M198...`, or regenerate the prior E008 gates in order. The tracked wrapper also needs local or archived support inputs from `E008-M193`, `E008-M64`, and `E008-M70`. | `python experiments/E008_real_navigation_benchmark/tools/verify_m194_source_pool_scale_render_detector_execution.py --require-ready`; then `bash scripts/run_e008_source_pool_scale.sh` |
+
+6. When downloading or rebuilding heavy payloads, use a resumable/background job and record the command.
+
+```bash
+mkdir -p logs
+tmux new -d -s dataset_restore 'cd /home/yoohyun/research2 && <resumable-command> > logs/$(date +%Y%m%d_%H%M%S)_dataset_restore.log 2>&1'
+```
+
+7. Do not write into external read-only sources.
+
+```bash
+# Correct: derived outputs stay inside this repo-local ignored data root.
+mkdir -p /home/yoohyun/research2/local_dataset/Open3DSG_bridge
+mkdir -p /home/yoohyun/research2/local_dataset/HM3D_navigation_bridge
+```
+
+사용자 판단 필요:
+
+- If official dataset access is unavailable, the repo can still support document review, code review, and lightweight result inspection, but cannot support full metric reproduction.
+- If the machine does not have a compatible GPU/Docker runtime, skip detector/simulator reruns and restore artifact summaries instead.
+
 ## Data Download Commands
 
 사실:

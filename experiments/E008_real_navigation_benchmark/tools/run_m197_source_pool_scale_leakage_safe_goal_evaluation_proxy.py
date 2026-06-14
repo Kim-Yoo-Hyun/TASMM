@@ -26,6 +26,21 @@ DATA_OUT_DIR = (
     / "E008-M197_source_pool_scale_leakage_safe_goal_evaluation_proxy_v0"
 )
 M64_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M64_full_val_mini_high_path_scale_materialization_v0"
+M64_DATA_DIR = (
+    ROOT
+    / "local_dataset"
+    / "HM3D_navigation_bridge"
+    / "E008-M64_full_val_mini_high_path_scale_materialization_v0"
+)
+ARCHIVED_M64_ARTIFACT_DIR = (
+    ROOT
+    / "archive"
+    / "generated_artifacts"
+    / "experiments"
+    / "E008_real_navigation_benchmark"
+    / "artifacts"
+    / "E008-M64_full_val_mini_high_path_scale_materialization_v0"
+)
 M195_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M195_source_pool_scale_candidate_navmesh_source_readiness_validation_v0"
 M196_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M196_source_pool_scale_candidate_visit_order_path_materialization_v0"
 PRIMARY_METRIC = "any_viewpoint_xz_1p0"
@@ -51,6 +66,13 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def first_existing(paths: list[Path]) -> Path:
+    for path in paths:
+        if path.exists():
+            return path
+    raise FileNotFoundError("missing all candidate inputs: " + ", ".join(str(path) for path in paths))
 
 
 def sanitize_json(payload: Any) -> Any:
@@ -327,7 +349,15 @@ def main() -> None:
     m70.VERSION = VERSION
 
     m196_coverage = read_json(M196_ARTIFACT_DIR / "coverage.json")
-    episode_rows = read_jsonl(M64_ARTIFACT_DIR / "val_mini_episode_rows.jsonl")
+    episode_rows = read_jsonl(
+        first_existing(
+            [
+                M64_ARTIFACT_DIR / "val_mini_episode_rows.jsonl",
+                M64_DATA_DIR / "val_mini_episode_rows.jsonl",
+                ARCHIVED_M64_ARTIFACT_DIR / "val_mini_episode_rows.jsonl",
+            ]
+        )
+    )
     scan_source_rows = read_jsonl(M195_ARTIFACT_DIR / "scan_source_boundary_rows.jsonl")
     nav_rows = read_jsonl(M195_ARTIFACT_DIR / "candidate_navmesh_validation_rows.jsonl")
     visit_rows = read_jsonl(M196_ARTIFACT_DIR / "candidate_visit_order_rows.jsonl")
