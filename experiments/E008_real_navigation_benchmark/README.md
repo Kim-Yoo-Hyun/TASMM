@@ -4,11 +4,11 @@ Updated: 2026-06-13
 
 ## Status
 
-Current concise status: E008-M01 through E008-M191 are complete. M130-M165 exposed and decomposed the proxy-to-trajectory, confidence-preserving, budget-aware, and local-rerank failure pattern. M166-M176 freeze that boundary, reject within-pool source-coverage reranking as a positive navigation-improvement claim, and move source coverage to `source_coverage_triggered_candidate_source_expansion_v1`. M177-M179 materialize, render, and run detector inference for a fixed-budget source-pool branch, yielding 192 coordinate candidate rows from 256 rendered frames. M180 validates 180 / 192 candidates as path-ready over 8 / 8 source-ready scans. M181-M182 materialize 732 visit-order rows and observe leakage-safe proxy recovery on 7 / 8 episodes. M183-M184 execute a Docker `Habitat` trajectory smoke with 32 scan-policy rows, 28 successes, aggregate `SR` 0.875, and mean `SPL` 0.2411. M185 rejects direct source-pool scale-up because `path_cost_ascending_reachable_subset_v0` ties protected detector confidence on `SR` but loses `SPL` 0.1716 vs 0.2926. M186 decomposes the failure: source-to-candidate proxy cost is not execution transition cost, causing 6 / 8 worse-`SPL` rows, mean delta `SPL` -0.1210, mean path +19.81m, and mean visits +5.125. M187 materializes `confidence_protected_transition_cost_policy_v1` over the fixed 8-episode / 180-candidate source-pool denominator with 4,072 / 4,072 transition matrix rows, 900 candidate-policy rows, 40 execution plans, 8 / 8 changed selected orders, 0 confidence-bin violations, and leakage audit pass. M188 evaluates those rows with leakage-safe ObjectNav goal labels: selected `SR`/`SPL` is 0.875/0.2449 vs protected detector-confidence 0.875/0.2926, so trajectory promotion is rejected. M189 decomposes that failure: transition rerank hits the same 7 success proposals, delays/costs more in 2 episodes, improves 1 episode, ties 4, and leaves 1 shared source-coverage/localization gap. M190 fixes the boundary: keep source-pool candidate-source expansion, reject transition repair as a positive claim, and use `detector_confidence_reachable_subset_v0` as the current safe execution default before scale-up. M191 fixes the scale contract: 30 triggered `HM3D ObjectNav val_mini` episodes, 240 planned source poses, 960 planned render rows, 3 batches, selected method `source_pool_plus_detector_confidence_reachable_subset_v1`, and required ablation `no_source_pool_detector_confidence_reachable_subset_v0`.
+Current concise status: E008-M01 through E008-M193 are complete and E008-M194 is running. M130-M165 exposed and decomposed the proxy-to-trajectory, confidence-preserving, budget-aware, and local-rerank failure pattern. M166-M176 freeze that boundary, reject within-pool source-coverage reranking as a positive navigation-improvement claim, and move source coverage to `source_coverage_triggered_candidate_source_expansion_v1`. M177-M179 materialize, render, and run detector inference for a fixed-budget source-pool branch, yielding 192 coordinate candidate rows from 256 rendered frames. M180 validates 180 / 192 candidates as path-ready over 8 / 8 source-ready scans. M181-M182 materialize 732 visit-order rows and observe leakage-safe proxy recovery on 7 / 8 episodes. M183-M184 execute a Docker `Habitat` trajectory smoke with 32 scan-policy rows, 28 successes, aggregate `SR` 0.875, and mean `SPL` 0.2411. M185 rejects direct source-pool scale-up because `path_cost_ascending_reachable_subset_v0` ties protected detector confidence on `SR` but loses `SPL` 0.1716 vs 0.2926. M186 decomposes the failure: source-to-candidate proxy cost is not execution transition cost, causing 6 / 8 worse-`SPL` rows, mean delta `SPL` -0.1210, mean path +19.81m, and mean visits +5.125. M187 materializes `confidence_protected_transition_cost_policy_v1` over the fixed 8-episode / 180-candidate source-pool denominator with 4,072 / 4,072 transition matrix rows, 900 candidate-policy rows, 40 execution plans, 8 / 8 changed selected orders, 0 confidence-bin violations, and leakage audit pass. M188 evaluates those rows with leakage-safe ObjectNav goal labels: selected `SR`/`SPL` is 0.875/0.2449 vs protected detector-confidence 0.875/0.2926, so trajectory promotion is rejected. M189 decomposes that failure: transition rerank hits the same 7 success proposals, delays/costs more in 2 episodes, improves 1 episode, ties 4, and leaves 1 shared source-coverage/localization gap. M190 fixes the boundary: keep source-pool candidate-source expansion, reject transition repair as a positive claim, and use `detector_confidence_reachable_subset_v0` as the current safe execution default before scale-up. M191 fixes the scale contract: 30 triggered `HM3D ObjectNav val_mini` episodes, 240 planned source poses, 960 planned render rows, 3 batches, selected method `source_pool_plus_detector_confidence_reachable_subset_v1`, and required ablation `no_source_pool_detector_confidence_reachable_subset_v0`. M192 materializes all 30 seed requests into 240 source poses and 960 render rows with 0 missing anchors and 0 blocked input hits. M193 validates 240 / 240 source-pool scale poses as snap-ready, 238 / 240 as source-ready, writes 960 render rows and 30 detector manifests, and records M194 render/detector long-job commands. M194 render is verified ready with 960 / 960 frames; M194 detector is currently running in tmux session `e008_m194_source_pool_scale_detector`.
 
-E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M191 are complete as source/adapter/contract/oracle-metric/candidate-source staging, rendered RGB-D detector route, leakage-safe goal evaluation, trajectory execution, H001 fallback execution, dynamic-stale overlay execution, source-gap repair chains, `ConceptGraphs` HM3D source-gap route, target-free source-coverage expansion, trajectory-aware repair, confidence-preserving full-val-mini execution, policy-family failure decomposition, method-pivot boundary, source-coverage memory-interface method contract, source-coverage trigger/candidate-source expansion, fixed-budget source-pool rendering/detection, source-pool navmesh validation, proxy evaluation, Docker trajectory execution, protected-baseline interpretation, source-pool failure decomposition, repaired row materialization, repaired proxy evaluation, proxy failure decomposition, method-boundary/scale decision, and scale-up contract. M191 keeps final navigation, deployable policy, real RGB-D/open-vocabulary robustness, and human-intent main claims blocked until M192+ materialization, launcher/preflight, proxy gate, Docker trajectory execution, heldout transfer, and external baseline comparison pass.
+E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M193 are complete as source/adapter/contract/oracle-metric/candidate-source staging, rendered RGB-D detector route, leakage-safe goal evaluation, trajectory execution, H001 fallback execution, dynamic-stale overlay execution, source-gap repair chains, `ConceptGraphs` HM3D source-gap route, target-free source-coverage expansion, trajectory-aware repair, confidence-preserving full-val-mini execution, policy-family failure decomposition, method-pivot boundary, source-coverage memory-interface method contract, source-coverage trigger/candidate-source expansion, fixed-budget source-pool rendering/detection, source-pool navmesh validation, proxy evaluation, Docker trajectory execution, protected-baseline interpretation, source-pool failure decomposition, repaired row materialization, repaired proxy evaluation, proxy failure decomposition, method-boundary/scale decision, scale-up contract, scale denominator materialization, and scale snap/launcher contract. M194 is partially complete with render verification ready and detector running. M194 keeps final navigation, deployable policy, real RGB-D/open-vocabulary robustness, and human-intent main claims blocked until detector verification, candidate validation, proxy gate, Docker trajectory execution, heldout transfer, and external baseline comparison pass.
 
-Next unit: E008-M192 source-pool protected-confidence scale denominator materialization.
+Next unit: E008-M194 detector completion verification.
 
 ## Source Rule
 
@@ -192,6 +192,8 @@ Next unit: E008-M192 source-pool protected-confidence scale denominator material
 - E008-M189 supports proxy failure decomposition only; it rejects `confidence_protected_transition_cost_policy_v1` as a positive navigation-improvement policy and does not execute trajectories.
 - E008-M190 supports method-boundary and scale-decision only; it keeps source-pool candidate-source expansion, rejects transition repair as a positive claim, sets `detector_confidence_reachable_subset_v0` as the current safe execution default, and blocks immediate Docker launch until M191 scale-up contract.
 - E008-M191 supports scale-up contract readiness only; it fixes the denominator, source-pool budget, protected-confidence default, required no-source-pool ablation, leakage audit, and command ledger, but does not materialize source poses, render frames, run detectors, evaluate goals, or execute trajectories.
+- E008-M192 supports scale denominator/source-pose/render-plan materialization only; it does not validate navmesh/snap, render frames, run detectors, evaluate goals, or execute trajectories.
+- E008-M193 supports scale navmesh/snap validation and render/detector launcher contract only; it does not launch render/detector jobs, evaluate targets, or execute trajectories.
 - `3RScan` / `3DSSG` remains the dynamic stale-memory source, but the first real navigation execution source is `HM3D ObjectNav` because local `Habitat` runtime and navmesh-backed scenes are available.
 - Any `HM3D ObjectNav` result must be described as a navigation-source transfer/adapter experiment unless stale-memory state injection is explicitly implemented.
 
@@ -9763,3 +9765,144 @@ Claim boundary:
 - M191 supports only a scale-up contract/readiness claim.
 - M191 does not support source-pool navigation improvement until M192+ materialization, leakage-safe proxy comparison, Docker trajectory execution, and no-source-pool ablation pass.
 - M191 keeps transition-cost repair as a rejected/optional negative ablation, not a positive claim.
+
+## E008-M192
+
+Implementation unit: `E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0`.
+
+- Status: `e008_m192_source_pool_protected_confidence_scale_denominator_materialization_ready`.
+- Scale denominator: `hm3d_val_mini_all_triggered_source_pool_scale_v1`.
+- Seed request rows: 30.
+- Source pose rows: 240 / expected 240.
+- Render plan rows: 960 / expected 960.
+- Scale batches: 3.
+- Source anchor request rows available: 30 / 30.
+- Missing source-anchor rows: 0.
+- Blocked input hit rows: 0.
+- Render/detector long job launched: false.
+- Selected next unit: E008-M193 source-pool scale navmesh/snap validation and render/detector launcher contract.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m192_source_pool_protected_confidence_scale_denominator_materialization.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/source_pool_scale_request_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/source_pool_observation_pose_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/source_pool_render_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/source_anchor_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/missing_source_anchor_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/blocked_input_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/scale_batch_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/expected_render_file_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/command_ledger_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M192_source_pool_protected_confidence_scale_denominator_materialization_v0/`
+
+Claim boundary:
+
+- M192 supports only scale denominator/source-pose/render-plan materialization.
+- M192 freezes the source-pool acquisition rows needed to compare `source_pool_plus_detector_confidence_reachable_subset_v1` against `no_source_pool_detector_confidence_reachable_subset_v0` after downstream gates.
+- M192 does not support render/detector recovery, real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, deployable search policy, or human intent as a main claim.
+
+## E008-M193
+
+Implementation unit: `E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0`.
+
+- Status: `e008_m193_source_pool_scale_navmesh_snap_launcher_contract_ready`.
+- Scale request rows: 30.
+- Source pose rows: 240.
+- Snap-ready rows: 240 / 240.
+- Source-ready rows for downstream validation: 238 / 240.
+- Render plan rows: 960 / expected 960.
+- Detector manifest rows: 30.
+- Launcher input materialization rows: 6.
+- Long-job command rows: 2.
+- M194 gate ready: true.
+- Render/detector jobs launched: false.
+- Selected next unit: E008-M194 source-pool scale render/detector execution launch and verification.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m193_source_pool_scale_navmesh_snap_launcher_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/snap_validation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/request_snap_render_coverage_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/source_pool_render_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/source_pool_detector_manifest_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/source_pool_object_target_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/expected_file_summary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/launcher_input_materialization_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/readiness_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/long_job_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/m194_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/route_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/next_action_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/`
+
+Claim boundary:
+
+- M193 supports only snap validation and launcher/preflight readiness for the M192 scale denominator.
+- M193 does not support detector candidate recovery, real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, deployable search policy, or human intent as a main claim.
+
+## E008-M194
+
+Implementation unit: `E008-M194_source_pool_scale_render_detector_execution_v0`.
+
+- Current status: render verified, detector launched/running.
+- Render launch status: `e008_m194_render_launched`.
+- Render verification status: `e008_m194_render_ready`.
+- Ready render frames: 960 / 960.
+- Detector manifests ready after render repair: 30 / 30.
+- Detector launch status: `e008_m194_detector_launched`.
+- Detector tmux session: `e008_m194_source_pool_scale_detector`.
+- Detector log: `logs/20260613_111110_e008_m194_source_pool_detector.log`.
+- Detector output: `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/detector`.
+- Render/detector verification command: `python experiments/E008_real_navigation_benchmark/tools/verify_m194_source_pool_scale_render_detector_execution.py --require-ready`.
+
+Launch commands:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/launch_m194_source_pool_scale_render_detector_execution.py --stage render
+python experiments/E008_real_navigation_benchmark/tools/verify_m194_source_pool_scale_render_detector_execution.py --require-render-ready
+python experiments/E008_real_navigation_benchmark/tools/launch_m194_source_pool_scale_render_detector_execution.py --stage detector
+```
+
+Exact tmux commands and expected files:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/long_job_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/render_launch_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/detector_launch_coverage.json`
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/render_launch_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/render_verification_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/render_verification_frame_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/detector_manifest_repair_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/detector_launch_coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M194_source_pool_scale_render_detector_execution_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/rendered_frame_rows.jsonl`
+- `local_dataset/HM3D_navigation_bridge/E008-M193_source_pool_scale_navmesh_snap_launcher_contract_v0/render_summary.json`
+
+Claim boundary:
+
+- M194 currently supports only render execution readiness for the source-pool scale denominator.
+- Detector candidate recovery, candidate navmesh validation, goal evaluation, real navigation `SR` / `SPL`, final real RGB-D/open-vocabulary robustness, deployable search policy, and human-intent main claim remain blocked until detector completion and downstream gates pass.
