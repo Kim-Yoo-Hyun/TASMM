@@ -311,6 +311,7 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] Docker image reproduction 문서화 완료: `docs/reproducibility.md`에 rebuild 가능한 image, image-tar restore dependency, save/load/checksum, runtime smoke check를 추가
 - [x] Internal status document refresh 완료: `TODO.md`와 `docs/reproducibility.md`를 E008-M198 완료 / M199 next gate 기준으로 정정
 - [x] Root README 간결화 완료: 연구 요약, 핵심 문제의식, structure, 핵심 실행 chain, artifact policy, docs navigation만 유지
 - [x] Repository status document refresh 완료: `README.md`, `summary.md`, `docs/`, `hypothesis/`, `experiments/` entry documents를 E008-M198 negative scale gate / M199 next gate 기준으로 갱신

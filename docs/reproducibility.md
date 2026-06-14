@@ -113,6 +113,135 @@ docker build --progress=plain \
   experiments/E005_external_baseline_transition/docker/conceptgraphs_smoke
 ```
 
+## Docker Image Reproduction
+
+사실:
+
+- Current image roles:
+  - `research2/conceptgraphs-smoke:latest`: `ConceptGraphs` external map baseline runtime.
+  - `research2/real-smoke:latest`: real RGB-D/open-vocabulary detector/proposal runtime used by E003/E005/E008 detector routes.
+  - `research3/habitat-h001:20260508-calib-artifacts`: `Habitat` / `HM3D ObjectNav` trajectory execution runtime.
+  - `h001-open3dsg-repro:cu128`: `Open3DSG` object-candidate export runtime.
+- `research2/conceptgraphs-smoke:latest` and `research2/real-smoke:latest` have repo-local Dockerfiles/build routes.
+- `research3/habitat-h001:20260508-calib-artifacts` and `h001-open3dsg-repro:cu128` do not currently have confirmed repo-local build recipes in this workspace. Treat them as restore-from-image-tar dependencies unless a future Dockerfile is added and verified.
+
+### Host Docker Preflight
+
+Run these before rebuilding or loading images:
+
+```bash
+docker info >/dev/null
+nvidia-smi
+docker image ls | grep -E 'research2/conceptgraphs-smoke|research2/real-smoke|research3/habitat-h001|h001-open3dsg-repro' || true
+```
+
+If GPU containers are failing, verify NVIDIA Docker separately:
+
+```bash
+docker run --rm --gpus all nvidia/cuda:12.1.1-base-ubuntu22.04 nvidia-smi
+```
+
+### Rebuildable Images
+
+`ConceptGraphs` image:
+
+```bash
+python experiments/E005_external_baseline_transition/tools/launch_m25_conceptgraphs_docker_build.py
+python experiments/E005_external_baseline_transition/tools/verify_m25_conceptgraphs_docker_build.py
+docker image inspect research2/conceptgraphs-smoke:latest >/dev/null
+```
+
+Direct build fallback:
+
+```bash
+docker build --progress=plain \
+  -t research2/conceptgraphs-smoke:latest \
+  --build-arg CONCEPTGRAPHS_COMMIT=93277a02bd89171f8121e84203121cf7af9ebb5d \
+  --build-arg GSA_COMMIT=a4d76a2b55e348943cba4cd57d7553c354296223 \
+  -f experiments/E005_external_baseline_transition/docker/conceptgraphs_smoke/Dockerfile \
+  experiments/E005_external_baseline_transition/docker/conceptgraphs_smoke
+```
+
+`real-smoke` image:
+
+```bash
+python experiments/E003_perception_noise_expansion/tools/run_m18_real_proposal_scaffold.py \
+  --build --smoke-run --docker-sudo --sudo-password-stdin
+docker image inspect research2/real-smoke:latest >/dev/null
+```
+
+Direct build fallback:
+
+```bash
+docker build --progress=plain \
+  -t research2/real-smoke:latest \
+  -f experiments/E003_perception_noise_expansion/docker/real_proposals/Dockerfile \
+  experiments/E003_perception_noise_expansion/docker/real_proposals
+```
+
+### Image-Tar Restore Dependencies
+
+Use this path for images that do not have a confirmed repo-local build recipe.
+
+Save on the source machine:
+
+```bash
+mkdir -p <drive_root>/docker <drive_root>/manifest
+
+docker save h001-open3dsg-repro:cu128 \
+  | gzip > <drive_root>/docker/h001-open3dsg-repro_cu128.tar.gz
+sha256sum <drive_root>/docker/h001-open3dsg-repro_cu128.tar.gz \
+  > <drive_root>/manifest/h001-open3dsg-repro_cu128.tar.gz.sha256
+
+docker save research3/habitat-h001:20260508-calib-artifacts \
+  | gzip > <drive_root>/docker/research3_habitat-h001_20260508-calib-artifacts.tar.gz
+sha256sum <drive_root>/docker/research3_habitat-h001_20260508-calib-artifacts.tar.gz \
+  > <drive_root>/manifest/research3_habitat-h001_20260508-calib-artifacts.tar.gz.sha256
+```
+
+Restore on the target machine:
+
+```bash
+sha256sum -c <drive_root>/manifest/h001-open3dsg-repro_cu128.tar.gz.sha256
+gunzip -c <drive_root>/docker/h001-open3dsg-repro_cu128.tar.gz | docker load
+docker image inspect h001-open3dsg-repro:cu128 >/dev/null
+
+sha256sum -c <drive_root>/manifest/research3_habitat-h001_20260508-calib-artifacts.tar.gz.sha256
+gunzip -c <drive_root>/docker/research3_habitat-h001_20260508-calib-artifacts.tar.gz | docker load
+docker image inspect research3/habitat-h001:20260508-calib-artifacts >/dev/null
+```
+
+Optional cache images can also be saved to avoid long rebuilds:
+
+```bash
+docker save research2/conceptgraphs-smoke:latest \
+  | gzip > <drive_root>/docker/research2_conceptgraphs-smoke_latest.tar.gz
+docker save research2/real-smoke:latest \
+  | gzip > <drive_root>/docker/research2_real-smoke_latest.tar.gz
+```
+
+### Runtime Smoke Checks
+
+After rebuild or restore:
+
+```bash
+docker run --rm research2/real-smoke:latest python - <<'PY'
+print("real-smoke import smoke")
+PY
+
+docker run --rm --gpus all \
+  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2:/work \
+  -w /work \
+  research3/habitat-h001:20260508-calib-artifacts \
+  bash -lc 'micromamba run -n base python -c "import habitat_sim; print(\"habitat smoke ok\")"'
+```
+
+사용자 판단 필요:
+
+- If `research3/habitat-h001:20260508-calib-artifacts` or `h001-open3dsg-repro:cu128` is not available as a tar, full `Habitat` trajectory execution or `Open3DSG` export reproduction should be marked unavailable until a build recipe is reconstructed and verified.
+- Do not claim full Docker reproducibility for those two images from the Git repo alone.
+
 ## Docker Runtime
 
 사실:
@@ -977,6 +1106,7 @@ Optional Docker image caches:
 ```bash
 docker save research2/conceptgraphs-smoke:latest | gzip > "$BACKUP_ROOT/docker/research2_conceptgraphs-smoke_latest_20260522.tar.gz"
 docker save research2/real-smoke:latest | gzip > "$BACKUP_ROOT/docker/research2_real-smoke_latest_20260522.tar.gz"
+docker save research3/habitat-h001:20260508-calib-artifacts | gzip > "$BACKUP_ROOT/docker/research3_habitat-h001_20260508-calib-artifacts.tar.gz"
 ```
 
 ### Restore Order On A New Machine
@@ -1028,6 +1158,10 @@ rsync -av --partial "$BACKUP_ROOT/open3dsg/artifacts/" \
 ```bash
 gunzip -c "$BACKUP_ROOT/docker/h001-open3dsg-repro_cu128_20260522.tar.gz" | docker load
 docker image inspect h001-open3dsg-repro:cu128
+
+# Required for E008 Habitat trajectory reproduction if the image is not rebuilt locally.
+gunzip -c "$BACKUP_ROOT/docker/research3_habitat-h001_20260508-calib-artifacts.tar.gz" | docker load
+docker image inspect research3/habitat-h001:20260508-calib-artifacts
 ```
 
 6. Verify the restored state.
