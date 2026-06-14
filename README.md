@@ -19,10 +19,12 @@ Dynamic object search에서 실패는 stale memory 하나가 틀렸기 때문만
 | [summary.md](summary.md) | 연구 방향, 배경, 문제 정의, hypothesis, framework, experiment plan 요약 |
 | [docs/](docs/) | workflow, paper framing, reproducibility 기준 |
 | [literature/](literature/) | 문헌 조사와 cross-paper synthesis |
-| [hypothesis/](hypothesis/) | hypothesis-stage 산출물과 promotion boundary |
+| [src/](src/) | 재사용 가능한 핵심 코드가 승격될 위치 |
+| [scripts/](scripts/) | top-level 실행 wrapper |
+| [configs/](configs/) | 공유 가능한 경량 config |
 | [experiments/](experiments/) | main experiment 구현, report, artifact index |
-| `local_dataset/` | git에 올리지 않는 dataset, checkpoint, generated bridge data |
-| `logs/` | long-running job 로그 |
+| [results/](results/) | 가벼운 결과 요약, 표, 로그 요약 |
+| [archive/](archive/) | hypothesis-stage workspace, blocked routes, local generated artifact archive |
 
 각 폴더의 `README.md`를 해당 폴더의 local entry point로 사용한다. 루트 README에는 긴 실험 기록을 중복하지 않는다.
 
@@ -31,6 +33,12 @@ Dynamic object search에서 실패는 stale memory 하나가 틀렸기 때문만
 현재 active experiment는 [experiments/E008_real_navigation_benchmark](experiments/E008_real_navigation_benchmark/README.md)이다. 작업 전에는 항상 [TODO.md](TODO.md)의 Now/Next를 확인한다.
 
 최근 검증된 E008 source-pool scale chain:
+
+```bash
+bash scripts/run_e008_source_pool_scale.sh
+```
+
+동일한 chain을 수동으로 실행하려면:
 
 ```bash
 python experiments/E008_real_navigation_benchmark/tools/verify_m194_source_pool_scale_render_detector_execution.py --require-ready
@@ -48,6 +56,9 @@ python experiments/E008_real_navigation_benchmark/tools/plan_m198_source_pool_sc
 - `/home/yoohyun/research/local_dataset/Open3DSG_staged`와 `/home/yoohyun/research3/local_dataset/data`는 read-only source로만 사용한다.
 - Derived `Open3DSG` 결과는 `local_dataset/Open3DSG_bridge/`에 저장한다.
 - Derived E008 navigation 결과는 `local_dataset/HM3D_navigation_bridge/`에 저장한다.
+- Active commands may regenerate outputs under `experiments/*/artifacts/`; generated artifacts are ignored by Git.
+- Historical generated artifacts moved out of active code live locally under `archive/generated_artifacts/`, which is also ignored by Git.
+- Share-facing result summaries live under [results/](results/).
 - Long-running download, Docker build/run, preprocessing job은 `tmux`/background로 실행하고 `logs/`에 timestamped log를 남긴다.
 - Paper-body experiment는 Docker 기반 실행을 기본으로 한다.
 
@@ -61,3 +72,4 @@ python experiments/E008_real_navigation_benchmark/tools/plan_m198_source_pool_sc
 - Experiment workflow: [docs/experiments.md](docs/experiments.md)
 - Paper framing / novelty / reviewer defense: [docs/paper.md](docs/paper.md)
 - 재현성과 artifact 관리: [docs/reproducibility.md](docs/reproducibility.md)
+- Historical hypothesis workspace: [archive/hypothesis/](archive/hypothesis/)

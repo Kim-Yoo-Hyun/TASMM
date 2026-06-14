@@ -1,6 +1,0 @@
-{"frame_id": "frame-000000", "label_count": 12, "raw_prediction_count": 207, "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801", "skipped_no_depth_prediction_count": 11, "written_prediction_count": 20}
-{"frame_id": "frame-000009", "label_count": 12, "raw_prediction_count": 276, "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801", "skipped_no_depth_prediction_count": 1, "written_prediction_count": 20}
-{"frame_id": "frame-000018", "label_count": 12, "raw_prediction_count": 252, "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801", "skipped_no_depth_prediction_count": 0, "written_prediction_count": 20}
-{"frame_id": "frame-000027", "label_count": 12, "raw_prediction_count": 342, "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801", "skipped_no_depth_prediction_count": 0, "written_prediction_count": 20}
-{"frame_id": "frame-000036", "label_count": 12, "raw_prediction_count": 280, "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801", "skipped_no_depth_prediction_count": 0, "written_prediction_count": 20}
-{"frame_id": "frame-000045", "label_count": 12, "raw_prediction_count": 307, "scan_id": "280d8ebb-6cc6-2788-9153-98959a2da801", "skipped_no_depth_prediction_count": 3, "written_prediction_count": 20}

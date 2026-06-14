@@ -97,7 +97,7 @@ Baselines:
 
 ## Next Action
 
-Benchmark shortlist와 H001 draft는 [hypothesis/CAND-001](../hypothesis/CAND-001/README.md) 아래로 이동했다.
+Benchmark shortlist와 H001 draft는 [archive/hypothesis/CAND-001](../archive/hypothesis/CAND-001/README.md) 아래로 이동했다.
 
 현재 판단:
 

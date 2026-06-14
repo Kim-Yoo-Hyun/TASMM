@@ -5,6 +5,9 @@ Updated: 2026-06-14
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
 - Current report: [report.md](report.md)
+- Generated artifacts under `experiments/*/artifacts/` are ignored by Git.
+- Historical generated artifacts from completed stages were moved to local ignored `archive/generated_artifacts/`.
+- Share-facing lightweight result summaries live under `results/`.
 
 ## Status
 
@@ -16,18 +19,18 @@ The 2026-06-09 targeted literature refresh constrains E008-M137: detector-confid
 
 | ID | Status | Folder | Next action |
 | --- | --- | --- | --- |
-| E001 | M01-M05 artifacts ready | [E001_semantic_pair_dynamic_search_proxy](E001_semantic_pair_dynamic_search_proxy/README.md) | Input to E002 |
-| E002 | M01-M09 path-cost artifacts ready | [E002_path_cost_bridge](E002_path_cost_bridge/README.md) | Input to E003 |
-| E003 | M00-M75 query bridge ready | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Input to E004 |
-| E004 | M01-M05 ready with constraints | [E004_task_context_memory_trust](E004_task_context_memory_trust/README.md) | Input to E005 |
-| E005 | M01-M101 ready | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Input to E007 |
-| E006 | M01-M08 ready; human intent main claim false under current evidence, secondary conditioning / ablation axis retained | [E006_human_intent_main_claim](E006_human_intent_main_claim/README.md) | No active unit; optional E006-M09 policy redesign only if re-promoted |
-| E007 | M01-M07 paper-facing path-cost proxy bridge package ready | [E007_navigation_path_cost_bridge](E007_navigation_path_cost_bridge/README.md) | Input to E008-M01 |
+| E001 | M01-M05 scripts ready; historical artifacts archived | [E001_semantic_pair_dynamic_search_proxy](E001_semantic_pair_dynamic_search_proxy/README.md) | Input to E002 |
+| E002 | M01-M09 path-cost scripts ready; historical artifacts archived | [E002_path_cost_bridge](E002_path_cost_bridge/README.md) | Input to E003 |
+| E003 | M00-M75 query bridge scripts ready; historical artifacts archived | [E003_perception_noise_expansion](E003_perception_noise_expansion/README.md) | Input to E004 |
+| E004 | M01-M05 ready with constraints; historical artifacts archived | [E004_task_context_memory_trust](E004_task_context_memory_trust/README.md) | Input to E005 |
+| E005 | M01-M101 ready; historical artifacts archived | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Input to E007 |
+| E006 | M01-M08 ready; human intent main claim false under current evidence, historical artifacts archived | [E006_human_intent_main_claim](E006_human_intent_main_claim/README.md) | No active unit; optional E006-M09 policy redesign only if re-promoted |
+| E007 | M01-M07 paper-facing path-cost proxy bridge package ready; historical artifacts archived | [E007_navigation_path_cost_bridge](E007_navigation_path_cost_bridge/README.md) | Input to E008-M01 |
 | E008 | M01-M198 ready with constraints; M198 blocks immediate trajectory promotion | [E008_real_navigation_benchmark](E008_real_navigation_benchmark/README.md) | E008-M199 failure decomposition / candidate-generation repair decision |
 
 ## 사실
 
-- Active hypothesis: `hypothesis/CAND-001/H001_stale-object-memory/`.
+- Active hypothesis: `archive/hypothesis/CAND-001/H001_stale-object-memory/`.
 - Active experiment: `E008_real_navigation_benchmark`.
 - E001 is the first main experiment for H001.
 - E001 starts as a proxy semantic-pair dynamic object search benchmark.

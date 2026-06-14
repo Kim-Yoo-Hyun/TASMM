@@ -25,7 +25,7 @@ Experiment 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 5. `docs/experiments.md`
 6. `docs/paper.md`
 7. `docs/reproducibility.md`
-8. `hypothesis/README.md`
+8. `archive/hypothesis/README.md`
 9. 대상 hypothesis folder의 `README.md`
 10. `experiments/README.md`
 11. 대상 experiment folder의 `README.md`
@@ -110,7 +110,9 @@ experiments/
 
 공용 구조 생성 조건:
 
-- `configs/`: 같은 실험을 seed나 dataset만 바꿔 반복할 때 필요해지면 만든다.
-- `src/`: 재사용 함수가 experiment 2개 이상에서 공유될 때 만든다.
-- `scripts/`: paper table을 재현하는 top-level CLI가 필요해지면 만든다.
+- `configs/`: 공유 가능한 경량 config만 둔다. local password, raw data path override, checkpoint payload는 두지 않는다.
+- `src/`: 재사용 함수가 experiment 2개 이상에서 공유될 때 승격한다. 현재 canonical 실행 코드는 아직 `experiments/*/tools/`에 있다.
+- `scripts/`: paper table이나 current gate를 재현하는 thin top-level wrapper만 둔다.
+- `results/`: 공유 가능한 가벼운 결과 요약과 표만 둔다.
+- `archive/`: blocked route, historical hypothesis workspace, generated artifact local archive를 둔다.
 - `outputs/`: 여러 experiment의 최종 table / figure를 모을 때 만든다.

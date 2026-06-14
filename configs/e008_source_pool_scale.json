@@ -1,0 +1,23 @@
+{
+  "active_experiment": "E008_real_navigation_benchmark",
+  "current_gate": "E008-M199 source-pool scale failure decomposition and candidate-generation repair decision",
+  "dataset_sources": {
+    "hm3d_objectnav_read_only": "/home/yoohyun/research3/local_dataset/data",
+    "derived_navigation_bridge": "local_dataset/HM3D_navigation_bridge"
+  },
+  "commands": [
+    "python experiments/E008_real_navigation_benchmark/tools/verify_m194_source_pool_scale_render_detector_execution.py --require-ready",
+    "python experiments/E008_real_navigation_benchmark/tools/run_m195_source_pool_scale_candidate_navmesh_source_readiness_validation.py",
+    "python experiments/E008_real_navigation_benchmark/tools/run_m196_source_pool_scale_candidate_visit_order_path_materialization.py",
+    "python experiments/E008_real_navigation_benchmark/tools/run_m197_source_pool_scale_leakage_safe_goal_evaluation_proxy.py",
+    "python experiments/E008_real_navigation_benchmark/tools/plan_m198_source_pool_scale_proxy_result_interpretation.py"
+  ],
+  "latest_result": {
+    "m197_source_pool_proxy_sr": 0.5667,
+    "m197_source_pool_proxy_spl": 0.3235,
+    "m70_no_source_detector_proxy_sr": 0.8,
+    "m70_no_source_detector_proxy_spl": 0.3506,
+    "m198_docker_trajectory_promotion": false
+  }
+}
+

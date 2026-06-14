@@ -18,6 +18,7 @@ env/
 .env.*
 
 # Logs and temporary files
+logs/
 *.log
 *.tmp
 .DS_Store
@@ -31,3 +32,13 @@ Thumbs.db
 **/container_output/
 **/external/
 *.jsonl
+
+# Local archive of generated artifacts moved out of active experiment code.
+# Keep lightweight archive docs/code trackable, but do not track bulk outputs.
+archive/generated_artifacts/**
+!archive/generated_artifacts/
+!archive/generated_artifacts/README.md
+
+# Third-party blocked-route clone kept locally for diagnosis only.
+archive/blocked_routes/openmask3d_external/
+archive/blocked_routes/openmask3d_external/**

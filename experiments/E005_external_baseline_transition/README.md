@@ -1597,7 +1597,7 @@ Updated: 2026-05-27
 ## Source
 
 - Workflow rule: `docs/experiments.md`
-- Source hypothesis: `hypothesis/CAND-001/H001_stale-object-memory/`
+- Source hypothesis: `archive/hypothesis/CAND-001/H001_stale-object-memory/`
 - E004 source: `experiments/E004_task_context_memory_trust/`
 - Immediate input artifact: `experiments/E004_task_context_memory_trust/artifacts/E004-M05_scale_split_stress_v0/`
 

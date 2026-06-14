@@ -8,7 +8,7 @@ Implementation started. `E001-M01_pair_manifest_v0` through `E001-M05_additional
 
 ## Source
 
-- Source hypothesis: `hypothesis/CAND-001/H001_stale-object-memory/`
+- Source hypothesis: `archive/hypothesis/CAND-001/H001_stale-object-memory/`
 - Workflow rule: `docs/experiments.md`
 - Dataset root: `local_dataset/`
 

@@ -9,7 +9,7 @@ Updated: 2026-05-13
 ## Source
 
 - Workflow rule: `docs/experiments.md`
-- Source hypothesis: `hypothesis/CAND-001/H001_stale-object-memory/`
+- Source hypothesis: `archive/hypothesis/CAND-001/H001_stale-object-memory/`
 - E003 source: `experiments/E003_perception_noise_expansion/`
 - Immediate input artifact: `experiments/E003_perception_noise_expansion/artifacts/E003-M75_expanded_direct_query_bridge_v0/`
 

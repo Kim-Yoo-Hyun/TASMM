@@ -311,9 +311,10 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 
 ## Recently Completed
 
+- [x] 공유/배포용 repository 구조 정리 완료: `src/`, `scripts/`, `configs/`, `results/`, `archive/` 생성, 폴더별 `README.md` 추가, historical hypothesis / blocked routes / generated artifacts를 archive로 이동, 실행 문서와 reproducibility 경로 갱신
 - [x] Internal status document refresh 완료: `TODO.md`와 `docs/reproducibility.md`를 E008-M198 완료 / M199 next gate 기준으로 정정
 - [x] Root README 간결화 완료: 연구 요약, 핵심 문제의식, structure, 핵심 실행 chain, artifact policy, docs navigation만 유지
-- [x] Repository status document refresh 완료: `README.md`, `summary.md`, `docs/`, `hypothesis/`, `experiments/` entry documents를 E008-M198 negative scale gate / M199 next gate 기준으로 갱신
+- [x] Repository status document refresh 완료: `README.md`, `summary.md`, `docs/`, `archive/hypothesis/`, `experiments/` entry documents를 E008-M198 negative scale gate / M199 next gate 기준으로 갱신
 - [x] E008-M198 source-pool scale proxy result interpretation 완료: status `e008_m198_source_pool_scale_proxy_result_interpretation_ready`, source-pool protected proxy `SR`/`SPL` 0.5667/0.3235 vs M70 no-source baseline 0.8000/0.3506, Docker trajectory promotion false, selected next E008-M199
 - [x] E008-M197 source-pool scale leakage-safe goal-evaluation proxy 완료: status `e008_m197_source_pool_scale_leakage_safe_goal_evaluation_proxy_ready`, full denominator 30, source-ready/source-gap 23/7, candidate-goal rows 2,121, proxy recovery 17/30, leakage audit pass
 - [x] E008-M196 source-pool scale candidate visit-order/path materialization 완료: status `e008_m196_source_pool_scale_candidate_visit_order_path_materialization_ready_with_source_warnings`, visit-order rows 2,121, source-ready/source-gap 23/7, leakage audit pass
@@ -899,11 +900,11 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 - [x] `AGENTS.md` 생성 및 Working Language rule 추가
 - [x] `docs/hypothesis.md` 생성 및 hypothesis workflow rule 추가
 - [x] `docs/index.md` 생성
-- [x] `hypothesis/README.md`와 `hypothesis/CAND-001/README.md` 생성
-- [x] CAND-001 benchmark shortlist 작성: `hypothesis/CAND-001/01_benchmark_shortlist.md`
-- [x] H001 draft 생성: `hypothesis/CAND-001/H001_stale-object-memory/`
+- [x] `archive/hypothesis/README.md`와 `archive/hypothesis/CAND-001/README.md` 생성
+- [x] CAND-001 benchmark shortlist 작성: `archive/hypothesis/CAND-001/01_benchmark_shortlist.md`
+- [x] H001 draft 생성: `archive/hypothesis/CAND-001/H001_stale-object-memory/`
 - [x] H001 Route B 선택: hypothesis 단계는 full reproduction이 아니라 small probe로 진행
-- [x] H001 Route B probe contract 작성: 현재 내용은 `hypothesis/CAND-001/H001_stale-object-memory/01_setup.md`와 `03_gates.md`로 병합
+- [x] H001 Route B probe contract 작성: 현재 내용은 `archive/hypothesis/CAND-001/H001_stale-object-memory/01_setup.md`와 `03_gates.md`로 병합
 - [x] `DualMap`, `OpenIN`, `OGScene3D`, `LangMap` evaluation notes 보강
 - [x] `docs/literature.md`를 새 문헌조사 workflow로 업데이트
 - [x] `docs/experiments.md`로 experiment harness 초안 이동
@@ -921,7 +922,7 @@ CAND-002와 CAND-003은 parallel backup candidate 트랙이다. 현재 active ta
 - [ ] CAND-001을 최종 thesis direction으로 확정하지 않는다. benchmark/metric/baseline gate가 먼저 필요하다.
 - [ ] H001은 main experiment implementation으로 전환됐지만 최종 thesis direction은 아직 확정하지 않는다.
 - [ ] `paper/`, `decisions/` 폴더를 아직 만들지 않는다.
-- [ ] `experiments/`는 활성화됐지만, 공용 `src/`, `configs/`, `outputs/` 구조는 필요해질 때 만든다.
+- [x] 공유용 구조 생성 완료: `src/`, `scripts/`, `configs/`, `results/`, `archive/`를 만들고 폴더별 README를 추가
 - [ ] `docs/paper.md`는 논문 작성 단계 전까지 초안 상태로 둔다.
 - [ ] Real navigation `SR` / `SPL`은 navmesh, simulator, 또는 trajectory execution source가 준비될 때까지 claim하지 않는다.
 - [ ] Docker permission은 작업별 preflight로 확인한다. E008-M65 기준 direct Docker는 pass지만 long job은 launch 전 command/log/output/verification을 다시 기록한다.

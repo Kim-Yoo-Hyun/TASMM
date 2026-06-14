@@ -1,6 +1,0 @@
-{
-  "allow_empty_scaffold": true,
-  "non_empty_detector_output_required_for_metrics": true,
-  "schema": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M17_real_proposal_denominator_staging_v0/proposal_output_schema.json",
-  "validator": "/home/yoohyun/research2/experiments/E003_perception_noise_expansion/tools/validate_real_proposal_output.py"
-}

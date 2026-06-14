@@ -8,7 +8,7 @@ Updated: 2026-05-13
 
 ## Source
 
-- Source hypothesis: `hypothesis/CAND-001/H001_stale-object-memory/`
+- Source hypothesis: `archive/hypothesis/CAND-001/H001_stale-object-memory/`
 - Workflow rule: `docs/experiments.md`
 - E001 source: `experiments/E001_semantic_pair_dynamic_search_proxy/`
 - E002 source: `experiments/E002_path_cost_bridge/`

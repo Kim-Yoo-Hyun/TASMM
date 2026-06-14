@@ -1,18 +1,18 @@
 # Hypothesis Workflow
 
-이 문서는 연구 후보를 검증 가능한 hypothesis로 바꾸는 에이전트 workflow와 작성 규칙을 정의한다. 실제 hypothesis 내용은 루트의 `hypothesis/` 폴더에 저장한다.
+이 문서는 연구 후보를 검증 가능한 hypothesis로 바꾸는 에이전트 workflow와 작성 규칙을 정의한다. 실제 hypothesis 내용은 루트의 `archive/hypothesis/` 폴더에 저장한다.
 
 ## Storage Rule
 
-Hypothesis 관련 산출물은 루트의 `hypothesis/` 폴더에 저장한다.
+Hypothesis 관련 산출물은 루트의 `archive/hypothesis/` 폴더에 저장한다.
 
 - workflow와 작성 규칙: `docs/hypothesis.md`
-- hypothesis index: `hypothesis/README.md`
-- candidate별 hypothesis 묶음: `hypothesis/CAND-<number>/`
-- 개별 hypothesis: `hypothesis/CAND-<number>/H<number>_<short-title>/`
+- hypothesis index: `archive/hypothesis/README.md`
+- candidate별 hypothesis 묶음: `archive/hypothesis/CAND-<number>/`
+- 개별 hypothesis: `archive/hypothesis/CAND-<number>/H<number>_<short-title>/`
 - 작업 계획과 진행 상태: `TODO.md`
 
-`docs/hypothesis.md`는 절차와 기준만 관리한다. 문제 정의, hypothesis, feasibility gate, first experiment shape는 `hypothesis/` 아래에 기록한다.
+`docs/hypothesis.md`는 절차와 기준만 관리한다. 문제 정의, hypothesis, feasibility gate, first experiment shape는 `archive/hypothesis/` 아래에 기록한다.
 
 ## Entry Context
 
@@ -25,7 +25,7 @@ Hypothesis 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 5. `docs/literature.md`
 6. `docs/hypothesis.md`
 7. `literature/CAND-001.md`
-8. `hypothesis/README.md`
+8. `archive/hypothesis/README.md`
 9. 대상 hypothesis 폴더의 `README.md`
 
 ## Phase Gate
@@ -47,14 +47,14 @@ Hypothesis 단계는 full reproduction이나 full dataset 검증 단계가 아�
 - 작은 subset, one-scene replay, before/after probe, synthetic perturbation을 허용한다.
 - 단, metric, baseline, failure interpretation은 반드시 있어야 한다.
 - 논문으로서의 가치 검증이 충분히 완료되기 전에는 `docs/experiments.md`로 넘어가지 않는다.
-- Hypothesis 단계의 probe 설계, dataset/replay 접근성 판단, baseline 후보, metric 정의는 모두 `hypothesis/` 아래에 기록한다.
+- Hypothesis 단계의 probe 설계, dataset/replay 접근성 판단, baseline 후보, metric 정의는 모두 `archive/hypothesis/` 아래에 기록한다.
 - 좋은 결과가 나오고 논문 발전 가능성이 확인되면 그때 `docs/experiments.md`에서 full experiment contract로 승격한다.
 - 나쁜 결과가 나오면 왜 안 되는지 기록하고 candidate를 수정하거나 보류한다.
 
 ## Hypothesis Folder Convention
 
 ```text
-hypothesis/
+archive/hypothesis/
   README.md
   CAND-001/
     README.md
@@ -75,7 +75,7 @@ hypothesis/
 
 ## File Roles
 
-### `hypothesis/README.md`
+### `archive/hypothesis/README.md`
 
 전체 hypothesis index를 관리한다.
 
@@ -91,7 +91,7 @@ hypothesis/
 ## Deferred Candidates
 ```
 
-### `hypothesis/CAND-<number>/README.md`
+### `archive/hypothesis/CAND-<number>/README.md`
 
 candidate별 hypothesis 후보 묶음을 관리한다.
 

@@ -27,10 +27,16 @@ Updated: 2026-06-14
 ## Folder Entry Points
 
 - Root `README.md`: repo 전체의 현재 상태와 핵심 파일 안내
+- `docs/README.md`: docs folder의 local entry point
 - `literature/README.md`: 문헌 조사 결과의 cross-paper synthesis
 - `literature/CAND-001_top-tier-refresh-2026.md`: E008-M137 confidence-preserving trajectory repair에 직접 연결한 targeted literature refresh
-- `hypothesis/README.md`: hypothesis index와 active gate
+- `src/README.md`: reusable core code promotion policy
+- `scripts/README.md`: top-level command wrapper policy
+- `configs/README.md`: lightweight config policy
 - `experiments/README.md`: main experiment index와 experiment 간 연결
+- `results/README.md`: 가벼운 공유용 결과 요약
+- `archive/README.md`: historical hypothesis workspace, blocked routes, generated artifact archive 안내
+- `archive/hypothesis/README.md`: archived hypothesis index
 - Future `paper/README.md`: paper workspace가 생성된 뒤 파일 역할, 읽는 순서, 업데이트 규칙을 관리한다. 현재 `paper/`는 thesis, main result table, method figure, target venue, claim-evidence ledger가 concrete해진 뒤에만 만든다.
 
 ## Rules

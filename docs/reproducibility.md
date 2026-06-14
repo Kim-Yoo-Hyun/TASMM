@@ -12,6 +12,8 @@ Updated: 2026-06-14
 - Active external baselines: `ConceptGraphs`; bounded `Open3DSG` predicted-vocabulary adapter row candidate.
 - Docker images: `research2/conceptgraphs-smoke:latest`, `research2/real-smoke:latest`, `research3/habitat-h001:20260508-calib-artifacts` for E008 `Habitat` smoke.
 - Current `ConceptGraphs` heldout state: `heldout_b01/b02/b03` runtime/metric conversion and full 9-scan aggregation are complete.
+- Repository organization state: active experiment code lives under `experiments/*/tools/`; thin wrappers live under `scripts/`; lightweight share-facing summaries live under `results/`; historical hypothesis material and blocked routes live under `archive/`.
+- Generated historical artifacts from completed stages were moved out of active experiment code into local ignored `archive/generated_artifacts/`. Regenerated outputs should be written by the scripts back under `experiments/*/artifacts/`, which is ignored by Git.
 - Current claim state: E005-M56-M101 use `/home/yoohyun/research/local_dataset/Open3DSG_staged` as a read-only source and store derived outputs under `/home/yoohyun/research2/local_dataset/Open3DSG_bridge/`. E005-M100 selects `h001_then_conceptgraphs_top5_on_observed_miss_v0`: H001 success 157 / 195 -> 181 / 195, `AttemptSPL` proxy 0.773932 -> 0.798675, mean `ExpectedSearchCost` 1.758974 -> 2.435897. E006-M07 materializes 20,800 utility metric rows after frozen policy rows, with policy-row mutation audit `pass`, but the human-intent main-claim gate fails because primary mean `ContextSpecificGain` is -4.253654 against the strongest context-agnostic baselines. E006-M08 therefore keeps human intent as secondary conditioning / ablation evidence under current data. E007-M07 packages the E007 bridge table as paper-facing occupancy-grid path-cost proxy evidence with 6 table rows, 3 allowed claim rows, and 3 blocked claim rows. E008-M01-M198 now cover local read-only `HM3D ObjectNav` + `Habitat` source preflight through source-coverage trigger/candidate-source expansion, fixed-budget source-pool render/detector execution, navmesh validation, leakage-safe proxy evaluation, bounded Docker trajectory smoke, protected-baseline interpretation, transition repair failure decomposition, source-pool protected-confidence method boundary, scale-up contract, scale denominator materialization, scale snap/launcher contract, scale detector execution, source-ready/source-gap split, full-denominator proxy evaluation, and no-source baseline comparison. E008-M198 rejects immediate Docker trajectory promotion because source-pool protected detector-confidence proxy `SR`/`SPL` is 0.5667/0.3235 versus M70 no-source detector baseline 0.8000/0.3506. Final real RGB-D/open-vocabulary robustness and final real navigation remain blocked until candidate-generation repair, Docker trajectory execution, heldout transfer, and external baseline evaluation pass.
 - Current targeted literature/code audit state: `literature/CAND-001_top-tier-refresh-2026.md` records the 2026-06-09 metadata scan and code audit. Shallow/filter code-audit clones are stored under ignored path `local_dataset/external_repos/literature_audit/`; no checkpoint/model download is required to reproduce that document-level audit.
 
@@ -33,6 +35,8 @@ Updated: 2026-06-14
 - Derived `Open3DSG` bridge outputs: `local_dataset/Open3DSG_bridge/`.
 - Existing `HM3D` / `ObjectNav` / `Habitat` data path from another research workspace: `/home/yoohyun/research3/local_dataset/data`. Use read-only for E008 source/episode preflight; do not write artifacts there.
 - Derived E008 navigation bridge outputs: `local_dataset/HM3D_navigation_bridge/`.
+- Current lightweight result summaries: `results/`.
+- Local ignored historical generated artifact archive: `archive/generated_artifacts/`.
 
 ## Data Download Commands
 
@@ -159,6 +163,12 @@ Runtime contract:
 ## Experiment Reproduction Commands
 
 사실:
+
+Current E008 source-pool scale wrapper:
+
+```bash
+bash scripts/run_e008_source_pool_scale.sh
+```
 
 Current E005 metric contract and conversion:
 
@@ -449,7 +459,7 @@ python experiments/E005_external_baseline_transition/tools/analyze_m98_conceptgr
 사실:
 
 - Continue with E008-M199 if following the current route. E008-M194 render/detector verification is complete; Docker trajectory execution remains blocked because E008-M198 rejects source-pool scale trajectory promotion against the M70 no-source detector baseline.
-- Reproduce E008-M170 from `experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/m170_command_rows.jsonl` only when the trajectory artifacts need regeneration.
+- Reproduce E008-M170 from the archived command rows at `archive/generated_artifacts/experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0/m170_command_rows.jsonl`, or regenerate E008-M169 under `experiments/E008_real_navigation_benchmark/artifacts/` first, only when the trajectory artifacts need regeneration.
 - Keep lower-memory runtime patch active to avoid unnecessary `InstructBLIP` GPU loading for object-candidate export.
 - Keep `OpenMask3D` as a later proposal baseline until its Docker/`MinkowskiEngine` blocker is worth revisiting.
 

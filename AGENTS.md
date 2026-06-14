@@ -56,13 +56,19 @@
 - `AGENTS.md` defines repo-level rules, work expectations, file responsibility, novelty standards, and Docker/reproducibility principles only.
 - Root `README.md` gives the repo-level current status and key file guide; do not duplicate long experiment records there.
 - Each folder `README.md` is the local entry point for that folder.
+- `src/` is reserved for reusable core code promoted out of experiment-local scripts.
+- `scripts/` stores thin top-level command wrappers only.
+- `configs/` stores lightweight, versionable configuration files only.
+- `experiments/` stores active experiment code, ablations, analysis scripts, and local experiment READMEs.
+- `results/` stores lightweight result summaries, tables, and log summaries for sharing.
+- `archive/` stores historical hypothesis workspace, blocked routes, legacy scratch material, and local generated artifact archives.
 - Research notes live under `literature/`.
 - `literature/README.md` maintains cross-paper synthesis.
-- `hypothesis/README.md` maintains the hypothesis index and active gate.
+- `archive/hypothesis/README.md` preserves the historical hypothesis index after promotion into experiments.
 - If `paper/` exists, `paper/README.md` maintains paper workspace file roles, read order, and update rules.
 - Do not create an empty `paper/` folder.
 - Create a paper folder only after the thesis, main result table, method figure, target venue, and claim-evidence ledger are concrete.
-- Put detailed results, long experiment records, and artifact interpretation in the closest responsible workflow document, folder `README.md`, `report.md`, or artifact note; do not copy them into `AGENTS.md` or root `README.md`.
+- Put detailed results, long experiment records, and artifact interpretation in the closest responsible workflow document, folder `README.md`, `report.md`, artifact note, or lightweight `results/` summary; do not copy them into `AGENTS.md` or root `README.md`.
 
 ## Long-running and Background Tasks
 
@@ -70,7 +76,7 @@
 - Launch long jobs in a separate `tmux` session, `nohup` process, or background job, then return to the main research task.
 - Prefer resumable commands: `aria2c`, `wget -c`, `rsync --partial`, or `huggingface-cli download` with a fixed cache or `--local-dir`.
 - Always write logs under `logs/` with a timestamped filename.
-- Record the exact command, working directory, output path, expected files, and verification command in `TODO.md` or the relevant hypothesis/experiment `README.md`.
+- Record the exact command, working directory, output path, expected files, and verification command in `TODO.md` or the relevant archive/hypothesis/experiment `README.md`.
 - Track job status as `launched`, `running`, `completed`, `failed`, or `needs verification`.
 - Check progress only when explicitly requested or when a dependent task needs the result.
 - Never scan or print huge logs; inspect only `tail`, `head`, or targeted `grep` / `rg` errors.
