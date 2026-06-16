@@ -1,6 +1,6 @@
 # Literature Workflow
 
-Updated: 2026-06-14
+Updated: 2026-06-16
 
 This document is the operating rule for literature work. Read it before adding or editing paper notes.
 

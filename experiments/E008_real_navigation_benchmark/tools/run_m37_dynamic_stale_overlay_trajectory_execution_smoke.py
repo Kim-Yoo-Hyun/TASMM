@@ -27,7 +27,7 @@ DEFAULT_DATA_OUT_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008
 M03_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M03_h001_candidate_navigation_adapter_contract_v0"
 M04_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M04_objectnav_oracle_path_smoke_v0"
 
-HOST_RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+HOST_RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 DOCKER_DATA_ROOT = Path("/data")
 SCENE_DATASET_CONFIG = "/data/versioned_data/hm3d-0.2/hm3d/minival/hm3d_annotated_minival_basis.scene_dataset_config.json"
 PRIMARY_METRIC = "any_viewpoint_xz_1p0"
@@ -44,7 +44,7 @@ REPORTING_ONLY_FIELDS = {"diagnostic_source_gap_boundary_for_reporting"}
 def data_root() -> Path:
     if DOCKER_DATA_ROOT.exists():
         return DOCKER_DATA_ROOT
-    return HOST_RESEARCH3_DATA_ROOT
+    return HOST_RESEARCH2_DATA_ROOT
 
 
 def objectnav_content_root() -> Path:

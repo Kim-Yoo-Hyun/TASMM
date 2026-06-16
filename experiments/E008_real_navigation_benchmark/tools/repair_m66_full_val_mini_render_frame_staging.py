@@ -19,8 +19,8 @@ M65_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M65_full_val_mini_render_detec
 M65_DATA_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M65_full_val_mini_render_detector_contract_v0"
 ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M66_full_val_mini_render_frame_staging_repair_v0"
 LOG_DIR = ROOT / "logs"
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 TMUX_SESSION = "e008_m66_full_val_mini_render_repair"
 VERSION = "e008_m66_full_val_mini_render_frame_staging_repair_v0"
 VERIFY_COMMAND = "python experiments/E008_real_navigation_benchmark/tools/verify_m66_full_val_mini_render_frame_staging.py --require-ready"
@@ -238,7 +238,7 @@ def build_render_command(prefix: list[str], log_path: Path) -> tuple[list[str], 
         "-e",
         "XDG_CACHE_HOME=/tmp/.cache",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "-v",
         f"{render_input_dir}:/inputs:ro",
         "-v",

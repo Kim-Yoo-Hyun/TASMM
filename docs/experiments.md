@@ -1,6 +1,6 @@
 # Experiments Workflow
 
-Updated: 2026-06-14
+Updated: 2026-06-16
 
 이 문서는 main experiment 구현과 기록을 위한 workflow / 작성 규칙만 관리한다. 실험별 내용, contract, manifest, 결과, failure analysis는 루트의 `experiments/` 폴더에 둔다.
 

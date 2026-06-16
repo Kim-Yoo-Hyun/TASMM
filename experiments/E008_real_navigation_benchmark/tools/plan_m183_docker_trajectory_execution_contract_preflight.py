@@ -190,7 +190,7 @@ def build_m183_readiness_gate_rows(
 def build_m184_command_rows(m129: Any) -> list[dict[str, Any]]:
     command = (
         "docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp "
-        "-v /home/yoohyun/research3/local_dataset/data:/data:ro "
+        "-v /home/yoohyun/research2/local_dataset/data:/data:ro "
         "-v /home/yoohyun/research2:/work -w /work "
         f"{m129.HABITAT_IMAGE} bash -lc "
         "\"micromamba run -n base python "
@@ -205,7 +205,7 @@ def build_m184_command_rows(m129: Any) -> list[dict[str, Any]]:
             "command_id": "e008_m184_docker_trajectory_execution_sr_spl",
             "working_directory": str(ROOT),
             "docker_image": m129.HABITAT_IMAGE,
-            "source_mount": "/home/yoohyun/research3/local_dataset/data:/data:ro",
+            "source_mount": "/home/yoohyun/research2/local_dataset/data:/data:ro",
             "repo_mount": "/home/yoohyun/research2:/work",
             "contract_path": str(ARTIFACT_DIR.relative_to(ROOT)),
             "runner_path": str(M184_RUNNER.relative_to(ROOT)),

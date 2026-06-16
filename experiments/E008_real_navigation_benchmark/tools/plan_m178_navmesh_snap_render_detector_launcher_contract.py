@@ -48,8 +48,8 @@ READY_WARNING_STATUS = "e008_m178_navmesh_snap_render_detector_launcher_contract
 BLOCKED_STATUS = "e008_m178_navmesh_snap_render_detector_launcher_contract_blocked"
 NEXT_UNIT = "E008-M179 bounded render/detector execution and verification"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 REAL_SMOKE_IMAGE = "research2/real-smoke"
 SCENE_DATASET_CONFIG = (
     "/data/versioned_data/hm3d-0.2/hm3d/minival/"
@@ -290,7 +290,7 @@ print(json.dumps(result_rows, sort_keys=True))
         "run",
         "--rm",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "-v",
         f"{ROOT}:/work:ro",
         "--entrypoint",
@@ -302,7 +302,7 @@ print(json.dumps(result_rows, sort_keys=True))
     proc = subprocess.run(cmd, check=False, text=True, capture_output=True, timeout=360)
     meta = {
         "command": shell_join(cmd[:12]) + " ...",
-        "mounts": [f"{RESEARCH3_DATA_ROOT}:/data:ro", f"{ROOT}:/work:ro"],
+        "mounts": [f"{RESEARCH2_DATA_ROOT}:/data:ro", f"{ROOT}:/work:ro"],
         "ok": proc.returncode == 0,
         "requested_observation_pose_rows": sum(1 for _ in input_path.open("r", encoding="utf-8")),
         "returncode": proc.returncode,
@@ -668,7 +668,7 @@ def build_long_job_command_rows(docker: dict[str, Any], detector_manifest_rows: 
         "-e",
         "XDG_CACHE_HOME=/tmp/.cache",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "-v",
         f"{render_input_dir}:/inputs:ro",
         "-v",
@@ -850,9 +850,9 @@ def build_readiness_rows(
             "version": VERSION,
             "row_type": "readiness_gate",
             "gate_id": "external_hm3d_data_readonly_source_ready",
-            "gate_status": "pass" if RESEARCH3_DATA_ROOT.exists() else "fail",
+            "gate_status": "pass" if RESEARCH2_DATA_ROOT.exists() else "fail",
             "blocks_m179": True,
-            "details": str(RESEARCH3_DATA_ROOT),
+            "details": str(RESEARCH2_DATA_ROOT),
         },
         {
             "version": VERSION,

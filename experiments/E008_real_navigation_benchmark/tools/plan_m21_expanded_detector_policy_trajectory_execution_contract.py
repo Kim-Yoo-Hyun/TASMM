@@ -26,8 +26,8 @@ M18_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M18_expanded_detector_candidat
 M19_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M19_expanded_detector_candidate_goal_evaluation_smoke_v0"
 M20_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M20_expanded_detector_goal_failure_comparison_navigation_decision_v0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 M22_RUNNER = EXP_ROOT / "tools" / "run_m22_expanded_detector_policy_trajectory_execution_smoke.py"
 M22_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0"
 M22_DATA_OUT_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0"
@@ -378,7 +378,7 @@ def build_docker_preflight_rows(
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     docker_info = command_status(["docker", "info", "--format", "{{.ServerVersion}}"])
     image_status = command_status(["docker", "image", "inspect", HABITAT_IMAGE, "--format", "{{.Id}} {{.Size}}"])
-    data_ready = RESEARCH3_DATA_ROOT.exists() and RESEARCH3_DATA_ROOT.is_dir()
+    data_ready = RESEARCH2_DATA_ROOT.exists() and RESEARCH2_DATA_ROOT.is_dir()
     rows = [
         {
             "version": VERSION,
@@ -396,9 +396,9 @@ def build_docker_preflight_rows(
         },
         {
             "version": VERSION,
-            "check": "research3_data_root_readable",
+            "check": "research2_data_root_readable",
             "status": "pass" if data_ready else "fail",
-            "evidence": str(RESEARCH3_DATA_ROOT),
+            "evidence": str(RESEARCH2_DATA_ROOT),
             "required_before": "E008-M22 runner execution",
         },
         {
@@ -433,7 +433,7 @@ def build_docker_preflight_rows(
     detail = {
         "docker_info": docker_info,
         "habitat_image_status": image_status,
-        "research3_data_root_ready": data_ready,
+        "research2_data_root_ready": data_ready,
         "runner_script_exists": M22_RUNNER.exists(),
     }
     return rows, detail
@@ -442,7 +442,7 @@ def build_docker_preflight_rows(
 def build_docker_command_rows() -> list[dict[str, Any]]:
     runner_cmd = (
         "docker run --rm --gpus all "
-        f"-v {RESEARCH3_DATA_ROOT}:/data:ro "
+        f"-v {RESEARCH2_DATA_ROOT}:/data:ro "
         f"-v {ROOT}:/work "
         "-w /work "
         f"{HABITAT_IMAGE} "
@@ -679,7 +679,7 @@ def main() -> None:
         "policy_execution_plan_rows": len(policy_execution_plan_rows),
         "policy_execution_rows": len(policy_contract_rows),
         "real_navigation_sr_spl_ready": False,
-        "research3_data_root": str(RESEARCH3_DATA_ROOT),
+        "research2_data_root": str(RESEARCH2_DATA_ROOT),
         "runner_implemented": runner_implemented,
         "runner_output_contract_rows": len(runner_output_contract_rows),
         "selected_next_unit": selected_next,

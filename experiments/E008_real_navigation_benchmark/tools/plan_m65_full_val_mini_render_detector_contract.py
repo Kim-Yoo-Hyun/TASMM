@@ -33,8 +33,8 @@ BLOCKED_STATUS = "e008_m65_full_val_mini_render_detector_contract_blocked"
 NEXT_UNIT = "E008-M66 full-val-mini render frame staging background launch"
 DETECTOR_NEXT_UNIT = "E008-M67 full-val-mini detector candidate-source background launch"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 REAL_SMOKE_IMAGE = "research2/real-smoke:latest"
 SCENE_DATASET_CONFIG = "/data/versioned_data/hm3d-0.2/hm3d/minival/hm3d_annotated_minival_basis.scene_dataset_config.json"
 LOG_DIR = ROOT / "logs"
@@ -265,7 +265,7 @@ def host_path_from_docker_path(docker_path: str) -> Path:
     value = Path(docker_path)
     if not str(value).startswith("/data/"):
         return value
-    return RESEARCH3_DATA_ROOT / value.relative_to("/data")
+    return RESEARCH2_DATA_ROOT / value.relative_to("/data")
 
 
 def build_preflight_rows(render_rows: list[dict[str, Any]], detector_manifest_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -382,7 +382,7 @@ def build_command_rows(docker_prefix: list[str]) -> list[dict[str, Any]]:
         "-e",
         "XDG_CACHE_HOME=/tmp/.cache",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "-v",
         f"{render_input_dir}:/inputs:ro",
         "-v",

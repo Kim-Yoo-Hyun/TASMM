@@ -1,6 +1,6 @@
 # Docs Index
 
-Updated: 2026-06-14
+Updated: 2026-06-16
 
 이 파일은 `docs/` 아래 workflow 문서들의 짧은 입구다. `docs/index.md`는 세부 연구 내용을 반복하지 않고, 새 작업자가 어떤 문서를 어떤 순서로 읽어야 하는지 알려주는 navigation hub로 쓴다.
 

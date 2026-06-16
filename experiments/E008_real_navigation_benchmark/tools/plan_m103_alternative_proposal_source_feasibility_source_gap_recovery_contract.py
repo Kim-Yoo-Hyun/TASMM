@@ -161,7 +161,7 @@ def build_route_rows(
 ) -> list[dict[str, Any]]:
     conceptgraphs_image_ready = docker_image_ready("research2/conceptgraphs-smoke:latest")
     real_smoke_image_ready = docker_image_ready("research2/real-smoke:latest")
-    habitat_image_ready = docker_image_ready("research3/habitat-h001:20260508-calib-artifacts")
+    habitat_image_ready = docker_image_ready("research2/habitat-h001:20260508-calib-artifacts")
     openmask3d_image_ready = docker_image_ready("research2/openmask3d-smoke:latest")
     openmask3d_ckpt_ready = checkpoint_ready(
         OPENMASK_CHECKPOINT_DIR / "openmask3d_arbitrary_scene_model.ckpt", 50_000_000

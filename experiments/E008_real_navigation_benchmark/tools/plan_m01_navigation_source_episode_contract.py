@@ -17,14 +17,14 @@ OUT_DIR = EXP_ROOT / "artifacts" / "E008-M01_navigation_source_episode_contract_
 VERSION = "e008_m01_navigation_source_episode_contract_v0"
 
 E007_M07_DIR = ROOT / "experiments" / "E007_navigation_path_cost_bridge" / "artifacts" / "E007-M07_bridge_table_package_navigation_decision_v0"
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HM3D_ROOT = RESEARCH3_DATA_ROOT / "versioned_data" / "hm3d-0.2"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HM3D_ROOT = RESEARCH2_DATA_ROOT / "versioned_data" / "hm3d-0.2"
 HM3D_SCENE_ROOT = HM3D_ROOT / "hm3d"
-OBJECTNAV_ROOT = RESEARCH3_DATA_ROOT / "datasets" / "objectnav" / "hm3d" / "v2" / "objectnav_hm3d_v2"
+OBJECTNAV_ROOT = RESEARCH2_DATA_ROOT / "datasets" / "objectnav" / "hm3d" / "v2" / "objectnav_hm3d_v2"
 DERIVED_NAV_ROOT = ROOT / "local_dataset" / "HM3D_navigation_bridge"
 
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
-VLMAPS_IMAGE = "research3/vlmaps-hm3d:20260508-timmfix"
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
+VLMAPS_IMAGE = "research2/vlmaps-hm3d:20260508-timmfix"
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -150,11 +150,11 @@ def build_source_rows(habitat_runtime: dict[str, Any], scene_counts: dict[str, d
     hm3d_runtime_ready = habitat_runtime["image_ready"] and habitat_runtime["import_ready"]
     return [
         {
-            "source_id": "hm3d_objectnav_habitat_local_research3",
+            "source_id": "hm3d_objectnav_habitat_local_research2",
             "source_type": "real_navigation_simulator_source",
             "dataset": "HM3D ObjectNav v2",
             "simulator": "Habitat",
-            "source_root": str(RESEARCH3_DATA_ROOT),
+            "source_root": str(RESEARCH2_DATA_ROOT),
             "source_access": "external_read_only",
             "derived_output_root": str(DERIVED_NAV_ROOT),
             "scene_counts": scene_counts,
@@ -489,4 +489,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

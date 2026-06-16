@@ -24,9 +24,9 @@ M12_TOOL = EXP_ROOT / "tools" / "run_m12_detector_candidate_goal_evaluation_smok
 VERSION = "e008_m70_full_val_mini_detector_candidate_goal_evaluation_smoke_v0"
 PRIMARY_METRIC = "any_viewpoint_xz_1p0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 OBJECTNAV_CONTENT_ROOT = (
-    RESEARCH3_DATA_ROOT
+    RESEARCH2_DATA_ROOT
     / "datasets"
     / "objectnav"
     / "hm3d"

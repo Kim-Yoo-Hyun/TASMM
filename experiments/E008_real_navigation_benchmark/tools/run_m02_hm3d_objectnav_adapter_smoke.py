@@ -18,10 +18,10 @@ DATA_OUT_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M02_hm3
 VERSION = "e008_m02_hm3d_objectnav_adapter_smoke_v0"
 
 M01_DIR = EXP_ROOT / "artifacts" / "E008-M01_navigation_source_episode_contract_v0"
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HM3D_SCENE_ROOT = RESEARCH3_DATA_ROOT / "versioned_data" / "hm3d-0.2" / "hm3d"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HM3D_SCENE_ROOT = RESEARCH2_DATA_ROOT / "versioned_data" / "hm3d-0.2" / "hm3d"
 OBJECTNAV_CONTENT_ROOT = (
-    RESEARCH3_DATA_ROOT
+    RESEARCH2_DATA_ROOT
     / "datasets"
     / "objectnav"
     / "hm3d"
@@ -30,7 +30,7 @@ OBJECTNAV_CONTENT_ROOT = (
     / "val_mini"
     / "content"
 )
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 SCENE_DATASET_CONFIG = HM3D_SCENE_ROOT / "minival" / "hm3d_annotated_minival_basis.scene_dataset_config.json"
 
 
@@ -56,7 +56,7 @@ def write_text(path: Path, text: str) -> None:
 
 
 def to_docker_path(path: Path) -> str:
-    return "/data/" + str(path.resolve().relative_to(RESEARCH3_DATA_ROOT.resolve()))
+    return "/data/" + str(path.resolve().relative_to(RESEARCH2_DATA_ROOT.resolve()))
 
 
 def resolve_scene(scene_id: str) -> dict[str, Any]:
@@ -215,7 +215,7 @@ print(json.dumps(rows, sort_keys=True))
         "run",
         "--rm",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "--entrypoint",
         "bash",
         HABITAT_IMAGE,
@@ -230,7 +230,7 @@ print(json.dumps(rows, sort_keys=True))
         "stderr_tail": proc.stderr[-1000:],
         "requested_scene_count": len(requested),
         "command": " ".join(cmd[:8]) + " ...",
-        "mount": f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        "mount": f"{RESEARCH2_DATA_ROOT}:/data:ro",
     }
     if proc.returncode != 0:
         return [], meta
@@ -382,7 +382,7 @@ def main() -> None:
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "status": "e008_m02_hm3d_objectnav_adapter_smoke_ready" if adapter_ready else "e008_m02_hm3d_objectnav_adapter_smoke_blocked",
         "m01_status": m01_coverage.get("status"),
-        "source_root": str(RESEARCH3_DATA_ROOT),
+        "source_root": str(RESEARCH2_DATA_ROOT),
         "source_access": "external_read_only",
         "derived_output_root": str(DATA_OUT_DIR),
         "artifact_output_root": str(ARTIFACT_DIR),

@@ -57,7 +57,7 @@ READY_STATUS = "e008_m104_conceptgraphs_hm3d_source_gap_adapter_preflight_contra
 BLOCKED_STATUS = "e008_m104_conceptgraphs_hm3d_source_gap_adapter_preflight_contract_blocked"
 NEXT_UNIT = "E008-M105 ConceptGraphs HM3D source-gap staging materialization smoke"
 CONCEPTGRAPHS_IMAGE = "research2/conceptgraphs-smoke:latest"
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 DEPTH_SCALE = 1000.0
 
 

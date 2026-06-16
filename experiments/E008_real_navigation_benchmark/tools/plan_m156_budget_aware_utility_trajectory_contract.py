@@ -34,11 +34,11 @@ DATA_OUT_DIR = (
     ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M156_budget_aware_utility_trajectory_contract_v0"
 )
 
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 DOCKER_DATA_ROOT = Path("/data")
 OBJECTNAV_CONTENT_ROOT = (
-    RESEARCH3_DATA_ROOT
+    RESEARCH2_DATA_ROOT
     / "datasets"
     / "objectnav"
     / "hm3d"
@@ -186,7 +186,7 @@ def host_path_from_docker(path_text: str | None) -> Path | None:
         rel = path.relative_to(DOCKER_DATA_ROOT)
     except ValueError:
         return None
-    return RESEARCH3_DATA_ROOT / rel
+    return RESEARCH2_DATA_ROOT / rel
 
 
 def normalize_candidate_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -410,8 +410,8 @@ def build_docker_preflight_rows(
         {
             "version": VERSION,
             "check_id": "read_only_hm3d_data_root",
-            "status": "pass" if RESEARCH3_DATA_ROOT.exists() else "fail",
-            "evidence": f"path={RESEARCH3_DATA_ROOT}; exists={RESEARCH3_DATA_ROOT.exists()}.",
+            "status": "pass" if RESEARCH2_DATA_ROOT.exists() else "fail",
+            "evidence": f"path={RESEARCH2_DATA_ROOT}; exists={RESEARCH2_DATA_ROOT.exists()}.",
         },
         {
             "version": VERSION,
@@ -449,7 +449,7 @@ def build_docker_preflight_rows(
 def build_m157_command_rows() -> list[dict[str, Any]]:
     command = (
         "docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp "
-        "-v /home/yoohyun/research3/local_dataset/data:/data:ro "
+        "-v /home/yoohyun/research2/local_dataset/data:/data:ro "
         "-v /home/yoohyun/research2:/work -w /work "
         f"{HABITAT_IMAGE} bash -lc "
         "\"micromamba run -n base python "
@@ -464,7 +464,7 @@ def build_m157_command_rows() -> list[dict[str, Any]]:
             "command_id": "e008_m157_budget_aware_utility_trajectory_execution",
             "working_directory": str(ROOT),
             "docker_image": HABITAT_IMAGE,
-            "source_mount": "/home/yoohyun/research3/local_dataset/data:/data:ro",
+            "source_mount": "/home/yoohyun/research2/local_dataset/data:/data:ro",
             "repo_mount": "/home/yoohyun/research2:/work",
             "contract_path": str(ARTIFACT_DIR.relative_to(ROOT)),
             "runner_path": str(M157_RUNNER.relative_to(ROOT)),

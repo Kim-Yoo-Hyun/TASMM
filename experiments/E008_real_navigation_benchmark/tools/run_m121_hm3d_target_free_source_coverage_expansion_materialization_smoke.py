@@ -33,8 +33,8 @@ READY_WARNING_STATUS = (
 BLOCKED_STATUS = "e008_m121_hm3d_target_free_source_coverage_expansion_materialization_smoke_blocked"
 NEXT_UNIT = "E008-M122 HM3D target-free source-coverage render/detector launcher contract"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 SCENE_DATASET_CONFIG = (
     "/data/versioned_data/hm3d-0.2/hm3d/minival/"
     "hm3d_annotated_minival_basis.scene_dataset_config.json"
@@ -300,7 +300,7 @@ print(json.dumps(result_rows, sort_keys=True))
         "run",
         "--rm",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "-v",
         f"{ROOT}:/work:ro",
         "--entrypoint",
@@ -312,7 +312,7 @@ print(json.dumps(result_rows, sort_keys=True))
     proc = subprocess.run(cmd, check=False, text=True, capture_output=True, timeout=180)
     meta = {
         "command": " ".join(cmd[:10]) + " ...",
-        "mounts": [f"{RESEARCH3_DATA_ROOT}:/data:ro", f"{ROOT}:/work:ro"],
+        "mounts": [f"{RESEARCH2_DATA_ROOT}:/data:ro", f"{ROOT}:/work:ro"],
         "ok": proc.returncode == 0,
         "requested_observation_pose_rows": sum(1 for _ in input_path.open("r", encoding="utf-8")),
         "returncode": proc.returncode,

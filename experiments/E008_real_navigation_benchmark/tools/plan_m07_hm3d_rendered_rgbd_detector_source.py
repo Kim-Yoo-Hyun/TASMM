@@ -33,8 +33,8 @@ E003_SCHEMA = (
 E003_RUNNER = ROOT / "experiments" / "E003_perception_noise_expansion" / "tools" / "run_m22_frame_scaling_diagnostics.py"
 E003_VALIDATOR = ROOT / "experiments" / "E003_perception_noise_expansion" / "tools" / "validate_real_proposal_output.py"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 REAL_PROPOSAL_IMAGE = "research2/real-smoke:latest"
 
 M08_DATASET_ROOT = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M08_hm3d_rendered_rgbd_frame_staging_smoke_v0"
@@ -597,8 +597,8 @@ def run() -> dict[str, Any]:
         },
         {
             "component": "HM3D read-only source root",
-            "ready": RESEARCH3_DATA_ROOT.exists(),
-            "path_or_image": str(RESEARCH3_DATA_ROOT),
+            "ready": RESEARCH2_DATA_ROOT.exists(),
+            "path_or_image": str(RESEARCH2_DATA_ROOT),
             "reason": "Mounted read-only for M08 Habitat rendering.",
         },
     ]

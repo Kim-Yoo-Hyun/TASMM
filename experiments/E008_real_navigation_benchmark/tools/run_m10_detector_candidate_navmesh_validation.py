@@ -21,8 +21,8 @@ VERSION = "e008_m10_detector_candidate_navmesh_validation_v0"
 M08_DATA_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M08_hm3d_rendered_rgbd_frame_staging_smoke_v0"
 M09_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M09_hm3d_rendered_rgbd_detector_candidate_smoke_v0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 SCENE_DATASET_CONFIG = "/data/versioned_data/hm3d-0.2/hm3d/minival/hm3d_annotated_minival_basis.scene_dataset_config.json"
 
 
@@ -249,7 +249,7 @@ print(json.dumps(result_rows, sort_keys=True))
         "run",
         "--rm",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "-v",
         f"{ROOT}:/work:ro",
         "--entrypoint",
@@ -266,7 +266,7 @@ print(json.dumps(result_rows, sort_keys=True))
         "stderr_tail": proc.stderr[-1000:],
         "requested_candidate_count": sum(1 for _ in input_path.open("r", encoding="utf-8")),
         "command": " ".join(cmd[:10]) + " ...",
-        "mounts": [f"{RESEARCH3_DATA_ROOT}:/data:ro", f"{ROOT}:/work:ro"],
+        "mounts": [f"{RESEARCH2_DATA_ROOT}:/data:ro", f"{ROOT}:/work:ro"],
     }
     if proc.returncode != 0:
         return [], meta

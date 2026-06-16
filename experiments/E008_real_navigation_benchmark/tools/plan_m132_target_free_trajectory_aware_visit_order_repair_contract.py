@@ -35,8 +35,8 @@ READY_STATUS = "e008_m132_target_free_trajectory_aware_visit_order_repair_contra
 BLOCKED_STATUS = "e008_m132_target_free_trajectory_aware_visit_order_repair_contract_blocked"
 NEXT_UNIT = "E008-M133 target-free trajectory-aware visit-order repair materialization smoke"
 
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 M133_SCRIPT = "experiments/E008_real_navigation_benchmark/tools/run_m133_target_free_trajectory_aware_visit_order_repair_materialization.py"
 
 METHOD_POLICY = "path_cost_ascending_reachable_subset_v0"
@@ -314,7 +314,7 @@ def build_policy_repair_contract_rows(path_ready_count: int) -> list[dict[str, A
 def build_m133_materialization_plan_rows() -> list[dict[str, Any]]:
     docker_cmd = (
         "docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp "
-        f"-v {RESEARCH3_DATA_ROOT}:/data:ro -v {ROOT}:/work -w /work "
+        f"-v {RESEARCH2_DATA_ROOT}:/data:ro -v {ROOT}:/work -w /work "
         f"{HABITAT_IMAGE} bash -lc "
         "\"micromamba run -n base python "
         f"{M133_SCRIPT} "
@@ -329,7 +329,7 @@ def build_m133_materialization_plan_rows() -> list[dict[str, Any]]:
             "selected_next_unit": NEXT_UNIT,
             "requires_docker": True,
             "docker_image": HABITAT_IMAGE,
-            "source_data_mount": f"{RESEARCH3_DATA_ROOT}:/data:ro",
+            "source_data_mount": f"{RESEARCH2_DATA_ROOT}:/data:ro",
             "workspace_mount": f"{ROOT}:/work",
             "script_to_implement": M133_SCRIPT,
             "input_artifact": "experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0",

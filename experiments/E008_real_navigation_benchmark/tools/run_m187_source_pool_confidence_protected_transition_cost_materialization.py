@@ -42,9 +42,9 @@ DEFAULT_DERIVED_OUT_ROOT = (
     / "E008-M187_source_pool_confidence_protected_transition_cost_materialization_v0"
 )
 
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 HOST_RESEARCH2_ROOT = Path("/home/yoohyun/research2")
-HOST_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+HOST_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 DOCKER_RESEARCH2_ROOT = Path("/work")
 DOCKER_DATA_ROOT = Path("/data")
 

@@ -368,7 +368,7 @@ def build_external_route_preflight_rows(
         if row.get("source_frame_rows")
     )
     current_source_closed = all(not row.get("current_source_recoverable_without_new_source") for row in current_case_rows)
-    vlmaps_image_ready = docker_image_ready("research3/vlmaps-hm3d:20260508-timmfix")
+    vlmaps_image_ready = docker_image_ready("research2/vlmaps-hm3d:20260508-timmfix")
     return [
         {
             "version": VERSION,

@@ -47,8 +47,8 @@ READY_STATUS = "e008_m95_coverage_expansion_render_detector_launcher_adaptation_
 BLOCKED_STATUS = "e008_m95_coverage_expansion_render_detector_launcher_adaptation_contract_blocked"
 NEXT_UNIT = "E008-M96 coverage-expansion render frame staging background launch"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 REAL_SMOKE_IMAGE = "research2/real-smoke:latest"
 SCENE_DATASET_CONFIG = "/data/versioned_data/hm3d-0.2/hm3d/minival/hm3d_annotated_minival_basis.scene_dataset_config.json"
 LOG_DIR = ROOT / "logs"
@@ -266,7 +266,7 @@ def build_long_job_command_rows(docker: dict[str, Any], render_rows: list[dict[s
         "-e",
         "XDG_CACHE_HOME=/tmp/.cache",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "-v",
         f"{render_input_dir}:/inputs:ro",
         "-v",
@@ -448,9 +448,9 @@ def build_preflight_rows(
             "version": VERSION,
             "row_type": "readiness_gate",
             "gate_id": "external_hm3d_data_readonly_source_ready",
-            "gate_status": "pass" if RESEARCH3_DATA_ROOT.exists() else "fail",
+            "gate_status": "pass" if RESEARCH2_DATA_ROOT.exists() else "fail",
             "blocks_m96": True,
-            "details": str(RESEARCH3_DATA_ROOT),
+            "details": str(RESEARCH2_DATA_ROOT),
         },
         {
             "version": VERSION,

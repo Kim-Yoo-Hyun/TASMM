@@ -23,9 +23,9 @@ VERSION = "e008_m06_hm3d_semantic_candidate_source_smoke_v0"
 M02_DATA_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M02_hm3d_objectnav_adapter_smoke_v0"
 M05_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M05_hm3d_candidate_source_staging_plan_v0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HM3D_MINIVAL_ROOT = RESEARCH3_DATA_ROOT / "versioned_data" / "hm3d-0.2" / "hm3d" / "minival"
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HM3D_MINIVAL_ROOT = RESEARCH2_DATA_ROOT / "versioned_data" / "hm3d-0.2" / "hm3d" / "minival"
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 SCENE_DATASET_CONFIG = "/data/versioned_data/hm3d-0.2/hm3d/minival/hm3d_annotated_minival_basis.scene_dataset_config.json"
 
 CATEGORY_ALIASES = {
@@ -336,7 +336,7 @@ print(json.dumps(out, sort_keys=True))
         "run",
         "--rm",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "--entrypoint",
         "bash",
         HABITAT_IMAGE,
@@ -350,7 +350,7 @@ print(json.dumps(out, sort_keys=True))
         "stdout_tail": proc.stdout[-1200:],
         "stderr_tail": proc.stderr[-1200:],
         "command": " ".join(cmd[:8]) + " ...",
-        "mount": f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        "mount": f"{RESEARCH2_DATA_ROOT}:/data:ro",
     }
     if proc.returncode != 0:
         return [], meta

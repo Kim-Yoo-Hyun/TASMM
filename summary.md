@@ -1,6 +1,6 @@
 # Research Summary
 
-Updated: 2026-06-14
+Updated: 2026-06-16
 
 ## Research Direction
 
@@ -10,7 +10,7 @@ Updated: 2026-06-14
 - Active candidate는 `CAND-001` / `Intent- and Staleness-Aware Semantic Mapping`이다.
 - Active hypothesis는 `H001_stale-object-memory`다.
 - 최종 목표는 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이며, AI, ML, CV, Robotics top-tier journal/conference를 겨냥한다.
-- 현재 main experiment는 `E008_real_navigation_benchmark`의 source-pool scale branch를 M198까지 완료했고, M199 failure decomposition / candidate-generation repair decision이 다음 gate다.
+- 현재 main experiment는 `E008_real_navigation_benchmark`의 source-pool scale branch를 M204까지 완료했다.
 
 논문 주장 후보:
 
@@ -22,12 +22,12 @@ Updated: 2026-06-14
 
 - 최근 semantic mapping, 3D scene graph, open-vocabulary mapping 연구는 RGB-D sequence, VLM/LLM reasoning, embodied search/navigation과 결합되고 있다.
 - Robotics 관점에서는 map construction 자체보다 search, navigation, manipulation, instruction following 같은 downstream behavior가 실제로 좋아지는지가 중요하다.
-- `ConceptGraphs`, `Open3DSG`, `HOV-SG`, `3D-Mem`, `VLFM`, `HM3D-OVON` 같은 계열은 open-vocabulary map, scene memory, navigation baseline으로 reviewer pressure를 제공한다.
+- `ConceptGraphs`, `Open3DSG`, `HOV-SG`, `3D-Mem`, `VLFM`, `HM3D-OVON` 계열은 open-vocabulary map, scene memory, navigation baseline으로 reviewer pressure를 제공한다.
 
 에이전트 추론:
 
-- Dynamic object search/navigation에서는 stale memory, RGB-D/open-vocabulary proposal noise, path/search cost, task context가 동시에 충돌한다.
-- Top-tier claim은 "기존 map이 dynamic object에 약하다"가 아니라, 왜 naive memory/retrieval/ranking이 실패하고 그 실패 때문에 어떤 decision layer가 필요한지를 보여야 한다.
+- Dynamic object search/navigation에서는 stale memory, RGB-D/open-vocabulary proposal noise, source coverage, path/search cost, task context가 동시에 충돌한다.
+- Top-tier claim은 "기존 map이 dynamic object에 약하다"가 아니라, 왜 naive memory/retrieval/ranking이 실패하고 그 실패 때문에 어떤 decision interface가 필요한지를 보여야 한다.
 
 ## Motivation
 
@@ -37,12 +37,11 @@ Updated: 2026-06-14
 - Old memory를 그대로 믿으면 stale old-location failure가 발생한다.
 - Old memory를 완전히 버리면 반복적으로 유용한 location prior와 stable object memory를 잃는다.
 - RGB-D / open-vocabulary perception은 missed target, false positive, localization error를 만든다.
-- Path/search cost를 무시하면 reachable하지 않거나 비효율적인 후보를 방문할 수 있고, path cost만 앞세우면 detector-confidence보다 낮은 `SPL`이 나올 수 있다.
-- 최근 E008-M198 scale gate에서는 source-pool candidate generation이 proxy recovery를 17 / 30으로 만들었지만, M70 no-source detector baseline 24 / 30보다 낮아 immediate Docker trajectory promotion이 거부됐다.
+- Path/search cost를 무시하면 비효율적인 후보 방문이 생기고, path cost만 앞세우면 detector-confidence보다 낮은 `SPL`이 나올 수 있다.
 
-논문 주장 후보:
+에이전트 추론:
 
-- Dynamic object search에서 stale semantic memory의 실패는 old memory 자체가 항상 틀려서가 아니라, current evidence confidence, stale-memory trust, source coverage, path feasibility, search budget이 서로 충돌하기 때문에 발생한다.
+- 현재까지의 실험 흐름은 "더 많은 후보를 붙이면 좋아진다"가 아니라, reliable current evidence를 보존하면서 source-pool evidence를 additive로 붙여야 한다는 방향을 지지한다.
 
 ## Limitation of Existing Work
 
@@ -54,7 +53,7 @@ Updated: 2026-06-14
 
 에이전트 추론:
 
-- 기존 한계는 "map이 틀린다"가 아니라 "map의 uncertainty, staleness, task relevance, path feasibility를 행동 의사결정으로 연결하는 기준이 약하다"로 잡는 것이 방어 가능하다.
+- 기존 한계는 "map이 틀린다"가 아니라 "map의 uncertainty, staleness, task relevance, source coverage, path feasibility를 행동 의사결정으로 연결하는 기준이 약하다"로 잡는 것이 방어 가능하다.
 - 이 문제는 stale semantic memory, current RGB-D observation, object identity, task context, spatial cost가 하나의 map-based decision으로 결합되므로 semantic mapping 문제다.
 
 ## Problem Definition
@@ -68,7 +67,7 @@ Updated: 2026-06-14
 논문 주장 후보:
 
 - `Task-Conditioned Stale Semantic Memory Update` should improve dynamic object search behavior over static memory, fixed top-k, detector-only, external open-vocabulary map baselines, and context-agnostic memory trust.
-- Real navigation `SR` / `SPL`은 simulator/navmesh/trajectory execution과 protected baseline comparison이 통과되기 전까지 final claim으로 쓰지 않는다. M198 기준 source-pool scale route는 protected baseline보다 proxy `SR`이 낮아 trajectory promotion이 막혀 있다.
+- Real navigation `SR` / `SPL`은 simulator/navmesh/trajectory execution과 protected baseline comparison이 통과되기 전까지 final claim으로 쓰지 않는다.
 
 ## Core Hypothesis
 
@@ -83,7 +82,7 @@ Updated: 2026-06-14
 에이전트 추론:
 
 - 현재 가장 방어 가능한 핵심은 task/staleness-aware semantic memory decision이다.
-- Broader Direction B claim은 real RGB-D/open-vocabulary robustness, heldout transfer, `ConceptGraphs` / bounded `Open3DSG` / future `HOV-SG` or `VLFM`-style baselines, and real navigation `SR` / `SPL` evidence가 더 붙어야 한다. M198은 source-pool scale route의 negative boundary로 해석해야 한다.
+- Broader Direction B claim은 real RGB-D/open-vocabulary robustness, heldout transfer, `ConceptGraphs` / bounded `Open3DSG` / future `HOV-SG` or `VLFM`-style baselines, and real navigation `SR` / `SPL` evidence가 더 붙어야 한다.
 
 ## Proposed Framework
 
@@ -100,7 +99,7 @@ TASMM은 semantic map을 object store가 아니라 decision-producing memory int
 2. `Proposal Reliability Layer`
    - Annotation-proxy candidate, real RGB-D/open-vocabulary proposal, `ConceptGraphs` candidate, bounded `Open3DSG` candidate를 공통 row schema로 변환한다.
    - Candidate row는 `confidence`, `source_role`, `candidate_position`, `path_ready`, `source_gap_flag`, `label_match`, `proposal_source`, `policy_allowed_inputs`를 가진다.
-   - Current evidence confidence는 protected base signal로 유지한다. M159/M160 이후 M198까지의 결과 기준으로 `detector_confidence_reachable_subset_v0`를 protected baseline으로 둔다.
+   - Current evidence confidence는 protected base signal로 유지한다.
 
 3. `Staleness And Memory Trust Gate`
    - Old memory candidate가 current observation보다 먼저 방문될 수 있는 조건을 task value, staleness/motion signal, current proposal availability, expected search cost로 제한한다.
@@ -108,19 +107,14 @@ TASMM은 semantic map을 object store가 아니라 decision-producing memory int
 
 4. `Re-observation / Source-Coverage Trigger`
    - Source-gap evidence가 있는 경우에만 re-observation or source expansion을 trigger한다.
-   - Source-gap bonus를 모든 target-free row에 global score로 더하지 않는다. M159에서 source-gap bonus는 current denominator에서 inert로 판정됐고, M160은 source-gap을 trigger-only signal로 고정했다.
-   - M191-M198 scale branch에서는 source-pool acquisition이 960 rendered frames와 552 detector candidates를 만들었지만, full-denominator proxy `SR`이 baseline보다 낮아 candidate-generation repair가 필요하다.
+   - Source-gap bonus를 모든 target-free row에 global score로 더하지 않는다.
+   - E008-M191-M204 scale branch에서는 source-pool acquisition이 960 rendered frames와 552 detector candidates를 만들었지만, replacement policy가 baseline success를 잃는 것으로 확인되어 additive candidate-union으로 전환했다.
 
-5. `Confidence-First Constrained Search Policy`
-   - Current safe execution default는 `detector_confidence_reachable_subset_v0`다.
-   - Base order는 `detector_confidence_reachable_subset_v0` 또는 equivalent current-evidence confidence ranking이다.
-   - Confidence floor 아래 candidate는 confidence floor 위 candidate를 넘지 못한다.
-   - Path/search cost는 global additive score가 아니라 다음 중 하나로만 사용한다.
-   - `hard_feasibility_veto`: non-navigable or no-path candidate를 demote/remove.
-   - `confidence_band_tie_break`: confidence 차이가 작은 후보들 안에서만 shorter path / lower candidate visit cost를 사용.
-   - `bounded_local_repair`: protected order에서 크게 벗어나지 않는 rank displacement 안에서만 source-gap or path-feasible repair를 허용.
-   - Budget은 weak scalar penalty가 아니라 hard visit cap, no-extra-visit gate, or precommitted utility/Pareto target으로 기록한다.
-   - M198 기준 path-cost source-pool policy는 proxy `SPL` 일부를 높였지만 proxy `SR` 손실을 복구하지 못했으므로, real trajectory 실행으로 승격하지 않는다.
+5. `Additive Candidate-Union Search Interface`
+   - `detector_confidence_reachable_subset_v0` candidate pool을 protected baseline으로 보존한다.
+   - Source-pool candidates는 source-gap/dedup/prefix/leakage guard 아래에서만 추가한다.
+   - E008-M202 proxy result는 selected additive union `SR` / `SPL` 0.8667 / 0.3564, baseline 0.8000 / 0.3506, +2 success, baseline success loss 0이다.
+   - E008-M204는 4-policy / 30-episode / 120-plan Docker trajectory contract를 materialize했다. 현재 runtime preflight는 `/home/yoohyun/research2/local_dataset/data`와 `research2/habitat-h001:20260508-calib-artifacts` image 부재로 fail이다.
 
 6. `Task Context Conditioner`
    - Human intent는 현재 natural-language understanding claim이 아니라 structured task context로 둔다.
@@ -133,6 +127,13 @@ TASMM은 semantic map을 object store가 아니라 decision-producing memory int
 
 ## Experiment Plan (Metric, Baseline)
 
+사실:
+
+- Current experiment state is E008-M204: `e008_m204_additive_source_pool_candidate_union_docker_trajectory_contract_ready_needs_runtime`.
+- M204 artifact contains 4,270 trajectory candidate rows, 120 execution plans, 30 episode goal rows, and 30 oracle path rows.
+- M204 leakage audit passes, but runtime preflight fails 5/9 because the current machine lacks the read-only `HM3D ObjectNav` data root and the required `Habitat` Docker image.
+- Therefore M204 supports trajectory contract readiness, not final real navigation performance.
+
 Metric:
 
 - Dynamic search proxy: proxy `SR`, `ExpectedSearchCost`, `AttemptSPL`, stale old-location false positive, candidate visits, first-success rank.
@@ -141,12 +142,12 @@ Metric:
 - Path/search bridge: path-ready ratio, source-ready subset metric, mean path cost, `PathAttemptSPLProxy`, source-limit sensitivity.
 - Real navigation: `SR`, `SPL`, path length, candidate visits, stop rank, failure type, protected-baseline delta.
 - Claim-boundary metrics: leakage audit pass/fail, heldout split transfer, label/scan/task-group breadth, component ablation pass/fail.
-- Current E008 scale gate: M70 no-source detector proxy `SR` / `SPL` 0.8000 / 0.3506; M197 source-pool protected proxy `SR` / `SPL` 0.5667 / 0.3235; M198 trajectory promotion false.
 
 Baseline:
 
 - Naive memory/search: static stale memory, fixed top-k, detector-confidence ranking, context-agnostic memory trust, oracle upper bound.
 - H001 ablations: no task context, no staleness/memory trust, no current-proposal reliability, no re-observation budget, no path/search-cost term, no confidence floor, no source-gap trigger, no budget guard.
+- Additive source-pool ablations: protected no-source detector baseline, source-pool replacement, unguarded additive union, source-gap guarded additive union.
 - External semantic mapping / scene graph: `ConceptGraphs`, bounded `Open3DSG` predicted-vocabulary adapter, future `HOV-SG` if runtime/source contract is ready.
 - Navigation/search baselines: detector-confidence reachable subset, path-cost-only rerank, confidence-first constrained repair, future `VLFM` / `HM3D-OVON` style executable navigation baseline if integrated on the same episodes.
 - Human intent baseline: structured task context vs strongest context-agnostic policy; human intent is not main claim unless E006 redesign passes strong-baseline and transfer gates.

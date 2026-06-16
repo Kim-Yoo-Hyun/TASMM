@@ -23,9 +23,9 @@ M04_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M04_objectnav_oracle_path_smok
 M10_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M10_detector_candidate_navmesh_validation_v0"
 M11_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M11_detector_candidate_visit_order_path_smoke_v0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 OBJECTNAV_CONTENT_ROOT = (
-    RESEARCH3_DATA_ROOT
+    RESEARCH2_DATA_ROOT
     / "datasets"
     / "objectnav"
     / "hm3d"

@@ -488,9 +488,9 @@ def build_readiness_rows(
             "version": VERSION,
             "row_type": "readiness_gate",
             "gate_id": "external_hm3d_data_readonly_source_ready",
-            "gate_status": "pass" if m178.RESEARCH3_DATA_ROOT.exists() else "fail",
+            "gate_status": "pass" if m178.RESEARCH2_DATA_ROOT.exists() else "fail",
             "blocks_m193": True,
-            "details": str(m178.RESEARCH3_DATA_ROOT),
+            "details": str(m178.RESEARCH2_DATA_ROOT),
         },
         {
             "version": VERSION,

@@ -22,8 +22,8 @@ M02_DATA_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M02_hm3
 M03_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M03_h001_candidate_navigation_adapter_contract_v0"
 M04_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M04_objectnav_oracle_path_smoke_v0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HM3D_MINIVAL_ROOT = RESEARCH3_DATA_ROOT / "versioned_data" / "hm3d-0.2" / "hm3d" / "minival"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HM3D_MINIVAL_ROOT = RESEARCH2_DATA_ROOT / "versioned_data" / "hm3d-0.2" / "hm3d" / "minival"
 
 CATEGORY_ALIASES = {
     "bed": ["bed"],
@@ -165,7 +165,7 @@ def build_semantic_scene_rows(episode_rows: list[dict[str, Any]]) -> tuple[list[
                 "semantic_annotation_route_ready_for_label_support": bool(semantic_rows)
                 and paths["semantic_glb"].exists()
                 and paths["semantic_txt"].exists(),
-                "read_only_source_root": str(RESEARCH3_DATA_ROOT),
+                "read_only_source_root": str(RESEARCH2_DATA_ROOT),
             }
         )
     return rows, semantic_by_scene

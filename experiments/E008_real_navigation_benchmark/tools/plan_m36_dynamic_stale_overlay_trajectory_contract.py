@@ -19,8 +19,8 @@ DATA_OUT_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M36_dyn
 VERSION = "e008_m36_dynamic_stale_overlay_trajectory_contract_v0"
 
 M35_DIR = EXP_ROOT / "artifacts" / "E008-M35_dynamic_stale_overlay_materialization_smoke_v0"
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 M37_RUNNER = EXP_ROOT / "tools" / "run_m37_dynamic_stale_overlay_trajectory_execution_smoke.py"
 M37_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0"
 M37_DATA_OUT_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0"
@@ -329,7 +329,7 @@ def build_runner_adaptation_rows() -> list[dict[str, Any]]:
 def build_docker_command_rows() -> list[dict[str, Any]]:
     command = (
         "docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp "
-        "-v /home/yoohyun/research3/local_dataset/data:/data:ro "
+        "-v /home/yoohyun/research2/local_dataset/data:/data:ro "
         "-v /home/yoohyun/research2:/work -w /work "
         f"{HABITAT_IMAGE} bash -lc "
         "\"micromamba run -n base python "
@@ -344,7 +344,7 @@ def build_docker_command_rows() -> list[dict[str, Any]]:
             "command_id": "e008_m37_dynamic_stale_overlay_trajectory_execution_smoke",
             "working_directory": str(ROOT),
             "docker_image": HABITAT_IMAGE,
-            "source_mount": "/home/yoohyun/research3/local_dataset/data:/data:ro",
+            "source_mount": "/home/yoohyun/research2/local_dataset/data:/data:ro",
             "repo_mount": "/home/yoohyun/research2:/work",
             "output_path": str(M37_ARTIFACT_DIR.relative_to(ROOT)),
             "derived_output_path": str(M37_DATA_OUT_DIR.relative_to(ROOT)),

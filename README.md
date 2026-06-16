@@ -1,6 +1,6 @@
 # Semantic Mapping Research Workspace
 
-업데이트: 2026-06-14
+업데이트: 2026-06-16
 
 ## Overview
 
@@ -38,14 +38,21 @@ python experiments/E008_real_navigation_benchmark/tools/run_m195_source_pool_sca
 python experiments/E008_real_navigation_benchmark/tools/run_m196_source_pool_scale_candidate_visit_order_path_materialization.py
 python experiments/E008_real_navigation_benchmark/tools/run_m197_source_pool_scale_leakage_safe_goal_evaluation_proxy.py
 python experiments/E008_real_navigation_benchmark/tools/plan_m198_source_pool_scale_proxy_result_interpretation.py
+python experiments/E008_real_navigation_benchmark/tools/plan_m199_source_pool_scale_failure_decomposition_repair_decision.py
+python experiments/E008_real_navigation_benchmark/tools/plan_m200_additive_source_pool_candidate_union_repair_contract.py
+python experiments/E008_real_navigation_benchmark/tools/run_m201_additive_source_pool_candidate_union_row_materialization.py
+python experiments/E008_real_navigation_benchmark/tools/run_m202_additive_source_pool_candidate_union_goal_evaluation_proxy.py
+python experiments/E008_real_navigation_benchmark/tools/plan_m203_additive_source_pool_candidate_union_proxy_result_interpretation.py
+python experiments/E008_real_navigation_benchmark/tools/plan_m204_additive_source_pool_candidate_union_docker_trajectory_contract.py
+python experiments/E008_real_navigation_benchmark/tools/verify_m205_runtime_restore_preflight.py
 ```
 
-현재 다음 gate는 `E008-M199 source-pool scale failure decomposition and candidate-generation repair decision`이다. 전체 데이터, checkpoint, Docker, 재현 명령은 [docs/reproducibility.md](docs/reproducibility.md)를 따른다.
+현재 다음 gate는 runtime 복구 후 `E008-M205 additive source-pool candidate-union Docker trajectory execution`이다. 현재 머신에서는 `/home/yoohyun/research2/local_dataset/data`와 `research2/habitat-h001:20260508-calib-artifacts` image가 없어 M205 launch가 막혀 있다. 전체 데이터, checkpoint, Docker, 재현 명령은 [docs/reproducibility.md](docs/reproducibility.md)를 따른다.
 
 ## Artifact Policy
 
 - `local_dataset/` 아래의 dataset, checkpoint, model cache, generated bridge data는 git에 올리지 않는다.
-- `/home/yoohyun/research/local_dataset/Open3DSG_staged`와 `/home/yoohyun/research3/local_dataset/data`는 read-only source로만 사용한다.
+- `/home/yoohyun/research/local_dataset/Open3DSG_staged`와 `/home/yoohyun/research2/local_dataset/data`는 read-only source로만 사용한다.
 - Derived `Open3DSG` 결과는 `local_dataset/Open3DSG_bridge/`에 저장한다.
 - Derived E008 navigation 결과는 `local_dataset/HM3D_navigation_bridge/`에 저장한다.
 - Long-running download, Docker build/run, preprocessing job은 `tmux`/background로 실행하고 `logs/`에 timestamped log를 남긴다.

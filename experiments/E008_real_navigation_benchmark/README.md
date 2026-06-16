@@ -1,19 +1,19 @@
 # E008 Real Navigation Benchmark
 
-Updated: 2026-06-14
+Updated: 2026-06-16
 
 ## Status
 
-Current concise status: E008-M01 through E008-M198 are complete with constraints. M130-M165 exposed and decomposed the proxy-to-trajectory, confidence-preserving, budget-aware, and local-rerank failure pattern. M166-M176 freeze that boundary, reject within-pool source-coverage reranking as a positive navigation-improvement claim, and move source coverage to `source_coverage_triggered_candidate_source_expansion_v1`. M177-M179 materialize, render, and run detector inference for a fixed-budget source-pool branch, yielding 192 coordinate candidate rows from 256 rendered frames. M180 validates 180 / 192 candidates as path-ready over 8 / 8 source-ready scans. M181-M182 materialize 732 visit-order rows and observe leakage-safe proxy recovery on 7 / 8 episodes. M183-M184 execute a Docker `Habitat` trajectory smoke with 32 scan-policy rows, 28 successes, aggregate `SR` 0.875, and mean `SPL` 0.2411. M185-M190 reject direct path-cost and transition-cost reranking as positive claims, keep source-pool candidate-source expansion, and set `detector_confidence_reachable_subset_v0` as the safe execution default before scale-up. M191-M193 fix and preflight the 30-triggered-episode source-pool scale denominator: 240 source poses, 960 render rows, and 30 detector manifests. M194 verifies scale render/detector execution with 960 / 960 ready frames, 552 detector prediction rows, 552 coordinate candidate rows, and 8,867 pre-cap candidate rows. M195 validates 523 / 552 candidates as path-ready with 23 / 30 source-ready scans. M196 materializes 2,121 visit-order rows while retaining 7 source-gap scan rows. M197 evaluates leakage-safe full-denominator proxy metrics: source-pool protected detector confidence reaches 17 / 30 proxy recovery, proxy `SR` 0.5667, proxy `SPL` 0.3235. M198 compares against M70 no-source detector baseline 24 / 30, proxy `SR` 0.8000, proxy `SPL` 0.3506, rejects immediate Docker trajectory promotion, and selects M199 failure decomposition / candidate-generation repair decision.
+Current concise status: E008-M01 through E008-M204 are complete with constraints. M130-M165 exposed and decomposed the proxy-to-trajectory, confidence-preserving, budget-aware, and local-rerank failure pattern. M166-M176 freeze that boundary, reject within-pool source-coverage reranking as a positive navigation-improvement claim, and move source coverage to `source_coverage_triggered_candidate_source_expansion_v1`. M177-M179 materialize, render, and run detector inference for a fixed-budget source-pool branch, yielding 192 coordinate candidate rows from 256 rendered frames. M180 validates 180 / 192 candidates as path-ready over 8 / 8 source-ready scans. M181-M182 materialize 732 visit-order rows and observe leakage-safe proxy recovery on 7 / 8 episodes. M183-M184 execute a Docker `Habitat` trajectory smoke with 32 scan-policy rows, 28 successes, aggregate `SR` 0.875, and mean `SPL` 0.2411. M185-M190 reject direct path-cost and transition-cost reranking as positive claims, keep source-pool candidate-source expansion, and set `detector_confidence_reachable_subset_v0` as the safe execution default before scale-up. M191-M193 fix and preflight the 30-triggered-episode source-pool scale denominator: 240 source poses, 960 render rows, and 30 detector manifests. M194 verifies scale render/detector execution with 960 / 960 ready frames, 552 detector prediction rows, 552 coordinate candidate rows, and 8,867 pre-cap candidate rows. M195 validates 523 / 552 candidates as path-ready with 23 / 30 source-ready scans. M196 materializes 2,121 visit-order rows while retaining 7 source-gap scan rows. M197 evaluates leakage-safe full-denominator proxy metrics: source-pool protected detector confidence reaches 17 / 30 proxy recovery, proxy `SR` 0.5667, proxy `SPL` 0.3235. M198 compares against M70 no-source detector baseline 24 / 30, proxy `SR` 0.8000, proxy `SPL` 0.3506, and rejects immediate Docker trajectory promotion. M199 decomposes the failure: source-pool adds 2 unique recoveries but loses 9 no-source baseline successes, including 7 `tv_monitor` source-gap/no-detector-candidate rows. M200 fixes the additive candidate-union contract. M201 materializes selected additive union rows: baseline 900, source-pool appended 521, duplicate dropped 2, selected union 1,421, baseline candidate loss 0, leakage audit pass. M202 evaluates frozen union rows: selected additive union reaches proxy `SR` 0.8667 and proxy `SPL` 0.3564, improving over baseline 0.8000 / 0.3506 with +2 success rows. M203 interprets this as a positive proxy gate. M204 materializes the 4-policy / 30-episode Docker trajectory contract with 4,270 candidate rows and 120 execution plans, but runtime preflight fails because the read-only `HM3D ObjectNav` data root and `research2/habitat-h001:20260508-calib-artifacts` image are absent on the current machine. The M205 runtime restore verifier is now fixed and reports `e008_m205_runtime_restore_preflight_blocked` until those runtime resources are restored.
 
-E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M198 are complete as source/adapter/contract/oracle-metric/candidate-source staging, rendered RGB-D detector route, leakage-safe goal evaluation, trajectory execution, H001 fallback execution, dynamic-stale overlay execution, source-gap repair chains, `ConceptGraphs` HM3D source-gap route, target-free source-coverage expansion, trajectory-aware repair, confidence-preserving full-val-mini execution, policy-family failure decomposition, method-pivot boundary, source-coverage memory-interface method contract, source-coverage trigger/candidate-source expansion, fixed-budget source-pool rendering/detection, source-pool navmesh validation, proxy evaluation, Docker trajectory execution, protected-baseline interpretation, source-pool failure decomposition, repaired row materialization, repaired proxy evaluation, proxy failure decomposition, method-boundary/scale decision, scale-up contract, scale denominator materialization, scale snap/launcher contract, scale detector execution, source-ready/source-gap split, full-denominator proxy evaluation, and no-source baseline comparison. M198 keeps final navigation, deployable policy, real RGB-D/open-vocabulary robustness, and human-intent main claims blocked because source-pool scale proxy `SR` is below the no-source detector baseline.
+E008 starts after E007-M07 packaged the occupancy-grid path-cost proxy table and selected `E008-M01 real navigation benchmark/source preflight and episode contract`. E008 is the first stage that prepares real navigation `SR` / `SPL` evidence. E008-M01 through E008-M204 are complete as source/adapter/contract/oracle-metric/candidate-source staging, rendered RGB-D detector route, leakage-safe goal evaluation, trajectory execution, H001 fallback execution, dynamic-stale overlay execution, source-gap repair chains, `ConceptGraphs` HM3D source-gap route, target-free source-coverage expansion, trajectory-aware repair, confidence-preserving full-val-mini execution, policy-family failure decomposition, method-pivot boundary, source-coverage memory-interface method contract, source-coverage trigger/candidate-source expansion, fixed-budget source-pool rendering/detection, source-pool navmesh validation, proxy evaluation, Docker trajectory execution, protected-baseline interpretation, source-pool failure decomposition, repaired row materialization, repaired proxy evaluation, proxy failure decomposition, method-boundary/scale decision, scale-up contract, scale denominator materialization, scale snap/launcher contract, scale detector execution, source-ready/source-gap split, full-denominator proxy evaluation, no-source baseline comparison, source-pool scale failure decomposition, additive candidate-union repair contract, additive union row materialization/proxy evaluation, proxy result interpretation, and trajectory contract/preflight. M204 keeps final navigation, deployable policy, real RGB-D/open-vocabulary robustness, and human-intent main claims blocked because selected additive union trajectory metrics are not executed yet.
 
-Next unit: E008-M199 source-pool scale failure decomposition and candidate-generation repair decision.
+Next unit: restore/repoint `HM3D ObjectNav` runtime data + `Habitat` Docker image, then E008-M205 additive source-pool candidate-union Docker trajectory execution.
 
 ## Source Rule
 
-- `/home/yoohyun/research3/local_dataset/data` is treated as an external read-only candidate source for `HM3D` / `ObjectNav` / `Habitat` preflight.
-- Do not modify, decompress into, or write generated files under `/home/yoohyun/research3/local_dataset/data`.
+- `/home/yoohyun/research2/local_dataset/data` is treated as an external read-only candidate source for `HM3D` / `ObjectNav` / `Habitat` preflight.
+- Do not modify, decompress into, or write generated files under `/home/yoohyun/research2/local_dataset/data`.
 - Store derived E008 bridge data under `/home/yoohyun/research2/local_dataset/HM3D_navigation_bridge/`.
 - Store experiment reports and lightweight artifacts under `experiments/E008_real_navigation_benchmark/artifacts/`.
 
@@ -23,19 +23,19 @@ Next unit: E008-M199 source-pool scale failure decomposition and candidate-gener
 | --- | --- |
 | question | Can E007's proxy path-cost table be promoted toward real navigation `SR` / `SPL` without confusing proxy search evidence with executed navigation evidence? |
 | hypothesis | A real navigation source should be selected only after scene files, navmesh files, episode files, Docker runtime, allowed inputs, metrics, and baseline rows are fixed. |
-| dataset | First selected source is local read-only `HM3D` / `ObjectNav` data from `/home/yoohyun/research3/local_dataset/data`; `3RScan` remains a dynamic-memory/proxy source unless a simulator/navmesh adapter is built. |
+| dataset | First selected source is local read-only `HM3D` / `ObjectNav` data from `/home/yoohyun/research2/local_dataset/data`; `3RScan` remains a dynamic-memory/proxy source unless a simulator/navmesh adapter is built. |
 | method | Define episode schema, candidate visit order interface, allowed/blocked inputs, and metric mapping from H001 policy rows to executed navigation episodes. |
 | comparison | Static stale memory, detector-confidence ranking, `ConceptGraphs`-only map, task-agnostic memory trust, H001 task-conditioned memory trust, and H001 + `ConceptGraphs` fallback. |
 | metrics | `SR`, `SPL`, path length, candidate visits, `ExpectedSearchCost`, `OldLocationDeadEndCostM`, failure type, and E007 proxy-to-execution consistency. |
-| command | `python experiments/E008_real_navigation_benchmark/tools/plan_m01_navigation_source_episode_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m02_hm3d_objectnav_adapter_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m03_h001_candidate_navigation_adapter.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m04_objectnav_oracle_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m05_hm3d_candidate_source_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m06_hm3d_semantic_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m07_hm3d_rendered_rgbd_detector_source.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m08_hm3d_rendered_rgbd_frame_staging_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m09_hm3d_rendered_rgbd_detector_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m10_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m11_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m12_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m13_detector_goal_failure_audit.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m14_non_oracle_observation_coverage.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m16_non_oracle_observation_expansion_detector_candidate_smoke.py --require-ready`; `python experiments/E008_real_navigation_benchmark/tools/run_m17_expanded_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m18_expanded_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m19_expanded_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m20_expanded_detector_goal_failure_comparison_navigation_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m21_expanded_detector_policy_trajectory_execution_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m23_trajectory_proxy_consistency_h001_source_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m24_h001_candidate_source_instantiation_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m25_h001_candidate_source_materialization_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m26_h001_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m27_h001_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m28_h001_goal_evaluation_comparison_trajectory_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m29_h001_current_observation_fallback_source_repair.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m30_h001_current_observation_fallback_replay_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m31_h001_fallback_trajectory_contract_source_gap_boundary.py`; `docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m32_h001_fallback_trajectory_execution_smoke.py --m31-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M32_h001_fallback_trajectory_execution_smoke_v0"`; `python experiments/E008_real_navigation_benchmark/tools/plan_m33_h001_trajectory_result_interpretation_baseline_alignment.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m34_dynamic_stale_navigation_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m35_dynamic_stale_overlay_materialization_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m36_dynamic_stale_overlay_trajectory_contract.py` |
+| command | `python experiments/E008_real_navigation_benchmark/tools/plan_m01_navigation_source_episode_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m02_hm3d_objectnav_adapter_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m03_h001_candidate_navigation_adapter.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m04_objectnav_oracle_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m05_hm3d_candidate_source_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m06_hm3d_semantic_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m07_hm3d_rendered_rgbd_detector_source.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m08_hm3d_rendered_rgbd_frame_staging_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m09_hm3d_rendered_rgbd_detector_candidate_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m10_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m11_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m12_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m13_detector_goal_failure_audit.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m14_non_oracle_observation_coverage.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m15_non_oracle_observation_expansion_frame_staging.py`; `python experiments/E008_real_navigation_benchmark/tools/verify_m16_non_oracle_observation_expansion_detector_candidate_smoke.py --require-ready`; `python experiments/E008_real_navigation_benchmark/tools/run_m17_expanded_detector_candidate_navmesh_validation.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m18_expanded_detector_candidate_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m19_expanded_detector_candidate_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m20_expanded_detector_goal_failure_comparison_navigation_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m21_expanded_detector_policy_trajectory_execution_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m23_trajectory_proxy_consistency_h001_source_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m24_h001_candidate_source_instantiation_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m25_h001_candidate_source_materialization_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m26_h001_visit_order_path_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m27_h001_goal_evaluation_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m28_h001_goal_evaluation_comparison_trajectory_decision.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m29_h001_current_observation_fallback_source_repair.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m30_h001_current_observation_fallback_replay_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m31_h001_fallback_trajectory_contract_source_gap_boundary.py`; `docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research2/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research2/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m32_h001_fallback_trajectory_execution_smoke.py --m31-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M32_h001_fallback_trajectory_execution_smoke_v0"`; `python experiments/E008_real_navigation_benchmark/tools/plan_m33_h001_trajectory_result_interpretation_baseline_alignment.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m34_dynamic_stale_navigation_contract.py`; `python experiments/E008_real_navigation_benchmark/tools/run_m35_dynamic_stale_overlay_materialization_smoke.py`; `python experiments/E008_real_navigation_benchmark/tools/plan_m36_dynamic_stale_overlay_trajectory_contract.py` |
 | output | Source preflight rows, episode schema rows, metric contract rows, baseline contract rows, allowed/blocked input rows, candidate visit-order rows, route decision rows, next action rows, and report. |
 | conclusion | E008-M01 selects `HM3D ObjectNav` + `Habitat` as the first real navigation source. E008-M02-M42 build and execute the detector/H001/dynamic-stale trajectory smoke chain with final navigation claims blocked. E008-M43 fixes source-diverse policy redesign because detector source-gap rows are recoverable in the full current candidate pool but not under confidence top-5. E008-M44-M82 iterate through source-diverse, routine-fetch, high-path tail-slot, full-val-mini, trajectory, source-gap/SPL repair, and loss-safe source-expansion gates while keeping final navigation claims blocked. E008-M83 fixes the non-oracle source/observation expansion contract. E008-M84 materializes source-gap render/detector inputs. E008-M85 verifies source-gap rendered frame staging. E008-M86 verifies source-gap detector candidate-source generation. E008-M87 validates source-gap candidates against navmesh/source-readiness and passes 2/2 source-gap cases. E008-M88 materializes source-gap visit-order/path rows. E008-M89 shows leakage-safe goal-evaluation proxy recovery is still 0/2. E008-M90 rejects trajectory promotion. E008-M91 separates target-coverage failure modes. E008-M92 fixes the two-branch coverage/cap repair contract. E008-M93 materializes coverage-expansion rows and cap-threshold probe rows. E008-M94 rejects the cap branch as immediate recovery and selects coverage launcher adaptation. E008-M95 adapts M93 coverage rows into M96/M97 launcher inputs and command ledger. E008-M96 verifies coverage-expansion rendered frame staging. E008-M97 verifies coverage-expansion detector candidate-source generation. E008-M98 validates coverage-expansion candidates against navmesh/source-readiness. E008-M99 materializes coverage-expansion candidate visit-order/path rows. E008-M100 runs leakage-safe goal evaluation and shows coverage expansion still does not recover the remaining source-gap case. E008-M101 rejects trajectory promotion. E008-M102 closes the current two-branch detector source-gap repair route. E008-M103 selects `ConceptGraphs` HM3D source-gap adapter/preflight as the next alternative proposal-source route. E008-M104 confirms selected source-gap cases are adapter materialization-ready for `ConceptGraphs`. E008-M105 materializes the staged `ConceptGraphs` input layout and passes container-readability smoke. E008-M106 fixes the bounded runtime launch/verification contract and M108 verifier. E008-M107 completes the bounded runtime, E008-M108 verifies runtime outputs ready for 2/2 scans, E008-M109 confirms adapter-ready post-PCD object schemas with 29/42 objects, E008-M110 materializes 71 leakage-safe candidate rows with CLIP text scores, E008-M111 validates 48/71 candidates as path-ready over 2/2 source-ready queries, E008-M112 materializes 215 visit-order/path rows with leakage audit pass, E008-M113 evaluates those rows against `ObjectNav` targets with primary proxy success 0/2 for all policies, E008-M114 rejects trajectory promotion while splitting the failures into one severe source coverage gap and one stop-region/viewpoint alignment gap, E008-M115 fixes M116 as the next audit materialization contract, E008-M116 materializes one source-coverage audit row plus one stop-region alignment audit row, E008-M117 selects M118 stop-region transform smoke while deferring the source-coverage gap to external/visibility preflight, E008-M118 materializes 50 stop-region candidates with 50/50 path-ready rows and budget-5 proxy recovery for the selected `toilet` case, E008-M119 verifies that the remaining `sofa` case is a source-coverage failure because current source poses are far from the target view region, E008-M120 fixes a target-free source-coverage expansion contract with two selected M121 materialization routes, E008-M121 materializes 40 target-free source poses, 320 render-plan rows, and 2 detector manifests with target/viewpoint leakage false, E008-M122 fixes launcher inputs and long-job command ledgers for M123 render and M124 detector execution, E008-M123 verifies a 295-frame depth-filtered detector-usable render subset, E008-M124 verifies 24 detector prediction rows over that subset, E008-M125 validates 15/24 candidates as path-smoke usable, E008-M126 materializes 69 visit-order/path rows with leakage audit pass, E008-M127 observes leakage-safe `any_viewpoint_xz_1p0` proxy recovery 1/1 for all four policies, E008-M128 selects a bounded trajectory contract/preflight gate, E008-M129 materializes 69 runner-compatible trajectory candidate rows, 4 execution plans, 1 eval-goal/oracle row pair, leakage audit pass, and Docker/data/runner preflight pass, and E008-M130 executes 4 policy trajectories with `SR` 1.0. M130 is diagnostic-negative for path-cost improvement because the path-cost policy `SPL` 0.092750 is below detector-confidence `SPL` 0.701267. Real navigation claims remain unsupported until result interpretation, heldout transfer, and baseline comparison pass. |
 
 ## Claim Boundary
 
-- E008-M01 through E008-M198 do not claim final real navigation `SR` / `SPL`.
-- E008-M01 through E008-M198 do not claim final real RGB-D/open-vocabulary robustness.
-- E008-M01 through E008-M198 do not make human intent a main contribution.
+- E008-M01 through E008-M204 do not claim final real navigation `SR` / `SPL`.
+- E008-M01 through E008-M204 do not claim final real RGB-D/open-vocabulary robustness.
+- E008-M01 through E008-M204 do not make human intent a main contribution.
 - E008-M33 explicitly blocks scaling the current H001 fallback trajectory as a main navigation result because it underperforms detector trajectories and lacks controlled stale-memory intervention.
 - E008-M34 is a contract/design unit only; it does not produce trajectory results or dynamic-stale navigation performance.
 - E008-M35 is an input materialization unit only; it does not produce trajectory results or dynamic-stale navigation performance.
@@ -194,6 +194,17 @@ Next unit: E008-M199 source-pool scale failure decomposition and candidate-gener
 - E008-M191 supports scale-up contract readiness only; it fixes the denominator, source-pool budget, protected-confidence default, required no-source-pool ablation, leakage audit, and command ledger, but does not materialize source poses, render frames, run detectors, evaluate goals, or execute trajectories.
 - E008-M192 supports scale denominator/source-pose/render-plan materialization only; it does not validate navmesh/snap, render frames, run detectors, evaluate goals, or execute trajectories.
 - E008-M193 supports scale navmesh/snap validation and render/detector launcher contract only; it does not launch render/detector jobs, evaluate targets, or execute trajectories.
+- E008-M194 supports scale render/detector execution verification only; it does not validate candidate reachability, evaluate goal recovery, or execute trajectories.
+- E008-M195 supports source-pool candidate navmesh/source-readiness validation only; it does not evaluate goal recovery or execute trajectories.
+- E008-M196 supports source-pool candidate visit-order/path materialization only; it does not evaluate goal recovery or execute trajectories.
+- E008-M197 supports leakage-safe source-pool proxy evaluation only; it is a negative scale gate against the no-source detector baseline and does not support trajectory promotion.
+- E008-M198 supports source-pool proxy result interpretation only; it rejects immediate trajectory promotion and selects failure decomposition.
+- E008-M199 supports source-pool failure decomposition and repair-route selection only; it does not materialize repaired rows or support a positive claim.
+- E008-M200 supports additive candidate-union repair contract only; it fixes allowed inputs and baseline preservation but does not materialize or evaluate rows.
+- E008-M201 supports additive candidate-union row materialization only; it preserves the baseline prefix and audits leakage but does not evaluate targets or execute trajectories.
+- E008-M202 supports leakage-safe additive candidate-union proxy evaluation only; it improves proxy `SR`/`SPL` over the protected baseline but does not execute trajectories.
+- E008-M203 supports proxy result interpretation and M204 contract promotion only; it does not execute trajectories or support final real navigation `SR` / `SPL`.
+- E008-M204 supports Docker trajectory contract/preflight materialization only; it creates M205 runner-compatible rows, but runtime preflight is blocked by missing `HM3D ObjectNav` data root and missing `Habitat` Docker image on the current machine.
 - `3RScan` / `3DSSG` remains the dynamic stale-memory source, but the first real navigation execution source is `HM3D ObjectNav` because local `Habitat` runtime and navmesh-backed scenes are available.
 - Any `HM3D ObjectNav` result must be described as a navigation-source transfer/adapter experiment unless stale-memory state injection is explicitly implemented.
 
@@ -202,8 +213,8 @@ Next unit: E008-M199 source-pool scale failure decomposition and candidate-gener
 Implementation unit: `E008-M01_navigation_source_episode_contract_v0`.
 
 - Status: `e008_m01_navigation_source_episode_contract_ready`.
-- Selected source: `hm3d_objectnav_habitat_local_research3`.
-- Habitat image: `research3/habitat-h001:20260508-calib-artifacts`.
+- Selected source: `hm3d_objectnav_habitat_local_research2`.
+- Habitat image: `research2/habitat-h001:20260508-calib-artifacts`.
 - Habitat import ready: true.
 - `HM3D` total `.glb` files: 1,095.
 - `HM3D` total `.navmesh` files: 910.
@@ -1089,10 +1100,10 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work \
   -w /work \
-  research3/habitat-h001:20260508-calib-artifacts \
+  research2/habitat-h001:20260508-calib-artifacts \
   bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m22_expanded_detector_policy_trajectory_execution_smoke.py --m21-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M21_expanded_detector_policy_trajectory_execution_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0"
 ```
 
@@ -1593,10 +1604,10 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work \
   -w /work \
-  research3/habitat-h001:20260508-calib-artifacts \
+  research2/habitat-h001:20260508-calib-artifacts \
   bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m32_h001_fallback_trajectory_execution_smoke.py \
     --m31-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M31_h001_fallback_trajectory_contract_source_gap_boundary_v0 \
     --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M32_h001_fallback_trajectory_execution_smoke_v0 \
@@ -1884,9 +1895,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work \
-  -w /work research3/habitat-h001:20260508-calib-artifacts \
+  -w /work research2/habitat-h001:20260508-calib-artifacts \
   bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m37_dynamic_stale_overlay_trajectory_execution_smoke.py --m36-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M36_dynamic_stale_overlay_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M37_dynamic_stale_overlay_trajectory_execution_smoke_v0"
 ```
 
@@ -2213,9 +2224,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work \
-  -w /work research3/habitat-h001:20260508-calib-artifacts \
+  -w /work research2/habitat-h001:20260508-calib-artifacts \
   bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m41_budget_matched_repair_trajectory_execution_smoke.py"
 ```
 
@@ -2592,9 +2603,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work -w /work \
-  research3/habitat-h001:20260508-calib-artifacts \
+  research2/habitat-h001:20260508-calib-artifacts \
   bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m46_source_diverse_redesign_trajectory_execution_smoke.py"
 ```
 
@@ -2963,9 +2974,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work -w /work \
-  research3/habitat-h001:20260508-calib-artifacts \
+  research2/habitat-h001:20260508-calib-artifacts \
   bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m51_routine_fetch_repair_trajectory_execution_smoke.py"
 ```
 
@@ -3650,7 +3661,7 @@ python experiments/E008_real_navigation_benchmark/tools/plan_m60_high_path_tail_
 M61 command contract:
 
 ```bash
-docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m61_high_path_tail_slot_trajectory_execution_smoke.py"
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research2/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research2/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m61_high_path_tail_slot_trajectory_execution_smoke.py"
 ```
 
 Verification:
@@ -3746,7 +3757,7 @@ Claim boundary:
 Command:
 
 ```bash
-docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m61_high_path_tail_slot_trajectory_execution_smoke.py"
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research2/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research2/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m61_high_path_tail_slot_trajectory_execution_smoke.py"
 ```
 
 Verification:
@@ -4022,7 +4033,7 @@ Facts:
 - Prompt labels: 8.
 - Expected render frame files: 3,270.
 - Docker direct preflight: pass.
-- `research3/habitat-h001:20260508-calib-artifacts` image preflight: pass.
+- `research2/habitat-h001:20260508-calib-artifacts` image preflight: pass.
 - `research2/real-smoke:latest` image preflight: pass.
 - Long job launched: false.
 - Render job launched: false.
@@ -4209,7 +4220,7 @@ Inputs:
 - M67 `validator/coverage.json` and `matching/coverage.json`.
 - M65 detector manifest and object target rows.
 - M66 frame verification rows and snap-warning rows.
-- Read-only `HM3D ObjectNav` / `Habitat` data from `/home/yoohyun/research3/local_dataset/data`.
+- Read-only `HM3D ObjectNav` / `Habitat` data from `/home/yoohyun/research2/local_dataset/data`.
 - Derived E008 bridge root under `local_dataset/HM3D_navigation_bridge/`.
 
 Allowed policy-independent fields:
@@ -6603,7 +6614,7 @@ Facts:
 - Full render-frame staging ready: false.
 - Depth-filtered detector manifest ready: true.
 - GPU free memory observed before relaunch: 31,282MiB / 32,607MiB.
-- Container smoke with `research3/habitat-h001:20260508-calib-artifacts` passed for `habitat_sim` import and render script visibility.
+- Container smoke with `research2/habitat-h001:20260508-calib-artifacts` passed for `habitat_sim` import and render script visibility.
 - Selected next unit: E008-M124 target-free source-coverage detector candidate-source background launch.
 
 Artifacts:
@@ -6896,9 +6907,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work -w /work \
-  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  research2/habitat-h001:20260508-calib-artifacts bash -lc \
   "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m130_target_free_detector_policy_trajectory_execution_smoke.py \
   --m129-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0 \
   --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M130_target_free_detector_policy_trajectory_execution_smoke_v0 \
@@ -7033,9 +7044,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work -w /work \
-  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  research2/habitat-h001:20260508-calib-artifacts bash -lc \
   "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m133_target_free_trajectory_aware_visit_order_repair_materialization.py \
   --m129-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M129_target_free_detector_policy_trajectory_contract_v0 \
   --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M133_target_free_trajectory_aware_visit_order_repair_materialization_smoke_v0 \
@@ -7123,9 +7134,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work -w /work \
-  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  research2/habitat-h001:20260508-calib-artifacts bash -lc \
   "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m135_target_free_trajectory_aware_repair_trajectory_execution_smoke.py \
   --m134-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M134_target_free_trajectory_aware_repair_trajectory_contract_v0 \
   --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M135_target_free_trajectory_aware_repair_trajectory_execution_smoke_v0 \
@@ -7342,7 +7353,7 @@ Implementation unit: `E008-M140_target_free_confidence_preserving_repair_traject
 Command:
 
 ```bash
-docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m140_target_free_confidence_preserving_repair_trajectory_execution_smoke.py --m139-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0"
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research2/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research2/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m140_target_free_confidence_preserving_repair_trajectory_execution_smoke.py --m139-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M139_target_free_confidence_preserving_repair_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M140_target_free_confidence_preserving_repair_trajectory_execution_smoke_v0"
 ```
 
 Facts:
@@ -7467,7 +7478,7 @@ Implementation unit: `E008-M143_full_val_mini_confidence_preserving_trajectory_c
 Command:
 
 ```bash
-docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m143_full_val_mini_confidence_preserving_trajectory_cost_materialization.py"
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research2/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research2/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m143_full_val_mini_confidence_preserving_trajectory_cost_materialization.py"
 ```
 
 Facts:
@@ -7546,7 +7557,7 @@ Implementation unit: `E008-M145_full_val_mini_confidence_preserving_trajectory_e
 Command:
 
 ```bash
-docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m145_full_val_mini_confidence_preserving_trajectory_execution.py --m144-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0"
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research2/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research2/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m145_full_val_mini_confidence_preserving_trajectory_execution.py --m144-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M144_full_val_mini_confidence_preserving_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M145_full_val_mini_confidence_preserving_trajectory_execution_v0"
 ```
 
 Launch log:
@@ -7798,7 +7809,7 @@ Facts:
 - Selected policy max rank displacement: 1.
 - Docker preflight pass: true.
 - `docker --version`: pass.
-- `research3/habitat-h001:20260508-calib-artifacts` image inspect: pass.
+- `research2/habitat-h001:20260508-calib-artifacts` image inspect: pass.
 - `nvidia-smi`: pass, free memory tail `22124`.
 - Read-only `HM3D` data root: pass.
 - Scene files: 2 / 2 ready.
@@ -7812,9 +7823,9 @@ M151 command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work -w /work \
-  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  research2/habitat-h001:20260508-calib-artifacts bash -lc \
   "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m151_full_val_mini_budget_guarded_confidence_path_execution.py \
   --m150-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0 \
   --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0 \
@@ -7860,10 +7871,10 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work \
   -w /work \
-  research3/habitat-h001:20260508-calib-artifacts \
+  research2/habitat-h001:20260508-calib-artifacts \
   bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m151_full_val_mini_budget_guarded_confidence_path_execution.py \
   --m150-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M150_full_val_mini_budget_guarded_confidence_path_trajectory_contract_v0 \
   --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M151_full_val_mini_budget_guarded_confidence_path_execution_v0 \
@@ -8111,9 +8122,9 @@ M157 command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work -w /work \
-  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  research2/habitat-h001:20260508-calib-artifacts bash -lc \
   "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m157_budget_aware_utility_trajectory_execution.py \
   --m156-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0 \
   --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0 \
@@ -8168,9 +8179,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work -w /work \
-  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  research2/habitat-h001:20260508-calib-artifacts bash -lc \
   "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m157_budget_aware_utility_trajectory_execution.py \
   --m156-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M156_budget_aware_utility_trajectory_contract_v0 \
   --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M157_budget_aware_utility_trajectory_execution_v0 \
@@ -8570,9 +8581,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work -w /work \
-  research3/habitat-h001:20260508-calib-artifacts bash -lc \
+  research2/habitat-h001:20260508-calib-artifacts bash -lc \
   "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m163_confidence_first_constrained_repair_trajectory_execution.py \
   --m162-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M162_confidence_first_constrained_repair_trajectory_contract_v0 \
   --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M163_confidence_first_constrained_repair_trajectory_execution_v0 \
@@ -8892,8 +8903,8 @@ Claim boundary:
 Implementation unit: `E008-M170_source_coverage_memory_interface_trajectory_execution_v0`.
 
 - Status: `e008_m170_source_coverage_memory_interface_trajectory_execution_ready`.
-- Docker image: `research3/habitat-h001:20260508-calib-artifacts`.
-- Source mount: `/home/yoohyun/research3/local_dataset/data:/data:ro`.
+- Docker image: `research2/habitat-h001:20260508-calib-artifacts`.
+- Source mount: `/home/yoohyun/research2/local_dataset/data:/data:ro`.
 - Trajectory candidate rows: 4,500.
 - Trajectory execution plan rows: 150.
 - Scan-task-policy rows: 150.
@@ -8909,9 +8920,9 @@ Command:
 
 ```bash
 docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp \
-  -v /home/yoohyun/research3/local_dataset/data:/data:ro \
+  -v /home/yoohyun/research2/local_dataset/data:/data:ro \
   -v /home/yoohyun/research2:/work \
-  -w /work research3/habitat-h001:20260508-calib-artifacts \
+  -w /work research2/habitat-h001:20260508-calib-artifacts \
   bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m170_source_coverage_memory_interface_trajectory_execution.py --m169-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M169_source_coverage_memory_interface_trajectory_contract_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M170_source_coverage_memory_interface_trajectory_execution_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M170_source_coverage_memory_interface_trajectory_execution_v0"
 ```
 
@@ -9493,7 +9504,7 @@ Implementation unit: `E008-M184_docker_trajectory_execution_sr_spl_v0`.
 Command:
 
 ```bash
-docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m184_docker_trajectory_execution_sr_spl.py --m129-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M183_docker_trajectory_execution_contract_preflight_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M184_docker_trajectory_execution_sr_spl_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M184_docker_trajectory_execution_sr_spl_v0"
+docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research2/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research2/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m184_docker_trajectory_execution_sr_spl.py --m129-contract experiments/E008_real_navigation_benchmark/artifacts/E008-M183_docker_trajectory_execution_contract_preflight_v0 --out-root experiments/E008_real_navigation_benchmark/artifacts/E008-M184_docker_trajectory_execution_sr_spl_v0 --derived-out-root local_dataset/HM3D_navigation_bridge/E008-M184_docker_trajectory_execution_sr_spl_v0"
 ```
 
 Artifacts:
@@ -9584,7 +9595,7 @@ python experiments/E008_real_navigation_benchmark/tools/run_m187_source_pool_con
 The command self-runs in Docker when `habitat_sim` is unavailable on the host:
 
 ```bash
-docker run --rm --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research3/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research3/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m187_source_pool_confidence_protected_transition_cost_materialization.py --inside-docker"
+docker run --rm --user 1001:1001 -e HOME=/tmp -v /home/yoohyun/research2/local_dataset/data:/data:ro -v /home/yoohyun/research2:/work -w /work research2/habitat-h001:20260508-calib-artifacts bash -lc "micromamba run -n base python experiments/E008_real_navigation_benchmark/tools/run_m187_source_pool_confidence_protected_transition_cost_materialization.py --inside-docker"
 ```
 
 Artifacts:
@@ -10036,3 +10047,297 @@ Claim boundary:
 
 - M198 supports a negative scale boundary: source-pool scale candidate generation is not ready for trajectory promotion.
 - M198 does not support source-pool navigation improvement, final real navigation `SR` / `SPL`, or final real RGB-D/open-vocabulary robustness.
+
+## E008-M199
+
+Implementation unit: `E008-M199_source_pool_scale_failure_decomposition_repair_decision_v0`.
+
+- Status: `e008_m199_source_pool_scale_failure_decomposition_repair_decision_ready`.
+- Denominator rows: 30.
+- Protected policy: `detector_confidence_reachable_subset_v0`.
+- No-source baseline primary success rows: 24.
+- Source-pool primary success rows: 17.
+- Shared success rows: 15.
+- Source-pool unique recovery rows: 2.
+- Source-pool lost baseline success rows: 9.
+- Lost baseline success rows caused by source-gap/no-detector-candidate: 7.
+- Shared failure rows: 4.
+- Selected repair: `additive_union_candidate_pool_with_source_gap_guard_v0`.
+- Docker trajectory execution promoted: false.
+- Selected next unit: E008-M200 additive source-pool candidate-union repair contract.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m199_source_pool_scale_failure_decomposition_repair_decision.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M199_source_pool_scale_failure_decomposition_repair_decision_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M199_source_pool_scale_failure_decomposition_repair_decision_v0/episode_comparison_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M199_source_pool_scale_failure_decomposition_repair_decision_v0/failure_decomposition_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M199_source_pool_scale_failure_decomposition_repair_decision_v0/repair_decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M199_source_pool_scale_failure_decomposition_repair_decision_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M199_source_pool_scale_failure_decomposition_repair_decision_v0/`
+
+Claim boundary:
+
+- M199 supports source-pool scale failure decomposition and repair-route selection only.
+- M199 selects additive candidate-union repair with a source-gap guard and protected detector-confidence baseline.
+- M199 rejects source-pool replacement policy and immediate threshold relaxation.
+- M199 does not materialize repaired rows, execute trajectories, or support final navigation claims.
+
+## E008-M200
+
+Implementation unit: `E008-M200_additive_source_pool_candidate_union_repair_contract_v0`.
+
+- Status: `e008_m200_additive_source_pool_candidate_union_repair_contract_ready`.
+- Selected policy: `additive_union_candidate_pool_with_source_gap_guard_v0`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Negative replacement policy: `source_pool_replacement_detector_confidence_reachable_subset_v0`.
+- Denominator rows: 30.
+- M199 source-pool unique recovery rows: 2.
+- M199 source-pool lost baseline success rows: 9.
+- M199 source-gap/no-detector loss rows: 7.
+- M201 materialization ready: true.
+- Baseline prefix audit required: true.
+- Dedup audit required: true.
+- Leakage audit required: true.
+- Docker trajectory execution promoted: false.
+- Selected next unit: E008-M201 additive source-pool candidate-union row materialization.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m200_additive_source_pool_candidate_union_repair_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M200_additive_source_pool_candidate_union_repair_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M200_additive_source_pool_candidate_union_repair_contract_v0/method_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M200_additive_source_pool_candidate_union_repair_contract_v0/candidate_union_schema_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M200_additive_source_pool_candidate_union_repair_contract_v0/input_guard_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M200_additive_source_pool_candidate_union_repair_contract_v0/baseline_protection_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M200_additive_source_pool_candidate_union_repair_contract_v0/policy_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M200_additive_source_pool_candidate_union_repair_contract_v0/m201_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M200_additive_source_pool_candidate_union_repair_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M200_additive_source_pool_candidate_union_repair_contract_v0/`
+
+Claim boundary:
+
+- M200 supports a repair contract only: source-pool candidates may be added to, but not replace, the protected no-source detector candidate pool.
+- M200 does not materialize repaired rows, evaluate proxy `SR` / `SPL`, execute trajectories, or support final navigation claims.
+
+## E008-M201
+
+Implementation unit: `E008-M201_additive_source_pool_candidate_union_row_materialization_v0`.
+
+- Status: `e008_m201_additive_source_pool_candidate_union_row_materialization_ready`.
+- Selected policy: `additive_union_candidate_pool_with_source_gap_guard_v0`.
+- Protected baseline: `detector_confidence_reachable_subset_v0`.
+- Denominator rows: 30.
+- Source-ready rows: 23.
+- Source-gap rows: 7.
+- Protected baseline input rows: 900.
+- Source-pool input rows: 523.
+- Source-pool appended rows: 521.
+- Source-pool duplicate dropped rows: 2.
+- Selected union policy rows: 1,421.
+- Baseline prefix audit pass: true.
+- Baseline candidate loss count: 0.
+- Dedup audit pass: true.
+- Leakage audit pass: true.
+- M202 proxy eval ready: true.
+- Docker trajectory execution promoted: false.
+- Selected next unit: E008-M202 additive source-pool candidate-union leakage-safe goal-evaluation proxy.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m201_additive_source_pool_candidate_union_row_materialization.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M201_additive_source_pool_candidate_union_row_materialization_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M201_additive_source_pool_candidate_union_row_materialization_v0/union_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M201_additive_source_pool_candidate_union_row_materialization_v0/union_policy_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M201_additive_source_pool_candidate_union_row_materialization_v0/baseline_prefix_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M201_additive_source_pool_candidate_union_row_materialization_v0/dedup_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M201_additive_source_pool_candidate_union_row_materialization_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M201_additive_source_pool_candidate_union_row_materialization_v0/policy_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M201_additive_source_pool_candidate_union_row_materialization_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M201_additive_source_pool_candidate_union_row_materialization_v0/`
+
+Claim boundary:
+
+- M201 supports row materialization only: the protected no-source detector prefix is preserved and source-pool candidates are appended without eval-goal/viewpoint policy leakage.
+- M201 does not evaluate proxy `SR` / `SPL`, execute trajectories, or support final navigation claims.
+
+## E008-M202
+
+Implementation unit: `E008-M202_additive_source_pool_candidate_union_goal_evaluation_proxy_v0`.
+
+- Status: `e008_m202_additive_source_pool_candidate_union_goal_evaluation_proxy_ready`.
+- Selected policy: `additive_union_candidate_pool_with_source_gap_guard_v0`.
+- Baseline policy: `no_source_pool_detector_confidence_reachable_subset_v0`.
+- Full denominator rows: 30.
+- Candidate-goal eval rows: 4,263.
+- Eval label join: 4,263 / 4,263.
+- Leakage audit pass: true.
+- Selected proxy `SR`: 0.8667, 26 / 30.
+- Baseline proxy `SR`: 0.8000, 24 / 30.
+- Selected proxy `SPL`: 0.3564.
+- Baseline proxy `SPL`: 0.3506.
+- Selected minus baseline success rows: +2.
+- Selected minus baseline proxy `SPL`: +0.0058.
+- Source-pool incremental recovery rows: 2.
+- Positive proxy gate pass: true.
+- Docker trajectory execution promoted: false.
+- Selected next unit: E008-M203 additive source-pool candidate-union proxy result interpretation and trajectory decision.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/run_m202_additive_source_pool_candidate_union_goal_evaluation_proxy.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M202_additive_source_pool_candidate_union_goal_evaluation_proxy_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M202_additive_source_pool_candidate_union_goal_evaluation_proxy_v0/candidate_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M202_additive_source_pool_candidate_union_goal_evaluation_proxy_v0/policy_goal_metric_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M202_additive_source_pool_candidate_union_goal_evaluation_proxy_v0/policy_comparison_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M202_additive_source_pool_candidate_union_goal_evaluation_proxy_v0/source_contribution_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M202_additive_source_pool_candidate_union_goal_evaluation_proxy_v0/leakage_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M202_additive_source_pool_candidate_union_goal_evaluation_proxy_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M202_additive_source_pool_candidate_union_goal_evaluation_proxy_v0/`
+
+Claim boundary:
+
+- M202 supports a leakage-safe proxy gate: selected additive union preserves the protected baseline and improves proxy recovery on the same 30 rows.
+- M202 does not execute trajectories and does not support final real navigation `SR` / `SPL`.
+- M203 later decides this proxy gate is strong enough for Docker trajectory contract/preflight, not direct trajectory claims.
+
+## E008-M203
+
+Implementation unit: `E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0`.
+
+- Status: `e008_m203_additive_source_pool_candidate_union_proxy_result_interpretation_ready`.
+- Selected policy: `additive_union_candidate_pool_with_source_gap_guard_v0`.
+- Baseline policy: `no_source_pool_detector_confidence_reachable_subset_v0`.
+- Full denominator rows: 30.
+- Selected proxy `SR` / `SPL`: 0.8667 / 0.3564.
+- Baseline proxy `SR` / `SPL`: 0.8000 / 0.3506.
+- Selected minus baseline success rows: +2.
+- Source-pool incremental recovery rows: 2.
+- Baseline successes lost by selected policy: 0.
+- Required gates pass: true.
+- M204 contract ready: true.
+- Docker trajectory execution promoted: false.
+- Selected next unit: E008-M204 additive source-pool candidate-union Docker trajectory execution contract/preflight.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m203_additive_source_pool_candidate_union_proxy_result_interpretation.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0/policy_interpretation_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0/trajectory_gate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0/decision_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0/claim_boundary_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0/reviewer_defense_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0/m204_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M203_additive_source_pool_candidate_union_proxy_result_interpretation_v0/`
+
+Claim boundary:
+
+- M203 supports a proxy-level additive candidate-union gate and promotes M204 Docker trajectory contract/preflight.
+- M203 does not execute trajectories and does not support final real navigation `SR` / `SPL`.
+- M203 does not support final real RGB-D/open-vocabulary robustness, deployable search policy, or human-intent main-claim evidence.
+
+## E008-M204
+
+Implementation unit: `E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0`.
+
+- Status: `e008_m204_additive_source_pool_candidate_union_docker_trajectory_contract_ready_needs_runtime`.
+- Trajectory candidate rows: 4,270.
+- Trajectory execution plan rows: 120.
+- Episode goal / oracle path rows: 30 / 30.
+- Policy plan counts: 30 per policy over 4 policies.
+- Policies: `additive_union_candidate_pool_with_source_gap_guard_v0`, `no_source_pool_detector_confidence_reachable_subset_v0`, `source_pool_replacement_detector_confidence_reachable_subset_v0`, `additive_union_unguarded_confidence_sort_v0`.
+- No-candidate placeholder rows: 7, all for the negative `source_pool_replacement_detector_confidence_reachable_subset_v0` ablation.
+- Candidate nav join fail rows: 0.
+- Candidate scene / position join fail rows: 0 / 0.
+- Leakage audit pass: true.
+- M205 runner implemented: true.
+- Runtime preflight pass: false.
+- Runtime blocker: `/home/yoohyun/research2/local_dataset/data` is absent and `research2/habitat-h001:20260508-calib-artifacts` is not available locally.
+- Runtime restore audit: no matching image/data tar found under `/home/yoohyun`, `/mnt`, `/media`, or `/run/media`; no stopped container/volume is available; host Python lacks `habitat_sim`, `habitat`, and `magnum`.
+- Selected next unit: restore/repoint `HM3D ObjectNav` data mount and `Habitat` image, then E008-M205 Docker trajectory execution.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/plan_m204_additive_source_pool_candidate_union_docker_trajectory_contract.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/episode_goal_eval_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/oracle_path_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/dynamic_stale_overlay_trajectory_candidate_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/trajectory_execution_plan_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/candidate_join_audit_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/policy_contract_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/m205_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M204_additive_source_pool_candidate_union_docker_trajectory_contract_v0/`
+
+Claim boundary:
+
+- M204 supports runner-compatible trajectory contract materialization and Docker/data preflight only.
+- M204 does not execute trajectories and does not support final real navigation `SR` / `SPL`.
+- M204 blocks M205 launch until runtime data and image preflight pass.
+
+## E008-M205 Runtime Restore Preflight
+
+Implementation unit: `E008-M205_runtime_restore_preflight_v0`.
+
+- Status: `e008_m205_runtime_restore_preflight_blocked`.
+- M204 candidate rows: 4,270.
+- M204 trajectory plan rows: 120.
+- M205 command ledger ready: true.
+- Runtime preflight pass: false.
+- Docker/data preflight fail rows: 5 / 9.
+- Selected next unit: restore `HM3D/ObjectNav` data root and `research2/habitat-h001:20260508-calib-artifacts`, then run E008-M205.
+
+Command:
+
+```bash
+python experiments/E008_real_navigation_benchmark/tools/verify_m205_runtime_restore_preflight.py
+```
+
+Artifacts:
+
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M205_runtime_restore_preflight_v0/coverage.json`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M205_runtime_restore_preflight_v0/docker_preflight_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M205_runtime_restore_preflight_v0/restore_requirement_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M205_runtime_restore_preflight_v0/m205_command_rows.jsonl`
+- `experiments/E008_real_navigation_benchmark/artifacts/E008-M205_runtime_restore_preflight_v0/report.md`
+- `local_dataset/HM3D_navigation_bridge/E008-M205_runtime_restore_preflight_v0/`
+
+Claim boundary:
+
+- This verifier does not execute trajectories.
+- It only checks whether E008-M205 can be launched.
+- Final real navigation `SR` / `SPL` remains blocked until E008-M205 execution and interpretation pass.

@@ -1,6 +1,6 @@
 # Schedule
 
-Last updated: 2026-06-14
+Last updated: 2026-06-16
 
 이 문서는 H001 main experiment implementation을 top-tier submission path로 확장하기 위한 실행 순서를 관리한다. 세부 실험 결과는 `experiments/`에 기록하고, 이 문서는 단계, gate, baseline 확장 방향만 관리한다.
 
@@ -15,14 +15,14 @@ Last updated: 2026-06-14
 - Current path: use Direction A `Task-Conditioned Stale Semantic Memory` as the core method/backbone, then expand through real proposal/search bridge, external baselines, and search/navigation metrics.
 - Current E003 status: E003-M75 direct current-rescan bridge is ready over 96 query rows; real RGB-D/open-vocabulary claim readiness remains false.
 - Current E004 status: E004-M05 supports memory-trust claim strength `split_supported`; task-context-specific claim strength remains `limited_positive_not_label_broad`.
-- Current E005/E007/E008 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract through map-assisted fallback claim-boundary decision. E006-M01-M08 completed human-intent contract/schema/policy/utility readiness and claim decision; current evidence keeps human intent as secondary conditioning / ablation evidence, not a main claim. E007-M01-M07 packaged the path-cost bridge as a paper-facing occupancy-grid proxy table. E008-M01-M198 completed real navigation source preflight through source-coverage trigger/candidate-source expansion, source-pool scale render/detector execution, candidate navmesh/source-readiness validation, leakage-safe full-denominator proxy evaluation, and no-source detector baseline comparison. E008-M198 rejects immediate Docker trajectory promotion because source-pool protected detector-confidence proxy `SR` / `SPL` is 0.5667 / 0.3235 versus M70 no-source detector baseline 0.8000 / 0.3506. Final navigation claims remain blocked until M199 failure decomposition, candidate-generation repair, heldout transfer, and navigation/search baseline evaluation.
+- Current E005/E007/E008 status: `ConceptGraphs` is the active converted positive external mapping baseline route. All 9 heldout scans have runtime output and query-level conversion, and H001 has been replayed on the same M38 heldout query contract. E005-M56-M101 completed the two-table robustness denominator contract through map-assisted fallback claim-boundary decision. E006-M01-M08 completed human-intent contract/schema/policy/utility readiness and claim decision; current evidence keeps human intent as secondary conditioning / ablation evidence, not a main claim. E007-M01-M07 packaged the path-cost bridge as a paper-facing occupancy-grid proxy table. E008-M01-M204 completed real navigation source preflight through source-coverage trigger/candidate-source expansion, source-pool scale render/detector execution, candidate navmesh/source-readiness validation, leakage-safe full-denominator proxy evaluation, no-source detector baseline comparison, source-pool failure decomposition, additive candidate-union repair, proxy evaluation, result interpretation, and Docker trajectory contract/preflight. E008-M202 improves proxy `SR` / `SPL` over the protected no-source baseline from 0.8000 / 0.3506 to 0.8667 / 0.3564 with +2 success rows and baseline candidate loss 0. E008-M204 materializes 4,270 runner-compatible candidate rows and 120 execution plans. Final navigation claims remain blocked because E008-M205 has not executed and the 2026-06-16 runtime recheck confirms the `HM3D ObjectNav` data root and `Habitat` Docker image are absent.
 
 에이전트 추론:
 
 - Current core direction is aligned with recent work on open-vocabulary semantic mapping, 3D scene memory, task-driven mapping, and embodied navigation.
 - Direction B is the correct final top-tier target, but the immediate implementation should remain focused on mechanism-level failure diagnosis around memory-decision / source-coverage / proposal reliability rather than forcing a broad system claim.
 - Human intent should remain a controlled task-context condition unless a dedicated context-sensitive utility benchmark shows broad gains over context-agnostic memory trust.
-- Top-tier competitiveness requires moving beyond `3RScan` / `3DSSG` proxy evidence into stronger external baselines and downstream search/navigation evaluation, but M198 shows the current source-pool scale route needs candidate-generation repair before executed navigation scale-up.
+- Top-tier competitiveness requires moving beyond `3RScan` / `3DSSG` proxy evidence into stronger external baselines and downstream search/navigation evaluation. M199-M204 repaired the M198 source-pool replacement failure into additive candidate union at proxy level, but executed-navigation evidence still requires M205 runtime restoration and protected-baseline interpretation.
 
 ## Top-Tier Target Claim
 
@@ -36,7 +36,7 @@ Last updated: 2026-06-14
 - Final claim should include real RGB-D / open-vocabulary proposal robustness and a search/navigation bridge, not only annotation-proxy stale memory behavior.
 - Direction B is the final target claim family; Direction A is the core method claim that must survive ablation and bridge tests.
 - Human task context is not yet a main contribution claim. The current defensible phrasing is that structured task context is a conditioning signal for memory trust and re-observation, not that the system understands human intent.
-- Current E008 evidence supports a negative scale boundary, not a positive navigation claim: source-pool acquisition must first recover proxy `SR` against the no-source detector baseline before Docker trajectory promotion.
+- Current E008 evidence supports additive candidate-union trajectory-contract readiness, not a positive navigation claim: source-pool acquisition has recovered proxy `SR` against the no-source detector baseline, but Docker trajectory execution and interpretation are still blocked by missing runtime resources.
 
 ## Schedule
 

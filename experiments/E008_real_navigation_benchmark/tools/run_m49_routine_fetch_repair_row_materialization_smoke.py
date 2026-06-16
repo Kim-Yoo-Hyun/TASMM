@@ -726,9 +726,9 @@ def build_m50_command_rows() -> list[dict[str, Any]]:
     )
     docker_command_template = (
         "docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp "
-        "-v /home/yoohyun/research3/local_dataset/data:/data:ro "
+        "-v /home/yoohyun/research2/local_dataset/data:/data:ro "
         "-v /home/yoohyun/research2:/work -w /work "
-        "research3/habitat-h001:20260508-calib-artifacts "
+        "research2/habitat-h001:20260508-calib-artifacts "
         "bash -lc \"micromamba run -n base python "
         "experiments/E008_real_navigation_benchmark/tools/run_m50_routine_fetch_repair_trajectory_execution_smoke.py\""
     )

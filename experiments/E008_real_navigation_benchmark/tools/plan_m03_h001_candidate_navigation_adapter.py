@@ -22,9 +22,9 @@ M02_DATA_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M02_hm3
 M100_DIR = ROOT / "experiments" / "E005_external_baseline_transition" / "artifacts" / "E005-M100_conceptgraphs_assisted_fallback_policy_v0"
 E007_M04_DIR = ROOT / "experiments" / "E007_navigation_path_cost_bridge" / "artifacts" / "E007-M04_path_cost_policy_metrics_v0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 OBJECTNAV_CONTENT_ROOT = (
-    RESEARCH3_DATA_ROOT
+    RESEARCH2_DATA_ROOT
     / "datasets"
     / "objectnav"
     / "hm3d"

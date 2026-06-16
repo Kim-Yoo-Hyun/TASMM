@@ -23,8 +23,8 @@ M21_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M21_expanded_detector_policy_t
 M22_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M22_expanded_detector_policy_trajectory_execution_smoke_v0"
 M30_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M30_h001_current_observation_fallback_replay_smoke_v0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 M32_RUNNER = EXP_ROOT / "tools" / "run_m32_h001_fallback_trajectory_execution_smoke.py"
 M32_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M32_h001_fallback_trajectory_execution_smoke_v0"
 M32_DATA_OUT_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M32_h001_fallback_trajectory_execution_smoke_v0"
@@ -442,9 +442,9 @@ def build_docker_preflight_rows(m21_coverage: dict[str, Any], m22_coverage: dict
         },
         {
             "version": VERSION,
-            "check": "research3_data_root_readable",
-            "status": "pass" if RESEARCH3_DATA_ROOT.exists() and RESEARCH3_DATA_ROOT.is_dir() else "fail",
-            "evidence": str(RESEARCH3_DATA_ROOT),
+            "check": "research2_data_root_readable",
+            "status": "pass" if RESEARCH2_DATA_ROOT.exists() and RESEARCH2_DATA_ROOT.is_dir() else "fail",
+            "evidence": str(RESEARCH2_DATA_ROOT),
             "required_before": "E008-M32 runner execution",
         },
         {
@@ -460,7 +460,7 @@ def build_docker_preflight_rows(m21_coverage: dict[str, Any], m22_coverage: dict
 def build_docker_command_rows() -> list[dict[str, Any]]:
     runner_cmd = (
         "docker run --rm --gpus all "
-        f"-v {RESEARCH3_DATA_ROOT}:/data:ro "
+        f"-v {RESEARCH2_DATA_ROOT}:/data:ro "
         f"-v {ROOT}:/work "
         "-w /work "
         f"{HABITAT_IMAGE} "
@@ -782,7 +782,7 @@ def main() -> None:
         "m32_runner_implemented": M32_RUNNER.exists(),
         "docker_preflight_status_counts": dict(sorted(Counter(row["status"] for row in docker_preflight_rows).items())),
         "docker_image": HABITAT_IMAGE,
-        "research3_data_root": str(RESEARCH3_DATA_ROOT),
+        "research2_data_root": str(RESEARCH2_DATA_ROOT),
         "launch_long_job_now": False,
         "real_navigation_sr_spl_ready": False,
         "final_real_rgbd_open_vocab_robustness_ready": False,

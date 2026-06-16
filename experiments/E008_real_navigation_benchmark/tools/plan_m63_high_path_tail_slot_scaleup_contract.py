@@ -34,9 +34,9 @@ READY_STATUS = "e008_m63_high_path_tail_slot_scaleup_contract_ready"
 BLOCKED_STATUS = "e008_m63_high_path_tail_slot_scaleup_contract_blocked"
 NEXT_UNIT = "E008-M64 full-val-mini high-path scale denominator materialization"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 OBJECTNAV_ROOT = (
-    RESEARCH3_DATA_ROOT
+    RESEARCH2_DATA_ROOT
     / "datasets"
     / "objectnav"
     / "hm3d"
@@ -128,7 +128,7 @@ def scene_key_from_scene_id(scene_id: str) -> str:
 
 def scene_paths(scene_id: str) -> tuple[Path, Path]:
     rel = scene_id.replace("hm3d_v0.2/", "")
-    scene_path = RESEARCH3_DATA_ROOT / "versioned_data" / "hm3d-0.2" / "hm3d" / rel
+    scene_path = RESEARCH2_DATA_ROOT / "versioned_data" / "hm3d-0.2" / "hm3d" / rel
     navmesh_path = scene_path.with_suffix(".basis.navmesh")
     if not navmesh_path.exists() and scene_path.name.endswith(".basis.glb"):
         navmesh_path = scene_path.with_name(scene_path.name.replace(".basis.glb", ".basis.navmesh"))

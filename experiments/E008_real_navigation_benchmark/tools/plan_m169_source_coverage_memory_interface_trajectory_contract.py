@@ -25,10 +25,10 @@ READY_STATUS = "e008_m169_source_coverage_memory_interface_trajectory_contract_r
 BLOCKED_STATUS = "e008_m169_source_coverage_memory_interface_trajectory_contract_blocked"
 NEXT_UNIT = "E008-M170 source-coverage memory-interface trajectory execution"
 
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 DOCKER_DATA_ROOT = Path("/data")
-OBJECTNAV_CONTENT_ROOT = RESEARCH3_DATA_ROOT / "datasets" / "objectnav" / "hm3d" / "v2" / "objectnav_hm3d_v2" / "val_mini" / "content"
+OBJECTNAV_CONTENT_ROOT = RESEARCH2_DATA_ROOT / "datasets" / "objectnav" / "hm3d" / "v2" / "objectnav_hm3d_v2" / "val_mini" / "content"
 
 SELECTED_POLICY = "source_coverage_memory_interface_policy_v1"
 PROTECTED_BASELINE = "detector_confidence_reachable_subset_v0"
@@ -131,7 +131,7 @@ def host_path_from_docker(path_text: str | None) -> Path | None:
         rel = path.relative_to(DOCKER_DATA_ROOT)
     except ValueError:
         return None
-    return RESEARCH3_DATA_ROOT / rel
+    return RESEARCH2_DATA_ROOT / rel
 
 
 def normalize_candidate_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -258,7 +258,7 @@ def docker_preflight_rows(candidate_rows: list[dict[str, Any]], runner_compile: 
         {"version": VERSION, "check_id": "docker_cli", "status": "pass" if docker_version.get("ok") else "fail", "evidence": f"returncode={docker_version.get('returncode')}; stderr_tail={docker_version.get('stderr_tail')!r}."},
         {"version": VERSION, "check_id": "habitat_docker_image", "status": "pass" if image_status.get("ok") else "fail", "evidence": f"image={HABITAT_IMAGE}; returncode={image_status.get('returncode')}; stderr_tail={image_status.get('stderr_tail')!r}."},
         {"version": VERSION, "check_id": "nvidia_smi", "status": "pass" if nvidia_status.get("ok") else "warning", "evidence": f"returncode={nvidia_status.get('returncode')}; stdout_tail={nvidia_status.get('stdout_tail')!r}; stderr_tail={nvidia_status.get('stderr_tail')!r}."},
-        {"version": VERSION, "check_id": "read_only_hm3d_data_root", "status": "pass" if RESEARCH3_DATA_ROOT.exists() else "fail", "evidence": f"path={RESEARCH3_DATA_ROOT}; exists={RESEARCH3_DATA_ROOT.exists()}."},
+        {"version": VERSION, "check_id": "read_only_hm3d_data_root", "status": "pass" if RESEARCH2_DATA_ROOT.exists() else "fail", "evidence": f"path={RESEARCH2_DATA_ROOT}; exists={RESEARCH2_DATA_ROOT.exists()}."},
         {"version": VERSION, "check_id": "scene_files", "status": "pass" if scene_ready == len(scene_paths) and bool(scene_paths) else "fail", "evidence": f"ready={scene_ready}/{len(scene_paths)}."},
         {"version": VERSION, "check_id": "navmesh_files", "status": "pass" if navmesh_ready == len(navmesh_paths) and bool(navmesh_paths) else "fail", "evidence": f"ready={navmesh_ready}/{len(navmesh_paths)}."},
         {"version": VERSION, "check_id": "objectnav_content_files", "status": "pass" if content_files else "fail", "evidence": f"path={OBJECTNAV_CONTENT_ROOT}; json_gz_files={len(content_files)}."},
@@ -320,7 +320,7 @@ def readiness_rows(m168: dict[str, Any], candidate_rows: list[dict[str, Any]], p
 def command_rows() -> list[dict[str, Any]]:
     command = (
         "docker run --rm --gpus all --user 1001:1001 -e HOME=/tmp "
-        "-v /home/yoohyun/research3/local_dataset/data:/data:ro "
+        "-v /home/yoohyun/research2/local_dataset/data:/data:ro "
         "-v /home/yoohyun/research2:/work -w /work "
         f"{HABITAT_IMAGE} bash -lc "
         "\"micromamba run -n base python "
@@ -335,7 +335,7 @@ def command_rows() -> list[dict[str, Any]]:
             "command_id": "e008_m170_source_coverage_memory_interface_trajectory_execution",
             "working_directory": str(ROOT),
             "docker_image": HABITAT_IMAGE,
-            "source_mount": "/home/yoohyun/research3/local_dataset/data:/data:ro",
+            "source_mount": "/home/yoohyun/research2/local_dataset/data:/data:ro",
             "repo_mount": "/home/yoohyun/research2:/work",
             "contract_path": str(ARTIFACT_DIR.relative_to(ROOT)),
             "runner_path": str(RUNNER.relative_to(ROOT)),

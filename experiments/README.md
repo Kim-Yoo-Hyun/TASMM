@@ -1,6 +1,6 @@
 # Experiments
 
-Updated: 2026-06-14
+Updated: 2026-06-16
 
 이 폴더는 main experiment 구현과 내용 기록을 관리한다. 작성 규칙은 `docs/experiments.md`를 따른다.
 
@@ -8,7 +8,7 @@ Updated: 2026-06-14
 
 ## Status
 
-Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, E005-M01 through E005-M101, E006-M01 through E006-M08, E007-M01 through E007-M07, and E008-M01 through E008-M198 are complete/verified with constraints through denominator-aligned `Open3DSG`, full-denominator real proposal diagnostics, `ConceptGraphs` reliability boundary, human-intent main-claim contracts, path-cost bridge packaging, real navigation source preflight, detector/H001/dynamic-stale trajectory smoke, source-gap repair chains, target-free trajectory execution, confidence-preserving full-val-mini execution, failure decomposition, source-coverage memory-interface method pivot, row materialization, Docker trajectory execution, protected-baseline interpretation, source-coverage tradeoff decomposition, source-coverage utility/Pareto contract, utility row materialization, utility conservatism failure decomposition, source-coverage trigger/candidate-source expansion contract, trigger row materialization smoke, budgeted source-pool pose/render-plan materialization, source-pool render/detector execution, source-pool trajectory smoke, repaired-policy proxy evaluation, failure decomposition, method-boundary/scale decision, source-pool protected-confidence scale-up contract, source-pool protected-confidence scale denominator materialization, source-pool scale navmesh/snap launcher contract, scale detector execution, source-ready/source-gap split, leakage-safe full-denominator proxy evaluation, and no-source baseline comparison. E008-M198 is a negative gate: source-pool protected detector-confidence proxy `SR`/`SPL` is 0.5667/0.3235 versus M70 no-source detector baseline 0.8000/0.3506, so Docker trajectory promotion is blocked. E006-M08 keeps human intent as a secondary conditioning / ablation axis rather than a main claim under current evidence.
+Main experiment implementation stage has started. E001-M01 through E001-M05, E002-M01 through E002-M09, E003-M00 through E003-M75, E004-M01 through E004-M05, E005-M01 through E005-M101, E006-M01 through E006-M08, E007-M01 through E007-M07, and E008-M01 through E008-M204 are complete/verified with constraints through denominator-aligned `Open3DSG`, full-denominator real proposal diagnostics, `ConceptGraphs` reliability boundary, human-intent main-claim contracts, path-cost bridge packaging, real navigation source preflight, detector/H001/dynamic-stale trajectory smoke, source-gap repair chains, target-free trajectory execution, confidence-preserving full-val-mini execution, failure decomposition, source-coverage memory-interface method pivot, row materialization, Docker trajectory execution, protected-baseline interpretation, source-coverage tradeoff decomposition, source-coverage utility/Pareto contract, utility row materialization, utility conservatism failure decomposition, source-coverage trigger/candidate-source expansion contract, trigger row materialization smoke, budgeted source-pool pose/render-plan materialization, source-pool render/detector execution, source-pool trajectory smoke, repaired-policy proxy evaluation, failure decomposition, method-boundary/scale decision, source-pool protected-confidence scale-up contract, source-pool protected-confidence scale denominator materialization, source-pool scale navmesh/snap launcher contract, scale detector execution, source-ready/source-gap split, leakage-safe full-denominator proxy evaluation, no-source baseline comparison, source-pool scale failure decomposition, additive candidate-union repair contract, additive candidate-union row materialization/proxy evaluation, result interpretation, and Docker trajectory contract/preflight. E008-M204 materializes 4,270 runner-compatible candidate rows and 120 execution plans, but M205 launch is blocked until the read-only `HM3D ObjectNav` data mount and `Habitat` Docker image are restored/repointed. E006-M08 keeps human intent as a secondary conditioning / ablation axis rather than a main claim under current evidence.
 
 The 2026-06-09 targeted literature refresh constrains E008-M137: detector-confidence remains the protected naive baseline, and trajectory cost may only act as confidence-band tie-break, hard feasibility veto, or source-gap/source-coverage trigger until it beats the M130/M135 `SPL` regressions.
 
@@ -22,8 +22,8 @@ The 2026-06-09 targeted literature refresh constrains E008-M137: detector-confid
 | E004 | M01-M05 ready with constraints | [E004_task_context_memory_trust](E004_task_context_memory_trust/README.md) | Input to E005 |
 | E005 | M01-M101 ready | [E005_external_baseline_transition](E005_external_baseline_transition/README.md) | Input to E007 |
 | E006 | M01-M08 ready; human intent main claim false under current evidence, secondary conditioning / ablation axis retained | [E006_human_intent_main_claim](E006_human_intent_main_claim/README.md) | No active unit; optional E006-M09 policy redesign only if re-promoted |
-| E007 | M01-M07 paper-facing path-cost proxy bridge package ready | [E007_navigation_path_cost_bridge](E007_navigation_path_cost_bridge/README.md) | Input to E008-M01 |
-| E008 | M01-M198 ready with constraints; M198 blocks immediate trajectory promotion | [E008_real_navigation_benchmark](E008_real_navigation_benchmark/README.md) | E008-M199 failure decomposition / candidate-generation repair decision |
+| E007 | M01-M07 paper-facing path-cost proxy bridge package ready | [E007_navigation_path_cost_bridge](E007_navigation_path_cost_bridge/README.md) | Consumed by E008; no active unit |
+| E008 | M01-M204 ready with constraints; M204 contract ready but runtime preflight blocked | [E008_real_navigation_benchmark](E008_real_navigation_benchmark/README.md) | Restore/repoint `HM3D ObjectNav` data + `Habitat` image, then E008-M205 |
 
 ## 사실
 
@@ -241,7 +241,7 @@ The 2026-06-09 targeted literature refresh constrains E008-M137: detector-confid
 - E005-M01 external baseline transition is complete with status `e005_m01_external_baseline_transition_ready`.
 - E005-M01 scored 10 candidate baselines and selected `DualMap` as the first external route.
 - E005-M01 selected `ConceptGraphs` as backup, because it is the strongest open-vocabulary graph mapping fallback over posed RGB-D observations.
-- E005-M01 keeps `OpenMask3D` as a later 3D instance proposal baseline because the local Docker/MinkowskiEngine blocker is still present.
+- E005-M01 keeps `OpenMask3D` as a later 3D instance proposal baseline. 2026-06-15 recheck: archived repo and checkpoints are ready, but active scene-staging artifacts and Docker image are absent, and the local Docker/`MinkowskiEngine` blocker remains.
 - E005-M02 `DualMap` source/interface audit is complete with status `e005_m02_dualmap_interface_audit_ready_with_staging_required`.
 - E005-M02 checked official `DualMap` repo commit `157235ec49e6a1f439babbc571c4c02ad1f06aa9` and license `Apache-2.0`.
 - E005-M02 direct drop-in to current E004 JSONL rows: false.

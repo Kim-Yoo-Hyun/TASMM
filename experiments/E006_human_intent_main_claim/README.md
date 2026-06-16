@@ -1,6 +1,6 @@
 # E006 Human Intent Main Claim
 
-Updated: 2026-06-06
+Updated: 2026-06-16
 
 This experiment folder defines the contract for promoting human intent from a secondary conditioning variable to a main paper claim. E006-M01 through E006-M04 are non-data claim-design gates, not execution results. E006-M05 is a schema and paired-context row materialization smoke. E006-M06 is a baseline policy row materialization smoke. E006-M07 is a utility metric materialization smoke over frozen policy rows. E006-M08 fixes the current decision: human intent is not a main claim under current evidence.
 

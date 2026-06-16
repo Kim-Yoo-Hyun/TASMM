@@ -1,12 +1,12 @@
 # E007 Navigation Path-Cost Bridge
 
-Updated: 2026-05-27
+Updated: 2026-06-16
 
 ## Status
 
 E007 starts after E005-M101 selected `paper_table_integration_and_navigation_bridge_next`. E007-M01 defines the contract for connecting the M100 query-level candidate visit order to path-aware search/navigation proxy metrics. E007-M02 materializes policy candidate routes and audits path-source compatibility. E007-M03 projects external candidate coordinates onto the E002 occupancy-grid profile and computes route-level path-cost fields with source-limited accounting. E007-M04 evaluates policy-level path-cost metrics while preserving the full denominator and source-ready subset. E007-M05 interprets the result for paper-table use and fixes reviewer-facing claim boundaries. E007-M06 audits source-limit, stop-rank, and old-memory path-start sensitivity. E007-M07 packages the final bridge table, claim-evidence ledger, reviewer-defense rows, and navigation-expansion decision. These units do not report real navigation `SR` / `SPL`.
 
-Next unit: E008-M01 real navigation benchmark/source preflight and episode contract.
+Current downstream state: E008-M01-M204 have already consumed this bridge. Repository-level next action is E008-M205 after restoring/repointing the `HM3D ObjectNav` data root and `Habitat` Docker image.
 
 ## Source
 
@@ -29,7 +29,7 @@ Next unit: E008-M01 real navigation benchmark/source preflight and episode contr
 | metrics | `PathExpectedSearchCost`, `PathAttemptSPLProxy`, `OldLocationDeadEndCostM`, `PathSourceLimitedRate`, and failure reduction by `row_band` / `task_context_id`. |
 | command | `python experiments/E007_navigation_path_cost_bridge/tools/plan_m01_navigation_path_cost_bridge_contract.py`; `python experiments/E007_navigation_path_cost_bridge/tools/audit_m02_path_source_compatibility.py`; `python experiments/E007_navigation_path_cost_bridge/tools/project_m03_external_candidate_grid_paths.py`; `python experiments/E007_navigation_path_cost_bridge/tools/evaluate_m04_path_cost_policy_metrics.py`; `python experiments/E007_navigation_path_cost_bridge/tools/plan_m05_path_cost_result_interpretation.py`; `python experiments/E007_navigation_path_cost_bridge/tools/audit_m06_path_start_source_limit_sensitivity.py`; `python experiments/E007_navigation_path_cost_bridge/tools/plan_m07_bridge_table_navigation_decision.py` |
 | output | Contract, source readiness rows, metric contract rows, candidate route rows, query materialization rows, projected route rows, target path rows, policy path summary rows, source-limited rows, baseline rows, claim boundary rows, and reports. |
-| conclusion | E007-M01 supports a path-cost bridge contract only. E007-M02 supports route materialization. E007-M03 supports route-level path-cost field readiness. E007-M04 supports occupancy-grid proxy path-cost policy metrics with source limits. E007-M05 supports a paper-facing bridge table with explicit proxy boundaries. E007-M06 shows the table is reviewer-defensible under source-limit/direct-only sensitivity. E007-M07 packages the bridge table as paper-facing proxy evidence and selects E008-M01 as the next preflight/contract step, but not real navigation `SR` / `SPL`. |
+| conclusion | E007-M01 supports a path-cost bridge contract only. E007-M02 supports route materialization. E007-M03 supports route-level path-cost field readiness. E007-M04 supports occupancy-grid proxy path-cost policy metrics with source limits. E007-M05 supports a paper-facing bridge table with explicit proxy boundaries. E007-M06 shows the table is reviewer-defensible under source-limit/direct-only sensitivity. E007-M07 packages the bridge table as paper-facing proxy evidence and selected E008-M01 as the next preflight/contract step at the time; E008 is now complete through M204, but real navigation `SR` / `SPL` remains blocked until M205 execution and interpretation. |
 
 ## E007-M01
 
@@ -72,9 +72,9 @@ Artifacts:
 - E007-M04 does not claim real navigation `SR` / `SPL`; it reports `PathAttemptSPLProxy`.
 - E007-M05 does not claim real navigation `SR` / `SPL`; it fixes E007-M04 as paper-facing occupancy-grid path-cost bridge evidence.
 - E007-M06 does not claim real navigation `SR` / `SPL`; it verifies source-limit/direct-only sensitivity for the proxy bridge table.
-- E007-M07 does not claim real navigation `SR` / `SPL`; it packages the final E007 proxy table and selects E008-M01.
+- E007-M07 does not claim real navigation `SR` / `SPL`; it packages the final E007 proxy table. Its downstream E008 route is now complete through M204.
 - `OldLocationDeadEndCostM` is not a primary metric yet because the current path source starts from the old-memory centroid.
-- The next defensible step is E008-M01 real navigation benchmark/source preflight and episode contract.
+- The next repository-level defensible step is E008-M205 trajectory execution after runtime data/image restoration.
 
 ## E007-M02
 

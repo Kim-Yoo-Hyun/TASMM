@@ -19,8 +19,8 @@ M122_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M122_hm3d_target_free_source_
 M121_DATA_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M121_hm3d_target_free_source_coverage_expansion_materialization_smoke_v0"
 ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M123_target_free_source_coverage_render_frame_staging_launch_v0"
 LOG_DIR = ROOT / "logs"
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 TMUX_SESSION = "e008_m123_target_free_render"
 VERSION = "e008_m123_target_free_source_coverage_render_frame_staging_launch_v0"
 VERIFY_COMMAND = (
@@ -125,7 +125,7 @@ def build_render_command(prefix: list[str], log_path: Path) -> tuple[list[str], 
         "-e",
         "XDG_CACHE_HOME=/tmp/.cache",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "-v",
         f"{render_input_dir}:/inputs:ro",
         "-v",
@@ -172,8 +172,8 @@ def build_preflight_rows(prefix: list[str], docker: dict[str, Any], render_plan_
         },
         {
             "gate_id": "external_hm3d_data_readonly_source_ready",
-            "gate_status": "pass" if RESEARCH3_DATA_ROOT.exists() else "fail",
-            "details": str(RESEARCH3_DATA_ROOT),
+            "gate_status": "pass" if RESEARCH2_DATA_ROOT.exists() else "fail",
+            "details": str(RESEARCH2_DATA_ROOT),
         },
         {
             "gate_id": "docker_available",

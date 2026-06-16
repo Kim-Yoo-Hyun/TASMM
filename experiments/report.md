@@ -1,6 +1,6 @@
 # Experiment Report
 
-Updated: 2026-06-14
+Updated: 2026-06-16
 
 이 문서는 현재 `experiments/` 단계에서 확인된 기여점, reviewer가 공격할 핵심 지점, 방어 전략, 최종 논문 방향성을 정리한다. 세부 산출물은 각 experiment folder와 artifact에 둔다.
 
@@ -11,10 +11,10 @@ Updated: 2026-06-14
 - Active direction: `CAND-001` / `Intent- and Staleness-Aware Semantic Mapping`.
 - Active hypothesis: `H001_stale-object-memory`.
 - Main experiment stage has started under `experiments/`.
-- Latest E008 status: E008-M177-M198 complete the current source-pool scale branch through fixed-budget source-pool materialization, render/detector execution, candidate navmesh/source-readiness validation, visit-order/path materialization, leakage-safe full-denominator proxy evaluation, and no-source baseline comparison. M194 produced 552 detector prediction rows and 8,867 pre-cap candidates from 960 rendered frames. M195 validated 523 / 552 candidates as path-ready with 23 / 30 source-ready scans. M196 materialized 2,121 visit-order rows while retaining 7 source-gap scan rows. M197 observed source-pool protected detector-confidence proxy recovery 17 / 30 with proxy `SR` / `SPL` 0.5667 / 0.3235. M198 rejected immediate Docker trajectory promotion because M70 no-source detector baseline reaches 24 / 30 with proxy `SR` / `SPL` 0.8000 / 0.3506.
+- Latest E008 status: E008-M177-M204 complete the current source-pool scale branch through fixed-budget source-pool materialization, render/detector execution, candidate navmesh/source-readiness validation, visit-order/path materialization, leakage-safe full-denominator proxy evaluation, no-source baseline comparison, failure decomposition, additive candidate-union repair, row materialization, proxy evaluation, result interpretation, and Docker trajectory contract/preflight. M194 produced 552 detector prediction rows and 8,867 pre-cap candidates from 960 rendered frames. M197 observed source-pool replacement proxy recovery 17 / 30 with proxy `SR` / `SPL` 0.5667 / 0.3235, while M198 rejected immediate trajectory promotion against the M70 no-source detector baseline 24 / 30 with proxy `SR` / `SPL` 0.8000 / 0.3506. M199-M202 then converted the failure into additive candidate-union repair: selected union proxy `SR` / `SPL` is 0.8667 / 0.3564 versus baseline 0.8000 / 0.3506, with +2 success rows and baseline candidate loss 0. M204 materialized 4,270 runner-compatible candidate rows and 120 execution plans.
 - Latest E006 status: E006-M01 through E006-M08 are complete in `experiments/E006_human_intent_main_claim/`. M07 materialized 20,800 utility metric rows with missing eval rows 0, policy-row mutation audit `pass`, and blocked metric output audit `pass`, but the claim gate is `fail_strong_context_agnostic_baseline_not_beaten`. M08 keeps human intent as secondary conditioning / ablation evidence under current data.
-- Latest E008 execution result: the most recent executed-trajectory positive smoke remains bounded/diagnostic only. The current M198 scale gate does not execute trajectories and explicitly blocks trajectory promotion for the source-pool scale route because proxy `SR` regresses against M70.
-- Latest claim boundary: M198 is a negative scale boundary. Source-pool acquisition remains a useful diagnostic interface, but it is not yet a positive navigation/search contribution. E006-M08 rejects human intent as a main claim under current evidence because the primary policy has mean `ContextSpecificGain` -4.253654 against the strongest context-agnostic baselines. Final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, detector target-recall claim, and human intent as a main claim remain false.
+- Latest E008 execution result: the most recent executed-trajectory positive smoke remains bounded/diagnostic only. M204 does not execute trajectories. M205 launch is blocked because the current machine lacks `/home/yoohyun/research2/local_dataset/data` and `research2/habitat-h001:20260508-calib-artifacts`; a 2026-06-16 lightweight recheck confirms both are still absent.
+- Latest claim boundary: M204 supports trajectory-contract readiness for an additive candidate-union policy, not final real navigation performance. E006-M08 rejects human intent as a main claim under current evidence because the primary policy has mean `ContextSpecificGain` -4.253654 against the strongest context-agnostic baselines. Final real navigation `SR` / `SPL`, deployable search policy, final RGB-D/open-vocabulary robustness, detector target-recall claim, and human intent as a main claim remain false until M205 execution, protected-baseline interpretation, heldout transfer, and external navigation/search baseline checks pass.
 - E001 provides a semantic-pair dynamic object search proxy benchmark.
 - E002 provides path/search-cost bridge fields and `occupancy_grid_astar_v0` proxy path costs.
 - E003 provides controlled perception/proposal-noise tests and a Dockerized RGB-D/open-vocabulary proposal route.
@@ -256,9 +256,9 @@ Updated: 2026-06-14
 - E007-M07 paper table package ready is true, table rows are 6, allowed claim rows are 3, blocked claim rows are 3, and selected next unit is E008-M01 real navigation benchmark/source preflight and episode contract.
 - E007-M07 does not launch a long-running simulator/navigation job.
 - E008-M01 completes real navigation source/episode preflight.
-- E008-M01 selected source is local read-only `HM3D ObjectNav` + `Habitat` at `/home/yoohyun/research3/local_dataset/data`.
+- E008-M01 selected source is local read-only `HM3D ObjectNav` + `Habitat` at `/home/yoohyun/research2/local_dataset/data`.
 - E008-M01 verifies 1,095 `HM3D` `.glb` files, 910 `.navmesh` files, 10 `minival` `.navmesh` files, 2 `ObjectNav val_mini` content files, and 30 parsed `ObjectNav val_mini` episodes.
-- E008-M01 verifies Docker image `research3/habitat-h001:20260508-calib-artifacts` can import `habitat_sim`, `habitat`, `magnum`, and `numpy`.
+- E008-M01 verifies Docker image `research2/habitat-h001:20260508-calib-artifacts` can import `habitat_sim`, `habitat`, `magnum`, and `numpy`.
 - E008-M01 selects E008-M02 `HM3D ObjectNav` episode/source adapter smoke and does not launch a long-running navigation job.
 - E008-M02 completes `HM3D ObjectNav` episode/source adapter smoke.
 - E008-M02 samples 6 `ObjectNav val_mini` episode rows from 2 content files and resolves them to 2 `HM3D` scenes.
@@ -283,7 +283,7 @@ Updated: 2026-06-14
 - E008-M06 rejects `ObjectNav` goal/viewpoint as a policy candidate source and selects E008-M07 `HM3D` rendered RGB-D detector candidate-source plan.
 - E008-M07 completes `HM3D` rendered RGB-D detector candidate-source plan.
 - E008-M07 fixes 24 start-pose fixed yaw-sweep render rows, 6 detector manifest rows, 5 detector labels (`bed`, `chair`, `monitor`, `television`, `tv`), and E003 detector compatibility layout under `3RScan/scans/<scan_id>/sequence`.
-- E008-M07 verifies `Habitat` image `research3/habitat-h001:20260508-calib-artifacts` and detector image `research2/real-smoke:latest` are ready, but launches no long job.
+- E008-M07 verifies `Habitat` image `research2/habitat-h001:20260508-calib-artifacts` and detector image `research2/real-smoke:latest` are ready, but launches no long job.
 - E008-M08 completes `HM3D` rendered RGB-D frame staging smoke.
 - E008-M08 verifies 24 / 24 rendered RGB-D/pose rows, 6 / 6 detector-compatible sequence dirs, 6 detector manifest rows, and detector input files ready under `local_dataset/HM3D_navigation_bridge/E008-M08_hm3d_rendered_rgbd_frame_staging_smoke_v0/`.
 - E008-M08 selects E008-M09 `HM3D` rendered RGB-D detector candidate smoke and launches no long navigation job.

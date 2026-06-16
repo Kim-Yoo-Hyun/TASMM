@@ -21,8 +21,8 @@ VERSION = "e008_m04_objectnav_oracle_path_smoke_v0"
 M03_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M03_h001_candidate_navigation_adapter_contract_v0"
 M03_DATA_DIR = ROOT / "local_dataset" / "HM3D_navigation_bridge" / "E008-M03_h001_candidate_navigation_adapter_contract_v0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
-HABITAT_IMAGE = "research3/habitat-h001:20260508-calib-artifacts"
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
+HABITAT_IMAGE = "research2/habitat-h001:20260508-calib-artifacts"
 SCENE_DATASET_CONFIG = "/data/versioned_data/hm3d-0.2/hm3d/minival/hm3d_annotated_minival_basis.scene_dataset_config.json"
 
 
@@ -196,7 +196,7 @@ print(json.dumps(result_rows, sort_keys=True))
         "run",
         "--rm",
         "-v",
-        f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        f"{RESEARCH2_DATA_ROOT}:/data:ro",
         "--entrypoint",
         "bash",
         HABITAT_IMAGE,
@@ -211,7 +211,7 @@ print(json.dumps(result_rows, sort_keys=True))
         "stderr_tail": proc.stderr[-1000:],
         "requested_episode_count": len(rows),
         "command": " ".join(cmd[:8]) + " ...",
-        "mount": f"{RESEARCH3_DATA_ROOT}:/data:ro",
+        "mount": f"{RESEARCH2_DATA_ROOT}:/data:ro",
     }
     if proc.returncode != 0:
         return [], meta

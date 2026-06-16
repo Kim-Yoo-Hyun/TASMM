@@ -23,9 +23,9 @@ M07_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M07_hm3d_rendered_rgbd_detecto
 M09_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M09_hm3d_rendered_rgbd_detector_candidate_smoke_v0"
 M12_ARTIFACT_DIR = EXP_ROOT / "artifacts" / "E008-M12_detector_candidate_goal_evaluation_smoke_v0"
 
-RESEARCH3_DATA_ROOT = Path("/home/yoohyun/research3/local_dataset/data")
+RESEARCH2_DATA_ROOT = Path("/home/yoohyun/research2/local_dataset/data")
 OBJECTNAV_CONTENT_ROOT = (
-    RESEARCH3_DATA_ROOT
+    RESEARCH2_DATA_ROOT
     / "datasets"
     / "objectnav"
     / "hm3d"
