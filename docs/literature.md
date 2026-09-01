@@ -4,26 +4,68 @@ Updated: 2026-09-01
 
 ## Purpose
 
-문헌 조사는 motivation을 수집하는 작업이 아니라 problem ownership, executable denominator, simple-baseline pressure와 forced method boundary를 판정하는 작업이다.
+문헌 조사는 두 가지 mode를 지원한다.
 
-## Start Condition
+1. `Buildup Search`: 사용자가 정한 home base에서 problem seed를 만들고
+   observable question, nearest neighbor, accessible probe를 찾는다.
+2. `Admission Audit`: 승격된 lead의 problem ownership, executable
+   denominator, simple-baseline pressure와 method boundary를 판정한다.
 
-N28의 re-entry trigger 또는 사용자가 승인한 새 scope가 없으면 broad survey를 열지 않는다.
+Early buildup에 paper-level admission criteria를 미리 적용하지 않는다.
+Topic discovery의 stage와 산출물은 `docs/buildup.md`를 따른다.
 
-Search를 열 때는 먼저 다음을 한 문장씩 고정한다.
+## Buildup Search Start Condition
+
+사용자가 home base와 resource boundary를 정한 뒤 search를 연다. Home base가
+정해지기 전에는 특정 과거 연구 방향을 새 search의 기본값으로 사용하지
+않는다.
+
+각 seed search는 다음을 한 문장씩 고정한다.
 
 1. existing limitation
-2. 왜 robotics/3D vision problem인가
-3. public artifact와 evaluator
+2. 선택한 research area에서 왜 중요한가
+3. 관찰하려는 phenomenon 또는 disagreement
+4. accessible artifact, data, evaluator 또는 small probe
+5. 가장 단순한 baseline 또는 counterexample
+6. 실패하면 무엇을 배우는가
+
+Exact novelty, 세 개의 controls, second-domain route, forced method는 seed
+search의 entry condition이 아니다.
+
+## Buildup Search Order
+
+1. Home base의 representative recent work, active groups와 benchmark를
+   얕게 map한다.
+2. anomaly, limitation, conflicting result, missing evaluation과 resource
+   opportunity에서 서로 다른 seed 3--5개를 만든다.
+3. 각 seed의 nearest primary paper 1--3개와 official artifact를 확인한다.
+4. observable target, simplest baseline, critical assumption과
+   time-to-information을 기록한다.
+5. 상위 1--2개만 deeper audit와 risk-reduction probe로 넘긴다.
+
+Broad survey의 완료를 probe의 선행조건으로 삼지 않는다. 반대로 novelty와
+artifact readiness의 최종 판단은 primary paper, appendix, official code/data로
+재검증한다.
+
+## Admission Audit Start Condition
+
+`docs/buildup.md`에서 lead가 승격되고 paper-oriented feasibility를 판단할 때
+다음을 고정한다.
+
+1. exact existing limitation과 nearest prior
+2. selected research area에서의 substantive relevance
+3. executable denominator와 evaluator
 4. 가장 단순한 세 controls
 5. 실패하면 무엇을 배우는가
 
-## Search Order
+## Admission Audit Order
 
 1. Official benchmark/data/code로 executable denominator를 확인한다.
 2. 2024--2026 exact problem/principle prior를 확인한다.
-3. Task/scene prior, geometry/trajectory/history, threshold/state-conditioned control을 먼저 정의한다.
-4. 같은 label/metric을 가진 second-domain path를 확인한다.
+3. Data coverage, task/context, model capacity, training/evaluation protocol,
+   resource cost와 domain-relevant confounder를 단순 control로 먼저 정의한다.
+4. Claim에 맞는 independent split, task, domain 또는 external-baseline
+   generalization path를 확인한다.
 5. Residual이 특정 representation/inference/control form을 강제하는지 판정한다.
 6. 위 조건이 남을 때만 one-week no-outcome contract를 쓴다.
 
@@ -45,20 +87,28 @@ Search를 열 때는 먼저 다음을 한 문장씩 고정한다.
 
 ## Output
 
-- Cross-paper synthesis와 current boundary: `literature/README.md`
-- Candidate-specific audit: `literature/<short-topic>-<gate>-<YYYY-MM>.md`
-- Paper folders와 registry는 active search가 실제로 필요할 때만 만든다.
-- Killed route의 source/artifact는 active surface에 누적하지 않고 retired archive로 이동한다.
+- Buildup seed reading과 synthesis:
+  `buildup/<short-home-base>/reading/`
+- Promoted hypothesis의 exact-prior audit: 해당 `hypothesis/CAND-<number>/`
+- Paper-level baseline/source audit: 해당 `experiments/E<number>_<short-title>/`
+- `literature/README.md`는 종료된 연구의 compact summary만 소유한다. Active
+  search payload를 그곳에 추가하지 않는다.
 
-## Admission Rule
+같은 literature payload를 stage folder와 다른 문서에 중복하지 않는다.
 
-모두 통과해야 candidate를 만든다.
+## Paper-Oriented Admission Rule
 
-1. public executable denominator
+다음 기준은 early seed를 만들거나 Draft hypothesis로 넘기기 위한 조건이
+아니다. Preliminary evidence가 생긴 lead를 top-tier contribution candidate로
+검토할 때 적용한다.
+
+모두 통과해야 paper contribution candidate로 승격한다.
+
+1. executable denominator: public artifact 또는 사용자가 승인한 construction route
 2. unoccupied exact problem/principle
 3. residual after at least three simple controls
 4. one-week decisive kill path
-5. credible second-domain route
+5. credible independent generalization route
 6. failure-derived, non-substitutable method principle
 
 Threshold나 denominator를 outcome 뒤에 바꿔 claim을 구제하지 않는다.

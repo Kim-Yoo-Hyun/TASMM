@@ -4,15 +4,24 @@
 
 ## Current State
 
-현재 active candidate, hypothesis, experiment, paper claim은 없다.
+현재 phase는 `pre-buildup`이다. Active home base, candidate, hypothesis,
+experiment와 paper claim은 없다. Home base는 사용자가 제안하기 전까지
+정하지 않는다.
 
-[N28 admission-bottleneck synthesis](literature/admission-bottleneck-synthesis-search-stop-n28-2026-09.md)는 N20--N27을 다섯 independent route로 집계했다. Strict admission은 `0/5`였고, final evidence에서 exact novelty, simple-baseline-resistant residual, failure-forced method의 demonstrated pass는 각각 `0/5`였다.
+## Research Pipeline
 
-Current outcome:
+```text
+buildup/     topic discovery와 research lead 형성
+    ↓ buildup gate
+hypothesis/  falsifiable hypothesis와 focused validation
+    ↓ experiment-ready gate
+experiments/ paper-level scale, baselines, ablation, robustness, artifacts
+```
 
-`stop_open_ended_direction_search_under_current_admission_contract`
-
-이는 Robotics나 3D Vision에 연구 문제가 없다는 뜻이 아니다. 현재의 public-artifact/resource contract 안에서 top-tier candidate로 승격할 evidence chain이 없다는 판단이다.
+- Buildup 과정은 `buildup/`에서만 진행한다.
+- Buildup을 완료한 research lead만 `hypothesis/`로 넘긴다.
+- 충분히 검증된 hypothesis만 `experiments/`로 넘겨 paper-level 작업을 한다.
+- 각 단계의 live 내용과 결과는 다음 단계나 다른 index에 중복하지 않는다.
 
 ## Active Workspace
 
@@ -20,31 +29,17 @@ Current outcome:
 | --- | --- |
 | [AGENTS.md](AGENTS.md) | 작업 규칙, novelty discipline, Docker-only 원칙 |
 | [TODO.md](TODO.md) | 현재 상태와 다음 승인 경계 |
-| [summary.md](summary.md) | 종료된 연구들의 핵심 결과와 재진입 조건 |
-| [docs/](docs/) | literature, hypothesis, experiment, paper, reproducibility workflow |
-| [literature/](literature/) | N20/N22--N28의 final decision reports만 보존 |
-| [hypothesis/](hypothesis/) | active hypothesis 상태 |
-| [experiments/](experiments/) | active experiment 상태 |
+| [summary.md](summary.md) | 현재 active research의 top-level summary |
+| [docs/](docs/) | buildup, literature, hypothesis, experiment, paper, reproducibility workflow |
+| [buildup/](buildup/) | home base, seed portfolio, reading, probe와 promotion decision |
+| [hypothesis/](hypothesis/) | promoted lead의 hypothesis와 focused validation |
+| [experiments/](experiments/) | validated hypothesis의 paper-level work |
+| [literature/](literature/) | 종료된 연구의 유일한 compact summary |
 
-`local_dataset/`, `logs/`, in-repo `archive/`는 active workload가 없어 workspace에서 제거했다. 새 gate가 실제로 요구할 때만 다시 만든다.
+## Next
 
-## Retired Workspace
-
-종료된 연구별 paper folders, E001--E009 source/artifacts, killed probes, datasets와 logs는 삭제하지 않고 다음 sibling archive로 이동했다.
-
-- Archive: `/home/yoohyun/research2_retired_20260901/`
-- Manifest: `/home/yoohyun/research2_retired_20260901/MANIFEST.md`
-- Pre-move size: 약 8.8 GiB, non-Git files 34,873개
-
-Archive는 historical evidence다. 새 hypothesis가 특정 자산을 요구하기 전에는 전체를 active workspace로 복원하지 않는다.
-
-## Re-entry
-
-Open-ended topic search는 다음 trigger 전까지 pause한다.
-
-1. policy-visible row, privileged mechanism oracle, task outcome과 fixed evaluator를 함께 제공하는 new public denominator
-2. group-disjoint split에서 최소 세 simple controls 뒤에도 남는 pre-existing residual
-3. exact-prior audit 뒤 남고 특정 representation/inference/control form을 강제하는 principle
-4. 사용자가 original benchmark/data/hardware instrumentation 또는 연구 scope 변경을 명시적으로 승인
-
-세부 기준은 [N28](literature/admission-bottleneck-synthesis-search-stop-n28-2026-09.md)과 [TODO.md](TODO.md)를 따른다.
+1. 사용자가 home base와 resource boundary를 제안한다.
+2. `buildup/README.md`와 `docs/buildup.md`에 따라 home-base folder와 서로
+   다른 problem seed 3--5개를 만든다.
+3. 상위 1--2개에 targeted reading과 risk-reduction probe를 적용한다.
+4. Buildup gate를 통과한 lead만 `hypothesis/`로 승격한다.

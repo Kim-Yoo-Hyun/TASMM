@@ -1,8 +1,10 @@
 # Experiments Workflow
 
-Updated: 2026-06-16
+Updated: 2026-09-01
 
-이 문서는 main experiment 구현과 기록을 위한 workflow / 작성 규칙만 관리한다. 실험별 내용, contract, manifest, 결과, failure analysis는 루트의 `experiments/` 폴더에 둔다.
+이 문서는 충분히 검증된 hypothesis를 paper-level evidence로 확장하는 main
+experiment workflow와 작성 규칙을 관리한다. 실험별 내용, contract,
+manifest, 결과, failure analysis는 루트의 `experiments/` 폴더에 둔다.
 
 ## Storage Rule
 
@@ -22,11 +24,11 @@ Experiment 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 2. `README.md`
 3. `TODO.md`
 4. `docs/index.md`
-5. `docs/experiments.md`
-6. `docs/paper.md`
-7. `docs/reproducibility.md`
-8. `hypothesis/README.md`
-9. 대상 hypothesis folder의 `README.md`
+5. `docs/hypothesis.md`
+6. `hypothesis/README.md`와 source `Experiment-ready` hypothesis
+7. `docs/experiments.md`
+8. `docs/paper.md`
+9. `docs/reproducibility.md`
 10. `experiments/README.md`
 11. 대상 experiment folder의 `README.md`
 
@@ -40,6 +42,18 @@ Experiment 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 - `experiments/`에는 실제 experiment 내용과 산출물 계약을 둔다.
 - `docs/experiments.md`에는 특정 experiment 숫자, 결과, claim ledger를 길게 넣지 않는다.
 
+## Paper-Level Scope
+
+`experiments/`는 exploratory buildup이나 first hypothesis probe를 위한 폴더가
+아니다. 이 단계는 다음 paper-level work를 수행한다.
+
+- frozen task/dataset/evaluator에 대한 scaled evaluation
+- strongest adjacent baseline과 최소 세 simple controls
+- component/factor ablation과 method-necessity test
+- robustness, generalization, efficiency/cost와 failure analysis
+- paper table/figure를 만드는 reproducible command와 artifact
+- claim-evidence ledger와 reviewer-defense evidence
+
 ## Docker Rule
 
 - 논문 본문용 experiment 구현은 Docker를 기본 실행 환경으로 둔다.
@@ -51,13 +65,18 @@ Experiment 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 
 Experiment folder를 만들 수 있는 조건:
 
-- 연결된 hypothesis가 `ready_with_constraints` 이상이다.
+- 연결된 hypothesis가 `Experiment-ready`이고
+  `docs/hypothesis.md`의 Experiment Handoff Gate를 모두 통과했다.
+- Source hypothesis path와 completed validation evidence가 있다.
 - target claim과 non-claims가 분리되어 있다.
 - dataset unit, baseline family, metric family가 정해져 있다.
+- split/evaluator와 disconfirmation rule을 outcome 전에 고정할 수 있다.
 - failure case에서 무엇을 배울지 적을 수 있다.
+- Docker 실행과 resource path가 현실적이다.
 - 빈 폴더가 아니라 최소 `README.md`를 함께 만든다.
 
-Main experiment 구현 시작은 최종 thesis 확정을 뜻하지 않는다. 첫 scaled result와 failure analysis 이후에 thesis direction 확정 여부를 판단한다.
+Main experiment 구현은 paper-level 작업의 시작이다. 첫 scaled result와
+failure analysis 이후에도 claim을 축소하거나 experiment를 종료할 수 있다.
 
 ## Minimal Experiment Contract
 

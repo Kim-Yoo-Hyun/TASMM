@@ -6,26 +6,33 @@ Last updated: 2026-09-01
 
 ## Current Phase
 
-Workspace consolidation complete. Active candidate, hypothesis, experiment와 automatic research TODO는 없다.
+Pre-buildup. Workflow는 준비됐고 active home base, candidate, hypothesis,
+experiment는 없다.
 
 ## Now
 
-- [x] Workspace publication: archive를 `/home/yoohyun/research2_retired_20260901/`로 이동·검증하고 consolidation 변경을 `main`에 commit/push했다.
-- [x] `N28` admission-bottleneck synthesis: N20--N27을 다섯 independent route로 집계하고 outcome을 `stop_open_ended_direction_search_under_current_admission_contract`로 고정했다. [report](literature/admission-bottleneck-synthesis-search-stop-n28-2026-09.md)
-- [x] Workspace consolidation: 종료된 `archive/`, `experiments/`, `hypothesis/`, `literature/`, `local_dataset/`, `logs/` 원본을 `/home/yoohyun/research2_retired_20260901/`로 recoverable하게 이동했다. Active workspace에는 workflow, summary, N20/N22--N28 final reports와 empty-state indexes만 남겼다.
+- 없음.
 
 ## Next
 
-- Automatic research TODO: 없음.
-- 권장: 현재 여섯 admission criteria를 유지하고 external E1--E3 trigger를 기다린다.
-- 사용자 승인 필요: original denominator/benchmark construction, 새 data/hardware instrumentation, 또는 연구 scope 변경.
-- 승인 전에는 candidate, hypothesis, method, runtime, GPU, dataset, hardware task를 열지 않는다.
+- 사용자 제안 필요: 새 research buildup의 home base와 resource boundary.
+- Home base가 정해지기 전에는 특정 연구주제를 active scope로 추정하지 않는다.
+- Home base가 정해지면 `docs/buildup.md`에 따라 problem seed 3--5개를 만들고
+  상위 1--2개에 targeted reading과 risk-reduction probe를 적용한다.
+- Buildup gate를 통과하기 전에는 `hypothesis/` task를 열지 않는다.
+- Experiment Handoff Gate를 통과하기 전에는 `experiments/`의 paper-level
+  task를 열지 않는다.
 
 ## Running / Needs Verification
 
 - 없음.
 
-## Retired Content
+## Recently Completed
 
-- Manifest: `/home/yoohyun/research2_retired_20260901/MANIFEST.md`
-- Restore는 새 gate가 특정 named asset을 요구할 때만 수행한다.
+- [x] Current pre-buildup workspace state를 GitHub publication snapshot으로 정리했다.
+- [x] Stage ownership을 `buildup/ → hypothesis/ → experiments/`로 고정하고,
+  종료된 연구 기록은 `literature/README.md`의 compact summary로
+  중앙화했다.
+- [x] Domain-general research buildup workflow를 추가하고 literature,
+  hypothesis, paper, agent workflow에 연결했다. Home base는
+  `pending_user_proposal`로 남겼다. [workflow](docs/buildup.md)

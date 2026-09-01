@@ -1,14 +1,16 @@
 # Paper Workflow
 
-Updated: 2026-08-28
+Updated: 2026-09-01
 
-이 문서는 특정 claim ledger가 아니라 top-tier paper로 승격하는 판단 규칙을 관리한다. 과거 CAND-001 전용 ledger는 `/home/yoohyun/research2_retired_20260901/archive/task-aware-semantic-memory-mapping-2026-08-28/docs/paper-legacy-claim-ledger.md`에 보존한다.
+이 문서는 특정 claim ledger가 아니라 `experiments/`의 paper-level 작업을
+top-tier paper로 구성하는 판단 규칙을 관리한다.
 
 ## Current Boundary
 
 - 현재 paper direction은 확정되지 않았다.
-- `Policy-Conditional Semantic Mapping`은 K05 G1 semantic gate에서 종료됐으며 candidate나 paper direction이 아니다.
-- `Task-Aware Semantic Memory Mapping`, human-intent conditioning, acquisition/admission, decision-calibrated revision은 active contribution이 아니다.
+- `buildup/`과 `hypothesis/`는 paper-level result를 만드는 단계가 아니다.
+- `docs/hypothesis.md`의 gate를 통과한 work만 `experiments/`에서 scaled
+  evidence, ablation, robustness와 reproducibility를 구축한다.
 - `paper/`는 thesis, main result table, method figure, target venue, claim-evidence ledger가 concrete해질 때만 만든다.
 
 ## Claim Construction
@@ -32,7 +34,7 @@ Updated: 2026-08-28
 | phenomenon | 2개 이상의 split/scene/task/domain에서 denominator와 prevalence |
 | simple baseline | 최소 3개 단순 대안과 strongest adjacent baseline을 같은 evidence/cost에서 비교 |
 | method necessity | simple baseline 뒤에도 residual이 남고 component가 failure mechanism에서 필연적으로 도출 |
-| behavior | map metric뿐 아니라 task success, regret, path/search/re-observation cost |
+| consequence | primary metric뿐 아니라 behavior, robustness, efficiency, cost 또는 failure severity |
 | generalization | 2개 이상의 독립 축과 precommitted robustness/failure analysis |
 | reproducibility | Docker image/source/data/seed/command/output/verifier 기록 |
 
@@ -46,11 +48,16 @@ Updated: 2026-08-28
 
 ## Reviewer Defense
 
-- 왜 semantic mapping 문제이며 calibration/ranking만의 문제가 아닌가?
-- 왜 더 단순한 coverage, source count, calibration, weighting, abstention으로 충분하지 않은가?
-- acquisition policy와 evaluation policy가 바뀌어도 비교가 leakage-safe한가?
-- no-support 영역에서 무엇을 추정하지 않고 abstain/re-observe하는가?
-- map-quality 변화가 실제 behavior와 cost에 어떤 causal consequence를 만드는가?
+- 왜 선택한 field의 substantive research problem이며 task-specific engineering
+  또는 evaluation artifact만의 문제가 아닌가?
+- 왜 더 단순한 data/compute scaling, coverage, calibration, weighting,
+  filtering 또는 abstention으로 충분하지 않은가?
+- Data, training, inference와 evaluation protocol이 바뀌어도 비교가
+  information/cost-matched이고 leakage-safe한가?
+- Evidence가 부족하거나 out-of-support인 조건에서 무엇을 추정하지 않고
+  abstain, fallback 또는 추가 관찰하는가?
+- Primary metric 변화가 실제 behavior, robustness, efficiency 또는 cost에
+  어떤 consequence를 만드는가?
 - 실패 조건과 claim boundary가 사전에 고정됐는가?
 
 답은 문장보다 artifact, table, ablation, failure row로 한다.

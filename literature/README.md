@@ -1,31 +1,32 @@
-# Literature And Direction Decisions
+# Retired Research Summary
 
 Updated: 2026-09-01
 
-## Current State
+이 문서는 종료된 연구의 핵심 결론을 남기는 유일한 active-workspace
+summary다. Active literature reading과 prior audit은 현재 단계의
+`buildup/`, `hypothesis/`, `experiments/` 아래에 기록한다.
 
-Active literature lead와 contribution candidate는 없다. 이 폴더에는 current search-stop decision을 이해하는 데 필요한 N20/N22--N28 final reports만 남긴다.
+## Core Outcome
 
-## Read Order
+이전 semantic memory/mapping 및 3D Vision/Robotics direction search에서는
+다섯 independent route를 검토했지만 당시 public-artifact/resource contract
+아래 strict paper admission은 `0/5`였다. Exact novelty,
+simple-baseline-resistant residual과 failure-forced method principle을 함께
+입증한 active candidate는 남지 않았다.
 
-1. [N28 Admission-Bottleneck Synthesis](admission-bottleneck-synthesis-search-stop-n28-2026-09.md)
-2. 필요한 route의 source report만 선택해서 읽는다.
+이 결과는 당시 route와 resource contract에 대한 종료 판단이며, 새로운
+home base나 research scope를 제한하지 않는다.
 
-| Report | Role | Outcome |
-| --- | --- | --- |
-| [N20](paired-contact-support-denominator-n20-feasibility-gate-2026-09.md) | paired contact/support denominator feasibility | `kill_no_valid_observation_matched_physical_pair` |
-| [N22](artifact-to-failure-3d-robotics-direction-search-n22-2026-09.md) | artifact-to-failure 3D Vision × Robotics search | `no_strict_pass_3d_robotics_artifact_search` |
-| [N23](simulation-first-robotics-wide-direction-search-n23-2026-09.md) | simulation-first robotics-wide search | one conditional diagnostic lead |
-| [N24](joint-filter-externality-n24-no-outcome-diagnostic-contract-2026-09.md) | joint-filter no-outcome contract | `ready_for_n25_k0_docker_preflight_only` |
-| [N25](joint-filter-externality-n25-k0-result-2026-09.md) | exact-QP readiness result | `kill_artifact_or_instrumentation` |
-| [N26](fresh-simulator-first-robotics-direction-search-n26-2026-09.md) | fresh simulator-first search | `no_strict_pass_no_conditional_lead` |
-| [N27](persistent-internal-robot-state-artifact-search-n27-2026-09.md) | battery/thermal/fatigue artifact search | `no_pass_exit_internal_state_family` |
-| [N28](admission-bottleneck-synthesis-search-stop-n28-2026-09.md) | five-route synthesis and stop decision | `stop_open_ended_direction_search_under_current_admission_contract` |
+## Reusable Lessons
 
-## Historical Literature
+- Topic buildup과 paper-level admission을 분리한다.
+- 가장 단순한 baseline과 competence/evaluator validity를 먼저 확인한다.
+- Public code나 simulator의 존재를 executable denominator의 존재로
+  간주하지 않는다.
+- 실패는 threshold 조정으로 구제하지 않고 다음 branch의 조건으로 남긴다.
 
-Full paper folders, PDFs, registries, deep reads와 N0--N19 records는 다음 위치에 보존한다.
+## Recovery
 
-`/home/yoohyun/research2_retired_20260901/literature/`
-
-새 search가 열리면 historical registry를 wholesale 복원하지 않고, exact question에 필요한 paper folder만 선택해서 가져온다.
+상세 source, reports, probes, experiments, datasets와 logs는
+`/home/yoohyun/research2_retired_20260901/` 및 Git history에서 복구할 수 있다.
+Active workspace에는 상세 retired report를 중복 보존하지 않는다.

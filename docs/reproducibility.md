@@ -21,31 +21,22 @@ Updated: 2026-09-01
 
 ## Current Data State
 
-Active dataset과 runtime artifact는 없다. 이전 `local_dataset/` 전체는 다음 위치에 원래 layout으로 보존한다.
+Active dataset과 runtime artifact는 없다.
 
-`/home/yoohyun/research2_retired_20260901/local_dataset/`
+새 hypothesis 또는 experiment가 named dataset/checkpoint를 요구할 때만
+`local_dataset/`을 만들고 source, checksum, mount, derived-output boundary를
+기록한다.
 
-새 gate가 특정 dataset을 요구할 때만 named source를 active `local_dataset/`로 복원한다. Derived cache나 prediction을 source와 함께 wholesale 복원하지 않는다.
+External dataset/source를 재사용할 때는 read-only mount를 기본으로 하고,
+derived cache, prediction과 evaluation output은 active workspace의 명시된
+artifact 경로에 분리한다.
 
-External `/home/yoohyun/research/local_dataset/Open3DSG_staged`가 존재할 경우 기존 규칙대로 read-only로만 사용하며 수정·삭제하지 않는다.
+## Data Activation Rule
 
-## Historical Execution Assets
-
-| Archived route | Location |
-| --- | --- |
-| E001--E009 | `/home/yoohyun/research2_retired_20260901/experiments/` |
-| killed/negative probes | `/home/yoohyun/research2_retired_20260901/hypothesis/probes/` |
-| paper/deep-read folders | `/home/yoohyun/research2_retired_20260901/literature/` |
-| completed logs | `/home/yoohyun/research2_retired_20260901/logs/` |
-| consolidation inventory | `/home/yoohyun/research2_retired_20260901/MANIFEST.md` |
-
-## Restore Rule
-
-1. Active hypothesis가 named asset을 요구하는지 확인한다.
-2. Archive manifest와 source README에서 input/output boundary를 확인한다.
-3. 필요한 directory만 `cp -a`로 복원한다.
-4. Archived artifact를 current result로 간주하지 않는다.
-5. 새 run은 current Docker record와 새로운 verifier를 남긴다.
+1. Active hypothesis 또는 experiment가 named asset을 요구하는지 확인한다.
+2. Source license, checksum, expected layout과 read/write boundary를 기록한다.
+3. 필요한 asset만 준비하고 unrelated dataset/cache를 함께 활성화하지 않는다.
+4. 새 run은 current Docker record와 independent verifier를 남긴다.
 
 ## Long Jobs
 

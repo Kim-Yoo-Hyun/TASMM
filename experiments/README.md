@@ -2,16 +2,32 @@
 
 Updated: 2026-09-01
 
+## Role
+
+이 폴더는 `hypothesis/`에서 충분히 검증돼 `Experiment-ready`가 된
+hypothesis의 paper-level 작업만 수행한다.
+
+- Buildup과 exploratory topic search는 `buildup/`에서 수행한다.
+- Focused hypothesis validation은 `hypothesis/`에서 수행한다.
+- Scaled benchmark, strong baselines, ablation, robustness, generalization,
+  failure analysis와 paper artifacts는 `experiments/`에서 수행한다.
+
 ## Active Experiment
+
+없음. 현재 `Experiment-ready` hypothesis가 없다.
+
+새 experiment는 source hypothesis, completed validation evidence와 frozen
+pre-outcome contract가 생긴 뒤 Docker-only로 연다. 세부 gate는
+`docs/hypothesis.md`와 `docs/experiments.md`를 따른다.
+
+## Experiment Registry
 
 없음.
 
-새 experiment는 admitted hypothesis와 pre-outcome contract가 생긴 뒤 Docker-only로 연다. Active gate가 없으므로 `local_dataset/`와 `logs/`도 현재 workspace에 만들지 않는다.
+## Required Handoff
 
-## Historical Experiments
-
-E001--E009 source, Docker recipes, manifests, artifacts와 reports는 다음 위치에 보존한다.
-
-`/home/yoohyun/research2_retired_20260901/experiments/`
-
-재사용 우선순위는 E003 perception/noise, E005 external-map adapter, E008 HM3D/Habitat runtime, E009 same-evidence baseline protocol이다. 새 hypothesis가 정확히 요구할 때 named directory만 복원한다.
+- source hypothesis path와 status
+- frozen question, claim/non-claim과 disconfirmation rule
+- dataset/split/evaluator, baselines와 metrics
+- main experiment contract와 Docker execution path
+- unresolved risks와 resource estimate
