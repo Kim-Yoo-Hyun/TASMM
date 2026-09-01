@@ -1,7 +1,0 @@
-{
-  "candidate_rows_written": 356,
-  "dataset_root": "/home/yoohyun/research2/local_dataset",
-  "metadata_pairs_scanned": 1004,
-  "pairs_with_reference_semseg": 84,
-  "status": "ready"
-}

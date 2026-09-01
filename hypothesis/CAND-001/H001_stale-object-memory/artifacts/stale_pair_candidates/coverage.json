@@ -1,8 +1,0 @@
-{
-  "dataset_root": "/home/yoohyun/research2/local_dataset",
-  "metadata_pairs_scanned": 1004,
-  "moved_rows_written": 97,
-  "pairs_with_local_semseg": 12,
-  "ready_pairs": 12,
-  "status": "ready"
-}

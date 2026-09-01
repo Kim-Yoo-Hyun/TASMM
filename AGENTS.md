@@ -49,6 +49,17 @@
 - Keep hypothesis-stage smoke tests and paper-body experiment artifacts explicitly separate.
 - Paper-body experiments use Docker as the default execution environment.
 
+## Docker-Only Reproduction
+
+- 모든 paper, baseline, external method의 reproduction, reimplementation, adapter 실행, smoke test, evaluation은 Docker container 안에서만 수행한다.
+- Host 환경에 baseline code나 그 dependency를 설치하지 않는다. Host에서 `pip`/`conda`/`apt` install, editable install, ROS/`colcon` build, CUDA/native extension compile, baseline entry-point 실행을 하지 않는다.
+- External source는 read-only audit 또는 Docker build context 용도로만 checkout할 수 있다. Source와 repository code를 container에 copy하거나 mount할 수 있지만 install/import/compile/runtime은 container 내부에서만 수행한다.
+- Docker build/run이 실패하거나 image가 없을 때 host 실행으로 우회하지 않는다. Docker recipe/image를 복구할 때까지 해당 reproduction을 `blocked` 또는 `unavailable`로 기록한다.
+- Host에서 허용되는 작업은 Markdown/source/Dockerfile 작성, Docker build/run orchestration, dataset/checkpoint download, checksum/manifest/log inspection, 그리고 method dependency를 import하거나 실행하지 않는 lightweight repository validation으로 제한한다.
+- Dataset/source mount는 가능한 한 read-only로 두고, derived cache, prediction, checkpoint, evaluation output은 명시된 workspace artifact 경로에 쓴다.
+- 각 reproduction은 Dockerfile 또는 immutable image reference, image digest/tag, source commit, dependency lock, build command, run command, mount, CPU/GPU mode, seed, output path, verification command를 기록한다.
+- GPU가 필요한 workload는 NVIDIA Container Toolkit과 explicit `--gpus` option으로 실행한다. CPU-capable workload도 Docker 안에서 실행하며, GPU 필요 여부와 사용 device를 config/artifact에 기록한다.
+
 ## Workspace Shape
 
 - Root operational files stay limited to `README.md`, `TODO.md`, and `AGENTS.md`.
@@ -63,6 +74,8 @@
 - Do not create an empty `paper/` folder.
 - Create a paper folder only after the thesis, main result table, method figure, target venue, and claim-evidence ledger are concrete.
 - Put detailed results, long experiment records, and artifact interpretation in the closest responsible workflow document, folder `README.md`, `report.md`, or artifact note; do not copy them into `AGENTS.md` or root `README.md`.
+- Retired 2026-09-01 source, artifacts, datasets, logs, paper folders, and long records live outside the active workspace at `/home/yoohyun/research2_retired_20260901/`; treat that tree as read-only historical evidence and restore only a named asset required by an active gate.
+- Do not restore the retired tree wholesale. Recreate active `local_dataset/`, `logs/`, candidate, or experiment directories only when `TODO.md` opens a concrete task.
 
 ## Long-running and Background Tasks
 

@@ -1,28 +1,19 @@
 # Hypotheses
 
-Updated: 2026-06-14
+Updated: 2026-09-01
 
 ## Active Candidate
 
-CAND-001: `Intent- and Staleness-Aware Semantic Mapping`
+없음.
 
-Status: H001 main experiment transition accepted; main experiment implementation is now active in `experiments/E008_real_navigation_benchmark/`.
+## Active Gate
 
-## Hypothesis Registry
+없음. N28 outcome에 따라 open-ended direction search를 pause했다.
 
-| ID | Candidate | Status | Folder | Next action |
-| --- | --- | --- | --- | --- |
-| H001 | CAND-001 | Main experiment transition accepted | [H001_stale-object-memory](CAND-001/H001_stale-object-memory/README.md) | Continue current experiment route in `experiments/E008_real_navigation_benchmark/` |
+새 hypothesis는 public executable denominator, exact novelty, simple-baseline-resistant residual, credible second-domain path와 failure-forced method principle이 구체화된 뒤에만 만든다.
 
-## Promotion Criteria
+## Historical Probes
 
-- 기존 한계가 primary source로 뒷받침된다.
-- 왜 semantic mapping 문제인지 분명하다.
-- dataset / benchmark / metric / baseline 후보가 있다.
-- first experiment shape가 작고 실행 가능하다.
-- 실패했을 때 무엇을 배울 수 있는지 명확하다.
+Killed/parked candidates, K01--K05, population-conditional, contact-grounded reward와 joint-filter probes는 다음 위치에 보존한다.
 
-## Deferred Candidates
-
-- CAND-002: `Common-Ground Semantic Mapping`
-- CAND-003: `Functional Semantic Memory`
+`/home/yoohyun/research2_retired_20260901/hypothesis/`

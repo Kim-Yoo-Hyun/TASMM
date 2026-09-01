@@ -1,70 +1,50 @@
-# Semantic Mapping Research Workspace
+# Research Workspace
 
-업데이트: 2026-06-16
+업데이트: 2026-09-01
 
-## Overview
+## Current State
 
-이 repository는 semantic mapping을 중심으로 dynamic object search/navigation에서 stale semantic memory를 어떻게 신뢰, 갱신, 재관측, 실행 결정에 연결할지 연구한다. 현재 목표는 Direction B `Task-Aware Dynamic Semantic Mapping for Open-Vocabulary Search and Navigation`이다. 핵심 실험은 `HM3D ObjectNav` + `Habitat`, real RGB-D/open-vocabulary proposal, external map baseline, path/search-cost metric을 연결해 paper-facing evidence를 만드는 것이다. 논문 목표는 AI, ML, CV, Robotics top-tier journal/conference 수준의 novelty, benchmark rigor, reproducibility를 만족하는 것이다.
+현재 active candidate, hypothesis, experiment, paper claim은 없다.
 
-## Core Question
+[N28 admission-bottleneck synthesis](literature/admission-bottleneck-synthesis-search-stop-n28-2026-09.md)는 N20--N27을 다섯 independent route로 집계했다. Strict admission은 `0/5`였고, final evidence에서 exact novelty, simple-baseline-resistant residual, failure-forced method의 demonstrated pass는 각각 `0/5`였다.
 
-Dynamic object search에서 실패는 stale memory 하나가 틀렸기 때문만이 아니라, current evidence confidence, stale-memory trust, source coverage, path feasibility가 서로 충돌하기 때문에 발생한다. 따라서 semantic map은 object memory를 저장하는 데서 끝나지 않고, re-observation/search decision과 search/navigation cost를 함께 노출해야 한다.
+Current outcome:
 
-## Repository Structure
+`stop_open_ended_direction_search_under_current_admission_contract`
+
+이는 Robotics나 3D Vision에 연구 문제가 없다는 뜻이 아니다. 현재의 public-artifact/resource contract 안에서 top-tier candidate로 승격할 evidence chain이 없다는 판단이다.
+
+## Active Workspace
 
 | Path | Role |
 | --- | --- |
-| [AGENTS.md](AGENTS.md) | repo-level 작업 규칙, novelty 기준, Docker/reproducibility 원칙 |
-| [TODO.md](TODO.md) | 현재 Now/Next/Completed 작업판 |
-| [summary.md](summary.md) | 연구 방향, 배경, 문제 정의, hypothesis, framework, experiment plan 요약 |
-| [docs/](docs/) | workflow, paper framing, reproducibility 기준 |
-| [literature/](literature/) | 문헌 조사와 cross-paper synthesis |
-| [hypothesis/](hypothesis/) | hypothesis-stage 산출물과 promotion boundary |
-| [experiments/](experiments/) | main experiment 구현, report, artifact index |
-| `local_dataset/` | git에 올리지 않는 dataset, checkpoint, generated bridge data |
-| `logs/` | long-running job 로그 |
+| [AGENTS.md](AGENTS.md) | 작업 규칙, novelty discipline, Docker-only 원칙 |
+| [TODO.md](TODO.md) | 현재 상태와 다음 승인 경계 |
+| [summary.md](summary.md) | 종료된 연구들의 핵심 결과와 재진입 조건 |
+| [docs/](docs/) | literature, hypothesis, experiment, paper, reproducibility workflow |
+| [literature/](literature/) | N20/N22--N28의 final decision reports만 보존 |
+| [hypothesis/](hypothesis/) | active hypothesis 상태 |
+| [experiments/](experiments/) | active experiment 상태 |
 
-각 폴더의 `README.md`를 해당 폴더의 local entry point로 사용한다. 루트 README에는 긴 실험 기록을 중복하지 않는다.
+`local_dataset/`, `logs/`, in-repo `archive/`는 active workload가 없어 workspace에서 제거했다. 새 gate가 실제로 요구할 때만 다시 만든다.
 
-## Key Execution
+## Retired Workspace
 
-현재 active experiment는 [experiments/E008_real_navigation_benchmark](experiments/E008_real_navigation_benchmark/README.md)이다. 작업 전에는 항상 [TODO.md](TODO.md)의 Now/Next를 확인한다.
+종료된 연구별 paper folders, E001--E009 source/artifacts, killed probes, datasets와 logs는 삭제하지 않고 다음 sibling archive로 이동했다.
 
-최근 검증된 E008 source-pool scale chain:
+- Archive: `/home/yoohyun/research2_retired_20260901/`
+- Manifest: `/home/yoohyun/research2_retired_20260901/MANIFEST.md`
+- Pre-move size: 약 8.8 GiB, non-Git files 34,873개
 
-```bash
-python experiments/E008_real_navigation_benchmark/tools/verify_m194_source_pool_scale_render_detector_execution.py --require-ready
-python experiments/E008_real_navigation_benchmark/tools/run_m195_source_pool_scale_candidate_navmesh_source_readiness_validation.py
-python experiments/E008_real_navigation_benchmark/tools/run_m196_source_pool_scale_candidate_visit_order_path_materialization.py
-python experiments/E008_real_navigation_benchmark/tools/run_m197_source_pool_scale_leakage_safe_goal_evaluation_proxy.py
-python experiments/E008_real_navigation_benchmark/tools/plan_m198_source_pool_scale_proxy_result_interpretation.py
-python experiments/E008_real_navigation_benchmark/tools/plan_m199_source_pool_scale_failure_decomposition_repair_decision.py
-python experiments/E008_real_navigation_benchmark/tools/plan_m200_additive_source_pool_candidate_union_repair_contract.py
-python experiments/E008_real_navigation_benchmark/tools/run_m201_additive_source_pool_candidate_union_row_materialization.py
-python experiments/E008_real_navigation_benchmark/tools/run_m202_additive_source_pool_candidate_union_goal_evaluation_proxy.py
-python experiments/E008_real_navigation_benchmark/tools/plan_m203_additive_source_pool_candidate_union_proxy_result_interpretation.py
-python experiments/E008_real_navigation_benchmark/tools/plan_m204_additive_source_pool_candidate_union_docker_trajectory_contract.py
-python experiments/E008_real_navigation_benchmark/tools/verify_m205_runtime_restore_preflight.py
-```
+Archive는 historical evidence다. 새 hypothesis가 특정 자산을 요구하기 전에는 전체를 active workspace로 복원하지 않는다.
 
-현재 다음 gate는 runtime 복구 후 `E008-M205 additive source-pool candidate-union Docker trajectory execution`이다. 현재 머신에서는 `/home/yoohyun/research2/local_dataset/data`와 `research2/habitat-h001:20260508-calib-artifacts` image가 없어 M205 launch가 막혀 있다. 전체 데이터, checkpoint, Docker, 재현 명령은 [docs/reproducibility.md](docs/reproducibility.md)를 따른다.
+## Re-entry
 
-## Artifact Policy
+Open-ended topic search는 다음 trigger 전까지 pause한다.
 
-- `local_dataset/` 아래의 dataset, checkpoint, model cache, generated bridge data는 git에 올리지 않는다.
-- `/home/yoohyun/research/local_dataset/Open3DSG_staged`와 `/home/yoohyun/research2/local_dataset/data`는 read-only source로만 사용한다.
-- Derived `Open3DSG` 결과는 `local_dataset/Open3DSG_bridge/`에 저장한다.
-- Derived E008 navigation 결과는 `local_dataset/HM3D_navigation_bridge/`에 저장한다.
-- Long-running download, Docker build/run, preprocessing job은 `tmux`/background로 실행하고 `logs/`에 timestamped log를 남긴다.
-- Paper-body experiment는 Docker 기반 실행을 기본으로 한다.
+1. policy-visible row, privileged mechanism oracle, task outcome과 fixed evaluator를 함께 제공하는 new public denominator
+2. group-disjoint split에서 최소 세 simple controls 뒤에도 남는 pre-existing residual
+3. exact-prior audit 뒤 남고 특정 representation/inference/control form을 강제하는 principle
+4. 사용자가 original benchmark/data/hardware instrumentation 또는 연구 scope 변경을 명시적으로 승인
 
-## Navigation
-
-- 현재 작업 우선순위: [TODO.md](TODO.md)
-- 연구 요약: [summary.md](summary.md)
-- 문서 지도: [docs/index.md](docs/index.md)
-- Literature workflow: [docs/literature.md](docs/literature.md)
-- Hypothesis workflow: [docs/hypothesis.md](docs/hypothesis.md)
-- Experiment workflow: [docs/experiments.md](docs/experiments.md)
-- Paper framing / novelty / reviewer defense: [docs/paper.md](docs/paper.md)
-- 재현성과 artifact 관리: [docs/reproducibility.md](docs/reproducibility.md)
+세부 기준은 [N28](literature/admission-bottleneck-synthesis-search-stop-n28-2026-09.md)과 [TODO.md](TODO.md)를 따른다.

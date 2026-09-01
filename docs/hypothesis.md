@@ -24,7 +24,7 @@ Hypothesis 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 4. `docs/index.md`
 5. `docs/literature.md`
 6. `docs/hypothesis.md`
-7. `literature/CAND-001.md`
+7. `literature/README.md`와 현재 candidate/lead 문서
 8. `hypothesis/README.md`
 9. 대상 hypothesis 폴더의 `README.md`
 

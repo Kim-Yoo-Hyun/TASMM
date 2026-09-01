@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-cd /home/yoohyun/research2
-exec python experiments/E003_perception_noise_expansion/tools/run_m22_frame_scaling_diagnostics.py --m17-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M58_direct_current_rescan_bridge_design_v0 --out-dir /home/yoohyun/research2/experiments/E003_perception_noise_expansion/artifacts/E003-M59_direct_current_rescan_detector_run_v0 --max-scans 4 --max-frames-per-scan 24 --max-labels 8 --max-predictions 4000 --max-predictions-per-frame 60 --threshold 0.08 --text-threshold 0.08 --candidate-selection-policy cap_aware_label_balanced_ranking_v0 --selection-score-mode confidence --pre-cap-per-scan-label-cap 24 --pre-cap-spatial-consolidation-radius-m 0.5 --raw-candidate-collection-cap 200000 --export-pre-cap-candidate-pool --build --docker-sudo --sudo-password-stdin
