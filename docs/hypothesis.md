@@ -2,8 +2,8 @@
 
 Updated: 2026-09-01
 
-이 문서는 `docs/buildup.md`에서 승격된 research lead를 검증 가능한
-hypothesis로 바꾸는 에이전트 workflow와 작성 규칙을 정의한다. 실제
+이 문서는 `docs/buildup.md`에서 선택된 research question을 formal,
+falsifiable hypothesis로 바꾸는 에이전트 workflow와 작성 규칙을 정의한다. 실제
 hypothesis 내용은 루트의 `hypothesis/` 폴더에 저장한다.
 
 ## Storage Rule
@@ -28,20 +28,23 @@ Hypothesis 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 4. `docs/index.md`
 5. `docs/buildup.md`
 6. `buildup/README.md`
-7. promoted research lead의 home-base README, problem card와 probe evidence
+7. selected research question의 research-scope README, question record와
+   feasibility/pilot evidence
 8. `docs/hypothesis.md`
 9. `hypothesis/README.md`
 10. 대상 hypothesis 폴더의 `README.md`
 
-## Buildup Handoff
+## Research Scoping Handoff
 
 Hypothesis workflow는 주제를 처음 생성하는 단계가 아니다. 다음 조건을
-만족해 `buildup/README.md`와 source problem card에서 `promoted`로 확정된
-research lead만 받는다.
+만족해 `buildup/README.md`와 source question record에서
+`ready_for_hypothesis`로 확정된 research question만 받는다.
 
-- `docs/buildup.md`의 `Handoff To Hypothesis` gate가 모두 통과돼 있다.
-- Source home-base README, problem card와 probe evidence path가 기록돼 있다.
-- Buildup decision, unresolved risk와 draft hypothesis가 handoff snapshot에
+- `docs/buildup.md`의 `Entry To Hypothesis Formulation` criteria가 모두
+  충족돼 있다.
+- Source research-scope README, question record와 feasibility/pilot evidence
+  path가 기록돼 있다.
+- Selection decision, unresolved research risk와 draft hypothesis가 handoff record에
   포함돼 있다.
 
 Handoff 시 exact novelty, final method, full benchmark, second-domain evidence,
@@ -55,7 +58,7 @@ Hypothesis 단계로 넘어간다는 뜻은 thesis direction을 확정한다는 
 
 - 기존 한계가 primary source로 뒷받침된다.
 - 선택된 research area에서 왜 중요한 문제인지 설명된다.
-- dataset, benchmark, evaluator 또는 small probe와 metric/baseline 후보가 있다.
+- dataset, benchmark, evaluator 또는 small study와 metric/baseline 후보가 있다.
 - 실패했을 때 배울 수 있는 것이 명확하다.
 - 첫 실험이 석사 연구 범위에서 실행 가능하다.
 
@@ -65,13 +68,13 @@ Hypothesis 단계는 full reproduction이나 full dataset 검증 단계가 아�
 
 - full dataset 사용을 요구하지 않는다.
 - 기존 논문 전체 재현을 요구하지 않는다.
-- 작은 subset, one-case replay, before/after probe, synthetic perturbation을 허용한다.
+- 작은 subset, one-case replay, before/after study, synthetic perturbation을 허용한다.
 - Research area에 따라 simulation, analytical test, controlled data slice,
-  human evaluation 또는 hardware probe를 사용할 수 있다. 단, 사용자 승인
+  human evaluation 또는 hardware study를 사용할 수 있다. 단, 사용자 승인
   resource boundary를 넘지 않는다.
 - 단, metric, baseline, failure interpretation은 반드시 있어야 한다.
 - Hypothesis가 충분히 검증되기 전에는 `experiments/`로 넘어가지 않는다.
-- Hypothesis 단계의 probe 설계, dataset/replay 접근성 판단, baseline 후보, metric 정의는 모두 `hypothesis/` 아래에 기록한다.
+- Hypothesis 단계의 study design, dataset/replay 접근성 판단, baseline 후보, metric 정의는 모두 `hypothesis/` 아래에 기록한다.
 - 좋은 결과 하나만으로 승격하지 않는다. 핵심 assumption, baseline threat,
   leakage/competence risk와 disconfirmation branch를 함께 검증한다.
 - Experiment-ready gate를 통과하면 `docs/experiments.md`에 따라
@@ -113,7 +116,7 @@ hypothesis/
 
 ## Hypothesis Registry
 
-## Promotion Criteria
+## Experiment Handoff Criteria
 
 ## Deferred Candidates
 ```
@@ -127,7 +130,7 @@ candidate별 hypothesis 후보 묶음을 관리한다.
 
 ## Candidate Summary
 
-## Buildup Handoff
+## Research Scoping Handoff
 
 ## Source Literature
 
@@ -169,7 +172,7 @@ candidate별 hypothesis 후보 묶음을 관리한다.
 
 ## Status
 
-Draft / Validating / Experiment-ready / Deferred / Killed
+Draft / Validating / Experiment-ready / Deferred / Discontinued
 
 ## Facts
 
@@ -177,7 +180,7 @@ Draft / Validating / Experiment-ready / Deferred / Killed
 
 ## Inferences
 
-## Buildup Handoff
+## Research Scoping Handoff
 
 ## Hypothesis
 
@@ -185,7 +188,7 @@ If <intervention>, then <expected measurable effect> on <task/benchmark>, compar
 
 ## Research Relevance
 
-## Dataset / Benchmark / Evaluator / Probe
+## Dataset / Benchmark / Evaluator / Study Design
 
 ## Metrics
 
@@ -203,10 +206,10 @@ If <intervention>, then <expected measurable effect> on <task/benchmark>, compar
 Hypothesis를 `Experiment-ready`로 올려 `experiments/`에 넘기려면 다음을 모두
 만족해야 한다.
 
-- Source buildup path와 handoff evidence가 기록돼 있다.
+- Source research-question path와 scoping handoff evidence가 기록돼 있다.
 - 최소 6개 primary source와 연결된다.
 - Nearest prior와 남는 problem/claim boundary가 구분돼 있다.
-- 접근 가능한 benchmark 또는 probe에서 최소 하나의 completed falsification
+- 접근 가능한 benchmark 또는 study에서 최소 하나의 completed falsification
   result가 있다.
 - metric 2개 이상이 있다. 하나는 primary quality/performance를 측정하고,
   다른 하나는 behavior, robustness, efficiency, cost 또는 failure severity처럼

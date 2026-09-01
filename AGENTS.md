@@ -31,8 +31,8 @@
 
 1. Global instruction: `AGENTS.md`
 2. Orientation: `README.md`, `TODO.md`, `docs/index.md`
-3. Topic buildup tasks: `docs/buildup.md`, then `buildup/README.md` and the relevant home-base README
-4. Hypothesis tasks: `docs/hypothesis.md`, `hypothesis/README.md`, then the promoted source buildup record and target hypothesis README
+3. Research scoping and topic-development tasks: `docs/buildup.md`, then `buildup/README.md` and the relevant research-scope README
+4. Hypothesis tasks: `docs/hypothesis.md`, `hypothesis/README.md`, then the selected source research-question record and target hypothesis README
 5. Paper-level experiment tasks: `docs/experiments.md`, `docs/paper.md`, `docs/reproducibility.md`, `experiments/README.md`, then relevant experiment/config/report files
 6. Literature tasks: `docs/literature.md`; store the output in the currently active stage folder
 
@@ -43,14 +43,14 @@
 - `TODO.md`: mutable task board. Owns `Now`, `Next`, and recently completed items. It should not contain long literature notes, full metrics, or large command logs.
 - `summary.md`: consolidated research summary. Owns problem definition, hypothesis, contribution, metric/baseline plan, current evidence, and top-level paper direction.
 - `docs/index.md`: documentation index. Owns navigation pointers and file-role links only; current status, active questions, metrics, and artifact inventories belong to the smallest authoritative owner such as `TODO.md`, `summary.md`, folder `README.md`, or reports.
-- `docs/buildup.md`: research-topic incubation workflow. Owns home-base entry contract, problem-card portfolio, comparison, risk-reduction probe, branch rules, and handoff to hypothesis.
-- `docs/literature.md`: literature workflow rulebook. Owns how to create paper cards, trend synthesis, and contribution scans.
+- `docs/buildup.md`: research-scoping and topic-development workflow. Owns scope entry requirements, candidate research questions, comparative assessment, feasibility/pilot studies, selection decisions, and entry to hypothesis formulation.
+- `docs/literature.md`: literature workflow rulebook. Owns preliminary literature review, related-work records, trend synthesis, and contribution scans.
 - `docs/hypothesis.md`: hypothesis workflow rulebook. Owns candidate/hypothesis stages, gate criteria, and hypothesis artifact conventions.
 - `docs/experiments.md`: Docker experiment workflow rulebook. Owns experiment promotion criteria, root-creation checklist, source adapter expectations, metric-freeze gates, and paper-result boundary rules.
 - `docs/paper.md`: paper-framing rulebook. Owns top-tier novelty standard, claim boundary, reviewer-process interpretation, reviewer-risk checklist, and table/ablation/failure-analysis requirements. It should not become a manuscript changelog or PDF build log.
 - `docs/reproducibility.md`: recovery and reproducibility runbook. Owns dataset/checkpoint/model locations, artifact bundles, Docker commands, verification commands, transfer guidance, and cleanup implications.
-- `buildup/`: the only active storage root for home-base selection, seed portfolios, targeted reading, risk-reduction probes, and buildup decisions.
-- `hypothesis/`: the only active storage root for promoted research leads, falsifiable hypotheses, focused validation, and experiment handoff evidence.
+- `buildup/`: the only active storage root for research scope, candidate research questions, preliminary literature review, feasibility/pilot studies, and question-selection decisions.
+- `hypothesis/`: the only active storage root for selected research questions, formal hypotheses, focused validation, and experiment handoff evidence.
 - `experiments/`: the only active storage root for sufficiently validated hypotheses promoted to paper-level scaled work.
 - `literature/README.md`: the sole compact summary of retired research. Do not duplicate that history in active stage indexes or workflow documents.
 - Keep hypothesis-stage smoke tests and paper-body experiment artifacts explicitly separate.
@@ -89,13 +89,13 @@
 - 후보, hypothesis, experiment, claim boundary를 정할 때 `NeurIPS`, `ICLR`, `ICML`, `CVPR`, `ICCV`, `ECCV`, `CoRL`, `ICRA`, `IROS`, `RA-L`, `T-RO`급 venue의 reviewer가 볼 novelty, contribution, benchmark rigor, reproducibility를 우선한다.
 - 단기 smoke test는 허용하지만, 최종 claim은 top-tier paper로 확장 가능한 dataset scale, baseline, metric, ablation, robustness, failure analysis 경로를 가져야 한다.
 
-## Research Scope And Buildup
+## Research Scoping And Topic Development
 
 - 새 연구주제는 `AI`, `ML`, `CV`, `Robotics` 전체에서 탐색할 수 있으며 특정 분야를 기본 scope로 가정하지 않는다.
-- Research topic discovery는 `docs/buildup.md`를 먼저 따른다. Buildup과 hypothesis validation, paper-level admission을 서로 다른 gate로 유지한다.
-- `home base`는 사용자가 명시적으로 선택한다. 선택 전에는 특정 task, method, dataset, application 또는 venue를 active scope로 추정하지 않는다.
-- Early seed에는 exact novelty, final method, full benchmark, second-domain evidence, failure-forced principle을 동시에 요구하지 않는다. 먼저 observable question, simplest baseline, critical assumption, risk-reduction probe와 learning value를 확인한다.
-- Buildup 과정과 payload는 `buildup/`에서만 관리한다. Gate를 통과한 research lead만 `hypothesis/`로 넘긴다.
+- Research scoping과 topic development는 `docs/buildup.md`를 먼저 따른다. Question selection, hypothesis validation, paper-level admission을 서로 다른 stage로 유지한다.
+- `research scope`는 사용자가 명시적으로 선택한다. 선택 전에는 특정 task, method, dataset, application 또는 venue를 active scope로 추정하지 않는다.
+- Candidate research question에는 exact novelty, final method, full benchmark, multi-domain evidence, failure-derived principle을 동시에 요구하지 않는다. 먼저 observable question, simplest baseline, critical assumption, feasibility/pilot study와 informational value를 확인한다.
+- Research scoping과 topic-development payload는 `buildup/`에서만 관리한다. Hypothesis Formulation Entry Criteria를 통과한 question만 `hypothesis/`로 넘긴다.
 - Hypothesis의 focused validation은 `hypothesis/`에서만 관리한다. 충분히 검증돼 Experiment Handoff Gate를 통과한 hypothesis만 `experiments/`로 넘긴다.
 - `experiments/`는 scaled benchmark, strong baseline, ablation, robustness, reproducibility와 paper claim을 다루는 paper-level stage다.
 
@@ -160,15 +160,15 @@ Each candidate must state:
 
 - existing limitation it starts from
 - why it is a substantive problem in the selected research area
-- dataset, benchmark, metric, evaluator, or probe that can test it
+- dataset, benchmark, metric, evaluator, or study design that can test it
 - what we learn if the idea fails
 
 ## Working Style
 
 - Prefer small Markdown updates before code.
 - If a new task appears during work, add it to `TODO.md`.
-- Do not add long explanations to `TODO.md`; put research detail in the active stage's closest README, card, probe, or experiment report.
-- For research topic discovery and incubation, follow `docs/buildup.md` before opening a hypothesis.
+- Do not add long explanations to `TODO.md`; put research detail in the active stage's closest README, research-question record, study, or experiment report.
+- For research scoping and topic development, follow `docs/buildup.md` before opening a hypothesis.
 - For literature work, follow `docs/literature.md`.
 - For hypothesis work, follow `docs/hypothesis.md`.
 - For paper-body experiment implementation, use Docker as the default execution environment.
@@ -189,8 +189,8 @@ Each candidate must state:
 - `TODO.md`: 시작할 작업은 `Now`, 바로 다음 작업은 `Next`, 완료한 작업은 `Recently Completed`에 둔다.
 - `docs/index.md`: 문서 위치, role map, durable workflow root 색인이 바뀔 때만 갱신한다. 연구 상태 dashboard나 active questions는 소유하지 않는다.
 - `summary.md`: 현재 active research의 문제 정의, 가설, contribution, metric, baseline, experiment setting, claim boundary만 갱신한다.
-- `docs/buildup.md`: home-base entry contract, problem-card portfolio, risk-reduction probe와 hypothesis handoff 규칙을 관리한다. Live seed status와 payload는 `buildup/`이 소유한다.
-- `buildup/README.md`: home base, active seed registry, current buildup gate와 promotion record를 관리한다.
+- `docs/buildup.md`: research-scope entry requirements, candidate-question comparison, feasibility/pilot study와 hypothesis-formulation entry criteria를 관리한다. Live question status와 payload는 `buildup/`이 소유한다.
+- `buildup/README.md`: research scope, candidate-question registry, current selection decision과 hypothesis-formulation handoff record를 관리한다.
 - `docs/literature.md`: 문헌 조사 절차를 관리한다. 실제 payload는 현재 작업 중인 `buildup/`, `hypothesis/`, 또는 `experiments/`의 가장 작은 owner에 둔다.
 - `docs/hypothesis.md`: hypothesis gate와 artifact convention을 관리한다. 실제 payload는 `hypothesis/`에 둔다.
 - `docs/experiments.md` / `experiments/`: Docker experiment promotion, source adapter, metric-freeze, and paper-result boundary를 관리한다.

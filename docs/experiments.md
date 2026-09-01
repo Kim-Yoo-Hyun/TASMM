@@ -44,8 +44,9 @@ Experiment 작업을 시작하는 에이전트는 아래 순서로 읽는다.
 
 ## Paper-Level Scope
 
-`experiments/`는 exploratory buildup이나 first hypothesis probe를 위한 폴더가
-아니다. 이 단계는 다음 paper-level work를 수행한다.
+`experiments/`는 research scoping, topic development 또는 preliminary
+hypothesis study를 위한 폴더가 아니다. 이 단계는 다음 paper-level work를
+수행한다.
 
 - frozen task/dataset/evaluator에 대한 scaled evaluation
 - strongest adjacent baseline과 최소 세 simple controls

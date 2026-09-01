@@ -6,44 +6,44 @@ Updated: 2026-09-01
 
 문헌 조사는 두 가지 mode를 지원한다.
 
-1. `Buildup Search`: 사용자가 정한 home base에서 problem seed를 만들고
-   observable question, nearest neighbor, accessible probe를 찾는다.
+1. `Scoping Literature Review`: 사용자가 정한 research scope에서 candidate
+   research questions, nearest related work와 accessible study design을 찾는다.
 2. `Admission Audit`: 승격된 lead의 problem ownership, executable
    denominator, simple-baseline pressure와 method boundary를 판정한다.
 
 Early buildup에 paper-level admission criteria를 미리 적용하지 않는다.
 Topic discovery의 stage와 산출물은 `docs/buildup.md`를 따른다.
 
-## Buildup Search Start Condition
+## Scoping Literature Review Start Condition
 
-사용자가 home base와 resource boundary를 정한 뒤 search를 연다. Home base가
-정해지기 전에는 특정 과거 연구 방향을 새 search의 기본값으로 사용하지
-않는다.
+사용자가 research scope와 resource constraints를 정한 뒤 review를 연다.
+Research scope가 정해지기 전에는 특정 과거 연구 방향을 새 review의
+기본값으로 사용하지 않는다.
 
-각 seed search는 다음을 한 문장씩 고정한다.
+각 candidate research question은 다음을 한 문장씩 고정한다.
 
 1. existing limitation
 2. 선택한 research area에서 왜 중요한가
 3. 관찰하려는 phenomenon 또는 disagreement
-4. accessible artifact, data, evaluator 또는 small probe
+4. accessible artifact, data, evaluator 또는 preliminary study
 5. 가장 단순한 baseline 또는 counterexample
 6. 실패하면 무엇을 배우는가
 
-Exact novelty, 세 개의 controls, second-domain route, forced method는 seed
-search의 entry condition이 아니다.
+Exact novelty, 세 개의 controls, multi-domain generalization과 forced method는
+scoping literature review의 entry condition이 아니다.
 
-## Buildup Search Order
+## Scoping Literature Review Order
 
-1. Home base의 representative recent work, active groups와 benchmark를
+1. Research scope의 representative recent work, active groups와 benchmark를
    얕게 map한다.
 2. anomaly, limitation, conflicting result, missing evaluation과 resource
-   opportunity에서 서로 다른 seed 3--5개를 만든다.
-3. 각 seed의 nearest primary paper 1--3개와 official artifact를 확인한다.
+   opportunity에서 서로 다른 candidate research questions 3--5개를 만든다.
+3. 각 question의 nearest primary papers 1--3개와 official artifact를 확인한다.
 4. observable target, simplest baseline, critical assumption과
-   time-to-information을 기록한다.
-5. 상위 1--2개만 deeper audit와 risk-reduction probe로 넘긴다.
+   feasibility를 기록한다.
+5. 상위 1--2개만 deeper review와 feasibility/pilot study로 넘긴다.
 
-Broad survey의 완료를 probe의 선행조건으로 삼지 않는다. 반대로 novelty와
+Broad survey의 완료를 feasibility study의 선행조건으로 삼지 않는다. 반대로 novelty와
 artifact readiness의 최종 판단은 primary paper, appendix, official code/data로
 재검증한다.
 
@@ -87,9 +87,9 @@ artifact readiness의 최종 판단은 primary paper, appendix, official code/da
 
 ## Output
 
-- Buildup seed reading과 synthesis:
-  `buildup/<short-home-base>/reading/`
-- Promoted hypothesis의 exact-prior audit: 해당 `hypothesis/CAND-<number>/`
+- Scoping literature review와 synthesis:
+  `buildup/<short-scope>/related_work/`
+- Selected research question의 exact-prior audit: 해당 `hypothesis/CAND-<number>/`
 - Paper-level baseline/source audit: 해당 `experiments/E<number>_<short-title>/`
 - `literature/README.md`는 종료된 연구의 compact summary만 소유한다. Active
   search payload를 그곳에 추가하지 않는다.
@@ -98,16 +98,16 @@ artifact readiness의 최종 판단은 primary paper, appendix, official code/da
 
 ## Paper-Oriented Admission Rule
 
-다음 기준은 early seed를 만들거나 Draft hypothesis로 넘기기 위한 조건이
-아니다. Preliminary evidence가 생긴 lead를 top-tier contribution candidate로
-검토할 때 적용한다.
+다음 기준은 candidate research question을 만들거나 Draft hypothesis로 넘기기
+위한 조건이 아니다. Focused validation evidence가 생긴 hypothesis를 top-tier
+contribution candidate로 검토할 때 적용한다.
 
 모두 통과해야 paper contribution candidate로 승격한다.
 
 1. executable denominator: public artifact 또는 사용자가 승인한 construction route
 2. unoccupied exact problem/principle
 3. residual after at least three simple controls
-4. one-week decisive kill path
+4. one-week decisive disconfirmation path
 5. credible independent generalization route
 6. failure-derived, non-substitutable method principle
 

@@ -7,7 +7,7 @@ Updated: 2026-09-01
 이 폴더는 `hypothesis/`에서 충분히 검증돼 `Experiment-ready`가 된
 hypothesis의 paper-level 작업만 수행한다.
 
-- Buildup과 exploratory topic search는 `buildup/`에서 수행한다.
+- Research scoping, topic development와 feasibility studies는 `buildup/`에서 수행한다.
 - Focused hypothesis validation은 `hypothesis/`에서 수행한다.
 - Scaled benchmark, strong baselines, ablation, robustness, generalization,
   failure analysis와 paper artifacts는 `experiments/`에서 수행한다.

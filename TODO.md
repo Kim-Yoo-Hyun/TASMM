@@ -6,8 +6,8 @@ Last updated: 2026-09-01
 
 ## Current Phase
 
-Pre-buildup. Workflow는 준비됐고 active home base, candidate, hypothesis,
-experiment는 없다.
+Research scoping pending. Workflow는 준비됐고 active research scope,
+candidate research question, hypothesis, experiment는 없다.
 
 ## Now
 
@@ -15,11 +15,13 @@ experiment는 없다.
 
 ## Next
 
-- 사용자 제안 필요: 새 research buildup의 home base와 resource boundary.
-- Home base가 정해지기 전에는 특정 연구주제를 active scope로 추정하지 않는다.
-- Home base가 정해지면 `docs/buildup.md`에 따라 problem seed 3--5개를 만들고
-  상위 1--2개에 targeted reading과 risk-reduction probe를 적용한다.
-- Buildup gate를 통과하기 전에는 `hypothesis/` task를 열지 않는다.
+- 사용자 제안 필요: research scope와 resource constraints.
+- Research scope가 정해지기 전에는 특정 연구주제를 active scope로 추정하지 않는다.
+- Research scope가 정해지면 `docs/buildup.md`에 따라 candidate research
+  questions 3--5개를 만들고 상위 1--2개에 preliminary literature review와
+  feasibility/pilot study를 적용한다.
+- Hypothesis Formulation Entry Criteria를 통과하기 전에는 `hypothesis/` task를
+  열지 않는다.
 - Experiment Handoff Gate를 통과하기 전에는 `experiments/`의 paper-level
   task를 열지 않는다.
 
@@ -29,10 +31,12 @@ experiment는 없다.
 
 ## Recently Completed
 
-- [x] Current pre-buildup workspace state를 GitHub publication snapshot으로 정리했다.
+- [x] Research scoping과 topic-development terminology를 official research
+  guidance에 맞춰 정리했다. [state](buildup/README.md)
+- [x] Current research-scoping workspace state를 GitHub publication snapshot으로 정리했다.
 - [x] Stage ownership을 `buildup/ → hypothesis/ → experiments/`로 고정하고,
   종료된 연구 기록은 `literature/README.md`의 compact summary로
   중앙화했다.
 - [x] Domain-general research buildup workflow를 추가하고 literature,
-  hypothesis, paper, agent workflow에 연결했다. Home base는
-  `pending_user_proposal`로 남겼다. [workflow](docs/buildup.md)
+  hypothesis, paper, agent workflow에 연결했다. Research scope는
+  `pending_user_decision`으로 남겼다. [workflow](docs/buildup.md)
